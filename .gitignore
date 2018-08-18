@@ -4,17 +4,12 @@ admin/config.php
 
 !index.html
 
-download/
-image/data/
+image/catalog/
 image/cache/
-system/cache/
-system/logs/
 
-system/storage/
-
-# vQmod log files
-vqmod/logs/*
-# vQmod cache files
-vqmod/vqcache/*
-vqmod/checked.cache
-vqmod/mods.cache
+system/storage/cache/
+system/storage/download/
+system/storage/logs/
+system/storage/modification/
+system/storage/session/
+system/storage/upload/
