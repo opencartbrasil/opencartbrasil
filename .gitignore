@@ -3,12 +3,3 @@
 admin/config.php
 
 !index.html
-
-image/cache/
-
-system/storage/cache/
-system/storage/download/
-system/storage/logs/
-system/storage/modification/
-system/storage/session/
-system/storage/upload/
