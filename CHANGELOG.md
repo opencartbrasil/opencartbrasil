@@ -6,7 +6,25 @@ e utiliza [Semantic Versioning](https://semver.org/lang/pt-BR/spec/v2.0.0.html).
 
 ## [Não lançada]
 
-## v1.0.0 (Data de lançamento: 08.09.2018)
+## [1.0.1] (Data de lançamento: 14.09.2018)
+### Corrigido
+- Remoção de atributos, grupos de atributos, países e estados https://github.com/opencartbrasil/opencartbrasil/issues/1
+- PayPal Express Checkout.
+- API do catálogo.
+
+### Mudou
+- README.md
+
+### Adicionado
+- composer.json
+- CHANGELOG.md
+- CONTRIBUTING.md
+- CODE_OF_CONDUCT.md
+
+### Removido
+- Suporte para sql_mode MYSQL40 que está obsoleto.
+
+## 1.0.0 (Data de lançamento: 08.09.2018)
 ### Corrigido
 - Instalador do OpenCart.
 - Biblioteca mysqli.php.
@@ -29,4 +47,5 @@ e utiliza [Semantic Versioning](https://semver.org/lang/pt-BR/spec/v2.0.0.html).
 - Cupons de descontos para demonstração.
 - Bibliotecas mpdo.php, mssql.php, mysql.php, postgre.php
 
-[Não lançada]: https://github.com/opencartbrasil/opencartbrasil/compare/v1.0.0...HEAD
+[Não lançada]: https://github.com/opencartbrasil/opencartbrasil/compare/v1.0.1...HEAD
+[1.0.1]: https://github.com/opencartbrasil/opencartbrasil/compare/v1.0.0...v1.0.1
