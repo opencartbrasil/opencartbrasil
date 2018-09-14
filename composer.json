@@ -7,7 +7,6 @@
   "authors": [
     {
       "name": "OpenCart Brasil",
-      "email": "dev@opencartbrasil.com.br",
       "homepage": "https://github.com/opencartbrasil"
     }
   ],
@@ -20,12 +19,12 @@
   ],
   "support": {
     "source": "https://github.com/opencartbrasil/opencartbrasil/releases",
-    "wiki": "https://github.com/opencartbrasil/opencartbrasil/wiki",
     "issues": "https://github.com/opencartbrasil/opencartbrasil/issues",
     "forum": "https://forum.opencartbrasil.com.br/"
   },
   "require": {
-    "php": ">=5.6.0"
+    "php": ">=5.6.0",
+    "composer/installers": "~1.2"
   },
   "config": {
     "vendor-dir": "./system/storage/vendor/"
