@@ -61,6 +61,6 @@ https://forum.opencartbrasil.com.br/
 
 ### Contribuindo
 
-Se você encontrou um erro no núclo do projeto OpenCart Brasil e deseja nos relatar, você deve registrar uma Issue.
+Se você encontrou um erro no núcelo do projeto OpenCart Brasil e deseja nos relatar, você deve registrar uma Issue.
 
 Se você tem uma correção ou melhoria e deseja nos enviar, faça um fork e nos envie um Pull request para avaliarmos.
