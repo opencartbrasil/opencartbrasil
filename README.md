@@ -1,10 +1,23 @@
-![version][opencart-badge] [![version][opencartbrasil-badge]][CHANGELOG] [![license][licenca-badge]][LICENSE]
+<p align="center"><a href="https://www.opencartbrasil.com.br/"><img src="https://forum.opencartbrasil.com.br/ext/sitesplat/flatbootsminicms/images/logo/logo-colorida.png" alt="OpenCart Brasil"></a>
+</p>
+
+<p align="center">
+<a href="./LICENSE"><img src="https://poser.pugx.org/opencartbrasil/opencartbrasil/license" alt="Licença"></a> 
+<a href="./CHANGELOG.md"><img src="https://poser.pugx.org/opencartbrasil/opencartbrasil/v/stable" alt="Última versão estável"></a>
+<img src="https://img.shields.io/badge/opencart-3.0.2.0-blue.svg" alt="Compatibilidade">
+</p>
 
 ### Apresentação
 
-A plataforma OpenCart Brasil é um fork da plataforma OpenCart com recursos para lojistas brasileiros. https://www.opencartbrasil.com.br/
+Bem-vindo ao repositório do projeto OpenCart Brasil no GitHub.
 
-### Requisitos para instalação
+Aqui você pode analisar o código, relatar erros e enviar correções ou melhorias para o projeto.
+
+O projeto OpenCart Brasil é um fork do OpenCart, que tem como objetivo atender lojistas brasileiros.
+
+Recomendamos que todos os desenvolvedores sigam este repositório para ficarem atualizados sobre o projeto.
+
+### Requisitos
 
 **Certifique-se que o PHP está configurado de acordo com os requisitos listados abaixo:**
 
@@ -26,15 +39,28 @@ A plataforma OpenCart Brasil é um fork da plataforma OpenCart com recursos para
 **Importante:**
 
 - Não utilize com sistema operacional Windows e servidor web IIS.
-- No caso de ambiente para homologação, você pode utilizar Windows e servidor web Apache 2.
+- Para montar um ambiente de homologação, você pode utilizar Windows e servidor web Apache 2 ou Nginx.
 - O ambiente de homologação ideal é com uma distro Linux e servidor web Apache 2 ou Nginx.
 - Em produção utilize apenas com distro Linux e servidor Apache 2 ou Nginx.
 - Testado com banco de dados MySQL até a versão 5.7  
 - Testado com banco de dados MariaDB até versão 10
-- Testado com PHP até a versão 7.2.x
+- Testado com PHP até a versão 7.2
 
-[opencart-badge]: https://img.shields.io/badge/opencart-3.0.2.0-blue.svg
-[opencartbrasil-badge]: https://img.shields.io/badge/opencartbrasil-1.0.1-blue.svg
-[CHANGELOG]: ./CHANGELOG.md
-[licenca-badge]: https://img.shields.io/badge/licença-GPLv3-blue.svg
-[LICENSE]: ./LICENSE
+### Versionamento
+
+Para o controle de versões, utilizamos as especificações de [Versionamento Semântico](https://semver.org/lang/pt-BR/spec/v2.0.0.html)
+
+### Suporte
+
+Este repositório não é adequado para fornecer suporte sobre a utilização do projeto OpenCart Brasil.
+
+Por favor, só registre uma issue para relatar erros no núcleo do projeto OpenCart Brasil.
+
+Para suporte relacionado a utilização do projeto OpenCart Brasil, utilize o nosso fórum:
+https://forum.opencartbrasil.com.br/
+
+### Contribuindo
+
+Se você encontrou um erro no núclo do projeto OpenCart Brasil e deseja nos relatar, você deve registrar uma Issue.
+
+Se você tem uma correção ou melhoria e deseja nos enviar, faça um fork e nos envie um Pull request para avaliarmos.
