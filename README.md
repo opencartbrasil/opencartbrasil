@@ -67,7 +67,7 @@ Os seguintes parâmetros são necessários para utilizar o instalador via linha 
 - **username**: usuário administrador da loja que será cadastrado automaticamente
 - **password**: senha do usuário administrador
 - **email**: e-mail do usuário administrador
-- **http_server**: domínio da loja
+- **http_server**: domínio da loja com uma / (barra) no final
 
 Exemplo de instalação via linha de comando em um computador local:
 
