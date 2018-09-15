@@ -84,6 +84,7 @@ Este repositório não é adequado para fornecer suporte sobre a utilização do
 Por favor, só registre uma issue para relatar erros no núcleo do projeto OpenCart Brasil.
 
 Para suporte relacionado a utilização do projeto OpenCart Brasil, utilize o nosso fórum:
+
 https://forum.opencartbrasil.com.br/
 
 ### Contribuindo
