@@ -1,24 +1,22 @@
 <?php
-//
-// Command line tool for installing opencart
-// Author: Vineet Naik <vineet.naik@kodeplay.com> <naikvin@gmail.com>
-//
-// (Currently tested on linux only)
-//
-// Uso:
-//
-//   cd install
-//   php cli_install.php install --db_hostname localhost
-//                               --db_username root
-//                               --db_password pass
-//                               --db_database opencart
-//                               --db_driver mysqli
-//                               --db_port 3306
-//                               --username admin
-//                               --password admin
-//                               --email youremail@example.com
-//                               --http_server http://localhost/opencart
-//
+/*
+ * Ferramenta de linha de comando para instalação do projeto opencartbrasil
+ *
+ * Uso:
+ *
+ * cd install
+ * php cli_install.php install --db_driver mysqli
+ *                             --db_hostname localhost
+ *                             --db_username root
+ *                             --db_password senha
+ *                             --db_database opencartbrasil
+ *                             --db_port 3306
+ *                             --db_prefix oc_
+ *                             --username admin
+ *                             --password admin
+ *                             --email usuario@dominio.com.br
+ *                             --http_server http://localhost/opencartbrasil
+ */
 
 ini_set('display_errors', 1);
 
@@ -60,69 +58,78 @@ set_error_handler(function ($code, $message, $file, $line, array $errcontext) {
 });
 
 function usage() {
-	echo "Manual:\n";
+	echo "Uso:\n";
 	echo "======\n";
 	echo "\n";
 	$options = implode(" ", array(
+		'--db_driver', 'mysqli',
 		'--db_hostname', 'localhost',
 		'--db_username', 'root',
-		'--db_password', 'pass',
-		'--db_database', 'opencart',
-		'--db_driver', 'mysqli',
+		'--db_password', 'senha',
+		'--db_database', 'opencartbrasil',
 		'--db_port', '3306',
+		'--db_prefix', 'oc_',
 		'--username', 'admin',
 		'--password', 'admin',
-		'--email', 'youremail@example.com',
-		'--http_server', 'http://localhost/opencart/'
+		'--email', 'usuario@dominio.com.br',
+		'--http_server', 'http://localhost/opencartbrasil/'
 	));
 	echo 'php cli_install.php install ' . $options . "\n\n";
 }
 
 function get_options($argv) {
 	$defaults = array(
+		'db_driver'   => 'mysqli',
 		'db_hostname' => 'localhost',
-		'db_database' => 'opencart',
-		'db_prefix' => 'oc_',
-		'db_driver' => 'mysqli',
-		'db_port' => '3306',
-		'username' => 'admin',
+		'db_password' => '',
+		'db_port'     => '3306',
+		'db_prefix'   => 'oc_',
+		'username'    => 'admin'
 	);
 
 	$options = array();
 	$total = count($argv);
 	for ($i=0; $i < $total; $i=$i+2) {
 		$is_flag = preg_match('/^--(.*)$/', $argv[$i], $match);
+
 		if (!$is_flag) {
-			throw new Exception($argv[$i] . ' encontrado ena linha de comando ao invéz de um argumento válido que comece com \'--\'');
+			throw new Exception('O argumento ' . $argv[$i] . ' não é válido, pois argumentos devem começar com \'--\'');
 		}
+
 		$options[$match[1]] = $argv[$i+1];
 	}
+
 	return array_merge($defaults, $options);
 }
 
 function valid($options) {
 	$required = array(
+		'db_driver',
 		'db_hostname',
 		'db_username',
 		'db_password',
 		'db_database',
-		'db_prefix',
 		'db_port',
+		'db_prefix',
 		'username',
 		'password',
 		'email',
 		'http_server',
 	);
+
 	$missing = array();
 	foreach ($required as $r) {
 		if (!array_key_exists($r, $options)) {
 			$missing[] = $r;
 		}
 	}
+
 	if (!preg_match('#/$#', $options['http_server'])) {
 		$options['http_server'] = $options['http_server'] . '/';
 	}
+
 	$valid = count($missing) === 0;
+
 	return array($valid, $missing);
 }
 
@@ -133,7 +140,7 @@ function install($options) {
 		write_config_files($options);
 		dir_permissions();
 	} else {
-		echo 'Erro: Falha na verificação de pré-instalação: ' . $check[1] . "\n\n";
+		echo 'Erro: Falha na pré-instalação: ' . $check[1] . "\n\n";
 		exit(1);
 	}
 }
@@ -141,11 +148,11 @@ function install($options) {
 function check_requirements() {
 	$error = null;
 	if (version_compare(phpversion(), '5.6', '<')) {
-		$error = 'Atenção: Você precisa usar PHP5.6 + ou superior para o OpenCart Brasil funcionar!';
+		$error = 'Atenção: Você precisa utilizar o PHP 5.6 ou superior para o projeto OpenCart Brasil funcionar!';
 	}
 
 	if (!ini_get('file_uploads')) {
-		$error = 'Atenção: file_uploads precisa ser ativado!';
+		$error = 'Atenção: file_uploads precisa ser ativado nas configurações do PHP!';
 	}
 
 	if (ini_get('session.auto_start')) {
@@ -206,26 +213,17 @@ function setup_db($data) {
 		}
 
 		$db->query("SET CHARACTER SET utf8");
-
 		$db->query("DELETE FROM `" . $data['db_prefix'] . "user` WHERE user_id = '1'");
-
 		$db->query("INSERT INTO `" . $data['db_prefix'] . "user` SET user_id = '1', user_group_id = '1', username = '" . $db->escape($data['username']) . "', salt = '" . $db->escape($salt = token(9)) . "', password = '" . $db->escape(sha1($salt . sha1($salt . sha1($data['password'])))) . "', firstname = 'John', lastname = 'Doe', email = '" . $db->escape($data['email']) . "', status = '1', date_added = NOW()");
-
 		$db->query("DELETE FROM `" . $data['db_prefix'] . "setting` WHERE `key` = 'config_email'");
 		$db->query("INSERT INTO `" . $data['db_prefix'] . "setting` SET `code` = 'config', `key` = 'config_email', value = '" . $db->escape($data['email']) . "'");
-
 		$db->query("DELETE FROM `" . $data['db_prefix'] . "setting` WHERE `key` = 'config_encryption'");
 		$db->query("INSERT INTO `" . $data['db_prefix'] . "setting` SET `code` = 'config', `key` = 'config_encryption', value = '" . $db->escape(token(1024)) . "'");
-
 		$db->query("UPDATE `" . $data['db_prefix'] . "product` SET `viewed` = '0'");
-
 		$db->query("INSERT INTO `" . $data['db_prefix'] . "api` SET username = 'Default', `key` = '" . $db->escape(token(256)) . "', status = 1, date_added = NOW(), date_modified = NOW()");
-
 		$api_id = $db->getLastId();
-
 		$db->query("DELETE FROM `" . $data['db_prefix'] . "setting` WHERE `key` = 'config_api_id'");
 		$db->query("INSERT INTO `" . $data['db_prefix'] . "setting` SET `code` = 'config', `key` = 'config_api_id', value = '" . (int)$api_id . "'");
-
 		$db->query("UPDATE `" . $data['db_prefix'] . "setting` SET `value` = 'FAT-" . date('Y') . "-' WHERE `key` = 'config_invoice_prefix'");
 	}
 }
@@ -322,6 +320,7 @@ function dir_permissions() {
 			DIR_OPENCART . 'system/storage/logs/',
 			DIR_OPENCART . 'system/storage/modification/',
 		);
+
 		exec('chmod o+w -R ' . implode(' ', $dirs));
 	}
 }
