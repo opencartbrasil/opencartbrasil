@@ -48,11 +48,11 @@ Recomendamos que todos os desenvolvedores sigam este repositório para ficarem a
 
 ### Download do projeto via composer
 
-Você pode baixar os arquivos do projeto utilizando o composer:
+Para baixar a última versão estável do projeto:
 
 ``composer create-project opencartbrasil/opencartbrasil nome_da_pasta``
 
-Para instalar a versão em desenvolvimento utilizando o composer:
+Para baixar a versão em desenvolvimento do projeto:
 
 ``composer create-project opencartbrasil/opencartbrasil nome_da_pasta dev-master``
 
