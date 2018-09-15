@@ -46,11 +46,15 @@ Recomendamos que todos os desenvolvedores sigam este repositório para ficarem a
 - Testado com banco de dados MariaDB até versão 10
 - Testado com PHP até a versão 7.2
 
-### Download via composer
+### Download do projeto via composer
 
-Você pode baixar os arquivos do projeto OpenCart Brasil utilizando o composer:
+Você pode baixar os arquivos do projeto utilizando o composer:
 
-``composer create-project opencartbrasil/opencartbrasil``
+``composer create-project opencartbrasil/opencartbrasil nome_da_pasta``
+
+Para instalar a versão em desenvolvimento utilizando o composer:
+
+``composer create-project opencartbrasil/opencartbrasil nome_da_pasta dev-master``
 
 ### Instalação por linha de comando
 
