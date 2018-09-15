@@ -59,8 +59,6 @@ set_error_handler(function ($code, $message, $file, $line, array $errcontext) {
 	throw new ErrorException($message, 0, $code, $file, $line);
 });
 
-set_error_handler('handleError');
-
 function usage() {
 	echo "Manual:\n";
 	echo "======\n";
