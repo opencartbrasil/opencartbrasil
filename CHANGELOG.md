@@ -6,6 +6,18 @@ e utiliza [Semantic Versioning](https://semver.org/lang/pt-BR/spec/v2.0.0.html).
 
 ## [Não lançada]
 
+## [1.0.2] (Data de lançamento: 15.09.2018)
+### Corrigido
+- Correção no instalador via linha de comando
+- Correções na conta do cliente
+
+### Mudou
+- README.md
+- composer.json
+
+### Adicionado
+- .htaccess
+
 ## [1.0.1] (Data de lançamento: 14.09.2018)
 ### Corrigido
 - Remoção de atributos, grupos de atributos, países e estados https://github.com/opencartbrasil/opencartbrasil/issues/1
@@ -47,5 +59,6 @@ e utiliza [Semantic Versioning](https://semver.org/lang/pt-BR/spec/v2.0.0.html).
 - Cupons de descontos para demonstração.
 - Bibliotecas mpdo.php, mssql.php, mysql.php, postgre.php
 
-[Não lançada]: https://github.com/opencartbrasil/opencartbrasil/compare/v1.0.1...HEAD
+[Não lançada]: https://github.com/opencartbrasil/opencartbrasil/compare/v1.0.2...HEAD
+[1.0.2]: https://github.com/opencartbrasil/opencartbrasil/compare/v1.0.1...v1.0.2
 [1.0.1]: https://github.com/opencartbrasil/opencartbrasil/compare/v1.0.0...v1.0.1
