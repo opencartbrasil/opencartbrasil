@@ -17,9 +17,9 @@ O projeto OpenCart Brasil é um fork do OpenCart, que tem como objetivo atender 
 
 Recomendamos que todos os desenvolvedores sigam este repositório para ficarem atualizados sobre o projeto.
 
-### Requisitos
+### Requisitos para instalação
 
-**Certifique-se que o PHP está configurado de acordo com os requisitos listados abaixo:**
+**O PHP deve está configurado com os requisitos listados abaixo:**
 
 - Versão do PHP: 5.6 ou superior
 - Register Globals: Off
@@ -27,7 +27,7 @@ Recomendamos que todos os desenvolvedores sigam este repositório para ficarem a
 - File Uploads: On
 - Session Auto Start: Off
 
-**Certifique-se que as extensões do PHP listadas abaixo estão instaladas:**
+**As extensões do PHP listadas abaixo devem está instaladas:**
 
 - MySQLi
 - GD
@@ -45,6 +45,33 @@ Recomendamos que todos os desenvolvedores sigam este repositório para ficarem a
 - Testado com banco de dados MySQL até a versão 5.7  
 - Testado com banco de dados MariaDB até versão 10
 - Testado com PHP até a versão 7.2
+
+### Download via composer
+
+Você pode baixar os arquivos do projeto OpenCart Brasil utilizando o composer:
+
+``composer create-project opencartbrasil/opencartbrasil``
+
+### Instalação por linha de comando
+
+Você pode instalar o projeto OpenCart Brasil via linha de comando.
+
+Os seguintes parâmetros são necessários para utilizar o instalador via linha de comando:
+
+- **db_hostname**: nome do servidor de banco de dados. Geralmente é localhost
+- **db_username**: usuário com permissão no banco de dados
+- **db_password**: senha do usuário com permissão no banco de dados
+- **db_database**: nome do banco de dados para instalar as tabelas do OpenCart Brasil
+- **db_driver**: driver para conexão com o banco de dados. O padrão é mysqli (não obrigatório)
+- **db_port**: porta de acesso ao banco de dados mysql. O padrão é 3306 (não obrigatório)
+- **username**: usuário administrador da loja que será cadastrado automaticamente
+- **password**: senha do usuário administrador
+- **email**: e-mail do usuário administrador
+- **http_server**: domínio da loja
+
+Exemplo de instalação via linha de comando em um computador local:
+
+``php install/cli_install.php install --db_hostname localhost --db_username root --db_password 123456 --db_database opencartbrasil --username admin --password 123456 --email usuario@dominio.com.br --http_server http://localhost/opencartbrasil``
 
 ### Versionamento
 
