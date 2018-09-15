@@ -58,16 +58,17 @@ Você pode instalar o projeto OpenCart Brasil via linha de comando.
 
 Os seguintes parâmetros são necessários para utilizar o instalador via linha de comando:
 
-- **db_hostname**: nome do servidor de banco de dados. Geralmente é localhost
-- **db_username**: usuário com permissão no banco de dados
-- **db_password**: senha do usuário com permissão no banco de dados
-- **db_database**: nome do banco de dados para instalar as tabelas do OpenCart Brasil
 - **db_driver**: driver para conexão com o banco de dados. O padrão é mysqli (não obrigatório)
+- **db_hostname**: nome do servidor de banco de dados. O padrão é localhost (não obrigatório)
+- **db_username**: usuário com permissão no banco de dados.
+- **db_password**: senha do usuário com permissão no banco de dados.
+- **db_database**: nome do banco de dados para instalar as tabelas da loja.
 - **db_port**: porta de acesso ao banco de dados mysql. O padrão é 3306 (não obrigatório)
-- **username**: usuário administrador da loja que será cadastrado automaticamente
-- **password**: senha do usuário administrador
-- **email**: e-mail do usuário administrador
-- **http_server**: domínio da loja com uma / (barra) no final
+- **db_prefix**: prefixo das tabelas do banco de dados.  O padrão é oc_ (não obrigatório)
+- **username**: usuário administrador da loja que será cadastrado. O padrão é admin (não obrigatório)
+- **password**: senha do usuário administrador.
+- **email**: e-mail do usuário administrador.
+- **http_server**: domínio da loja com uma / (barra) no final.
 
 Exemplo de instalação via linha de comando em um computador local:
 
