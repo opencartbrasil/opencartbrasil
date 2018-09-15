@@ -71,7 +71,7 @@ Os seguintes parâmetros são necessários para utilizar o instalador via linha 
 
 Exemplo de instalação via linha de comando em um computador local:
 
-``php install/cli_install.php install --db_hostname localhost --db_username root --db_password 123456 --db_database opencartbrasil --username admin --password 123456 --email usuario@dominio.com.br --http_server http://localhost/opencartbrasil``
+``php install/cli_install.php install --db_hostname localhost --db_username root --db_password 123456 --db_database opencartbrasil --username admin --password 123456 --email usuario@dominio.com.br --http_server http://localhost/opencartbrasil/``
 
 ### Versionamento
 
