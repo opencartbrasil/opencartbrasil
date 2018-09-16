@@ -16,7 +16,7 @@ Aqui você poderá analisar o código, relatar erros e enviar correções ou mel
 
 Recomendamos que todos os desenvolvedores sigam este repositório para ficarem atualizados sobre o projeto.
 
-## Principais diferenciais do projeto
+## Diferenciais
 
 - Melhorias no processo de download e instalação.
 - Correção de bugs, melhorias e otimizações no código.
@@ -25,17 +25,40 @@ Recomendamos que todos os desenvolvedores sigam este repositório para ficarem a
 - Após a instalação, a loja já estará em português do Brasil com a moeda Real.
 - Todos os dados de demonstração e dados auxiliares já estão em português do Brasil.
 
+## Roteiro
+
+- [ ] Opções relacionadas nos produtos.
+- [ ] Campo SKU nas opções dos produtos.
+- [ ] Cadastro de clientes padrão Brasil.
+- [ ] Tema versão Brasil 100% customizado.
+- [ ] Extensões integradas com serviços brasileiros.
+- [ ] API para integração com sistemas externos como ERP, CRM, etc.
+
 ## Requisitos
+
+### ⚠ Aviso:
+
+Se o seu serviço de hospedagem não lhe oferece versões atualizadas dos softwares citados abaixo, troque de serviço de hospedagem, pois sua loja não pode ficar exposta por causa das falhas de segurança existentes em softwares antigos.
+
+Se você é o profissional que administra os servidores que armazenam os arquivos e dados da loja, não utilize os softwares descritos abaixo em versões legadas. No mínimo utilize as versões mínimas recomendadas.
 
 ### Servidores web compatíveis:
 
-- Apache 2 ou superior.
-- Nginx 1 ou superior.
+- Apache 2.4 ou superior.
+- Nginx 1.14 ou superior.
+
+### OpenSLL:
+
+- 1.0.1c ou superior.
+
+### cURL:
+
+- 7.34.0 ou superior.
 
 ### Bancos de dados compatíveis:
 
-- MySQL 5 ou superior.
-- MariaDB 10 ou superior.
+- MySQL 5.5 ou superior.
+- MariaDB 5.5 ou superior.
 
 ### Versões do PHP compatíveis:
 
