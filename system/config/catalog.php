@@ -8,7 +8,7 @@ $_['url_autostart']      = false;
 
 // Database
 $_['db_autostart']       = true;
-$_['db_engine']          = DB_DRIVER; // mpdo, mssql, mysql, mysqli or postgre
+$_['db_engine']          = DB_DRIVER; // mysqli, pdo or pgsql
 $_['db_hostname']        = DB_HOSTNAME;
 $_['db_username']        = DB_USERNAME;
 $_['db_password']        = DB_PASSWORD;
@@ -41,13 +41,13 @@ $_['action_pre_action']  = array(
 );
 
 // Action Events
-$_['action_event'] = array(
+$_['action_event']       = array(
 	'controller/*/before' => array(
 		'event/language/before'
 	),
 	'controller/*/after' => array(
 		'event/language/after'
-	),	
+	),
 	'view/*/before' => array(
 		500  => 'event/theme/override',
 		998  => 'event/language',
