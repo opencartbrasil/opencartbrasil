@@ -87,7 +87,7 @@ git clone https://github.com/opencartbrasil/opencartbrasil.git
 2. Crie um usuário no MySQL para uso da loja. **Atenção:** Em produção utilize um usuário exclusivo para a loja.
 3. Adicione no usuário as permissões de acesso ao banco de dados da loja.
 
-### Sem-automática através do navegador:
+### Semi-automática através do navegador:
 
 1. Extraia o conteúdo do arquivo que você baixou deste repositório para o servidor em que você irá instalar o projeto OpenCart Brasil.
 2. Renomeie os arquivos **config_dist.php** e admin/**config_dist.php** para **config.php**.
