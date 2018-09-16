@@ -29,19 +29,19 @@ class ControllerAccountAccount extends Controller {
 			unset($this->session->data['success']);
 		} else {
 			$data['success'] = '';
-		} 
-		
+		}
+
 		$data['edit'] = $this->url->link('account/edit', '', true);
 		$data['password'] = $this->url->link('account/password', '', true);
 		$data['address'] = $this->url->link('account/address', '', true);
-		
+
 		$data['credit_cards'] = array();
-		
+
 		$files = glob(DIR_APPLICATION . 'controller/extension/credit_card/*.php');
-		
+
 		foreach ($files as $file) {
 			$code = basename($file, '.php');
-			
+
 			if ($this->config->get('payment_' . $code . '_status') && $this->config->get('payment_' . $code . '_card')) {
 				$this->load->language('extension/credit_card/' . $code, 'extension');
 
@@ -51,7 +51,15 @@ class ControllerAccountAccount extends Controller {
 				);
 			}
 		}
-		
+
+		if ($this->customer->isLogged()) {
+			$this->load->model('account/wishlist');
+
+			$data['text_wishlist'] = sprintf($this->language->get('text_wishlist'), $this->model_account_wishlist->getTotalWishlist());
+		} else {
+			$data['text_wishlist'] = sprintf($this->language->get('text_wishlist'), (isset($this->session->data['wishlist']) ? count($this->session->data['wishlist']) : 0));
+		}
+
 		$data['wishlist'] = $this->url->link('account/wishlist');
 		$data['order'] = $this->url->link('account/order', '', true);
 		$data['download'] = $this->url->link('account/download', '', true);
@@ -60,36 +68,36 @@ class ControllerAccountAccount extends Controller {
 			$data['reward'] = $this->url->link('account/reward', '', true);
 		} else {
 			$data['reward'] = '';
-		}		
-		
+		}
+
 		$data['return'] = $this->url->link('account/return', '', true);
 		$data['transaction'] = $this->url->link('account/transaction', '', true);
 		$data['newsletter'] = $this->url->link('account/newsletter', '', true);
 		$data['recurring'] = $this->url->link('account/recurring', '', true);
-		
+
 		$this->load->model('account/customer');
 		
 		$affiliate_info = $this->model_account_customer->getAffiliate($this->customer->getId());
-		
-		if (!$affiliate_info) {	
+
+		if (!$affiliate_info) {
 			$data['affiliate'] = $this->url->link('account/affiliate/add', '', true);
 		} else {
 			$data['affiliate'] = $this->url->link('account/affiliate/edit', '', true);
 		}
-		
-		if ($affiliate_info) {		
+
+		if ($affiliate_info) {
 			$data['tracking'] = $this->url->link('account/tracking', '', true);
 		} else {
 			$data['tracking'] = '';
 		}
-		
+
 		$data['column_left'] = $this->load->controller('common/column_left');
 		$data['column_right'] = $this->load->controller('common/column_right');
 		$data['content_top'] = $this->load->controller('common/content_top');
 		$data['content_bottom'] = $this->load->controller('common/content_bottom');
 		$data['footer'] = $this->load->controller('common/footer');
 		$data['header'] = $this->load->controller('common/header');
-		
+
 		$this->response->setOutput($this->load->view('account/account', $data));
 	}
 
