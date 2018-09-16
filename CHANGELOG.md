@@ -6,12 +6,23 @@ e utiliza [Semantic Versioning](https://semver.org/lang/pt-BR/spec/v2.0.0.html).
 
 ## [Não lançada]
 
+## [1.0.3] (Data de lançamento: 16.09.2018)
+### Corrigido
+- Correção no instalador via navegador
+- Correção no instalador via linha de comando
+
+### Modificado
+- README.md
+
+### Adicionado
+- .gitattributes
+
 ## [1.0.2] (Data de lançamento: 15.09.2018)
 ### Corrigido
 - Correção no instalador via linha de comando
 - Correções na conta do cliente
 
-### Mudou
+### Modificado
 - README.md
 - composer.json
 
@@ -24,7 +35,7 @@ e utiliza [Semantic Versioning](https://semver.org/lang/pt-BR/spec/v2.0.0.html).
 - PayPal Express Checkout.
 - API do catálogo.
 
-### Mudou
+### Modificado
 - README.md
 
 ### Adicionado
@@ -42,7 +53,7 @@ e utiliza [Semantic Versioning](https://semver.org/lang/pt-BR/spec/v2.0.0.html).
 - Biblioteca mysqli.php.
 - 10 bugs relatados em: https://forum.opencartbrasil.com.br/viewtopic.php?f=105&t=17361
 
-### Mudou
+### Modificado
 - Instalador do OpenCart em português do Brasil.
 
 ### Adicionado
@@ -59,6 +70,7 @@ e utiliza [Semantic Versioning](https://semver.org/lang/pt-BR/spec/v2.0.0.html).
 - Cupons de descontos para demonstração.
 - Bibliotecas mpdo.php, mssql.php, mysql.php, postgre.php
 
-[Não lançada]: https://github.com/opencartbrasil/opencartbrasil/compare/v1.0.2...HEAD
+[Não lançada]: https://github.com/opencartbrasil/opencartbrasil/compare/v1.0.3...HEAD
+[1.0.3]: https://github.com/opencartbrasil/opencartbrasil/compare/v1.0.2...v1.0.3
 [1.0.2]: https://github.com/opencartbrasil/opencartbrasil/compare/v1.0.1...v1.0.2
 [1.0.1]: https://github.com/opencartbrasil/opencartbrasil/compare/v1.0.0...v1.0.1
