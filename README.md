@@ -21,7 +21,7 @@ Recomendamos que todos os desenvolvedores sigam este repositório para ficarem a
 - Melhorias no processo de download e instalação.
 - Correção de bugs, melhorias e otimizações no código.
 - O processo de instalação ocorre em português do Brasil.
-- Ferramente de instalação por linha de comando em português do Brasil.
+- Ferramenta de instalação por linha de comando em português do Brasil.
 - Após a instalação, a loja já estará em português do Brasil com a moeda Real.
 - Todos os dados de demonstração e dados auxiliares já estão em português do Brasil.
 
