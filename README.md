@@ -72,6 +72,7 @@ Se você é o profissional que administra os servidores que armazenam os arquivo
 | magic_quotes_gpc | Off |
 | file_uploads | On |
 | session.auto_start | Off |
+| open_basedir | none |
 
 ### Extensões necessárias no PHP:
 
