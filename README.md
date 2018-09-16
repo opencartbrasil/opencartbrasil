@@ -22,13 +22,13 @@ Recomendamos que todos os desenvolvedores sigam este repositório para ficarem a
 
 ### Servidores web compatíveis:
 
-- Apache 2 ou superior
-- Nginx
+- Apache 2 ou superior.
+- Nginx 1 ou superior.
 
 ### Bancos de dados compatíveis:
 
-- MySQL 5 ou superior
-- MariaDB 10 ou superior
+- MySQL 5 ou superior.
+- MariaDB 10 ou superior.
 
 ### Versões do PHP compatíveis:
 
