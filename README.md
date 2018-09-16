@@ -10,13 +10,20 @@
 
 ## Apresentação
 
-Bem-vindo ao repositório do projeto OpenCart Brasil no GitHub.
+O projeto OpenCart Brasil é um fork do OpenCart, que tem como objetivo atender lojistas brasileiros sempre mantendo a compatibilidade com a última versão estável do OpenCart.
 
-Aqui você pode analisar o código, relatar erros e enviar correções ou melhorias para o projeto.
-
-O projeto OpenCart Brasil é um fork do OpenCart, que tem como objetivo atender lojistas brasileiros.
+Aqui você poderá analisar o código, relatar erros e enviar correções ou melhorias para o projeto.
 
 Recomendamos que todos os desenvolvedores sigam este repositório para ficarem atualizados sobre o projeto.
+
+## Principais diferenciais do projeto
+
+- Melhorias no processo de download e instalação.
+- Correção de bugs, melhorias e otimizações no código.
+- O processo de instalação ocorre em português do Brasil.
+- Ferramente de instalação por linha de comando em português do Brasil.
+- Após a instalação, a loja já estará em português do Brasil com a moeda Real.
+- Todos os dados de demonstração e dados auxiliares já estão em português do Brasil.
 
 ## Requisitos
 
