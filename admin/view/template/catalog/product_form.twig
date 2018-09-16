@@ -637,7 +637,7 @@
                             <td class="text-left"><select name="product_option[{{ option_row }}][product_option_value][{{ option_value_row }}][subtract]" class="form-control">
                                 
 
-                                  {% if product_option_value.subtract %}
+                                  {% if product_option_value.subtract == '1' %}
 
                                 
                                 <option value="1" selected="selected">{{ text_yes }}</option>
