@@ -82,10 +82,11 @@ Se você é o profissional que administra os servidores que armazenam os arquivo
 - ZLIB
 - ZIP
 
-### ⚠ Avisos:
+### ⚠ Notas:
 
-- Não é compatível com sistema operacional Windows utilizando servidor web IIS.
-- Em breve a versão mínima do PHP será 7.1, pois o suporte para PHP até 7.0 encerrará em dezembro de 2018.
+Não é compatível com sistema operacional Windows utilizando servidor web IIS.
+
+Em breve a versão mínima do PHP será 7.1, pois o suporte para PHP até 7.0 encerrará em dezembro de 2018.
 
 ## Download
 
