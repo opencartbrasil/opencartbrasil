@@ -28,7 +28,7 @@ class File {
 	}
 
 	public function write($session_id, $data) {
-		$file = DIR_SESSION . '/sess_' . basename($session_id);
+		$file = DIR_SESSION . 'sess_' . basename($session_id);
 
 		$handle = fopen($file, 'w');
 
@@ -49,7 +49,7 @@ class File {
 		$file = DIR_SESSION . 'sess_' . basename($session_id);
 
 		if (is_file($file)) {
-			unset($file);
+			unlink($file);
 		}
 	}
 
