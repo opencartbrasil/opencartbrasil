@@ -5,7 +5,7 @@ class ControllerStartupSass extends Controller {
 
 		if (!is_file($file) || !$this->config->get('developer_sass')) {
 			$scss = new \Leafo\ScssPhp\Compiler();
-			$scss->setImportPaths(DIR_APPLICATION . 'view/stylesheet/scss/');
+			$scss->setImportPaths(DIR_APPLICATION . 'view/stylesheet/sass/');
 
 			$output = $scss->compile('@import "_bootstrap.scss"');
 
