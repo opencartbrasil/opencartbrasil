@@ -68,17 +68,17 @@ Se você é o profissional que administra os servidores que armazenam os arquivo
 
 | Diretiva | Valor |
 | -------- | ----- |
-| register_globals | Off |
-| magic_quotes_gpc | Off |
-| file_uploads | On |
-| allow_url_fopen | On |
-| open_basedir | none |
-| default_charset | UTF-8 |
-| session.auto_start | Off |
-| session.use_only_cookies | On |
-| session.use_trans_sid | Off |
-| session.cookie_httponly | On |
-| session.gc_maxlifetime | 3600 |
+| `register_globals` | Off |
+| `magic_quotes_gpc` | Off |
+| `file_uploads` | On |
+| `allow_url_fopen` | On |
+| `open_basedir` | none |
+| `default_charset` | UTF-8 |
+| `session.auto_start` | Off |
+| `session.use_only_cookies` | On |
+| `session.use_trans_sid` | Off |
+| `session.cookie_httponly` | On |
+| `session.gc_maxlifetime` | 3600 |
 
 ### Extensões necessárias no PHP:
 
