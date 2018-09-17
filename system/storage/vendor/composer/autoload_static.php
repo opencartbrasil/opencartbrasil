@@ -30,6 +30,10 @@ class ComposerStaticInit529edf555723ee7d6785bff5252964ab
         array (
             'Psr\\Log\\' => 8,
         ),
+        'L' => 
+        array (
+            'Leafo\\ScssPhp\\' => 14,
+        ),
         'G' => 
         array (
             'GuzzleHttp\\Subscriber\\Oauth\\' => 28,
@@ -40,6 +44,7 @@ class ComposerStaticInit529edf555723ee7d6785bff5252964ab
         ),
         'C' => 
         array (
+            'Composer\\Installers\\' => 20,
             'Cardinity\\' => 10,
         ),
     );
@@ -69,6 +74,10 @@ class ComposerStaticInit529edf555723ee7d6785bff5252964ab
         array (
             0 => __DIR__ . '/..' . '/psr/log/Psr/Log',
         ),
+        'Leafo\\ScssPhp\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/leafo/scssphp/src',
+        ),
         'GuzzleHttp\\Subscriber\\Oauth\\' => 
         array (
             0 => __DIR__ . '/..' . '/guzzlehttp/oauth-subscriber/src',
@@ -88,6 +97,10 @@ class ComposerStaticInit529edf555723ee7d6785bff5252964ab
         'GuzzleHttp\\' => 
         array (
             0 => __DIR__ . '/..' . '/guzzlehttp/guzzle/src',
+        ),
+        'Composer\\Installers\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/composer/installers/src/Composer/Installers',
         ),
         'Cardinity\\' => 
         array (
@@ -116,15 +129,6 @@ class ComposerStaticInit529edf555723ee7d6785bff5252964ab
         ),
     );
 
-    public static $classMap = array (
-        'scss_formatter' => __DIR__ . '/..' . '/leafo/scssphp/scss.inc.php',
-        'scss_formatter_compressed' => __DIR__ . '/..' . '/leafo/scssphp/scss.inc.php',
-        'scss_formatter_nested' => __DIR__ . '/..' . '/leafo/scssphp/scss.inc.php',
-        'scss_parser' => __DIR__ . '/..' . '/leafo/scssphp/scss.inc.php',
-        'scss_server' => __DIR__ . '/..' . '/leafo/scssphp/scss.inc.php',
-        'scssc' => __DIR__ . '/..' . '/leafo/scssphp/scss.inc.php',
-    );
-
     public static function getInitializer(ClassLoader $loader)
     {
         return \Closure::bind(function () use ($loader) {
@@ -132,7 +136,6 @@ class ComposerStaticInit529edf555723ee7d6785bff5252964ab
             $loader->prefixDirsPsr4 = ComposerStaticInit529edf555723ee7d6785bff5252964ab::$prefixDirsPsr4;
             $loader->fallbackDirsPsr4 = ComposerStaticInit529edf555723ee7d6785bff5252964ab::$fallbackDirsPsr4;
             $loader->prefixesPsr0 = ComposerStaticInit529edf555723ee7d6785bff5252964ab::$prefixesPsr0;
-            $loader->classMap = ComposerStaticInit529edf555723ee7d6785bff5252964ab::$classMap;
 
         }, null, ClassLoader::class);
     }
