@@ -6,6 +6,11 @@ e utiliza [Semantic Versioning](https://semver.org/lang/pt-BR/spec/v2.0.0.html).
 
 ## [Não lançada]
 
+## [1.0.5] (Data de lançamento: 18.09.2018)
+### Corrigido
+- Correção na edição dos pedidos na administração
+- Adicionando o Brasil na região geográfica dentro do SQL
+
 ## [1.0.4] (Data de lançamento: 17.09.2018)
 ### Corrigido
 - Correção no layout do e-mail de novo pedido
@@ -98,7 +103,8 @@ e utiliza [Semantic Versioning](https://semver.org/lang/pt-BR/spec/v2.0.0.html).
 - Cupons de descontos para demonstração.
 - Bibliotecas mpdo.php, mssql.php, mysql.php, postgre.php
 
-[Não lançada]: https://github.com/opencartbrasil/opencartbrasil/compare/v1.0.4...HEAD
+[Não lançada]: https://github.com/opencartbrasil/opencartbrasil/compare/v1.0.5...HEAD
+[1.0.5]: https://github.com/opencartbrasil/opencartbrasil/compare/v1.0.4...v1.0.5
 [1.0.4]: https://github.com/opencartbrasil/opencartbrasil/compare/v1.0.3...v1.0.4
 [1.0.3]: https://github.com/opencartbrasil/opencartbrasil/compare/v1.0.2...v1.0.3
 [1.0.2]: https://github.com/opencartbrasil/opencartbrasil/compare/v1.0.1...v1.0.2
