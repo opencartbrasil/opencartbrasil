@@ -8181,4 +8181,4 @@ CREATE TABLE `oc_zone_to_geo_zone` (
 --
 
 INSERT INTO `oc_zone_to_geo_zone` (`zone_to_geo_zone_id`, `country_id`, `zone_id`, `geo_zone_id`, `date_added`, `date_modified`) VALUES
-(1, 30, 0, 1, '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
+(1, 30, 0, 1, '0000-00-00 00:00:00', '0000-00-00 00:00:00');
