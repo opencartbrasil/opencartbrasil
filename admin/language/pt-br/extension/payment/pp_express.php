@@ -25,7 +25,7 @@ $_['text_promotion_li_2']			 = 'Aceite pagamentos de todo o mundo';
 $_['text_promotion_li_3']			 = 'Oferecer atalho para check-out expresso, permitindo que os compradores façam o check-out diretamente da página do seu carrinho';
 $_['text_connect_paypal']			 = 'Conecte-se com o PayPal';
 $_['text_retrieve']	 				 = 'Seus detalhes foram inseridos no PayPal';
-$_['text_enable_button']			 = 'Recomendamos oferecer o atalho do PayPal Express para maximizar a conversão de sua loja. Isso permite que os clientes usem as informações deles no PayPal e <strong>finalizem o pedido em três passos</strong> a partir da página do carrinho. Clique em habilitar para instalar a extensão e acessar o gerenciador de layout, onde você deverá adicionar o "PayPal Express Checkout botão" ao layout do checkout de sua loja.';
+$_['text_enable_button']			 = 'Recomendamos oferecer Botão PayPal Express Checkout para maximizar a conversão de sua loja. Isso permite que os clientes usem as informações deles no PayPal e <strong>finalizem o pedido em três passos</strong> a partir da página do carrinho. Clique em Ativar para instalar a extensão e acessar o gerenciador de layout da loja, onde você deverá adicionar o "Botão PayPal Express Checkout" no layout do carrinho de sua loja.';
 $_['text_horizontal']	 			 = 'Horizontal';
 $_['text_vertical']	 			 	 = 'Vertical';
 $_['text_medium']	 			 	 = 'Médio';
@@ -38,7 +38,7 @@ $_['text_blue']	 			 		 = 'Blue';
 $_['text_silver']	 			 	 = 'Silver';
 $_['text_black']	 			 	 = 'Black';
 $_['text_button_styling']	 		 = 'Estilo de botão';
-$_['text_funding_type']			 	 = 'Métodos opcionais de financiamento';
+$_['text_funding_type']			 	 = 'Métodos de pagamento opicionais';
 
 // Entry
 $_['entry_username']				 = 'API Username';
@@ -73,8 +73,8 @@ $_['entry_style_size']			 	 = 'Tamanho do botão';
 $_['entry_style_shape']			 	 = 'Formato do botão';
 $_['entry_style_color']			 	 = 'Cor do botão';
 $_['entry_pp_credit']	 			 = 'Crédito PayPal';
-$_['entry_pp_cards']	 			 = 'Cartão de crédito ou débito';
-$_['entry_pp_elv']	 			 	 = 'Pagamento bancário (Alemanha)';
+$_['entry_pp_cards']	 			 = 'Cartão de crédito';
+$_['entry_pp_elv']	 			 	 = 'Pagamento bancário';
 
 // Tab
 $_['tab_api']				         = 'Detalhes da API';
