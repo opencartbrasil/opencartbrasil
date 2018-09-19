@@ -18,16 +18,27 @@ $_['text_show_quick_setup']          = 'Exibir configuração rápida';
 $_['text_quick_setup']             	 = 'Configuração rápida - Vincule uma conta existente ou crie uma nova conta do PayPal para começar a aceitar pagamentos.';
 $_['text_paypal_consent']		 	 = 'Ao utilizar a ferramenta de configuração rápida, você permite que o PayPal receba informações da sua loja.';
 $_['text_success_connect']			 = 'Você conectou sua conta ao PayPal!';
-$_['text_preferred_main']		 	 = 'Fornece aos seus compradores uma experiência de compra simplificada em vários dispositivos móveis que os mantém em sua loja durante todo o processo de autorização de pagamento.';
+$_['text_promotion_main']		 	 = 'Fornece aos seus compradores uma experiência de compra simplificada em vários dispositivos móveis que os mantém em sua loja durante todo o processo de autorização de pagamento.';
 $_['text_learn_more']			 	 = '(Saber mais)';
-$_['text_preferred_li_1']			 = 'Comece a aceitar o PayPal em três cliques';
-$_['text_preferred_li_2']			 = 'Aceite pagamentos de todo o mundo';
-$_['text_preferred_li_3']			 = 'Oferecer atalho para check-out expresso, permitindo que os compradores façam o check-out diretamente da página do seu carrinho';
-$_['text_preferred_li_4']			 = 'Melhore a conversão com check-out do PayPal One Touch e In-Context';
+$_['text_promotion_li_1']			 = 'Comece a aceitar o PayPal em três cliques';
+$_['text_promotion_li_2']			 = 'Aceite pagamentos de todo o mundo';
+$_['text_promotion_li_3']			 = 'Oferecer atalho para check-out expresso, permitindo que os compradores façam o check-out diretamente da página do seu carrinho';
 $_['text_connect_paypal']			 = 'Conecte-se com o PayPal';
-$_['text_incontext_not_supported']	 = '* Não suportado com check-in no contexto';
 $_['text_retrieve']	 				 = 'Seus detalhes foram inseridos no PayPal';
 $_['text_enable_button']			 = 'Recomendamos oferecer o atalho do PayPal Express para maximizar a conversão de sua loja. Isso permite que os clientes usem as informações deles no PayPal e <strong>finalizem o pedido em três passos</strong> a partir da página do carrinho. Clique em habilitar para instalar a extensão e acessar o gerenciador de layout, onde você deverá adicionar o "PayPal Express Checkout botão" ao layout do checkout de sua loja.';
+$_['text_horizontal']	 			 = 'Horizontal';
+$_['text_vertical']	 			 	 = 'Vertical';
+$_['text_medium']	 			 	 = 'Médio';
+$_['text_large']	 			 	 = 'Grande';
+$_['text_responsive']	 			 = 'Responsivo';
+$_['text_pill']	 			 		 = 'Comprimido';
+$_['text_rectangle']	 			 = 'Retângulo';
+$_['text_gold']	 			 		 = 'Gold';
+$_['text_blue']	 			 		 = 'Blue';
+$_['text_silver']	 			 	 = 'Silver';
+$_['text_black']	 			 	 = 'Black';
+$_['text_button_styling']	 		 = 'Estilo de botão';
+$_['text_funding_type']			 	 = 'Métodos opcionais de financiamento';
 
 // Entry
 $_['entry_username']				 = 'API Username';
@@ -56,10 +67,14 @@ $_['entry_processed_status']		 = 'Processado';
 $_['entry_refunded_status']			 = 'Reembolsado';
 $_['entry_reversed_status']			 = 'Em disputa';
 $_['entry_voided_status']			 = 'Cancelado';
-$_['entry_allow_notes']				 = 'Permitir anotações';
-$_['entry_colour']	      			 = 'Cor de fundo da página';
 $_['entry_logo']					 = 'Logo';
-$_['entry_incontext']				 = 'Desativar o check-in no contexto';
+$_['entry_style_layout']			 = 'Layout do botão';
+$_['entry_style_size']			 	 = 'Tamanho do botão';
+$_['entry_style_shape']			 	 = 'Formato do botão';
+$_['entry_style_color']			 	 = 'Cor do botão';
+$_['entry_pp_credit']	 			 = 'Crédito PayPal';
+$_['entry_pp_cards']	 			 = 'Cartão de crédito ou débito';
+$_['entry_pp_elv']	 			 	 = 'Pagamento bancário (Alemanha)';
 
 // Tab
 $_['tab_api']				         = 'Detalhes da API';
@@ -70,8 +85,10 @@ $_['tab_checkout']					 = 'Finalização';
 $_['help_ipn']						 = 'Obrigatório para assinaturas';
 $_['help_total']					 = 'O total de checkout que o pedido deve atingir antes que esse método de pagamento seja ativado';
 $_['help_logo']						 = 'Máximo de 750px(w) x 90px(h)<br>Você só deve usar uma logo se estiver com o SSL habilitado na loja.';
-$_['help_colour']					 = '6 caracteres com o código de cor HTML';
 $_['help_currency']					 = 'Usado para pesquisas de transações';
+$_['help_pp_credit']				 = 'Comerciantes de fora dos EUA precisam se inscrever para aceitar o Crédito PayPal. Entre em contato com o PayPal para obter mais informações. Habilitado por padrão para todos os compradores dos EUA.';
+$_['help_pp_cards']				 	 = 'Ativado por padrão para todos os compradores';
+$_['help_pp_elv']				 	 = 'Elektronisches Lastschriftverfahren (Pagamento bancário). Ativado por padrão para todos os compradores da Alemanha.';
 
 // Error
 $_['error_permission']				 = 'Atenção: Você não tem permissão para modificar a extensão PayPal Express Checkout!';
