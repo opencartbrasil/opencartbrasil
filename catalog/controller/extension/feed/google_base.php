@@ -63,6 +63,7 @@ class ControllerExtensionFeedGoogleBase extends Controller {
 						}
 
 						$currencies = array(
+							'BRL',
 							'USD',
 							'EUR',
 							'GBP'
@@ -77,7 +78,7 @@ class ControllerExtensionFeedGoogleBase extends Controller {
 						}
 
 						if ((float)$product['special']) {
-							$output .= '  <g:price>' .  $this->currency->format($this->tax->calculate($product['special'], $product['tax_class_id']), $currency_code, $currency_value, false) . '</g:price>';
+							$output .= '  <g:price>' . $this->currency->format($this->tax->calculate($product['special'], $product['tax_class_id']), $currency_code, $currency_value, false) . '</g:price>';
 						} else {
 							$output .= '  <g:price>' . $this->currency->format($this->tax->calculate($product['price'], $product['tax_class_id']), $currency_code, $currency_value, false) . '</g:price>';
 						}
