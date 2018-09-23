@@ -107,7 +107,7 @@
 
   {% if not logged %}
   $(document).ready(function() {
-    $.ajax({
+    $.ajax({ cache: false,
       url: 'index.php?route=checkout/login',
       dataType: 'html',
       success: function(html) {
@@ -124,7 +124,7 @@
   });
   {% else %}
   $(document).ready(function() {
-    $.ajax({
+    $.ajax({ cache: false,
       url: 'index.php?route=checkout/payment_address',
       dataType: 'html',
       success: function(html) {
@@ -143,7 +143,7 @@
 
   // Checkout
   $(document).delegate('#button-account', 'click', function() {
-    $.ajax({
+    $.ajax({ cache: false,
       url: 'index.php?route=checkout/' + $('input[name=\'account\']:checked').val(),
       dataType: 'html',
       beforeSend: function() {
@@ -245,12 +245,12 @@
           var shipping_address = $('#payment-address input[name=\'shipping_address\']:checked').prop('value');
 
           if (shipping_address) {
-            $.ajax({
+            $.ajax({ cache: false,
               url: 'index.php?route=checkout/shipping_method',
               dataType: 'html',
               success: function(html) {
                 // Add the shipping address
-                $.ajax({
+                $.ajax({ cache: false,
                   url: 'index.php?route=checkout/shipping_address',
                   dataType: 'html',
                   success: function(html) {
@@ -278,7 +278,7 @@
               }
             });
           } else {
-            $.ajax({
+            $.ajax({ cache: false,
               url: 'index.php?route=checkout/shipping_address',
               dataType: 'html',
               success: function(html) {
@@ -298,7 +298,7 @@
             });
           }
           {% else %}
-          $.ajax({
+          $.ajax({ cache: false,
             url: 'index.php?route=checkout/payment_method',
             dataType: 'html',
             success: function(html) {
@@ -315,7 +315,7 @@
             }
           });
           {% endif %}
-          $.ajax({
+          $.ajax({ cache: false,
             url: 'index.php?route=checkout/payment_address',
             dataType: 'html',
             complete: function() {
@@ -376,7 +376,7 @@
                 $('.text-danger').parent().parent().addClass('has-error');
             } else {
                 {% if shipping_required %}
-                $.ajax({
+                $.ajax({ cache: false,
                     url: 'index.php?route=checkout/shipping_address',
                     dataType: 'html',
                     success: function(html) {
@@ -394,7 +394,7 @@
                         alert(thrownError + "\r\n" + xhr.statusText + "\r\n" + xhr.responseText);
                     }
                 }).done(function() {
-                    $.ajax({
+                    $.ajax({ cache: false,
                         url: 'index.php?route=checkout/payment_address',
                         dataType: 'html',
                         success: function(html) {
@@ -406,7 +406,7 @@
                     });
                 });
                 {% else %}
-                $.ajax({
+                $.ajax({ cache: false,
                     url: 'index.php?route=checkout/payment_method',
                     dataType: 'html',
                     success: function(html) {
@@ -422,7 +422,7 @@
                         alert(thrownError + "\r\n" + xhr.statusText + "\r\n" + xhr.responseText);
                     }
                 }).done(function() {
-                    $.ajax({
+                    $.ajax({ cache: false,
                         url: 'index.php?route=checkout/payment_address',
                         dataType: 'html',
                         success: function(html) {
@@ -431,7 +431,7 @@
                         error: function(xhr, ajaxOptions, thrownError) {
                             alert(thrownError + "\r\n" + xhr.statusText + "\r\n" + xhr.responseText);
                         }
-                    });                
+                    });
                 });
                 {% endif %}
             }
@@ -478,7 +478,7 @@
                 // Highlight any found errors
                 $('.text-danger').parent().parent().addClass('has-error');
             } else {
-                $.ajax({
+                $.ajax({ cache: false,
                     url: 'index.php?route=checkout/shipping_method',
                     dataType: 'html',
                     complete: function() {
@@ -494,7 +494,7 @@
                         $('#collapse-payment-method').parent().find('.panel-heading .panel-title').html('{{ text_checkout_payment_method }}');
                         $('#collapse-checkout-confirm').parent().find('.panel-heading .panel-title').html('{{ text_checkout_confirm }}');
                         
-                        $.ajax({
+                        $.ajax({ cache: false,
                             url: 'index.php?route=checkout/shipping_address',
                             dataType: 'html',
                             success: function(html) {
@@ -509,7 +509,7 @@
                         alert(thrownError + "\r\n" + xhr.statusText + "\r\n" + xhr.responseText);
                     }
                 }).done(function() {
-                    $.ajax({
+                    $.ajax({ cache: false,
                         url: 'index.php?route=checkout/payment_address',
                         dataType: 'html',
                         success: function(html) {
@@ -568,7 +568,7 @@
                 var shipping_address = $('#collapse-payment-address input[name=\'shipping_address\']:checked').prop('value');
 
                 if (shipping_address) {
-                    $.ajax({
+                    $.ajax({ cache: false,
                         url: 'index.php?route=checkout/shipping_method',
                         dataType: 'html',
                         complete: function() {
@@ -576,7 +576,7 @@
                         },
                         success: function(html) {
                             // Add the shipping address
-                            $.ajax({
+                            $.ajax({ cache: false,
                                 url: 'index.php?route=checkout/guest_shipping',
                                 dataType: 'html',
                                 success: function(html) {
@@ -603,7 +603,7 @@
                         }
                     });
                 } else {
-                    $.ajax({
+                    $.ajax({ cache: false,
                         url: 'index.php?route=checkout/guest_shipping',
                         dataType: 'html',
                         complete: function() {
@@ -626,7 +626,7 @@
                     });
                 }
                 {% else %}
-                $.ajax({
+                $.ajax({ cache: false,
                     url: 'index.php?route=checkout/payment_method',
                     dataType: 'html',
                     complete: function() {
@@ -690,7 +690,7 @@
                 // Highlight any found errors
                 $('.text-danger').parent().addClass('has-error');
             } else {
-                $.ajax({
+                $.ajax({ cache: false,
                     url: 'index.php?route=checkout/shipping_method',
                     dataType: 'html',
                     complete: function() {
@@ -739,7 +739,7 @@
                     $('#collapse-shipping-method .panel-body').prepend('<div class="alert alert-danger alert-dismissible">' + json['error']['warning'] + '<button type="button" class="close" data-dismiss="alert">&times;</button></div>');
                 }
             } else {
-                $.ajax({
+                $.ajax({ cache: false,
                     url: 'index.php?route=checkout/payment_method',
                     dataType: 'html',
                     complete: function() {
@@ -787,7 +787,7 @@
                     $('#collapse-payment-method .panel-body').prepend('<div class="alert alert-danger alert-dismissible">' + json['error']['warning'] + '<button type="button" class="close" data-dismiss="alert">&times;</button></div>');
                 }
             } else {
-                $.ajax({
+                $.ajax({ cache: false,
                     url: 'index.php?route=checkout/confirm',
                     dataType: 'html',
                     complete: function() {
