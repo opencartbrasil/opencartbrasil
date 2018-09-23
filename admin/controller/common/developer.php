@@ -60,11 +60,9 @@ class ControllerCommonDeveloper extends Controller {
 				foreach ($directories as $directory) {
 					$files = glob($directory . '/*');
 
-					if (is_resource($files)) {
-						foreach ($files as $file) {
-							if (is_file($file)) {
-								unlink($file);
-							}
+					foreach ($files as $file) {
+						if (is_file($file)) {
+							unlink($file);
 						}
 					}
 
