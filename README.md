@@ -97,12 +97,15 @@ Se você é o profissional que administra os servidores que armazenam os arquivo
 ### Extensões necessárias no PHP:
 
 - cURL
+- DOM
 - Fileinfo
 - GD
 - MySQLi
+- Mbstring
 - OpenSSL
 - ZLIB
 - ZIP
+- XML
 
 ### ⚠ Notas:
 
