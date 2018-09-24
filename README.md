@@ -146,7 +146,7 @@ git clone https://github.com/opencartbrasil/opencartbrasil.git
 
 ### Através do navegador (manual):
 
-1. Extraia o conteúdo do arquivo zip que você baixou no servidor em que você irá instalar o OpenCart Brasil.
+1. Extraia o conteúdo do arquivo zip que você baixou, no servidor em que você irá instalar o OpenCart Brasil.
 2. Renomeie os arquivos **config_dist.php** e admin/**config_dist.php** para **config.php**.
 3. Em ambiente Linux, a permissão incial de todos os arquivos deve ser **644** e de todas as pastas **755**.
 4. Através do navegador, acesse o domínio onde estão os arquivos do OpenCart Brasil para iniciar a instalação.
@@ -156,7 +156,7 @@ git clone https://github.com/opencartbrasil/opencartbrasil.git
 
 Através da interface de linha de comandos, a loja pode ser instalada automaticamente.
 
-1. Extraia o conteúdo do arquivo zip que você baixou no servidor em que você irá instalar o OpenCart Brasil.
+1. Extraia o conteúdo do arquivo zip que você baixou, no servidor em que você irá instalar o OpenCart Brasil.
 2. No diretório raiz onde estão os arquivos do OpenCart Brasil, execute a linha de comando para iniciar a instalação.
 3. Ao final da instalação a loja estará pronta para utilização.
 
