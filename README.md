@@ -16,6 +16,20 @@ Aqui você poderá analisar o código, relatar erros e enviar correções ou mel
 
 Recomendamos que todos os desenvolvedores sigam este repositório para ficarem atualizados sobre o projeto.
 
+## Imagens
+
+### Início da instalação:
+
+<img src="https://www.opencartbrasil.com.br/image/catalog/teste-drive/install.png">
+
+### Página principal da loja:
+
+<img src="https://www.opencartbrasil.com.br/image/catalog/teste-drive/front-3.0.2.0.png">
+
+### Painel de controle administrativo:
+
+<img src="https://www.opencartbrasil.com.br/image/catalog/teste-drive/back-3.0.2.0.png">
+
 ## Diferenciais
 
 - Melhorias no processo de download e instalação.
