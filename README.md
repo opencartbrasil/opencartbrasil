@@ -41,10 +41,11 @@ Recomendamos que todos os desenvolvedores sigam este repositório para ficarem a
 
 ## Roteiro
 
+- [ ] Cadastro de clientes padrão Brasil.
 - [ ] Opções relacionadas nos produtos.
 - [ ] Campo SKU nas opções dos produtos.
-- [ ] Cadastro de clientes padrão Brasil.
 - [ ] Tema versão Brasil 100% customizado.
+- [ ] Upgrade automático do OpenCart Brasil.
 - [ ] Extensões integradas com serviços brasileiros.
 - [ ] API para integração com sistemas externos como ERP, CRM, etc.
 
@@ -115,21 +116,21 @@ Em breve a versão mínima do PHP será 7.1, pois o suporte para PHP até 7.0 en
 
 ## Download
 
-### Manual através do site:
+### Através do site:
 
 Faça o download da última versão estável através de nosso site [clicando aqui](https://www.opencartbrasil.com.br/download).
 
-### Manual através do repositório:
+### Através do repositório:
 
 Faça o download da última versão estável marcada como **latest release** [clicando aqui](https://github.com/opencartbrasil/opencartbrasil/releases/).
 
-### Automático utilizando o composer:
+### Utilizando o composer:
 
 ``
 composer create-project opencartbrasil/opencartbrasil nome_da_pasta
 ``
 
-### Automático utilizando o Git Bash:
+### Utilizando o Git Bash:
 
 ``
 git clone https://github.com/opencartbrasil/opencartbrasil.git
@@ -143,18 +144,29 @@ git clone https://github.com/opencartbrasil/opencartbrasil.git
 2. Crie um usuário no MySQL para uso da loja. **Atenção:** Em produção utilize um usuário exclusivo para a loja.
 3. Adicione no usuário as permissões de acesso ao banco de dados da loja.
 
-### Semi-automática através do navegador:
+### Através do navegador (manual):
 
-1. Extraia o conteúdo do arquivo que você baixou deste repositório para o servidor em que você irá instalar o projeto OpenCart Brasil.
+1. Extraia o conteúdo do arquivo zip que você baixou no servidor em que você irá instalar o OpenCart Brasil.
 2. Renomeie os arquivos **config_dist.php** e admin/**config_dist.php** para **config.php**.
 3. Em ambiente Linux, a permissão incial de todos os arquivos deve ser **644** e de todas as pastas **755**.
-3. Através do seu navegador, acesse o domínio onde estão os arquivos do projeto OpenCart Brasil para iniciar a instalação.
+4. Através do navegador, acesse o domínio onde estão os arquivos do OpenCart Brasil para iniciar a instalação.
+5. Ao final da instalação a loja estará pronta para utilização.
 
-### Automática por linha de comando:
+### Através da Interface CLI (automática):
 
-Você pode instalar o projeto OpenCart Brasil via linha de comando.
+Através da interface de linha de comandos, a loja pode ser instalada automaticamente.
 
-Os seguintes parâmetros são necessários para utilizar o instalador via linha de comando:
+1. Extraia o conteúdo do arquivo zip que você baixou no servidor em que você irá instalar o OpenCart Brasil.
+2. No diretório raiz onde estão os arquivos do OpenCart Brasil, execute a linha de comando para iniciar a instalação.
+3. Ao final da instalação a loja estará pronta para utilização.
+
+**Exemplo de instalação através da linha de comando no servidor local:**
+
+``
+php install/cli_install.php install --db_hostname localhost --db_username root --db_password 123456 --db_database opencartbrasil --username admin --password 123456 --email usuario@dominio.com.br --http_server http://localhost/opencartbrasil/
+``
+
+Lista de parâmetros para instalação através da linha de comando:
 
 | Parâmetro | Descrição | Padrão | Obrigatório |
 | --------- | --------- | ------ | ----------- |
@@ -169,12 +181,6 @@ Os seguintes parâmetros são necessários para utilizar o instalador via linha 
 | `password` | Senha do usuário administrador da loja. | | Sim |
 | `email` | E-mail do usuário administrador da loja. | | Sim |
 | `http_server` | Domínio da loja com uma / (barra) no final. | | Sim |
-
-**Exemplo de instalação no servidor local:**
-
-``
-php install/cli_install.php install --db_hostname localhost --db_username root --db_password 123456 --db_database opencartbrasil --username admin --password 123456 --email usuario@dominio.com.br --http_server http://localhost/opencartbrasil/
-``
 
 ## Configurações adicionais
 
