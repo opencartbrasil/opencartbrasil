@@ -39,14 +39,24 @@ set_error_handler(function($code, $message, $file, $line) use($log, $config) {
 	}
 
 	if ($config->get('error_display')) {
-		echo '<b>' . $error . '</b>: ' . $message . ' in <b>' . $file . '</b> on line <b>' . $line . '</b>';
+		echo '<b>' . $error . '</b>: ' . $message . ' no arquivo <b>' . $file . '</b> na linha <b>' . $line . '</b>';
 	}
 
 	if ($config->get('error_log')) {
-		$log->write('PHP ' . $error . ':  ' . $message . ' in ' . $file . ' on line ' . $line);
+		$log->write('PHP ' . $error . ':  ' . $message . ' no arquivo ' . $file . ' na linha ' . $line);
 	}
 
 	return true;
+});
+
+set_exception_handler(function($e) use ($log, $config) {
+	if ($config->get('error_display')) {
+		echo '<b>' . get_class($e) . '</b>: ' . $e->getMessage() . ' no arquivo <b>' . $e->getFile() . '</b> na linha <b>' . $e->getLine() . '</b>';
+	}
+
+	if ($config->get('error_log')) {
+		$log->write(get_class($e) . ':  ' . $e->getMessage() . ' no arquivo ' . $e->getFile() . ' na linha ' . $e->getLine());
+	}
 });
 
 // Event
