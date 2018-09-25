@@ -1066,7 +1066,7 @@ CREATE TABLE `oc_customer_affiliate` (
 
 DROP TABLE IF EXISTS `oc_customer_affiliate_report`;
 CREATE TABLE `oc_customer_affiliate_report` (
-  `customer_affiliate_report_id` int(11) NOT NULL,
+  `customer_affiliate_report_id` int(11) NOT NULL AUTO_INCREMENT,
   `customer_id` int(11) NOT NULL,
   `store_id` int(11) NOT NULL,
   `ip` varchar(40) NOT NULL,
@@ -2000,7 +2000,7 @@ CREATE TABLE `oc_marketing` (
 
 DROP TABLE IF EXISTS `oc_marketing_report`;
 CREATE TABLE `oc_marketing_report` (
-  `marketing_report_id` int(11) NOT NULL,
+  `marketing_report_id` int(11) NOT NULL AUTO_INCREMENT,
   `marketing_id` int(11) NOT NULL,
   `store_id` int(11) NOT NULL,
   `ip` varchar(40) NOT NULL,
