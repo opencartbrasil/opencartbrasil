@@ -10,7 +10,7 @@ class ModelUpgrade1000 extends Model {
 		$file = DIR_APPLICATION . 'opencart.sql';
 
 		if (!file_exists($file)) {
-			exit('Could not load sql file: ' . $file);
+			exit('Não foi possível carregar o arquivo sql: ' . $file);
 		}
 
 		$string = '';

@@ -6,7 +6,7 @@ class ModelInstallInstall extends Model {
 		$file = DIR_APPLICATION . 'opencart.sql';
 
 		if (!file_exists($file)) {
-			exit('Could not load sql file: ' . $file);
+			exit('Não foi possível carregar o arquivo sql: ' . $file);
 		}
 
 		$lines = file($file);
@@ -50,7 +50,7 @@ class ModelInstallInstall extends Model {
 
 			$db->query("DELETE FROM `" . $data['db_prefix'] . "setting` WHERE `key` = 'config_api_id'");
 			$db->query("INSERT INTO `" . $data['db_prefix'] . "setting` SET `code` = 'config', `key` = 'config_api_id', value = '" . (int)$api_id . "'");
-			
+
 			// set the current years prefix
 			$db->query("UPDATE `" . $data['db_prefix'] . "setting` SET `value` = 'INV-" . date('Y') . "-00' WHERE `key` = 'config_invoice_prefix'");
 		}
