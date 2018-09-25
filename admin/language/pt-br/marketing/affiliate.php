@@ -18,7 +18,7 @@ $_['text_history']              = 'Histórico';
 $_['text_history_add']          = 'Adicionar';
 $_['text_transaction']          = 'Transações';
 $_['text_transaction_add']      = 'Adicionar';
-$_['text_report']               = 'Relatório';
+$_['text_report']               = 'Interações';
 
 // Column
 $_['column_name']               = 'Cliente';

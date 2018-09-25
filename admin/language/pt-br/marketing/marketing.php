@@ -8,12 +8,19 @@ $_['text_list']         = 'Listando campanhas';
 $_['text_add']          = 'Nova campanha';
 $_['text_edit']         = 'Editando campanha';
 $_['text_filter']       = 'Filtros';
+$_['text_history']      = 'Histórico';
+$_['text_history_add']  = 'Adicionar histórico';
+$_['text_report']       = 'Interações';
 
 // Column
 $_['column_name']       = 'Campanha';
 $_['column_code']       = 'Código de rastreio';
 $_['column_clicks']     = 'Cliques';
 $_['column_orders']     = 'Pedidos';
+$_['column_ip']         = 'IP';
+$_['column_account']    = 'Contas';
+$_['column_store']      = 'Loja';
+$_['column_country']    = 'País';
 $_['column_date_added'] = 'Cadastro';
 $_['column_action']     = 'Ação';
 
