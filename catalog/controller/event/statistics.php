@@ -36,7 +36,7 @@ class ControllerEventStatistics extends Controller {
 			}
 
 			// If order status not in complete or proccessing remove value to orderother
-			if (in_array($args[1], $selected_situations) && !in_array($output, $selected_situations)) {
+			if (in_array($args[1], $selected_situations) && !in_array($output, $selected_situations) && $output != 0) {
 				$this->model_report_statistics->removeValue('order_other', 1);
 			}
 
