@@ -57,6 +57,7 @@ Recomendamos que todos os desenvolvedores sigam este repositório para ficarem a
 - [x] Correção no formulário de produtos.
 - [x] Correção na biblioteca do carrinho.
 - [x] Correção no envio de e-mail por SMTP.
+- [x] Correção das falhas ao finalizar o pedido.
 - [x] Melhorias nos produtos por downloads.
 - [x] Melhorias no gerenciamento de sessão.
 - [x] Melhorias no startup e framework do core.
