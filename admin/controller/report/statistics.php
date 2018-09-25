@@ -70,6 +70,7 @@ class ControllerReportStatistics extends Controller {
 		}
 
 		$this->getList();
+	}
 
 	public function orderother() {
 		$this->load->language('report/statistics');
