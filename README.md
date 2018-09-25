@@ -41,10 +41,10 @@ Recomendamos que todos os desenvolvedores sigam este repositório para ficarem a
 
 ## Roteiro
 
-### Concluído:
+### Tarefas concluídas:
 
 - [x] Loja 100% traduzida.
-- [x] Instalaçao 100% traduzida.
+- [x] Instalação 100% traduzida.
 - [x] Correção nas estátisticas.
 - [x] Correção nos arquivos config.
 - [x] Correção na API do catálogo.
@@ -57,17 +57,21 @@ Recomendamos que todos os desenvolvedores sigam este repositório para ficarem a
 - [x] Correção no formulário de produtos.
 - [x] Correção na biblioteca do carrinho.
 - [x] Correção no envio de e-mail por SMTP.
+- [x] Melhorias nos produtos por downloads.
 - [x] Melhorias no gerenciamento de sessão.
 - [x] Melhorias no startup e framework do core.
 - [x] Melhorias na tradução e no layout de e-mail.
 - [x] Melhorias na comunicação com o banco de dados.
 
-### Em andamento:
+### Tarefas em andamento:
+
+- [ ] Tema versão Brasil 100% customizado.
+
+### Próximas tarefas:
 
 - [ ] Cadastro de clientes padrão Brasil.
 - [ ] Opções relacionadas nos produtos.
 - [ ] Campo SKU nas opções dos produtos.
-- [ ] Tema versão Brasil 100% customizado.
 - [ ] Upgrade automático do OpenCart Brasil.
 - [ ] Extensões integradas com serviços brasileiros.
 - [ ] API para integração com sistemas externos como ERP, CRM, etc.
