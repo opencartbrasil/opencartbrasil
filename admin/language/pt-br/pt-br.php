@@ -141,6 +141,7 @@ $_['tab_marketing']                 = 'Marketing';
 $_['tab_online']                    = 'Pessoas online';
 $_['tab_activity']                  = 'Atividade recente';
 $_['tab_recurring']                 = 'Assinaturas';
+$_['tab_report']                    = 'Relatório';
 $_['tab_action']                    = 'Ação';
 $_['tab_google']                    = 'Google';
 
