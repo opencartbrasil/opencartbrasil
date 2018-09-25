@@ -397,6 +397,65 @@ class ControllerCatalogDownload extends Controller {
 		return !$this->error;
 	}
 
+	public function report() {
+		$this->load->language('catalog/download');
+
+		if (isset($this->request->get['download_id'])) {
+			$download_id = (int)$this->request->get['download_id'];
+		} else {
+			$download_id = 0;
+		}
+
+		if (isset($this->request->get['page'])) {
+			$page = $this->request->get['page'];
+		} else {
+			$page = 1;
+		}
+
+		$data['reports'] = array();
+
+		$this->load->model('catalog/download');
+		$this->load->model('customer/customer');
+		$this->load->model('setting/store');
+
+		$results = $this->model_catalog_download->getReports($download_id, ($page - 1) * 10, 10);
+
+		foreach ($results as $result) {
+			$store_info = $this->model_setting_store->getStore($result['store_id']);
+
+			if ($store_info) {
+				$store = $store_info['name'];
+			} elseif (!$result['store_id']) {
+				$store = $this->config->get('config_name');
+			} else {
+				$store = '';
+			}
+
+			$data['reports'][] = array(
+				'ip'         => $result['ip'],
+				'account'    => $this->model_customer_customer->getTotalCustomersByIp($result['ip']),
+				'store'      => $store,
+				'country'    => $result['country'],
+				'date_added' => date($this->language->get('datetime_format'), strtotime($result['date_added'])),
+				'filter_ip'  => $this->url->link('customer/customer', 'user_token=' . $this->session->data['user_token'] . '&filter_ip=' . $result['ip'], true)
+			);
+		}
+
+		$report_total = $this->model_catalog_download->getTotalReports($download_id);
+
+		$pagination = new Pagination();
+		$pagination->total = $report_total;
+		$pagination->page = $page;
+		$pagination->limit = 10;
+		$pagination->url = $this->url->link('catalog/download/report', 'user_token=' . $this->session->data['user_token'] . '&download_id=' . $download_id . '&page={page}', true);
+
+		$data['pagination'] = $pagination->render();
+
+		$data['results'] = sprintf($this->language->get('text_pagination'), ($report_total) ? (($page - 1) * 10) + 1 : 0, ((($page - 1) * 10) > ($report_total - 10)) ? $report_total : ((($page - 1) * 10) + 10), $report_total, ceil($report_total / 10));
+
+		$this->response->setOutput($this->load->view('catalog/download_report', $data));
+	}
+
 	public function upload() {
 		$this->load->language('catalog/download');
 

@@ -8,9 +8,14 @@ $_['text_list']         = 'Listando downloads';
 $_['text_add']          = 'Novo download';
 $_['text_edit']         = 'Editando download';
 $_['text_upload']       = 'O arquivo foi enviado!';
+$_['text_report']       = 'Interações';
 
 // Column
 $_['column_name']       = 'Download';
+$_['column_ip']         = 'IP';
+$_['column_account']    = 'Contas';
+$_['column_store']      = 'Loja';
+$_['column_country']    = 'País';
 $_['column_date_added'] = 'Cadastro';
 $_['column_action']     = 'Ação';
 
