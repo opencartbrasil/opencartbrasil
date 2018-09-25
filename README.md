@@ -46,7 +46,7 @@ Recomendamos que todos os desenvolvedores sigam este repositório para ficarem a
 - [x] Loja 100% traduzida.
 - [x] Instalaçao 100% traduzida.
 - [x] Correção nas estátisticas.
-- [x] Correção no arquivos config.
+- [x] Correção nos arquivos config.
 - [x] Correção na API do catálogo.
 - [x] Correção na edição de pedidos.
 - [x] Correção no sistema de pontos.
