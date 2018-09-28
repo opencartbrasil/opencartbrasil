@@ -190,7 +190,7 @@ class Smtp {
 			$lines = explode("\n", $message);
 
 			foreach ($lines as $line) {
-				$results = str_split($line, 998);
+				preg_match_all('/.{1,{' . $length . '}}(?=\W+)/u', $line, $results, PREG_PATTERN_ORDER);
 
 				foreach ($results as $result) {
 					if (substr(PHP_OS, 0, 3) != 'WIN') {
