@@ -91,7 +91,7 @@ class ControllerCustomerCustomerApproval extends Controller {
 
 		$this->response->setOutput($this->load->view('customer/customer_approval', $data));	
 	}
-				
+
 	public function customer_approval() {
 		$this->load->language('customer/customer_approval');
 		
@@ -124,12 +124,12 @@ class ControllerCustomerCustomerApproval extends Controller {
 		} else {
 			$filter_date_added = '';
 		}
-						
+
 		if (isset($this->request->get['page'])) {
 			$page = $this->request->get['page'];
 		} else {
 			$page = 1;
-		}		
+		}
 
 		$data['customer_approvals'] = array();
 
@@ -172,19 +172,19 @@ class ControllerCustomerCustomerApproval extends Controller {
 		if (isset($this->request->get['filter_email'])) {
 			$url .= '&filter_email=' . urlencode(html_entity_decode($this->request->get['filter_email'], ENT_QUOTES, 'UTF-8'));
 		}
-			
+
 		if (isset($this->request->get['filter_customer_group_id'])) {
 			$url .= '&filter_customer_group_id=' . $this->request->get['filter_customer_group_id'];
 		}
-		
+
 		if (isset($this->request->get['filter_type'])) {
 			$url .= '&filter_type=' . $this->request->get['filter_type'];
 		}
-		
+
 		if (isset($this->request->get['filter_date_added'])) {
 			$url .= '&filter_date_added=' . $this->request->get['filter_date_added'];
 		}
-					
+
 		$pagination = new Pagination();
 		$pagination->total = $customer_approval_total;
 		$pagination->page = $page;
@@ -219,13 +219,13 @@ class ControllerCustomerCustomerApproval extends Controller {
 
 		$this->response->addHeader('Content-Type: application/json');
 		$this->response->setOutput(json_encode($json));
-	}	
-	
+	}
+
 	public function deny() {
 		$this->load->language('customer/customer_approval');
 
 		$json = array();
-				
+
 		if (!$this->user->hasPermission('modify', 'customer/customer_approval')) {
 			$json['error'] = $this->language->get('error_permission');
 		} else {
@@ -236,7 +236,7 @@ class ControllerCustomerCustomerApproval extends Controller {
 			} elseif ($this->request->get['type'] == 'affiliate') {
 				$this->model_customer_customer_approval->denyAffiliate($this->request->get['customer_id']);
 			}
-					
+
 			$json['success'] = $this->language->get('text_success');
 		}
 		

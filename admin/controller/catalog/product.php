@@ -587,7 +587,7 @@ class ControllerCatalogProduct extends Controller {
 
 		if (isset($this->request->post['product_description'])) {
 			$data['product_description'] = $this->request->post['product_description'];
-		} elseif (isset($this->request->get['product_id'])) {
+		} elseif (!empty($product_info)) {
 			$data['product_description'] = $this->model_catalog_product->getProductDescriptions($this->request->get['product_id']);
 		} else {
 			$data['product_description'] = array();
@@ -677,7 +677,7 @@ class ControllerCatalogProduct extends Controller {
 
 		if (isset($this->request->post['product_store'])) {
 			$data['product_store'] = $this->request->post['product_store'];
-		} elseif (isset($this->request->get['product_id'])) {
+		} elseif (!empty($product_info)) {
 			$data['product_store'] = $this->model_catalog_product->getProductStores($this->request->get['product_id']);
 		} else {
 			$data['product_store'] = array(0);
@@ -868,7 +868,7 @@ class ControllerCatalogProduct extends Controller {
 
 		if (isset($this->request->post['product_category'])) {
 			$categories = $this->request->post['product_category'];
-		} elseif (isset($this->request->get['product_id'])) {
+		} elseif (!empty($product_info)) {
 			$categories = $this->model_catalog_product->getProductCategories($this->request->get['product_id']);
 		} else {
 			$categories = array();
@@ -892,7 +892,7 @@ class ControllerCatalogProduct extends Controller {
 
 		if (isset($this->request->post['product_filter'])) {
 			$filters = $this->request->post['product_filter'];
-		} elseif (isset($this->request->get['product_id'])) {
+		} elseif (!empty($product_info)) {
 			$filters = $this->model_catalog_product->getProductFilters($this->request->get['product_id']);
 		} else {
 			$filters = array();
@@ -916,7 +916,7 @@ class ControllerCatalogProduct extends Controller {
 
 		if (isset($this->request->post['product_attribute'])) {
 			$product_attributes = $this->request->post['product_attribute'];
-		} elseif (isset($this->request->get['product_id'])) {
+		} elseif (!empty($product_info)) {
 			$product_attributes = $this->model_catalog_product->getProductAttributes($this->request->get['product_id']);
 		} else {
 			$product_attributes = array();
@@ -941,7 +941,7 @@ class ControllerCatalogProduct extends Controller {
 
 		if (isset($this->request->post['product_option'])) {
 			$product_options = $this->request->post['product_option'];
-		} elseif (isset($this->request->get['product_id'])) {
+		} elseif (!empty($product_info)) {
 			$product_options = $this->model_catalog_product->getProductOptions($this->request->get['product_id']);
 		} else {
 			$product_options = array();
@@ -996,7 +996,7 @@ class ControllerCatalogProduct extends Controller {
 
 		if (isset($this->request->post['product_discount'])) {
 			$product_discounts = $this->request->post['product_discount'];
-		} elseif (isset($this->request->get['product_id'])) {
+		} elseif (!empty($product_info)) {
 			$product_discounts = $this->model_catalog_product->getProductDiscounts($this->request->get['product_id']);
 		} else {
 			$product_discounts = array();
@@ -1017,7 +1017,7 @@ class ControllerCatalogProduct extends Controller {
 
 		if (isset($this->request->post['product_special'])) {
 			$product_specials = $this->request->post['product_special'];
-		} elseif (isset($this->request->get['product_id'])) {
+		} elseif (!empty($product_info)) {
 			$product_specials = $this->model_catalog_product->getProductSpecials($this->request->get['product_id']);
 		} else {
 			$product_specials = array();
@@ -1059,7 +1059,7 @@ class ControllerCatalogProduct extends Controller {
 		// Images
 		if (isset($this->request->post['product_image'])) {
 			$product_images = $this->request->post['product_image'];
-		} elseif (isset($this->request->get['product_id'])) {
+		} elseif (!empty($product_info)) {
 			$product_images = $this->model_catalog_product->getProductImages($this->request->get['product_id']);
 		} else {
 			$product_images = array();
@@ -1088,7 +1088,7 @@ class ControllerCatalogProduct extends Controller {
 
 		if (isset($this->request->post['product_download'])) {
 			$product_downloads = $this->request->post['product_download'];
-		} elseif (isset($this->request->get['product_id'])) {
+		} elseif (!empty($product_info)) {
 			$product_downloads = $this->model_catalog_product->getProductDownloads($this->request->get['product_id']);
 		} else {
 			$product_downloads = array();
@@ -1109,7 +1109,7 @@ class ControllerCatalogProduct extends Controller {
 
 		if (isset($this->request->post['product_related'])) {
 			$products = $this->request->post['product_related'];
-		} elseif (isset($this->request->get['product_id'])) {
+		} elseif (!empty($product_info)) {
 			$products = $this->model_catalog_product->getProductRelated($this->request->get['product_id']);
 		} else {
 			$products = array();
@@ -1138,7 +1138,7 @@ class ControllerCatalogProduct extends Controller {
 
 		if (isset($this->request->post['product_reward'])) {
 			$data['product_reward'] = $this->request->post['product_reward'];
-		} elseif (isset($this->request->get['product_id'])) {
+		} elseif (!empty($product_info)) {
 			$data['product_reward'] = $this->model_catalog_product->getProductRewards($this->request->get['product_id']);
 		} else {
 			$data['product_reward'] = array();
@@ -1146,7 +1146,7 @@ class ControllerCatalogProduct extends Controller {
 
 		if (isset($this->request->post['product_seo_url'])) {
 			$data['product_seo_url'] = $this->request->post['product_seo_url'];
-		} elseif (isset($this->request->get['product_id'])) {
+		} elseif (!empty($product_info)) {
 			$data['product_seo_url'] = $this->model_catalog_product->getProductSeoUrls($this->request->get['product_id']);
 		} else {
 			$data['product_seo_url'] = array();
@@ -1154,7 +1154,7 @@ class ControllerCatalogProduct extends Controller {
 
 		if (isset($this->request->post['product_layout'])) {
 			$data['product_layout'] = $this->request->post['product_layout'];
-		} elseif (isset($this->request->get['product_id'])) {
+		} elseif (!empty($product_info)) {
 			$data['product_layout'] = $this->model_catalog_product->getProductLayouts($this->request->get['product_id']);
 		} else {
 			$data['product_layout'] = array();
@@ -1198,10 +1198,10 @@ class ControllerCatalogProduct extends Controller {
 					if (!empty($keyword)) {
 						if (count(array_keys($language, $keyword)) > 1) {
 							$this->error['keyword'][$store_id][$language_id] = $this->language->get('error_unique');
-						}						
-						
+						}
+
 						$seo_urls = $this->model_design_seo_url->getSeoUrlsByKeyword($keyword);
-						
+
 						foreach ($seo_urls as $seo_url) {
 							if (($seo_url['store_id'] == $store_id) && (!isset($this->request->get['product_id']) || (($seo_url['query'] != 'product_id=' . $this->request->get['product_id'])))) {
 								$this->error['keyword'][$store_id][$language_id] = $this->language->get('error_keyword');

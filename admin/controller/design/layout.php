@@ -312,7 +312,7 @@ class ControllerDesignLayout extends Controller {
 
 		if (isset($this->request->post['layout_route'])) {
 			$data['layout_routes'] = $this->request->post['layout_route'];
-		} elseif (isset($this->request->get['layout_id'])) {
+		} elseif (!empty($layout_info)) {
 			$data['layout_routes'] = $this->model_design_layout->getLayoutRoutes($this->request->get['layout_id']);
 		} else {
 			$data['layout_routes'] = array();
@@ -354,18 +354,18 @@ class ControllerDesignLayout extends Controller {
 		// Modules layout
 		if (isset($this->request->post['layout_module'])) {
 			$layout_modules = $this->request->post['layout_module'];
-		} elseif (isset($this->request->get['layout_id'])) {
+		} elseif (!empty($layout_info)) {
 			$layout_modules = $this->model_design_layout->getLayoutModules($this->request->get['layout_id']);
 		} else {
 			$layout_modules = array();
 		}
 
 		$data['layout_modules'] = array();
-		
+
 		// Add all the modules which have multiple settings for each module
 		foreach ($layout_modules as $layout_module) {
 			$part = explode('.', $layout_module['code']);
-		
+
 			$this->load->language('extension/module/' . $part[0]);
 
 			if (!isset($part[1])) {
@@ -387,10 +387,10 @@ class ControllerDesignLayout extends Controller {
 						'position'   => $layout_module['position'],
 						'sort_order' => $layout_module['sort_order']
 					);
-				}				
+				}
 			}
-		}		
-		
+		}
+
 		$data['header'] = $this->load->controller('common/header');
 		$data['column_left'] = $this->load->controller('common/column_left');
 		$data['footer'] = $this->load->controller('common/footer');

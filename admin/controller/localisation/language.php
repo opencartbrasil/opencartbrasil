@@ -267,7 +267,7 @@ class ControllerLocalisationLanguage extends Controller {
 		} else {
 			$data['error_code'] = '';
 		}
-		
+
 		if (isset($this->error['locale'])) {
 			$data['error_locale'] = $this->error['locale'];
 		} else {

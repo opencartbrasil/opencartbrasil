@@ -338,18 +338,18 @@ class ControllerUserApi extends Controller {
 		// IP
 		if (isset($this->request->post['api_ip'])) {
 			$data['api_ips'] = $this->request->post['api_ip'];
-		} elseif (isset($this->request->get['api_id'])) {
+		} elseif (!empty($api_info)) {
 			$data['api_ips'] = $this->model_user_api->getApiIps($this->request->get['api_id']);
 		} else {
 			$data['api_ips'] = array();
 		}
-		
+
 		// Session
 		$data['api_sessions'] = array();
-		
-		if (isset($this->request->get['api_id'])) {
+
+		if (!empty($api_info)) {
 			$results = $this->model_user_api->getApiSessions($this->request->get['api_id']);
-			
+
 			foreach ($results as $result) {
 				$data['api_sessions'][] = array(
 					'api_session_id' => $result['api_session_id'],
@@ -360,7 +360,7 @@ class ControllerUserApi extends Controller {
 				);
 			}
 		}
-		
+
 		$data['header'] = $this->load->controller('common/header');
 		$data['column_left'] = $this->load->controller('common/column_left');
 		$data['footer'] = $this->load->controller('common/footer');
@@ -413,5 +413,5 @@ class ControllerUserApi extends Controller {
 
 		$this->response->addHeader('Content-Type: application/json');
 		$this->response->setOutput(json_encode($json));
-	}	
+	}
 }
