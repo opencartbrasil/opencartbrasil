@@ -429,6 +429,18 @@ class ControllerMarketingAffiliate extends Controller {
 			$data['error_warning'] = '';
 		}
 
+		if (isset($this->error['customer'])) {
+			$data['error_customer'] = $this->error['customer'];
+		} else {
+			$data['error_customer'] = '';
+		}
+
+		if (isset($this->error['tracking'])) {
+			$data['error_tracking'] = $this->error['tracking'];
+		} else {
+			$data['error_tracking'] = '';
+		}
+
 		if (isset($this->error['cheque'])) {
 			$data['error_cheque'] = $this->error['cheque'];
 		} else {
@@ -696,11 +708,18 @@ class ControllerMarketingAffiliate extends Controller {
 			$this->error['warning'] = $this->language->get('error_permission');
 		}
 
-		// Check to see if customer is already a affiliate
-		if (isset($this->request->post['customer_id'])) {
-			$affiliate_info = $this->model_marketing_affiliate->getAffiliate($this->request->post['customer_id']);
+		if (!$this->request->post['customer_id']) {
+			$this->error['customer'] = $this->language->get('error_customer');
+		}
 
-			if ($affiliate_info) {
+		if (isset($this->request->post['customer']) && !$this->request->post['customer_id']) {
+			$this->error['customer'] = $this->language->get('error_wrong_customer');
+		}
+
+		// Check to see if customer is already a affiliate
+		if ($this->request->post['customer_id']) {
+			$affiliate_info = $this->model_marketing_affiliate->getAffiliate($this->request->post['customer_id']);
+			if ($affiliate_info && ($this->request->post['customer_id'] == $affiliate_info['customer_id'] && !isset($this->request->get['customer_id']))) {
 				$this->error['warning'] = $this->language->get('error_already');
 			}
 		}

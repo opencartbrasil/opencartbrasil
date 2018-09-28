@@ -9,7 +9,7 @@ $_['text_add']                  = 'Adicionando afiliado';
 $_['text_edit']                 = 'Editando afiliado';
 $_['text_affiliate']            = 'Detalhes do afiliado';
 $_['text_payment']              = 'Detalhes do pagamento';
-$_['text_other']                = 'Outro';
+$_['text_other']                = 'Outros';
 $_['text_balance']              = 'Saldo';
 $_['text_cheque']               = 'Cheque';
 $_['text_paypal']               = 'PayPal';
@@ -64,6 +64,8 @@ $_['help_tracking']             = 'Código de rastreamento que será utilizado p
 // Error
 $_['error_warning']             = 'Atenção: Existem erros no preenchimento do formulário!';
 $_['error_permission']          = 'Atenção: Você não tem permissão para modificar os afiliados!';
+$_['error_customer']            = 'É necessário selecionar um cliente!';
+$_['error_wrong_customer']      = 'Atenção: Escolha o cliente correto!';
 $_['error_already']             = 'Atenção: O cliente selecionado já está registrado como afiliado!';
 $_['error_tracking']            = 'O código de rastreamento é obrigatório!';
 $_['error_exists']              = 'O código de rastreamento já está em uso por outro afiliado!';

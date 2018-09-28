@@ -4,7 +4,8 @@
     <div class="container-fluid">
       <div class="pull-right">
         <button type="submit" form="form-customer" data-toggle="tooltip" title="{{ button_save }}" class="btn btn-primary"><i class="fa fa-save"></i></button>
-        <a href="{{ cancel }}" data-toggle="tooltip" title="{{ button_cancel }}" class="btn btn-default"><i class="fa fa-reply"></i></a></div>
+        <a href="{{ cancel }}" data-toggle="tooltip" title="{{ button_cancel }}" class="btn btn-default"><i class="fa fa-reply"></i></a>
+      </div>
       <h1>{{ heading_title }}</h1>
       <ul class="breadcrumb">
         {% for breadcrumb in breadcrumbs %}
@@ -13,7 +14,8 @@
       </ul>
     </div>
   </div>
-  <div class="container-fluid">{% if error_warning %}
+  <div class="container-fluid">
+    {% if error_warning %}
       <div class="alert alert-danger alert-dismissible"><i class="fa fa-exclamation-circle"></i> {{ error_warning }}
         <button type="button" class="close" data-dismiss="alert">&times;</button>
       </div>
@@ -27,9 +29,9 @@
           <ul class="nav nav-tabs">
             <li class="active"><a href="#tab-general" data-toggle="tab">{{ tab_general }}</a></li>
             {% if customer_id %}
-              <li><a href="#tab-history" data-toggle="tab">{{ tab_history }}</a></li>
-              <li><a href="#tab-transaction" data-toggle="tab">{{ tab_transaction }}</a></li>
-              <li><a href="#tab-report" data-toggle="tab">{{ tab_report }}</a></li>
+            <li><a href="#tab-history" data-toggle="tab">{{ tab_history }}</a></li>
+            <li><a href="#tab-transaction" data-toggle="tab">{{ tab_transaction }}</a></li>
+            <li><a href="#tab-report" data-toggle="tab">{{ tab_report }}</a></li>
             {% endif %}
           </ul>
           <div class="tab-content">
@@ -40,14 +42,16 @@
                   <label class="col-sm-2 control-label" for="input-customer">{{ entry_customer }}</label>
                   <div class="col-sm-10">
                     {% if not customer_id %}
-                      <input type="text" name="customer" value="{{ customer }}" placeholder="{{ entry_customer }}" id="input-customer" class="form-control"/> <input type="hidden" name="customer_id" value="{{ customer_id }}"/>
+                    <input type="text" name="customer" value="{{ customer }}" placeholder="{{ entry_customer }}" id="input-customer" class="form-control"/>
                     {% else %}
-                      <input type="text" name="customer" value="{{ customer }}" placeholder="{{ entry_customer }}" id="input-customer" class="form-control" readonly/>
+                    <input type="text" name="customer" value="{{ customer }}" placeholder="{{ entry_customer }}" id="input-customer" class="form-control" disabled/>
                     {% endif %}
-                    <input type="hidden" name="customer_group_id" value="{{ customer_group_id }}" />
+                    <input type="hidden" name="customer_id" value="{{ customer_id }}"/>
+                    <input type="hidden" name="customer_group_id" value="{{ customer_group_id }}"/>
                     {% if error_customer %}
-                      <div class="text-danger">{{ error_customer }}</div>
-                    {% endif %}</div>
+                    <div class="text-danger">{{ error_customer }}</div>
+                    {% endif %}
+                  </div>
                 </div>
                 <div class="form-group">
                   <label class="col-sm-2 control-label" for="input-company">{{ entry_company }}</label>
@@ -61,11 +65,13 @@
                     <input type="text" name="website" value="{{ website }}" placeholder="{{ entry_website }}" id="input-website" class="form-control"/>
                   </div>
                 </div>
-
-                <div class="form-group">
+                <div class="form-group" required>
                   <label class="col-sm-2 control-label" for="input-tracking"><span data-toggle="tooltip" title="{{ help_tracking }}">{{ entry_tracking }}</span></label>
                   <div class="col-sm-10">
                     <input type="text" name="tracking" value="{{ tracking }}" placeholder="{{ entry_tracking }}" id="input-tracking" class="form-control"/>
+                    {% if error_tracking %}
+                    <div class="text-danger">{{ error_tracking }}</div>
+                    {% endif %}
                   </div>
                 </div>
                 <div class="form-group">
@@ -74,7 +80,6 @@
                     <input type="text" name="commission" value="{{ commission }}" placeholder="{{ entry_commission }}" id="input-commission" class="form-control"/>
                   </div>
                 </div>
-
                 {% for custom_field in custom_fields %}
                   {% if custom_field.location == 'affiliate' %}
                     {% if custom_field.type == 'select' %}
@@ -92,8 +97,9 @@
                             {% endfor %}
                           </select>
                           {% if error_custom_field[custom_field.custom_field_id] %}
-                            <div class="text-danger">{{ error_custom_field[custom_field.custom_field_id] }}</div>
-                          {% endif %}</div>
+                          <div class="text-danger">{{ error_custom_field[custom_field.custom_field_id] }}</div>
+                          {% endif %}
+                        </div>
                       </div>
                     {% endif %}
                     {% if custom_field.type == 'radio' %}
@@ -110,8 +116,9 @@
                                 {% endif %}</div>
                             {% endfor %} </div>
                           {% if error_custom_field[custom_field.custom_field_id] %}
-                            <div class="text-danger">{{ error_custom_field[custom_field.custom_field_id] }}</div>
-                          {% endif %}</div>
+                          <div class="text-danger">{{ error_custom_field[custom_field.custom_field_id] }}</div>
+                          {% endif %}
+                        </div>
                       </div>
                     {% endif %}
                     {% if custom_field.type == 'checkbox' %}
@@ -128,8 +135,9 @@
                                 {% endif %}</div>
                             {% endfor %} </div>
                           {% if error_custom_field[custom_field.custom_field_id] %}
-                            <div class="text-danger">{{ error_custom_field[custom_field.custom_field_id] }}</div>
-                          {% endif %}</div>
+                          <div class="text-danger">{{ error_custom_field[custom_field.custom_field_id] }}</div>
+                          {% endif %}
+                        </div>
                       </div>
                     {% endif %}
                     {% if custom_field.type == 'text' %}
@@ -138,8 +146,9 @@
                         <div class="col-sm-10">
                           <input type="text" name="custom_field[{{ custom_field.custom_field_id }}]" value="{{ affiliate_custom_field[custom_field.custom_field_id] ? affiliate_custom_field[custom_field.custom_field_id] : custom_field.value }}" placeholder="{{ custom_field.name }}" id="input-custom-field{{ custom_field.custom_field_id }}" class="form-control"/>
                           {% if error_custom_field[custom_field.custom_field_id] %}
-                            <div class="text-danger">{{ error_custom_field[custom_field.custom_field_id] }}</div>
-                          {% endif %}</div>
+                          <div class="text-danger">{{ error_custom_field[custom_field.custom_field_id] }}</div>
+                          {% endif %}
+                        </div>
                       </div>
                     {% endif %}
                     {% if custom_field.type == 'textarea' %}
@@ -148,8 +157,9 @@
                         <div class="col-sm-10">
                           <textarea name="custom_field[{{ custom_field.custom_field_id }}]" rows="5" placeholder="{{ custom_field.name }}" id="input-custom-field{{ custom_field.custom_field_id }}" class="form-control">{{ affiliate_custom_field[custom_field.custom_field_id] ? affiliate_custom_field[custom_field.custom_field_id] : custom_field.value }}</textarea>
                           {% if error_custom_field[custom_field.custom_field_id] %}
-                            <div class="text-danger">{{ error_custom_field[custom_field.custom_field_id] }}</div>
-                          {% endif %}</div>
+                          <div class="text-danger">{{ error_custom_field[custom_field.custom_field_id] }}</div>
+                          {% endif %}
+                        </div>
                       </div>
                     {% endif %}
                     {% if custom_field.type == 'file' %}
@@ -159,8 +169,9 @@
                           <button type="button" id="button-custom-field{{ custom_field.custom_field_id }}" data-loading-text="{{ text_loading }}" class="btn btn-default"><i class="fa fa-upload"></i> {{ button_upload }}</button>
                           <input type="hidden" name="custom_field[{{ custom_field.custom_field_id }}]" value="{{ affiliate_custom_field[custom_field.custom_field_id] ? affiliate_custom_field[custom_field.custom_field_id] }}" id="input-custom-field{{ custom_field.custom_field_id }}"/>
                           {% if error_custom_field[custom_field.custom_field_id] %}
-                            <div class="text-danger">{{ error_custom_field[custom_field.custom_field_id] }}</div>
-                          {% endif %}</div>
+                          <div class="text-danger">{{ error_custom_field[custom_field.custom_field_id] }}</div>
+                          {% endif %}
+                        </div>
                       </div>
                     {% endif %}
                     {% if custom_field.type == 'date' %}
@@ -174,8 +185,9 @@
                             </div>
                           </div>
                           {% if error_custom_field[custom_field.custom_field_id] %}
-                            <div class="text-danger">{{ error_custom_field[custom_field.custom_field_id] }}</div>
-                          {% endif %}</div>
+                          <div class="text-danger">{{ error_custom_field[custom_field.custom_field_id] }}</div>
+                          {% endif %}
+                        </div>
                       </div>
                     {% endif %}
                     {% if custom_field.type == 'time' %}
@@ -189,8 +201,9 @@
                             </div>
                           </div>
                           {% if error_custom_field[custom_field.custom_field_id] %}
-                            <div class="text-danger">{{ error_custom_field[custom_field.custom_field_id] }}</div>
-                          {% endif %}</div>
+                          <div class="text-danger">{{ error_custom_field[custom_field.custom_field_id] }}</div>
+                          {% endif %}
+                        </div>
                       </div>
                     {% endif %}
                     {% if custom_field.type == 'datetime' %}
@@ -203,8 +216,9 @@
                             </div>
                           </div>
                           {% if error_custom_field[custom_field.custom_field_id] %}
-                            <div class="text-danger">{{ error_custom_field[custom_field.custom_field_id] }}</div>
-                          {% endif %}</div>
+                          <div class="text-danger">{{ error_custom_field[custom_field.custom_field_id] }}</div>
+                          {% endif %}
+                        </div>
                       </div>
                     {% endif %}
                   {% endif %}
@@ -222,28 +236,34 @@
                   <label class="col-sm-2 control-label">{{ entry_payment }}</label>
                   <div class="col-sm-10">
                     <div class="radio">
-                      <label>{% if payment == 'cheque' %}
-                          <input type="radio" name="payment" value="cheque" checked="checked"/>
+                      <label>
+                        {% if payment == 'cheque' %}
+                        <input type="radio" name="payment" value="cheque" checked="checked"/>
                         {% else %}
-                          <input type="radio" name="payment" value="cheque"/>
+                        <input type="radio" name="payment" value="cheque"/>
                         {% endif %}
-                        {{ text_cheque }}</label>
+                        {{ text_cheque }}
+                      </label>
                     </div>
                     <div class="radio">
-                      <label> {% if payment == 'paypal' %}
-                          <input type="radio" name="payment" value="paypal" checked="checked"/>
+                      <label>
+                        {% if payment == 'paypal' %}
+                        <input type="radio" name="payment" value="paypal" checked="checked"/>
                         {% else %}
-                          <input type="radio" name="payment" value="paypal"/>
+                        <input type="radio" name="payment" value="paypal"/>
                         {% endif %}
-                        {{ text_paypal }}</label>
+                        {{ text_paypal }}
+                      </label>
                     </div>
                     <div class="radio">
-                      <label> {% if payment == 'bank' %}
-                          <input type="radio" name="payment" value="bank" checked="checked"/>
+                      <label>
+                        {% if payment == 'bank' %}
+                        <input type="radio" name="payment" value="bank" checked="checked"/>
                         {% else %}
-                          <input type="radio" name="payment" value="bank"/>
+                        <input type="radio" name="payment" value="bank"/>
                         {% endif %}
-                        {{ text_bank }}</label>
+                        {{ text_bank }}
+                      </label>
                     </div>
                   </div>
                 </div>
@@ -253,8 +273,9 @@
                     <div class="col-sm-10">
                       <input type="text" name="cheque" value="{{ cheque }}" placeholder="{{ entry_cheque }}" id="input-cheque" class="form-control"/>
                       {% if error_cheque %}
-                        <div class="text-danger">{{ error_cheque }}</div>
-                      {% endif %}</div>
+                      <div class="text-danger">{{ error_cheque }}</div>
+                      {% endif %}
+                    </div>
                   </div>
                 </div>
                 <div id="payment-paypal" class="payment">
@@ -291,16 +312,18 @@
                     <div class="col-sm-10">
                       <input type="text" name="bank_account_name" value="{{ bank_account_name }}" placeholder="{{ entry_bank_account_name }}" id="input-bank-account-name" class="form-control"/>
                       {% if error_bank_account_name %}
-                        <div class="text-danger">{{ error_bank_account_name }}</div>
-                      {% endif %}</div>
+                      <div class="text-danger">{{ error_bank_account_name }}</div>
+                      {% endif %}
+                    </div>
                   </div>
                   <div class="form-group required">
                     <label class="col-sm-2 control-label" for="input-bank-account-number">{{ entry_bank_account_number }}</label>
                     <div class="col-sm-10">
                       <input type="text" name="bank_account_number" value="{{ bank_account_number }}" placeholder="{{ entry_bank_account_number }}" id="input-bank-account-number" class="form-control"/>
                       {% if error_bank_account_number %}
-                        <div class="text-danger">{{ error_bank_account_number }}</div>
-                      {% endif %}</div>
+                      <div class="text-danger">{{ error_bank_account_number }}</div>
+                      {% endif %}
+                    </div>
                   </div>
                 </div>
               </fieldset>
@@ -311,11 +334,11 @@
                   <div class="col-sm-10">
                     <select name="status" id="input-status" class="form-control">
                       {% if status %}
-                        <option value="1" selected="selected">{{ text_enabled }}</option>
-                        <option value="0">{{ text_disabled }}</option>
+                      <option value="1" selected="selected">{{ text_enabled }}</option>
+                      <option value="0">{{ text_disabled }}</option>
                       {% else %}
-                        <option value="1">{{ text_enabled }}</option>
-                        <option value="0" selected="selected">{{ text_disabled }}</option>
+                      <option value="1">{{ text_enabled }}</option>
+                      <option value="0" selected="selected">{{ text_disabled }}</option>
                       {% endif %}
                     </select>
                   </div>
@@ -382,220 +405,220 @@
 </div>
 <script type="text/javascript"><!--
 $('input[name=\'customer\']').autocomplete({
-	'source': function(request, response) {
-		$.ajax({
-			url: 'index.php?route=customer/customer/autocomplete&user_token={{ user_token }}&filter_name=' + encodeURIComponent(request),
-			dataType: 'json',
-			success: function(json) {
-				response($.map(json, function(item) {
-					return {
-						category: item['customer_group'],
-						label: item['name'],
-						value: item['customer_id'],
-						customer_group_id: item['customer_group_id'],
-					}
-				}));
-			}
-		});
-	},
-	'select': function(item) {
-		$('input[name=\'customer\']').val(item['label']);
-		$('input[name=\'customer_id\']').val(item['value']);
-		$('input[name=\'customer_group_id\']').val(item['customer_group_id']);
-		$('input[name=\'customer_group_id\']').trigger('change');
-	}
+    'source': function(request, response) {
+        $.ajax({
+            url: 'index.php?route=customer/customer/autocomplete&user_token={{ user_token }}&filter_name=' + encodeURIComponent(request),
+            dataType: 'json',
+            success: function(json) {
+                response($.map(json, function(item) {
+                    return {
+                        category: item['customer_group'],
+                        label: item['name'],
+                        value: item['customer_id'],
+                        customer_group_id: item['customer_group_id'],
+                    }
+                }));
+            }
+        });
+    },
+    'select': function(item) {
+        $('input[name=\'customer\']').val(item['label']);
+        $('input[name=\'customer_id\']').val(item['value']);
+        $('input[name=\'customer_group_id\']').val(item['customer_group_id']);
+        $('input[name=\'customer_group_id\']').trigger('change');
+    }
 });
 //--></script>
 <script type="text/javascript"><!--
 $('input[name=\'customer_group_id\']').on('change', function() {
-	$.ajax({
-		url: 'index.php?route=customer/customer/customfield&user_token={{ user_token }}&customer_group_id=' + this.value,
-		dataType: 'json',
-		success: function(json) {
-			$('.custom-field').hide();
-			$('.custom-field').removeClass('required');
-			for (i = 0; i < json.length; i++) {
-				custom_field = json[i];
-				$('.custom-field' + custom_field['custom_field_id']).show();
-				if (custom_field['required']) {
-					$('.custom-field' + custom_field['custom_field_id']).addClass('required');
-				}
-			}
-		},
-		error: function(xhr, ajaxOptions, thrownError) {
-			alert(thrownError + "\r\n" + xhr.statusText + "\r\n" + xhr.responseText);
-		}
-	});
+    $.ajax({
+        url: 'index.php?route=customer/customer/customfield&user_token={{ user_token }}&customer_group_id=' + this.value,
+        dataType: 'json',
+        success: function(json) {
+            $('.custom-field').hide();
+            $('.custom-field').removeClass('required');
+            for (i = 0; i < json.length; i++) {
+                custom_field = json[i];
+                $('.custom-field' + custom_field['custom_field_id']).show();
+                if (custom_field['required']) {
+                    $('.custom-field' + custom_field['custom_field_id']).addClass('required');
+                }
+            }
+        },
+        error: function(xhr, ajaxOptions, thrownError) {
+            alert(thrownError + "\r\n" + xhr.statusText + "\r\n" + xhr.responseText);
+        }
+    });
 });
 
 $('input[name=\'customer_group_id\']').trigger('change');
 //--></script>
 <script type="text/javascript"><!--
 $('#history').delegate('.pagination a', 'click', function(e) {
-	e.preventDefault();
+    e.preventDefault();
 
-	$('#history').load(this.href);
+    $('#history').load(this.href);
 });
 
 $('#history').load('index.php?route=customer/customer/history&user_token={{ user_token }}&customer_id={{ customer_id }}');
 
 $('#button-history').on('click', function(e) {
-	e.preventDefault();
-	$.ajax({
-		url: 'index.php?route=customer/customer/addhistory&user_token={{ user_token }}&customer_id={{ customer_id }}',
-		type: 'post',
-		dataType: 'json',
-		data: 'comment=' + encodeURIComponent($('#tab-history textarea[name=\'comment\']').val()),
-		beforeSend: function() {
-			$('#button-history').button('loading');
-		},
-		complete: function() {
-			$('#button-history').button('reset');
-		},
-		success: function(json) {
-			$('.alert-dismissible').remove();
-			if (json['error']) {
-				$('#tab-history').prepend('<div class="alert alert-danger alert-dismissible"><i class="fa fa-exclamation-circle"></i> ' + json['error'] + ' <button type="button" class="close" data-dismiss="alert">&times;</button></div>');
-			}
-			if (json['success']) {
-				$('#tab-history').prepend('<div class="alert alert-success alert-dismissible"><i class="fa fa-check-circle"></i> ' + json['success'] + ' <button type="button" class="close" data-dismiss="alert">&times;</button></div>');
-				$('#history').load('index.php?route=customer/customer/history&user_token={{ user_token }}&customer_id={{ customer_id }}');
-				$('#tab-history textarea[name=\'comment\']').val('');
-			}
-		},
-		error: function(xhr, ajaxOptions, thrownError) {
-			alert(thrownError + "\r\n" + xhr.statusText + "\r\n" + xhr.responseText);
-		}
-	});
+    e.preventDefault();
+    $.ajax({
+        url: 'index.php?route=customer/customer/addhistory&user_token={{ user_token }}&customer_id={{ customer_id }}',
+        type: 'post',
+        dataType: 'json',
+        data: 'comment=' + encodeURIComponent($('#tab-history textarea[name=\'comment\']').val()),
+        beforeSend: function() {
+            $('#button-history').button('loading');
+        },
+        complete: function() {
+            $('#button-history').button('reset');
+        },
+        success: function(json) {
+            $('.alert-dismissible').remove();
+            if (json['error']) {
+                $('#tab-history').prepend('<div class="alert alert-danger alert-dismissible"><i class="fa fa-exclamation-circle"></i> ' + json['error'] + ' <button type="button" class="close" data-dismiss="alert">&times;</button></div>');
+            }
+            if (json['success']) {
+                $('#tab-history').prepend('<div class="alert alert-success alert-dismissible"><i class="fa fa-check-circle"></i> ' + json['success'] + ' <button type="button" class="close" data-dismiss="alert">&times;</button></div>');
+                $('#history').load('index.php?route=customer/customer/history&user_token={{ user_token }}&customer_id={{ customer_id }}');
+                $('#tab-history textarea[name=\'comment\']').val('');
+            }
+        },
+        error: function(xhr, ajaxOptions, thrownError) {
+            alert(thrownError + "\r\n" + xhr.statusText + "\r\n" + xhr.responseText);
+        }
+    });
 });
 //--></script>
 <script type="text/javascript"><!--
 $('#transaction').delegate('.pagination a', 'click', function(e) {
-	e.preventDefault();
+    e.preventDefault();
 
-	$('#transaction').load(this.href);
+    $('#transaction').load(this.href);
 });
 $('#transaction').load('index.php?route=customer/customer/transaction&user_token={{ user_token }}&customer_id={{ customer_id }}');
 $('#button-transaction').on('click', function(e) {
-	e.preventDefault();
-	$.ajax({
-		url: 'index.php?route=customer/customer/addtransaction&user_token={{ user_token }}&customer_id={{ customer_id }}',
-		type: 'post',
-		dataType: 'json',
-		data: 'description=' + encodeURIComponent($('#tab-transaction input[name=\'description\']').val()) + '&amount=' + encodeURIComponent($('#tab-transaction input[name=\'amount\']').val()),
-		beforeSend: function() {
-			$('#button-transaction').button('loading');
-		},
-		complete: function() {
-			$('#button-transaction').button('reset');
-		},
-		success: function(json) {
-			$('.alert-dismissible').remove();
-			if (json['error']) {
-				$('#tab-transaction').prepend('<div class="alert alert-danger alert-dismissible"><i class="fa fa-exclamation-circle"></i> ' + json['error'] + ' <button type="button" class="close" data-dismiss="alert">&times;</button></div>');
-			}
-			if (json['success']) {
-				$('#tab-transaction').prepend('<div class="alert alert-success alert-dismissible"><i class="fa fa-check-circle"></i> ' + json['success'] + ' <button type="button" class="close" data-dismiss="alert">&times;</button></div>');
-				$('#transaction').load('index.php?route=customer/customer/transaction&user_token={{ user_token }}&customer_id={{ customer_id }}');
-				$('#tab-transaction input[name=\'amount\']').val('');
-				$('#tab-transaction input[name=\'description\']').val('');
-			}
-		},
-		error: function(xhr, ajaxOptions, thrownError) {
-			alert(thrownError + "\r\n" + xhr.statusText + "\r\n" + xhr.responseText);
-		}
-	});
+    e.preventDefault();
+    $.ajax({
+        url: 'index.php?route=customer/customer/addtransaction&user_token={{ user_token }}&customer_id={{ customer_id }}',
+        type: 'post',
+        dataType: 'json',
+        data: 'description=' + encodeURIComponent($('#tab-transaction input[name=\'description\']').val()) + '&amount=' + encodeURIComponent($('#tab-transaction input[name=\'amount\']').val()),
+        beforeSend: function() {
+            $('#button-transaction').button('loading');
+        },
+        complete: function() {
+            $('#button-transaction').button('reset');
+        },
+        success: function(json) {
+            $('.alert-dismissible').remove();
+            if (json['error']) {
+                $('#tab-transaction').prepend('<div class="alert alert-danger alert-dismissible"><i class="fa fa-exclamation-circle"></i> ' + json['error'] + ' <button type="button" class="close" data-dismiss="alert">&times;</button></div>');
+            }
+            if (json['success']) {
+                $('#tab-transaction').prepend('<div class="alert alert-success alert-dismissible"><i class="fa fa-check-circle"></i> ' + json['success'] + ' <button type="button" class="close" data-dismiss="alert">&times;</button></div>');
+                $('#transaction').load('index.php?route=customer/customer/transaction&user_token={{ user_token }}&customer_id={{ customer_id }}');
+                $('#tab-transaction input[name=\'amount\']').val('');
+                $('#tab-transaction input[name=\'description\']').val('');
+            }
+        },
+        error: function(xhr, ajaxOptions, thrownError) {
+            alert(thrownError + "\r\n" + xhr.statusText + "\r\n" + xhr.responseText);
+        }
+    });
 });
 //--></script>
 <script type="text/javascript"><!--
 $('#report').delegate('.pagination a', 'click', function(e) {
-	e.preventDefault();
+    e.preventDefault();
 
-	$('#report').load(this.href);
+    $('#report').load(this.href);
 });
 
 $('#report').load('index.php?route=marketing/affiliate/report&user_token={{ user_token }}&customer_id={{ customer_id }}');
 //--></script>
 <script type="text/javascript"><!--
 $('#content').delegate('button[id^=\'button-custom-field\'], button[id^=\'button-address\']', 'click', function() {
-	var element = this;
-	$('#form-upload').remove();
-	$('body').prepend('<form enctype="multipart/form-data" id="form-upload" style="display: none;"><input type="file" name="file" /></form>');
-	$('#form-upload input[name=\'file\']').trigger('click');
-	if (typeof timer != 'undefined') {
-		clearInterval(timer);
-	}
-	timer = setInterval(function() {
-		if ($('#form-upload input[name=\'file\']').val() != '') {
-			clearInterval(timer);
-			$.ajax({
-				url: 'index.php?route=tool/upload/upload&user_token={{ user_token }}',
-				type: 'post',
-				dataType: 'json',
-				data: new FormData($('#form-upload')[0]),
-				cache: false,
-				contentType: false,
-				processData: false,
-				beforeSend: function() {
-					$(element).button('loading');
-				},
-				complete: function() {
-					$(element).button('reset');
-				},
-				success: function(json) {
-					$(element).parent().find('.text-danger').remove();
-					if (json['error']) {
-						$(element).parent().find('input[type=\'hidden\']').after('<div class="text-danger">' + json['error'] + '</div>');
-					}
-					if (json['success']) {
-						alert(json['success']);
-					}
-					if (json['code']) {
-						$(element).parent().find('input[type=\'hidden\']').val(json['code']);
-					}
-				},
-				error: function(xhr, ajaxOptions, thrownError) {
-					alert(thrownError + "\r\n" + xhr.statusText + "\r\n" + xhr.responseText);
-				}
-			});
-		}
-	}, 500);
+    var element = this;
+    $('#form-upload').remove();
+    $('body').prepend('<form enctype="multipart/form-data" id="form-upload" style="display: none;"><input type="file" name="file" /></form>');
+    $('#form-upload input[name=\'file\']').trigger('click');
+    if (typeof timer != 'undefined') {
+        clearInterval(timer);
+    }
+    timer = setInterval(function() {
+        if ($('#form-upload input[name=\'file\']').val() != '') {
+            clearInterval(timer);
+            $.ajax({
+                url: 'index.php?route=tool/upload/upload&user_token={{ user_token }}',
+                type: 'post',
+                dataType: 'json',
+                data: new FormData($('#form-upload')[0]),
+                cache: false,
+                contentType: false,
+                processData: false,
+                beforeSend: function() {
+                    $(element).button('loading');
+                },
+                complete: function() {
+                    $(element).button('reset');
+                },
+                success: function(json) {
+                    $(element).parent().find('.text-danger').remove();
+                    if (json['error']) {
+                        $(element).parent().find('input[type=\'hidden\']').after('<div class="text-danger">' + json['error'] + '</div>');
+                    }
+                    if (json['success']) {
+                        alert(json['success']);
+                    }
+                    if (json['code']) {
+                        $(element).parent().find('input[type=\'hidden\']').val(json['code']);
+                    }
+                },
+                error: function(xhr, ajaxOptions, thrownError) {
+                    alert(thrownError + "\r\n" + xhr.statusText + "\r\n" + xhr.responseText);
+                }
+            });
+        }
+    }, 500);
 });
 
 $('.date').datetimepicker({
-	language: '{{ datepicker }}',
-	pickTime: false
+    language: '{{ datepicker }}',
+    pickTime: false
 });
 
 $('.datetime').datetimepicker({
-	language: '{{ datepicker }}',
-	pickDate: true,
-	pickTime: true
+    language: '{{ datepicker }}',
+    pickDate: true,
+    pickTime: true
 });
 
 $('.time').datetimepicker({
-	language: '{{ datepicker }}',
-	pickDate: false
+    language: '{{ datepicker }}',
+    pickDate: false
 });
 $('#tab-general .form-group[data-sort]').detach().each(function() {
-	if ($(this).attr('data-sort') >= 0 && $(this).attr('data-sort') <= $('#tab-general .form-group').length) {
-			$('#tab-general .form-group').eq($(this).attr('data-sort')).before(this);
-	}
+    if ($(this).attr('data-sort') >= 0 && $(this).attr('data-sort') <= $('#tab-general .form-group').length) {
+            $('#tab-general .form-group').eq($(this).attr('data-sort')).before(this);
+    }
 
-	if ($(this).attr('data-sort') > $('#tab-general .form-group').length) {
-			$('#tab-general .form-group:last').after(this);
-	}
+    if ($(this).attr('data-sort') > $('#tab-general .form-group').length) {
+            $('#tab-general .form-group:last').after(this);
+    }
 
-	if ($(this).attr('data-sort') < -$('#tab-general .form-group').length) {
-			$('#tab-general .form-group:first').before(this);
-	}
+    if ($(this).attr('data-sort') < -$('#tab-general .form-group').length) {
+            $('#tab-general .form-group:first').before(this);
+    }
 });
 //--></script>
 <script type="text/javascript"><!--
 $('input[name=\'payment\']').on('change', function() {
-	$('.payment').hide();
+    $('.payment').hide();
 
-	$('#payment-' + this.value).show();
+    $('#payment-' + this.value).show();
 });
 $('input[name=\'payment\']:checked').trigger('change');
 //--></script>

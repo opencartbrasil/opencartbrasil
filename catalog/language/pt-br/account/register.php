@@ -7,7 +7,7 @@ $_['text_account']         = 'Minha conta';
 $_['text_register']        = 'Cadastre-se';
 $_['text_account_already'] = 'Se você já tem uma conta em nossa loja, acesse sua conta <a href="%s">clicando aqui</a>.';
 $_['text_your_details']    = 'Seus dados de contato';
-$_['text_newsletter']      = 'Novidades, ofertas e promoções por e-mail';
+$_['text_newsletter']      = 'Assine nosso informativo e receba novidades e promoções';
 $_['text_your_password']   = 'Sua senha de acesso';
 $_['text_agree']           = 'Eu li e concordo com o contrato de <a href="%s" class="agree"><b>%s</b></a>';
 
@@ -17,7 +17,7 @@ $_['entry_firstname']      = 'Nome';
 $_['entry_lastname']       = 'Sobrenome';
 $_['entry_email']          = 'E-mail';
 $_['entry_telephone']      = 'Telefone';
-$_['entry_newsletter']     = 'Deseja receber?';
+$_['entry_newsletter']     = 'Deseja assinar?';
 $_['entry_password']       = 'Senha';
 $_['entry_confirm']        = 'Repetir a senha';
 

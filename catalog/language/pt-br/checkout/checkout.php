@@ -65,8 +65,8 @@ $_['entry_postcode']                 = 'CEP';
 $_['entry_city']                     = 'Cidade';
 $_['entry_country']                  = 'País';
 $_['entry_zone']                     = 'Estado';
-$_['entry_newsletter']               = 'Deseja receber novidades, ofertas e promoções da loja %s em seu e-mail?';
-$_['entry_shipping']                 = 'O endereço para entrega é o mesmo que estou cadastrando.';
+$_['entry_newsletter']               = 'Quero assinar o informativo e receber novidades e promoções.';
+$_['entry_shipping']                 = 'Confirmo que o endereço para entrega é o mesmo que estou cadastrando.';
 
 // Error
 $_['error_warning']                  = 'Houve um problema ao processar o seu pagamento, por isso, seu pedido não foi concluído. Você pode tentar novamente utilizando outra forma de pagamento ou entre em <a href="%s">contato</a> e informe os detalhes do pedido.';
