@@ -532,6 +532,8 @@ class ControllerMarketingAffiliate extends Controller {
 
 		if (isset($this->request->get['customer_id'])) {
 			$data['customer_id'] = (int)$this->request->get['customer_id'];
+		} else if (isset($this->request->post['customer_id'])) {
+			$data['customer_id'] = (int)$this->request->post['customer_id'];
 		} else {
 			$data['customer_id'] = 0;
 		}
@@ -573,7 +575,7 @@ class ControllerMarketingAffiliate extends Controller {
 		} elseif (!empty($affiliate_info)) {
 			$data['tracking'] = $affiliate_info['tracking'];
 		} else {
-			$data['tracking'] = '';
+			$data['tracking'] = token(10);
 		}
 
 		if (isset($this->request->post['commission'])) {
@@ -719,8 +721,9 @@ class ControllerMarketingAffiliate extends Controller {
 		// Check to see if customer is already a affiliate
 		if ($this->request->post['customer_id']) {
 			$affiliate_info = $this->model_marketing_affiliate->getAffiliate($this->request->post['customer_id']);
+
 			if ($affiliate_info && ($this->request->post['customer_id'] == $affiliate_info['customer_id'] && !isset($this->request->get['customer_id']))) {
-				$this->error['warning'] = $this->language->get('error_already');
+				$this->error['customer'] = $this->language->get('error_already');
 			}
 		}
 
@@ -749,16 +752,18 @@ class ControllerMarketingAffiliate extends Controller {
 			}
 		}
 
-		// Custom field validation
-		$this->load->model('customer/custom_field');
+		if ($this->request->post['customer_group_id']) {
+			// Custom field validation
+			$this->load->model('customer/custom_field');
 
-		$custom_fields = $this->model_customer_custom_field->getCustomFields(array('filter_customer_group_id' => $this->request->post['customer_group_id']));
+			$custom_fields = $this->model_customer_custom_field->getCustomFields(array('filter_customer_group_id' => $this->request->post['customer_group_id']));
 
-		foreach ($custom_fields as $custom_field) {
-			if (($custom_field['location'] == 'affiliate') && $custom_field['required'] && empty($this->request->post['custom_field'][$custom_field['custom_field_id']])) {
-				$this->error['custom_field'][$custom_field['custom_field_id']] = sprintf($this->language->get('error_custom_field'), $custom_field['name']);
-			} elseif (($custom_field['location'] == 'affiliate') && ($custom_field['type'] == 'text') && !empty($custom_field['validation']) && filter_var($this->request->post['custom_field'][$custom_field['custom_field_id']], FILTER_VALIDATE_REGEXP, array('options' => array('regexp' => '/' . html_entity_decode($custom_field['validation'], ENT_QUOTES, 'UTF-8') . '/')))) {
-				$this->error['custom_field'][$custom_field['custom_field_id']] = sprintf($this->language->get('error_custom_field'), $custom_field['name']);
+			foreach ($custom_fields as $custom_field) {
+				if (($custom_field['location'] == 'affiliate') && $custom_field['required'] && empty($this->request->post['custom_field'][$custom_field['custom_field_id']])) {
+					$this->error['custom_field'][$custom_field['custom_field_id']] = sprintf($this->language->get('error_custom_field'), $custom_field['name']);
+				} elseif (($custom_field['location'] == 'affiliate') && ($custom_field['type'] == 'text') && !empty($custom_field['validation']) && filter_var($this->request->post['custom_field'][$custom_field['custom_field_id']], FILTER_VALIDATE_REGEXP, array('options' => array('regexp' => '/' . html_entity_decode($custom_field['validation'], ENT_QUOTES, 'UTF-8') . '/')))) {
+					$this->error['custom_field'][$custom_field['custom_field_id']] = sprintf($this->language->get('error_custom_field'), $custom_field['name']);
+				}
 			}
 		}
 

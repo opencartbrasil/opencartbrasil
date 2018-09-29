@@ -214,10 +214,16 @@ class ControllerAccountAffiliate extends Controller {
 		// Custom Fields
 		$this->load->model('account/custom_field');
 
-		$data['custom_fields'] = $this->model_account_custom_field->getCustomFields($this->config->get('config_customer_group_id'));
+		$custom_fields = $this->model_account_custom_field->getCustomFields($this->config->get('config_customer_group_id'));
 
-		if (isset($this->request->post['custom_field'])) {
-			$data['affiliate_custom_field'] = $this->request->post['custom_field'];
+		foreach ($custom_fields as $custom_field) {
+			if ($custom_field['location'] == 'affiliate') {
+				$data['custom_fields'][] = $custom_field;
+			}
+		}
+
+		if (isset($this->request->post['custom_field']['affiliate'])) {
+			$data['affiliate_custom_field'] = $this->request->post['custom_field']['affiliate'];
 		} elseif (isset($affiliate_info)) {
 			$data['affiliate_custom_field'] = json_decode($affiliate_info['custom_field'], true);
 		} else {

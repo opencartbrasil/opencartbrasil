@@ -59,16 +59,16 @@ $_['entry_date_added']          = 'Cadastro';
 
 // Help
 $_['help_commission']           = 'Percentual que o afiliado recebe a cada pedido indicado e pago';
-$_['help_tracking']             = 'Código de rastreamento que será utilizado para rastrear as indicações do afiliado';
+$_['help_tracking']             = 'Código de rastreio que será utilizado para rastrear as indicações do afiliado';
 
 // Error
 $_['error_warning']             = 'Atenção: Existem erros no preenchimento do formulário!';
 $_['error_permission']          = 'Atenção: Você não tem permissão para modificar os afiliados!';
 $_['error_customer']            = 'É necessário selecionar um cliente!';
-$_['error_wrong_customer']      = 'Atenção: Escolha o cliente correto!';
-$_['error_already']             = 'Atenção: O cliente selecionado já está registrado como afiliado!';
-$_['error_tracking']            = 'O código de rastreamento é obrigatório!';
-$_['error_exists']              = 'O código de rastreamento já está em uso por outro afiliado!';
+$_['error_wrong_customer']      = 'Atenção: Escolha um cliente!';
+$_['error_already']             = 'O cliente escolhido já está registrado como afiliado! Escolha outro cliente.';
+$_['error_tracking']            = 'O código de rastreio é obrigatório!';
+$_['error_exists']              = 'O código de rastreio já está em uso por outro afiliado!';
 $_['error_cheque']              = 'Beneficiário do cheque é obrigatório!';
 $_['error_paypal']              = 'E-mail no payPal não é válido!';
 $_['error_bank_account_name']   = 'Banco é obrigatório!';
