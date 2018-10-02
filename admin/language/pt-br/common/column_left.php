@@ -5,6 +5,7 @@ $_['text_api']                  = 'API';
 $_['text_attribute']            = 'Atributos';
 $_['text_attribute_group']      = 'Grupos de atributos';
 $_['text_backup']               = 'Backup / Restaurar';
+$_['text_update']               = 'Atualização';
 $_['text_banner']               = 'Banners';
 $_['text_catalog']              = 'Catálogo';
 $_['text_category']             = 'Departamentos';
