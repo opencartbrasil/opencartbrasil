@@ -37,8 +37,8 @@ class ControllerExtensionShippingFrenet extends Controller {
 		);
 
 		$data['breadcrumbs'][] = array(
-			'text' => $this->language->get('text_shipping'),
-			'href' => $this->url->link('extension/extension', 'user_token=' . $this->session->data['user_token'], true)
+			'text' => $this->language->get('text_extension'),
+			'href' => $this->url->link('marketplace/extension', 'user_token=' . $this->session->data['user_token'] . '&type=shipping', true)
 		);
 
 		$data['breadcrumbs'][] = array(
