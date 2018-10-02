@@ -173,12 +173,6 @@ class ControllerToolUpdate extends Controller {
 
             $path = array($directory . '/*');
 
-            $ignore = array(
-                '.htaccess',
-                'php.ini',
-                'config-dist.php'
-            );
-
             while (count($path) != 0) {
                 $next = array_shift($path);
 
