@@ -6,6 +6,33 @@ e utiliza [Semantic Versioning](https://semver.org/lang/pt-BR/spec/v2.0.0.html).
 
 ## [Não lançada]
 
+## [1.0.7] (Data de lançamento: 02.10.2018)
+### Corrigido
+- Correção no sitemap
+- Correção na biblioteca SMTP
+- Correção na captura de erros
+- Correção no checkout da loja
+- Correção na situação do pedido
+- Correção no nível de compressão
+- Correção no sistema de pontos
+- Correção no sistema de marketing
+- Correção no sistema de afiliados
+- Correção no sistema de donwloads
+- Correção no sistema de transações
+- Correção no sistema de estatística
+- Correção na instalação do OpenCart
+- Correção na extensão de frete grátis
+- Correção nos cadastros da administração
+
+### Modificado
+- README.md
+- LICENSE
+
+### Adicionado
+- Tema Básico
+- Extensão para Frenet
+- Sistema de atualização da versão
+
 ## [1.0.6] (Data de lançamento: 23.09.2018)
 ### Corrigido
 - Correção na exibição das estrelas de avaliação do módulo de Produtos em destaque. @leandrorppo
@@ -120,7 +147,8 @@ e utiliza [Semantic Versioning](https://semver.org/lang/pt-BR/spec/v2.0.0.html).
 - Cupons de descontos para demonstração.
 - Moedas: Euro e Libra esterlina.
 
-[Não lançada]: https://github.com/opencartbrasil/opencartbrasil/compare/v1.0.6...HEAD
+[Não lançada]: https://github.com/opencartbrasil/opencartbrasil/compare/v1.0.7...HEAD
+[1.0.6]: https://github.com/opencartbrasil/opencartbrasil/compare/v1.0.6...v1.0.7
 [1.0.6]: https://github.com/opencartbrasil/opencartbrasil/compare/v1.0.5...v1.0.6
 [1.0.5]: https://github.com/opencartbrasil/opencartbrasil/compare/v1.0.4...v1.0.5
 [1.0.4]: https://github.com/opencartbrasil/opencartbrasil/compare/v1.0.3...v1.0.4
