@@ -44,6 +44,7 @@ Recomendamos que todos os desenvolvedores sigam este repositório para ficarem a
 ### Tarefas concluídas:
 
 - [x] Loja 100% traduzida.
+- [x] Atualização automática.
 - [x] Instalação 100% traduzida.
 - [x] Correção nas estátisticas.
 - [x] Correção nos arquivos config.
@@ -73,7 +74,6 @@ Recomendamos que todos os desenvolvedores sigam este repositório para ficarem a
 - [ ] Cadastro de clientes padrão Brasil.
 - [ ] Opções relacionadas nos produtos.
 - [ ] Campo SKU nas opções dos produtos.
-- [ ] Upgrade automático do OpenCart Brasil.
 - [ ] Extensões integradas com serviços brasileiros.
 - [ ] API para integração com sistemas externos como ERP, CRM, etc.
 
