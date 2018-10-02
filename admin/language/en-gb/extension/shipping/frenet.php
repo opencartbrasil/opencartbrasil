@@ -14,7 +14,7 @@ $_['entry_status']            = 'Situação';
 $_['entry_postcode']          = 'CEP de origem';
 $_['entry_sort_order']        = 'Posição';
 $_['entry_frenet_key']        = 'Chave de acesso';
-$_['entry_msg_prazo']         = 'Mensagem que exibe prazo de entrega';
+$_['entry_msg_prazo']         = 'Mensagem que exibe o prazo de entrega';
 $_['entry_frenet_key_codigo'] = 'Chave';
 $_['entry_frenet_key_senha']  = 'Senha';
 

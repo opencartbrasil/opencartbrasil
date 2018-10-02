@@ -15,7 +15,6 @@ class ControllerExtensionShippingFrenet extends Controller {
 			$this->session->data['success'] = $this->language->get('text_success');
 
 			$this->response->redirect($this->url->link('marketplace/extension', 'user_token=' . $this->session->data['user_token'] . '&type=shipping', true));
-
 		}
 
 		if (isset($this->error['warning'])) {
@@ -36,10 +35,12 @@ class ControllerExtensionShippingFrenet extends Controller {
 			'text' => $this->language->get('text_home'),
 			'href' => $this->url->link('common/dashboard', 'user_token=' . $this->session->data['user_token'], true)
 		);
+
 		$data['breadcrumbs'][] = array(
 			'text' => $this->language->get('text_shipping'),
 			'href' => $this->url->link('extension/extension', 'user_token=' . $this->session->data['user_token'], true)
 		);
+
 		$data['breadcrumbs'][] = array(
 			'text' => $this->language->get('heading_title'),
 			'href' => $this->url->link('extension/shipping/frenet', 'user_token=' . $this->session->data['user_token'], true)
@@ -90,7 +91,6 @@ class ControllerExtensionShippingFrenet extends Controller {
 		$data['footer'] = $this->load->controller('common/footer');
 
 		$this->response->setOutput($this->load->view('extension/shipping/frenet', $data));
-
 	}
 
 	protected function validate() {
