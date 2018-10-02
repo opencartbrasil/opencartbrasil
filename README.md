@@ -32,6 +32,7 @@ Recomendamos que todos os desenvolvedores sigam este repositório para ficarem a
 
 ## Diferenciais
 
+- **Atualização automática do OpenCart Brasil**.
 - Melhorias no processo de download e instalação.
 - Correção de bugs, melhorias e otimizações no código.
 - O processo de instalação ocorre em português do Brasil.
