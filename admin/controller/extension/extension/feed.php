@@ -45,7 +45,7 @@ class ControllerExtensionExtensionFeed extends Controller {
 
 			$this->session->data['success'] = $this->language->get('text_success');
 		}
-		
+
 		$this->getList();
 	}
 
@@ -75,7 +75,7 @@ class ControllerExtensionExtensionFeed extends Controller {
 		}
 
 		$data['extensions'] = array();
-		
+
 		// Compatibility code for old extension folders
 		$files = glob(DIR_APPLICATION . 'controller/extension/feed/*.php');
 
@@ -83,16 +83,18 @@ class ControllerExtensionExtensionFeed extends Controller {
 			foreach ($files as $file) {
 				$extension = basename($file, '.php');
 
-				$this->load->language('extension/feed/' . $extension, 'extension');
+				if ($this->user->hasPermission('access', 'extension/feed/' . $extension)) {
+					$this->load->language('extension/feed/' . $extension, 'extension');
 
-				$data['extensions'][] = array(
-					'name'      => $this->language->get('extension')->get('heading_title'),
-					'status'    => $this->config->get('feed_' . $extension . '_status') ? $this->language->get('text_enabled') : $this->language->get('text_disabled'),
-					'install'   => $this->url->link('extension/extension/feed/install', 'user_token=' . $this->session->data['user_token'] . '&extension=' . $extension, true),
-					'uninstall' => $this->url->link('extension/extension/feed/uninstall', 'user_token=' . $this->session->data['user_token'] . '&extension=' . $extension, true),
-					'installed' => in_array($extension, $extensions),
-					'edit'      => $this->url->link('extension/feed/' . $extension, 'user_token=' . $this->session->data['user_token'], true)
-				);
+					$data['extensions'][] = array(
+						'name'      => $this->language->get('extension')->get('heading_title'),
+						'status'    => $this->config->get('feed_' . $extension . '_status') ? $this->language->get('text_enabled') : $this->language->get('text_disabled'),
+						'install'   => $this->url->link('extension/extension/feed/install', 'user_token=' . $this->session->data['user_token'] . '&extension=' . $extension, true),
+						'uninstall' => $this->url->link('extension/extension/feed/uninstall', 'user_token=' . $this->session->data['user_token'] . '&extension=' . $extension, true),
+						'installed' => in_array($extension, $extensions),
+						'edit'      => $this->url->link('extension/feed/' . $extension, 'user_token=' . $this->session->data['user_token'], true)
+					);
+				}
 			}
 		}
 

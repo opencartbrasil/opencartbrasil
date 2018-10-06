@@ -22,7 +22,7 @@ class ControllerExtensionExtensionAnalytics extends Controller {
 
 			$this->model_user_user_group->addPermission($this->user->getGroupId(), 'access', 'extension/analytics/' . $this->request->get['extension']);
 			$this->model_user_user_group->addPermission($this->user->getGroupId(), 'modify', 'extension/analytics/' . $this->request->get['extension']);
-			
+
 			// Compatibility
 			$this->model_user_user_group->addPermission($this->user->getGroupId(), 'access', 'analytics/' . $this->request->get['extension']);
 			$this->model_user_user_group->addPermission($this->user->getGroupId(), 'modify', 'analytics/' . $this->request->get['extension']);
@@ -77,7 +77,7 @@ class ControllerExtensionExtensionAnalytics extends Controller {
 				unset($extensions[$key]);
 			}
 		}
-		
+
 		$this->load->model('setting/store');
 		$this->load->model('setting/setting');
 
@@ -91,33 +91,35 @@ class ControllerExtensionExtensionAnalytics extends Controller {
 		if ($files) {
 			foreach ($files as $file) {
 				$extension = basename($file, '.php');
-				
-				// Compatibility code for old extension folders
-				$this->load->language('extension/analytics/' . $extension, 'extension');
-				
-				$store_data = array();
 
-				$store_data[] = array(
-					'name'   => $this->config->get('config_name'),
-					'edit'   => $this->url->link('extension/analytics/' . $extension, 'user_token=' . $this->session->data['user_token'] . '&store_id=0', true),
-					'status' => $this->config->get('analytics_' . $extension . '_status') ? $this->language->get('text_enabled') : $this->language->get('text_disabled')
-				);
-				
-				foreach ($stores as $store) {
+				if ($this->user->hasPermission('access', 'extension/analytics/' . $extension)) {
+					// Compatibility code for old extension folders
+					$this->load->language('extension/analytics/' . $extension, 'extension');
+
+					$store_data = array();
+
 					$store_data[] = array(
-						'name'   => $store['name'],
-						'edit'   => $this->url->link('extension/analytics/' . $extension, 'user_token=' . $this->session->data['user_token'] . '&store_id=' . $store['store_id'], true),
-						'status' => $this->model_setting_setting->getSettingValue('analytics_' . $extension . '_status', $store['store_id']) ? $this->language->get('text_enabled') : $this->language->get('text_disabled')
+						'name'   => $this->config->get('config_name'),
+						'edit'   => $this->url->link('extension/analytics/' . $extension, 'user_token=' . $this->session->data['user_token'] . '&store_id=0', true),
+						'status' => $this->config->get('analytics_' . $extension . '_status') ? $this->language->get('text_enabled') : $this->language->get('text_disabled')
+					);
+
+					foreach ($stores as $store) {
+						$store_data[] = array(
+							'name'   => $store['name'],
+							'edit'   => $this->url->link('extension/analytics/' . $extension, 'user_token=' . $this->session->data['user_token'] . '&store_id=' . $store['store_id'], true),
+							'status' => $this->model_setting_setting->getSettingValue('analytics_' . $extension . '_status', $store['store_id']) ? $this->language->get('text_enabled') : $this->language->get('text_disabled')
+						);
+					}
+
+					$data['extensions'][] = array(
+						'name'      => $this->language->get('extension')->get('heading_title'),
+						'install'   => $this->url->link('extension/extension/analytics/install', 'user_token=' . $this->session->data['user_token'] . '&extension=' . $extension, true),
+						'uninstall' => $this->url->link('extension/extension/analytics/uninstall', 'user_token=' . $this->session->data['user_token'] . '&extension=' . $extension, true),
+						'installed' => in_array($extension, $extensions),
+						'store'     => $store_data
 					);
 				}
-
-				$data['extensions'][] = array(
-					'name'      => $this->language->get('extension')->get('heading_title'),
-					'install'   => $this->url->link('extension/extension/analytics/install', 'user_token=' . $this->session->data['user_token'] . '&extension=' . $extension, true),
-					'uninstall' => $this->url->link('extension/extension/analytics/uninstall', 'user_token=' . $this->session->data['user_token'] . '&extension=' . $extension, true),
-					'installed' => in_array($extension, $extensions),
-					'store'     => $store_data
-				);
 			}
 		}
 
