@@ -83,18 +83,16 @@ class ControllerExtensionExtensionFraud extends Controller {
 			foreach ($files as $file) {
 				$extension = basename($file, '.php');
 
-				if ($this->user->hasPermission('access', 'extension/fraud/' . $extension)) {
-					$this->load->language('extension/fraud/' . $extension, 'extension');
+				$this->load->language('extension/fraud/' . $extension, 'extension');
 
-					$data['extensions'][] = array(
-						'name'      => $this->language->get('extension')->get('heading_title'),
-						'status'    => $this->config->get('fraud_' . $extension . '_status') ? $this->language->get('text_enabled') : $this->language->get('text_disabled'),
-						'install'   => $this->url->link('extension/extension/fraud/install', 'user_token=' . $this->session->data['user_token'] . '&extension=' . $extension, true),
-						'uninstall' => $this->url->link('extension/extension/fraud/uninstall', 'user_token=' . $this->session->data['user_token'] . '&extension=' . $extension, true),
-						'installed' => in_array($extension, $extensions),
-						'edit'      => $this->url->link('extension/fraud/' . $extension, 'user_token=' . $this->session->data['user_token'], true)
-					);
-				}
+				$data['extensions'][] = array(
+					'name'      => $this->language->get('extension')->get('heading_title'),
+					'status'    => $this->config->get('fraud_' . $extension . '_status') ? $this->language->get('text_enabled') : $this->language->get('text_disabled'),
+					'install'   => $this->url->link('extension/extension/fraud/install', 'user_token=' . $this->session->data['user_token'] . '&extension=' . $extension, true),
+					'uninstall' => $this->url->link('extension/extension/fraud/uninstall', 'user_token=' . $this->session->data['user_token'] . '&extension=' . $extension, true),
+					'installed' => in_array($extension, $extensions),
+					'edit'      => $this->url->link('extension/fraud/' . $extension, 'user_token=' . $this->session->data['user_token'], true)
+				);
 			}
 		}
 

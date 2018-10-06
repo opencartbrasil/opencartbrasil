@@ -34,26 +34,15 @@ class ControllerMarketplaceExtension extends Controller {
 		foreach ($files as $file) {
 			$extension = basename($file, '.php');
 
-			if ($this->user->hasPermission('access', 'extension/extension/' . $extension)) {
 				$this->load->language('extension/extension/' . $extension, 'extension');
 
 				$files = glob(DIR_APPLICATION . 'controller/extension/' . $extension . '/*.php', GLOB_BRACE);
 
-				$count = 0;
-				foreach ($files as $file) {
-					$name = basename($file, '.php');
-
-					if ($this->user->hasPermission('access', 'extension/' . $extension . '/' . $name)) {
-						$count++;
-					}
-				}
-
 				$data['categories'][] = array(
 					'code' => $extension,
-					'text' => $this->language->get('extension')->get('heading_title') . ' (' . $count .')',
+					'text' => $this->language->get('extension')->get('heading_title') . ' (' . count($files) .')',
 					'href' => $this->url->link('extension/extension/' . $extension, 'user_token=' . $this->session->data['user_token'], true)
 				);
-			}
 		}
 
 		$data['header'] = $this->load->controller('common/header');
