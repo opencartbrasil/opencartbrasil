@@ -93,7 +93,6 @@ class ControllerExtensionExtensionAnalytics extends Controller {
 				$extension = basename($file, '.php');
 
 				if ($this->user->hasPermission('access', 'extension/analytics/' . $extension)) {
-					// Compatibility code for old extension folders
 					$this->load->language('extension/analytics/' . $extension, 'extension');
 
 					$store_data = array();

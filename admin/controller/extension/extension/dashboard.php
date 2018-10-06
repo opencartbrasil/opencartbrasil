@@ -84,7 +84,6 @@ class ControllerExtensionExtensionDashboard extends Controller {
 				$extension = basename($file, '.php');
 
 				if ($this->user->hasPermission('access', 'extension/dashboard/' . $extension)) {
-					// Compatibility code for old extension folders
 					$this->load->language('extension/dashboard/' . $extension, 'extension');
 
 					$data['extensions'][] = array(
