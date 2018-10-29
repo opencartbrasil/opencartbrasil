@@ -180,7 +180,7 @@
                           </select>
                           <input type="hidden" name="layout_module[{{ module_row }}][position]" value="{{ layout_module.position }}" />
                           <input type="hidden" name="layout_module[{{ module_row }}][sort_order]" value="{{ layout_module.sort_order }}" />
-                          <div class="input-group-btn"> <a href="{{ layout_module.edit }}" type="button" data-toggle="tooltip" title="{{ button_edit }}" target="_blank" class="btn btn-primary btn-sm"><i class="fa fa-pencil"></i></a>
+                          <div class="input-group-btn"><a href="{{ layout_module.edit }}" type="button" data-toggle="tooltip" title="{{ button_edit }}" target="_blank" class="btn btn-primary btn-sm"><i class="fa fa-pencil"></i></a>
                             <button type="button" onclick="$('#module-row{{ module_row }}').remove();" data-toggle="tooltip" title="{{ button_remove }}" class="btn btn-danger btn-sm"><i class="fa fa fa-minus-circle"></i></button>
                           </div>
                         </div></td>
@@ -356,7 +356,7 @@
       </div>
     </div>
   </div>
-  <script type="text/javascript"><!--
+<script type="text/javascript"><!--
 var route_row = {{ route_row }};
 
 function addRoute() {
@@ -370,9 +370,9 @@ function addRoute() {
 	html += '  <td class="text-left"><input type="text" name="layout_route[' + route_row + '][route]" value="" placeholder="{{ entry_route }}" class="form-control" /></td>';
 	html += '  <td class="text-left"><button type="button" onclick="$(\'#route-row' + route_row + '\').remove();" data-toggle="tooltip" title="{{ button_remove }}" class="btn btn-danger"><i class="fa fa-minus-circle"></i></button></td>';
 	html += '</tr>';
-	
+
 	$('#route tbody').append(html);
-	
+
 	route_row++;
 }
 
@@ -380,7 +380,7 @@ var module_row = {{ module_row }};
 
 function addModule(type) {
 	html  = '<tr id="module-row' + module_row + '">';
-    html += '  <td class="text-left"><div class="input-group"><select name="layout_module[' + module_row + '][code]" class="form-control input-sm">';
+	html += '  <td class="text-left"><div class="input-group"><select name="layout_module[' + module_row + '][code]" class="form-control input-sm">';
 	{% for extension in extensions %}
 	html += '    <optgroup label="{{ extension.name|escape('js') }}">';
 	{% if not extension.module %}
@@ -393,27 +393,27 @@ function addModule(type) {
 	html += '    </optgroup>';
 	{% endfor %}
 	html += '  </select>';
-    html += '  <input type="hidden" name="layout_module[' + module_row + '][position]" value="' + type.replace('-', '_') + '" />';
-    html += '  <input type="hidden" name="layout_module[' + module_row + '][sort_order]" value="" />';
+	html += '  <input type="hidden" name="layout_module[' + module_row + '][position]" value="' + type.replace('-', '_') + '" />';
+	html += '  <input type="hidden" name="layout_module[' + module_row + '][sort_order]" value="" />';
 	html += '  <div class="input-group-btn"><a href="" target="_blank" type="button" data-toggle="tooltip" title="{{ button_edit }}" class="btn btn-primary btn-sm"><i class="fa fa-pencil"></i></a><button type="button" onclick="$(\'#module-row' + module_row + '\').remove();" data-toggle="tooltip" title="{{ button_remove }}" class="btn btn-danger btn-sm"><i class="fa fa fa-minus-circle"></i></button></div></div></td>';
 	html += '</tr>';
-	
+
 	$('#module-' + type + ' tbody').append(html);
-	
+
 	$('#module-' + type + ' tbody select[name=\'layout_module[' + module_row + '][code]\']').val($('#module-' + type + ' tfoot select').val());
 	
 	$('#module-' + type + ' select[name*=\'code\']').trigger('change');
-		
+
 	$('#module-' + type + ' tbody input[name*=\'sort_order\']').each(function(i, element) {
 		$(element).val(i);
 	});
-	
+
 	module_row++;
 }
 
 $('#module-column-left, #module-column-right, #module-content-top, #module-content-bottom').delegate('select[name*=\'code\']', 'change', function() {
 	var part = this.value.split('.');
-	
+
 	if (!part[1]) {
 		$(this).parent().find('a').attr('href', 'index.php?route=extension/module/' + part[0] + '&user_token={{ user_token }}');
 	} else {
@@ -422,6 +422,6 @@ $('#module-column-left, #module-column-right, #module-content-top, #module-conte
 });
 
 $('#module-column-left, #module-column-right, #module-content-top, #module-content-bottom').trigger('change');
-//--></script> 
+//--></script>
 </div>
 {{ footer }}
