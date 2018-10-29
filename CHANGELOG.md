@@ -16,7 +16,7 @@ e utiliza [Semantic Versioning](https://semver.org/lang/pt-BR/spec/v2.0.0.html).
 - Correção nos campos personalizados do cliente e pedido no admin
 
 ### Adicionado
-- Instegração com Tiny ERP
+- Integração com Tiny ERP
 - Adicionado no rodapé da administração a versão Brasil
 
 ## [1.1.0] (Data de lançamento: 02.10.2018)
