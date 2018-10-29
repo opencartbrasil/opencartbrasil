@@ -4,7 +4,7 @@ class ControllerCommonFooter extends Controller {
 		$this->load->language('common/footer');
 
 		if ($this->user->isLogged() && isset($this->request->get['user_token']) && ($this->request->get['user_token'] == $this->session->data['user_token'])) {
-			$data['text_version'] = sprintf($this->language->get('text_version'), VERSION);
+			$data['text_version'] = sprintf($this->language->get('text_version'), VERSION, OPENCART_BRASIL);
 		} else {
 			$data['text_version'] = '';
 		}
