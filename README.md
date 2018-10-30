@@ -108,23 +108,28 @@ Se você é o profissional que administra os servidores que armazenam os arquivo
 
 - 5.6 ou superior.
 
-### Configurações necessárias no PHP:
+### Configurações mínimas necessárias no PHP:
 
 | Diretiva | Valor |
 | -------- | ----- |
 | `register_globals` | Off |
 | `magic_quotes_gpc` | Off |
+| `safe_mode` | Off |
 | `file_uploads` | On |
 | `allow_url_fopen` | On |
 | `open_basedir` | none |
 | `default_charset` | UTF-8 |
+| `max_execution_time` | 360 |
+| `upload_max_filesize` | 100M |
+| `post_max_size` | 100M |
+| `memory_limit` | 128M |
 | `session.auto_start` | Off |
 | `session.use_only_cookies` | On |
 | `session.use_trans_sid` | Off |
 | `session.cookie_httponly` | On |
 | `session.gc_maxlifetime` | 3600 |
 
-### Extensões necessárias no PHP:
+### Extensões básicas necessárias no PHP:
 
 - cURL
 - DOM
