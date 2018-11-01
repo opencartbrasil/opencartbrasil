@@ -12,9 +12,13 @@ class ModelToolImage extends Model {
 
 		if (!is_file(DIR_IMAGE . $image_new) || (filemtime(DIR_IMAGE . $image_old) > filemtime(DIR_IMAGE . $image_new))) {
 			list($width_orig, $height_orig, $image_type) = getimagesize(DIR_IMAGE . $image_old);
-				 
-			if (!in_array($image_type, array(IMAGETYPE_PNG, IMAGETYPE_JPEG, IMAGETYPE_GIF))) { 
-				return DIR_IMAGE . $image_old;
+
+			if (!in_array($image_type, array(IMAGETYPE_PNG, IMAGETYPE_JPEG, IMAGETYPE_GIF))) {
+				if ($this->request->server['HTTPS']) {
+					return HTTPS_CATALOG . 'image/' . $image_old;
+				} else {
+					return HTTP_CATALOG . 'image/' . $image_old;
+				}
 			}
  
 			$path = '';
