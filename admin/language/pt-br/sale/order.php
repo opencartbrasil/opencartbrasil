@@ -20,7 +20,7 @@ $_['text_customer_group']        = 'Tipo de cliente';
 $_['text_email']                 = 'E-mail:';
 $_['text_telephone']             = 'Telefone:';
 $_['text_fax']                   = 'Fax';
-$_['text_invoice']               = 'Gerar fatura';
+$_['text_invoice']               = 'Fatura';
 $_['text_reward']                = 'Liberar pontos';
 $_['text_affiliate']             = 'Comissionar afiliado';
 $_['text_order']                 = 'Pedido (%s)';
@@ -59,7 +59,7 @@ $_['text_commission_added']      = 'Comissão adicionada!';
 $_['text_commission_removed']    = 'Comissão removida!';
 $_['text_restock']               = 'Os produtos retornaram para o estoque!';
 $_['text_upload']                = 'O arquivo foi enviado!';
-$_['text_picklist']              = 'Nota de expedição';
+$_['text_picklist']              = 'Entrega';
 
 // Column
 $_['column_order_id']            = 'Pedido nº';
