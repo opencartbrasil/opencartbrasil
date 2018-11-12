@@ -59,7 +59,7 @@ class ControllerCheckoutShippingAddress extends Controller {
 
 	public function save() {
 		$this->load->language('checkout/checkout');
-		
+
 		$json = array();
 
 		// Validate if customer is logged in.
