@@ -4,7 +4,7 @@ class ControllerApiCart extends Controller {
 		$this->load->language('api/cart');
 
 		$json = array();
-			
+
 		if (!isset($this->session->data['api_id'])) {
 			$json['error']['warning'] = $this->language->get('error_permission');
 		} else {
@@ -215,7 +215,7 @@ class ControllerApiCart extends Controller {
 				'taxes'  => &$taxes,
 				'total'  => &$total
 			);
-			
+
 			$sort_order = array();
 
 			$results = $this->model_setting_extension->getExtensions('total');
@@ -252,7 +252,7 @@ class ControllerApiCart extends Controller {
 				);
 			}
 		}
-		
+
 		$this->response->addHeader('Content-Type: application/json');
 		$this->response->setOutput(json_encode($json));
 	}

@@ -1,5 +1,4 @@
 <?php
-
 class ModelExtensionCreditCardSquareup extends Model {
     public function addCustomer($data) {
         $this->db->query("INSERT INTO `" . DB_PREFIX . "squareup_customer` SET customer_id='" . (int)$data['customer_id'] . "', sandbox='" . (int)$data['sandbox'] . "', square_customer_id='" . $this->db->escape($data['square_customer_id']) . "'");
