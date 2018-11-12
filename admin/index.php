@@ -1,7 +1,7 @@
 <?php
 // Version
 define('VERSION', '3.0.2.0');
-define('OPENCART_BRASIL', '1.1.1');
+define('OPENCART_BRASIL', '1.1.2');
 
 // Configuration
 if (is_file('config.php')) {

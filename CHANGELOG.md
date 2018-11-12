@@ -6,6 +6,18 @@ e utiliza [Semantic Versioning](https://semver.org/lang/pt-BR/spec/v2.0.0.html).
 
 ## [Não lançada]
 
+## [1.1.2] (Data de lançamento: 12.11.2018)
+### Corrigido
+- Remoção de espaços em branco
+- Melhorias na tradução do pedido
+- Melhorias na instalação do OpenCart
+- Melhorias nas instruções para atualização
+- Melhorias na captura de IP dos clientes online
+- Correção na ordenação dos departamentos no admin
+- Correção no contador de estatísticas ao deletar o pedido
+- Correção no model de redimensionamento de imagens no admin
+- Correção no model de redimensionamento de imagens no catalog
+
 ## [1.1.1] (Data de lançamento: 29.10.2018)
 ### Corrigido
 - Melhorias no formulário de comentário
@@ -160,7 +172,8 @@ e utiliza [Semantic Versioning](https://semver.org/lang/pt-BR/spec/v2.0.0.html).
 - Cupons de descontos para demonstração.
 - Moedas: Euro e Libra esterlina.
 
-[Não lançada]: https://github.com/opencartbrasil/opencartbrasil/compare/v1.1.1...HEAD
+[Não lançada]: https://github.com/opencartbrasil/opencartbrasil/compare/v1.1.2...HEAD
+[1.1.2]: https://github.com/opencartbrasil/opencartbrasil/compare/v1.1.1...v1.1.2
 [1.1.1]: https://github.com/opencartbrasil/opencartbrasil/compare/v1.1.0...v1.1.1
 [1.1.0]: https://github.com/opencartbrasil/opencartbrasil/compare/v1.0.6...v1.1.0
 [1.0.6]: https://github.com/opencartbrasil/opencartbrasil/compare/v1.0.5...v1.0.6
