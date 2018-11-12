@@ -51,7 +51,7 @@ class ControllerEventActivity extends Controller {
 
 					$this->model_account_activity->addActivity('reset', $activity_data);
 				}
-			}	
+			}
 		}
 	}
 
@@ -70,7 +70,7 @@ class ControllerEventActivity extends Controller {
 
 				$this->model_account_activity->addActivity('login', $activity_data);
 			}
-		}	
+		}
 	}
 
 	// model/account/customer/editCode/after
@@ -90,7 +90,7 @@ class ControllerEventActivity extends Controller {
 
 				$this->model_account_activity->addActivity('forgotten', $activity_data);
 			}
-		}	
+		}
 	}
 
 	// model/account/customer/addTransaction/after
@@ -179,7 +179,7 @@ class ControllerEventActivity extends Controller {
 				'customer_id' => $this->customer->getId(),
 				'name'        => $this->customer->getFirstName() . ' ' . $this->customer->getLastName()
 			);
-			
+
 			$this->model_account_activity->addActivity('address_delete', $activity_data);
 		}
 	}
@@ -213,7 +213,7 @@ class ControllerEventActivity extends Controller {
 		if ($this->config->get('config_customer_activity')) {
 			// If last order status id is 0 and new order status is not then record as new order
 			$this->load->model('checkout/order');
-			
+
 			$order_info = $this->model_checkout_order->getOrder($args[0]);
 
 			if ($order_info && !$order_info['order_status_id'] && $args[1]) {
