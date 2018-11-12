@@ -14,6 +14,33 @@ class ControllerEventStatistics extends Controller {
 		$this->model_report_statistics->addValue('return', 1);
 	}
 
+	// model/checkout/order/deleteOrder/before
+	public function deleteOrder(&$route, &$args) {
+		$this->load->model('checkout/order');
+
+		$order_info = $this->model_checkout_order->getOrder($args[0]);
+
+		if ($order_info) {
+			$this->load->model('report/statistics');
+
+			$this->model_report_statistics->removeValue('order_sale', $order_info['total']);
+
+			$selected_situations = array_merge((array)$this->config->get('config_processing_status'), (array)$this->config->get('config_complete_status'));
+
+			if (!in_array($order_info['order_status_id'], $selected_situations)) {
+				$this->model_report_statistics->removeValue('order_other', 1);
+			}
+
+			if (in_array($order_info['order_status_id'], (array)$this->config->get('config_processing_status'))) {
+				$this->model_report_statistics->removeValue('order_processing', 1);
+			}
+
+			if (in_array($order_info['order_status_id'], (array)$this->config->get('config_complete_status'))) {
+				$this->model_report_statistics->removeValue('order_complete', 1);
+			}
+		}
+	}
+
 	// model/checkout/order/addOrderHistory/after
 	public function addOrderHistory(&$route, &$args, &$output) {
 		$this->load->model('checkout/order');

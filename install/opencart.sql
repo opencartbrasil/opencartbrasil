@@ -1406,7 +1406,7 @@ CREATE TABLE `oc_event` (
   `trigger` text NOT NULL,
   `action` text NOT NULL,
   `status` tinyint(1) NOT NULL,
-  `sort_order` int(3) NOT NULL,
+  `sort_order` int(3) NOT NULL DEFAULT '0',
   PRIMARY KEY (`event_id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
@@ -1480,6 +1480,8 @@ INSERT INTO `oc_event` (`event_id`, `code`, `trigger`, `action`, `status`) VALUE
 (32, 'admin_mail_return', 'admin/model/sale/return/addReturn/after', 'mail/return', 1);
 INSERT INTO `oc_event` (`event_id`, `code`, `trigger`, `action`, `status`) VALUES
 (33, 'admin_mail_forgotten', 'admin/model/user/user/editCode/after', 'mail/forgotten', 1);
+INSERT INTO `oc_event` (`event_id`, `code`, `trigger`, `action`, `status`) VALUES
+(34, 'statistics_order_delete', 'catalog/model/checkout/order/deleteOrder/before', 'event/statistics/deleteOrder', 1);
 
 -----------------------------------------------------------
 
