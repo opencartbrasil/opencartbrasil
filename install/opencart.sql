@@ -1827,16 +1827,14 @@ CREATE TABLE `oc_layout_module` (
 --
 
 INSERT INTO `oc_layout_module` (`layout_module_id`, `layout_id`, `code`, `position`, `sort_order`) VALUES
-(2, 4, '0', 'content_top', 0),
-(3, 4, '0', 'content_top', 1),
-(20, 5, '0', 'column_left', 2),
-(69, 10, 'account', 'column_right', 1),
-(68, 6, 'account', 'column_right', 1),
-(67, 1, 'carousel.29', 'content_top', 3),
-(66, 1, 'slideshow.27', 'content_top', 1),
-(65, 1, 'featured.28', 'content_top', 2),
-(72, 3, 'category', 'column_left', 1),
-(73, 3, 'banner.30', 'column_left', 2);
+(1, 5, '0', 'column_left', 2),
+(2, 10, 'account', 'column_right', 1),
+(3, 6, 'account', 'column_right', 1),
+(4, 1, 'carousel.29', 'content_top', 3),
+(5, 1, 'slideshow.27', 'content_top', 1),
+(6, 1, 'featured.28', 'content_top', 2),
+(7, 3, 'category', 'column_left', 1),
+(8, 3, 'banner.30', 'column_left', 2);
 
 -----------------------------------------------------------
 
@@ -1858,19 +1856,19 @@ CREATE TABLE `oc_layout_route` (
 --
 
 INSERT INTO `oc_layout_route` (`layout_route_id`, `layout_id`, `store_id`, `route`) VALUES
-(38, 6, 0, 'account/%'),
-(17, 10, 0, 'affiliate/%'),
-(44, 3, 0, 'product/category'),
-(42, 1, 0, 'common/home'),
-(20, 2, 0, 'product/product'),
-(24, 11, 0, 'information/information'),
-(23, 7, 0, 'checkout/%'),
-(31, 8, 0, 'information/contact'),
-(32, 9, 0, 'information/sitemap'),
-(34, 4, 0, ''),
-(45, 5, 0, 'product/manufacturer'),
-(52, 12, 0, 'product/compare'),
-(53, 13, 0, 'product/search');
+(1, 6, 0, 'account/%'),
+(2, 10, 0, 'affiliate/%'),
+(3, 3, 0, 'product/category'),
+(4, 1, 0, 'common/home'),
+(5, 2, 0, 'product/product'),
+(6, 11, 0, 'information/information'),
+(7, 7, 0, 'checkout/%'),
+(8, 8, 0, 'information/contact'),
+(9, 9, 0, 'information/sitemap'),
+(10, 4, 0, ''),
+(11, 5, 0, 'product/manufacturer'),
+(12, 12, 0, 'product/compare'),
+(13, 13, 0, 'product/search');
 
 -----------------------------------------------------------
 
