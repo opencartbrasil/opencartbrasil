@@ -73,15 +73,17 @@ class ControllerExtensionFeedGoogleBase extends Controller {
 							$currency_code = $this->session->data['currency'];
 							$currency_value = $this->currency->getValue($this->session->data['currency']);
 						} else {
-							$currency_code = 'USD';
-							$currency_value = $this->currency->getValue('USD');
+							$currency_code = 'BRL';
+							$currency_value = $this->currency->getValue('BRL');
 						}
 
+						$output .= '<g:currency>' . $currency_code . '</g:currency>';
+
 						if ((float)$product['special']) {
-							$output .= '  <g:price>' . $this->currency->format($this->tax->calculate($product['special'], $product['tax_class_id']), $currency_code, $currency_value, false) . '</g:price>';
-						} else {
-							$output .= '  <g:price>' . $this->currency->format($this->tax->calculate($product['price'], $product['tax_class_id']), $currency_code, $currency_value, false) . '</g:price>';
+							$output .= '<g:sale_price>' .  $this->currency->format($this->tax->calculate($product['special'], $product['tax_class_id']), $currency_code, $currency_value, false) . ' ' . $currency_code . '</g:sale_price>';
 						}
+
+						$output .= '<g:price>' . $this->currency->format($this->tax->calculate($product['price'], $product['tax_class_id']), $currency_code, $currency_value, false) . ' ' . $currency_code . '</g:price>';
 
 						$output .= '  <g:google_product_category>' . $google_base_category['google_base_category_id'] . '</g:google_product_category>';
 
@@ -120,7 +122,7 @@ class ControllerExtensionFeedGoogleBase extends Controller {
 			$output .= '  </channel>';
 			$output .= '</rss>';
 
-			$this->response->addHeader('Content-Type: application/rss+xml');
+			$this->response->addHeader('Content-Type: application/xml');
 			$this->response->setOutput($output);
 		}
 	}
