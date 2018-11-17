@@ -155,13 +155,13 @@ class ControllerExtensionFeedGoogleBase extends Controller {
 							}
 						}
 
-						$output .= '    </item>' . PHP_EOL;
+						$output .= '      </item>' . PHP_EOL;
 					}
 				}
 			}
 
 			$output .= '  </channel>' . PHP_EOL;
-			$output .= '</rss>' . PHP_EOL;
+			$output .= '</rss>';
 
 			$this->response->addHeader('Content-Type: application/xml');
 			$this->response->setOutput($output);
