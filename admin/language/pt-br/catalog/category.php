@@ -33,7 +33,7 @@ $_['entry_status']           = 'Situação';
 $_['entry_layout']           = 'Layout para este departamento';
 
 // Help
-$_['help_filter']            = '(autocompletar)';
+$_['help_filter']            = 'Pesquisa do tipo autocompletar';
 $_['help_top']               = 'A exibição no topo será no menu superior da loja, e só funcionará para um departamento principal.';
 $_['help_column']            = 'O número de colunas para organizar os departamentos inferiores em até 3 níveis. Só funciona para um departamento principal.';
 

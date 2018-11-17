@@ -26,7 +26,7 @@ $_['entry_text']        = 'Comentário';
 $_['entry_date_added']  = 'Cadastro';
 
 // Help
-$_['help_product']      = '(autocompletar)';
+$_['help_product']      = 'Pesquisa do tipo autocompletar';
 
 // Error
 $_['error_permission']  = 'Atenção: Você não tem permissão para modificar os comentários!';
