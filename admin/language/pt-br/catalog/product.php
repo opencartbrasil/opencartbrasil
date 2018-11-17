@@ -36,7 +36,7 @@ $_['entry_store']            = 'Loja';
 $_['entry_keyword']          = 'URL amigável';
 $_['entry_model']            = 'Modelo';
 $_['entry_sku']              = 'SKU';
-$_['entry_upc']              = 'Código de barras';
+$_['entry_upc']              = 'UPC';
 $_['entry_ean']              = 'EAN';
 $_['entry_jan']              = 'JAN';
 $_['entry_isbn']             = 'ISBN';
@@ -84,20 +84,20 @@ $_['entry_layout']           = 'Layout para este produto';
 $_['entry_recurring']        = 'Tipo de assinatura';
 
 // Help
-$_['help_sku']               = 'É o código ligado à logística de armazém, e designa os diferentes produtos do estoque.';
-$_['help_upc']               = 'É o mesmo que UPC, que significa Código Universal de Produtos.';
-$_['help_ean']               = 'Significa Número de Artigo Europeu';
-$_['help_jan']               = 'Significa Número de Artigo Japonês';
-$_['help_isbn']              = 'Significa Número Padrão Internacional de Livro. É o código de identificação utilizado em livros.';
-$_['help_mpn']               = 'Significa Número da Peça do Fabricante. É o código usado pelos fabricantes para identificar os seus produtos.';
-$_['help_manufacturer']      = '(autocompletar)';
+$_['help_sku']               = 'É o código ligado à logística de armazém, e deve conter até 64 caracteres.';
+$_['help_upc']               = 'Significa Código universal de produto, e deve conter 12 números.';
+$_['help_ean']               = 'Significa Número de artigo europeu, e deve conter 13 números, mas pode ter 8 ou 14 números.';
+$_['help_jan']               = 'Significa Número de artigo japonês, e deve conter 13 números, mas pode ter 8 números.';
+$_['help_isbn']              = 'Significa Número padrão internacional de livro, e deve conter 13 números, mas pode conter 10 números.';
+$_['help_mpn']               = 'Significa Número da peça do fabricante, e deve conter até 64 caracteres.';
+$_['help_manufacturer']      = 'Pesquisa do tipo autocompletar';
 $_['help_minimum']           = 'Forçar uma quantidade mínima a ser vendida.';
 $_['help_stock_status']      = 'Situação do produto quando está fora de estoque';
 $_['help_points']            = 'Número de pontos necessários para comprar este produto. Se você não deseja que este produto seja comprado com pontos, coloque 0.';
-$_['help_category']          = '(autocompletar)';
-$_['help_filter']            = '(autocompletar)';
-$_['help_download']          = '(autocompletar)';
-$_['help_related']           = '(autocompletar)';
+$_['help_category']          = 'Pesquisa do tipo autocompletar';
+$_['help_filter']            = 'Pesquisa do tipo autocompletar';
+$_['help_download']          = 'Pesquisa do tipo autocompletar';
+$_['help_related']           = 'Pesquisa do tipo autocompletar';
 $_['help_tag']               = 'Separadas por vírgulas';
 
 // Error
