@@ -6,8 +6,8 @@ class ControllerExtensionFeedGoogleBase extends Controller {
 			$output .= '<rss version="2.0" xmlns:g="http://base.google.com/ns/1.0">' . PHP_EOL;
 			$output .= '  <channel>' . PHP_EOL;
 			$output .= '    <title>' . strip_tags(html_entity_decode(utf8_substr($this->config->get('config_name'), 0, 150), ENT_QUOTES, 'UTF-8')) . '</title>' . PHP_EOL;
-			$output .= '    <description>' . strip_tags(html_entity_decode(utf8_substr($this->config->get('config_meta_description'), 0, 5000), ENT_QUOTES, 'UTF-8')) . '</description>' . PHP_EOL;
 			$output .= '    <link>' . $this->config->get('config_url') . '</link>' . PHP_EOL;
+			$output .= '    <description>' . strip_tags(html_entity_decode(utf8_substr($this->config->get('config_meta_description'), 0, 300), ENT_QUOTES, 'UTF-8')) . '</description>' . PHP_EOL;
 
 			$this->load->model('extension/feed/google_base');
 			$this->load->model('catalog/category');
@@ -33,8 +33,8 @@ class ControllerExtensionFeedGoogleBase extends Controller {
 
 						$output .= '      <item>' . PHP_EOL;
 						$output .= '        <g:id>' . $product['product_id'] . '</g:id>' . PHP_EOL;
-						$output .= '        <g:title><![CDATA[' . strip_tags(html_entity_decode($product['name'], ENT_QUOTES, 'UTF-8')) . ']]></g:title>' . PHP_EOL;
-						$output .= '        <g:description><![CDATA[' . strip_tags(html_entity_decode($product['description'], ENT_QUOTES, 'UTF-8')) . ']]></g:description>' . PHP_EOL;
+						$output .= '        <g:title><![CDATA[' . strip_tags(html_entity_decode(utf8_substr($product['name'], 0, 150), ENT_QUOTES, 'UTF-8')) . ']]></g:title>' . PHP_EOL;
+						$output .= '        <g:description><![CDATA[' . strip_tags(html_entity_decode(utf8_substr($product['description'], 0, 5000), ENT_QUOTES, 'UTF-8')) . ']]></g:description>' . PHP_EOL;
 						$output .= '        <g:link>' . $this->url->link('product/product', 'product_id=' . $product['product_id']) . '</g:link>' . PHP_EOL;
 
 						if ($product['image']) {
