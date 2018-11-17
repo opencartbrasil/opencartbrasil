@@ -37,7 +37,7 @@ class ModelCatalogCategory extends Model {
 				$this->db->query("INSERT INTO " . DB_PREFIX . "category_to_store SET category_id = '" . (int)$category_id . "', store_id = '" . (int)$store_id . "'");
 			}
 		}
-		
+
 		if (isset($data['category_seo_url'])) {
 			foreach ($data['category_seo_url'] as $store_id => $language) {
 				foreach ($language as $language_id => $keyword) {
@@ -47,7 +47,7 @@ class ModelCatalogCategory extends Model {
 				}
 			}
 		}
-		
+
 		// Set which layout to use with this category
 		if (isset($data['category_layout'])) {
 			foreach ($data['category_layout'] as $store_id => $layout_id) {
@@ -152,7 +152,7 @@ class ModelCatalogCategory extends Model {
 				}
 			}
 		}
-		
+
 		$this->db->query("DELETE FROM " . DB_PREFIX . "category_to_layout WHERE category_id = '" . (int)$category_id . "'");
 
 		if (isset($data['category_layout'])) {
@@ -211,7 +211,7 @@ class ModelCatalogCategory extends Model {
 
 	public function getCategory($category_id) {
 		$query = $this->db->query("SELECT DISTINCT *, (SELECT GROUP_CONCAT(cd1.name ORDER BY level SEPARATOR '&nbsp;&nbsp;&gt;&nbsp;&nbsp;') FROM " . DB_PREFIX . "category_path cp LEFT JOIN " . DB_PREFIX . "category_description cd1 ON (cp.path_id = cd1.category_id AND cp.category_id != cp.path_id) WHERE cp.category_id = c.category_id AND cd1.language_id = '" . (int)$this->config->get('config_language_id') . "' GROUP BY cp.category_id) AS path FROM " . DB_PREFIX . "category c LEFT JOIN " . DB_PREFIX . "category_description cd2 ON (c.category_id = cd2.category_id) WHERE c.category_id = '" . (int)$category_id . "' AND cd2.language_id = '" . (int)$this->config->get('config_language_id') . "'");
-		
+
 		return $query->row;
 	}
 
@@ -275,13 +275,13 @@ class ModelCatalogCategory extends Model {
 
 		return $category_description_data;
 	}
-	
+
 	public function getCategoryPath($category_id) {
 		$query = $this->db->query("SELECT category_id, path_id, level FROM " . DB_PREFIX . "category_path WHERE category_id = '" . (int)$category_id . "'");
 
 		return $query->rows;
 	}
-	
+
 	public function getCategoryFilters($category_id) {
 		$category_filter_data = array();
 
@@ -305,10 +305,10 @@ class ModelCatalogCategory extends Model {
 
 		return $category_store_data;
 	}
-	
+
 	public function getCategorySeoUrls($category_id) {
 		$category_seo_url_data = array();
-		
+
 		$query = $this->db->query("SELECT * FROM " . DB_PREFIX . "seo_url WHERE query = 'category_id=" . (int)$category_id . "'");
 
 		foreach ($query->rows as $result) {
@@ -317,7 +317,7 @@ class ModelCatalogCategory extends Model {
 
 		return $category_seo_url_data;
 	}
-	
+
 	public function getCategoryLayouts($category_id) {
 		$category_layout_data = array();
 
@@ -335,10 +335,10 @@ class ModelCatalogCategory extends Model {
 
 		return $query->row['total'];
 	}
-	
+
 	public function getTotalCategoriesByLayoutId($layout_id) {
 		$query = $this->db->query("SELECT COUNT(*) AS total FROM " . DB_PREFIX . "category_to_layout WHERE layout_id = '" . (int)$layout_id . "'");
 
 		return $query->row['total'];
-	}	
+	}
 }

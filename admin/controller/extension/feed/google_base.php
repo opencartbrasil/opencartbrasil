@@ -148,11 +148,13 @@ class ControllerExtensionFeedGoogleBase extends Controller {
 		$results = $this->model_extension_feed_google_base->getCategories(($page - 1) * 10, 10);
 
 		foreach ($results as $result) {
+			$category = $this->model_extension_feed_google_base->getCategory($result['category_id']);
+
 			$data['google_base_categories'][] = array(
 				'google_base_category_id' => $result['google_base_category_id'],
 				'google_base_category'    => $result['google_base_category'],
 				'category_id'             => $result['category_id'],
-				'category'                => $result['category']
+				'category'                => $category['name']
 			);
 		}
 
@@ -224,7 +226,7 @@ class ControllerExtensionFeedGoogleBase extends Controller {
 			$filter_data = array(
 				'filter_name' => html_entity_decode($filter_name, ENT_QUOTES, 'UTF-8'),
 				'start'       => 0,
-				'limit'       => 5
+				'limit'       => 12
 			);
 
 			$results = $this->model_extension_feed_google_base->getGoogleBaseCategories($filter_data);
