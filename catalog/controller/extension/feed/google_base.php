@@ -58,27 +58,15 @@ class ControllerExtensionFeedGoogleBase extends Controller {
 
 						$output .= '  <g:availability>' . ($product['quantity'] ? 'in stock' : 'out of stock') . '</g:availability>';
 
-						$currencies = array(
-							'BRL',
-							'USD',
-							'EUR',
-							'GBP'
-						);
-
-						if (in_array($this->session->data['currency'], $currencies)) {
-							$currency_code = $this->session->data['currency'];
-							$currency_value = $this->currency->getValue($this->session->data['currency']);
-						} else {
-							$currency_code = 'BRL';
-							$currency_value = $this->currency->getValue('BRL');
-						}
+						$currency_code = $this->config->get('config_currency');
+						$currency_value = $this->currency->getValue($currency_code);
 
 						$output .= '<g:currency>' . $currency_code . '</g:currency>';
 
-						$output .= '<g:price>' . $this->currency->format($this->tax->calculate($product['price'], $product['tax_class_id']), $currency_code, $currency_value, false) . ' ' . $currency_code . '</g:price>';
+						$output .= '<g:price>' . number_format($this->tax->calculate($product['price'], $product['tax_class_id'])*$currency_value, 2, '.', '') . ' ' . $currency_code . '</g:price>';
 
 						if ((float)$product['special']) {
-							$output .= '<g:sale_price>' .  $this->currency->format($this->tax->calculate($product['special'], $product['tax_class_id']), $currency_code, $currency_value, false) . ' ' . $currency_code . '</g:sale_price>';
+							$output .= '<g:sale_price>' . number_format($this->tax->calculate($product['special'], $product['tax_class_id'])*$currency_value, 2, '.', '') . ' ' . $currency_code . '</g:sale_price>';
 						}
 
 						$output .= '  <g:google_product_category>' . $google_base_category['google_base_category_id'] . '</g:google_product_category>';
