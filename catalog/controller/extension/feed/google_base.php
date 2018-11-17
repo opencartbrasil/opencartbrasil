@@ -140,7 +140,7 @@ class ControllerExtensionFeedGoogleBase extends Controller {
 							}
 						}
 
-						if ($product['length'] > 0 && $product['​​width'] > 0 && $product['height'] > 0) {
+						if ($product['length'] > 0 && $product['width'] > 0 && $product['height'] > 0) {
 							$length_units = array(
 								'in',
 								'cm'
