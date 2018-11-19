@@ -19,7 +19,7 @@ class ControllerMailAffiliate extends Controller {
 		}
 
 		$customer_group_info = $this->model_account_customer_group->getCustomerGroup($customer_group_id);
-		
+
 		if ($customer_group_info) {
 			$data['approval'] = ($this->config->get('config_affiliate_approval') || $customer_group_info['approval']);
 		} else {

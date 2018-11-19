@@ -39,5 +39,5 @@ class ControllerStartupError extends Controller {
 		}
 
 		return true;
-	} 
-} 
+	}
+}

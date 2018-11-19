@@ -37,7 +37,7 @@ class ControllerCheckoutShippingAddress extends Controller {
 
 		// Custom Fields
 		$data['custom_fields'] = array();
-		
+
 		$this->load->model('account/custom_field');
 
 		$custom_fields = $this->model_account_custom_field->getCustomFields($this->config->get('config_customer_group_id'));
@@ -53,7 +53,7 @@ class ControllerCheckoutShippingAddress extends Controller {
 		} else {
 			$data['shipping_address_custom_field'] = array();
 		}
-		
+
 		$this->response->setOutput($this->load->view('checkout/shipping_address', $data));
 	}
 
@@ -98,7 +98,7 @@ class ControllerCheckoutShippingAddress extends Controller {
 
 		if (!$json) {
 			$this->load->model('account/address');
-			
+
 			if (isset($this->request->post['shipping_address']) && $this->request->post['shipping_address'] == 'existing') {
 				if (empty($this->request->post['address_id'])) {
 					$json['error']['warning'] = $this->language->get('error_address');

@@ -337,7 +337,7 @@ class ControllerProductCategory extends Controller {
 			} else {
 				$this->document->addLink($this->url->link('product/category', 'path=' . $category_info['category_id'] . '&page='. $page), 'canonical');
 			}
-			
+
 			if ($page > 1) {
 				$this->document->addLink($this->url->link('product/category', 'path=' . $category_info['category_id'] . (($page - 2) ? '&page='. ($page - 1) : '')), 'prev');
 			}

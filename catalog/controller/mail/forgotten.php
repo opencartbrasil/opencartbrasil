@@ -1,15 +1,15 @@
 <?php
 class ControllerMailForgotten extends Controller {
-	public function index(&$route, &$args, &$output) {			            
+	public function index(&$route, &$args, &$output) {
 		$this->load->language('mail/forgotten');
 
 		$data['text_greeting'] = sprintf($this->language->get('text_greeting'), html_entity_decode($this->config->get('config_name'), ENT_QUOTES, 'UTF-8'));
 		$data['text_change'] = $this->language->get('text_change');
 		$data['text_ip'] = $this->language->get('text_ip');
-		
+
 		$data['reset'] = str_replace('&amp;', '&', $this->url->link('account/reset', 'code=' . $args[1], true));
 		$data['ip'] = $this->request->server['REMOTE_ADDR'];
-		
+
 		$mail = new Mail($this->config->get('config_mail_engine'));
 		$mail->parameter = $this->config->get('config_mail_parameter');
 		$mail->smtp_hostname = $this->config->get('config_mail_smtp_hostname');
