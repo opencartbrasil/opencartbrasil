@@ -289,7 +289,7 @@
           </div>
           {% endif %}
           {% endif %}
-          {% endfor %} 
+          {% endfor %}
         </fieldset>
         {% if text_agree %}
         <div class="buttons clearfix">
@@ -404,15 +404,15 @@
     pickTime: false
   });
 
+  $('.time').datetimepicker({
+    language: '{{ datepicker }}',
+    pickDate: false
+  });
+
   $('.datetime').datetimepicker({
     language: '{{ datepicker }}',
     pickDate: true,
     pickTime: true
   });
-
-  $('.time').datetimepicker({
-    language: '{{ datepicker }}',
-    pickDate: false
-  });
-//--></script> 
+//--></script>
 {{ footer }}
