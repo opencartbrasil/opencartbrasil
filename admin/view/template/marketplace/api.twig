@@ -25,8 +25,8 @@ $('#button-save').on('click', function(e) {
 	$.ajax({
 		url: 'index.php?route=marketplace/api/save&user_token={{ user_token }}',
 		type: 'post',
-		dataType: 'json',		
-		data: $('#modal-opencart :input'),		
+		dataType: 'json',
+		data: $('#modal-opencart :input'),
 		beforeSend: function() {
 			$('#button-save').button('loading');
 		},
@@ -35,30 +35,30 @@ $('#button-save').on('click', function(e) {
 		},
 		success: function(json) {
 			$('.alert-dismissible, .text-danger').remove();
-			
+
 			if (json['error']) {
 				if (json['error']['warning']) {
 					$('#modal-opencart .modal-body').prepend('<div class="alert alert-danger alert-dismissible"><i class="fa fa-exclamation-circle"></i> ' + json['error']['warning'] + ' <button type="button" class="close" data-dismiss="alert">&times;</button></div>');
 				}
-				
+
 				if (json['error']['username']) {
 					$('input[name="username"]').after('<div class="text-danger">' + json['error']['username'] + '</div>');
-				}	
-				
+				}
+
 				if (json['error']['secret']) {
 					$('textarea[name="secret"]').after('<div class="text-danger">' + json['error']['secret'] + '</div>');
-				}						
+				}
 			}
-			
+
 			if (json['success']) {
 				$('#modal-opencart .modal-body').prepend('<div class="alert alert-success alert-dismissible"><i class="fa fa-check-circle"></i> ' + json['success'] + ' <button type="button" class="close" data-dismiss="alert">&times;</button></div>');
-			
+
 				window.location.reload();
-			}			
+			}
 		},
 		error: function(xhr, ajaxOptions, thrownError) {
 			alert(thrownError + "\r\n" + xhr.statusText + "\r\n" + xhr.responseText);
 		}
 	});
 });
-//--></script> 
+//--></script>

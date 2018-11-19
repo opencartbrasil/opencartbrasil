@@ -6,7 +6,7 @@ class ControllerDesignLayout extends Controller {
 		$this->load->language('design/layout');
 
 		$this->document->setTitle($this->language->get('heading_title'));
-		
+
 		$this->load->model('design/layout');
 
 		$this->getList();
@@ -323,7 +323,7 @@ class ControllerDesignLayout extends Controller {
 		$this->load->model('setting/module');
 
 		$data['extensions'] = array();
-		
+
 		// Get a list of installed modules
 		$extensions = $this->model_setting_extension->getInstalled('module');
 

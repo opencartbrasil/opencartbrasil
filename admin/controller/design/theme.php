@@ -24,7 +24,7 @@ class ControllerDesignTheme extends Controller {
 		$this->load->model('setting/store');
 
 		$results = $this->model_setting_store->getStores();
-		
+
 		foreach ($results as $result) {
 			$data['stores'][] = array(
 				'store_id' => $result['store_id'],
@@ -261,7 +261,7 @@ class ControllerDesignTheme extends Controller {
 		$this->load->model('setting/setting');
 
 		$theme = $this->model_setting_setting->getSettingValue('config_theme', $store_id);
-		
+
 		// This is only here for compatibility with old themes.
 		if ($theme == 'theme_default') {
 			$theme = $this->model_setting_setting->getSettingValue('theme_default_directory', $store_id);

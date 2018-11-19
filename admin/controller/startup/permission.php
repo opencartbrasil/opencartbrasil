@@ -28,7 +28,7 @@ class ControllerStartupPermission extends Controller {
 				'extension/theme',
 				'extension/total',
 				'extension/report',
-                'extension/openbay'
+				'extension/openbay'
 			);
 
 			if (isset($part[2]) && in_array($route, $extension)) {

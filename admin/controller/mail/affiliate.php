@@ -33,7 +33,7 @@ class ControllerMailAffiliate extends Controller {
 			$language->load('mail/affiliate_approve');
 
 			$subject = sprintf($language->get('text_subject'), $store_name);
-			
+
 			$data['text_welcome'] = sprintf($language->get('text_welcome'), $store_name);
 
 			$data['login'] = $store_url . 'index.php?route=account/login';

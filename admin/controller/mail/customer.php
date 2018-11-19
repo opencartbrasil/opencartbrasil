@@ -2,7 +2,7 @@
 class ControllerMailCustomer extends Controller {
 	public function approve(&$route, &$args, &$output) {
 		$this->load->model('customer/customer');
-		
+
 		$customer_info = $this->model_customer_customer->getCustomer($args[0]);
 
 		if ($customer_info) {

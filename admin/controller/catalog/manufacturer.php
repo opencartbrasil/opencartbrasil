@@ -317,12 +317,12 @@ class ControllerCatalogManufacturer extends Controller {
 		$this->load->model('setting/store');
 
 		$data['stores'] = array();
-		
+
 		$data['stores'][] = array(
 			'store_id' => 0,
 			'name'     => $this->language->get('text_default')
 		);
-		
+
 		$stores = $this->model_setting_store->getStores();
 
 		foreach ($stores as $store) {
@@ -371,7 +371,7 @@ class ControllerCatalogManufacturer extends Controller {
 		$this->load->model('localisation/language');
 
 		$data['languages'] = $this->model_localisation_language->getLanguages();
-		
+
 		if (isset($this->request->post['manufacturer_seo_url'])) {
 			$data['manufacturer_seo_url'] = $this->request->post['manufacturer_seo_url'];
 		} elseif (!empty($manufacturer_info)) {
@@ -398,7 +398,7 @@ class ControllerCatalogManufacturer extends Controller {
 
 		if ($this->request->post['manufacturer_seo_url']) {
 			$this->load->model('design/seo_url');
-			
+
 			foreach ($this->request->post['manufacturer_seo_url'] as $store_id => $language) {
 				foreach ($language as $language_id => $keyword) {
 					if (!empty($keyword)) {

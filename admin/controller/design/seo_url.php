@@ -33,7 +33,7 @@ class ControllerDesignSeoUrl extends Controller {
 			if (isset($this->request->get['filter_keyword'])) {
 				$url .= '&filter_keyword=' . urlencode(html_entity_decode($this->request->get['filter_keyword'], ENT_QUOTES, 'UTF-8'));
 			}
-			
+
 			if (isset($this->request->get['filter_store_id'])) {
 				$url .= '&filter_store_id=' . $this->request->get['filter_store_id'];
 			}
@@ -202,7 +202,7 @@ class ControllerDesignSeoUrl extends Controller {
 		}
 
 		$url = '';
-			
+
 		if (isset($this->request->get['filter_query'])) {
 			$url .= '&filter_query=' . urlencode(html_entity_decode($this->request->get['filter_query'], ENT_QUOTES, 'UTF-8'));
 		}
@@ -218,7 +218,7 @@ class ControllerDesignSeoUrl extends Controller {
 		if (isset($this->request->get['filter_language_id'])) {
 			$url .= '&filter_language_id=' . $this->request->get['filter_language_id'];
 		}
-			
+
 		if (isset($this->request->get['sort'])) {
 			$url .= '&sort=' . $this->request->get['sort'];
 		}
@@ -330,7 +330,7 @@ class ControllerDesignSeoUrl extends Controller {
 		$data['sort_language'] = $this->url->link('design/seo_url', 'user_token=' . $this->session->data['user_token'] . '&sort=language' . $url, true);
 
 		$url = '';
-		
+
 		if (isset($this->request->get['filter_query'])) {
 			$url .= '&filter_query=' . urlencode(html_entity_decode($this->request->get['filter_query'], ENT_QUOTES, 'UTF-8'));
 		}
@@ -372,15 +372,15 @@ class ControllerDesignSeoUrl extends Controller {
 
 		$data['sort'] = $sort;
 		$data['order'] = $order;
-		
+
 		$this->load->model('setting/store');
 
 		$data['stores'] = $this->model_setting_store->getStores();
-		
+
 		$this->load->model('localisation/language');
 
 		$data['languages'] = $this->model_localisation_language->getLanguages();
-		
+
 		$data['header'] = $this->load->controller('common/header');
 		$data['column_left'] = $this->load->controller('common/column_left');
 		$data['footer'] = $this->load->controller('common/footer');
@@ -466,12 +466,12 @@ class ControllerDesignSeoUrl extends Controller {
 		$this->load->model('setting/store');
 
 		$data['stores'] = array();
-		
+
 		$data['stores'][] = array(
 			'store_id' => 0,
 			'name'     => $this->language->get('text_default')
 		);
-		
+
 		$stores = $this->model_setting_store->getStores();
 
 		foreach ($stores as $store) {
@@ -516,13 +516,13 @@ class ControllerDesignSeoUrl extends Controller {
 		if (!$this->request->post['query']) {
 			$this->error['query'] = $this->language->get('error_query');
 		}
-		
+
 		$seo_urls = $this->model_design_seo_url->getSeoUrlsByKeyword($this->request->post['keyword']);
 
 		foreach ($seo_urls as $seo_url) {
 			if ($seo_url['store_id'] == $this->request->post['store_id'] && $seo_url['query'] != $this->request->post['query']) {
 				$this->error['keyword'] = $this->language->get('error_exists');
-				
+
 				break;
 			}
 		}
@@ -530,7 +530,7 @@ class ControllerDesignSeoUrl extends Controller {
 		if (!$this->request->post['keyword']) {
 			$this->error['keyword'] = $this->language->get('error_keyword');
 		}
-		
+
 		return !$this->error;
 	}
 

@@ -101,7 +101,7 @@ class ControllerCommonColumnLeft extends Controller {
 					'children' => array()
 				);
 			}
-			
+
 			if ($this->user->hasPermission('access', 'catalog/review')) {
 				$catalog[] = array(
 					'name'	   => $this->language->get('text_review'),
@@ -565,7 +565,7 @@ class ControllerCommonColumnLeft extends Controller {
 
 			if ($this->user->hasPermission('access', 'localisation/length_class')) {
 				$localisation[] = array(
-					'name'	   => $this->language->get('text_length_class'),
+					'name'     => $this->language->get('text_length_class'),
 					'href'     => $this->url->link('localisation/length_class', 'user_token=' . $this->session->data['user_token'], true),
 					'children' => array()
 				);
@@ -573,7 +573,7 @@ class ControllerCommonColumnLeft extends Controller {
 
 			if ($this->user->hasPermission('access', 'localisation/weight_class')) {
 				$localisation[] = array(
-					'name'	   => $this->language->get('text_weight_class'),
+					'name'     => $this->language->get('text_weight_class'),
 					'href'     => $this->url->link('localisation/weight_class', 'user_token=' . $this->session->data['user_token'], true),
 					'children' => array()
 				);
@@ -581,7 +581,7 @@ class ControllerCommonColumnLeft extends Controller {
 
 			if ($localisation) {
 				$system[] = array(
-					'name'	   => $this->language->get('text_localisation'),
+					'name'     => $this->language->get('text_localisation'),
 					'href'     => '',
 					'children' => $localisation	
 				);
@@ -592,7 +592,7 @@ class ControllerCommonColumnLeft extends Controller {
 
 			if ($this->user->hasPermission('access', 'tool/backup')) {
 				$maintenance[] = array(
-					'name'	   => $this->language->get('text_backup'),
+					'name'     => $this->language->get('text_backup'),
 					'href'     => $this->url->link('tool/backup', 'user_token=' . $this->session->data['user_token'], true),
 					'children' => array()
 				);
@@ -600,7 +600,7 @@ class ControllerCommonColumnLeft extends Controller {
 
 			if ($this->user->hasPermission('access', 'tool/update')) {
 				$maintenance[] = array(
-					'name'	   => $this->language->get('text_update'),
+					'name'     => $this->language->get('text_update'),
 					'href'     => $this->url->link('tool/update', 'user_token=' . $this->session->data['user_token'], true),
 					'children' => array()
 				);
@@ -608,7 +608,7 @@ class ControllerCommonColumnLeft extends Controller {
 
 			if ($this->user->hasPermission('access', 'tool/upload')) {
 				$maintenance[] = array(
-					'name'	   => $this->language->get('text_upload'),
+					'name'     => $this->language->get('text_upload'),
 					'href'     => $this->url->link('tool/upload', 'user_token=' . $this->session->data['user_token'], true),
 					'children' => array()
 				);
@@ -616,7 +616,7 @@ class ControllerCommonColumnLeft extends Controller {
 
 			if ($this->user->hasPermission('access', 'tool/log')) {
 				$maintenance[] = array(
-					'name'	   => $this->language->get('text_log'),
+					'name'     => $this->language->get('text_log'),
 					'href'     => $this->url->link('tool/log', 'user_token=' . $this->session->data['user_token'], true),
 					'children' => array()
 				);

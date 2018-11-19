@@ -14,7 +14,7 @@ class ModelLocalisationGeoZone extends Model {
 		}
 
 		$this->cache->delete('geo_zone');
-		
+
 		return $geo_zone_id;
 	}
 

@@ -74,7 +74,7 @@ class ControllerCommonDeveloper extends Controller {
 
 			$json['success'] = sprintf($this->language->get('text_cache'), $this->language->get('text_theme'));
 		}
-		
+
 		$this->response->addHeader('Content-Type: application/json');
 		$this->response->setOutput(json_encode($json));
 	}
@@ -103,7 +103,7 @@ class ControllerCommonDeveloper extends Controller {
 					unlink($file);
 				}
 			}
-			
+
 			$json['success'] = sprintf($this->language->get('text_cache'), $this->language->get('text_sass'));
 		}
 

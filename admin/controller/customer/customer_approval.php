@@ -4,7 +4,7 @@ class ControllerCustomerCustomerApproval extends Controller {
 		$this->load->language('customer/customer_approval');
 
 		$this->document->setTitle($this->language->get('heading_title'));
-		
+
 		if (isset($this->request->get['filter_name'])) {
 			$filter_name = $this->request->get['filter_name'];
 		} else {
@@ -16,7 +16,7 @@ class ControllerCustomerCustomerApproval extends Controller {
 		} else {
 			$filter_email = '';
 		}
-		
+
 		if (isset($this->request->get['filter_customer_group_id'])) {
 			$filter_customer_group_id = $this->request->get['filter_customer_group_id'];
 		} else {
@@ -28,15 +28,15 @@ class ControllerCustomerCustomerApproval extends Controller {
 		} else {
 			$filter_type = '';
 		}
-		
+
 		if (isset($this->request->get['filter_date_added'])) {
 			$filter_date_added = $this->request->get['filter_date_added'];
 		} else {
 			$filter_date_added = '';
 		}
-			
+
 		$url = '';
-		
+
 		if (isset($this->request->get['filter_name'])) {
 			$url .= '&filter_name=' . urlencode(html_entity_decode($this->request->get['filter_name'], ENT_QUOTES, 'UTF-8'));
 		}
@@ -48,19 +48,19 @@ class ControllerCustomerCustomerApproval extends Controller {
 		if (isset($this->request->get['filter_customer_group_id'])) {
 			$url .= '&filter_customer_group_id=' . $this->request->get['filter_customer_group_id'];
 		}
-		
+
 		if (isset($this->request->get['filter_type'])) {
 			$url .= '&filter_type=' . $this->request->get['filter_type'];
 		}
-		
+
 		if (isset($this->request->get['filter_date_added'])) {
 			$url .= '&filter_date_added=' . $this->request->get['filter_date_added'];
 		}
-					
+
 		if (isset($this->request->get['page'])) {
 			$url .= '&page=' . $this->request->get['page'];
-		}		
-		
+		}
+
 		$data['breadcrumbs'] = array();
 
 		$data['breadcrumbs'][] = array(
@@ -71,8 +71,8 @@ class ControllerCustomerCustomerApproval extends Controller {
 		$data['breadcrumbs'][] = array(
 			'text' => $this->language->get('heading_title'),
 			'href' => $this->url->link('customer/customer_approval', 'user_token=' . $this->session->data['user_token'], true)
-		);	
-				
+		);
+
 		$data['filter_name'] = $filter_name;
 		$data['filter_email'] = $filter_email;
 		$data['filter_customer_group_id'] = $filter_customer_group_id;
@@ -94,7 +94,7 @@ class ControllerCustomerCustomerApproval extends Controller {
 
 	public function customer_approval() {
 		$this->load->language('customer/customer_approval');
-		
+
 		if (isset($this->request->get['filter_name'])) {
 			$filter_name = $this->request->get['filter_name'];
 		} else {
@@ -106,7 +106,7 @@ class ControllerCustomerCustomerApproval extends Controller {
 		} else {
 			$filter_email = '';
 		}
-		
+
 		if (isset($this->request->get['filter_customer_group_id'])) {
 			$filter_customer_group_id = $this->request->get['filter_customer_group_id'];
 		} else {
@@ -118,7 +118,7 @@ class ControllerCustomerCustomerApproval extends Controller {
 		} else {
 			$filter_type = '';
 		}
-		
+
 		if (isset($this->request->get['filter_date_added'])) {
 			$filter_date_added = $this->request->get['filter_date_added'];
 		} else {
@@ -207,13 +207,13 @@ class ControllerCustomerCustomerApproval extends Controller {
 			$json['error'] = $this->language->get('error_permission');
 		} else {
 			$this->load->model('customer/customer_approval');
-			
+
 			if ($this->request->get['type'] == 'customer') {
 				$this->model_customer_customer_approval->approveCustomer($this->request->get['customer_id']);
 			} elseif ($this->request->get['type'] == 'affiliate') {
 				$this->model_customer_customer_approval->approveAffiliate($this->request->get['customer_id']);
 			}
-			
+
 			$json['success'] = $this->language->get('text_success');
 		}
 
@@ -230,7 +230,7 @@ class ControllerCustomerCustomerApproval extends Controller {
 			$json['error'] = $this->language->get('error_permission');
 		} else {
 			$this->load->model('customer/customer_approval');
-			
+
 			if ($this->request->get['type'] == 'customer') {
 				$this->model_customer_customer_approval->denyCustomer($this->request->get['customer_id']);
 			} elseif ($this->request->get['type'] == 'affiliate') {
@@ -239,7 +239,7 @@ class ControllerCustomerCustomerApproval extends Controller {
 
 			$json['success'] = $this->language->get('text_success');
 		}
-		
+
 		$this->response->addHeader('Content-Type: application/json');
 		$this->response->setOutput(json_encode($json));
 	}

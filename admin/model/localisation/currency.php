@@ -10,7 +10,7 @@ class ModelLocalisationCurrency extends Model {
 		}
 
 		$this->cache->delete('currency');
-		
+
 		return $currency_id;
 	}
 
@@ -139,8 +139,8 @@ class ModelLocalisationCurrency extends Model {
 			
 			if ((float)$value < 1 && isset($line[$i + 1])) {
 				$value = (1 / utf8_substr($line[$i + 1], 11, 6));
-			}	
-						
+			}
+
 			if ((float)$value) {
 				$this->db->query("UPDATE " . DB_PREFIX . "currency SET value = '" . (float)$value . "', date_modified = '" .  $this->db->escape(date('Y-m-d H:i:s')) . "' WHERE code = '" . $this->db->escape($currency) . "'");
 			}
