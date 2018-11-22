@@ -106,7 +106,7 @@ class ControllerDesignTheme extends Controller {
 		$theme = $this->model_setting_setting->getSettingValue('config_theme', $store_id);
 
 		// This is only here for compatibility with old themes.
-		if ($theme == 'theme_default') {
+		if ($theme == 'default') {
 			$theme = $this->model_setting_setting->getSettingValue('theme_default_directory', $store_id);
 		}
 
@@ -120,7 +120,7 @@ class ControllerDesignTheme extends Controller {
 			$path_data = array();
 
 			// We grab the files from the default theme directory first as the custom themes drops back to the default theme if selected theme files can not be found.
-			$files = glob(rtrim(DIR_CATALOG . 'view/theme/{default,' . $theme . '}/template/' . $path, '/') . '/*', GLOB_BRACE);
+			$files = glob(rtrim(DIR_CATALOG . 'view/theme/{' . $theme . '}/template/' . $path, '/') . '/*', GLOB_BRACE);
 
 			if ($files) {
 				foreach($files as $file) {
