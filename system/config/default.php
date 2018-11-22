@@ -40,7 +40,7 @@ $_['cache_engine']         = 'file'; // apc, file, mem or memcached
 $_['cache_expire']         = 3600;
 
 // Session
-$_['session_engine']       = 'db';
+$_['session_engine']       = 'file';
 $_['session_autostart']    = true;
 $_['session_name']         = 'OCSESSID';
 
@@ -48,6 +48,7 @@ $_['session_name']         = 'OCSESSID';
 $_['template_engine']      = 'twig';
 $_['template_directory']   = '';
 $_['template_cache']       = false;
+$_['template_extension']   = '.twig';
 
 // Error
 $_['error_display']        = true;
