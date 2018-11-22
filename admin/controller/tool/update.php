@@ -20,7 +20,7 @@ class ControllerToolUpdate extends Controller {
         $data['user_token'] = $this->session->data['user_token'];
 
         $data['version'] = OPENCART_BRASIL;
-        $data['update'] = false;
+        $data['update'] = true;
 
         $curl = curl_init('https://api.github.com/repos/opencartbrasil/opencartbrasil/releases');
 
@@ -39,22 +39,27 @@ class ControllerToolUpdate extends Controller {
             $releases = json_decode($response, true);
 
             $release = $releases[0];
+            $version = $release['tag_name'];
             $release_local = str_replace("v", "", OPENCART_BRASIL);
-            $release_atual = str_replace("v", "", $release['tag_name']);
+            $release_atual = str_replace("v", "", $version);
+
+            $this->session->data['version'] = $version;
+
+            $data['version'] = $version;
+            $data['log'] = $release['body'];
+
+            $data['text_change'] = sprintf($this->language->get('text_change'), $release_atual);
 
             if (version_compare($release_local, $release_atual, '>=')) {
-                $data['success'] = sprintf($this->language->get('text_success'), $release['tag_name']);
+                $data['button_update'] = $this->language->get('button_again');
+                $data['success'] = sprintf($this->language->get('text_success'), $release_atual);
             } else {
-                $this->session->data['version'] = $release['tag_name'];
-                $data['version'] = $release['tag_name'];
-                $data['log'] = $release['body'];
-
-                $data['update'] = true;
-
-                $data['error_warning'] = sprintf($this->language->get('error_version'), $release['tag_name']);
+                $data['button_update'] = sprintf($this->language->get('button_start'), $release_atual);
+                $data['warning'] = sprintf($this->language->get('error_version'), $release_atual);
             }
         } else {
-            $data['error_warning'] = $this->language->get('error_connection');
+            $data['update'] = false;
+            $data['warning'] = $this->language->get('error_connection');
         }
 
         $data['header'] = $this->load->controller('common/header');

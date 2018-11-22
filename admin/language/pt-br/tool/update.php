@@ -6,7 +6,7 @@ $_['heading_title']      = 'Atualização da versão OpenCart Brasil';
 $_['text_success']       = 'Parabéns! Sua versão %s é a mais atual!';
 $_['text_instructions']  = '<strong>Instruções para atualização:</strong><br>1º Faça um <strong>backup completo</strong> da loja antes da atualização.<br>2º Certifique-se que todas as <strong>pastas</strong> tem permissão <strong>755</strong> e os <strong>arquivos</strong> tem a permissão <strong>644</strong>.<br>3º Certifique-se que a diretiva PHP <strong>max_execution_time</strong> está definida como <strong>360</strong> ou superior.<br>4º Inicie a atualização.';
 $_['text_update']        = 'Inciar atualização';
-$_['text_change']        = 'Sobre a nova versão';
+$_['text_change']        = 'Sobre a versão %s';
 $_['text_log']           = 'Log de informações da atualização';
 $_['text_download']      = 'Baixando a última versão...';
 $_['text_unzip']         = 'Extraindo os arquivos...';
@@ -22,7 +22,8 @@ $_['tab_update']         = 'Atualizar';
 $_['entry_progress']     = 'Progresso';
 
 // Button
-$_['button_start']       = 'Atualizar agora';
+$_['button_start']       = 'Iniciar atualização para versão %s';
+$_['button_again']       = 'Atualizar novamente';
 
 // Error
 $_['error_permission']   = 'Atenção: Você não tem permissão para atualizar a loja!';

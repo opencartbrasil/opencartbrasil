@@ -11,7 +11,7 @@
     </div>
   </div>
   <div class="container-fluid">
-    {% if error_warning %}
+    {% if warning %}
       <div class="alert alert-danger">
         <i class="fa fa-exclamation-circle"></i> {{ error_warning }}
       </div>
@@ -51,7 +51,7 @@
             </div>
             <div class="col-sm-10">
               <div class="form-group">
-                <button type="button" id="button-update" data-loading-text="{{ text_loading }}" class="btn btn-success"><i class="fa fa-play"></i> {{ button_start }}</button>
+                <button type="button" id="button-update" data-loading-text="{{ text_loading }}" class="btn btn-success"><i class="fa fa-play"></i> {{ button_update }}</button>
               </div>
             </div>
           </fieldset>

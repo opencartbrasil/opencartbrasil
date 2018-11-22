@@ -6,7 +6,7 @@ $_['heading_title']      = 'Update version OpenCart Brasil';
 $_['text_success']       = 'Success: You are using the latest version %s!';
 $_['text_instructions']  = '<strong>Update Instructions:</strong><br>1. Make a <strong>full backup</strong> of the store before the update.<br>2. Make sure that all <strong>folders</strong> have <strong>755</strong> permission and the <strong>files</strong> have <strong>644</strong> permission.<br>3. Make sure that the PHP <strong>max_execution_time</strong> directive is set to <strong>360</strong> or higher.<br>4. Start Update.';
 $_['text_update']        = 'Start update';
-$_['text_change']        = 'Change Log';
+$_['text_change']        = 'Change Log %s';
 $_['text_log']           = 'Update Log';
 $_['text_download']      = 'Downloading latest version...';
 $_['text_unzip']         = 'Extracting files...';
@@ -22,7 +22,8 @@ $_['tab_update']         = 'Update';
 $_['entry_progress']     = 'Progress';
 
 // Button
-$_['button_start']       = 'Start';
+$_['button_start']       = 'Start update for version %s';
+$_['button_again']       = 'Update again';
 
 // Error
 $_['error_permission']   = 'Warning: You do not have permission to modify upgrades!';
