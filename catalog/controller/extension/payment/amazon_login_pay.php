@@ -883,5 +883,4 @@ class ControllerExtensionPaymentAmazonLoginPay extends Controller {
 			}
 		}
 	}
-
 }

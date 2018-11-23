@@ -70,7 +70,6 @@ class ControllerExtensionPaymentAlipay extends Controller {
 			$this->log->write('Alipay check failed');
 			//chedk failed
 			echo "fail";
-
 		}
 	}
 }
