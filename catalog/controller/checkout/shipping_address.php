@@ -168,10 +168,10 @@ class ControllerCheckoutShippingAddress extends Controller {
 					// If no default address ID set we use the last address
 					if (!$this->customer->getAddressId()) {
 						$this->load->model('account/customer');
-						
+
 						$this->model_account_customer->editAddressId($this->customer->getId(), $address_id);
 					}
-					
+
 					unset($this->session->data['shipping_method']);
 					unset($this->session->data['shipping_methods']);
 				}
