@@ -1,12 +1,4 @@
 <?php
-/*
-CREATE TABLE IF NOT EXISTS `session` (
-  `session_id` varchar(32) NOT NULL,
-  `data` text NOT NULL,
-  `expire` datetime NOT NULL,
-  PRIMARY KEY (`session_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
-*/
 namespace Session;
 final class DB {
 	public $expire = '';
