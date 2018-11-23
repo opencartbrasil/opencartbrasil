@@ -16,10 +16,10 @@ class Request {
 	public $cookie = array();
 	public $files = array();
 	public $server = array();
-	
+
 	/**
 	 * Constructor
- 	*/
+	*/
 	public function __construct() {
 		$this->get = $this->clean($_GET);
 		$this->post = $this->clean($_POST);
@@ -28,13 +28,13 @@ class Request {
 		$this->files = $this->clean($_FILES);
 		$this->server = $this->clean($_SERVER);
 	}
-	
+
 	/**
-     * 
+	 *
 	 * @param	array	$data
 	 *
-     * @return	array
-     */
+	 * @return	array
+	 */
 	public function clean($data) {
 		if (is_array($data)) {
 			foreach ($data as $key => $value) {

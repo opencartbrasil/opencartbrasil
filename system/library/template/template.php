@@ -2,11 +2,11 @@
 namespace Template;
 final class Template {
 	private $data = array();
-		
+
 	public function set($key, $value) {
 		$this->data[$key] = $value;
 	}
-	
+
 	public function render($template) {
 		$file = DIR_TEMPLATE . $template . '.tpl';
 
@@ -22,5 +22,5 @@ final class Template {
 
 		throw new \Exception('Error: Could not load template ' . $file . '!');
 		exit();
-	}	
+	}
 }
