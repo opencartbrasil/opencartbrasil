@@ -196,7 +196,7 @@ class ControllerMarketingContact extends Controller {
 						$json['next'] = '';
 					}
 
-					$message  = '<html dir="ltr" lang="en">' . "\n";
+					$message  = '<html dir="ltr" lang="pt-br">' . "\n";
 					$message .= '  <head>' . "\n";
 					$message .= '    <title>' . $this->request->post['subject'] . '</title>' . "\n";
 					$message .= '    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">' . "\n";
