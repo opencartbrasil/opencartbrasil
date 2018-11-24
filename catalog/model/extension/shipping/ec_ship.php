@@ -531,11 +531,11 @@ class api01Req {
 	private $shipCode;
 	private $weight;
 
-    function __construct($ecshipUsername, $integratorUsername, $countryCode, $shipCode, $weight) {
+	function __construct($ecshipUsername, $integratorUsername, $countryCode, $shipCode, $weight) {
 		$this->ecshipUsername 		= $ecshipUsername;
 		$this->integratorUsername   = $integratorUsername;
 		$this->countryCode 			= $countryCode;
 		$this->shipCode			    = $shipCode;
 		$this->weight			    = $weight;
-    }
+	}
 }
