@@ -34,7 +34,7 @@ final class Twig {
 
 			return $template->render($this->data);
 		} catch (Exception $e) {
-			trigger_error('Error: Could not load template ' . $template . '!');
+			trigger_error('Erro: Não foi possível carregar o arquivo ' . $template . '!');
 			exit();
 		}
 	}

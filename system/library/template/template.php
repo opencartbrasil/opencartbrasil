@@ -20,7 +20,7 @@ final class Template {
 			return ob_get_clean();
 		}
 
-		throw new \Exception('Error: Could not load template ' . $file . '!');
+		throw new \Exception('Erro: Não foi possível carregar o arquivo ' . $file . '!');
 		exit();
 	}
 }
