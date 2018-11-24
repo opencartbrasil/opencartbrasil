@@ -6,6 +6,11 @@ e utiliza [Semantic Versioning](https://semver.org/lang/pt-BR/spec/v2.0.0.html).
 
 ## [Não lançada]
 
+## [1.1.4] (Data de lançamento: 24.11.2018)
+### Corrigido
+- Melhorias na tradução
+- Correção no sistema de login do cliente
+
 ## [1.1.3] (Data de lançamento: 24.11.2018)
 ### Corrigido
 - Remoção de espaços em branco
@@ -197,7 +202,8 @@ e utiliza [Semantic Versioning](https://semver.org/lang/pt-BR/spec/v2.0.0.html).
 - Cupons de descontos para demonstração.
 - Moedas: Euro e Libra esterlina.
 
-[Não lançada]: https://github.com/opencartbrasil/opencartbrasil/compare/v1.1.3...HEAD
+[Não lançada]: https://github.com/opencartbrasil/opencartbrasil/compare/v1.1.4...HEAD
+[1.1.4]: https://github.com/opencartbrasil/opencartbrasil/compare/v1.1.3...v1.1.4
 [1.1.3]: https://github.com/opencartbrasil/opencartbrasil/compare/v1.1.2...v1.1.3
 [1.1.2]: https://github.com/opencartbrasil/opencartbrasil/compare/v1.1.1...v1.1.2
 [1.1.1]: https://github.com/opencartbrasil/opencartbrasil/compare/v1.1.0...v1.1.1
