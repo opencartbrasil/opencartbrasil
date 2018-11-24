@@ -46,7 +46,7 @@ class ControllerAffiliateLogin extends Controller {
 			if (isset($this->request->post['redirect']) && (strpos($this->request->post['redirect'], $this->config->get('config_url')) !== false)) {
 				$this->response->redirect(str_replace('&amp;', '&', $this->request->post['redirect']));
 			} else {
-				$this->response->redirect($this->url->link('account/account', 'language=' . $this->config->get('config_language')));
+				$this->response->redirect($this->url->link('account/account', '', true));
 			}
 		}
 

@@ -29,9 +29,9 @@ class ControllerCheckoutLogin extends Controller {
 			$json['redirect'] = $this->url->link('checkout/cart');
 		}
 
-		if (!$json) {
-			$this->load->model('account/customer');
+		$this->load->model('account/customer');
 
+		if (!$json) {
 			// Check how many login attempts have been made.
 			$login_info = $this->model_account_customer->getLoginAttempts($this->request->post['email']);
 
@@ -82,6 +82,9 @@ class ControllerCheckoutLogin extends Controller {
 					unset($this->session->data['wishlist'][$key]);
 				}
 			}
+
+			// Log the IP info
+			$this->model_account_customer->addLogin($this->customer->getId(), $this->request->server['REMOTE_ADDR']);
 
 			$json['redirect'] = $this->url->link('checkout/checkout', '', true);
 		}

@@ -193,7 +193,7 @@ class ControllerCheckoutRegister extends Controller {
 				}
 			}
 
-			// Captcha
+			// Capatcha
 			if ($this->config->get('captcha_' . $this->config->get('config_captcha') . '_status') && in_array('register', (array)$this->config->get('config_captcha_page'))) {
 				$captcha = $this->load->controller('extension/captcha/' . $this->config->get('config_captcha') . '/validate');
 
