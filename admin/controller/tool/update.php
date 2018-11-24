@@ -282,7 +282,7 @@ class ControllerToolUpdate extends Controller {
 
             $this->cache_twig();
 
-            $json['success'] = sprintf($this->language->get('text_success'), $this->session->data['version']);
+            $json['success'] = sprintf($this->language->get('text_success'), str_replace("v", "", $this->session->data['version']));
 
             $this->maintenance_off();
 
