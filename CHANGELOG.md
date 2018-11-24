@@ -6,6 +6,31 @@ e utiliza [Semantic Versioning](https://semver.org/lang/pt-BR/spec/v2.0.0.html).
 
 ## [Não lançada]
 
+## [1.1.3] (Data de lançamento: 24.11.2018)
+### Corrigido
+- Remoção de espaços em branco
+- Correção do Editor de Temas
+- Correção no Core da API REST
+- Correção no SQL de instalação
+- Correção no checkout sem conta
+- Correção na extensão para Sitemap
+- Correção na extensão Google reCAPTCHA
+- Correção no envio de e-mails administrativos
+- Correção na extensão para Google Merchant Center
+- Correção no e-mail de novo pedido para o lojista
+- Melhorias nas mensagens de erro dos templates
+- Melhorias nas traduções do formulário de contato
+- Melhorias nas mensagens de erro do banco de dados
+- Melhorias nas mensagens de erro do envio de e-mail
+- Melhorias no envio do informativo pela administração
+- Melhorias na recuperação da senha do cliente através da loja
+- Melhorias na tradução das mensagens de erros nativas do motor
+- Melhorias na tradução das mensagens de erros nativas do núcleo
+
+### Modificado
+- .htaccess
+- php.ini
+
 ## [1.1.2] (Data de lançamento: 12.11.2018)
 ### Corrigido
 - Remoção de espaços em branco
@@ -172,7 +197,8 @@ e utiliza [Semantic Versioning](https://semver.org/lang/pt-BR/spec/v2.0.0.html).
 - Cupons de descontos para demonstração.
 - Moedas: Euro e Libra esterlina.
 
-[Não lançada]: https://github.com/opencartbrasil/opencartbrasil/compare/v1.1.2...HEAD
+[Não lançada]: https://github.com/opencartbrasil/opencartbrasil/compare/v1.1.3...HEAD
+[1.1.3]: https://github.com/opencartbrasil/opencartbrasil/compare/v1.1.2...v1.1.3
 [1.1.2]: https://github.com/opencartbrasil/opencartbrasil/compare/v1.1.1...v1.1.2
 [1.1.1]: https://github.com/opencartbrasil/opencartbrasil/compare/v1.1.0...v1.1.1
 [1.1.0]: https://github.com/opencartbrasil/opencartbrasil/compare/v1.0.6...v1.1.0
