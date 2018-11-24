@@ -17,4 +17,4 @@ $_['tab_restore']      = 'Restaurar';
 // Error
 $_['error_permission'] = 'Atenção: Você não tem permissão para realizar Backup / Restaurar!';
 $_['error_export']     = 'Atenção: Você deve selecionar pelo menos uma tabela para exportar!';
-$_['error_file']       = 'O arquivo para importação não foi encontrado!';
+$_['error_file']       = 'O arquivo de backup para importação não foi encontrado!';

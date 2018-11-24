@@ -29,4 +29,4 @@ $_['entry_value']      = 'Valor';
 
 // Error
 $_['error_permission'] = 'Atenção: Você não tem permissão para utilizar o editor de tradução!';
-$_['error_key']        = 'A Chave deve ter entre 3 e 64 caracteres!';
+$_['error_key']        = 'A chave deve ter entre 3 e 64 caracteres!';

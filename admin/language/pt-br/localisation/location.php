@@ -33,6 +33,6 @@ $_['help_comment']     = 'Este campo server para você digitar informações imp
 
 // Error
 $_['error_permission'] = 'Atenção: Você não tem permissão para modificar as localizações!';
-$_['error_name']       = 'Loja deve ter pelo menos 1 caractere!';
-$_['error_address']    = 'Endereço deve ter entre 3 e 128 caracteres!';
-$_['error_telephone']  = 'Telefone deve ter entre 3 e 32 caracteres!';
+$_['error_name']       = 'A loja deve ter pelo menos 1 caractere!';
+$_['error_address']    = 'O endereço deve ter entre 3 e 128 caracteres!';
+$_['error_telephone']  = 'O telefone deve ter entre 3 e 32 caracteres!';

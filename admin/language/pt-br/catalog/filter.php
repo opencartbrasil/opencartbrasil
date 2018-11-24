@@ -22,5 +22,5 @@ $_['entry_sort_order']  = 'Posição';
 
 // Error
 $_['error_permission']  = 'Atenção: Você não tem permissão para modificar os filtros!';
-$_['error_group']       = 'Filtro deve ter entre 1 e 64 caracteres!';
-$_['error_name']        = 'Opção deve ter entre 1 e 64 caracteres!';
+$_['error_group']       = 'O filtro deve ter entre 1 e 64 caracteres!';
+$_['error_name']        = 'A opção deve ter entre 1 e 64 caracteres!';

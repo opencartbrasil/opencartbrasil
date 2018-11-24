@@ -22,7 +22,7 @@ $_['entry_status']           = 'Situação';
 
 // Error
 $_['error_permission']       = 'Atenção: Você não tem permissão para modificar os estados!';
-$_['error_name']             = 'Estado deve ter entre 3 e 128 caracteres!';
+$_['error_name']             = 'O estado deve ter entre 3 e 128 caracteres!';
 $_['error_default']          = 'Atenção: Este estado não pode ser excluído, pois ele está definido como o estado padrão!';
 $_['error_store']            = 'Atenção: Este estado não pode ser excluído, pois está vinculado a %s lojas!';
 $_['error_address']          = 'Atenção: Este estado não pode ser excluído, pois está vinculado a %s endereços!';

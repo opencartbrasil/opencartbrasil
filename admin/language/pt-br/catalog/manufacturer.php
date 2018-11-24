@@ -27,7 +27,7 @@ $_['entry_type']        = 'Tipo';
 
 // Error
 $_['error_permission']  = 'Atenção: Você não tem permissão para modificar as marcas!';
-$_['error_name']        = 'Marca deve ter entre 1 e 64 caracteres!';
-$_['error_keyword']     = 'URL amigável já está em uso!';
+$_['error_name']        = 'A marca deve ter entre 1 e 64 caracteres!';
+$_['error_keyword']     = 'A URL amigável já está em uso!';
 $_['error_unique']      = 'A URL amigável deve ser exclusiva!';
 $_['error_product']     = 'Atenção: Esta marca não pode ser excluída, pois está vinculada a %s produtos!';

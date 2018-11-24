@@ -103,8 +103,8 @@ $_['help_tag']               = 'Separadas por vírgulas';
 // Error
 $_['error_warning']          = 'Atenção: Faltou você preencher alguma informação, verifique todos os campos.';
 $_['error_permission']       = 'Atenção: Você não tem permissão para modificar os produtos!';
-$_['error_name']             = 'Produto deve ter entre 3 e 255 caracteres!';
-$_['error_meta_title']       = 'Meta título deve ter entre 3 e 255 caracteres!';
-$_['error_model']            = 'Modelo deve ter entre 1 e 64 caracteres!';
-$_['error_keyword']          = 'URL amigável já está em uso!';
-$_['error_unique']           = 'URL amigável deve ser exclusiva!';
+$_['error_name']             = 'O produto deve ter entre 3 e 255 caracteres!';
+$_['error_meta_title']       = 'O meta título deve ter entre 3 e 255 caracteres!';
+$_['error_model']            = 'O modelo deve ter entre 1 e 64 caracteres!';
+$_['error_keyword']          = 'A URL amigável já está em uso!';
+$_['error_unique']           = 'A URL amigável deve ser exclusiva!';

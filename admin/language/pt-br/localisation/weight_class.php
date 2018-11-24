@@ -24,7 +24,7 @@ $_['help_value']       = 'Definir em 1.00000, se for a sua unidade de peso padr�
 
 // Error
 $_['error_permission'] = 'Atenção: Você não tem permissão para modificar as unidades de pesos!';
-$_['error_title']      = 'Unidade de peso deve ter entre 3 e 32 caracteres!';
-$_['error_unit']       = 'Unidade deve ser entre 1 e 4 caracteres!';
+$_['error_title']      = 'A unidade de peso deve ter entre 3 e 32 caracteres!';
+$_['error_unit']       = 'A unidade deve ser entre 1 e 4 caracteres!';
 $_['error_default']    = 'Atenção: Esta unidade de peso não pode ser excluída, pois ela está definida como a unidade de peso padrão!';
 $_['error_product']    = 'Atenção: Esta unidade de peso não pode ser excluída, pois está vinculada a %s produtos!';

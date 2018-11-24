@@ -17,5 +17,5 @@ $_['entry_name']       = 'Motivo de devoluções';
 
 // Error
 $_['error_permission'] = 'Atenção: Você não tem permissão para modificar os motivos de devoluções!';
-$_['error_name']       = 'Motivo de devoluções deve ter entre 3 e 128 caracteres!';
+$_['error_name']       = 'O motivo de devoluções deve ter entre 3 e 128 caracteres!';
 $_['error_return']     = 'Atenção: Este motivo de devoluções não pode ser excluído, pois está vinculado a %s produtos devolvidos!';

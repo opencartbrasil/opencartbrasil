@@ -19,6 +19,6 @@ $_['entry_sort_order']  = 'Posição';
 
 // Error
 $_['error_permission']  = 'Atenção: Você não tem permissão para modificar os grupos de atributos!';
-$_['error_name']        = 'Grupo de atributos deve ter entre 1 e 64 caracteres!';
+$_['error_name']        = 'O grupo de atributos deve ter entre 1 e 64 caracteres!';
 $_['error_attribute']   = 'Atenção: Este grupo de atributos não pode ser excluído, pois está vinculado a %s atributos!';
 $_['error_product']     = 'Atenção: Este grupo de atributos não pode ser excluído, pois está vinculado a %s produtos!';

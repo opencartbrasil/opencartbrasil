@@ -19,5 +19,5 @@ $_['entry_modify']     = 'Permissões de modificação';
 
 // Error
 $_['error_permission'] = 'Atenção: Você não tem permissão para modificar os Grupos de usuários!';
-$_['error_name']       = 'Grupo de usuários deve ter entre 3 e 64 caracteres!';
+$_['error_name']       = 'O grupo de usuários deve ter entre 3 e 64 caracteres!';
 $_['error_user']       = 'Atenção: O grupo de usuários não pode ser excluído pois ele possui %s usuários vinculados a ele!';

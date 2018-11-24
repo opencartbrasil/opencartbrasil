@@ -17,5 +17,5 @@ $_['entry_name']       = 'Situação de estoque';
 
 // Error
 $_['error_permission'] = 'Atenção: Você não tem permissão para modificar as situações de estoque!';
-$_['error_name']       = 'Situação de estoque deve ter entre 3 e 32 caracteres!';
+$_['error_name']       = 'A situação de estoque deve ter entre 3 e 32 caracteres!';
 $_['error_product']    = 'Atenção: Esta situação de estoque não pode ser excluída, pois está vinculada a %s produtos!';

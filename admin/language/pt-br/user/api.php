@@ -26,6 +26,6 @@ $_['entry_ip']             = 'IP';
 
 // Error
 $_['error_permission']     = 'Atenção: Você não tem permissão para modicar API!';
-$_['error_username']       = 'Usuário da API deve ter entre 3 e 20 caracteres!';
-$_['error_key']            = 'Chave da API deve ter entre 64 e 256 caracteres!';
+$_['error_username']       = 'O usuário da API deve ter entre 3 e 20 caracteres!';
+$_['error_key']            = 'A chave da API deve ter entre 64 e 256 caracteres!';
 $_['error_ip']             = 'Você deve ter pelo menos um IP adicionado na lista!';

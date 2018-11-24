@@ -29,5 +29,5 @@ $_['entry_geo_zone']       = 'Região geográfica';
 // Error
 $_['error_permission']     = 'Atenção: Você não tem permissão para modificar os tipos de impostos!';
 $_['error_tax_rule']       = 'Atenção: Este tipo de imposto não pode ser excluído, pois está vinculado a %s grupos de impostos!';
-$_['error_name']           = 'Tipo de imposto deve ter entre 3 e 32 caracteres!';
-$_['error_rate']           = 'Valor do imposto é obrigatório!';
+$_['error_name']           = 'O tipo de imposto deve ter entre 3 e 32 caracteres!';
+$_['error_rate']           = 'O valor do imposto é obrigatório!';

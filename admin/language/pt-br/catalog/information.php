@@ -34,10 +34,10 @@ $_['help_bottom']            = 'Exibe o link para a página de informações no 
 // Error
 $_['error_warning']          = 'Atenção: Faltou você preencher alguma informação, verifique todos os campos.';
 $_['error_permission']       = 'Atenção: Você não tem permissão para modificar as páginas de informações!';
-$_['error_title']            = 'Título da página deve ter entre 3 e 64 caracteres!';
-$_['error_description']      = 'Conteúdo deve possuir pelo menos 3 caracteres!';
-$_['error_meta_title']       = 'Meta título deve ter entre 3 e 255 caracteres!';
-$_['error_keyword']          = 'URL amigável já está em uso!';
+$_['error_title']            = 'O título da página deve ter entre 3 e 64 caracteres!';
+$_['error_description']      = 'O conteúdo deve possuir pelo menos 3 caracteres!';
+$_['error_meta_title']       = 'O meta título deve ter entre 3 e 255 caracteres!';
+$_['error_keyword']          = 'A URL amigável já está em uso!';
 $_['error_unique']           = 'A URL amigável deve ser exclusiva!';
 $_['error_account']          = 'Atenção: Esta página de informações não pode ser excluída, pois ela está definida como os termos para conta de clientes!';
 $_['error_checkout']         = 'Atenção: Esta página de informações não pode ser excluída, pois ela está definida como os termos para finalização do pedido!';

@@ -40,8 +40,8 @@ $_['help_code']         = 'O código que o cliente utilizará para ativar o vale
 $_['error_permission']  = 'Atenção: Você não tem permissão para modificar os vale presentes!';
 $_['error_exists']      = 'Atenção: O código já está em uso!';
 $_['error_code']        = 'O código deve ter entre 3 e 10 caracteres!';
-$_['error_to_name']     = 'O destinatário deve ser entre 1 e 64 caracteres!';
-$_['error_from_name']   = 'O emitente deve ser entre 1 e 64 caracteres!';
+$_['error_to_name']     = 'O destinatário deve ter entre 1 e 64 caracteres!';
+$_['error_from_name']   = 'O emitente deve ter entre 1 e 64 caracteres!';
 $_['error_email']       = 'O e-mail não é válido!';
-$_['error_amount']      = 'O valor deve ser maior ou igual a 1.00!';
-$_['error_order']       = 'Atenção: O vale presentes não pode ser excluído, pois ele está vinculado ao seguinte <a href="%s">pedido</a>!';
+$_['error_amount']      = 'O valor deve ter maior ou igual a 1.00!';
+$_['error_order']       = 'Atenção: O vale presentes não pode ter excluído, pois ele está vinculado ao seguinte <a href="%s">pedido</a>!';

@@ -17,5 +17,5 @@ $_['entry_name']       = 'Solução de devolução';
 
 // Error
 $_['error_permission'] = 'Atenção: Você não tem permissão para modificar as solução de devoluções!';
-$_['error_name']       = 'Solução de devoluções deve ter entre 3 e 64 caracteres!';
+$_['error_name']       = 'A solução de devoluções deve ter entre 3 e 64 caracteres!';
 $_['error_return']     = 'Atenção: Esta solução de devoluções não pode ser excluída, pois está vinculada a %s produtos devolvidos!';

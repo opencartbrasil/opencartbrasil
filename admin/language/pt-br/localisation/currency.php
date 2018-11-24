@@ -31,8 +31,8 @@ $_['help_value']           = 'Defina para 1.00000, se está é a sua moeda padr�
 
 // Error
 $_['error_permission']     = 'Atenção: Você não tem permissão para modificar moedas!';
-$_['error_title']          = 'Moeda deve ter entre 3 e 32 caracteres!';
-$_['error_code']           = 'Código deve conter 3 caracteres!';
+$_['error_title']          = 'A moeda deve ter entre 3 e 32 caracteres!';
+$_['error_code']           = 'O código deve conter 3 caracteres!';
 $_['error_default']        = 'Atenção: Esta moeda não pode ser excluída, pois ela está definida como a moeda padrão!';
 $_['error_store']          = 'Atenção: Esta moeda não pode ser excluída, pois está vinculada a %s lojas!';
 $_['error_order']          = 'Atenção: Esta moeda não pode ser excluída, pois está vinculada a %s pedidos!';

@@ -22,6 +22,6 @@ $_['entry_zone']         = 'Estado';
 
 // Error
 $_['error_permission']   = 'Atenção: Você não possui permissão para modificar as regiões geográficas!';
-$_['error_name']         = 'Região geográfica deve ter entre 3 e 32 caracteres!';
-$_['error_description']  = 'Descrição deve ter entre 3 e 255 caracteres!';
+$_['error_name']         = 'A região geográfica deve ter entre 3 e 32 caracteres!';
+$_['error_description']  = 'A descrição deve ter entre 3 e 255 caracteres!';
 $_['error_tax_rate']     = 'Atenção: Esta região geográfica não pode ser excluída, pois está vinculada a um ou mais tipos de impostos!';

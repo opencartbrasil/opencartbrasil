@@ -27,6 +27,6 @@ $_['entry_priority']    = 'Prioridade';
 
 // Error
 $_['error_permission']  = 'Atenção: Você não tem permissão para modificar os grupos de impostos!';
-$_['error_title']       = 'Grupo de impostos deve ter entre 3 e 32 caracteres!';
-$_['error_description'] = 'Descrição deve ter entre 3 e 255 caracteres!';
+$_['error_title']       = 'O grupo de impostos deve ter entre 3 e 32 caracteres!';
+$_['error_description'] = 'A descrição deve ter entre 3 e 255 caracteres!';
 $_['error_product']     = 'Atenção: Este grupo de impostos não pode ser excluído, pois está vinculado a %s produtos!';

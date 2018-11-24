@@ -37,6 +37,6 @@ $_['help_example']      = 'Através das URLs geradas automaticamente, a loja pod
 
 // Error
 $_['error_permission']  = 'Atenção: Você não tem permissão para modificar as campanhas de marketing!';
-$_['error_name']        = 'Campanha deve ter entre 1 e 32 caracteres!';
-$_['error_code']        = 'Código de rastreio é obrigatório!';
-$_['error_exists']      = 'Código de rastrei já está em uso!';
+$_['error_name']        = 'A campanha deve ter entre 1 e 32 caracteres!';
+$_['error_code']        = 'O código de rastreio é obrigatório!';
+$_['error_exists']      = 'O código de rastreio já está em uso!';

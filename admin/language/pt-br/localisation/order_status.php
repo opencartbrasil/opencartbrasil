@@ -17,7 +17,7 @@ $_['entry_name']       = 'Situação de pedidos';
 
 // Error
 $_['error_permission'] = 'Atenção: Você não tem permissão para modificar as situações de pedidos!';
-$_['error_name']       = 'Situação de pedidos deve ter entre 3 e 32 caracteres!';
+$_['error_name']       = 'A situação de pedidos deve ter entre 3 e 32 caracteres!';
 $_['error_default']    = 'Atenção: Esta situação de pedidos não pode ser excluída, pois ela está definida como a situação de pedido padrão!';
 $_['error_download']   = 'Atenção: Esta situação de pedidos não pode ser excluída, pois ela está definida como a situação de pedido padrão de download!';
 $_['error_store']      = 'Atenção: Esta situação de pedidos não pode ser excluída, pois está vinculada a %s lojas!';

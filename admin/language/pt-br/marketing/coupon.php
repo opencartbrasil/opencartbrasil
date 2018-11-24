@@ -52,6 +52,6 @@ $_['help_uses_customer']  = 'Número máximo de vezes que o cupom pode ser utili
 
 // Error
 $_['error_permission']    = 'Atenção: Você não tem permissão para modificar os cupons!';
-$_['error_exists']        = 'Atenção: o código do cupom já está em uso!';
-$_['error_name']          = 'Cupom deve ter entre 3 e 128 caracteres!';
-$_['error_code']          = 'Código deve ter entre 3 e 10 caracteres!';
+$_['error_exists']        = 'Atenção: O código do cupom já está em uso!';
+$_['error_name']          = 'O cupom deve ter entre 3 e 128 caracteres!';
+$_['error_code']          = 'O código deve ter entre 3 e 10 caracteres!';

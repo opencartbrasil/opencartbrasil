@@ -30,7 +30,7 @@ $_['help_product']      = 'Pesquisa do tipo autocompletar';
 
 // Error
 $_['error_permission']  = 'Atenção: Você não tem permissão para modificar os comentários!';
-$_['error_product']     = 'Produto é obrigatório!';
-$_['error_author']      = 'Autor deve ter entre 3 e 64 caracteres!';
-$_['error_text']        = 'Comentário dever ter pelo menos 1 caractere!';
-$_['error_rating']      = 'Avaliação é obrigatória!';
+$_['error_product']     = 'O produto é obrigatório!';
+$_['error_author']      = 'O autor deve ter entre 3 e 64 caracteres!';
+$_['error_text']        = 'O comentário dever ter pelo menos 1 caractere!';
+$_['error_rating']      = 'A avaliação é obrigatória!';

@@ -25,6 +25,6 @@ $_['entry_language']   = 'Idioma';
 
 // Error
 $_['error_permission'] = 'Atenção: Você não tem permissão para utilizar o Editor de URL amigável!';
-$_['error_query']      = 'A Query deve ter entre 3 e 64 caracteres!';
+$_['error_query']      = 'A query deve ter entre 3 e 64 caracteres!';
 $_['error_keyword']    = 'A URL amigável deve ter entre 3 e 64 caracteres!';
 $_['error_exists']     = 'A URL amigável já está em uso!';

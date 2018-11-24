@@ -27,7 +27,7 @@ $_['help_address_format']     = 'Nome = {firstname}<br />Sobrenome = {lastname}<
 
 // Error
 $_['error_permission']        = 'Atenção: Você não tem permissão para modificar os países!';
-$_['error_name']              = 'OPaís deve ter entre 3 e 128 caracteres!';
+$_['error_name']              = 'O país deve ter entre 3 e 128 caracteres!';
 $_['error_default']           = 'Atenção: Este país não pode ser excluído, pois ele está definido como o país padrão!';
 $_['error_store']             = 'Atenção: Este país não pode ser excluído, pois está vinculado a %s lojas!';
 $_['error_address']           = 'Atenção: Este país não pode ser excluído, pois está vinculado a %s endereços!';
