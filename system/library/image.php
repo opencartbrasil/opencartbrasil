@@ -23,10 +23,10 @@ class Image {
 	 *
 	 * @param	string	$file
 	 *
-	*/
+	 */
 	public function __construct($file) {
 		if (!extension_loaded('gd')) {
-			exit('Error: PHP GD is not installed!');
+			exit('Erro: A biblioteca GD do PHP não está instalada!');
 		}
 
 		if (file_exists($file)) {
@@ -47,7 +47,7 @@ class Image {
 				$this->image = imagecreatefromjpeg($file);
 			}
 		} else {
-			exit('Error: Could not load image ' . $file . '!');
+			exit('Erro: Não foi possível encontrar a imagem ' . $file . '!');
 		}
 	}
 

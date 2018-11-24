@@ -23,14 +23,14 @@ class DB {
 	 * @param	string	$database
 	 * @param	int		$port
 	 *
-	*/
+	 */
 	public function __construct($adaptor, $hostname, $username, $password, $database, $port = NULL) {
 		$class = 'DB\\' . $adaptor;
 
 		if (class_exists($class)) {
 			$this->adaptor = new $class($hostname, $username, $password, $database, $port);
 		} else {
-			throw new \Exception('Error: Could not load database adaptor ' . $adaptor . '!');
+			throw new \Exception('Erro: Não foi possível carregar o adaptador de banco de dados ' . $adaptor . '!');
 		}
 	}
 

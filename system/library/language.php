@@ -20,7 +20,7 @@ class Language {
 	 *
 	 * @param	string	$file
 	 *
-	*/
+	 */
 	public function __construct($directory = '') {
 		$this->directory = $directory;
 	}

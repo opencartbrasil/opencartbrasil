@@ -17,7 +17,7 @@ class Log {
 	 * Constructor
 	 *
 	 * @param	string	$filename
-	*/
+	 */
 	public function __construct($filename) {
 		$this->handle = fopen(DIR_LOGS . $filename, 'a');
 	}
@@ -28,7 +28,7 @@ class Log {
 	 * @param	string	$message
 	 */
 	public function write($message) {
-		fwrite($this->handle, date('Y-m-d G:i:s') . ' - ' . print_r($message, true) . "\n");
+		fwrite($this->handle, date('d-m-Y G:i:s') . ' - ' . print_r($message, true) . "\n");
 	}
 
 	/**

@@ -33,7 +33,7 @@ class Session {
 
 			register_shutdown_function(array($this, 'close'));
 		} else {
-			trigger_error('Error: Could not load cache adaptor ' . $adaptor . ' session!');
+			trigger_error('Erro: Não foi possível carregar o adaptador de sessão ' . $adaptor . '!');
 			exit();
 		}
 	}
@@ -66,7 +66,7 @@ class Session {
 		if (preg_match('/^[a-zA-Z0-9,\-]{22,52}$/', $session_id)) {
 			$this->session_id = $session_id;
 		} else {
-			exit('Error: Invalid session ID!');
+			exit('Erro: O ID da sessão não é válido!');
 		}
 
 		$this->data = $this->adaptor->read($session_id);
@@ -76,14 +76,14 @@ class Session {
 
 	/**
 	 *
-	*/
+	 */
 	public function close() {
 		$this->adaptor->write($this->session_id, $this->data);
 	}
 
 	/**
 	 *
-	*/
+	 */
 	public function __destroy() {
 		$this->adaptor->destroy($this->session_id);
 	}

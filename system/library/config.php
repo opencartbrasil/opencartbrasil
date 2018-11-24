@@ -60,7 +60,7 @@ class Config {
 
 			$this->data = array_merge($this->data, $_);
 		} else {
-			trigger_error('Error: Could not load config ' . $filename . '!');
+			trigger_error('Erro: Não foi possível carregar o arquivo de configuração ' . $filename . '!');
 			exit();
 		}
 	}

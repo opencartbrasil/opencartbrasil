@@ -33,7 +33,7 @@ class Mail {
 		if (class_exists($class)) {
 			$this->adaptor = new $class();
 		} else {
-			trigger_error('Error: Could not load mail adaptor ' . $adaptor . '!');
+			trigger_error('Erro: Não foi possível carregar o adaptador de e-mail ' . $adaptor . '!');
 			exit();
 		}	
 	}
@@ -117,23 +117,23 @@ class Mail {
 	public function send() {
 		try {
 			if (!$this->to) {
-				throw new \Exception('Error: E-Mail to required!');
+				throw new \Exception('Erro: O e-mail do destinatário é obrigatório!');
 			}
 
 			if (!$this->from) {
-				throw new \Exception('Error: E-Mail from required!');
+				throw new \Exception('Erro: O e-mail do remetente é obrigatório!');
 			}
 
 			if (!$this->sender) {
-				throw new \Exception('Error: E-Mail sender required!');
+				throw new \Exception('Erro: O nome do remetente é obrigatório!');
 			}
 
 			if (!$this->subject) {
-				throw new \Exception('Error: E-Mail subject required!');
+				throw new \Exception('Erro: O assunto do e-mail é obrigatório!');
 			}
 
 			if ((!$this->text) && (!$this->html)) {
-				throw new \Exception('Error: E-Mail message required!');
+				throw new \Exception('Erro: A mensagem do e-mail é obrigatória!');
 			}
 
 			foreach (get_object_vars($this) as $key => $value) {
