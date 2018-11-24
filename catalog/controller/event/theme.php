@@ -26,7 +26,7 @@ class ControllerEventTheme extends Controller {
 
 	public function override(&$route, &$args, &$template) {
 		if (!$this->config->get('theme_' . $this->config->get('config_theme') . '_status')) {
-			exit('Error: A theme has not been assigned to this store!');
+			exit('Erro: Não há um tema definido para esta loja!');
 		}
 
 		// If the default theme is selected we need to know which directory its pointing to
