@@ -49,7 +49,7 @@ class Smtp {
 			if ($this->text) {
 				$message .= $this->text . PHP_EOL;
 			} else {
-				$message .= 'This is a HTML email and your email client software does not support HTML email!' . PHP_EOL;
+				$message .= 'Este é um e-mail em HTML e o seu cliente de email não suporta e-mail em HTML!' . PHP_EOL;
 			}
 
 			$message .= '--' . $boundary . '_alt' . PHP_EOL;
@@ -88,7 +88,7 @@ class Smtp {
 		$handle = fsockopen($hostname, $this->smtp_port, $errno, $errstr, $this->smtp_timeout);
 
 		if (!$handle) {
-			throw new \Exception('Error: ' . $errstr . ' (' . $errno . ')');
+			throw new \Exception('Erro: ' . $errstr . ' (' . $errno . ')');
 		} else {
 			if (substr(PHP_OS, 0, 3) != 'WIN') {
 				socket_set_timeout($handle, $this->smtp_timeout, 0);
@@ -117,13 +117,13 @@ class Smtp {
 			}
 
 			if (substr($reply, 0, 3) != 250) {
-				throw new \Exception('Error: EHLO not accepted from server!');
+				throw new \Exception('Erro: O servidor SMTP recusou a cláusula EHLO!');
 			}
 
 			if (substr($this->smtp_hostname, 0, 3) == 'tls') {
 				fputs($handle, 'STARTTLS' . "\r\n");
 
-				$this->handleReply($handle, 220, 'Error: STARTTLS not accepted from server!');
+				$this->handleReply($handle, 220, 'Erro: O servidor SMTP recusou o comando STARTTLS!');
 
 				stream_socket_enable_crypto($handle, true, STREAM_CRYPTO_METHOD_TLS_CLIENT);
 			}
@@ -131,24 +131,24 @@ class Smtp {
 			if (!empty($this->smtp_username) && !empty($this->smtp_password)) {
 				fputs($handle, 'EHLO ' . getenv('SERVER_NAME') . "\r\n");
 
-				$this->handleReply($handle, 250, 'Error: EHLO not accepted from server!');
+				$this->handleReply($handle, 250, 'Erro: O servidor SMTP recusou a cláusula EHLO!');
 
 				fputs($handle, 'AUTH LOGIN' . "\r\n");
 
-				$this->handleReply($handle, 334, 'Error: AUTH LOGIN not accepted from server!');
+				$this->handleReply($handle, 334, 'Erro: O servidor SMTP recusou a autenticação!');
 
 				fputs($handle, base64_encode($this->smtp_username) . "\r\n");
 
-				$this->handleReply($handle, 334, 'Error: Username not accepted from server!');
+				$this->handleReply($handle, 334, 'Erro: O servidor SMTP recusou o usuário!');
 
 				fputs($handle, base64_encode($this->smtp_password) . "\r\n");
 
-				$this->handleReply($handle, 235, 'Error: Password not accepted from server!');
+				$this->handleReply($handle, 235, 'Erro: O servidor SMTP recusou a senha!');
 
 			} else {
 				fputs($handle, 'HELO ' . getenv('SERVER_NAME') . "\r\n");
 
-				$this->handleReply($handle, 250, 'Error: HELO not accepted from server!');
+				$this->handleReply($handle, 250, 'Erro: O servidor SMTP recusou a cláusula EHLO!');
 			}
 
 			if ($this->verp) {
@@ -157,7 +157,7 @@ class Smtp {
 				fputs($handle, 'MAIL FROM: <' . $this->smtp_username . '>' . "\r\n");
 			}
 
-			$this->handleReply($handle, 250, 'Error: MAIL FROM not accepted from server!');
+			$this->handleReply($handle, 250, 'Erro: O servidor SMTP recusou o e-mail do remetente!');
 
 			if (!is_array($this->to)) {
 				fputs($handle, 'RCPT TO: <' . $this->to . '>' . "\r\n");
@@ -165,7 +165,7 @@ class Smtp {
 				$reply = $this->handleReply($handle, false, 'RCPT TO [!array]');
 
 				if ((substr($reply, 0, 3) != 250) && (substr($reply, 0, 3) != 251)) {
-					throw new \Exception('Error: RCPT TO not accepted from server!');
+					throw new \Exception('Erro: O servidor SMTP recusou o e-mail do destinatário!');
 				}
 			} else {
 				foreach ($this->to as $recipient) {
@@ -174,14 +174,14 @@ class Smtp {
 					$reply = $this->handleReply($handle, false, 'RCPT TO [array]');
 
 					if ((substr($reply, 0, 3) != 250) && (substr($reply, 0, 3) != 251)) {
-						throw new \Exception('Error: RCPT TO not accepted from server!');
+						throw new \Exception('Erro: O servidor SMTP recusou o e-mail do destinatário!');
 					}
 				}
 			}
 
 			fputs($handle, 'DATA' . "\r\n");
 
-			$this->handleReply($handle, 354, 'Error: DATA not accepted from server!');
+			$this->handleReply($handle, 354, 'Erro: O servidor SMTP recusou receber o e-mail!');
 
 			// According to rfc 821 we should not send more than 1000 including the CRLF
 			$message = str_replace("\r\n", "\n", $header . $message);
@@ -203,11 +203,11 @@ class Smtp {
 
 			fputs($handle, '.' . "\r\n");
 
-			$this->handleReply($handle, 250, 'Error: DATA not accepted from server!');
+			$this->handleReply($handle, 250, 'Erro: O servidor SMTP recusou enviar o e-mail!');
 
 			fputs($handle, 'QUIT' . "\r\n");
 
-			$this->handleReply($handle, 221, 'Error: QUIT not accepted from server!');
+			$this->handleReply($handle, 221, 'Erro: O servidor SMTP recusou o comando QUIT!');
 
 			fclose($handle);
 		}

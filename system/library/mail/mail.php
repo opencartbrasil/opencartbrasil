@@ -39,7 +39,7 @@ class Mail {
 			if ($this->text) {
 				$message .= $this->text . PHP_EOL;
 			} else {
-				$message .= 'This is a HTML email and your email client software does not support HTML email!' . PHP_EOL;
+				$message .= 'Este é um e-mail em HTML e o seu cliente de email não suporta e-mail em HTML!' . PHP_EOL;
 			}
 
 			$message .= '--' . $boundary . '_alt' . PHP_EOL;
