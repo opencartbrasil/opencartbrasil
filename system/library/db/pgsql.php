@@ -7,7 +7,7 @@ final class PgSQL {
 		$this->connection = @pg_connect('hostname=' . $hostname . ' port=' . $port .  ' username=' . $username . ' password='	. $password . ' database=' . $database);
 
 		if (!$this->connection) {
-			throw new \Exception('Error: Could not make a database link using ' . $username . '@' . $hostname);
+			throw new \Exception('Erro: Não foi possível conectar no banco de dados usando!');
 		}
 
 		pg_query($this->connection, "SET CLIENT_ENCODING TO 'UTF8'");
@@ -42,7 +42,7 @@ final class PgSQL {
 				return true;
 			}
 		} else {
-			throw new \Exception('Error: ' . pg_result_error($this->connection) . '<br />' . $sql);
+			throw new \Exception('Erro: ' . pg_result_error($this->connection) . '<br>Código: ' . $sql);
 		}
 	}
 
