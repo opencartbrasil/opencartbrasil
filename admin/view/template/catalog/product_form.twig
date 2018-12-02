@@ -509,6 +509,7 @@
                           <thead>
                             <tr>
                               <td class="text-left">{{ entry_option_value }}</td>
+                              <td class="text-right">{{ entry_sku }}</td>
                               <td class="text-right">{{ entry_quantity }}</td>
                               <td class="text-left">{{ entry_subtract }}</td>
                               <td class="text-right">{{ entry_price }}</td>
@@ -532,6 +533,7 @@
                                   {% endif %}
                               </select>
                               <input type="hidden" name="product_option[{{ option_row }}][product_option_value][{{ option_value_row }}][product_option_value_id]" value="{{ product_option_value.product_option_value_id }}" /></td>
+                            <td class="text-left"><input type="text" name="product_option[{{ option_row }}][product_option_value][{{ option_value_row }}][sku]" value="{{ product_option_value.sku }}" placeholder="{{ entry_sku }}" class="form-control" /></td>
                             <td class="text-right"><input type="text" name="product_option[{{ option_row }}][product_option_value][{{ option_value_row }}][quantity]" value="{{ product_option_value.quantity }}" placeholder="{{ entry_quantity }}" class="form-control" /></td>
                             <td class="text-left"><select name="product_option[{{ option_row }}][product_option_value][{{ option_value_row }}][subtract]" class="form-control">
                                   {% if product_option_value.subtract == '1' %}
@@ -1179,6 +1181,7 @@ $('input[name=\'option\']').autocomplete({
 			html += '  	 <thead>';
 			html += '      <tr>';
 			html += '        <td class="text-left">{{ entry_option_value }}</td>';
+			html += '        <td class="text-left">{{ entry_sku }}</td>';
 			html += '        <td class="text-right">{{ entry_quantity }}</td>';
 			html += '        <td class="text-left">{{ entry_subtract }}</td>';
 			html += '        <td class="text-right">{{ entry_price }}</td>';
@@ -1247,6 +1250,7 @@ function addOptionValue(option_row) {
 	html += '  <td class="text-left"><select name="product_option[' + option_row + '][product_option_value][' + option_value_row + '][option_value_id]" class="form-control">';
 	html += $('#option-values' + option_row).html();
 	html += '  </select><input type="hidden" name="product_option[' + option_row + '][product_option_value][' + option_value_row + '][product_option_value_id]" value="" /></td>';
+	html += '  <td class="text-left"><input type="text" name="product_option[' + option_row + '][product_option_value][' + option_value_row + '][sku]" value="" placeholder="{{ entry_sku }}" class="form-control" /></td>';
 	html += '  <td class="text-right"><input type="text" name="product_option[' + option_row + '][product_option_value][' + option_value_row + '][quantity]" value="" placeholder="{{ entry_quantity }}" class="form-control" /></td>';
 	html += '  <td class="text-left"><select name="product_option[' + option_row + '][product_option_value][' + option_value_row + '][subtract]" class="form-control">';
 	html += '    <option value="1">{{ text_yes }}</option>';
