@@ -47,6 +47,7 @@ Recomendamos que todos os desenvolvedores sigam este repositório para ficarem a
 - [x] Loja 100% traduzida.
 - [x] Atualização automática.
 - [x] Instalação 100% traduzida.
+- [x] Campo SKU nas opções dos produtos.
 - [x] Correção nas estátisticas.
 - [x] Correção nos arquivos config.
 - [x] Correção na API do catálogo.
@@ -74,7 +75,6 @@ Recomendamos que todos os desenvolvedores sigam este repositório para ficarem a
 
 - [ ] Cadastro de clientes padrão Brasil.
 - [ ] Opções relacionadas nos produtos.
-- [ ] Campo SKU nas opções dos produtos.
 - [ ] Extensões integradas com serviços brasileiros.
 - [ ] API para integração com sistemas externos como ERP, CRM, etc.
 
@@ -128,6 +128,13 @@ Se você é o profissional que administra os servidores que armazenam os arquivo
 | `session.use_trans_sid` | Off |
 | `session.cookie_httponly` | On |
 | `session.gc_maxlifetime` | 3600 |
+
+### Configurações mínimas recomendadas no MySQL/MariaDB:
+
+| Variável | Valor |
+| -------- | ----- |
+| `wait_timeout` | 30 |
+| `interactive_timeout` | 30 |
 
 ### Extensões básicas necessárias no PHP:
 
