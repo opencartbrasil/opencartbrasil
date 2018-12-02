@@ -26,7 +26,7 @@ class ControllerToolUpload extends Controller {
 			}
 
 			if (!in_array(strtolower(substr(strrchr($filename, '.'), 1)), $allowed)) {
-				$json['error'] = $this->language->get('error_filetype');
+				$json['error'] = $this->language->get('error_file_ext');
 			}
 
 			// Allowed file mime types
@@ -41,14 +41,14 @@ class ControllerToolUpload extends Controller {
 			}
 
 			if (!in_array($this->request->files['file']['type'], $allowed)) {
-				$json['error'] = $this->language->get('error_filetype');
+				$json['error'] = $this->language->get('error_file_type');
 			}
 
 			// Check to see if any PHP files are trying to be uploaded
 			$content = file_get_contents($this->request->files['file']['tmp_name']);
 
 			if (preg_match('/\<\?php/i', $content)) {
-				$json['error'] = $this->language->get('error_filetype');
+				$json['error'] = $this->language->get('error_file_php');
 			}
 
 			// Return any upload error
