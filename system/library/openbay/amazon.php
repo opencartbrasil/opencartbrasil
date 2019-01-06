@@ -99,7 +99,7 @@ final class Amazon {
 
         $post_data = array(
             'token' => $this->token,
-            'data' => rawurlencode(base64_encode($encrypted)),
+            'data' => base64_encode($encrypted),
             'opencart_version' => VERSION
         );
 
@@ -227,7 +227,6 @@ final class Amazon {
 	}
 
 	public function updateOrder($order_id, $order_status_string, $courier_id = '', $courier_from_list = true, $tracking_no = '') {
-
 		if ($this->config->get('openbay_amazon_status') != 1) {
 			return;
 		}
@@ -280,12 +279,14 @@ final class Amazon {
 
 		$this->model_extension_openbay_amazon->updateAmazonOrderTracking($order_id, $courier_id, $courier_from_list, !empty($courier_id) ? $tracking_no : '');
 		$log->write('Request: ' . $doc->saveXML());
+
 		$response = $this->call('order/update2', $doc->saveXML(), false);
+
 		$log->write("Response for Order's status update: $response");
 	}
 
 	public function getCategoryTemplates() {
-		$result = $this->call("productv2/RequestTemplateList");
+		$result = $this->call("productv2/RequestTemplateList", array('list' => true));
 		if(isset($result)) {
 			return (array)json_decode($result);
 		} else {

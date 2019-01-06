@@ -362,7 +362,7 @@ class ModelExtensionOpenBayOpenbay extends Model {
 
 	private function call($call, array $post = null, array $options = array(), $content_type = 'json') {
 		$data = array(
-			'language' => $this->config->get('openbay_language'),
+			'language' => $this->config->get('feed_openbaypro_language'),
 			'server' => 1,
 			'domain' => HTTP_CATALOG,
 			'openbay_version' => (int)$this->config->get('feed_openbaypro_version'),
@@ -484,45 +484,36 @@ class ModelExtensionOpenBayOpenbay extends Model {
 			}
 		}
 
-		if (!empty($data['filter_name'])) {
-			$sql .= " AND pd.name LIKE '%" . $this->db->escape($data['filter_name']) . "%'";
-		}
-
-		if (!empty($data['filter_model'])) {
-			$sql .= " AND p.model LIKE '%" . $this->db->escape($data['filter_model']) . "%'";
-		}
-
-		if (!empty($data['filter_price'])) {
-			$sql .= " AND p.price >= '" . (double)$data['filter_price'] . "'";
-		}
-
-		if (!empty($data['filter_price_to'])) {
-			$sql .= " AND p.price <= '" . (double)$data['filter_price_to'] . "'";
-		}
-
-		if (isset($data['filter_quantity']) && !is_null($data['filter_quantity'])) {
-			$sql .= " AND p.quantity >= '" . $this->db->escape($data['filter_quantity']) . "'";
-		}
-
-		if (isset($data['filter_quantity_to']) && !is_null($data['filter_quantity_to'])) {
-			$sql .= " AND p.quantity <= '" . $this->db->escape($data['filter_quantity_to']) . "'";
-		}
-
-		if (isset($data['filter_status']) && !is_null($data['filter_status'])) {
-			$sql .= " AND p.status = '" . (int)$data['filter_status'] . "'";
-		}
-
-		if (isset($data['filter_sku']) && !is_null($data['filter_sku'])) {
-			$sql .= " AND p.sku != ''";
-		}
-
-		if (isset($data['filter_desc']) && !is_null($data['filter_desc'])) {
-			$sql .= " AND pd.description != ''";
-		}
-
-		if (isset($data['filter_manufacturer']) && !is_null($data['filter_manufacturer'])) {
-			$sql .= " AND p.manufacturer_id = '" . (int)$data['filter_manufacturer'] . "'";
-		}
+        if (isset($data['filter_name']) && !empty($data['filter_name']) && !is_null($data['filter_name'])) {
+            $sql .= " AND pd.name LIKE '" . $this->db->escape($data['filter_name']) . "%'";
+        }
+        if (isset($data['filter_model']) && !empty($data['filter_model']) && !is_null($data['filter_model'])) {
+            $sql .= " AND p.model LIKE '" . $this->db->escape($data['filter_model']) . "%'";
+        }
+        if (isset($data['filter_price']) && !empty($data['filter_price']) && !is_null($data['filter_price'])) {
+            $sql .= " AND p.price >= '" . (double)$data['filter_price'] . "'";
+        }
+        if (isset($data['filter_price_to']) && !empty($data['filter_price_to']) && !is_null($data['filter_price_to'])) {
+            $sql .= " AND p.price <= '" . (double)$data['filter_price_to'] . "'";
+        }
+        if (isset($data['filter_quantity']) && !empty($data['filter_quantity']) && !is_null($data['filter_quantity'])) {
+            $sql .= " AND p.quantity >= " . (int)$data['filter_quantity'];
+        }
+        if (isset($data['filter_quantity_to']) && !empty($data['filter_quantity_to']) && !is_null($data['filter_quantity_to'])) {
+            $sql .= " AND p.quantity <= " . (int)$data['filter_quantity_to'];
+        }
+        if (isset($data['filter_status']) && !empty($data['filter_status']) && !is_null($data['filter_status'])) {
+            $sql .= " AND p.status = " . (int)$data['filter_status'];
+        }
+        if (isset($data['filter_sku']) && !empty($data['filter_sku']) && !is_null($data['filter_sku'])) {
+            $sql .= " AND p.sku != ''";
+        }
+        if (isset($data['filter_desc']) && !empty($data['filter_desc']) && !is_null($data['filter_desc'])) {
+            $sql .= " AND pd.description != ''";
+        }
+        if (isset($data['filter_manufacturer']) && !empty($data['filter_price_to']) && !is_null($data['filter_manufacturer'])) {
+            $sql .= " AND p.manufacturer_id = " . (int)$data['filter_manufacturer'];
+        }
 
 		$query = $this->db->query($sql);
 
@@ -616,44 +607,35 @@ class ModelExtensionOpenBayOpenbay extends Model {
 			}
 		}
 
-		if (!empty($data['filter_name'])) {
+		if (isset($data['filter_name']) && !empty($data['filter_name']) && !is_null($data['filter_name'])) {
 			$sql .= " AND pd.name LIKE '" . $this->db->escape($data['filter_name']) . "%'";
 		}
-
-		if (!empty($data['filter_model'])) {
+		if (isset($data['filter_model']) && !empty($data['filter_model']) && !is_null($data['filter_model'])) {
 			$sql .= " AND p.model LIKE '" . $this->db->escape($data['filter_model']) . "%'";
 		}
-
-		if (!empty($data['filter_price'])) {
+		if (isset($data['filter_price']) && !empty($data['filter_price']) && !is_null($data['filter_price'])) {
 			$sql .= " AND p.price >= '" . (double)$data['filter_price'] . "'";
 		}
-
-		if (!empty($data['filter_price_to'])) {
+		if (isset($data['filter_price_to']) && !empty($data['filter_price_to']) && !is_null($data['filter_price_to'])) {
 			$sql .= " AND p.price <= '" . (double)$data['filter_price_to'] . "'";
 		}
-
-		if (isset($data['filter_quantity']) && !is_null($data['filter_quantity'])) {
-			$sql .= " AND p.quantity >= '" . $this->db->escape($data['filter_quantity']) . "'";
+		if (isset($data['filter_quantity']) && !empty($data['filter_quantity']) && !is_null($data['filter_quantity'])) {
+			$sql .= " AND p.quantity >= " . (int)$data['filter_quantity'];
 		}
-
-		if (isset($data['filter_quantity_to']) && !is_null($data['filter_quantity_to'])) {
-			$sql .= " AND p.quantity <= '" . $this->db->escape($data['filter_quantity_to']) . "'";
+		if (isset($data['filter_quantity_to']) && !empty($data['filter_quantity_to']) && !is_null($data['filter_quantity_to'])) {
+			$sql .= " AND p.quantity <= " . (int)$data['filter_quantity_to'];
 		}
-
-		if (isset($data['filter_status']) && !is_null($data['filter_status'])) {
-			$sql .= " AND p.status = '" . (int)$data['filter_status'] . "'";
+		if (isset($data['filter_status']) && !empty($data['filter_status']) && !is_null($data['filter_status'])) {
+			$sql .= " AND p.status = " . (int)$data['filter_status'];
 		}
-
-		if (isset($data['filter_sku']) && !is_null($data['filter_sku'])) {
+		if (isset($data['filter_sku']) && !empty($data['filter_sku']) && !is_null($data['filter_sku'])) {
 			$sql .= " AND p.sku != ''";
 		}
-
-		if (isset($data['filter_desc']) && !is_null($data['filter_desc'])) {
+		if (isset($data['filter_desc']) && !empty($data['filter_desc']) && !is_null($data['filter_desc'])) {
 			$sql .= " AND pd.description != ''";
 		}
-
-		if (isset($data['filter_manufacturer']) && !is_null($data['filter_manufacturer'])) {
-			$sql .= " AND p.manufacturer_id = '" . (int)$data['filter_manufacturer'] . "'";
+		if (isset($data['filter_manufacturer']) && !empty($data['filter_price_to']) && !is_null($data['filter_manufacturer'])) {
+			$sql .= " AND p.manufacturer_id = " . (int)$data['filter_manufacturer'];
 		}
 
 		$sql .= " GROUP BY p.product_id";
@@ -696,25 +678,19 @@ class ModelExtensionOpenBayOpenbay extends Model {
 		return $query->rows;
 	}
 
-	public function addOrderHistory($order_id, $data, $api_login) {
+	public function addOrderHistory($order_id, $post_data, $api_token) {
 		$defaults = array(
+            CURLOPT_POST => true,
 			CURLOPT_HEADER => false,
 			CURLOPT_USERAGENT => $this->request->server['HTTP_USER_AGENT'],
+            CURLOPT_URL => HTTPS_CATALOG . 'index.php?route=api/order/history&api_token=' . $api_token . '&store_id=0&order_id=' . (int)$order_id,
 			CURLOPT_SSL_VERIFYPEER => 0,
 			CURLOPT_SSL_VERIFYHOST => 0,
 			CURLOPT_FORBID_REUSE => true,
 			CURLOPT_RETURNTRANSFER => true,
-			CURLOPT_URL => HTTPS_CATALOG . 'index.php?route=api/order/history&order_id=' . $order_id . '&token=' . $api_login['token'],
-			CURLOPT_POST => true,
-			CURLOPT_POSTFIELDS => http_build_query($data, '', "&"),
+			CURLOPT_POSTFIELDS => http_build_query($post_data, '', "&"),
 			CURLOPT_TIMEOUT => 60,
-			CURLOPT_COOKIE => "PHPSESSID=" . $api_login['session_id'],
 		);
-
-		// Set SSL if required
-		if (substr(HTTPS_CATALOG, 0, 5) == 'https') {
-			$defaults[CURLOPT_PORT] = 443;
-		}
 
 		$curl = curl_init();
 		curl_setopt_array($curl, $defaults);
@@ -724,54 +700,6 @@ class ModelExtensionOpenBayOpenbay extends Model {
 		$result = json_decode($result, 1);
 
 		return $result;
-	}
-
-	public function apiLogin($key) {
-		$defaults = array(
-			CURLOPT_HEADER => true,
-			CURLINFO_HEADER_OUT => true,
-			CURLOPT_USERAGENT => $this->request->server['HTTP_USER_AGENT'],
-			CURLOPT_SSL_VERIFYPEER => 0,
-			CURLOPT_SSL_VERIFYHOST => 0,
-			CURLOPT_RETURNTRANSFER => true,
-			CURLOPT_URL => HTTPS_CATALOG . 'index.php?route=api/login',
-			CURLOPT_POST => true,
-			CURLOPT_POSTFIELDS => http_build_query(array('key' => $key)),
-			CURLOPT_TIMEOUT => 60,
-		);
-
-		// Set SSL if required
-		if (substr(HTTPS_CATALOG, 0, 5) == 'https') {
-			$defaults[CURLOPT_PORT] = 443;
-		}
-
-		$curl = curl_init();
-		curl_setopt_array($curl, $defaults);
-		$result = curl_exec($curl);
-		$header_size = curl_getinfo($curl, CURLINFO_HEADER_SIZE);
-		curl_close($curl);
-
-		$header = substr($result, 0, $header_size);
-		$body = substr($result, $header_size);
-
-		$json = json_decode($body, true);
-
-		preg_match_all("/^Set-cookie: (.*?);/ism", $header, $cookies);
-		foreach( $cookies[1] as $cookie ){
-			$buffer_explode = strpos($cookie, "=");
-			$header_cookies[ substr($cookie,0,$buffer_explode) ] = substr($cookie,$buffer_explode+1);
-		}
-
-		if (isset($json['success']) && isset($header_cookies['PHPSESSID'])) {
-			$response = [
-				'token' => $json['token'],
-				'session_id' => $header_cookies['PHPSESSID']
-			];
-		} else {
-			$response['error'] = $json['error'];
-		}
-
-		return $response;
 	}
 
     public function storeImage($filename, $width, $height, $sub_directory = '') {
