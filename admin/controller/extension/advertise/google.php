@@ -1659,7 +1659,7 @@ class ControllerExtensionAdvertiseGoogle extends Controller {
         $this->load->model('extension/advertise/google');
         $this->load->model('catalog/product');
 
-        foreach ($this->model_catalog_product->getProductStores($output) as $store_id)
+        foreach ($this->model_catalog_product->getProductStores($output) as $store_id) {
             $this->model_extension_advertise_google->insertNewProducts(array($output), $store_id);
         }
     }
