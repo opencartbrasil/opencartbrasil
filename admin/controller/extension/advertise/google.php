@@ -1688,6 +1688,10 @@ class ControllerExtensionAdvertiseGoogle extends Controller {
 
         $this->model_extension_advertise_google->createTables();
         $this->model_extension_advertise_google->createEvents();
+
+        $this->load->model('user/user_group');
+        $this->model_user_user_group->addPermission($this->user->getGroupId(), 'access', 'extension/advertise/google');
+        $this->model_user_user_group->addPermission($this->user->getGroupId(), 'modify', 'extension/advertise/google');
     }
 
     public function uninstall() {
@@ -1695,6 +1699,10 @@ class ControllerExtensionAdvertiseGoogle extends Controller {
 
         $this->model_extension_advertise_google->dropTables();
         $this->model_extension_advertise_google->deleteEvents();
+
+        $this->load->model('user/user_group');
+        $this->model_user_user_group->removePermission($this->user->getGroupId(), 'access', 'extension/advertise/google');
+        $this->model_user_user_group->removePermission($this->user->getGroupId(), 'modify', 'extension/advertise/google');
     }
 
     public function category_autocomplete() {
