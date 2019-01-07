@@ -6,7 +6,7 @@ e utiliza [Semantic Versioning](https://semver.org/lang/pt-BR/spec/v2.0.0.html).
 
 ## [Não lançada]
 
-## [1.1.6] (Data de lançamento: 07.01.2019)
+## [1.2.0] (Data de lançamento: 07.01.2019)
 ### Corrigido
 - Correção no pagamento eWAY
 - Correção na atualização da senha
@@ -227,8 +227,8 @@ e utiliza [Semantic Versioning](https://semver.org/lang/pt-BR/spec/v2.0.0.html).
 - Cupons de descontos para demonstração.
 - Moedas: Euro e Libra esterlina.
 
-[Não lançada]: https://github.com/opencartbrasil/opencartbrasil/compare/v1.1.6...HEAD
-[1.1.6]: https://github.com/opencartbrasil/opencartbrasil/compare/v1.1.5...v1.1.6
+[Não lançada]: https://github.com/opencartbrasil/opencartbrasil/compare/v1.2.0...HEAD
+[1.1.6]: https://github.com/opencartbrasil/opencartbrasil/compare/v1.1.5...v1.2.0
 [1.1.5]: https://github.com/opencartbrasil/opencartbrasil/compare/v1.1.4...v1.1.5
 [1.1.4]: https://github.com/opencartbrasil/opencartbrasil/compare/v1.1.3...v1.1.4
 [1.1.3]: https://github.com/opencartbrasil/opencartbrasil/compare/v1.1.2...v1.1.3
