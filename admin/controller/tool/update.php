@@ -83,9 +83,9 @@ class ControllerToolUpdate extends Controller {
         if (!$json && isset($this->session->data['version'])) {
             set_time_limit(0);
 
-            $handle = fopen(DIR_DOWNLOAD . 'opencartbrasil-3.0.2.0.zip', 'w');
+            $handle = fopen(DIR_DOWNLOAD . 'opencartbrasil-' . VERSION . '.zip', 'w');
 
-            $curl = curl_init('https://github.com/opencartbrasil/opencartbrasil/releases/download/'.$this->session->data['version'].'/opencartbrasil-3.0.2.0.zip');
+            $curl = curl_init('https://github.com/opencartbrasil/opencartbrasil/releases/download/'.$this->session->data['version'].'/opencartbrasil-' . VERSION . '.zip');
 
             curl_setopt($curl, CURLOPT_USERAGENT, 'OpenCart Brasil ' . OPENCART_BRASIL);
             curl_setopt($curl, CURLOPT_SSL_VERIFYPEER, 0);
@@ -127,7 +127,7 @@ class ControllerToolUpdate extends Controller {
             $json['error'] = $this->language->get('error_permission');
         }
 
-        $file = DIR_DOWNLOAD . 'opencartbrasil-3.0.2.0.zip';
+        $file = DIR_DOWNLOAD . 'opencartbrasil-' . VERSION . '.zip';
 
         if (!is_file($file)) {
             $this->maintenance_off();
@@ -389,7 +389,7 @@ class ControllerToolUpdate extends Controller {
             }
         }
 
-        $file = DIR_DOWNLOAD . 'opencartbrasil-3.0.2.0.zip';
+        $file = DIR_DOWNLOAD . 'opencartbrasil-' . VERSION . '.zip';
 
         if (is_file($file)) {
             @unlink($file);
