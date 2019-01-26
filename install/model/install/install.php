@@ -52,7 +52,7 @@ class ModelInstallInstall extends Model {
 			$db->query("INSERT INTO `" . $data['db_prefix'] . "setting` SET `code` = 'config', `key` = 'config_api_id', value = '" . (int)$api_id . "'");
 
 			// set the current years prefix
-			$db->query("UPDATE `" . $data['db_prefix'] . "setting` SET `value` = 'FATURA-" . date('Y') . "' WHERE `key` = 'config_invoice_prefix'");
+			$db->query("UPDATE `" . $data['db_prefix'] . "setting` SET `value` = 'FAT" . date('Y') . "' WHERE `key` = 'config_invoice_prefix'");
 		}
 	}
 }
