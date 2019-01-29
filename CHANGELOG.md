@@ -6,6 +6,10 @@ e utiliza [Semantic Versioning](https://semver.org/lang/pt-BR/spec/v2.0.0.html).
 
 ## [Não lançada]
 
+## [1.2.2] (Data de lançamento: 29.01.2019)
+### Corrigido
+- Correção na atualização da senha do cliente
+
 ## [1.2.1] (Data de lançamento: 26.01.2019)
 ### Corrigido
 - Tradução do prefixo da fatura após a instalação
@@ -233,7 +237,8 @@ e utiliza [Semantic Versioning](https://semver.org/lang/pt-BR/spec/v2.0.0.html).
 - Cupons de descontos para demonstração.
 - Moedas: Euro e Libra esterlina.
 
-[Não lançada]: https://github.com/opencartbrasil/opencartbrasil/compare/v1.2.1...HEAD
+[Não lançada]: https://github.com/opencartbrasil/opencartbrasil/compare/v1.2.2...HEAD
+[1.2.2]: https://github.com/opencartbrasil/opencartbrasil/compare/v1.2.1...v1.2.2
 [1.2.1]: https://github.com/opencartbrasil/opencartbrasil/compare/v1.2.0...v1.2.1
 [1.2.0]: https://github.com/opencartbrasil/opencartbrasil/compare/v1.1.5...v1.2.0
 [1.1.5]: https://github.com/opencartbrasil/opencartbrasil/compare/v1.1.4...v1.1.5
