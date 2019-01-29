@@ -997,7 +997,7 @@ CREATE TABLE `oc_customer` (
   `email` varchar(96) NOT NULL,
   `telephone` varchar(32) NOT NULL,
   `fax` varchar(32) NOT NULL,
-  `password` varchar(40) NOT NULL,
+  `password` varchar(255) NOT NULL,
   `salt` varchar(9) NOT NULL,
   `cart` text,
   `wishlist` text,
