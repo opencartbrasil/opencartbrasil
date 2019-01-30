@@ -10,7 +10,7 @@
 
 ## Apresentação
 
-O projeto OpenCart Brasil é um fork do OpenCart, que tem como objetivo atender lojistas brasileiros sempre mantendo a compatibilidade com a última versão estável do OpenCart.
+O projeto OpenCart Brasil é um fork do OpenCart, que tem o objetivo de oferecer uma versão do OpenCart voltada para lojistas brasileiros, sempre compatíve com a última versão estável do OpenCart, e mantendo a licença GPL para garantir que **o projeto OpenCart Brasil é livre e sempre será**.
 
 Aqui você poderá analisar o código, relatar erros e enviar correções ou melhorias para o projeto.
 
@@ -32,8 +32,12 @@ Recomendamos que todos os desenvolvedores sigam este repositório para ficarem a
 
 ## Diferenciais
 
+- Sistema de afiliados 100% funcional.
+- Campos SKU nas opções dos produtos.
 - **Atualização automática do OpenCart Brasil**.
+- Melhorias no gerenciamento de sessões do PHP.
 - Melhorias no processo de download e instalação.
+- Melhorias na criptografia das senhas dos clientes.
 - Correção de bugs, melhorias e otimizações no código.
 - O processo de instalação ocorre em português do Brasil.
 - Ferramenta de instalação por linha de comando em português do Brasil.
@@ -66,6 +70,7 @@ Recomendamos que todos os desenvolvedores sigam este repositório para ficarem a
 - [x] Melhorias no startup e framework do core.
 - [x] Melhorias na tradução e no layout de e-mail.
 - [x] Melhorias na comunicação com o banco de dados.
+- [x] Melhorias na criptografia das senhas dos clientes.
 
 ### Tarefas em andamento:
 
@@ -153,7 +158,7 @@ Se você é o profissional que administra os servidores que armazenam os arquivo
 
 Não é compatível com sistema operacional Windows utilizando servidor web IIS.
 
-Em breve a versão mínima do PHP será 7.1, pois o suporte para PHP até 7.0 encerrará em dezembro de 2018.
+Em breve a versão mínima do PHP será 7.1, pois o suporte para PHP até 7.0 encerrou em dezembro de 2018.
 
 ## Download
 
