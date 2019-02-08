@@ -1,15 +1,13 @@
 <?php
-
 class ModelExtensionPaymentWorldpay extends Model {
-
 	public function getMethod($address, $total) {
 		$this->load->language('extension/payment/worldpay');
 
-		$query = $this->db->query("SELECT * FROM " . DB_PREFIX . "zone_to_geo_zone WHERE geo_zone_id = '" . (int)$this->config->get('worldpay_geo_zone_id') . "' AND country_id = '" . (int)$address['country_id'] . "' AND (zone_id = '" . (int)$address['zone_id'] . "' OR zone_id = '0')");
+		$query = $this->db->query("SELECT * FROM " . DB_PREFIX . "zone_to_geo_zone WHERE geo_zone_id = '" . (int)$this->config->get('payment_worldpay_geo_zone_id') . "' AND country_id = '" . (int)$address['country_id'] . "' AND (zone_id = '" . (int)$address['zone_id'] . "' OR zone_id = '0')");
 
 		if ($this->config->get('payment_worldpay_total') > 0 && $this->config->get('payment_worldpay_total') > $total) {
 			$status = false;
-		} elseif (!$this->config->get('worldpay_geo_zone_id')) {
+		} elseif (!$this->config->get('payment_worldpay_geo_zone_id')) {
 			$status = true;
 		} elseif ($query->num_rows) {
 			$status = true;
@@ -24,7 +22,7 @@ class ModelExtensionPaymentWorldpay extends Model {
 				'code' => 'worldpay',
 				'title' => $this->language->get('text_title'),
 				'terms' => '',
-				'sort_order' => $this->config->get('worldpay_sort_order')
+				'sort_order' => $this->config->get('payment_worldpay_sort_order')
 			);
 		}
 
@@ -356,7 +354,7 @@ class ModelExtensionPaymentWorldpay extends Model {
 	}
 
 	public function logger($data) {
-		if ($this->config->get('worldpay_debug')) {
+		if ($this->config->get('payment_worldpay_debug')) {
 			$log = new Log('worldpay_debug.log');
 			$backtrace = debug_backtrace();
 			$log->write($backtrace[6]['class'] . '::' . $backtrace[6]['function'] . ' Data:  ' . print_r($data, 1));
