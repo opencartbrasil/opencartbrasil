@@ -71,6 +71,7 @@ Recomendamos que todos os desenvolvedores sigam este repositório para ficarem a
 - [x] Melhorias na tradução e no layout de e-mail.
 - [x] Melhorias na comunicação com o banco de dados.
 - [x] Melhorias na criptografia das senhas dos clientes.
+- [x] Melhorias na redefinição de senha do cliente na loja.
 
 ### Tarefas em andamento:
 
@@ -96,7 +97,7 @@ Se você é o profissional que administra os servidores que armazenam os arquivo
 - Apache 2.4 ou superior.
 - Nginx 1.14 ou superior.
 
-### OpenSLL:
+### OpenSSL:
 
 - 1.0.1c ou superior.
 
