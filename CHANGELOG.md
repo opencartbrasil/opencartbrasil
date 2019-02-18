@@ -6,6 +6,13 @@ e utiliza [Semantic Versioning](https://semver.org/lang/pt-BR/spec/v2.0.0.html).
 
 ## [Não lançada]
 
+## [1.2.4] (Data de lançamento: 18.02.2019)
+### Corrigido
+- Correção na edição do pedido com afiliados
+
+### Modificado
+- Extensão Google Shopping v106
+
 ## [1.2.3] (Data de lançamento: 11.02.2019)
 ### Corrigido
 - Correções na solicitação de nova senha do cliente na loja
@@ -243,7 +250,8 @@ e utiliza [Semantic Versioning](https://semver.org/lang/pt-BR/spec/v2.0.0.html).
 - Cupons de descontos para demonstração.
 - Moedas: Euro e Libra esterlina.
 
-[Não lançada]: https://github.com/opencartbrasil/opencartbrasil/compare/v1.2.3...HEAD
+[Não lançada]: https://github.com/opencartbrasil/opencartbrasil/compare/v1.2.4...HEAD
+[1.2.4]: https://github.com/opencartbrasil/opencartbrasil/compare/v1.2.3...v1.2.4
 [1.2.3]: https://github.com/opencartbrasil/opencartbrasil/compare/v1.2.2...v1.2.3
 [1.2.2]: https://github.com/opencartbrasil/opencartbrasil/compare/v1.2.1...v1.2.2
 [1.2.1]: https://github.com/opencartbrasil/opencartbrasil/compare/v1.2.0...v1.2.1
