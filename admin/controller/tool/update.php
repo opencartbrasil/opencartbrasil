@@ -211,6 +211,10 @@ class ControllerToolUpdate extends Controller {
                     $path = DIR_SYSTEM . substr($destination, 7);
                 }
 
+                if (substr($destination, 0, 7) == 'storage') {
+                    $path = DIR_STORAGE . substr($destination, 8);
+                }
+
                 if (is_dir($file) && !is_dir($path)) {
                     if (!mkdir($path, 0777)) {
                         $json['error'] = sprintf($this->language->get('error_directory'), $destination);
