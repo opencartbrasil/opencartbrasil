@@ -48,9 +48,9 @@ class ModelExtensionShippingFedex extends Model {
 			$zone_info = $this->model_localisation_zone->getZone($this->config->get('config_zone_id'));
 
 			if (!$this->config->get('shipping_fedex_test')) {
-				$url = 'https://gateway.fedex.com/web-services/';
+				$url = 'https://ws.fedex.com/web-services/';
 			} else {
-				$url = 'https://gatewaybeta.fedex.com/web-services/';
+				$url = 'https://wsbeta.fedex.com/web-services/';
 			}
 
 			// Whoever introduced xml to shipping companies should be flogged
@@ -164,9 +164,9 @@ class ModelExtensionShippingFedex extends Model {
 			$dom->loadXml($response);
 
 			if ($dom->getElementsByTagName('faultcode')->length > 0) {
-    			$error = $dom->getElementsByTagName('cause')->item(0)->nodeValue;
+				$error = $dom->getElementsByTagName('cause')->item(0)->nodeValue;
 
-    			$this->log->write('FEDEX :: ' . $response);
+				$this->log->write('FEDEX :: ' . $response);
 			} elseif ($dom->getElementsByTagName('HighestSeverity')->item(0)->nodeValue == 'FAILURE' || $dom->getElementsByTagName('HighestSeverity')->item(0)->nodeValue == 'ERROR') {
 				$error = $dom->getElementsByTagName('HighestSeverity')->item(0)->nodeValue;
 
