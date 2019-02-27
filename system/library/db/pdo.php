@@ -8,7 +8,7 @@ final class PDO {
 		try {
 			$this->connection = @new \PDO("mysql:host=" . $hostname . ";port=" . $port . ";dbname=" . $database, $username, $password, array(\PDO::ATTR_PERSISTENT => true));
 		} catch (\PDOException $e) {
-			throw new \Exception('Erro: Não foi possível conectar no banco de dados usando!');
+			throw new \Exception('Erro: Não foi possível conectar-se ao banco de dados!');
 		}
 
 		$this->connection->exec("SET NAMES 'utf8'");
