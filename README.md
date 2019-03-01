@@ -75,14 +75,12 @@ Recomendamos que todos os desenvolvedores sigam este repositório para ficarem a
 
 ### Tarefas em andamento:
 
-- [ ] Tema versão Brasil 100% customizado.
+- [ ] Gerenciador de tarefas agendadas.
 
 ### Próximas tarefas:
 
-- [ ] Cadastro de clientes padrão Brasil.
-- [ ] Opções relacionadas nos produtos.
-- [ ] Extensões integradas com serviços brasileiros.
-- [ ] API para integração com sistemas externos como ERP, CRM, etc.
+- [ ] API REST para inclusão de produtos, clientes, pedidos, etc.
+- [ ] Webhook que enviará notificações para aplicações externas.
 
 ## Requisitos
 
