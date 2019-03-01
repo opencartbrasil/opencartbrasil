@@ -75,7 +75,7 @@ Recomendamos que todos os desenvolvedores sigam este repositório para ficarem a
 
 ### Tarefas em andamento:
 
-- [ ] Gerenciador de tarefas agendadas.
+- [ ] Tarefas agendadas.
 
 ### Próximas tarefas:
 
