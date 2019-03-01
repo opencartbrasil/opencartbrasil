@@ -2,6 +2,19 @@
 class ModelUpdate01 extends Model {
 	public function update() {
 		$this->db->query("
+			CREATE TABLE `" . DB_PREFIX . "cron` (
+				`cron_id` int(11) NOT NULL AUTO_INCREMENT,
+				`code` varchar(64) NOT NULL,
+				`cycle` varchar(12) NOT NULL,
+				`action` text NOT NULL,
+				`status` tinyint(1) NOT NULL,
+				`date_added` datetime NOT NULL,
+				`date_modified` datetime NOT NULL,
+				PRIMARY KEY (`cron_id`)
+			) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+		");
+
+		$this->db->query("
 			CREATE TABLE IF NOT EXISTS `" . DB_PREFIX . "customer_affiliate_report` (
 				`customer_affiliate_report_id` int(11) NOT NULL AUTO_INCREMENT,
 				`customer_id` int(11) NOT NULL,

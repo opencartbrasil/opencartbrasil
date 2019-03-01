@@ -16,6 +16,7 @@ class ControllerStartupPermission extends Controller {
 
 			// If a 3rd part is found we need to check if its under one of the extension folders.
 			$extension = array(
+				'cron',
 				'extension/advertise',
 				'extension/dashboard',
 				'extension/analytics',
@@ -43,6 +44,7 @@ class ControllerStartupPermission extends Controller {
 				'common/logout',
 				'common/forgotten',
 				'common/reset',
+				'common/cron',
 				'error/not_found',
 				'error/permission'
 			);
