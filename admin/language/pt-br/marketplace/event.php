@@ -3,9 +3,9 @@
 $_['heading_title']     = 'Eventos';
 
 // Text
-$_['text_success']      = 'Eventos modificado com sucesso!';
+$_['text_success']      = 'Evento modificado com sucesso!';
 $_['text_list']         = 'Listando eventos';
-$_['text_event']        = 'Eventos são utilizados por extensões para substituir funcionalidades que são padrão de sua loja. Se você tiver problemas, você pode desativar ou ativar os eventos aqui.';
+$_['text_event']        = 'Os eventos são gatilhos adicionados pelas extensões para executar ações na loja.';
 $_['text_info']         = 'Informações sobre o evento';
 $_['text_trigger']      = 'Gatilho';
 $_['text_action']       = 'Ação';
