@@ -70,7 +70,7 @@ class ControllerStartupStartup extends Controller {
 							break 2;
 						}
 					}
-				}	
+				}
 			}
 
 			if (!$detect) { 
@@ -180,8 +180,5 @@ class ControllerStartupStartup extends Controller {
 
 		// Encryption
 		$this->registry->set('encryption', new Encryption($this->config->get('config_encryption')));
-
-		// OpenBay Pro
-		$this->registry->set('openbay', new Openbay($this->registry));
 	}
 }
