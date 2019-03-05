@@ -31,11 +31,11 @@ class ControllerStartupError extends Controller {
 		}
 
 		if ($this->config->get('config_error_display')) {
-			echo '<b>' . $error . '</b>: ' . $message . ' in <b>' . $file . '</b> on line <b>' . $line . '</b>';
+			echo '<b>' . $error . '</b>: ' . $message . ' no arquivo <b>' . $file . '</b> na linha <b>' . $line . '</b>';
 		}
 
 		if ($this->config->get('config_error_log')) {
-			$this->log->write('PHP ' . $error . ':  ' . $message . ' in ' . $file . ' on line ' . $line);
+			$this->log->write('PHP ' . $error . ':  ' . $message . ' no arquivo ' . $file . ' na linha ' . $line);
 		}
 
 		return true;
