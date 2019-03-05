@@ -7,7 +7,7 @@ class ModelExtensionTotalKlarnaFee extends Model {
 
 		$status = true;
 
-		$klarna_fee = $this->config->get('klarna_fee');
+		$klarna_fee = $this->config->get('payment_klarna_fee');
 
 		if (isset($this->session->data['payment_address_id'])) {
 			$this->load->model('account/address');
