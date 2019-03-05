@@ -1,6 +1,6 @@
-<form class="form-horizontal" action="https://secure.bluepay.com/interfaces/bp10emu" method=POST>
-    <fieldset id="payment">
-        <legend>{{ text_credit_card }}</legend>
+<form class="form-horizontal" action="https://secure.bluepay.com/interfaces/bp10emu" method="POST">
+	<fieldset id="payment">
+		<legend>{{ text_credit_card }}</legend>
 		{% if not existing_cards %}
 			<div class="form-group">
 				<label class="col-sm-2 control-label">{{ entry_card }}</label>
@@ -74,14 +74,14 @@
 						</div>
 					</div>
 				{% endif %}
-            </div>
-        </div>
-        <div class="buttons">
-            <div class="pull-right">
-                <input type="button" value="{{ button_confirm }}" id="button-confirm" data-loading-text="{{ text_loading }}" class="btn btn-primary" />
-            </div>
-        </div>
-    </fieldset>
+			</div>
+		</div>
+		<div class="buttons">
+			<div class="pull-right">
+				<input type="button" value="{{ button_confirm }}" id="button-confirm" data-loading-text="{{ text_loading }}" class="btn btn-primary" />
+			</div>
+		</div>
+	</fieldset>
 </form>
 <script type="text/javascript"><!--
 $(document).ready(function() {

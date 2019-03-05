@@ -18,13 +18,13 @@ class ModelExtensionFraudFraudLabsPro extends Model {
 		$ip = $data['ip'];
 
 		// Detect client IP is store is behind CloudFlare protection.
-		if(isset($_SERVER['HTTP_CF_CONNECTING_IP']) && filter_var($_SERVER['HTTP_CF_CONNECTING_IP'], FILTER_VALIDATE_IP)){
-			$ip = $_SERVER['HTTP_CF_CONNECTING_IP'];
+		if(isset($this->request->server['HTTP_CF_CONNECTING_IP']) && filter_var($this->request->server['HTTP_CF_CONNECTING_IP'], FILTER_VALIDATE_IP)){
+			$ip = $this->request->server['HTTP_CF_CONNECTING_IP'];
 		}
 
 		// Get real client IP is they are behind proxy server.
-		if(isset($_SERVER['HTTP_X_FORWARDED_FOR']) && filter_var($_SERVER['HTTP_X_FORWARDED_FOR'], FILTER_VALIDATE_IP)){
-			$ip = $_SERVER['HTTP_X_FORWARDED_FOR'];
+		if(isset($this->request->server['HTTP_X_FORWARDED_FOR']) && filter_var($this->request->server['HTTP_X_FORWARDED_FOR'], FILTER_VALIDATE_IP)){
+			$ip = $this->request->server['HTTP_X_FORWARDED_FOR'];
 		}
 
 		// Overwrite client IP if simulate IP is provided.
@@ -58,7 +58,7 @@ class ModelExtensionFraudFraudLabsPro extends Model {
 		$request['currency'] = $data['currency_code'];
 		$request['payment_mode'] = $data['payment_code'];
 		$request['user_order_id'] = $data['order_id'];
-		$request['flp_checksum'] = (isset($_COOKIE['flp_checksum'])) ? $_COOKIE['flp_checksum'] : '';
+		$request['flp_checksum'] = (isset($this->request->cookie['flp_checksum'])) ? $this->request->cookie['flp_checksum'] : '';
 		$request['format'] = 'json';
 		$request['source'] = 'opencart';
 		$request['source_version'] = '2.1.0.2';

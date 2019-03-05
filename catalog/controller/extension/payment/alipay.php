@@ -20,7 +20,7 @@ class ControllerExtensionPaymentAlipay extends Controller {
 		$out_trade_no = trim($order_info['order_id']);
 		$subject = trim($this->config->get('config_name'));
 		$total_amount = trim($this->currency->format($order_info['total'], 'CNY', '', false));
-		$body = '';//trim($_POST['WIDbody']);
+		$body = '';//trim($this->request->post['WIDbody']);
 
 		$payRequestBuilder = array(
 			'body'         => $body,
@@ -41,7 +41,7 @@ class ControllerExtensionPaymentAlipay extends Controller {
 
 	public function callback() {
 		$this->log->write('alipay pay notify:');
-		$arr = $_POST;
+		$arr = $this->request->post;
 		$config = array (
 			'app_id'               => $this->config->get('payment_alipay_app_id'),
 			'merchant_private_key' => $this->config->get('payment_alipay_merchant_private_key'),
@@ -53,15 +53,15 @@ class ControllerExtensionPaymentAlipay extends Controller {
 			'alipay_public_key'    => $this->config->get('payment_alipay_alipay_public_key'),
 		);
 		$this->load->model('extension/payment/alipay');
-		$this->log->write('POST' . var_export($_POST,true));
+		$this->log->write('POST' . var_export($this->request->post,true));
 		$result = $this->model_extension_payment_alipay->check($arr, $config);
 
 		if($result) {//check successed
 			$this->log->write('Alipay check successed');
-			$order_id = $_POST['out_trade_no'];
-			if($_POST['trade_status'] == 'TRADE_FINISHED') {
+			$order_id = $this->request->post['out_trade_no'];
+			if($this->request->post['trade_status'] == 'TRADE_FINISHED') {
 			}
-			else if ($_POST['trade_status'] == 'TRADE_SUCCESS') {
+			else if ($this->request->post['trade_status'] == 'TRADE_SUCCESS') {
 				$this->load->model('checkout/order');
 				$this->model_checkout_order->addOrderHistory($order_id, $this->config->get('payment_alipay_order_status_id'));
 			}
