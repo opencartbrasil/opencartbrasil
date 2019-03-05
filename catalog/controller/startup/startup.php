@@ -78,7 +78,7 @@ class ControllerStartupStartup extends Controller {
 				foreach ($browser_languages as $browser_language) {
 					if (array_key_exists(strtolower($browser_language), $languages)) {
 						$detect = strtolower($browser_language);
-						
+
 						break;
 					}
 				}
@@ -106,7 +106,7 @@ class ControllerStartupStartup extends Controller {
 		$this->registry->set('language', $language);
 
 		// Set the config language_id
-		$this->config->set('config_language_id', $languages[$code]['language_id']);	
+		$this->config->set('config_language_id', $languages[$code]['language_id']);
 
 		// Customer
 		$customer = new Cart\Customer($this->registry);
