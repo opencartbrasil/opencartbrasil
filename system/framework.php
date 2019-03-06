@@ -84,6 +84,8 @@ $registry->set('request', new Request());
 // Response
 $response = new Response();
 $response->addHeader('Content-Type: text/html; charset=utf-8');
+$response->addHeader('Cache-Control: no-store, no-cache, must-revalidate, post-check=0, pre-check=0');
+$response->addHeader('Pragma: no-cache');
 $response->setCompression($config->get('config_compression'));
 $registry->set('response', $response);
 
