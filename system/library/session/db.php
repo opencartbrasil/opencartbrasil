@@ -10,6 +10,8 @@ final class DB {
 	}
 
 	public function read($session_id) {
+		$this->gc();
+
 		$query = $this->db->query("SELECT `data` FROM `" . DB_PREFIX . "session` WHERE session_id = '" . $this->db->escape($session_id) . "' AND expire > '" . $this->db->escape(date('Y-m-d H:i:s', time()))  . "'");
 
 		if ($query->num_rows) {
@@ -23,7 +25,7 @@ final class DB {
 		if ($session_id) {
 			$this->db->query("REPLACE INTO `" . DB_PREFIX . "session` SET session_id = '" . $this->db->escape($session_id) . "', `data` = '" . $this->db->escape(json_encode($data)) . "', expire = '" . $this->db->escape(date('Y-m-d H:i:s', time() + $this->expire)) . "'");
 		}
-		
+
 		return true;
 	}
 
@@ -33,8 +35,10 @@ final class DB {
 		return true;
 	}
 
-	public function gc($expire) {
-		$this->db->query("DELETE FROM `" . DB_PREFIX . "session` WHERE expire < '" . $this->db->escape(date('Y-m-d H:i:s', time())) . "'");
+	public function gc() {
+		if (rand(1,100) == 100) {
+			$this->db->query("DELETE FROM `" . DB_PREFIX . "session` WHERE expire < '" . $this->db->escape(date('Y-m-d H:i:s', time())) . "'");
+		}
 
 		return true;
 	}
