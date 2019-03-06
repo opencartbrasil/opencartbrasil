@@ -807,7 +807,7 @@ class ControllerSaleOrder extends Controller {
 				$data['invoice_no'] = '';
 			}
 
-			$data['date_added'] = date($this->language->get('date_format_short'), strtotime($order_info['date_added']));
+			$data['date_added'] = date($this->language->get('datetime_format'), strtotime($order_info['date_added']));
 
 			$data['firstname'] = $order_info['firstname'];
 			$data['lastname'] = $order_info['lastname'];
