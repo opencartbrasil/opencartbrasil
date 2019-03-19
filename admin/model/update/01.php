@@ -2,7 +2,7 @@
 class ModelUpdate01 extends Model {
 	public function update() {
 		$this->db->query("
-			CREATE TABLE `" . DB_PREFIX . "cron` (
+			CREATE TABLE IF NOT EXISTS `" . DB_PREFIX . "cron` (
 				`cron_id` int(11) NOT NULL AUTO_INCREMENT,
 				`code` varchar(64) NOT NULL,
 				`cycle` varchar(12) NOT NULL,

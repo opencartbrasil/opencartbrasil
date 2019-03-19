@@ -970,6 +970,13 @@ CREATE TABLE `oc_cron` (
   PRIMARY KEY (`cron_id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
+--
+-- Dumping data for table `oc_cron`
+--
+
+INSERT INTO `oc_cron` (`cron_id`, `code`, `cycle`, `action`, `status`, `date_added`, `date_modified`) VALUES
+(3, 'session', 'day', 'cron/session', 1, '2019-03-19 04:33:00', '2019-03-19 04:33:00');
+
 -----------------------------------------------------------
 
 --
