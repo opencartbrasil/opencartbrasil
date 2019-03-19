@@ -4,6 +4,7 @@ class ControllerStartupLogin extends Controller {
 		$route = isset($this->request->get['route']) ? $this->request->get['route'] : '';
 
 		$ignore = array(
+			'common/cron',
 			'common/login',
 			'common/forgotten',
 			'common/reset'
@@ -18,6 +19,7 @@ class ControllerStartupLogin extends Controller {
 
 		if (isset($this->request->get['route'])) {
 			$ignore = array(
+				'common/cron',
 				'common/login',
 				'common/logout',
 				'common/forgotten',
