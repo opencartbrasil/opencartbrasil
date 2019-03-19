@@ -10,8 +10,6 @@ final class DB {
 	}
 
 	public function read($session_id) {
-		$this->gc();
-
 		$query = $this->db->query("SELECT `data` FROM `" . DB_PREFIX . "session` WHERE session_id = '" . $this->db->escape($session_id) . "' AND expire > '" . $this->db->escape(date('Y-m-d H:i:s', time()))  . "'");
 
 		if ($query->num_rows) {
@@ -31,14 +29,6 @@ final class DB {
 
 	public function destroy($session_id) {
 		$this->db->query("DELETE FROM `" . DB_PREFIX . "session` WHERE session_id = '" . $this->db->escape($session_id) . "'");
-
-		return true;
-	}
-
-	public function gc() {
-		if (rand(1,100) == 100) {
-			$this->db->query("DELETE FROM `" . DB_PREFIX . "session` WHERE expire < '" . $this->db->escape(date('Y-m-d H:i:s', time())) . "'");
-		}
 
 		return true;
 	}
