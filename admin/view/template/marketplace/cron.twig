@@ -33,7 +33,7 @@
         <p>{{ text_cron_2 }}</p>
         <div class="input-group">
           <span class="input-group-addon">{{ entry_cron }}</span>
-          <input type="text" value="wget &quot;{{ cron }}&quot; --read-timeout=5400" id="input-cron" class="form-control" />
+          <input type="text" value="curl -s --connect-timeout 10 --max-time 1800 &quot;{{ cron }}&quot;" id="input-cron" class="form-control" />
           <span class="input-group-btn">
             <button type="button" id="button-copy" data-toggle="tooltip" title="{{ button_copy }}" class="btn btn-default"><i class="fa fa-clipboard"></i></button>
           </span>
