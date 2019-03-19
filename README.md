@@ -88,7 +88,7 @@ Recomendamos que todos os desenvolvedores sigam este repositório para ficarem a
 
 Se o seu serviço de hospedagem não lhe oferece versões atualizadas dos softwares citados abaixo, troque de serviço de hospedagem, pois sua loja não pode ficar exposta por causa das falhas de segurança existentes em softwares antigos.
 
-Se você é o profissional que administra os servidores que armazenam os arquivos e dados da loja, não utilize os softwares descritos abaixo em versões legadas. No mínimo utilize as versões mínimas recomendadas.
+Se você é o profissional que administra os servidores que armazenam os arquivos e dados da loja, não utilize os softwares descritos abaixo em versões antigas. Utilize as versões mínimas recomendadas, sendo o ideal utilizar as versões mais recentes não só por questões de desempenho, mas principalmente por questão de segurança.
 
 ### Servidores web compatíveis:
 
@@ -105,12 +105,12 @@ Se você é o profissional que administra os servidores que armazenam os arquivo
 
 ### Bancos de dados compatíveis:
 
-- MySQL 5.5 ou superior.
-- MariaDB 5.5 ou superior.
+- MySQL 5.5 ou superior (Recomendado 5.7).
+- MariaDB 5.5 ou superior (Recomendado 10.3).
 
 ### Versões do PHP compatíveis:
 
-- 5.6 ou superior.
+- 5.6 ou superior (recomendado 7.3).
 
 ### Configurações mínimas necessárias no PHP:
 
@@ -157,7 +157,7 @@ Se você é o profissional que administra os servidores que armazenam os arquivo
 
 Não é compatível com sistema operacional Windows utilizando servidor web IIS.
 
-Em breve a versão mínima do PHP será 7.1, pois o suporte para PHP até 7.0 encerrou em dezembro de 2018.
+Em breve a versão mínima aceita pelo OpenCart será o PHP 7.1 (recomendado PHP 7.3), pois o suporte para o PHP até as versões 7.0 encerraram em dezembro de 2018, ou seja, não faz sentido continuar o suporte para versões do PHP que os próprios desenvolvedores abandonaram, o que significa que essas versões não receberão correções de bugs e falhas.
 
 ## Download
 
