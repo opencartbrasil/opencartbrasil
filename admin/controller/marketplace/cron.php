@@ -217,7 +217,7 @@ class ControllerMarketplaceCron extends Controller {
 			$cron_info = $this->model_setting_cron->getCron($cron_id);
 
 			if ($cron_info) {
-				$this->load->controller($cron_info['action'], $cron_id, $cron_info['code'], $cron_info['cycle'], $cron_info['date_added'], $cron_info['date_modified']);
+				$this->load->controller($cron_info['action'], $cron_info);
 
 				$this->model_setting_cron->editCron($cron_info['cron_id']);
 			}
