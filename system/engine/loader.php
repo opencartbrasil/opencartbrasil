@@ -110,7 +110,8 @@ final class Loader {
 		// Keep the original trigger
 		$trigger = $route;
 
-		$template = new Template($this->registry->get('config')->get('template_engine'));
+		// Template contents. Not the output!
+		$template = '';
 
 		// Trigger the pre events
 		$result = $this->registry->get('event')->trigger('view/' . $trigger . '/before', array(&$route, &$data, &$template));
@@ -119,6 +120,8 @@ final class Loader {
 		if ($result && !$result instanceof Exception) {
 			$output = $result;
 		} else {
+			$template = new Template($this->registry->get('config')->get('template_engine'));
+
 			foreach ($data as $key => $value) {
 				$template->set($key, $value);
 			}
