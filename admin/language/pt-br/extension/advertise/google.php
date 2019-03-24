@@ -3,7 +3,7 @@
 $_['heading_campaign']                      = 'Google Smart Shopping Campaigns';
 $_['heading_mapping']                       = 'Mapeamento de Categorias';
 $_['heading_merchant']                      = 'Conta do GoogleMerchant Center';
-$_['heading_shipping_taxes']                = 'Frete & Taxas';
+$_['heading_shipping_taxes']                = 'Frete e Taxas';
 $_['heading_title']                         = 'Google Shopping';
 
 // Steps
@@ -11,7 +11,7 @@ $_['step_campaigns']                        = 'Smart Shopping Campaigns';
 $_['step_connect']                          = 'Conectar';
 $_['step_mapping']                          = 'Mapeamento de Categorias';
 $_['step_merchant_account']                 = 'Conta Merchant Center';
-$_['step_shipping_taxes']                   = 'Frete &amp; Taxas';
+$_['step_shipping_taxes']                   = 'Frete e Taxas';
 
 // Help
 $_['help_adult']                            = 'Use this attribute to indicate that individual products are for adults only because they contain adult content such as nudity, sexually suggestive content, or are intended to enhance sexual activity. Google cares what they show to their users, so if your business model is not adult oriented but you&apos;re selling an individual adult-oriented product, you need to label that product clearly so Google can show appropriate and legally compliant content to people shopping online.';
@@ -20,15 +20,15 @@ $_['help_budget']                           = 'Average daily budget to spend on 
 $_['help_carrier_price_percentage']         = 'Estimate the shipment price as percentage of the product price.';
 $_['help_color']                            = 'If the product a color option, select it here. This is a required attribute for all apparel items in feeds that target Brazil, France, Germany, Japan, the UK, and the US as well as all products available in different colors.';
 $_['help_condition']                        = 'Tell users about the condition of the product you&apos;re selling. Setting this value correctly is important since Google uses it to refine search results.';
-$_['help_cron_email']                       = 'A summary of the CRON task will be sent to this e-mail after completion.';
-$_['help_cron_email_status']                = 'Enable to receive a summary after every CRON task.';
+$_['help_cron_email']                       = 'Um resumo da tarefa CRON será enviado para este e-mail após a execução.';
+$_['help_cron_email_status']                = 'Habilite para receber um resumo por e-mail após cada tarefa CRON ser executada.';
 $_['help_feed']                             = 'If a language or currency is inactive, this means it was not found on your OpenCart store. To set it up, go to System > Localisation > Languages / Currencies';
 $_['help_gender']                           = 'Specify the gender your product is designed for using the gender attribute. When you provide this information, potential customers can accurately filter products by gender to help narrow their search. Keep in mind that Google also uses the gender information together with the values you provide for Size and Age Group to standardize the sizes that are shown to users.';
 $_['help_google_product_category']          = 'Use the this attribute to indicate the category of your item based on the Google product taxonomy. Categorizing your product helps ensure that your ad is shown with the right search results.';
 $_['help_is_bundle']                        = 'Use the Bundle attribute to indicate that you&apos;ve created a bundle: a main product that you&apos;ve grouped with other, different products, sold together as one package for a single price. This attribute lets Google show your ad in the right situations by distinguishing your item from manufacturer-created bundles, multipacks, and other products without accessories.';
-$_['help_local_cron']                       = 'Insert this command in your web server CRON tab. Set it up to run every hour.';
+$_['help_local_cron']                       = 'Insira este comando no agendador tarefas de sua hospedagem. Configure para ser executado a cada 1 hora.';
 $_['help_multipack']                        = 'Use the Multipack attribute to indicate that you&apos;ve grouped multiple identical products for sale as one item. This attribute lets Google show your ad in the right situations by distinguishing your item from manufacturer-created multipacks, bundles, and other products.';
-$_['help_remote_cron']                      = 'Use this URL to set up a CRON task via a web-based CRON service. Set it up to run every hour.';
+$_['help_remote_cron']                      = 'Use a URL para configurar uma tarefa CRON por meio de um serviço CRON baseado na Web. Configure para executada a cada 1 hora.';
 $_['help_size']                             = 'Use the size attribute to describe the standardized size of your product. When you use this attribute, your ad can appear in results that are filtered by size. The size you submit will also affect how your product variants are shown.';
 $_['help_size_system']                      = 'With this attribute you can explain which country&apos;s sizing system your product uses. This information helps create accurate filters, which users can use to narrow search results. The sizing system that you submit will affect search, filtering, and how variants are shown in your ad.';
 $_['help_size_type']                        = 'Use this attribute to describe the cut of your product. This information helps create accurate filters, which users can use to narrow search results.';
@@ -104,7 +104,7 @@ $_['text_cost']                             = 'Cost';
 $_['text_critical']                         = 'Critical';
 $_['text_cron_email']                       = 'Enviar o resumo para o e-mail';
 $_['text_cron_email_status']                = 'Enviar e-mail de resumo';
-$_['text_cron_info']                        = 'Certifique-se de configurar a tarefa CRON para ser executada <strong>a cada hora</strong> utilizando um dos métodos abaixo.<br>O método #1 é o que recomendamos.<br>A tarefa CRON vai lhe ajudar com:<br>&bull; A sincronização periódica do seu catálogo do OpenCart com o Google Merchant Center.<br>&bull; A busca automática por status de produtos e relatórios de produtos.';
+$_['text_cron_info']                        = 'Certifique-se de configurar a tarefa CRON para ser executada <strong>a cada hora</strong> utilizando um dos métodos abaixo.<br>O método #1 é o que recomendamos.<br>A execução da tarefa CRON vai lhe ajudar com:<br>&bull; A sincronização automática dos produtos cadastrados no OpenCart com o Google Merchant Center.<br>&bull; A busca automática por status dos produtos e relatórios de produtos.';
 $_['text_cron_settings']                    = 'Configurações da CRON';
 $_['text_data_quality_issues']              = 'Data Quality Issues';
 $_['text_debug_log']                        = 'Debug Logging';
