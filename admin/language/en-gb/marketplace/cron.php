@@ -21,7 +21,7 @@ $_['column_date_modified'] = 'Date Modified';
 $_['column_action']        = 'Action';
 
 // entry
-$_['entry_cron']           = 'Cron URL';
+$_['entry_cron']           = 'Command';
 
 // Error
 $_['error_permission']     = 'Warning: You do not have permission to modify cron jobs!';

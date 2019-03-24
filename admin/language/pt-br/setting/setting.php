@@ -117,6 +117,7 @@ $_['entry_file_mime_allowed']      = 'MIME permitido';
 $_['entry_maintenance']            = 'Modo de manutenção?';
 $_['entry_password']               = 'Recuperar senha?';
 $_['entry_encryption']             = 'Chave de criptografia';
+$_['entry_cron_token']             = 'Token da URL CRON';
 $_['entry_compression']            = 'Compressão';
 $_['entry_error_display']          = 'Exibir erros?';
 $_['entry_error_log']              = 'Log erros?';
@@ -181,6 +182,7 @@ $_['help_file_mime_allowed']       = 'Lista de tipos de arquivos que serão perm
 $_['help_maintenance']             = 'Se sim, fecha o acesso à loja para realização de manutenção. A loja continuará visível ao usuário logado como administrador.';
 $_['help_password']                = 'Se sim, habilita a recuperação de senha na administração da loja. Este recurso será desativado automaticamente se o sistema identificar uma tentativa de invasão.';
 $_['help_encryption']              = 'Chave secreta utilizada para encriptação dos dados durante as transações dos pedidos.';
+$_['help_cron_token']              = 'Token que será utilizado para impedir o acesso direto da URL CRON.';
 $_['help_compression']             = 'Nível de compressão GZIP das páginas. O nível de compressão deve está entre 0 e 9. Só utilize se souber como funciona o GZIP.';
 
 // Error
@@ -203,3 +205,4 @@ $_['error_log_required']           = 'O nome do arquivo de log de erros é neces
 $_['error_log_invalid']            = 'O nome do arquivo de log de erros é inválido!';
 $_['error_log_extension']          = 'A extensão do arquivo de log de erros deve ser .log!';
 $_['error_encryption']             = 'A chave de criptografia deve ter entre 32 e 1024 caracteres!';
+$_['error_cron_token']             = 'O token da URL CRON é obrigatório!';

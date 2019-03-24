@@ -7,7 +7,7 @@ $_['text_success']         = 'Tarefa modificada com sucesso!';
 $_['text_instruction']     = 'Instruções';
 $_['text_list']            = 'Listando tarefas';
 $_['text_cron_1']          = 'As tarefas agendadas são executadas periodicamente através do agendador de tarefas de sua hospedagem.';
-$_['text_cron_2']          = 'Configure a URL abaixo para ser executada a cada hora.';
+$_['text_cron_2']          = 'Configure o comando abaixo para ser executado a cada 1 hora.';
 $_['text_hour']            = 'Hora';
 $_['text_day']             = 'dia';
 $_['text_month']           = 'Mês';
@@ -21,7 +21,7 @@ $_['column_date_modified'] = 'Última modificação';
 $_['column_action']        = 'Ação';
 
 // entry
-$_['entry_cron']           = 'URL';
+$_['entry_cron']           = 'Comando';
 
 // Error
 $_['error_permission']     = 'Atenção: Você não tem permissão para modificar as tarefas agendadas!';
