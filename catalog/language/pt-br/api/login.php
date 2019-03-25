@@ -1,7 +1,9 @@
 <?php
 // Text
-$_['text_success'] = 'A sessão da API foi iniciada com sucesso.';
+$_['text_success']  = 'Após uma hora de inatividade o api_token será apagado.';
 
 // Error
-$_['error_key']    = 'Atenção: A chave de acesso da API não é válida.';
-$_['error_ip']     = 'Atenção: O seu IP %s não tem permissão para acessar a API.';
+$_['error_method']  = 'Atenção: O método não permitido.';
+$_['error_request'] = 'Atenção: O usuário e a chave da API não foram informados.';
+$_['error_key']     = 'Atenção: O usuário e a chave da API não são válidos.';
+$_['error_ip']      = 'Atenção: Seu IP %s não tem permissão para acessar a API.';
