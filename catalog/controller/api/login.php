@@ -57,33 +57,33 @@ class ControllerApiLogin extends Controller {
 						$session->data['api_id'] = $api_info['api_id'];
 
 						// Create Token
-						$http_code = '200';
+						$http_code = '201 Created';
 
 						$json['success'] = $this->language->get('text_success');
 						$json['api_token'] = $session->getId();
 					} else {
-						$http_code = '403';
+						$http_code = '403 Forbidden';
 
 						$json['error']['ip'] = sprintf($this->language->get('error_ip'), $ip);
 					}
 				} else {
-					$http_code = '401';
+					$http_code = '401 Unauthorized';
 
 					$json['error']['key'] = $this->language->get('error_key');
 				}
 			} else {
-				$http_code = '400';
+				$http_code = '400 Bad Request';
 
 				$json['error']['request'] = $this->language->get('error_request');
 			}
 		} else {
-			$http_code = '405';
+			$http_code = '405 Method Not Allowed';
 
 			$json['error']['method'] = $this->language->get('error_method');
 		}
 
 		$this->response->addHeader('Content-Type: application/json');
-		$this->response->addHeader($this->request->server['SERVER_PROTOCOL'] . ' ' . $http_code .' Not Found');
+		$this->response->addHeader($this->request->server['SERVER_PROTOCOL'] . ' ' . $http_code);
 		$this->response->setOutput(json_encode($json));
 	}
 }
