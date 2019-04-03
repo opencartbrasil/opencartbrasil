@@ -51,6 +51,7 @@ Recomendamos que todos os desenvolvedores sigam este repositório para ficarem a
 - [x] Loja 100% traduzida.
 - [x] Atualização automática.
 - [x] Instalação 100% traduzida.
+- [x] Suporte para tarefas agendadas.
 - [x] Campo SKU nas opções dos produtos.
 - [x] Correção nas estátisticas.
 - [x] Correção nos arquivos config.
@@ -75,7 +76,6 @@ Recomendamos que todos os desenvolvedores sigam este repositório para ficarem a
 
 ### Tarefas em andamento:
 
-- [ ] Tarefas agendadas.
 
 ### Próximas tarefas:
 
