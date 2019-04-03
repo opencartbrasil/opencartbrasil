@@ -19,6 +19,11 @@ e utiliza [Semantic Versioning](https://semver.org/lang/pt-BR/spec/v2.0.0.html).
 - Correção no botão para redefinir produtos visualizados
 - Remoção de registro desnecessário da extensão OpenBay
 
+### Adicionado
+- Tarefas agendadas
+- Suporte para limpeza de sessão por tarefa
+- Adicionado no framework o header para limpeza de cache do navegador
+
 ### Modificado
 - Melhorias na API catalog
 - Melhorias no engine loader
@@ -34,11 +39,6 @@ e utiliza [Semantic Versioning](https://semver.org/lang/pt-BR/spec/v2.0.0.html).
 - Mudança no limite de itens exibidos na administração
 - Adicionada a hora do pedido nas informações do pedido
 - Melhoria na tradução do erro de conexão com o banco de dados
-
-### Adicionado
-- Tarefas agendadas
-- Suporte para limpeza de sessão por tarefa
-- Adicionado no framework o header para limpeza de cache do navegador
 
 ## [1.2.4] (Data de lançamento: 18.02.2019)
 ### Corrigido
