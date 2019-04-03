@@ -32,6 +32,7 @@ Recomendamos que todos os desenvolvedores sigam este repositório para ficarem a
 
 ## Diferenciais
 
+- Suporte para tarefas agendadas.
 - Sistema de afiliados 100% funcional.
 - Campos SKU nas opções dos produtos.
 - **Atualização automática do OpenCart Brasil**.
