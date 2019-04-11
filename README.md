@@ -10,11 +10,11 @@
 
 ## Apresentação
 
-O projeto OpenCart Brasil é um fork do OpenCart, que tem o objetivo de oferecer uma versão do OpenCart voltada para lojistas brasileiros, sempre compatíve com a última versão estável do OpenCart, e mantendo a licença GPL para garantir que **o projeto OpenCart Brasil é livre e sempre será**.
+O projeto OpenCart Brasil é um fork do OpenCart 3, que tem o objetivo de oferecer uma versão do OpenCart otimizada, atualizada e segura, com foco especial no mercado brasileiro, sempre compatível com a última versão estável do OpenCart, e mantendo a licença GPLv3 para garantir que **o projeto OpenCart Brasil é livre e sempre será**.
 
 Aqui você poderá analisar o código, relatar erros e enviar correções ou melhorias para o projeto.
 
-Recomendamos que todos os desenvolvedores sigam este repositório para ficarem atualizados sobre o projeto.
+Recomendamos que todos os desenvolvedores sigam este repositório para receberem atualizações sobre o projeto.
 
 ## Imagens
 
@@ -44,6 +44,10 @@ Recomendamos que todos os desenvolvedores sigam este repositório para ficarem a
 - Ferramenta de instalação por linha de comando em português do Brasil.
 - Após a instalação, a loja já estará em português do Brasil com a moeda Real.
 - Todos os dados de demonstração e dados auxiliares já estão em português do Brasil.
+
+## Changelog
+
+Para analisar todas as correções, modificações e melhorias realizadas no projeto OpenCart Brasil a cada versão lançada <a href="https://github.com/opencartbrasil/opencartbrasil/blob/master/CHANGELOG.md">clique aqui</a>.
 
 ## Roteiro
 
