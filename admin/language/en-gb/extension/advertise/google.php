@@ -1,5 +1,4 @@
 <?php
-
 // Heading
 $_['heading_campaign']                      = 'Smart Shopping Ad Campaigns';
 $_['heading_mapping']                       = 'Category Mapping';
@@ -277,7 +276,7 @@ $_['success_disconnect']                    = 'Success! The extension has been d
 $_['success_index']                         = 'Success! You have modified the extension!';
 $_['success_mapping']                       = 'Success! You have set up mapping!';
 $_['success_merchant']                      = 'Success! Your Google Merchant Center account has been set up! Your website has been claimed!';
-$_['success_merchant_access']           = 'Success! Your Google Merchant Center account has been set up! Your website has been claimed! You can access the linked Google Merchant Center account from the <a href="https://merchants.google.com/mc/merchantdashboard?a=%s" target="_blank">Google Merchant Center dashboard</a>.';
+$_['success_merchant_access']               = 'Success! Your Google Merchant Center account has been set up! Your website has been claimed! You can access the linked Google Merchant Center account from the <a href="https://merchants.google.com/mc/merchantdashboard?a=%s" target="_blank">Google Merchant Center dashboard</a>.';
 $_['success_product']                       = 'Success! The product information has been updated.';
 $_['success_shipping_taxes']                = 'Success! The merchant shipping and taxes have been updated.';
 $_['success_target_add']                    = 'Success! Your new campaign has been created! It will become active as soon as your product feeds get approved by Google Merchant Center.';
