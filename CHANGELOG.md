@@ -6,6 +6,19 @@ e utiliza [Semantic Versioning](https://semver.org/lang/pt-BR/spec/v2.0.0.html).
 
 ## [Não lançada]
 
+## [1.3.1] (Data de lançamento: 16.04.2019)
+### Corrigido
+- Correção nos links para https
+- Correção nas extensões Wordpay e Authorize.Net
+
+### Modificado
+- Extensão Google Shopping v111
+- Melhorias na gestão da sessão
+- Melhorias na library document
+- Melhorias ao salvar o endereço na finalização
+- Melhorias na tradução da extensão Google Shopping
+- Melhorias no formulário de produtos na administração
+
 ## [1.3.0] (Data de lançamento: 03.04.2019)
 ### Corrigido
 - Correção na edição do pedido
@@ -284,7 +297,8 @@ e utiliza [Semantic Versioning](https://semver.org/lang/pt-BR/spec/v2.0.0.html).
 - Cupons de descontos para demonstração.
 - Moedas: Euro e Libra esterlina.
 
-[Não lançada]: https://github.com/opencartbrasil/opencartbrasil/compare/v1.3.0...HEAD
+[Não lançada]: https://github.com/opencartbrasil/opencartbrasil/compare/v1.3.1...HEAD
+[1.3.1]: https://github.com/opencartbrasil/opencartbrasil/compare/v1.3.0...v1.3.1
 [1.3.0]: https://github.com/opencartbrasil/opencartbrasil/compare/v1.2.4...v1.3.0
 [1.2.4]: https://github.com/opencartbrasil/opencartbrasil/compare/v1.2.3...v1.2.4
 [1.2.3]: https://github.com/opencartbrasil/opencartbrasil/compare/v1.2.2...v1.2.3
