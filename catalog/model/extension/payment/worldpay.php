@@ -56,7 +56,7 @@ class ModelExtensionPaymentWorldpay extends Model {
 	}
 
 	public function deleteCard($token) {
-		$this->db->query("DELETE FROM " . DB_PREFIX . "worldpay_card WHERE customer_id = '" . $this->customer->isLogged() . "' AND token = '" . $this->db->escape($token) . "'");
+		$this->db->query("DELETE FROM " . DB_PREFIX . "worldpay_card WHERE customer_id = '" . $this->customer->isLogged() . "' AND `token` = '" . $this->db->escape($token) . "'");
 
 		if ($this->db->countAffected() > 0) {
 			return true;
@@ -322,8 +322,8 @@ class ModelExtensionPaymentWorldpay extends Model {
 	}
 
 	public function updateCronJobRunTime() {
-		$this->db->query("DELETE FROM `" . DB_PREFIX . "setting` WHERE `code` = 'worldpay' AND `key` = 'worldpay_last_cron_job_run'");
-		$this->db->query("INSERT INTO `" . DB_PREFIX . "setting` (`store_id`, `code`, `key`, `value`, `serialized`) VALUES (0, 'worldpay', 'worldpay_last_cron_job_run', NOW(), 0)");
+		$this->db->query("DELETE FROM `" . DB_PREFIX . "setting` WHERE `code` = 'payment_worldpay' AND `key` = 'payment_worldpay_last_cron_job_run'");
+		$this->db->query("INSERT INTO `" . DB_PREFIX . "setting` (`store_id`, `code`, `key`, `value`, `serialized`) VALUES (0, 'payment_worldpay', 'payment_worldpay_last_cron_job_run', NOW(), 0)");
 	}
 
 	public function sendCurl($url, $order = null) {
@@ -368,5 +368,4 @@ class ModelExtensionPaymentWorldpay extends Model {
 		 */
 		return true;
 	}
-
 }

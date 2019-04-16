@@ -48,19 +48,13 @@
               <label class="col-sm-2 control-label" for="input-card">{{ entry_card }}</label>
               <div class="col-sm-10">
                 <select name="payment_worldpay_card" id="input-card" class="form-control">
-                  
-				  {% if payment_worldpay_card %}
-					  
-                  <option value="1" selected="selected">{{ text_enabled }}</option>
-                  <option value="0">{{ text_disabled }}</option>
-                  
-				  {% else %}
-					  
-                  <option value="1">{{ text_enabled }}</option>
-                  <option value="0" selected="selected">{{ text_disabled }}</option>
-                  
-				  {% endif %}
-				
+                  {% if payment_worldpay_card %}
+                    <option value="1" selected="selected">{{ text_enabled }}</option>
+                    <option value="0">{{ text_disabled }}</option>
+                  {% else %}
+                    <option value="1">{{ text_enabled }}</option>
+                    <option value="0" selected="selected">{{ text_disabled }}</option>
+                  {% endif %}
                 </select>
               </div>
             </div>
@@ -98,19 +92,13 @@
               <label class="col-sm-2 control-label" for="input-order-status">{{ entry_order_status }}</label>
               <div class="col-sm-10">
                 <select name="payment_worldpay_order_status_id" id="input-order-status" class="form-control">
-                  
-				  {% for order_status in order_statuses %}
-					  {% if order_status.order_status_id == payment_worldpay_order_status_id %}
-						  
-                  <option value="{{ order_status.order_status_id }}" selected="selected">{{ order_status.name }}</option>
-                  
-					  {% else %}
-						  
-                  <option value="{{ order_status.order_status_id }}">{{ order_status.name }}</option>
-                  
-					  {% endif %}
-				  {% endfor %}
-				
+                {% for order_status in order_statuses %}
+                  {% if order_status.order_status_id == payment_worldpay_order_status_id %}
+                    <option value="{{ order_status.order_status_id }}" selected="selected">{{ order_status.name }}</option>
+                  {% else %}
+                    <option value="{{ order_status.order_status_id }}">{{ order_status.name }}</option>
+                  {% endif %}
+                {% endfor %}
                 </select>
               </div>
             </div>
@@ -119,19 +107,13 @@
               <div class="col-sm-10">
                 <select name="payment_worldpay_geo_zone_id" id="input-geo-zone" class="form-control">
                   <option value="0">{{ text_all_zones }}</option>
-                  
-				  {% for geo_zone in geo_zones %}
-					  {% if geo_zone.geo_zone_id == payment_worldpay_geo_zone_id %}
-						  
-                  <option value="{{ geo_zone.geo_zone_id }}" selected="selected">{{ geo_zone.name }}</option>
-                  
-					  {% else %}
-						  
-                  <option value="{{ geo_zone.geo_zone_id }}">{{ geo_zone.name }}</option>
-                  
-					  {% endif %}
-				  {% endfor %}
-				
+                  {% for geo_zone in geo_zones %}
+                    {% if geo_zone.geo_zone_id == payment_worldpay_geo_zone_id %}
+                      <option value="{{ geo_zone.geo_zone_id }}" selected="selected">{{ geo_zone.name }}</option>
+                    {% else %}
+                      <option value="{{ geo_zone.geo_zone_id }}">{{ geo_zone.name }}</option>
+                    {% endif %}
+                  {% endfor %}
                 </select>
               </div>
             </div>
@@ -139,19 +121,13 @@
               <label class="col-sm-2 control-label" for="input-debug">{{ entry_debug }}</label>
               <div class="col-sm-10">
                 <select name="payment_worldpay_debug" id="input-debug" class="form-control">
-                  
-				  {% if payment_worldpay_debug %}
-					  
-                  <option value="1" selected="selected">{{ text_enabled }}</option>
-                  <option value="0">{{ text_disabled }}</option>
-                  
-				  {% else %}
-					  
-                  <option value="1">{{ text_enabled }}</option>
-                  <option value="0" selected="selected">{{ text_disabled }}</option>
-                  
-				  {% endif %}
-				
+                  {% if payment_worldpay_debug %}
+                    <option value="1" selected="selected">{{ text_enabled }}</option>
+                    <option value="0">{{ text_disabled }}</option>
+                  {% else %}
+                    <option value="1">{{ text_enabled }}</option>
+                    <option value="0" selected="selected">{{ text_disabled }}</option>
+                  {% endif %}
                 </select>
                 <span class="help-block">{{ help_debug }}</span> </div>
             </div>
@@ -159,19 +135,13 @@
               <label class="col-sm-2 control-label" for="input-status">{{ entry_status }}</label>
               <div class="col-sm-10">
                 <select name="payment_worldpay_status" id="input-status" class="form-control">
-                  
-				  {% if payment_worldpay_status %}
-					  
+                  {% if payment_worldpay_status %}
                   <option value="1" selected="selected">{{ text_enabled }}</option>
                   <option value="0">{{ text_disabled }}</option>
-                  
-				  {% else %}
-					  
+                  {% else %}
                   <option value="1">{{ text_enabled }}</option>
                   <option value="0" selected="selected">{{ text_disabled }}</option>
-                  
-				  {% endif %}
-				
+                  {% endif %}
                 </select>
               </div>
             </div>
@@ -186,60 +156,42 @@
             <div class="form-group">
               <label class="col-sm-2 control-label">{{ entry_success_status }}</label>
               <div class="col-sm-10">
-                <select name="payment_worldpay_entry_success_status_id" class="form-control">
-                  
-				  {% for order_status in order_statuses %}
-					  {% if order_status.order_status_id == payment_worldpay_entry_success_status_id %}
-						  
+                <select name="payment_worldpay_success_status_id" class="form-control">
+                  {% for order_status in order_statuses %}
+                      {% if order_status.order_status_id == payment_worldpay_success_status_id %}
                   <option value="{{ order_status.order_status_id }}" selected="selected">{{ order_status.name }}</option>
-                  
-					  {% else %}
-						  
+                      {% else %}
                   <option value="{{ order_status.order_status_id }}">{{ order_status.name }}</option>
-                  
-					  {% endif %}
-				  {% endfor %}
-				
+                      {% endif %}
+                  {% endfor %}
                 </select>
               </div>
             </div>
             <div class="form-group">
               <label class="col-sm-2 control-label">{{ entry_failed_status }}</label>
               <div class="col-sm-10">
-                <select name="payment_worldpay_entry_failed_status_id" class="form-control">
-                  
-				  {% for order_status in order_statuses %}
-					  {% if order_status.order_status_id == payment_worldpay_entry_failed_status_id %}
-						  
+                <select name="payment_worldpay_failed_status_id" class="form-control">
+                  {% for order_status in order_statuses %}
+                      {% if order_status.order_status_id == payment_worldpay_failed_status_id %}
                   <option value="{{ order_status.order_status_id }}" selected="selected">{{ order_status.name }}</option>
-                  
-					  {% else %}
-						  
+                      {% else %}
                   <option value="{{ order_status.order_status_id }}">{{ order_status.name }}</option>
-                  
-					  {% endif %}
-				  {% endfor %}
-				
+                      {% endif %}
+                  {% endfor %}
                 </select>
               </div>
             </div>
             <div class="form-group">
               <label class="col-sm-2 control-label">{{ entry_settled_status }}</label>
               <div class="col-sm-10">
-                <select name="payment_worldpay_entry_settled_status_id" class="form-control">
-                  
-				  {% for order_status in order_statuses %}
-					  {% if order_status.order_status_id == payment_worldpay_entry_settled_status_id %}
-						  
+                <select name="payment_worldpay_settled_status_id" class="form-control">
+                  {% for order_status in order_statuses %}
+                      {% if order_status.order_status_id == payment_worldpay_settled_status_id %}
                   <option value="{{ order_status.order_status_id }}" selected="selected">{{ order_status.name }}</option>
-                  
-					  {% else %}
-						  
+                      {% else %}
                   <option value="{{ order_status.order_status_id }}">{{ order_status.name }}</option>
-                  
-					  {% endif %}
-				  {% endfor %}
-				
+                      {% endif %}
+                  {% endfor %}
                 </select>
               </div>
             </div>
@@ -247,119 +199,83 @@
               <label class="col-sm-2 control-label">{{ entry_refunded_status }}</label>
               <div class="col-sm-10">
                 <select name="payment_worldpay_refunded_status_id" class="form-control">
-                  
-				  {% for order_status in order_statuses %}
-					  {% if order_status.order_status_id == payment_worldpay_refunded_status_id %}
-						  
+                  {% for order_status in order_statuses %}
+                      {% if order_status.order_status_id == payment_worldpay_refunded_status_id %}
                   <option value="{{ order_status.order_status_id }}" selected="selected">{{ order_status.name }}</option>
-                  
-					  {% else %}
-						  
+                      {% else %}
                   <option value="{{ order_status.order_status_id }}">{{ order_status.name }}</option>
-                  
-					  {% endif %}
-				  {% endfor %}
-				
+                      {% endif %}
+                  {% endfor %}
                 </select>
               </div>
             </div>
             <div class="form-group">
               <label class="col-sm-2 control-label">{{ entry_partially_refunded_status }}</label>
               <div class="col-sm-10">
-                <select name="payment_worldpay_entry_partially_refunded_status_id" class="form-control">
-                  
-				  {% for order_status in order_statuses %}
-					  {% if order_status.order_status_id == payment_worldpay_entry_partially_refunded_status_id %}
-						  
+                <select name="payment_worldpay_partially_refunded_status_id" class="form-control">
+                  {% for order_status in order_statuses %}
+                      {% if order_status.order_status_id == payment_worldpay_partially_refunded_status_id %}
                   <option value="{{ order_status.order_status_id }}" selected="selected">{{ order_status.name }}</option>
-                  
-					  {% else %}
-						  
+                      {% else %}
                   <option value="{{ order_status.order_status_id }}">{{ order_status.name }}</option>
-                  
-					  {% endif %}
-				  {% endfor %}
-				
+                      {% endif %}
+                  {% endfor %}
                 </select>
               </div>
             </div>
             <div class="form-group">
               <label class="col-sm-2 control-label">{{ entry_charged_back_status }}</label>
               <div class="col-sm-10">
-                <select name="payment_worldpay_entry_charged_back_status_id" class="form-control">
-                  
-				  {% for order_status in order_statuses %}
-					  {% if order_status.order_status_id == payment_worldpay_entry_charged_back_status_id %}
-						  
+                <select name="payment_worldpay_charged_back_status_id" class="form-control">
+                  {% for order_status in order_statuses %}
+                      {% if order_status.order_status_id == payment_worldpay_charged_back_status_id %}
                   <option value="{{ order_status.order_status_id }}" selected="selected">{{ order_status.name }}</option>
-                  
-					  {% else %}
-						  
+                      {% else %}
                   <option value="{{ order_status.order_status_id }}">{{ order_status.name }}</option>
-                  
-					  {% endif %}
-				 {% endfor %}
-				
+                      {% endif %}
+                 {% endfor %}
                 </select>
               </div>
             </div>
             <div class="form-group">
               <label class="col-sm-2 control-label">{{ entry_information_requested_status }}</label>
               <div class="col-sm-10">
-                <select name="payment_worldpay_entry_information_requested_status_id" class="form-control">
-                  
-				  {% for order_status in order_statuses %}
-					  {% if order_status.order_status_id == payment_worldpay_entry_information_requested_status_id %}
-						  
+                <select name="payment_worldpay_information_requested_status_id" class="form-control">
+                  {% for order_status in order_statuses %}
+                      {% if order_status.order_status_id == payment_worldpay_information_requested_status_id %}
                   <option value="{{ order_status.order_status_id }}" selected="selected">{{ order_status.name }}</option>
-                  
-					  {% else %}
-						  
+                      {% else %}
                   <option value="{{ order_status.order_status_id }}">{{ order_status.name }}</option>
-                  
-					  {% endif %}
-				  {% endfor %}
-				
+                      {% endif %}
+                  {% endfor %}
                 </select>
               </div>
             </div>
             <div class="form-group">
               <label class="col-sm-2 control-label">{{ entry_information_supplied_status }}</label>
               <div class="col-sm-10">
-                <select name="payment_worldpay_entry_information_supplied_status_id" class="form-control">
-                  
-				  {% for order_status in order_statuses %}
-					  {% if order_status.order_status_id == payment_worldpay_entry_information_supplied_status_id %}
-						  
+                <select name="payment_worldpay_information_supplied_status_id" class="form-control">
+                  {% for order_status in order_statuses %}
+                      {% if order_status.order_status_id == payment_worldpay_information_supplied_status_id %}
                   <option value="{{ order_status.order_status_id }}" selected="selected">{{ order_status.name }}</option>
-                  
-					  {% else %}
-						  
+                      {% else %}
                   <option value="{{ order_status.order_status_id }}">{{ order_status.name }}</option>
-                  
-					 {% endif %}
-				  {% endfor %}
-				
+                     {% endif %}
+                  {% endfor %}
                 </select>
               </div>
             </div>
             <div class="form-group">
               <label class="col-sm-2 control-label">{{ entry_chargeback_reversed_status }}</label>
               <div class="col-sm-10">
-                <select name="payment_worldpay_entry_chargeback_reversed_status_id" class="form-control">
-                  
-				  {% for order_status in order_statuses %}
-					  {% if order_status.order_status_id == payment_worldpay_entry_chargeback_reversed_status_id %}
-						  
+                <select name="payment_worldpay_chargeback_reversed_status_id" class="form-control">
+                  {% for order_status in order_statuses %}
+                      {% if order_status.order_status_id == payment_worldpay_chargeback_reversed_status_id %}
                   <option value="{{ order_status.order_status_id }}" selected="selected">{{ order_status.name }}</option>
-                  
-					  {% else %}
-						  
+                      {% else %}
                   <option value="{{ order_status.order_status_id }}">{{ order_status.name }}</option>
-                  
-					  {% endif %}
-				  {% endfor %}
-				
+                      {% endif %}
+                  {% endfor %}
                 </select>
               </div>
             </div>

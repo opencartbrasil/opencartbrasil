@@ -82,7 +82,6 @@ class ModelExtensionPaymentWorldpay extends Model {
 	}
 
 	public function getOrder($order_id) {
-
 		$qry = $this->db->query("SELECT * FROM `" . DB_PREFIX . "worldpay_order` WHERE `order_id` = '" . (int)$order_id . "' LIMIT 1");
 
 		if ($qry->num_rows) {
@@ -127,7 +126,6 @@ class ModelExtensionPaymentWorldpay extends Model {
 	}
 
 	public function sendCurl($url, $order) {
-
 		$json = json_encode($order);
 
 		$curl = curl_init();
