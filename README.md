@@ -144,6 +144,7 @@ Se você é o profissional que administra os servidores que armazenam os arquivo
 | -------- | ----- |
 | `wait_timeout` | 30 |
 | `interactive_timeout` | 30 |
+| `max_allowed_packet` | 16777216 |
 
 ### Extensões básicas necessárias no PHP:
 
