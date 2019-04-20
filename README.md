@@ -140,11 +140,11 @@ Se você é o profissional que administra os servidores que armazenam os arquivo
 
 ### Configurações mínimas recomendadas no MySQL/MariaDB:
 
-| Variável | Valor |
-| -------- | ----- |
-| `wait_timeout` | 30 |
-| `interactive_timeout` | 30 |
-| `max_allowed_packet` | 16777216 |
+| Variável | Valor | Observações |
+| -------- | ----- | ----------- |
+| `wait_timeout` | 30 | 30 segundos |
+| `interactive_timeout` | 30 | 30 segundos |
+| `max_allowed_packet` | 16777216 | 16M |
 
 ### Extensões básicas necessárias no PHP:
 
