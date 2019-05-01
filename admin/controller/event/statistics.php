@@ -7,7 +7,7 @@ class ControllerEventStatistics extends Controller {
 		$this->model_report_statistics->addValue('review', 1);
 	}
 
-	// model/catalog/review/deleteReview/after
+	// model/catalog/review/deleteReview/before
 	public function deleteReview(&$route, &$args, &$output) {
 		$this->load->model('setting/statistics');
 
@@ -21,7 +21,7 @@ class ControllerEventStatistics extends Controller {
 		$this->model_report_statistics->addValue('return', 1);
 	}
 
-	// model/sale/return/deleteReturn/after
+	// model/sale/return/deleteReturn/before
 	public function deleteReturn(&$route, &$args, &$output) {
 		$this->load->model('setting/statistics');
 
