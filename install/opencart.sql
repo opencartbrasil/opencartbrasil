@@ -1507,6 +1507,14 @@ INSERT INTO `oc_event` (`event_id`, `code`, `trigger`, `action`, `status`) VALUE
 (33, 'admin_mail_forgotten', 'admin/model/user/user/editCode/after', 'mail/forgotten', 1);
 INSERT INTO `oc_event` (`event_id`, `code`, `trigger`, `action`, `status`) VALUES
 (34, 'statistics_order_delete', 'catalog/model/checkout/order/deleteOrder/before', 'event/statistics/deleteOrder', 1);
+INSERT INTO `oc_event` (`event_id`, `code`, `trigger`, `action`, `status`) VALUES
+(35, 'admin_statistics_review_delete', 'admin/model/catalog/review/deleteReview/before', 'event/statistics/deleteReview', 1);
+INSERT INTO `oc_event` (`event_id`, `code`, `trigger`, `action`, `status`) VALUES
+(36, 'admin_statistics_return_delete', 'admin/model/sale/return/deleteReturn/before', 'event/statistics/deleteReturn', 1);
+INSERT INTO `oc_event` (`event_id`, `code`, `trigger`, `action`, `status`) VALUES
+(37, 'admin_statistics_review_add', 'admin/model/catalog/review/addReview/after', 'event/statistics/addReview', 1);
+INSERT INTO `oc_event` (`event_id`, `code`, `trigger`, `action`, `status`) VALUES
+(38, 'admin_statistics_return_add', 'admin/model/sale/return/addReturn/after', 'event/statistics/addReturn', 1);
 
 -----------------------------------------------------------
 
