@@ -8,8 +8,8 @@ class ControllerEventStatistics extends Controller {
 	}
 
 	// model/catalog/review/deleteReview/before
-	public function deleteReview(&$route, &$args, &$output) {
-		$this->load->model('setting/statistics');
+	public function deleteReview(&$route, &$args) {
+		$this->load->model('report/statistics');
 
 		$this->model_report_statistics->removeValue('review', 1);
 	}
@@ -22,8 +22,8 @@ class ControllerEventStatistics extends Controller {
 	}
 
 	// model/sale/return/deleteReturn/before
-	public function deleteReturn(&$route, &$args, &$output) {
-		$this->load->model('setting/statistics');
+	public function deleteReturn(&$route, &$args) {
+		$this->load->model('report/statistics');
 
 		$this->model_report_statistics->removeValue('return', 1);
 	}
