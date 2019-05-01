@@ -180,10 +180,10 @@ class ModelUpgrade1004 extends Model {
 							$module_data['name'] = ($result['key'] . '_' . $k);
 							$module_data['status'] = $v['status'];
 							$module_data['banner_id'] = $v['banner_id'];
-							if (isset($v['image_width'])) {	$module_data['width'] = $v['image_width']; }
+							if (isset($v['image_width'])) { $module_data['width'] = $v['image_width']; }
 							if (isset($v['image_height'])) { $module_data['height'] = $v['image_height']; }
-							if (isset($v['width'])) {	$module_data['width'] = $v['width']; }
-							if (isset($v['height'])) {	$module_data['height'] = $v['height']; }
+							if (isset($v['width'])) { $module_data['width'] = $v['width']; }
+							if (isset($v['height'])) { $module_data['height'] = $v['height']; }
 
 							$this->db->query("INSERT INTO `" . DB_PREFIX . "module` (`name`, `code`, `setting`) values ('" . $this->db->escape($result['key']) . '_' . $k . "', '" . $this->db->escape($result['code']) . "', '" . $this->db->escape(json_encode($module_data)) . "')");
 							$module_id = $this->db->getLastId();

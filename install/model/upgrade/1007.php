@@ -79,7 +79,7 @@ class ModelUpgrade1007 extends Model {
 		if ($query->num_rows) {
 			$this->db->query("ALTER TABLE `" . DB_PREFIX . "paypal_order_transaction` CHANGE `created` `date_added` datetime NOT NULL");
 		}
-		
+
 		// Banner
 		$query = $this->db->query("SELECT * FROM information_schema.COLUMNS WHERE TABLE_SCHEMA = '" . DB_DATABASE . "' AND TABLE_NAME = '" . DB_PREFIX . "banner_image' AND COLUMN_NAME = 'language_id'");
 
@@ -88,7 +88,7 @@ class ModelUpgrade1007 extends Model {
 		}
 
 		$query = $this->db->query("SELECT * FROM information_schema.COLUMNS WHERE TABLE_SCHEMA = '" . DB_DATABASE . "' AND TABLE_NAME = '" . DB_PREFIX . "banner_image' AND COLUMN_NAME = 'title'");
-		
+
 		if (!$query->num_rows) {
 			$this->db->query("ALTER TABLE `" . DB_PREFIX . "banner_image` ADD `title` VARCHAR(64) NOT NULL AFTER `language_id`");
 		}
@@ -100,14 +100,14 @@ class ModelUpgrade1007 extends Model {
 
 			foreach ($banner_image_query->rows as $banner_image) {
 				$this->db->query("DELETE FROM `" . DB_PREFIX . "banner_image` WHERE banner_image_id = '" . (int)$banner_image['banner_image_id'] . "'");
-				
+
 				$banner_image_description_query = $this->db->query("SELECT * FROM `" . DB_PREFIX . "banner_image_description` WHERE banner_image_id = '" . (int)$banner_image['banner_image_id'] . "'");
-				
+
 				foreach ($banner_image_description_query->rows as $banner_image_description) {
 					$this->db->query("INSERT INTO `" . DB_PREFIX . "banner_image` SET banner_id = '" . (int)$banner_image['banner_id'] . "', language_id = '" . (int)$banner_image_description['language_id'] . "', title = '" . $this->db->escape($banner_image_description['title']) . "', link = '" . $this->db->escape($banner_image['link']) . "', image = '" . $this->db->escape($banner_image['image']) . "', sort_order = '" . (int)$banner_image['sort_order'] . "'");
 				}
 			}
-			
+
 			$this->db->query("DROP TABLE `" . DB_PREFIX . "banner_image_description`");
 		}
 	}
