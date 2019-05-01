@@ -221,9 +221,9 @@ class ModelLocalisationLanguage extends Model {
 
 		/*
 		Do not put any delete code for related tables for languages!!!!!!!!!
-		
-		It is not required as when ever you re save to a multi language table then the entries for the deleted language will also be deleted! 
-		
+
+		It is not required as whenever you re save to a multi language table then the entries for the deleted language will also be deleted! 
+
 		Wasting my time with people adding code here!
 		*/
 	}
