@@ -6,6 +6,22 @@ e utiliza [Semantic Versioning](https://semver.org/lang/pt-BR/spec/v2.0.0.html).
 
 ## [Não lançada]
 
+## [1.3.2] (Data de lançamento: 01.05.2019)
+### Corrigido
+- Várias correções ortográficas
+- Correção no upgrade do banco de dados
+- Correções e melhorias na estatística de comentários e devoluções
+
+### Adicionado
+- Validação da URL amigável no Editor de URL amigável
+
+### Modificado
+- Melhorias no gerenciamento da sessão
+- Melhorias na instrução de atualização da versão
+
+### Removido
+- Remoção de chamadas de cache não utilizadas
+
 ## [1.3.1] (Data de lançamento: 16.04.2019)
 ### Corrigido
 - Correção nos links para https
@@ -297,7 +313,8 @@ e utiliza [Semantic Versioning](https://semver.org/lang/pt-BR/spec/v2.0.0.html).
 - Cupons de descontos para demonstração.
 - Moedas: Euro e Libra esterlina.
 
-[Não lançada]: https://github.com/opencartbrasil/opencartbrasil/compare/v1.3.1...HEAD
+[Não lançada]: https://github.com/opencartbrasil/opencartbrasil/compare/v1.3.2...HEAD
+[1.3.2]: https://github.com/opencartbrasil/opencartbrasil/compare/v1.3.1...v1.3.2
 [1.3.1]: https://github.com/opencartbrasil/opencartbrasil/compare/v1.3.0...v1.3.1
 [1.3.0]: https://github.com/opencartbrasil/opencartbrasil/compare/v1.2.4...v1.3.0
 [1.2.4]: https://github.com/opencartbrasil/opencartbrasil/compare/v1.2.3...v1.2.4
