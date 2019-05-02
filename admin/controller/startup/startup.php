@@ -65,5 +65,11 @@ class ControllerStartupStartup extends Controller {
 
 		// OpenBay Pro
 		$this->registry->set('openbay', new Openbay($this->registry));
+
+		// Provider
+		$this->registry->set('provider', $this->load->controller('common/provider'));
+
+		// Breadcrumbs
+		$this->registry->set('breadcrumbs', $this->load->controller('common/breadcrumbs'));
 	}
 }
