@@ -68,15 +68,11 @@ class ControllerCommonProvider extends Controller {
 			unset($params['route']);
 		}
 
-		$url = '';
+		$query = array_filter($params, function($value) {
+			return $value !== '';
+		});
 		
-		foreach ($params as $key => $param) {
-			if (!is_numeric($param) && empty($param)) {
-				continue;
-			}
-
-			$url .= "&{$key}={$param}";
-		}
+		$url = http_build_query($query, '', '&');
 
 		return $this->url->link($route, $url);
 	}
