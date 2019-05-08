@@ -10,6 +10,28 @@ class ControllerStartupSession extends Controller {
 				$ip = $this->request->server['REMOTE_ADDR'];
 			}
 
+			if (isset($this->request->server['HTTP_X_FORWARDED_FOR'])) {
+				$xip = trim(current(explode(',', $this->request->server['HTTP_X_FORWARDED_FOR'])));
+
+				if (filter_var($xip, FILTER_VALIDATE_IP, FILTER_FLAG_NO_PRIV_RANGE | FILTER_FLAG_NO_RES_RANGE)) {
+					if (isset($this->request->server['SERVER_ADDR']) && $this->request->server['SERVER_ADDR'] != $xip) {
+						$ip = $xip;
+					}
+				}
+			}
+
+			if(isset($this->request->server['HTTP_CF_CONNECTING_IP']) && filter_var($this->request->server['HTTP_CF_CONNECTING_IP'], FILTER_VALIDATE_IP)){
+				$ip = $this->request->server['HTTP_CF_CONNECTING_IP'];
+			}
+
+			if(isset($this->request->server['HTTP_INCAP_CLIENT_IP']) && filter_var($this->request->server['HTTP_INCAP_CLIENT_IP'], FILTER_VALIDATE_IP)){
+				$ip = $this->request->server['HTTP_INCAP_CLIENT_IP'];
+			}
+
+			if(isset($this->request->server['HTTP_X_SUCURI_CLIENTIP']) && filter_var($this->request->server['HTTP_X_SUCURI_CLIENTIP'], FILTER_VALIDATE_IP)){
+				$ip = $this->request->server['HTTP_X_SUCURI_CLIENTIP'];
+			}
+
 			// Make sure the IP is allowed
 			$api_token = (array_key_exists('api_token', $this->request->get)) ? (string)$this->request->get['api_token'] : '';
 			$api_query = $this->db->query("SELECT DISTINCT * FROM `" . DB_PREFIX . "api` `a` LEFT JOIN `" . DB_PREFIX . "api_session` `as` ON (a.api_id = as.api_id) LEFT JOIN " . DB_PREFIX . "api_ip `ai` ON (a.api_id = ai.api_id) WHERE a.status = '1' AND `as`.`session_id` = '" . $this->db->escape((string)$api_token) . "' AND ai.ip = '" . $this->db->escape((string)$ip) . "'");
