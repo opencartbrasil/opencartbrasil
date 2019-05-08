@@ -6,6 +6,12 @@ e utiliza [Semantic Versioning](https://semver.org/lang/pt-BR/spec/v2.0.0.html).
 
 ## [Não lançada]
 
+## [1.3.3] (Data de lançamento: 08.05.2019)
+### Corrigido
+- Melhoria na sintaxe do index.php
+- Melhorias na identificação de eventos estatísticos
+- Correção na API para hospedagem com proxy estranho
+
 ## [1.3.2] (Data de lançamento: 01.05.2019)
 ### Corrigido
 - Várias correções ortográficas
@@ -313,7 +319,8 @@ e utiliza [Semantic Versioning](https://semver.org/lang/pt-BR/spec/v2.0.0.html).
 - Cupons de descontos para demonstração.
 - Moedas: Euro e Libra esterlina.
 
-[Não lançada]: https://github.com/opencartbrasil/opencartbrasil/compare/v1.3.2...HEAD
+[Não lançada]: https://github.com/opencartbrasil/opencartbrasil/compare/v1.3.3...HEAD
+[1.3.3]: https://github.com/opencartbrasil/opencartbrasil/compare/v1.3.2...v1.3.3
 [1.3.2]: https://github.com/opencartbrasil/opencartbrasil/compare/v1.3.1...v1.3.2
 [1.3.1]: https://github.com/opencartbrasil/opencartbrasil/compare/v1.3.0...v1.3.1
 [1.3.0]: https://github.com/opencartbrasil/opencartbrasil/compare/v1.2.4...v1.3.0
