@@ -83,6 +83,11 @@ class ControllerToolUpdate extends Controller {
         if (!$json && isset($this->session->data['version'])) {
             set_time_limit(0);
 
+            $file = DIR_DOWNLOAD . 'opencartbrasil.zip';
+            if (is_file($file)) {
+                @unlink($file);
+            }
+
             $handle = fopen(DIR_DOWNLOAD . 'opencartbrasil.zip', 'w');
 
             $curl = curl_init('https://github.com/opencartbrasil/opencartbrasil/releases/download/'.$this->session->data['version'].'/opencartbrasil.zip');
@@ -128,7 +133,6 @@ class ControllerToolUpdate extends Controller {
         }
 
         $file = DIR_DOWNLOAD . 'opencartbrasil.zip';
-
         if (!is_file($file)) {
             $this->maintenance_off();
 
@@ -224,6 +228,28 @@ class ControllerToolUpdate extends Controller {
                 if (is_file($file)) {
                     if (!rename($file, $path)) {
                         $json['error'] = sprintf($this->language->get('error_file'), $destination);
+                    }
+                }
+            }
+
+            $files = array();
+            $path = array(DIR_MODIFICATION . '*');
+            while (count($path) != 0) {
+                $next = array_shift($path);
+                foreach (glob($next) as $file) {
+                    if (is_dir($file)) {
+                        $path[] = $file . '/*';
+                    }
+                    $files[] = $file;
+                }
+            }
+            rsort($files);
+            foreach ($files as $file) {
+                if ($file != DIR_MODIFICATION . 'index.html') {
+                    if (is_file($file)) {
+                        @unlink($file);
+                    } elseif (is_dir($file)) {
+                        @rmdir($file);
                     }
                 }
             }
@@ -363,7 +389,6 @@ class ControllerToolUpdate extends Controller {
             $files = array();
 
             $path = array($directory);
-
             while (count($path) != 0) {
                 $next = array_shift($path);
 
@@ -394,44 +419,36 @@ class ControllerToolUpdate extends Controller {
         }
 
         $file = DIR_DOWNLOAD . 'opencartbrasil.zip';
-
         if (is_file($file)) {
             @unlink($file);
         }
    }
 
     private function cache_ocmod() {
-        $log = array();
-        $log_error = array();
-
         $files = array();
-
         $path = array(DIR_MODIFICATION . '*');
-
         while (count($path) != 0) {
             $next = array_shift($path);
-
             foreach (glob($next) as $file) {
                 if (is_dir($file)) {
                     $path[] = $file . '/*';
                 }
-
                 $files[] = $file;
             }
         }
-
         rsort($files);
-
         foreach ($files as $file) {
             if ($file != DIR_MODIFICATION . 'index.html') {
                 if (is_file($file)) {
                     @unlink($file);
-
                 } elseif (is_dir($file)) {
                     @rmdir($file);
                 }
             }
         }
+
+        $log = array();
+        $log_error = array();
 
         $xml = array();
         $xml[] = file_get_contents(DIR_SYSTEM . 'modification.xml');
