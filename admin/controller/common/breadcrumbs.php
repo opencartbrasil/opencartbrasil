@@ -22,30 +22,18 @@ class ControllerCommonBreadcrumbs extends Controller {
 	public function setDefaults()
 	{
 		$count_routes = count($this->routes);
-
-		if ($this->routes[0] === 'extension') {				
-			$this->load->language('marketplace/extension');
-
-			$this->breadcrumbs[] = [
-				'text' => $this->language->get('heading_title'),
-				'href' => $this->provider->link('marketplace/extension')
-			];
-		}
-
-		if ($this->routes[0] === 'setting') {				
-			$this->load->language('setting/store');
-
-			$this->breadcrumbs[] = [
-				'text' => $this->language->get('heading_title'),
-				'href' => $this->provider->link('setting/store')
-			];
-		}
-
+		
 		if ($count_routes >= 2) {
 			$routes = array_slice($this->routes, 0, 2);
-
+			
 			$route = implode('/', $routes);
-
+			
+			$list = array('extension' => 'marketplace/extension', 'setting' => 'setting/store');
+			
+			if (array_key_exists($this->routes[0], $list)) {
+				$route = $list[$this->routes[0]];
+			}
+			
 			$this->load->language($route);
 
 			$this->breadcrumbs[] = [
@@ -61,11 +49,6 @@ class ControllerCommonBreadcrumbs extends Controller {
 			'text' => $this->language->get($text),
 			'href' => $this->provider->link($route)
 		];
-	}
-
-	public function detach($key)
-	{
-		$this->provider->detach($key);
 	}
 
 	public function render()
