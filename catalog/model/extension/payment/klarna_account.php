@@ -50,7 +50,7 @@ class ModelExtensionPaymentKlarnaAccount extends Model {
 		if ($status) {
 			$total = $this->currency->format($total, $country_to_currency[$address['iso_code_3']], '', false);
 
-			$pclasses = $this->config->get('klarna_account_pclasses');
+			$pclasses = $this->config->get('payment_klarna_account_pclasses');
 
 			if (isset($pclasses[$address['iso_code_3']])) {
 				$pclasses = $pclasses[$address['iso_code_3']];

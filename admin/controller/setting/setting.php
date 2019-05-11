@@ -131,6 +131,12 @@ class ControllerSettingSetting extends Controller {
 			$data['error_encryption'] = '';
 		}
 
+		if (isset($this->error['cron_token'])) {
+			$data['error_cron_token'] = $this->error['cron_token'];
+		} else {
+			$data['error_cron_token'] = '';
+		}
+
 		$data['breadcrumbs'] = array();
 
 		$data['breadcrumbs'][] = array(
@@ -852,6 +858,14 @@ class ControllerSettingSetting extends Controller {
 			$data['config_encryption'] = $this->config->get('config_encryption');
 		}
 
+		if (isset($this->request->post['config_cron_token'])) {
+			$data['config_cron_token'] = $this->request->post['config_cron_token'];
+		} elseif ($this->config->get('config_cron_token')) {
+			$data['config_cron_token'] = $this->config->get('config_cron_token');
+		} else {
+			$data['config_cron_token'] = token(64);
+		}
+
 		if (isset($this->request->post['config_compression'])) {
 			$data['config_compression'] = $this->request->post['config_compression'];
 		} else {
@@ -950,6 +964,10 @@ class ControllerSettingSetting extends Controller {
 
 		if ((utf8_strlen($this->request->post['config_encryption']) < 32) || (utf8_strlen($this->request->post['config_encryption']) > 1024)) {
 			$this->error['encryption'] = $this->language->get('error_encryption');
+		}
+
+		if (!isset($this->request->post['config_cron_token'])) {
+			$this->error['config_cron_token'] = $this->language->get('config_cron_token');
 		}
 
 		if ($this->error && !isset($this->error['warning'])) {

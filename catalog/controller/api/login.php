@@ -1,73 +1,91 @@
 <?php
 class ControllerApiLogin extends Controller {
 	public function index() {
-		$this->load->language('api/login');
-
 		$json = array();
 
-		$this->load->model('account/api');
+		$this->load->language('api/login');
 
-		// Login with API Key
-		$api_info = $this->model_account_api->login($this->request->post['username'], $this->request->post['key']);
+		if (isset($this->request->server['REQUEST_METHOD']) && $this->request->server['REQUEST_METHOD'] === 'POST') {
+			if (isset($this->request->post['username']) && isset($this->request->post['key'])) {
+				$this->load->model('account/api');
 
-		if ($api_info) {
-			// Check if IP is allowed
-			$ip_data = array();
+				// Login with API Key
+				$api_info = $this->model_account_api->login($this->request->post['username'], $this->request->post['key']);
 
-			$results = $this->model_account_api->getApiIps($api_info['api_id']);
+				if ($api_info) {
+					// Check if IP is allowed
+					$ip_data = array();
 
-			foreach ($results as $result) {
-				$ip_data[] = trim($result['ip']);
-			}
+					$results = $this->model_account_api->getApiIps($api_info['api_id']);
 
-			$ip = '';
+					foreach ($results as $result) {
+						$ip_data[] = trim($result['ip']);
+					}
 
-			if (isset($_SERVER['REMOTE_ADDR']) && filter_var($_SERVER['REMOTE_ADDR'], FILTER_VALIDATE_IP)) {
-				$ip = $_SERVER['REMOTE_ADDR'];
-			}
+					$ip = '';
 
-			if(isset($_SERVER['HTTP_CF_CONNECTING_IP']) && filter_var($_SERVER['HTTP_CF_CONNECTING_IP'], FILTER_VALIDATE_IP)){
-				$ip = $_SERVER['HTTP_CF_CONNECTING_IP'];
-			}
+					if (isset($this->request->server['REMOTE_ADDR']) && filter_var($this->request->server['REMOTE_ADDR'], FILTER_VALIDATE_IP)) {
+						$ip = $this->request->server['REMOTE_ADDR'];
+					}
 
-			if(isset($_SERVER['HTTP_INCAP_CLIENT_IP']) && filter_var($_SERVER['HTTP_INCAP_CLIENT_IP'], FILTER_VALIDATE_IP)){
-				$ip = $_SERVER['HTTP_INCAP_CLIENT_IP'];
-			}
+					if (isset($this->request->server['HTTP_X_FORWARDED_FOR'])) {
+						$xip = trim(current(explode(',', $this->request->server['HTTP_X_FORWARDED_FOR'])));
 
-			if(isset($_SERVER['HTTP_X_SUCURI_CLIENTIP']) && filter_var($_SERVER['HTTP_X_SUCURI_CLIENTIP'], FILTER_VALIDATE_IP)){
-				$ip = $_SERVER['HTTP_X_SUCURI_CLIENTIP'];
-			}
+						if (filter_var($xip, FILTER_VALIDATE_IP, FILTER_FLAG_NO_PRIV_RANGE | FILTER_FLAG_NO_RES_RANGE)) {
+							if (isset($this->request->server['SERVER_ADDR']) && $this->request->server['SERVER_ADDR'] != $xip) {
+								$ip = $xip;
+							}
+						}
+					}
 
-			if (isset($_SERVER['HTTP_X_FORWARDED_FOR'])) {
-				$xip = trim(current(explode(',', $_SERVER['HTTP_X_FORWARDED_FOR'])));
+					if(isset($this->request->server['HTTP_CF_CONNECTING_IP']) && filter_var($this->request->server['HTTP_CF_CONNECTING_IP'], FILTER_VALIDATE_IP)){
+						$ip = $this->request->server['HTTP_CF_CONNECTING_IP'];
+					}
 
-				if (filter_var($xip, FILTER_VALIDATE_IP, FILTER_FLAG_NO_PRIV_RANGE | FILTER_FLAG_NO_RES_RANGE)) {
-					$ip = $xip;
+					if(isset($this->request->server['HTTP_INCAP_CLIENT_IP']) && filter_var($this->request->server['HTTP_INCAP_CLIENT_IP'], FILTER_VALIDATE_IP)){
+						$ip = $this->request->server['HTTP_INCAP_CLIENT_IP'];
+					}
+
+					if(isset($this->request->server['HTTP_X_SUCURI_CLIENTIP']) && filter_var($this->request->server['HTTP_X_SUCURI_CLIENTIP'], FILTER_VALIDATE_IP)){
+						$ip = $this->request->server['HTTP_X_SUCURI_CLIENTIP'];
+					}
+
+					if (in_array($ip, $ip_data)) {
+						$session = new Session($this->config->get('session_engine'), $this->registry);
+						$session->start();
+
+						$this->model_account_api->addApiSession($api_info['api_id'], $session->getId(), $ip);
+
+						$session->data['api_id'] = $api_info['api_id'];
+
+						// Create Token
+						$http_code = '201 Created';
+
+						$json['success'] = $this->language->get('text_success');
+						$json['api_token'] = $session->getId();
+					} else {
+						$http_code = '403 Forbidden';
+
+						$json['error']['ip'] = sprintf($this->language->get('error_ip'), $ip);
+					}
+				} else {
+					$http_code = '401 Unauthorized';
+
+					$json['error']['key'] = $this->language->get('error_key');
 				}
-			}
-
-			if (!in_array($ip, $ip_data)) {
-				$json['error']['ip'] = sprintf($this->language->get('error_ip'), $ip);
-			}
-
-			if (!$json) {
-				$json['success'] = $this->language->get('text_success');
-
-				$session = new Session($this->config->get('session_engine'), $this->registry);
-				$session->start();
-
-				$this->model_account_api->addApiSession($api_info['api_id'], $session->getId(), $ip);
-
-				$session->data['api_id'] = $api_info['api_id'];
-
-				// Create Token
-				$json['api_token'] = $session->getId();
 			} else {
-				$json['error']['key'] = $this->language->get('error_key');
+				$http_code = '400 Bad Request';
+
+				$json['error']['request'] = $this->language->get('error_request');
 			}
+		} else {
+			$http_code = '405 Method Not Allowed';
+
+			$json['error']['method'] = $this->language->get('error_method');
 		}
 
 		$this->response->addHeader('Content-Type: application/json');
+		$this->response->addHeader($this->request->server['SERVER_PROTOCOL'] . ' ' . $http_code);
 		$this->response->setOutput(json_encode($json));
 	}
 }

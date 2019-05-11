@@ -4,7 +4,7 @@ $_['heading_title']      = 'Update version OpenCart Brasil';
 
 // Text
 $_['text_success']       = 'Success: You are using the latest version %s!';
-$_['text_instructions']  = '<strong>Update Instructions:</strong><br>1. Make a <strong>full backup</strong> of the store before the update.<br>2. Make sure that all <strong>folders</strong> have <strong>755</strong> permission and the <strong>files</strong> have <strong>644</strong> permission.<br>3. Make sure that the PHP <strong>max_execution_time</strong> directive is set to <strong>360</strong> or higher.<br>4. Start Update.';
+$_['text_instructions']  = '<strong>Update Instructions:</strong><br>1. Make a <strong>full backup</strong> of the store before the update.<br>2. Make sure that all <strong>folders</strong> have <strong>755</strong> permission and the <strong>files</strong> have <strong>644</strong> permission.<br>3. Make sure that the PHP <strong>max_execution_time</strong> directive is set to <strong>360</strong> or higher.<br>4. Make sure that the MySQL or MariaDB database variables <strong>wait_timeout</strong> and <strong>interactive_timeout</strong> are set to <strong>30</strong> or higher.<br><br>5. Start Update.';
 $_['text_update']        = 'Start update';
 $_['text_change']        = 'Change Log %s';
 $_['text_log']           = 'Update Log';

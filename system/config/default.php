@@ -55,7 +55,7 @@ $_['error_display']        = true;
 $_['error_log']            = true;
 $_['error_filename']       = 'error.log';
 
-// Reponse
+// Response
 $_['response_header']      = array('Content-Type: text/html; charset=utf-8');
 $_['response_compression'] = 0;
 
@@ -65,7 +65,7 @@ $_['config_autoload']      = array();
 // Autoload Libraries
 $_['library_autoload']     = array();
 
-// Autoload Libraries
+// Autoload Models
 $_['model_autoload']       = array();
 
 // Actions
@@ -74,3 +74,4 @@ $_['action_router']        = 'startup/router';
 $_['action_error']         = 'error/not_found';
 $_['action_pre_action']    = array();
 $_['action_event']         = array();
+$_['action_cron']          = array();

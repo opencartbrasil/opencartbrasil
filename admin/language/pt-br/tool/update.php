@@ -4,7 +4,7 @@ $_['heading_title']      = 'Atualização da versão OpenCart Brasil';
 
 // Text
 $_['text_success']       = 'Parabéns! Sua versão %s é a mais atual!';
-$_['text_instructions']  = '<strong>Instruções para atualização:</strong><br>1º Faça um <strong>backup completo</strong> da loja antes da atualização.<br>2º Certifique-se que todas as <strong>pastas</strong> tem permissão <strong>755</strong> e os <strong>arquivos</strong> tem a permissão <strong>644</strong>.<br>3º Certifique-se que a diretiva PHP <strong>max_execution_time</strong> está definida como <strong>360</strong> ou superior.<br>4º Inicie a atualização.';
+$_['text_instructions']  = '<strong>Instruções para atualização:</strong><br>1º Faça um <strong>backup completo</strong> da loja antes da atualização.<br>2º Certifique-se que todas as <strong>pastas</strong> tem permissão <strong>755</strong> e os <strong>arquivos</strong> tem a permissão <strong>644</strong>.<br>3º Certifique-se que a diretiva PHP <strong>max_execution_time</strong> está definida como <strong>360</strong> ou superior.<br>4º Certifique-se que as variáveis do banco de dados MySQL ou MariaDB <strong>wait_timeout</strong> e <strong>interactive_timeout</strong> estejam definidas como <strong>30</strong> ou superior.<br>5º Inicie a atualização.';
 $_['text_update']        = 'Inciar atualização';
 $_['text_change']        = 'Sobre a versão %s';
 $_['text_log']           = 'Log de informações da atualização';

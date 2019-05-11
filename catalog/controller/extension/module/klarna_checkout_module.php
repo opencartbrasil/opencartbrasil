@@ -4,7 +4,7 @@ class ControllerExtensionModuleKlarnaCheckoutModule extends Controller {
 		$this->load->model('extension/payment/klarna_checkout');
 
 		// If Payment Method or Module is disabled
-		if (!$this->config->get('module_klarna_checkout_status') || !$this->config->get('klarna_checkout_status')) {
+		if (!$this->config->get('module_klarna_checkout_status') || !$this->config->get('payment_klarna_checkout_status')) {
 			$this->model_extension_payment_klarna_checkout->log('Not shown due to Payment Method or Module being disabled');
 			return false;
 		}
@@ -41,7 +41,7 @@ class ControllerExtensionModuleKlarnaCheckoutModule extends Controller {
 
 		list($totals, $taxes, $total) = $this->model_extension_payment_klarna_checkout->getTotals();
 
-		if ($this->config->get('klarna_checkout_total') > 0 && $this->config->get('klarna_checkout_total') > $total) {
+		if ($this->config->get('payment_klarna_checkout_total') > 0 && $this->config->get('payment_klarna_checkout_total') > $total) {
 			return false;
 		}
 
@@ -52,7 +52,7 @@ class ControllerExtensionModuleKlarnaCheckoutModule extends Controller {
 
 		$this->setShipping();
 
-		list($klarna_account, $connector) = $this->model_extension_payment_klarna_checkout->getConnector($this->config->get('klarna_checkout_account'), $this->session->data['currency']);
+		list($klarna_account, $connector) = $this->model_extension_payment_klarna_checkout->getConnector($this->config->get('payment_klarna_checkout_account'), $this->session->data['currency']);
 
 		if (!$klarna_account || !$connector) {
 			$this->model_extension_payment_klarna_checkout->log('Couldn\'t secure connection to Klarna API.');

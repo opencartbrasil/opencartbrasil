@@ -171,6 +171,14 @@ class ControllerCommonColumnLeft extends Controller {
 				);
 			}
 
+			if ($this->user->hasPermission('access', 'marketplace/cron')) {
+				$marketplace[] = array(
+					'name'	   => $this->language->get('text_cron'),
+					'href'     => $this->url->link('marketplace/cron', 'user_token=' . $this->session->data['user_token']),
+					'children' => array()
+				);
+			}
+
 			if ($marketplace) {
 				$data['menus'][] = array(
 					'id'       => 'menu-extension',

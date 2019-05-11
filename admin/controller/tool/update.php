@@ -83,9 +83,14 @@ class ControllerToolUpdate extends Controller {
         if (!$json && isset($this->session->data['version'])) {
             set_time_limit(0);
 
-            $handle = fopen(DIR_DOWNLOAD . 'opencartbrasil-3.0.2.0.zip', 'w');
+            $file = DIR_DOWNLOAD . 'opencartbrasil.zip';
+            if (is_file($file)) {
+                @unlink($file);
+            }
 
-            $curl = curl_init('https://github.com/opencartbrasil/opencartbrasil/releases/download/'.$this->session->data['version'].'/opencartbrasil-3.0.2.0.zip');
+            $handle = fopen(DIR_DOWNLOAD . 'opencartbrasil.zip', 'w');
+
+            $curl = curl_init('https://github.com/opencartbrasil/opencartbrasil/releases/download/'.$this->session->data['version'].'/opencartbrasil.zip');
 
             curl_setopt($curl, CURLOPT_USERAGENT, 'OpenCart Brasil ' . OPENCART_BRASIL);
             curl_setopt($curl, CURLOPT_SSL_VERIFYPEER, 0);
@@ -127,8 +132,7 @@ class ControllerToolUpdate extends Controller {
             $json['error'] = $this->language->get('error_permission');
         }
 
-        $file = DIR_DOWNLOAD . 'opencartbrasil-3.0.2.0.zip';
-
+        $file = DIR_DOWNLOAD . 'opencartbrasil.zip';
         if (!is_file($file)) {
             $this->maintenance_off();
 
@@ -211,6 +215,10 @@ class ControllerToolUpdate extends Controller {
                     $path = DIR_SYSTEM . substr($destination, 7);
                 }
 
+                if (substr($destination, 0, 7) == 'storage') {
+                    $path = DIR_STORAGE . substr($destination, 8);
+                }
+
                 if (is_dir($file) && !is_dir($path)) {
                     if (!mkdir($path, 0777)) {
                         $json['error'] = sprintf($this->language->get('error_directory'), $destination);
@@ -220,6 +228,28 @@ class ControllerToolUpdate extends Controller {
                 if (is_file($file)) {
                     if (!rename($file, $path)) {
                         $json['error'] = sprintf($this->language->get('error_file'), $destination);
+                    }
+                }
+            }
+
+            $files = array();
+            $path = array(DIR_MODIFICATION . '*');
+            while (count($path) != 0) {
+                $next = array_shift($path);
+                foreach (glob($next) as $file) {
+                    if (is_dir($file)) {
+                        $path[] = $file . '/*';
+                    }
+                    $files[] = $file;
+                }
+            }
+            rsort($files);
+            foreach ($files as $file) {
+                if ($file != DIR_MODIFICATION . 'index.html') {
+                    if (is_file($file)) {
+                        @unlink($file);
+                    } elseif (is_dir($file)) {
+                        @rmdir($file);
                     }
                 }
             }
@@ -359,7 +389,6 @@ class ControllerToolUpdate extends Controller {
             $files = array();
 
             $path = array($directory);
-
             while (count($path) != 0) {
                 $next = array_shift($path);
 
@@ -389,45 +418,37 @@ class ControllerToolUpdate extends Controller {
             }
         }
 
-        $file = DIR_DOWNLOAD . 'opencartbrasil-3.0.2.0.zip';
-
+        $file = DIR_DOWNLOAD . 'opencartbrasil.zip';
         if (is_file($file)) {
             @unlink($file);
         }
    }
 
     private function cache_ocmod() {
-        $log = array();
-        $log_error = array();
-
         $files = array();
-
         $path = array(DIR_MODIFICATION . '*');
-
         while (count($path) != 0) {
             $next = array_shift($path);
-
             foreach (glob($next) as $file) {
                 if (is_dir($file)) {
                     $path[] = $file . '/*';
                 }
-
                 $files[] = $file;
             }
         }
-
         rsort($files);
-
         foreach ($files as $file) {
             if ($file != DIR_MODIFICATION . 'index.html') {
                 if (is_file($file)) {
                     @unlink($file);
-
                 } elseif (is_dir($file)) {
                     @rmdir($file);
                 }
             }
         }
+
+        $log = array();
+        $log_error = array();
 
         $xml = array();
         $xml[] = file_get_contents(DIR_SYSTEM . 'modification.xml');

@@ -8,6 +8,7 @@ $_['text_backup']               = 'Backup / Restaurar';
 $_['text_update']               = 'Atualização';
 $_['text_banner']               = 'Banners';
 $_['text_catalog']              = 'Catálogo';
+$_['text_cron']                 = 'Tarefas agendadas';
 $_['text_category']             = 'Departamentos';
 $_['text_country']              = 'Países';
 $_['text_coupon']               = 'Cupons';

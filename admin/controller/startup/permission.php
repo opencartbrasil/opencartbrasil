@@ -16,6 +16,7 @@ class ControllerStartupPermission extends Controller {
 
 			// If a 3rd part is found we need to check if its under one of the extension folders.
 			$extension = array(
+				'cron',
 				'extension/advertise',
 				'extension/dashboard',
 				'extension/analytics',
@@ -38,6 +39,7 @@ class ControllerStartupPermission extends Controller {
 
 			// We want to ingore some pages from having its permission checked.
 			$ignore = array(
+				'common/cron',
 				'common/dashboard',
 				'common/login',
 				'common/logout',

@@ -4,7 +4,7 @@ class ModelExtensionAdvertiseGoogle extends Model {
     public function getHumanReadableCategory($product_id, $store_id) {
         $this->load->config('googleshopping/googleshopping');
 
-        $google_category_result = $this->db->query("SELECT google_product_category FROM `" . DB_PREFIX . "product_advertise_google` pag WHERE pag.product_id = " . (int)$product_id . " AND pag.store_id = " . (int)$store_id);
+        $google_category_result = $this->db->query("SELECT google_product_category FROM `" . DB_PREFIX . "googleshopping_product` pag WHERE pag.product_id = " . (int)$product_id . " AND pag.store_id = " . (int)$store_id);
 
         if ($google_category_result->num_rows > 0) {
             $google_category_id = $google_category_result->row['google_product_category'];
@@ -54,8 +54,81 @@ class ModelExtensionAdvertiseGoogle extends Model {
         return $map;
     }
 
+    public function getCoupon($order_id) {
+        $sql = "SELECT c.code FROM `" . DB_PREFIX . "coupon_history` ch LEFT JOIN `" . DB_PREFIX . "coupon` c ON (c.coupon_id = ch.coupon_id) WHERE ch.order_id=" . (int)$order_id;
+
+        $result = $this->db->query($sql);
+
+        if ($result->num_rows > 0) {
+            return $result->row['code'];
+        }
+
+        return null;
+    }
+
+    public function getRemarketingProductIds($products, $store_id) {
+        $ecomm_prodid = array();
+
+        foreach ($products as $product) {
+            if (null !== $id = $this->getRemarketingProductId($product, $store_id)) {
+                $ecomm_prodid[] = $id;
+            }
+        }
+
+        return $ecomm_prodid;
+    }
+
+    public function getRemarketingItems($products, $store_id) {
+        $items = array();
+
+        foreach ($products as $product) {
+            if (null !== $id = $this->getRemarketingProductId($product, $store_id)) {
+                $items[] = array(
+                    'google_business_vertical' => 'retail',
+                    'id' => (string)$id,
+                    'name' => (string)$product['name'],
+                    'quantity' => (int)$product['quantity']
+                );
+            }
+        }
+
+        return $items;
+    }
+
+    protected function getRemarketingProductId($product, $store_id) {
+        $option_map = $this->getSizeAndColorOptionMap($product['product_id'], $store_id);
+        $found_color = "";
+        $found_size = "";
+
+        foreach ($product['option'] as $option) {
+            if (is_array($option_map['colors'])) {
+                foreach ($option_map['colors'] as $product_option_value_id => $color) {
+                    if ($option['product_option_value_id'] == $product_option_value_id) {
+                        $found_color = $color;
+                    }
+                }
+            }
+
+            if (is_array($option_map['sizes'])) {
+                foreach ($option_map['sizes'] as $product_option_value_id => $size) {
+                    if ($option['product_option_value_id'] == $product_option_value_id) {
+                        $found_size = $size;
+                    }
+                }
+            }
+        }
+
+        foreach ($option_map['groups'] as $id => $group) {
+            if ($group['color'] === $found_color && $group['size'] === $found_size) {
+                return $id;
+            }
+        }
+
+        return null;
+    }
+
     protected function getOptionId($product_id, $store_id, $type) {
-        $sql = "SELECT pag." . $type . " FROM `" . DB_PREFIX . "product_advertise_google` pag WHERE product_id=" . (int)$product_id . " AND store_id=" . (int)$store_id;
+        $sql = "SELECT pag." . $type . " FROM `" . DB_PREFIX . "googleshopping_product` pag WHERE product_id=" . (int)$product_id . " AND store_id=" . (int)$store_id;
 
         $result = $this->db->query($sql);
 

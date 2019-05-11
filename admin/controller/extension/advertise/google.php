@@ -29,8 +29,14 @@ class ControllerExtensionAdvertiseGoogle extends Controller {
 
         $this->load->config('googleshopping/googleshopping');
 
+        // Fix clashes with third-party extension table names
+        $this->model_extension_advertise_google->renameTables();
+
         // Even though this should be ran during install, there are known cases of webstores which do not trigger the install method. This is why we run createTables here explicitly.
         $this->model_extension_advertise_google->createTables();
+
+        // Fix a missing AUTO_INCREMENT
+        $this->model_extension_advertise_google->fixColumns();
         
         // Redirect to the preliminary check-list
         if (!$this->setting->get('advertise_google_checklist_confirmed')) {
@@ -38,19 +44,14 @@ class ControllerExtensionAdvertiseGoogle extends Controller {
         }
 
         try {
-            $this->googleshopping->isConnected();
-
-            // Proceed with default actions in case we have connected
-            try {
-                $is_claimed = $this->googleshopping->isStoreUrlClaimed();
-            } catch (\RuntimeException $e) {
-                $this->session->data['error'] = $e->getMessage();
-
-                $is_claimed = false;
-            }
-
-            if (!$this->setting->has('advertise_google_gmc_account_selected') || !$is_claimed) {
-                if (!$is_claimed && empty($this->session->data['error'])) {
+            // If we have not connected, navigate to connect screen
+            if (!$this->setting->has('advertise_google_access_token')) {
+                $this->response->redirect($this->url->link('extension/advertise/google/connect', 'store_id=' . $this->store_id . '&user_token=' . $this->session->data['user_token'], true));
+            } else if (!$this->setting->has('advertise_google_gmc_account_selected')) {
+                // In case the merchant has made no decision about which GMC account to use, redirect to the form for connection
+                $this->response->redirect($this->url->link('extension/advertise/google/merchant', 'store_id=' . $this->store_id . '&user_token=' . $this->session->data['user_token'], true));
+            } else if (!$this->googleshopping->isStoreUrlClaimed()) {
+                if (empty($this->session->data['error'])) {
                     $this->session->data['error'] = $this->language->get('error_store_url_claim');
                 }
 
@@ -69,6 +70,8 @@ class ControllerExtensionAdvertiseGoogle extends Controller {
             // Pull the campaign reports
             $this->googleshopping->getCampaignReports();
         } catch (ConnectionException $e) {
+            $this->session->data['error'] = $e->getMessage();
+
             $this->response->redirect($this->url->link('extension/advertise/google/connect', 'store_id=' . $this->store_id . '&user_token=' . $this->session->data['user_token'], true));
         } catch (\RuntimeException $e) {
             $this->error['warning'] = $e->getMessage();
@@ -78,6 +81,8 @@ class ControllerExtensionAdvertiseGoogle extends Controller {
             $this->applyNewSettings($this->request->post);
 
             try {
+                // Profilactic target push, as sometimes targets are not initialized properly
+                $this->googleshopping->pushTargets();
                 $this->googleshopping->pushCampaignStatus();
 
                 $this->session->data['success'] = $this->language->get('success_index');
@@ -117,10 +122,19 @@ class ControllerExtensionAdvertiseGoogle extends Controller {
             unset($this->session->data['success']);
         }
 
+        $advertised_count = $this->model_extension_advertise_google->getAdvertisedCount($this->store_id);
+        $last_cron_executed = (int)$this->setting->get('advertise_google_cron_last_executed');
+
         $data['warning'] = '';
 
         if (!$this->setting->get('advertise_google_status') && $this->model_extension_advertise_google->hasActiveTarget($this->store_id)) {
-            $data['warning'] = $this->language->get('warning_paused_targets');
+            $data['warning'] = $this->language->get('warning_disabled');
+        } else if (!$this->model_extension_advertise_google->hasActiveTarget($this->store_id)) {
+            $data['warning'] = sprintf($this->language->get('warning_no_active_campaigns'), $this->url->link('extension/advertise/google/campaign', 'store_id=' . $this->store_id . '&user_token=' . $this->session->data['user_token'] . '&from_dashboard=true', true));
+        } else if ($advertised_count == 0) {
+            $data['warning'] = sprintf($this->language->get("warning_no_advertised_products"), $this->language->get("text_video_tutorial_url_advertise"));
+        } else if ($last_cron_executed + 24 * 60 * 60 <= time()) {
+            $data['warning'] = sprintf($this->language->get("warning_last_cron_executed"), $this->language->get("text_tutorial_cron"));
         }
 
         $data['breadcrumbs']   = array();
@@ -170,7 +184,7 @@ class ControllerExtensionAdvertiseGoogle extends Controller {
 
         $server = $this->googleshopping->getStoreUrl();
 
-        $data['advertise_google_cron_command'] = 'export CUSTOM_SERVER_NAME=' . parse_url($server, PHP_URL_HOST) . '; export CUSTOM_SERVER_PORT=443; export ADVERTISE_GOOGLE_CRON=1; export ADVERTISE_GOOGLE_STORE_ID=' . $this->store_id . '; ' . PHP_BINDIR . '/php -d session.save_path=' . session_save_path() . ' ' . DIR_SYSTEM . 'library/googleshopping/cron.php > /dev/null 2> /dev/null';
+        $data['advertise_google_cron_command'] = 'export CUSTOM_SERVER_NAME=' . parse_url($server, PHP_URL_HOST) . '; export CUSTOM_SERVER_PORT=443; export ADVERTISE_GOOGLE_CRON=1; export ADVERTISE_GOOGLE_STORE_ID=' . $this->store_id . '; ' . PHP_BINDIR . '/php -d session.save_path=' . session_save_path() . ' -d memory_limit=256M ' . DIR_SYSTEM . 'library/googleshopping/cron.php > /dev/null 2> /dev/null';
         
         if (!$this->setting->get('advertise_google_cron_token')) {
             $data['advertise_google_cron_token'] = md5(mt_rand());
@@ -234,7 +248,8 @@ class ControllerExtensionAdvertiseGoogle extends Controller {
         $json = array(
             'success' => null,
             'redirect' => null,
-            'error' => null
+            'error' => null,
+            'warning' => null
         );
 
         if ($this->validatePermission()) {
@@ -266,6 +281,20 @@ class ControllerExtensionAdvertiseGoogle extends Controller {
             }
         } else {
             $json['error'] = $this->error['warning'];
+        }
+
+        // Refresh warnings
+        $advertised_count = $this->model_extension_advertise_google->getAdvertisedCount($this->store_id);
+        $last_cron_executed = (int)$this->setting->get('advertise_google_cron_last_executed');
+
+        if (!$this->setting->get('advertise_google_status') && $this->model_extension_advertise_google->hasActiveTarget($this->store_id)) {
+            $json['warning'] = $this->language->get('warning_disabled');
+        } else if (!$this->model_extension_advertise_google->hasActiveTarget($this->store_id)) {
+            $json['warning'] = sprintf($this->language->get('warning_no_active_campaigns'), $this->url->link('extension/advertise/google/campaign', 'store_id=' . $this->store_id . '&user_token=' . $this->session->data['user_token'] . '&from_dashboard=true', true));
+        } else if ($advertised_count == 0) {
+            $json['warning'] = sprintf($this->language->get("warning_no_advertised_products"), $this->language->get("text_video_tutorial_url_advertise"));
+        } else if ($last_cron_executed + 24 * 60 * 60 <= time()) {
+            $json['warning'] = sprintf($this->language->get("warning_last_cron_executed"), $this->language->get("text_tutorial_cron"));
         }
 
         $this->response->addHeader('Content-Type: application/json');
@@ -814,10 +843,20 @@ class ControllerExtensionAdvertiseGoogle extends Controller {
         $data['target_list'] = html_entity_decode($this->url->link('extension/advertise/google/target_list', 'store_id=' . $this->store_id . '&user_token=' . $this->session->data['user_token'], true), ENT_QUOTES, 'UTF-8');
         $data['url_campaign_test'] = html_entity_decode($this->url->link('extension/advertise/google/campaign_test', 'store_id=' . $this->store_id . '&user_token=' . $this->session->data['user_token'], true), ENT_QUOTES, 'UTF-8');
         $data['can_edit_campaigns'] = (bool)$this->setting->get('advertise_google_can_edit_campaigns');
+        $data['text_roas_warning'] = sprintf($this->language->get('warning_roas'), date($this->language->get('date_format_long'), time() + Googleshopping::ROAS_WAIT_INTERVAL));
 
         $data['json_allowed_targets'] = json_encode($this->model_extension_advertise_google->getAllowedTargets());
 
         $targets = $this->googleshopping->getTargets($this->store_id);
+
+        foreach ($targets as &$target) {
+            if (!$target['roas_status']) {
+                $target['roas_warning'] = sprintf($this->language->get('warning_roas'), date($this->language->get('date_format_long'), $target['roas_available_on']));
+            } else {
+                $target['roas_warning'] = null;
+            }
+        }
+
         $data['targets'] = $targets;
         $data['json_targets'] = json_encode($targets);
 
@@ -850,6 +889,7 @@ class ControllerExtensionAdvertiseGoogle extends Controller {
                     'country' => $this->request->post['country'],
                     'status' => $this->request->post['status'] == 'active' ? 'active' : 'paused',
                     'budget' => (float)preg_replace('~[^0-9\.]~i', '', $this->request->post['budget']),
+                    'roas' => isset($this->request->post['roas']) ? (int)$this->request->post['roas'] : 0,
                     'feeds' => array_values($this->request->post['feed'])
                 );
 
@@ -911,6 +951,7 @@ class ControllerExtensionAdvertiseGoogle extends Controller {
                     'country' => $this->request->post['country'],
                     'status' => $this->request->post['status'] == 'active' ? 'active' : 'paused',
                     'budget' => (float)preg_replace('~[^0-9\.]~i', '', $this->request->post['budget']),
+                    'roas' => isset($this->request->post['roas']) ? (int)$this->request->post['roas'] : 0,
                     'feeds' => array_values($this->request->post['feed'])
                 );
 
@@ -1003,7 +1044,17 @@ class ControllerExtensionAdvertiseGoogle extends Controller {
 
         $this->load->model('extension/advertise/google');
 
-        $json['targets'] = $this->googleshopping->getTargets($this->store_id);
+        $targets = $this->googleshopping->getTargets($this->store_id);
+
+        foreach ($targets as &$target) {
+            if (!$target['roas_status']) {
+                $target['roas_warning'] = sprintf($this->language->get('warning_roas'), date($this->language->get('date_format_long'), $target['roas_available_on']));
+            } else {
+                $target['roas_warning'] = null;
+            }
+        }
+
+        $json['targets'] = $targets;
 
         $this->response->addHeader('Content-Type: application/json');
         $this->response->setOutput(json_encode($json));
@@ -1065,6 +1116,16 @@ class ControllerExtensionAdvertiseGoogle extends Controller {
             }
         } else if (!is_null($error)) {
             $this->session->data['error'] = $error;
+
+            $setting = $this->model_setting_setting->getSetting('advertise_google', $this->store_id);
+
+            unset($setting['advertise_google_status']);
+            unset($setting['advertise_google_work']);
+            unset($setting['advertise_google_gmc_account_selected']);
+            unset($setting['advertise_google_gmc_shipping_taxes_configured']);
+            unset($setting['advertise_google_can_edit_campaigns']);
+
+            $this->model_setting_setting->editSetting('advertise_google', $setting, $this->store_id);
         }
 
         unset($this->session->data['advertise_google']);
@@ -1155,7 +1216,9 @@ class ControllerExtensionAdvertiseGoogle extends Controller {
         $data['error'] = '';
 
         if (isset($this->session->data['error'])) {
-            $data['error'] = $this->session->data['error'];
+            if (empty($this->session->data['success']) && $this->getSettingValue('advertise_google_app_id', false) && $this->getSettingValue('advertise_google_app_secret', false)) {
+                $data['error'] = $this->session->data['error'];
+            }
             unset($this->session->data['error']);
         } else if (!empty($this->error['warning'])) {
             $data['error'] = $this->error['warning'];
@@ -1207,7 +1270,7 @@ class ControllerExtensionAdvertiseGoogle extends Controller {
 
         $server = $this->googleshopping->getStoreUrl();
 
-        $data['advertise_google_cron_command'] = 'export CUSTOM_SERVER_NAME=' . parse_url($server, PHP_URL_HOST) . '; export CUSTOM_SERVER_PORT=443; export ADVERTISE_GOOGLE_CRON=1; export ADVERTISE_GOOGLE_STORE_ID=' . $this->store_id . '; ' . PHP_BINDIR . '/php -d session.save_path=' . session_save_path() . ' ' . DIR_SYSTEM . 'library/googleshopping/cron.php > /dev/null 2> /dev/null';
+        $data['advertise_google_cron_command'] = 'export CUSTOM_SERVER_NAME=' . parse_url($server, PHP_URL_HOST) . '; export CUSTOM_SERVER_PORT=443; export ADVERTISE_GOOGLE_CRON=1; export ADVERTISE_GOOGLE_STORE_ID=' . $this->store_id . '; ' . PHP_BINDIR . '/php -d session.save_path=' . session_save_path() . ' -d memory_limit=256M ' . DIR_SYSTEM . 'library/googleshopping/cron.php > /dev/null 2> /dev/null';
         
         if (!$this->setting->get('advertise_google_cron_token')) {
             $data['advertise_google_cron_token'] = md5(mt_rand());
@@ -1688,10 +1751,6 @@ class ControllerExtensionAdvertiseGoogle extends Controller {
 
         $this->model_extension_advertise_google->createTables();
         $this->model_extension_advertise_google->createEvents();
-
-        $this->load->model('user/user_group');
-        $this->model_user_user_group->addPermission($this->user->getGroupId(), 'access', 'extension/advertise/google');
-        $this->model_user_user_group->addPermission($this->user->getGroupId(), 'modify', 'extension/advertise/google');
     }
 
     public function uninstall() {
@@ -1699,10 +1758,6 @@ class ControllerExtensionAdvertiseGoogle extends Controller {
 
         $this->model_extension_advertise_google->dropTables();
         $this->model_extension_advertise_google->deleteEvents();
-
-        $this->load->model('user/user_group');
-        $this->model_user_user_group->removePermission($this->user->getGroupId(), 'access', 'extension/advertise/google');
-        $this->model_user_user_group->removePermission($this->user->getGroupId(), 'modify', 'extension/advertise/google');
     }
 
     public function category_autocomplete() {

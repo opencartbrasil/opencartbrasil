@@ -6,6 +6,98 @@ e utiliza [Semantic Versioning](https://semver.org/lang/pt-BR/spec/v2.0.0.html).
 
 ## [Não lançada]
 
+## [1.3.3] (Data de lançamento: 08.05.2019)
+### Corrigido
+- Melhoria na sintaxe do index.php
+- Melhorias na identificação de eventos estatísticos
+- Correção na API para hospedagem com proxy estranho
+
+## [1.3.2] (Data de lançamento: 01.05.2019)
+### Corrigido
+- Várias correções ortográficas
+- Correção no upgrade do banco de dados
+- Correções e melhorias na estatística de comentários e devoluções
+
+### Adicionado
+- Validação da URL amigável no Editor de URL amigável
+
+### Modificado
+- Melhorias no gerenciamento da sessão
+- Melhorias na instrução de atualização da versão
+
+### Removido
+- Remoção de chamadas de cache não utilizadas
+
+## [1.3.1] (Data de lançamento: 16.04.2019)
+### Corrigido
+- Correção nos links para https
+- Correção nas extensões Wordpay e Authorize.Net
+
+### Modificado
+- Extensão Google Shopping v111
+- Melhorias na gestão da sessão
+- Melhorias na library document
+- Melhorias ao salvar o endereço na finalização
+- Melhorias na tradução da extensão Google Shopping
+- Melhorias no formulário de produtos na administração
+
+## [1.3.0] (Data de lançamento: 03.04.2019)
+### Corrigido
+- Correção na edição do pedido
+- Correções nas extensões klarna
+- Correções em extensões estrangeiras
+- Correção no layout da lista de países
+- Correção no layout do gerenciador de cache
+- Correção na utilização do cache de idiomas
+- Correção para o estouro em tabelas responsivas
+- Correção da extensão de frete fedex por @caiobernal
+- Correção no botão para redefinir produtos visualizados
+- Remoção de registro desnecessário da extensão OpenBay
+
+### Adicionado
+- Tarefas agendadas
+- Suporte para limpeza de sessão por tarefa
+- Adicionado no framework o header para limpeza de cache do navegador
+
+### Modificado
+- Melhorias na API catalog
+- Melhorias no engine loader
+- Melhorias no helper general
+- Melhorias na footer.php catalog
+- Melhorias no startup do catálogo
+- Melhorias no tratamento da paginação
+- Tradução das mensagens de erro no core
+- Melhorias na atualização do diretório storage
+- Melhorias na biblioteca de sessão por arquivo
+- Melhoria na tradução do processo de instalação
+- Melhorias na tradução da extensão Google Shopping
+- Mudança no limite de itens exibidos na administração
+- Adicionada a hora do pedido nas informações do pedido
+- Melhoria na tradução do erro de conexão com o banco de dados
+
+## [1.2.4] (Data de lançamento: 18.02.2019)
+### Corrigido
+- Correção na edição do pedido com afiliados
+
+### Modificado
+- Extensão Google Shopping v106
+
+## [1.2.3] (Data de lançamento: 11.02.2019)
+### Corrigido
+- Correções na solicitação de nova senha do cliente na loja
+- Correção no manuseio dos arquivos de sessão
+- Correções na extensão de pagamento Wordpay
+
+## [1.2.2] (Data de lançamento: 29.01.2019)
+### Corrigido
+- Correção na atualização da senha do cliente
+
+## [1.2.1] (Data de lançamento: 26.01.2019)
+### Corrigido
+- Tradução do prefixo da fatura após a instalação
+- Desabilitando a atualização automática da moeda no SQL de instalação
+- Adição das permissões para acesso as extensões do tipo Propaganda no SQL de instalação
+
 ## [1.2.0] (Data de lançamento: 07.01.2019)
 ### Corrigido
 - Correção no pagamento eWAY
@@ -227,8 +319,16 @@ e utiliza [Semantic Versioning](https://semver.org/lang/pt-BR/spec/v2.0.0.html).
 - Cupons de descontos para demonstração.
 - Moedas: Euro e Libra esterlina.
 
-[Não lançada]: https://github.com/opencartbrasil/opencartbrasil/compare/v1.2.0...HEAD
-[1.1.6]: https://github.com/opencartbrasil/opencartbrasil/compare/v1.1.5...v1.2.0
+[Não lançada]: https://github.com/opencartbrasil/opencartbrasil/compare/v1.3.3...HEAD
+[1.3.3]: https://github.com/opencartbrasil/opencartbrasil/compare/v1.3.2...v1.3.3
+[1.3.2]: https://github.com/opencartbrasil/opencartbrasil/compare/v1.3.1...v1.3.2
+[1.3.1]: https://github.com/opencartbrasil/opencartbrasil/compare/v1.3.0...v1.3.1
+[1.3.0]: https://github.com/opencartbrasil/opencartbrasil/compare/v1.2.4...v1.3.0
+[1.2.4]: https://github.com/opencartbrasil/opencartbrasil/compare/v1.2.3...v1.2.4
+[1.2.3]: https://github.com/opencartbrasil/opencartbrasil/compare/v1.2.2...v1.2.3
+[1.2.2]: https://github.com/opencartbrasil/opencartbrasil/compare/v1.2.1...v1.2.2
+[1.2.1]: https://github.com/opencartbrasil/opencartbrasil/compare/v1.2.0...v1.2.1
+[1.2.0]: https://github.com/opencartbrasil/opencartbrasil/compare/v1.1.5...v1.2.0
 [1.1.5]: https://github.com/opencartbrasil/opencartbrasil/compare/v1.1.4...v1.1.5
 [1.1.4]: https://github.com/opencartbrasil/opencartbrasil/compare/v1.1.3...v1.1.4
 [1.1.3]: https://github.com/opencartbrasil/opencartbrasil/compare/v1.1.2...v1.1.3

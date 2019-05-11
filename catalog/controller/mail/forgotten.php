@@ -1,28 +1,36 @@
 <?php
 class ControllerMailForgotten extends Controller {
+	//catalog/model/account/customer/editCode/after
 	public function index(&$route, &$args, &$output) {
-		$this->load->language('mail/forgotten');
+		if ($args[0] && $args[1]) {
+			$this->load->model('account/customer');
+			$customer_info = $this->model_account_customer->getCustomerByEmail($args[0]);
 
-		$data['text_greeting'] = sprintf($this->language->get('text_greeting'), html_entity_decode($this->config->get('config_name'), ENT_QUOTES, 'UTF-8'));
-		$data['text_change'] = $this->language->get('text_change');
-		$data['text_ip'] = $this->language->get('text_ip');
+			if ($customer_info) {
+				$this->load->language('mail/forgotten');
 
-		$data['reset'] = str_replace('&amp;', '&', $this->url->link('account/reset', 'code=' . $args[1], true));
-		$data['ip'] = $this->request->server['REMOTE_ADDR'];
+				$data['text_greeting'] = sprintf($this->language->get('text_greeting'), html_entity_decode($this->config->get('config_name'), ENT_QUOTES, 'UTF-8'));
+				$data['text_change'] = $this->language->get('text_change');
+				$data['text_ip'] = $this->language->get('text_ip');
 
-		$mail = new Mail($this->config->get('config_mail_engine'));
-		$mail->parameter = $this->config->get('config_mail_parameter');
-		$mail->smtp_hostname = $this->config->get('config_mail_smtp_hostname');
-		$mail->smtp_username = $this->config->get('config_mail_smtp_username');
-		$mail->smtp_password = html_entity_decode($this->config->get('config_mail_smtp_password'), ENT_QUOTES, 'UTF-8');
-		$mail->smtp_port = $this->config->get('config_mail_smtp_port');
-		$mail->smtp_timeout = $this->config->get('config_mail_smtp_timeout');
+				$data['reset'] = str_replace('&amp;', '&', $this->url->link('account/reset', 'code=' . $args[1], true));
+				$data['ip'] = $this->request->server['REMOTE_ADDR'];
 
-		$mail->setTo($args[0]);
-		$mail->setFrom($this->config->get('config_email'));
-		$mail->setSender(html_entity_decode($this->config->get('config_name'), ENT_QUOTES, 'UTF-8'));
-		$mail->setSubject(html_entity_decode(sprintf($this->language->get('text_subject'), html_entity_decode($this->config->get('config_name'), ENT_QUOTES, 'UTF-8')), ENT_QUOTES, 'UTF-8'));
-		$mail->setText($this->load->view('mail/forgotten', $data));
-		$mail->send();
+				$mail = new Mail($this->config->get('config_mail_engine'));
+				$mail->parameter = $this->config->get('config_mail_parameter');
+				$mail->smtp_hostname = $this->config->get('config_mail_smtp_hostname');
+				$mail->smtp_username = $this->config->get('config_mail_smtp_username');
+				$mail->smtp_password = html_entity_decode($this->config->get('config_mail_smtp_password'), ENT_QUOTES, 'UTF-8');
+				$mail->smtp_port = $this->config->get('config_mail_smtp_port');
+				$mail->smtp_timeout = $this->config->get('config_mail_smtp_timeout');
+
+				$mail->setTo($args[0]);
+				$mail->setFrom($this->config->get('config_email'));
+				$mail->setSender(html_entity_decode($this->config->get('config_name'), ENT_QUOTES, 'UTF-8'));
+				$mail->setSubject(html_entity_decode(sprintf($this->language->get('text_subject'), html_entity_decode($this->config->get('config_name'), ENT_QUOTES, 'UTF-8')), ENT_QUOTES, 'UTF-8'));
+				$mail->setText($this->load->view('mail/forgotten', $data));
+				$mail->send();
+			}
+		}
 	}
 }

@@ -1,7 +1,5 @@
 <?php
-
 class ModelExtensionPaymentWorldpay extends Model {
-
 	public function install() {
 		$this->db->query("
 			CREATE TABLE IF NOT EXISTS `" . DB_PREFIX . "worldpay_order` (
@@ -84,7 +82,6 @@ class ModelExtensionPaymentWorldpay extends Model {
 	}
 
 	public function getOrder($order_id) {
-
 		$qry = $this->db->query("SELECT * FROM `" . DB_PREFIX . "worldpay_order` WHERE `order_id` = '" . (int)$order_id . "' LIMIT 1");
 
 		if ($qry->num_rows) {
@@ -129,7 +126,6 @@ class ModelExtensionPaymentWorldpay extends Model {
 	}
 
 	public function sendCurl($url, $order) {
-
 		$json = json_encode($order);
 
 		$curl = curl_init();
@@ -166,10 +162,9 @@ class ModelExtensionPaymentWorldpay extends Model {
 	}
 
 	public function logger($message) {
-		if ($this->config->get('worldpay_debug') == 1) {
+		if ($this->config->get('payment_worldpay_debug') == 1) {
 			$log = new Log('worldpay.log');
 			$log->write($message);
 		}
 	}
-
 }

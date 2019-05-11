@@ -19,23 +19,23 @@
             <div class="btn-group" data-toggle="buttons">
               {% if developer_theme %}
               <label class="btn btn-success active" {% if not eval %}disabled="disabled"{% endif %}>
-              <input type="radio" name="developer_theme" value="1" autocomplete="off" {% if not eval %}disabled="disabled"{% endif %} checked/>
+              <input type="radio" name="developer_theme" value="1" {% if not eval %}disabled="disabled"{% endif %} checked/>
               {{ button_on }}
               </label>
               {% else %}
               <label class="btn btn-success" {% if not eval %}disabled="disabled"{% endif %}>
-              <input type="radio" name="developer_theme" value="1" autocomplete="off" {% if not eval %}disabled="disabled"{% endif %}/>
+              <input type="radio" name="developer_theme" value="1" {% if not eval %}disabled="disabled"{% endif %}/>
               {{ button_on }}
               </label>
               {% endif %}
               {% if not developer_theme %}
               <label class="btn btn-danger active" {% if not eval %}disabled="disabled"{% endif %}>
-              <input type="radio" name="developer_theme" value="0" autocomplete="off" {% if not eval %}disabled="disabled"{% endif %} checked/>
+              <input type="radio" name="developer_theme" value="0" {% if not eval %}disabled="disabled"{% endif %} checked/>
               {{ button_off }}
               </label>
               {% else %}
               <label class="btn btn-danger" {% if not eval %}disabled="disabled"{% endif %}>
-              <input type="radio" name="developer_theme" value="0" autocomplete="off" {% if not eval %}disabled="disabled"{% endif %}/>
+              <input type="radio" name="developer_theme" value="0" {% if not eval %}disabled="disabled"{% endif %}/>
               {{ button_off }}
               </label>
               {% endif %}
@@ -49,23 +49,23 @@
             <div class="btn-group" data-toggle="buttons">
               {% if developer_sass %}
               <label class="btn btn-success active">
-                <input type="radio" name="developer_sass" value="1" autocomplete="off" checked>
+                <input type="radio" name="developer_sass" value="1" checked>
                 {{ button_on }}
               </label>
               {% else %}
               <label class="btn btn-success">
-                <input type="radio" name="developer_sass" value="1" autocomplete="off">
+                <input type="radio" name="developer_sass" value="1">
                 {{ button_on }}
               </label>
               {% endif %}
               {% if not developer_sass %}
               <label class="btn btn-danger active">
-                <input type="radio" name="developer_sass" value="0" autocomplete="off" checked>
+                <input type="radio" name="developer_sass" value="0" checked>
                 {{ button_off }}
               </label>
               {% else %}
               <label class="btn btn-danger">
-                <input type="radio" name="developer_sass" value="0" autocomplete="off">
+                <input type="radio" name="developer_sass" value="0">
                 {{ button_off }}
               </label>
               {% endif %}

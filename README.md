@@ -4,17 +4,17 @@
 <p align="center">
 <a href="https://github.com/opencartbrasil/opencartbrasil/releases"><img src="https://img.shields.io/github/downloads/opencartbrasil/opencartbrasil/total.svg"></a>
 <a href="./CHANGELOG.md"><img src="https://img.shields.io/github/release/opencartbrasil/opencartbrasil.svg" alt="Última versão"></a>
-<img src="https://img.shields.io/badge/opencart-3.0.3.1-blue.svg" alt="Compatibilidade">
+<img src="https://img.shields.io/badge/opencart-3.0.3.2-blue.svg" alt="Compatibilidade">
 <a href="./LICENSE"><img src="https://img.shields.io/github/license/opencartbrasil/opencartbrasil.svg" alt="Licença"></a>
 </p>
 
 ## Apresentação
 
-O projeto OpenCart Brasil é um fork do OpenCart, que tem como objetivo atender lojistas brasileiros sempre mantendo a compatibilidade com a última versão estável do OpenCart.
+O projeto OpenCart Brasil é um fork do OpenCart 3, que tem o objetivo de oferecer uma versão do OpenCart otimizada, atualizada e segura, com foco especial no mercado brasileiro, sempre compatível com a última versão estável do OpenCart, e mantendo a licença GPLv3 para garantir que **o projeto OpenCart Brasil é livre e sempre será**.
 
 Aqui você poderá analisar o código, relatar erros e enviar correções ou melhorias para o projeto.
 
-Recomendamos que todos os desenvolvedores sigam este repositório para ficarem atualizados sobre o projeto.
+Recomendamos que todos os desenvolvedores sigam este repositório para receberem atualizações sobre o projeto.
 
 ## Imagens
 
@@ -32,13 +32,35 @@ Recomendamos que todos os desenvolvedores sigam este repositório para ficarem a
 
 ## Diferenciais
 
+- Suporte para tarefas agendadas.
+- Sistema de afiliados 100% funcional.
+- Campos SKU nas opções dos produtos.
 - **Atualização automática do OpenCart Brasil**.
+- Melhorias no gerenciamento de sessões do PHP.
 - Melhorias no processo de download e instalação.
+- Melhorias na criptografia das senhas dos clientes.
 - Correção de bugs, melhorias e otimizações no código.
 - O processo de instalação ocorre em português do Brasil.
 - Ferramenta de instalação por linha de comando em português do Brasil.
 - Após a instalação, a loja já estará em português do Brasil com a moeda Real.
 - Todos os dados de demonstração e dados auxiliares já estão em português do Brasil.
+
+## Changelog
+
+Para analisar todas as correções, modificações e melhorias realizadas no projeto OpenCart Brasil a cada versão lançada <a href="https://github.com/opencartbrasil/opencartbrasil/blob/master/CHANGELOG.md">clique aqui</a>.
+
+## Atualização
+
+Para realizar a atualização automática do OpenCart Brasil, na administração da loja, acesse o menu **Configurações→Manutenção→Atualização**, clique na aba "**Atualizar**", e siga as instruções na página para executar a atualização automática.
+
+**Atenção:** Em casos raros, durante o processo de atualização automática ocorre um erro que não permite o acesso a loja após a substituição dos arquivos da loja, sendo que este é causado pelos seguintes motivos:
+
+- O cache de arquivos criado pelas modificações OCMOD estão causando o problema.
+- O tema que foi instalado na loja sobrescreveu arquivos nativos do OpenCart.
+
+Para resolver, apague todos os arquivos (com exceção do arquivo index.html) e as pastas que estão dentro da pasta storage/**modification** (veja o caminho para a pasta storage dentro do arquivo **config.php**), e por último reenvie os arquivos do tema que você está utilizando na loja (caso esteja utilizando um tema personalizado).
+
+Após executar os procedimentos, acesse a administração da loja e vá no menu **Extensões→Modificações**, clique no botão **Atualizar** para atualizar o cache de modificações, depois vá na página principal do painel de controle da administração da loja, abaixo do botão "**Sair**", você verá um botão na cor azul com o desenho de uma engrenagem branca dentro dele, clique neste botão, e no popup que vai abrir, clique nos dois botões na cor laranja que estão dentro da coluna "**Ação**" para atualizar o cache do tema.
 
 ## Roteiro
 
@@ -47,6 +69,7 @@ Recomendamos que todos os desenvolvedores sigam este repositório para ficarem a
 - [x] Loja 100% traduzida.
 - [x] Atualização automática.
 - [x] Instalação 100% traduzida.
+- [x] Suporte para tarefas agendadas.
 - [x] Campo SKU nas opções dos produtos.
 - [x] Correção nas estátisticas.
 - [x] Correção nos arquivos config.
@@ -66,17 +89,16 @@ Recomendamos que todos os desenvolvedores sigam este repositório para ficarem a
 - [x] Melhorias no startup e framework do core.
 - [x] Melhorias na tradução e no layout de e-mail.
 - [x] Melhorias na comunicação com o banco de dados.
+- [x] Melhorias na criptografia das senhas dos clientes.
+- [x] Melhorias na redefinição de senha do cliente na loja.
 
 ### Tarefas em andamento:
 
-- [ ] Tema versão Brasil 100% customizado.
 
 ### Próximas tarefas:
 
-- [ ] Cadastro de clientes padrão Brasil.
-- [ ] Opções relacionadas nos produtos.
-- [ ] Extensões integradas com serviços brasileiros.
-- [ ] API para integração com sistemas externos como ERP, CRM, etc.
+- [ ] API REST para inclusão de produtos, clientes, pedidos, etc.
+- [ ] Webhook que enviará notificações para aplicações externas.
 
 ## Requisitos
 
@@ -84,14 +106,14 @@ Recomendamos que todos os desenvolvedores sigam este repositório para ficarem a
 
 Se o seu serviço de hospedagem não lhe oferece versões atualizadas dos softwares citados abaixo, troque de serviço de hospedagem, pois sua loja não pode ficar exposta por causa das falhas de segurança existentes em softwares antigos.
 
-Se você é o profissional que administra os servidores que armazenam os arquivos e dados da loja, não utilize os softwares descritos abaixo em versões legadas. No mínimo utilize as versões mínimas recomendadas.
+Se você é o profissional que administra os servidores que armazenam os arquivos e dados da loja, não utilize os softwares descritos abaixo em versões antigas. Utilize as versões mínimas recomendadas, sendo o ideal utilizar as versões mais recentes não só por questões de desempenho, mas principalmente por questão de segurança.
 
 ### Servidores web compatíveis:
 
 - Apache 2.4 ou superior.
 - Nginx 1.14 ou superior.
 
-### OpenSLL:
+### OpenSSL:
 
 - 1.0.1c ou superior.
 
@@ -101,12 +123,12 @@ Se você é o profissional que administra os servidores que armazenam os arquivo
 
 ### Bancos de dados compatíveis:
 
-- MySQL 5.5 ou superior.
-- MariaDB 5.5 ou superior.
+- MySQL 5.5 ou superior (Recomendado 5.7).
+- MariaDB 5.5 ou superior (Recomendado 10.3).
 
 ### Versões do PHP compatíveis:
 
-- 5.6 ou superior.
+- 5.6 ou superior (recomendado 7.3).
 
 ### Configurações mínimas necessárias no PHP:
 
@@ -131,10 +153,11 @@ Se você é o profissional que administra os servidores que armazenam os arquivo
 
 ### Configurações mínimas recomendadas no MySQL/MariaDB:
 
-| Variável | Valor |
-| -------- | ----- |
-| `wait_timeout` | 30 |
-| `interactive_timeout` | 30 |
+| Variável | Valor | Descrição |
+| -------- | ----- | --------- |
+| `wait_timeout` | 30 | 30 segundos |
+| `interactive_timeout` | 30 | 30 segundos |
+| `max_allowed_packet` | 16777216 | 16M |
 
 ### Extensões básicas necessárias no PHP:
 
@@ -153,7 +176,7 @@ Se você é o profissional que administra os servidores que armazenam os arquivo
 
 Não é compatível com sistema operacional Windows utilizando servidor web IIS.
 
-Em breve a versão mínima do PHP será 7.1, pois o suporte para PHP até 7.0 encerrará em dezembro de 2018.
+Em breve a versão mínima aceita pelo OpenCart será o PHP 7.1 (recomendado PHP 7.3), pois o suporte para o PHP até as versões 7.0 encerraram em dezembro de 2018, ou seja, não faz sentido continuar o suporte para versões do PHP que os próprios desenvolvedores abandonaram, o que significa que essas versões não receberão correções de bugs e falhas.
 
 ## Download
 
