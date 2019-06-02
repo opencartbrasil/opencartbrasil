@@ -26,7 +26,7 @@ class ModelMarketingAffiliate extends Model {
 	}
 
 	public function getAffiliates($data = array()) {
-		$sql = "SELECT *, CONCAT(c.firstname, ' ', c.lastname) AS name, ca.status FROM " . DB_PREFIX . "customer_affiliate ca LEFT JOIN " . DB_PREFIX . "customer c ON (ca.customer_id = c.customer_id)";
+		$sql = "SELECT *, CONCAT(c.firstname, ' ', c.lastname) AS name, ca.date_added, ca.status FROM " . DB_PREFIX . "customer_affiliate ca LEFT JOIN " . DB_PREFIX . "customer c ON (ca.customer_id = c.customer_id)";
 
 		$implode = array();
 
