@@ -4,7 +4,8 @@
     <div class="container-fluid">
       <div class="pull-right">
         <button type="submit" form="form-product" data-toggle="tooltip" title="{{ button_save }}" class="btn btn-primary"><i class="fa fa-save"></i></button>
-        <a href="{{ cancel }}" data-toggle="tooltip" title="{{ button_cancel }}" class="btn btn-default"><i class="fa fa-reply"></i></a></div>
+        <a href="{{ cancel }}" data-toggle="tooltip" title="{{ button_cancel }}" class="btn btn-default"><i class="fa fa-reply"></i></a>
+      </div>
       <h1>{{ heading_title }}</h1>
       <ul class="breadcrumb">
         {% for breadcrumb in breadcrumbs %}
@@ -14,9 +15,9 @@
     </div>
   </div>
   <div class="container-fluid"> {% if error_warning %}
-      <div class="alert alert-danger alert-dismissible"><i class="fa fa-exclamation-circle"></i> {{ error_warning }}
-        <button type="button" class="close" data-dismiss="alert">&times;</button>
-      </div>
+    <div class="alert alert-danger alert-dismissible"><i class="fa fa-exclamation-circle"></i> {{ error_warning }}
+      <button type="button" class="close" data-dismiss="alert">&times;</button>
+    </div>
     {% endif %}
     <div class="panel panel-default">
       <div class="panel-heading">
@@ -881,16 +882,16 @@
       </div>
     </div>
   </div>
-  <link href="view/javascript/codemirror/lib/codemirror.css" rel="stylesheet"/>
-  <link href="view/javascript/codemirror/theme/monokai.css" rel="stylesheet"/>
-  <script type="text/javascript" src="view/javascript/codemirror/lib/codemirror.js"></script>
-  <script type="text/javascript" src="view/javascript/codemirror/lib/xml.js"></script>
-  <script type="text/javascript" src="view/javascript/codemirror/lib/formatting.js"></script>
-  <script type="text/javascript" src="view/javascript/summernote/summernote.js"></script>
-  <link href="view/javascript/summernote/summernote.css" rel="stylesheet"/>
-  <script type="text/javascript" src="view/javascript/summernote/summernote-image-attributes.js"></script>
-  <script type="text/javascript" src="view/javascript/summernote/opencart.js"></script>
-  <script type="text/javascript"><!--
+<link href="view/javascript/codemirror/lib/codemirror.css" rel="stylesheet"/>
+<link href="view/javascript/codemirror/theme/monokai.css" rel="stylesheet"/>
+<script type="text/javascript" src="view/javascript/codemirror/lib/codemirror.js"></script>
+<script type="text/javascript" src="view/javascript/codemirror/lib/xml.js"></script>
+<script type="text/javascript" src="view/javascript/codemirror/lib/formatting.js"></script>
+<script type="text/javascript" src="view/javascript/summernote/summernote.js"></script>
+<link href="view/javascript/summernote/summernote.css" rel="stylesheet"/>
+<script type="text/javascript" src="view/javascript/summernote/summernote-image-attributes.js"></script>
+<script type="text/javascript" src="view/javascript/summernote/opencart.js"></script>
+<script type="text/javascript"><!--
   // Manufacturer
   $('input[name=\'manufacturer\']').autocomplete({
 	  'source': function(request, response) {
@@ -1033,8 +1034,8 @@
   $('#product-related').delegate('.fa-minus-circle', 'click', function() {
 	  $(this).parent().remove();
   });
-  //--></script>
-  <script type="text/javascript"><!--
+//--></script>
+<script type="text/javascript"><!--
   var attribute_row = {{ attribute_row }};
 
   function addAttribute() {
@@ -1082,8 +1083,8 @@
   $('#attribute tbody tr').each(function(index, element) {
 	  attributeautocomplete(index);
   });
-  //--></script>
-  <script type="text/javascript"><!--
+//--></script>
+<script type="text/javascript"><!--
   var option_row = {{ option_row }};
 
   $('input[name=\'option\']').autocomplete({
@@ -1227,8 +1228,8 @@
 		  option_row++;
 	  }
   });
-  //--></script>
-  <script type="text/javascript"><!--
+//--></script>
+<script type="text/javascript"><!--
   var option_value_row = {{ option_value_row }};
 
   function addOptionValue(option_row) {
@@ -1266,8 +1267,8 @@
 	  option_value_row++;
   }
 
-  //--></script>
-  <script type="text/javascript"><!--
+//--></script>
+<script type="text/javascript"><!--
   var discount_row = {{ discount_row }};
 
   function addDiscount() {
@@ -1294,8 +1295,8 @@
 	  discount_row++;
   }
 
-  //--></script>
-  <script type="text/javascript"><!--
+//--></script>
+<script type="text/javascript"><!--
   var special_row = {{ special_row }};
 
   function addSpecial() {
@@ -1322,8 +1323,8 @@
 	  special_row++;
   }
 
-  //--></script>
-  <script type="text/javascript"><!--
+//--></script>
+<script type="text/javascript"><!--
   var image_row = {{ image_row }};
 
   function addImage() {
@@ -1338,8 +1339,8 @@
 	  image_row++;
   }
 
-  //--></script>
-  <script type="text/javascript"><!--
+//--></script>
+<script type="text/javascript"><!--
   var recurring_row = {{ recurring_row }};
 
   function addRecurring() {
@@ -1368,8 +1369,8 @@
 	  recurring_row++;
   }
 
-  //--></script>
-  <script type="text/javascript"><!--
+//--></script>
+<script type="text/javascript"><!--
   $('.date').datetimepicker({
 	  language: '{{ datepicker }}',
 	  pickTime: false
@@ -1385,10 +1386,10 @@
 	  pickDate: true,
 	  pickTime: true
   });
-  //--></script>
-  <script type="text/javascript"><!--
+//--></script>
+<script type="text/javascript"><!--
   $('#language a:first').tab('show');
   $('#option a:first').tab('show');
-  //--></script>
+//--></script>
 </div>
 {{ footer }}

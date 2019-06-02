@@ -4,7 +4,8 @@
     <div class="container-fluid">
       <div class="pull-right">
         <button type="submit" form="form-review" data-toggle="tooltip" title="{{ button_save }}" class="btn btn-primary"><i class="fa fa-save"></i></button>
-        <a href="{{ cancel }}" data-toggle="tooltip" title="{{ button_cancel }}" class="btn btn-default"><i class="fa fa-reply"></i></a></div>
+        <a href="{{ cancel }}" data-toggle="tooltip" title="{{ button_cancel }}" class="btn btn-default"><i class="fa fa-reply"></i></a>
+      </div>
       <h1>{{ heading_title }}</h1>
       <ul class="breadcrumb">
         {% for breadcrumb in breadcrumbs %}
@@ -30,7 +31,8 @@
               <input type="text" name="author" value="{{ author }}" placeholder="{{ entry_author }}" id="input-author" class="form-control" />
               {% if error_author %}
               <div class="text-danger">{{ error_author }}</div>
-              {% endif %} </div>
+              {% endif %}
+            </div>
           </div>
           <div class="form-group required">
             <label class="col-sm-2 control-label" for="input-product"><span data-toggle="tooltip" title="{{ help_product }}">{{ entry_product }}</span></label>
@@ -39,7 +41,8 @@
               <input type="hidden" name="product_id" value="{{ product_id }}" />
               {% if error_product %}
               <div class="text-danger">{{ error_product }}</div>
-              {% endif %} </div>
+              {% endif %}
+            </div>
           </div>
           <div class="form-group required">
             <label class="col-sm-2 control-label" for="input-text">{{ entry_text }}</label>
@@ -47,7 +50,8 @@
               <textarea name="text" cols="60" rows="8" placeholder="{{ entry_text }}" id="input-text" class="form-control">{{ text }}</textarea>
               {% if error_text %}
               <div class="text-danger">{{ error_text }}</div>
-              {% endif %} </div>
+              {% endif %}
+            </div>
           </div>
           <div class="form-group required">
             <label class="col-sm-2 control-label" for="input-name">{{ entry_rating }}</label>
@@ -58,38 +62,44 @@
                 {% else %}
                 <input type="radio" name="rating" value="1" />
                 1
-                {% endif %} </label>
+                {% endif %}
+              </label>
               <label class="radio-inline"> {% if rating == 2 %}
                 <input type="radio" name="rating" value="2" checked="checked" />
                 2
                 {% else %}
                 <input type="radio" name="rating" value="2" />
                 2
-                {% endif %} </label>
+                {% endif %}
+              </label>
               <label class="radio-inline"> {% if rating == 3 %}
                 <input type="radio" name="rating" value="3" checked="checked" />
                 3
                 {% else %}
                 <input type="radio" name="rating" value="3" />
                 3
-                {% endif %} </label>
+                {% endif %}
+              </label>
               <label class="radio-inline"> {% if rating == 4 %}
                 <input type="radio" name="rating" value="4" checked="checked" />
                 4
                 {% else %}
                 <input type="radio" name="rating" value="4" />
                 4
-                {% endif %} </label>
+                {% endif %}
+              </label>
               <label class="radio-inline"> {% if rating == 5 %}
                 <input type="radio" name="rating" value="5" checked="checked" />
                 5
                 {% else %}
                 <input type="radio" name="rating" value="5" />
                 5
-                {% endif %} </label>
+                {% endif %}
+              </label>
               {% if error_rating %}
               <div class="text-danger">{{ error_rating }}</div>
-              {% endif %} </div>
+              {% endif %}
+            </div>
           </div>
           <div class="form-group">
             <label class="col-sm-2 control-label" for="input-date-added">{{ entry_date_added }}</label>
@@ -98,26 +108,21 @@
                 <input type="text" name="date_added" value="{{ date_added }}" placeholder="{{ entry_date_added }}" data-date-format="YYYY-MM-DD HH:mm:ss" id="input-date-added" class="form-control" />
                 <span class="input-group-btn">
                 <button type="button" class="btn btn-default"><i class="fa fa-calendar"></i></button>
-                </span> </div>
+                </span>
+              </div>
             </div>
           </div>
           <div class="form-group">
             <label class="col-sm-2 control-label" for="input-status">{{ entry_status }}</label>
             <div class="col-sm-10">
               <select name="status" id="input-status" class="form-control">
-                
                 {% if status %}
-                
                 <option value="1" selected="selected">{{ text_enabled }}</option>
                 <option value="0">{{ text_disabled }}</option>
-                
                 {% else %}
-                
                 <option value="1">{{ text_enabled }}</option>
                 <option value="0" selected="selected">{{ text_disabled }}</option>
-                
                 {% endif %}
-              
               </select>
             </div>
           </div>
@@ -125,14 +130,14 @@
       </div>
     </div>
   </div>
-  <script type="text/javascript"><!--
+<script type="text/javascript"><!--
 $('.datetime').datetimepicker({
 	language: '{{ datepicker }}',
 	pickDate: true,
 	pickTime: true
 });
 //--></script> 
-  <script type="text/javascript"><!--
+<script type="text/javascript"><!--
 $('input[name=\'product\']').autocomplete({
 	'source': function(request, response) {
 		$.ajax({
@@ -150,7 +155,7 @@ $('input[name=\'product\']').autocomplete({
 	},
 	'select': function(item) {
 		$('input[name=\'product\']').val(item['label']);
-		$('input[name=\'product_id\']').val(item['value']);		
+		$('input[name=\'product_id\']').val(item['value']);
 	}
 });
 //--></script>
