@@ -216,6 +216,10 @@ class ModelCatalogCategory extends Model {
 			$sql .= " AND cd2.name LIKE '%" . $this->db->escape($data['filter_name']) . "%'";
 		}
 
+		if (isset($data['filter_status']) && $data['filter_status'] !== '') {
+			$sql .= " AND c1.status = '" . (int)$data['filter_status'] . "'";
+		}
+
 		$sql .= " GROUP BY cp.category_id";
 
 		$sort_data = array(
@@ -324,8 +328,18 @@ class ModelCatalogCategory extends Model {
 		return $category_layout_data;
 	}
 
-	public function getTotalCategories() {
-		$query = $this->db->query("SELECT COUNT(*) AS total FROM " . DB_PREFIX . "category");
+	public function getTotalCategories($data = array()) {
+		$sql = "SELECT COUNT(*) AS total FROM " . DB_PREFIX . "category c LEFT JOIN " . DB_PREFIX . "category_description cd ON (c.category_id = cd.category_id) WHERE cd.language_id = '" . (int)$this->config->get('config_language_id') . "'";
+
+		if (!empty($data['filter_name'])) {
+			$sql .= " AND cd.name LIKE '%" . $this->db->escape($data['filter_name']) . "%'";
+		}
+
+		if (isset($data['filter_status']) && $data['filter_status'] !== '') {
+			$sql .= " AND c.status = '" . (int)$data['filter_status'] . "'";
+		}
+
+		$query = $this->db->query($sql);
 
 		return $query->row['total'];
 	}

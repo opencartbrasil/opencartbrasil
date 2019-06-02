@@ -53,77 +53,16 @@
               <label class="control-label" for="input-status">{{ entry_status }}</label>
               <select name="filter_status" id="input-status" class="form-control">
                 <option value=""></option>
-                
-                
-                
-                  
-                
-
-                  {% if filter_status == '1' %}
-
-                
-                
-                  
-                
-                
+                {% if filter_status == '1' %}
                 <option value="1" selected="selected">{{ text_enabled }}</option>
-                
-                
-                
-                  
-                
-
-                  {% else %}
-
-                
-                
-                  
-                
-                
+                {% else %}
                 <option value="1">{{ text_enabled }}</option>
-                
-                
-                
-                  
-                
-
-                  {% endif %}
-                  {% if filter_status == '0' %}
-
-                
-                
-                  
-                
-                
+                {% endif %}
+                {% if filter_status == '0' %}
                 <option value="0" selected="selected">{{ text_disabled }}</option>
-                
-                
-                
-                  
-                
-
-                  {% else %}
-
-                
-                
-                  
-                
-                
+                {% else %}
                 <option value="0">{{ text_disabled }}</option>
-                
-                
-                
-                  
-                
-
-                  {% endif %}
-
-
-              
-              
-                
-              
-              
+                {% endif %}
               </select>
             </div>
             <div class="form-group text-right">
@@ -154,7 +93,6 @@
                     </tr>
                   </thead>
                   <tbody>
-                  
                   {% if products %}
                   {% for product in products %}
                   <tr>
@@ -181,8 +119,7 @@
                     <td class="text-center" colspan="8">{{ text_no_results }}</td>
                   </tr>
                   {% endif %}
-                    </tbody>
-                  
+                  </tbody>
                 </table>
               </div>
             </form>
@@ -195,7 +132,7 @@
       </div>
     </div>
   </div>
-  <script type="text/javascript"><!--
+<script type="text/javascript"><!--
 $('#button-filter').on('click', function() {
 	var url = '';
 
@@ -232,12 +169,11 @@ $('#button-filter').on('click', function() {
 	location = 'index.php?route=catalog/product&user_token={{ user_token }}' + url;
 });
 //--></script> 
-  <script type="text/javascript"><!--
+<script type="text/javascript"><!--
 // IE and Edge fix!
 $('button[form=\'form-product\']').on('click', function(e) {
 	$('#form-product').attr('action', $(this).attr('formaction'));
 });
-  
 $('input[name=\'filter_name\']').autocomplete({
 	'source': function(request, response) {
 		$.ajax({
@@ -257,7 +193,6 @@ $('input[name=\'filter_name\']').autocomplete({
 		$('input[name=\'filter_name\']').val(item['label']);
 	}
 });
-
 $('input[name=\'filter_model\']').autocomplete({
 	'source': function(request, response) {
 		$.ajax({

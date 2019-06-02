@@ -71,7 +71,11 @@ class ModelCatalogOption extends Model {
 		$sql = "SELECT * FROM `" . DB_PREFIX . "option` o LEFT JOIN " . DB_PREFIX . "option_description od ON (o.option_id = od.option_id) WHERE od.language_id = '" . (int)$this->config->get('config_language_id') . "'";
 
 		if (!empty($data['filter_name'])) {
-			$sql .= " AND od.name LIKE '" . $this->db->escape($data['filter_name']) . "%'";
+			$sql .= " AND od.name LIKE '%" . $this->db->escape($data['filter_name']) . "%'";
+		}
+
+		if (!empty($data['filter_type'])) {
+			$sql .= " AND o.type = '" . $this->db->escape($data['filter_type']) . "'";
 		}
 
 		$sort_data = array(
@@ -169,8 +173,18 @@ class ModelCatalogOption extends Model {
 		return $option_value_data;
 	}
 
-	public function getTotalOptions() {
-		$query = $this->db->query("SELECT COUNT(*) AS total FROM `" . DB_PREFIX . "option`");
+	public function getTotalOptions($data = array()) {
+		$sql = "SELECT COUNT(*) AS total FROM `" . DB_PREFIX . "option` o LEFT JOIN " . DB_PREFIX . "option_description od ON (o.option_id = od.option_id) WHERE od.language_id = '" . (int)$this->config->get('config_language_id') . "'";
+
+		if (!empty($data['filter_name'])) {
+			$sql .= " AND od.name LIKE '%" . $this->db->escape($data['filter_name']) . "%'";
+		}
+
+		if (!empty($data['filter_type'])) {
+			$sql .= " AND o.type = '" . $this->db->escape($data['filter_type']) . "'";
+		}
+
+		$query = $this->db->query($sql);
 
 		return $query->row['total'];
 	}

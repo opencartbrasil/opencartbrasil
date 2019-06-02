@@ -44,90 +44,16 @@
               <label class="control-label" for="input-status">{{ entry_status }}</label>
               <select name="filter_status" id="input-status" class="form-control">
                 <option value=""></option>
-                
-                  
-              
-              
-          
-          
-                  
-                  
-                  
-                  {% if filter_status == '1' %}
-                  
-                  
-                  
-                  
-          
-          
-              
-              
-                  
+                {% if filter_status == '1' %}
                 <option value="1" selected="selected">{{ text_enabled }}</option>
-                
-                  
-              
-              
-          
-          
-                  
-                  
-                  
-                  {% else %}
-                  
-                  
-                  
-                  
-          
-          
-              
-              
-                  
+                {% else %}
                 <option value="1">{{ text_enabled }}</option>
-                
-                  
-              
-              
-          
-          
-                  
-                  
-                  
-                  {% endif %}
-                  {% if filter_status == '0' %}
-                  
-                  
-                  
-                  
-          
-          
-              
-              
-                  
+                {% endif %}
+                {% if filter_status == '0' %}
                 <option value="0" selected="selected">{{ text_disabled }}</option>
-                
-                  
-              
-              
-          
-          
-                  
-                  
-                  
-                  {% else %}
-                  
-                  
-                  
-                  
-          
-          
-              
-              
-                  
+                {% else %}
                 <option value="0">{{ text_disabled }}</option>
-                
-                  {% endif %}
-                
+                {% endif %}
               </select>
             </div>
             <div class="form-group">
@@ -136,7 +62,8 @@
                 <input type="text" name="filter_date_added" value="{{ filter_date_added }}" placeholder="{{ entry_date_added }}" data-date-format="YYYY-MM-DD" id="input-date-added" class="form-control" />
                 <span class="input-group-btn">
                 <button type="button" class="btn btn-default"><i class="fa fa-calendar"></i></button>
-                </span></div>
+                </span>
+              </div>
             </div>
             <div class="form-group text-right">
               <button type="button" id="button-filter" class="btn btn-default"><i class="fa fa-filter"></i> {{ button_filter }}</button>
@@ -165,30 +92,30 @@
                     </tr>
                   </thead>
                   <tbody>
-                  
-                  {% if reviews %}
-                  {% for review in reviews %}
-                  <tr>
-                    <td class="text-center">{% if review.review_id in selected %}
-                      <input type="checkbox" name="selected[]" value="{{ review.review_id }}" checked="checked" />
-                      {% else %}
-                      <input type="checkbox" name="selected[]" value="{{ review.review_id }}" />
-                      {% endif %}</td>
-                    <td class="text-left">{{ review.name }}</td>
-                    <td class="text-left">{{ review.author }}</td>
-                    <td class="text-right">{{ review.rating }}</td>
-                    <td class="text-left">{{ review.status }}</td>
-                    <td class="text-left">{{ review.date_added }}</td>
-                    <td class="text-right"><a href="{{ review.edit }}" data-toggle="tooltip" title="{{ button_edit }}" class="btn btn-primary"><i class="fa fa-pencil"></i></a></td>
-                  </tr>
-                  {% endfor %}
-                  {% else %}
-                  <tr>
-                    <td class="text-center" colspan="7">{{ text_no_results }}</td>
-                  </tr>
-                  {% endif %}
-                    </tbody>
-                  
+                    {% if reviews %}
+                    {% for review in reviews %}
+                    <tr>
+                      <td class="text-center">
+                        {% if review.review_id in selected %}
+                        <input type="checkbox" name="selected[]" value="{{ review.review_id }}" checked="checked" />
+                        {% else %}
+                        <input type="checkbox" name="selected[]" value="{{ review.review_id }}" />
+                        {% endif %}
+                      </td>
+                      <td class="text-left">{{ review.name }}</td>
+                      <td class="text-left">{{ review.author }}</td>
+                      <td class="text-right">{{ review.rating }}</td>
+                      <td class="text-left">{{ review.status }}</td>
+                      <td class="text-left">{{ review.date_added }}</td>
+                      <td class="text-right"><a href="{{ review.edit }}" data-toggle="tooltip" title="{{ button_edit }}" class="btn btn-primary"><i class="fa fa-pencil"></i></a></td>
+                    </tr>
+                    {% endfor %}
+                    {% else %}
+                    <tr>
+                      <td class="text-center" colspan="7">{{ text_no_results }}</td>
+                    </tr>
+                    {% endif %}
+                  </tbody>
                 </table>
               </div>
             </form>
@@ -220,7 +147,7 @@ $('#button-filter').on('click', function() {
 	var filter_status = $('select[name=\'filter_status\']').val();
 	
 	if (filter_status !== '') {
-		url += '&filter_status=' + encodeURIComponent(filter_status); 
+		url += '&filter_status=' + encodeURIComponent(filter_status);
 	}
 
 	var filter_date_added = $('input[name=\'filter_date_added\']').val();
@@ -231,7 +158,7 @@ $('#button-filter').on('click', function() {
 
 	location = url;
 });
-//--></script> 
+//--></script>
 <script type="text/javascript"><!--
 $('.date').datetimepicker({
 	language: '{{ datepicker }}',

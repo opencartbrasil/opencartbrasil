@@ -37,7 +37,11 @@ class ModelCatalogDownload extends Model {
 		$sql = "SELECT * FROM " . DB_PREFIX . "download d LEFT JOIN " . DB_PREFIX . "download_description dd ON (d.download_id = dd.download_id) WHERE dd.language_id = '" . (int)$this->config->get('config_language_id') . "'";
 
 		if (!empty($data['filter_name'])) {
-			$sql .= " AND dd.name LIKE '" . $this->db->escape($data['filter_name']) . "%'";
+			$sql .= " AND dd.name LIKE '%" . $this->db->escape($data['filter_name']) . "%'";
+		}
+
+		if (!empty($data['filter_mask'])) {
+			$sql .= " AND d.mask LIKE '%" . $this->db->escape($data['filter_mask']) . "%'";
 		}
 
 		$sort_data = array(
@@ -86,8 +90,18 @@ class ModelCatalogDownload extends Model {
 		return $download_description_data;
 	}
 
-	public function getTotalDownloads() {
-		$query = $this->db->query("SELECT COUNT(*) AS total FROM " . DB_PREFIX . "download");
+	public function getTotalDownloads($data = array()) {
+		$sql = "SELECT COUNT(*) AS total FROM " . DB_PREFIX . "download d LEFT JOIN " . DB_PREFIX . "download_description dd ON (d.download_id = dd.download_id) WHERE dd.language_id = '" . (int)$this->config->get('config_language_id') . "'";
+
+		if (!empty($data['filter_name'])) {
+			$sql .= " AND dd.name LIKE '%" . $this->db->escape($data['filter_name']) . "%'";
+		}
+
+		if (!empty($data['filter_mask'])) {
+			$sql .= " AND d.mask LIKE '%" . $this->db->escape($data['filter_mask']) . "%'";
+		}
+
+		$query = $this->db->query($sql);
 
 		return $query->row['total'];
 	}

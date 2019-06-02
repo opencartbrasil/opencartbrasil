@@ -97,6 +97,14 @@ class ModelCatalogInformation extends Model {
 		if ($data) {
 			$sql = "SELECT * FROM " . DB_PREFIX . "information i LEFT JOIN " . DB_PREFIX . "information_description id ON (i.information_id = id.information_id) WHERE id.language_id = '" . (int)$this->config->get('config_language_id') . "'";
 
+			if (!empty($data['filter_title'])) {
+				$sql .= " AND id.title LIKE '%" . $this->db->escape($data['filter_title']) . "%'";
+			}
+
+			if (isset($data['filter_status']) && $data['filter_status'] !== '') {
+				$sql .= " AND i.status = '" . (int)$data['filter_status'] . "'";
+			}
+
 			$sort_data = array(
 				'id.title',
 				'i.sort_order'
@@ -198,8 +206,18 @@ class ModelCatalogInformation extends Model {
 		return $information_layout_data;
 	}
 
-	public function getTotalInformations() {
-		$query = $this->db->query("SELECT COUNT(*) AS total FROM " . DB_PREFIX . "information");
+	public function getTotalInformations($data = array()) {
+		$sql = "SELECT COUNT(*) AS total FROM " . DB_PREFIX . "information i LEFT JOIN " . DB_PREFIX . "information_description id ON (i.information_id = id.information_id) WHERE id.language_id = '" . (int)$this->config->get('config_language_id') . "'";
+
+		if (!empty($data['filter_title'])) {
+			$sql .= " AND id.title LIKE '%" . $this->db->escape($data['filter_title']) . "%'";
+		}
+
+		if (isset($data['filter_status']) && $data['filter_status'] !== '') {
+			$sql .= " AND i.status = '" . (int)$data['filter_status'] . "'";
+		}
+
+		$query = $this->db->query($sql);
 
 		return $query->row['total'];
 	}

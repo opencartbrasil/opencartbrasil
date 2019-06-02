@@ -79,7 +79,7 @@ class ModelCatalogManufacturer extends Model {
 		$sql = "SELECT * FROM " . DB_PREFIX . "manufacturer";
 
 		if (!empty($data['filter_name'])) {
-			$sql .= " WHERE name LIKE '" . $this->db->escape($data['filter_name']) . "%'";
+			$sql .= " WHERE name LIKE '%" . $this->db->escape($data['filter_name']) . "%'";
 		}
 
 		$sort_data = array(
@@ -140,8 +140,14 @@ class ModelCatalogManufacturer extends Model {
 		return $manufacturer_seo_url_data;
 	}
 	
-	public function getTotalManufacturers() {
-		$query = $this->db->query("SELECT COUNT(*) AS total FROM " . DB_PREFIX . "manufacturer");
+	public function getTotalManufacturers($data = array()) {
+		$sql = "SELECT COUNT(*) AS total FROM " . DB_PREFIX . "manufacturer";
+
+		if (!empty($data['filter_name'])) {
+			$sql .= " WHERE name LIKE '%" . $this->db->escape($data['filter_name']) . "%'";
+		}
+
+		$query = $this->db->query($sql);
 
 		return $query->row['total'];
 	}

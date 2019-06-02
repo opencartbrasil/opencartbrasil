@@ -26,6 +26,14 @@ class ControllerCatalogDownload extends Controller {
 
 			$url = '';
 
+			if (isset($this->request->get['filter_name'])) {
+				$url .= '&filter_name=' . urlencode(html_entity_decode($this->request->get['filter_name'], ENT_QUOTES, 'UTF-8'));
+			}
+
+			if (isset($this->request->get['filter_mask'])) {
+				$url .= '&filter_mask=' . urlencode(html_entity_decode($this->request->get['filter_mask'], ENT_QUOTES, 'UTF-8'));
+			}
+
 			if (isset($this->request->get['sort'])) {
 				$url .= '&sort=' . $this->request->get['sort'];
 			}
@@ -57,6 +65,14 @@ class ControllerCatalogDownload extends Controller {
 			$this->session->data['success'] = $this->language->get('text_success');
 
 			$url = '';
+
+			if (isset($this->request->get['filter_name'])) {
+				$url .= '&filter_name=' . urlencode(html_entity_decode($this->request->get['filter_name'], ENT_QUOTES, 'UTF-8'));
+			}
+
+			if (isset($this->request->get['filter_mask'])) {
+				$url .= '&filter_mask=' . urlencode(html_entity_decode($this->request->get['filter_mask'], ENT_QUOTES, 'UTF-8'));
+			}
 
 			if (isset($this->request->get['sort'])) {
 				$url .= '&sort=' . $this->request->get['sort'];
@@ -92,6 +108,14 @@ class ControllerCatalogDownload extends Controller {
 
 			$url = '';
 
+			if (isset($this->request->get['filter_name'])) {
+				$url .= '&filter_name=' . urlencode(html_entity_decode($this->request->get['filter_name'], ENT_QUOTES, 'UTF-8'));
+			}
+
+			if (isset($this->request->get['filter_mask'])) {
+				$url .= '&filter_mask=' . urlencode(html_entity_decode($this->request->get['filter_mask'], ENT_QUOTES, 'UTF-8'));
+			}
+
 			if (isset($this->request->get['sort'])) {
 				$url .= '&sort=' . $this->request->get['sort'];
 			}
@@ -111,6 +135,18 @@ class ControllerCatalogDownload extends Controller {
 	}
 
 	protected function getList() {
+		if (isset($this->request->get['filter_name'])) {
+			$filter_name = $this->request->get['filter_name'];
+		} else {
+			$filter_name = '';
+		}
+
+		if (isset($this->request->get['filter_mask'])) {
+			$filter_mask = $this->request->get['filter_mask'];
+		} else {
+			$filter_mask = '';
+		}
+
 		if (isset($this->request->get['sort'])) {
 			$sort = $this->request->get['sort'];
 		} else {
@@ -130,6 +166,14 @@ class ControllerCatalogDownload extends Controller {
 		}
 
 		$url = '';
+
+		if (isset($this->request->get['filter_name'])) {
+			$url .= '&filter_name=' . urlencode(html_entity_decode($this->request->get['filter_name'], ENT_QUOTES, 'UTF-8'));
+		}
+
+		if (isset($this->request->get['filter_mask'])) {
+			$url .= '&filter_mask=' . urlencode(html_entity_decode($this->request->get['filter_mask'], ENT_QUOTES, 'UTF-8'));
+		}
 
 		if (isset($this->request->get['sort'])) {
 			$url .= '&sort=' . $this->request->get['sort'];
@@ -161,13 +205,15 @@ class ControllerCatalogDownload extends Controller {
 		$data['downloads'] = array();
 
 		$filter_data = array(
+			'filter_name' => $filter_name,
+			'filter_mask'  => $filter_mask,
 			'sort'  => $sort,
 			'order' => $order,
 			'start' => ($page - 1) * $this->config->get('config_limit_admin'),
 			'limit' => $this->config->get('config_limit_admin')
 		);
 
-		$download_total = $this->model_catalog_download->getTotalDownloads();
+		$download_total = $this->model_catalog_download->getTotalDownloads($filter_data);
 
 		$results = $this->model_catalog_download->getDownloads($filter_data);
 
@@ -179,6 +225,8 @@ class ControllerCatalogDownload extends Controller {
 				'edit'        => $this->url->link('catalog/download/edit', 'user_token=' . $this->session->data['user_token'] . '&download_id=' . $result['download_id'] . $url, true)
 			);
 		}
+
+		$data['user_token'] = $this->session->data['user_token'];
 
 		if (isset($this->error['warning'])) {
 			$data['error_warning'] = $this->error['warning'];
@@ -202,6 +250,14 @@ class ControllerCatalogDownload extends Controller {
 
 		$url = '';
 
+		if (isset($this->request->get['filter_name'])) {
+			$url .= '&filter_name=' . urlencode(html_entity_decode($this->request->get['filter_name'], ENT_QUOTES, 'UTF-8'));
+		}
+
+		if (isset($this->request->get['filter_mask'])) {
+			$url .= '&filter_mask=' . urlencode(html_entity_decode($this->request->get['filter_mask'], ENT_QUOTES, 'UTF-8'));
+		}
+
 		if ($order == 'ASC') {
 			$url .= '&order=DESC';
 		} else {
@@ -216,6 +272,14 @@ class ControllerCatalogDownload extends Controller {
 		$data['sort_date_added'] = $this->url->link('catalog/download', 'user_token=' . $this->session->data['user_token'] . '&sort=d.date_added' . $url, true);
 
 		$url = '';
+
+		if (isset($this->request->get['filter_name'])) {
+			$url .= '&filter_name=' . urlencode(html_entity_decode($this->request->get['filter_name'], ENT_QUOTES, 'UTF-8'));
+		}
+
+		if (isset($this->request->get['filter_mask'])) {
+			$url .= '&filter_mask=' . urlencode(html_entity_decode($this->request->get['filter_mask'], ENT_QUOTES, 'UTF-8'));
+		}
 
 		if (isset($this->request->get['sort'])) {
 			$url .= '&sort=' . $this->request->get['sort'];
@@ -235,6 +299,8 @@ class ControllerCatalogDownload extends Controller {
 
 		$data['results'] = sprintf($this->language->get('text_pagination'), ($download_total) ? (($page - 1) * $this->config->get('config_limit_admin')) + 1 : 0, ((($page - 1) * $this->config->get('config_limit_admin')) > ($download_total - $this->config->get('config_limit_admin'))) ? $download_total : ((($page - 1) * $this->config->get('config_limit_admin')) + $this->config->get('config_limit_admin')), $download_total, ceil($download_total / $this->config->get('config_limit_admin')));
 
+		$data['filter_name'] = $filter_name;
+		$data['filter_mask'] = $filter_mask;
 		$data['sort'] = $sort;
 		$data['order'] = $order;
 
@@ -273,6 +339,14 @@ class ControllerCatalogDownload extends Controller {
 		}
 
 		$url = '';
+
+		if (isset($this->request->get['filter_name'])) {
+			$url .= '&filter_name=' . urlencode(html_entity_decode($this->request->get['filter_name'], ENT_QUOTES, 'UTF-8'));
+		}
+
+		if (isset($this->request->get['filter_mask'])) {
+			$url .= '&filter_mask=' . urlencode(html_entity_decode($this->request->get['filter_mask'], ENT_QUOTES, 'UTF-8'));
+		}
 
 		if (isset($this->request->get['sort'])) {
 			$url .= '&sort=' . $this->request->get['sort'];

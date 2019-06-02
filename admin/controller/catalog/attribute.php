@@ -26,6 +26,14 @@ class ControllerCatalogAttribute extends Controller {
 
 			$url = '';
 
+			if (isset($this->request->get['filter_name'])) {
+				$url .= '&filter_name=' . urlencode(html_entity_decode($this->request->get['filter_name'], ENT_QUOTES, 'UTF-8'));
+			}
+
+			if (isset($this->request->get['filter_attribute_group_id'])) {
+				$url .= '&filter_attribute_group_id=' . $this->request->get['filter_attribute_group_id'];
+			}
+
 			if (isset($this->request->get['sort'])) {
 				$url .= '&sort=' . $this->request->get['sort'];
 			}
@@ -57,6 +65,14 @@ class ControllerCatalogAttribute extends Controller {
 			$this->session->data['success'] = $this->language->get('text_success');
 
 			$url = '';
+
+			if (isset($this->request->get['filter_name'])) {
+				$url .= '&filter_name=' . urlencode(html_entity_decode($this->request->get['filter_name'], ENT_QUOTES, 'UTF-8'));
+			}
+
+			if (isset($this->request->get['filter_attribute_group_id'])) {
+				$url .= '&filter_attribute_group_id=' . $this->request->get['filter_attribute_group_id'];
+			}
 
 			if (isset($this->request->get['sort'])) {
 				$url .= '&sort=' . $this->request->get['sort'];
@@ -92,6 +108,14 @@ class ControllerCatalogAttribute extends Controller {
 
 			$url = '';
 
+			if (isset($this->request->get['filter_name'])) {
+				$url .= '&filter_name=' . urlencode(html_entity_decode($this->request->get['filter_name'], ENT_QUOTES, 'UTF-8'));
+			}
+
+			if (isset($this->request->get['filter_attribute_group_id'])) {
+				$url .= '&filter_attribute_group_id=' . $this->request->get['filter_attribute_group_id'];
+			}
+
 			if (isset($this->request->get['sort'])) {
 				$url .= '&sort=' . $this->request->get['sort'];
 			}
@@ -111,6 +135,18 @@ class ControllerCatalogAttribute extends Controller {
 	}
 
 	protected function getList() {
+		if (isset($this->request->get['filter_name'])) {
+			$filter_name = $this->request->get['filter_name'];
+		} else {
+			$filter_name = '';
+		}
+
+		if (isset($this->request->get['filter_attribute_group_id'])) {
+			$filter_attribute_group_id = $this->request->get['filter_attribute_group_id'];
+		} else {
+			$filter_attribute_group_id = '';
+		}
+
 		if (isset($this->request->get['sort'])) {
 			$sort = $this->request->get['sort'];
 		} else {
@@ -130,6 +166,14 @@ class ControllerCatalogAttribute extends Controller {
 		}
 
 		$url = '';
+
+		if (isset($this->request->get['filter_name'])) {
+			$url .= '&filter_name=' . urlencode(html_entity_decode($this->request->get['filter_name'], ENT_QUOTES, 'UTF-8'));
+		}
+
+		if (isset($this->request->get['filter_attribute_group_id'])) {
+			$url .= '&filter_attribute_group_id=' . $this->request->get['filter_attribute_group_id'];
+		}
 
 		if (isset($this->request->get['sort'])) {
 			$url .= '&sort=' . $this->request->get['sort'];
@@ -161,13 +205,15 @@ class ControllerCatalogAttribute extends Controller {
 		$data['attributes'] = array();
 
 		$filter_data = array(
+			'filter_name' => $filter_name,
+			'filter_attribute_group_id' => $filter_attribute_group_id,
 			'sort'  => $sort,
 			'order' => $order,
 			'start' => ($page - 1) * $this->config->get('config_limit_admin'),
 			'limit' => $this->config->get('config_limit_admin')
 		);
 
-		$attribute_total = $this->model_catalog_attribute->getTotalAttributes();
+		$attribute_total = $this->model_catalog_attribute->getTotalAttributes($filter_data);
 
 		$results = $this->model_catalog_attribute->getAttributes($filter_data);
 
@@ -180,6 +226,8 @@ class ControllerCatalogAttribute extends Controller {
 				'edit'            => $this->url->link('catalog/attribute/edit', 'user_token=' . $this->session->data['user_token'] . '&attribute_id=' . $result['attribute_id'] . $url, true)
 			);
 		}
+
+		$data['user_token'] = $this->session->data['user_token'];
 
 		if (isset($this->error['warning'])) {
 			$data['error_warning'] = $this->error['warning'];
@@ -203,6 +251,14 @@ class ControllerCatalogAttribute extends Controller {
 
 		$url = '';
 
+		if (isset($this->request->get['filter_name'])) {
+			$url .= '&filter_name=' . urlencode(html_entity_decode($this->request->get['filter_name'], ENT_QUOTES, 'UTF-8'));
+		}
+
+		if (isset($this->request->get['filter_attribute_group_id'])) {
+			$url .= '&filter_attribute_group_id=' . $this->request->get['filter_attribute_group_id'];
+		}
+
 		if ($order == 'ASC') {
 			$url .= '&order=DESC';
 		} else {
@@ -218,6 +274,14 @@ class ControllerCatalogAttribute extends Controller {
 		$data['sort_sort_order'] = $this->url->link('catalog/attribute', 'user_token=' . $this->session->data['user_token'] . '&sort=a.sort_order' . $url, true);
 
 		$url = '';
+
+		if (isset($this->request->get['filter_name'])) {
+			$url .= '&filter_name=' . urlencode(html_entity_decode($this->request->get['filter_name'], ENT_QUOTES, 'UTF-8'));
+		}
+
+		if (isset($this->request->get['filter_attribute_group_id'])) {
+			$url .= '&filter_attribute_group_id=' . $this->request->get['filter_attribute_group_id'];
+		}
 
 		if (isset($this->request->get['sort'])) {
 			$url .= '&sort=' . $this->request->get['sort'];
@@ -237,9 +301,15 @@ class ControllerCatalogAttribute extends Controller {
 
 		$data['results'] = sprintf($this->language->get('text_pagination'), ($attribute_total) ? (($page - 1) * $this->config->get('config_limit_admin')) + 1 : 0, ((($page - 1) * $this->config->get('config_limit_admin')) > ($attribute_total - $this->config->get('config_limit_admin'))) ? $attribute_total : ((($page - 1) * $this->config->get('config_limit_admin')) + $this->config->get('config_limit_admin')), $attribute_total, ceil($attribute_total / $this->config->get('config_limit_admin')));
 
+		$data['filter_name'] = $filter_name;
+		$data['filter_attribute_group_id'] = $filter_attribute_group_id;
 		$data['sort'] = $sort;
 		$data['order'] = $order;
-		
+
+		$this->load->model('catalog/attribute_group');
+
+		$data['attribute_groups'] = $this->model_catalog_attribute_group->getAttributeGroups();
+
 		$data['header'] = $this->load->controller('common/header');
 		$data['column_left'] = $this->load->controller('common/column_left');
 		$data['footer'] = $this->load->controller('common/footer');
@@ -269,6 +339,14 @@ class ControllerCatalogAttribute extends Controller {
 		}
 
 		$url = '';
+
+		if (isset($this->request->get['filter_name'])) {
+			$url .= '&filter_name=' . urlencode(html_entity_decode($this->request->get['filter_name'], ENT_QUOTES, 'UTF-8'));
+		}
+
+		if (isset($this->request->get['filter_attribute_group_id'])) {
+			$url .= '&filter_attribute_group_id=' . $this->request->get['filter_attribute_group_id'];
+		}
 
 		if (isset($this->request->get['sort'])) {
 			$url .= '&sort=' . $this->request->get['sort'];
