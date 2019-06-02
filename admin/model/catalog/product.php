@@ -362,6 +362,10 @@ class ModelCatalogProduct extends Model {
 			$sql .= " AND pd.name LIKE '" . $this->db->escape($data['filter_name']) . "%'";
 		}
 
+		if (!empty($data['filter_sku'])) {
+			$sql .= " AND p.sku LIKE '%" . $this->db->escape($data['filter_sku']) . "%'";
+		}
+
 		if (!empty($data['filter_model'])) {
 			$sql .= " AND p.model LIKE '" . $this->db->escape($data['filter_model']) . "%'";
 		}
@@ -639,6 +643,10 @@ class ModelCatalogProduct extends Model {
 
 		if (!empty($data['filter_name'])) {
 			$sql .= " AND pd.name LIKE '" . $this->db->escape($data['filter_name']) . "%'";
+		}
+
+		if (!empty($data['filter_sku'])) {
+			$sql .= " AND p.sku LIKE '%" . $this->db->escape($data['filter_sku']) . "%'";
 		}
 
 		if (!empty($data['filter_model'])) {
