@@ -8,9 +8,6 @@ e utiliza [Semantic Versioning](https://semver.org/lang/pt-BR/spec/v2.0.0.html).
 
 ## [1.3.4] (Data de lançamento: 03.06.2019)
 ### Corrigido
-- Melhorias no processo de atualização
-- Melhorias na tradução da administração
-- Melhorias no layout da edição do pedido
 - Correção na data de cadastro dos afiliados
 - Correção no botão fechar do alerta no catálogo
 - Correção no filtro por data de cadastro dos afiliados
@@ -19,6 +16,12 @@ e utiliza [Semantic Versioning](https://semver.org/lang/pt-BR/spec/v2.0.0.html).
 ### Adicionado
 - Filtro por SKU do produto na administração
 - Filtro de departamentos, atributos, opções, marcas, downloads e páginas de informações na administração
+
+### Modificado
+- Bootstrap v3.3.7
+- Melhorias no processo de atualização
+- Melhorias na tradução da administração
+- Melhorias no layout da edição do pedido
 
 ## [1.3.3] (Data de lançamento: 08.05.2019)
 ### Corrigido
