@@ -6,6 +6,20 @@ e utiliza [Semantic Versioning](https://semver.org/lang/pt-BR/spec/v2.0.0.html).
 
 ## [Não lançada]
 
+## [1.3.4] (Data de lançamento: 03.06.2019)
+### Corrigido
+- Melhorias no processo de atualização
+- Melhorias na tradução da administração
+- Melhorias no layout da edição do pedido
+- Correção na data de cadastro dos afiliados
+- Correção no botão fechar do alerta no catálogo
+- Correção no filtro por data de cadastro dos afiliados
+- Indentação dos templates do catálogo na administração
+
+### Adicionado
+- Filtro por SKU do produto na administração
+- Filtro de departamentos, atributos, opções, marcas, downloads e páginas de informações na administração
+
 ## [1.3.3] (Data de lançamento: 08.05.2019)
 ### Corrigido
 - Melhoria na sintaxe do index.php
@@ -319,7 +333,8 @@ e utiliza [Semantic Versioning](https://semver.org/lang/pt-BR/spec/v2.0.0.html).
 - Cupons de descontos para demonstração.
 - Moedas: Euro e Libra esterlina.
 
-[Não lançada]: https://github.com/opencartbrasil/opencartbrasil/compare/v1.3.3...HEAD
+[Não lançada]: https://github.com/opencartbrasil/opencartbrasil/compare/v1.3.4...HEAD
+[1.3.4]: https://github.com/opencartbrasil/opencartbrasil/compare/v1.3.3...v1.3.4
 [1.3.3]: https://github.com/opencartbrasil/opencartbrasil/compare/v1.3.2...v1.3.3
 [1.3.2]: https://github.com/opencartbrasil/opencartbrasil/compare/v1.3.1...v1.3.2
 [1.3.1]: https://github.com/opencartbrasil/opencartbrasil/compare/v1.3.0...v1.3.1
