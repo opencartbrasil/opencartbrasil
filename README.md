@@ -20,15 +20,16 @@ Recomendamos que todos os desenvolvedores sigam este repositório para receberem
 
 ### Início da instalação:
 
-<img src="https://www.opencartbrasil.com.br/image/catalog/teste-drive/install.png">
+
+<img src="./.github/IMAGES/01.jpg">
 
 ### Página principal da loja:
 
-<img src="https://www.opencartbrasil.com.br/image/catalog/teste-drive/front-3.0.2.0.png">
+<img src="./.github/IMAGES/02.jpg">
 
 ### Painel de controle administrativo:
 
-<img src="https://www.opencartbrasil.com.br/image/catalog/teste-drive/back-3.0.2.0.png">
+<img src="./.github/IMAGES/03.jpg">
 
 ## Diferenciais
 
