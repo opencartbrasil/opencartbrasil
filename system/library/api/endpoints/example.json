@@ -1,0 +1,25 @@
+{
+  "base_uri": {
+    "production": "https://api.provider-example.com",
+    "sandbox": "https://sandbox.provider-example.com"
+  },
+  "endpoints": {
+    "getToken": {
+      "endpoint": "oauth/token",
+      "method": "post"
+    },
+    "creatPayment": {
+      "endpoint": "payment/new",
+      "method": "post"
+    },
+    "getPaymentId": {
+      "endpoint": "payment/:id",
+      "method": "get",
+      "assoc": ""
+    },
+    "putStatus": {
+      "endpoint": "payment/:id",
+      "method": "put"
+    }
+  }
+}
