@@ -17,7 +17,7 @@ class Endpoints implements EndpointsInterface
     /** @static */
     private static $file;
 
-    public function __construct(string $endpoint, string $url_config = 'production', array $options = [])
+    public function __construct(string $endpoint, array $options = [], string $url_config = 'production')
     {
         self::$file = file_get_contents(__DIR__ . '/endpoints/' . $endpoint . '.json');
 

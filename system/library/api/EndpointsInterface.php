@@ -13,9 +13,9 @@ namespace Api;
      *
      * @param string $path Api Provider Path
      * @param array  $options Options params
-     * @param string $url Type production or sandbox
+     * @param string $url_config Type production or sandbox
      */
-    public function __construct(string $path, string $url_config = 'production', array $options = []);
+    public function __construct(string $path, array $options = [], string $url_config = 'production');
 
     /**
      * method call magic
