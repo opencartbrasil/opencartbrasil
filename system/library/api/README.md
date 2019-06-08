@@ -40,7 +40,7 @@ Como a maioria das APIs estão utilizando o formato json tanto para consumir as 
 
 Após criar o arquivo, na sua aplicação basta instanciar a classe Endpoints:
 
-$api = new \Api\Endpoints('endpoint-file-name', 'sandbox', ['timeout' => 60.0]); // nome do arquivo, tipo do ambiente, opções
+$api = new \Api\Endpoints('endpoint-file-name', ['timeout' => 60.0], 'sandbox'); // nome do arquivo, opções, tipo do ambiente
 
 Faça a requisição conforme o método configurado no arquivo
 

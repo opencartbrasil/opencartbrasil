@@ -121,14 +121,14 @@ class Api implements ApiInterface
 	private function makePath(string $endpoint = '', array $params = [], string $url = '')
 	{
 		if (!preg_match("/^\//", $endpoint)) {
-			$endpoint = '/' . $endpoint;
+            $endpoint = '/' . $endpoint;
 		}
 		
 		$url = empty($url) ? $this->url : $url;
-		
+
 		$uri = $url . $endpoint . $this->toQuery($params);
-		
-		return $uri;
+
+        return $uri;
 	}
 
 	public function toQuery(array $data)
