@@ -10,33 +10,7 @@ A biblioteca usa o Client HTTP Guzzle para fazer as requisições simples, assí
 
 **Modo 1:**
 
-Como a maioria das APIs estão utilizando o formato json tanto para consumir as requisições, como para a documentação, basta criar um arquivo json na pasta endpoints com base no modelo abaixo:
-
-{
-  "base_uri": {
-    "production": "https://api.provider-example.com", // ambiente de produção (padrão)
-    "sandbox": "https://sandbox.provider-example.com" // ambiente de testes
-  },
-  "endpoints": { // matriz com os endpoints que serão consumidos durante as chamadas de cada método
-    "getPaymentId": { // método nomeado para fazer a chamada
-      "endpoint": "payment/:id", // endpoint para consumir a requisição
-      "method": "get", // verbo da requisição
-      "assoc": "" // parâmetro para retornar uma matriz associativa. Pode ser preenchido com true ou deixar como vazio na chave. Se não for definido será retornado um objeto.
-    },
-    "getToken": {
-      "endpoint": "oauth/token",
-      "method": "post"
-    },
-    "creatPayment": {
-      "endpoint": "payment/new",
-      "method": "post"
-    },
-    "putStatus": {
-      "endpoint": "payment/:id",
-      "method": "put"
-    }
-  }
-}
+Como a maioria das APIs estão utilizando o formato json tanto para consumir as requisições, como para a documentação, basta criar um arquivo json na pasta endpoints com base no modelo de exemplo que está dentro da pasta.
 
 Após criar o arquivo, na sua aplicação basta instanciar a classe Endpoints:
 
