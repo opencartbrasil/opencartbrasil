@@ -4,16 +4,8 @@ namespace Api;
 /**
  * Api Interface
  */
- interface ApiInterface
+interface ApiInterface
 {
-	/**
-	 * construct
-	 *
-	 * @param string $url	 Base URI
-	 * @param array  $options Options params
-	 */
-	public function __construct(string $url = '', array $options = []);
-
 	/**
 	 * Send only Request
 	 *
@@ -47,7 +39,7 @@ namespace Api;
 	 *
 	 * @return mixed
 	 */
-	public function assync(bool $assoc = false);
+	public function async(bool $assoc = false);
 
 	/**
 	 *
@@ -65,7 +57,5 @@ namespace Api;
 	 *
 	 * @return string
 	 */
-	public function toQuery(array $data);
-	
+	public function toQuery(array $data);	
 }
-?>

@@ -17,7 +17,14 @@ class Endpoints implements EndpointsInterface
     /** @static */
     private static $file;
 
-    public function __construct(string $endpoint, string $url_config = 'production', array $options = [])
+    /**
+     * construct method
+     *
+     * @param string $endpoint Api Provider Path
+     * @param array  $options Options params
+     * @param string $url_config Type production or sandbox
+     */
+    public function __construct(string $endpoint, array $options = [], string $url_config = 'production')
     {
         self::$file = file_get_contents(__DIR__ . '/endpoints/' . $endpoint . '.json');
 
@@ -32,11 +39,15 @@ class Endpoints implements EndpointsInterface
 
    public function __call(string $method, array $args)
     {
+        if (empty($args)) {
+            $args = [];
+        }
+        
         if (isset($this->methods[$method])) {
             return $this->methods[$method]($args[0]);
         } 
         
-        throw new Exception('non existent endpoint');
+        return new \Exception('non existent endpoint');
     }
 
     /**

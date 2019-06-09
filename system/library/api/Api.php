@@ -26,6 +26,12 @@ class Api implements ApiInterface
 	/** @var array */
 	private $requests = [];
 
+	/**
+	 * construct
+	 *
+	 * @param string $url	 Base URI
+	 * @param array  $options Options params
+	 */
 	public function __construct(string $url = '', array $options = [])
 	{
 		$this->url = $url;
@@ -136,5 +142,3 @@ class Api implements ApiInterface
 		return empty($data) ? '' : '?' . http_build_query($data, '', '&');
 	}
 }
-
-?>
