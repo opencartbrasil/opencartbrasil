@@ -78,7 +78,7 @@ class ControllerCommonFooter extends Controller {
 		}
 
 		$data['scripts'] = $this->document->getScripts('footer');
-		
+
 		return $this->load->view('common/footer', $data);
 	}
 }
