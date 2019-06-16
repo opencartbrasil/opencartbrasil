@@ -25,11 +25,13 @@
         <tr>
           <td class="text-left">{{ extension.name }}</b></td>
           <td class="text-left">{{ extension.status }}</td>
-          <td class="text-right">{% if not extension.installed %}
+          <td class="text-right">
+            {% if not extension.installed %}
             <a href="{{ extension.install }}" data-toggle="tooltip" title="{{ button_install }}" class="btn btn-success"><i class="fa fa-plus-circle"></i></a>
             {% else %}
             <a href="{{ extension.uninstall }}" data-toggle="tooltip" title="{{ button_uninstall }}" class="btn btn-danger"><i class="fa fa-minus-circle"></i></a>
-            {% endif %}</td>
+            {% endif %}
+          </td>
         </tr>
         {% endfor %}
         {% else %}
