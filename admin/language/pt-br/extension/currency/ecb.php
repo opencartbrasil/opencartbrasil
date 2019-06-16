@@ -6,7 +6,7 @@ $_['heading_title']    = 'Banco Central Europeu';
 $_['text_extension']   = 'Extensões';
 $_['text_success']     = 'Banco Central Europeu modificado com sucesso!';
 $_['text_edit']        = 'Editando Banco Central Europeu';
-$_['text_support']     = 'Esta extensão requer que a moeda EUR esteja cadastrada.';
+$_['text_support']     = 'Esta extensão utiliza como base a cotação do EURO.';
 
 // Entry
 $_['entry_status']     = 'Situação';

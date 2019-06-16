@@ -7,7 +7,7 @@ $_['text_extension']   = 'Extensões';
 $_['text_success']     = 'Fixer modificado com sucesso!';
 $_['text_edit']        = 'Editando Fixer';
 $_['text_signup']      = 'Fixer.io é um serviço de conversão de moedas que tem um plano gratuito. Para criar sua conta <a href="https://fixer.io/" target="_blank" class="alert-link">clique aqui</a>.';
-$_['text_support']     = 'Esta extensão requer que a moeda EUR esteja cadastrada.';
+$_['text_support']     = 'Esta extensão utiliza como base a cotação do EURO.';
 
 // Entry
 $_['entry_api']        = 'API Access Key';
