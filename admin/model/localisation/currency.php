@@ -16,6 +16,12 @@ class ModelLocalisationCurrency extends Model {
 		$this->cache->delete('currency');
 	}
 
+	public function editValueByCode($code, $value) {
+		$this->db->query("UPDATE " . DB_PREFIX . "currency SET value = '" . (float)$value . "', date_modified = NOW() WHERE code = '" . $this->db->escape((string)$code) . "'");
+
+		$this->cache->delete('currency');
+	}
+
 	public function deleteCurrency($currency_id) {
 		$this->db->query("DELETE FROM " . DB_PREFIX . "currency WHERE currency_id = '" . (int)$currency_id . "'");
 
