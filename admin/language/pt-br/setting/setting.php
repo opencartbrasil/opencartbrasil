@@ -55,6 +55,7 @@ $_['entry_zone']                   = 'Estado padrão';
 $_['entry_language']               = 'Idioma da loja';
 $_['entry_admin_language']         = 'Idioma da administração';
 $_['entry_currency']               = 'Moeda padrão';
+$_['entry_currency_engine']        = 'Conversor de moedas';
 $_['entry_currency_auto']          = 'Atualizar moeda?';
 $_['entry_length_class']           = 'Unidade de medida padrão';
 $_['entry_weight_class']           = 'Unidade de peso padrão';
