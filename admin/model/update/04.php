@@ -38,5 +38,10 @@ class ModelUpdate04 extends Model {
 		if (!$query->num_rows) {
 			$this->db->query("INSERT INTO `" . DB_PREFIX . "cron` (`cron_id`, `code`, `cycle`, `action`, `status`, `date_added`, `date_modified`) VALUES (3, 'session', 'day', 'cron/session', 1, '2019-03-19 04:33:00', '2019-03-19 04:33:00');");
 		}
+
+		$query = $this->db->query("SELECT * FROM `" . DB_PREFIX . "cron` WHERE code = 'currency'");
+		if (!$query->num_rows) {
+			$this->db->query("INSERT INTO `" . DB_PREFIX . "cron` (`cron_id`, `code`, `cycle`, `action`, `status`, `date_added`, `date_modified`) VALUES (1, 'currency', 'day', 'cron/currency', 1, '2019-06-16 01:19:00', '2019-06-16 01:19:00');");
+		}
 	}
 }
