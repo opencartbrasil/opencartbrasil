@@ -17,5 +17,20 @@ class ModelUpdate05 extends Model {
 			$this->model_user_user_group->addPermission($this->user->getGroupId(), 'access', 'marketplace/cron');
 			$this->model_user_user_group->addPermission($this->user->getGroupId(), 'modify', 'marketplace/cron');
 		}
+
+		if (!$this->user->hasPermission('modify', 'extension/extension/currency')) {
+			$this->model_user_user_group->addPermission($this->user->getGroupId(), 'access', 'extension/extension/currency');
+			$this->model_user_user_group->addPermission($this->user->getGroupId(), 'modify', 'extension/extension/currency');
+		}
+
+		if (!$this->user->hasPermission('modify', 'extension/currency/ecb')) {
+			$this->model_user_user_group->addPermission($this->user->getGroupId(), 'access', 'extension/currency/ecb');
+			$this->model_user_user_group->addPermission($this->user->getGroupId(), 'modify', 'extension/currency/ecb');
+		}
+
+		if (!$this->user->hasPermission('modify', 'extension/currency/fix')) {
+			$this->model_user_user_group->addPermission($this->user->getGroupId(), 'access', 'extension/currency/fix');
+			$this->model_user_user_group->addPermission($this->user->getGroupId(), 'modify', 'extension/currency/fix');
+		}
 	}
 }
