@@ -96,6 +96,7 @@ Após executar os procedimentos, acesse a administração da loja e vá no menu 
 
 ### Tarefas em andamento:
 
+- [ ] Novas extensões do tipo conversor de moedas.
 
 ### Próximas tarefas:
 
