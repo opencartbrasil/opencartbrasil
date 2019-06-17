@@ -20,7 +20,6 @@ Recomendamos que todos os desenvolvedores sigam este repositório para receberem
 
 ### Início da instalação:
 
-
 <img src="./.github/IMAGES/01.jpg">
 
 ### Página principal da loja:
@@ -30,6 +29,10 @@ Recomendamos que todos os desenvolvedores sigam este repositório para receberem
 ### Painel de controle administrativo:
 
 <img src="./.github/IMAGES/03.jpg">
+
+## Demonstração
+
+Para acessar uma demonstração online do OpenCart Brasil e visualizar a loja em funcionamento <a href="https://www.opencartbrasil.com.br/test-drive-loja" target="_blank">clique aqui</a>.
 
 ## Diferenciais
 
