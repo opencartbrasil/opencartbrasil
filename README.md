@@ -52,7 +52,7 @@ Para acessar uma demonstração online do OpenCart Brasil e visualizar a loja em
 
 ## Changelog
 
-Para analisar todas as correções, modificações e melhorias realizadas no projeto OpenCart Brasil a cada versão lançada <a href="https://github.com/opencartbrasil/opencartbrasil/blob/master/CHANGELOG.md">clique aqui</a>.
+Para analisar todas as correções, modificações e melhorias realizadas a cada versão lançada <a href="https://github.com/opencartbrasil/opencartbrasil/blob/master/CHANGELOG.md">clique aqui</a>.
 
 ## Atualização
 
