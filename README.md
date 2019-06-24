@@ -41,6 +41,7 @@ Para acessar uma demonstração online do OpenCart Brasil e visualizar a loja em
 - Sistema de afiliados 100% funcional.
 - Campos SKU nas opções dos produtos.
 - **Atualização automática do OpenCart Brasil**.
+- Novas extensões do tipo conversor de moedas.
 - Melhorias no gerenciamento de sessões do PHP.
 - Melhorias no processo de download e instalação.
 - Melhorias na criptografia das senhas dos clientes.
@@ -76,6 +77,7 @@ Após executar os procedimentos, acesse a administração da loja e vá no menu 
 - [x] Instalação 100% traduzida.
 - [x] Suporte para tarefas agendadas.
 - [x] Campo SKU nas opções dos produtos.
+- [x] Novas extensões do tipo conversor de moedas.
 - [x] Correção nas estátisticas.
 - [x] Correção nos arquivos config.
 - [x] Correção na API do catálogo.
@@ -99,7 +101,6 @@ Após executar os procedimentos, acesse a administração da loja e vá no menu 
 
 ### Tarefas em andamento:
 
-- [ ] Novas extensões do tipo conversor de moedas.
 
 ### Próximas tarefas:
 

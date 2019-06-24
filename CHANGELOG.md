@@ -6,6 +6,17 @@ e utiliza [Semantic Versioning](https://semver.org/lang/pt-BR/spec/v2.0.0.html).
 
 ## [Não lançada]
 
+## [1.4.0] (Data de lançamento: 24.06.2019)
+### Corrigido
+- Melhorias no layout do cadastro de cliente e produto na administração
+- Melhorias no layout do pedido para mobile na administração
+- Melhorias no layout do pedido na administração da loja
+- Melhorias no layout do gerenciador de extensões
+- Melhorias no layout dos filtros para mobile
+
+### Adicionado
+- Suporte para extensões do tipo conversor de moedas
+
 ## [1.3.4] (Data de lançamento: 03.06.2019)
 ### Corrigido
 - Correção na data de cadastro dos afiliados
@@ -336,7 +347,8 @@ e utiliza [Semantic Versioning](https://semver.org/lang/pt-BR/spec/v2.0.0.html).
 - Cupons de descontos para demonstração.
 - Moedas: Euro e Libra esterlina.
 
-[Não lançada]: https://github.com/opencartbrasil/opencartbrasil/compare/v1.3.4...HEAD
+[Não lançada]: https://github.com/opencartbrasil/opencartbrasil/compare/v1.4.0...HEAD
+[1.4.0]: https://github.com/opencartbrasil/opencartbrasil/compare/v1.3.4...v1.4.0
 [1.3.4]: https://github.com/opencartbrasil/opencartbrasil/compare/v1.3.3...v1.3.4
 [1.3.3]: https://github.com/opencartbrasil/opencartbrasil/compare/v1.3.2...v1.3.3
 [1.3.2]: https://github.com/opencartbrasil/opencartbrasil/compare/v1.3.1...v1.3.2
