@@ -9,7 +9,7 @@ e utiliza [Semantic Versioning](https://semver.org/lang/pt-BR/spec/v2.0.0.html).
 ## [1.4.1] (Data de lançamento: 27.06.2019)
 ### Corrigido
 - Correção para o bug ao salvar cadastros na administração
-* Limpe o cache do navegador para apagar arquivos javascript
+*Limpe o cache do navegador para apagar os arquivos javascript em cache
 
 ## [1.4.0] (Data de lançamento: 24.06.2019)
 ### Corrigido
