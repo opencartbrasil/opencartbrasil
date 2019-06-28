@@ -8,16 +8,7 @@ about: Informe detalhes sobre o erro, assim poderemos resolver mais rapidamente.
 
 **Que parte da loja é afetada pelo erro?**
 
-**Como é possível reproduzir o erro?**
-
-**Descreva os passos para reproduzir o erro (conforme o exemplo abaixo):**
-
-1. Vá em '...'
-2. Clique em '...'
-3. Role para baixo até '...'
-4. Veja o erro '...'
-
-**Se necessário, adicione informações extras sobre o erro:**
+**Faça um resumo do problema ocasionado pelo erro:**
 
 **Link para imagens com capturas da tela de erro:**
 
