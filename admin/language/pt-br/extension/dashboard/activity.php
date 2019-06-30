@@ -10,7 +10,7 @@ $_['text_activity_register']       = '<a href="customer_id=%d">%s</a> cadastrou 
 $_['text_activity_edit']           = '<a href="customer_id=%d">%s</a> atualizou os detalhes da conta.';
 $_['text_activity_password']       = '<a href="customer_id=%d">%s</a> solicitou uma nova senha.';
 $_['text_activity_reset']          = '<a href="customer_id=%d">%s</a> atualizou a senha da conta.';
-$_['text_activity_login']          = '<a href="customer_id=%d">%s</a> logged in.';
+$_['text_activity_login']          = '<a href="customer_id=%d">%s</a> logou.';
 $_['text_activity_forgotten']      = '<a href="customer_id=%d">%s</a> solicitou uma nova senha.';
 $_['text_activity_address_add']    = '<a href="customer_id=%d">%s</a> cadastrou um novo endereço.';
 $_['text_activity_address_edit']   = '<a href="customer_id=%d">%s</a> atualizou um endereço.';
