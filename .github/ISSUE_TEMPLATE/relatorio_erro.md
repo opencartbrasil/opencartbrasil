@@ -6,25 +6,26 @@ about: Informe detalhes sobre o erro, assim poderemos resolver mais rapidamente.
 
 **Em que versão do OpenCart Brasil o erro ocorre?**
 
-**Informações sobre o erro**
-Descrição resumida e clara sobre o erro
-Que parte da loja é afetada pelo erro?
+**Que parte da loja é afetada pelo erro?**
 
-**Para reproduzir o erro**
-Se aplicável, descreva os passos para reproduzir o erro:
-1. Vá em '...'
-2. Clique em '....'
-3. Role para baixo até '....'
-4. Veja o erro
+**Faça um resumo do problema ocasionado pelo erro:**
 
-**Capturas de tela / gravações de tela**
-Se aplicável, adicione capturas ou gravações de tela para ajudar a explicar o erro.
+**Link para imagens com capturas da tela de erro:**
 
-**Ambiente de trabalho (preencha as seguintes informações):**
- - Voceê está em um computador local ou servidor web?
- - Qual o sistema operacional utilizado?
- - Qual a versão do Apache e/ou Nginx?
- - Qual a versão do MySQL e/ou MariaDB?
- - Qual a versão do PHP?
- - Se aplicável, qual o(s) navegador(es) utilizado(s) [por exemplo: chrome 68]:
- - Se aplicável, informe detalhes do dispositivo móvel utilizado:
+**Responda as perguntas abaixo sobre o seu ambiente de trabalho:**
+
+ - Você está em um computador local ou hospedagem web?
+ 
+ - Se estiver em uma hospedagem web, qual hospedagem?
+ 
+ - Qual o sistema operacional utilizado?
+ 
+ - Qual o servidor web utilizado?
+ 
+ - Qual o servidor de banco dados utilizado?
+ 
+ - Qual a versão do PHP?
+ 
+ - Se aplicável, qual o(s) navegador(es) utilizado(s) [por exemplo: chrome 75]:
+ 
+ - Se aplicável, informe detalhes do dispositivo móvel utilizado:
