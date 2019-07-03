@@ -14,6 +14,7 @@ class Document {
 	private $title;
 	private $description;
 	private $keywords;
+	private $robots = array();
 	private $links = array();
 	private $styles = array();
 	private $scripts = array();
@@ -72,6 +73,27 @@ class Document {
 	 */
 	public function getKeywords() {
 		return $this->keywords;
+	}
+
+	/**
+	 *
+	 *
+	 * @param	string	$content
+	 */
+	public function addRobot($name, $content) {
+		$this->robots[] = array(
+			'name'    => $name,
+			'content' => $content
+		);
+	}
+
+	/**
+	 *
+	 *
+	 * @return	array
+	 */
+	public function getRobots() {
+		return $this->robots;
 	}
 
 	/**
