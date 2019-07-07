@@ -1835,8 +1835,8 @@ INSERT INTO `oc_layout` (`layout_id`, `name`) VALUES
 (8, 'Formulário de contato'),
 (9, 'Mapa do site'),
 (10, 'Afiliados'),
-(11, 'Páginas de informações'),
-(12, 'Página de compraração'),
+(11, 'Página de informação'),
+(12, 'Página de comparação'),
 (13, 'Resultado da busca');
 
 -----------------------------------------------------------
