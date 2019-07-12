@@ -335,9 +335,10 @@ footer h5 {
 }
 /* breadcrumb */
 .breadcrumb {
-	margin: 0 0 20px 0;
-	padding: 8px 0;
+	padding: 8px 0px 8px 0px;
 	border: 1px solid #ddd;
+	white-space: nowrap;
+	overflow: hidden;
 }
 .breadcrumb i {
 	font-size: 15px;
@@ -347,6 +348,7 @@ footer h5 {
 	padding: 0 20px;
 	position: relative;
 	white-space: nowrap;
+	vertical-align: middle;
 }
 .breadcrumb > li + li:before {
 	content: '';
