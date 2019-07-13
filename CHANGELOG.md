@@ -6,6 +6,17 @@ e utiliza [Semantic Versioning](https://semver.org/lang/pt-BR/spec/v2.0.0.html).
 
 ## [Não lançada]
 
+## [1.4.2] (Data de lançamento: 12.07.2019)
+### Corrigido
+- Correção nos relatórios de produtos visualizados, palavras pesquisadas e atividades por clientes
+- Correção na ordem de exibição dos campos personalizados
+- Melhoria no breadcrumb para dispositivos móveis
+- Otimização do tema default para SEO
+- Correção na descrição dos layouts
+
+### Adicionado
+- Suporte para adicionar meta tags robots por página
+
 ## [1.4.1] (Data de lançamento: 27.06.2019)
 ### Corrigido
 - Correção para o bug ao salvar cadastros na administração
@@ -352,7 +363,8 @@ e utiliza [Semantic Versioning](https://semver.org/lang/pt-BR/spec/v2.0.0.html).
 - Cupons de descontos para demonstração.
 - Moedas: Euro e Libra esterlina.
 
-[Não lançada]: https://github.com/opencartbrasil/opencartbrasil/compare/v1.4.1...HEAD
+[Não lançada]: https://github.com/opencartbrasil/opencartbrasil/compare/v1.4.2...HEAD
+[1.4.2]: https://github.com/opencartbrasil/opencartbrasil/compare/v1.4.1...v1.4.2
 [1.4.1]: https://github.com/opencartbrasil/opencartbrasil/compare/v1.4.0...v1.4.1
 [1.4.0]: https://github.com/opencartbrasil/opencartbrasil/compare/v1.3.4...v1.4.0
 [1.3.4]: https://github.com/opencartbrasil/opencartbrasil/compare/v1.3.3...v1.3.4
