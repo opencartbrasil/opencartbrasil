@@ -111,8 +111,8 @@ class ControllerExtensionReportCustomerActivity extends Controller {
 			'filter_ip'         => $filter_ip,
 			'filter_date_start'	=> $filter_date_start,
 			'filter_date_end'	=> $filter_date_end,
-			'start'             => ($page - 1) * 20,
-			'limit'             => 20
+			'start'             => ($page - 1) * $this->config->get('config_limit_admin'),
+			'limit'             => $this->config->get('config_limit_admin')
 		);
 
 		$activity_total = $this->model_extension_report_customer->getTotalCustomerActivities($filter_data);

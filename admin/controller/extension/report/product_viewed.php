@@ -112,12 +112,6 @@ class ControllerExtensionReportProductViewed extends Controller {
 
 		$data['user_token'] = $this->session->data['user_token'];
 
-		$url = '';
-
-		if (isset($this->request->get['page'])) {
-			$url .= '&page=' . $this->request->get['page'];
-		}
-
 		$pagination = new Pagination();
 		$pagination->total = $product_total;
 		$pagination->page = $page;
