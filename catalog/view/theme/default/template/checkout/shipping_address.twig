@@ -222,21 +222,22 @@
   });
 //--></script>
 <script type="text/javascript"><!--
+  // Sort the custom fields
+  var shipping_fields_length = $('#collapse-shipping-address .form-group').length;
+
   $('#collapse-shipping-address .form-group[data-sort]').detach().each(function() {
-    if ($(this).attr('data-sort') >= 0 && $(this).attr('data-sort') <= $('#collapse-shipping-address .form-group').length-2) {
-      $('#collapse-shipping-address .form-group').eq(parseInt($(this).attr('data-sort'))+2).before(this);
-    }
+    var data_sort = $(this).attr('data-sort');
 
-    if ($(this).attr('data-sort') > $('#collapse-shipping-address .form-group').length-2) {
-      $('#collapse-shipping-address .form-group:last').after(this);
-    }
-
-    if ($(this).attr('data-sort') == $('#collapse-shipping-address .form-group').length-2) {
-      $('#collapse-shipping-address .form-group:last').after(this);
-    }
-
-    if ($(this).attr('data-sort') < -$('#collapse-shipping-address .form-group').length-2) {
+    if (data_sort <= 0) {
       $('#collapse-shipping-address .form-group:first').before(this);
+    }
+
+    if (data_sort > 0 && data_sort <= shipping_fields_length) {
+      $('#collapse-shipping-address .form-group').eq(parseInt(data_sort)-1).before(this);
+    }
+
+    if (data_sort > shipping_fields_length) {
+      $('#collapse-shipping-address .form-group:last').after(this);
     }
   });
 //--></script>

@@ -414,7 +414,7 @@
                       {% for custom_field in custom_fields %}
                       {% if custom_field.location == 'address' %}
                       {% if custom_field.type == 'select' %}
-                      <div class="form-group custom-field custom-field{{ custom_field.custom_field_id }}" data-sort="{{ custom_field.sort_order + 2 }}">
+                      <div class="form-group custom-field custom-field{{ custom_field.custom_field_id }}" data-sort="{{ custom_field.sort_order }}">
                         <label class="col-sm-2 control-label" for="input-address{{ address_row }}-custom-field{{ custom_field.custom_field_id }}">{{ custom_field.name }}</label>
                         <div class="col-sm-10">
                           <select name="address[{{ address_row }}][custom_field][{{ custom_field.custom_field_id }}]" id="input-address{{ address_row }}-custom-field{{ custom_field.custom_field_id }}" class="form-control">
@@ -434,7 +434,7 @@
                       </div>
                       {% endif %}
                       {% if custom_field.type == 'radio' %}
-                      <div class="form-group custom-field custom-field{{ custom_field.custom_field_id }}" data-sort="{{ custom_field.sort_order + 2 }}">
+                      <div class="form-group custom-field custom-field{{ custom_field.custom_field_id }}" data-sort="{{ custom_field.sort_order }}">
                         <label class="col-sm-2 control-label">{{ custom_field.name }}</label>
                         <div class="col-sm-10">
                           <div> {% for custom_field_value in custom_field.custom_field_value %}
@@ -458,7 +458,7 @@
                       </div>
                       {% endif %}
                       {% if custom_field.type == 'checkbox' %}
-                      <div class="form-group custom-field custom-field{{ custom_field.custom_field_id }}" data-sort="{{ custom_field.sort_order + 2 }}">
+                      <div class="form-group custom-field custom-field{{ custom_field.custom_field_id }}" data-sort="{{ custom_field.sort_order }}">
                         <label class="col-sm-2 control-label">{{ custom_field.name }}</label>
                         <div class="col-sm-10">
                           <div> {% for custom_field_value in custom_field.custom_field_value %}
@@ -482,7 +482,7 @@
                       </div>
                       {% endif %}
                       {% if custom_field.type == 'text' %}
-                      <div class="form-group custom-field custom-field{{ custom_field.custom_field_id }}" data-sort="{{ custom_field.sort_order + 2 }}">
+                      <div class="form-group custom-field custom-field{{ custom_field.custom_field_id }}" data-sort="{{ custom_field.sort_order }}">
                         <label class="col-sm-2 control-label" for="input-address{{ address_row }}-custom-field{{ custom_field.custom_field_id }}">{{ custom_field.name }}</label>
                         <div class="col-sm-10">
                           <input type="text" name="address[{{ address_row }}][custom_field][{{ custom_field.custom_field_id }}]" value="{{ address.custom_field[custom_field.custom_field_id] ? address.custom_field[custom_field.custom_field_id] : custom_field.value }}" placeholder="{{ custom_field.name }}" id="input-address{{ address_row }}-custom-field{{ custom_field.custom_field_id }}" class="form-control" />
@@ -493,7 +493,7 @@
                       </div>
                       {% endif %}
                       {% if custom_field.type == 'textarea' %}
-                      <div class="form-group custom-field custom-field{{ custom_field.custom_field_id }}" data-sort="{{ custom_field.sort_order + 2 }}">
+                      <div class="form-group custom-field custom-field{{ custom_field.custom_field_id }}" data-sort="{{ custom_field.sort_order }}">
                         <label class="col-sm-2 control-label" for="input-address{{ address_row }}-custom-field{{ custom_field.custom_field_id }}">{{ custom_field.name }}</label>
                         <div class="col-sm-10">
                           <textarea name="address[{{ address_row }}][custom_field][{{ custom_field.custom_field_id }}]" rows="5" placeholder="{{ custom_field.name }}" id="input-address{{ address_row }}-custom-field{{ custom_field.custom_field_id }}" class="form-control">{{ address.custom_field[custom_field.custom_field_id] ? address.custom_field[custom_field.custom_field_id] : custom_field.value }}</textarea>
@@ -504,7 +504,7 @@
                       </div>
                       {% endif %}
                       {% if custom_field.type == 'file' %}
-                      <div class="form-group custom-field custom-field{{ custom_field.custom_field_id }}" data-sort="{{ custom_field.sort_order + 2 }}">
+                      <div class="form-group custom-field custom-field{{ custom_field.custom_field_id }}" data-sort="{{ custom_field.sort_order }}">
                         <label class="col-sm-2 control-label">{{ custom_field.name }}</label>
                         <div class="col-sm-10">
                           <button type="button" id="button-address{{ address_row }}-custom-field{{ custom_field.custom_field_id }}" data-loading-text="{{ text_loading }}" class="btn btn-default"><i class="fa fa-upload"></i> {{ button_upload }}</button>
@@ -516,7 +516,7 @@
                       </div>
                       {% endif %}
                       {% if custom_field.type == 'date' %}
-                      <div class="form-group custom-field custom-field{{ custom_field.custom_field_id }}" data-sort="{{ custom_field.sort_order + 2 }}">
+                      <div class="form-group custom-field custom-field{{ custom_field.custom_field_id }}" data-sort="{{ custom_field.sort_order }}">
                         <label class="col-sm-2 control-label" for="input-address{{ address_row }}-custom-field{{ custom_field.custom_field_id }}">{{ custom_field.name }}</label>
                         <div class="col-sm-10">
                           <div class="input-group date">
@@ -532,7 +532,7 @@
                       </div>
                       {% endif %}
                       {% if custom_field.type == 'time' %}
-                      <div class="form-group custom-field custom-field{{ custom_field.custom_field_id }}" data-sort="{{ custom_field.sort_order + 2 }}">
+                      <div class="form-group custom-field custom-field{{ custom_field.custom_field_id }}" data-sort="{{ custom_field.sort_order }}">
                         <label class="col-sm-2 control-label" for="input-address{{ address_row }}-custom-field{{ custom_field.custom_field_id }}">{{ custom_field.name }}</label>
                         <div class="col-sm-10">
                           <div class="input-group time">
@@ -548,7 +548,7 @@
                       </div>
                       {% endif %}
                       {% if custom_field.type == 'datetime' %}
-                      <div class="form-group custom-field custom-field{{ custom_field.custom_field_id }}" data-sort="{{ custom_field.sort_order + 2 }}">
+                      <div class="form-group custom-field custom-field{{ custom_field.custom_field_id }}" data-sort="{{ custom_field.sort_order }}">
                         <label class="col-sm-2 control-label" for="input-address{{ address_row }}-custom-field{{ custom_field.custom_field_id }}">{{ custom_field.name }}</label>
                         <div class="col-sm-10">
                           <div class="input-group datetime">
@@ -755,7 +755,7 @@
     {% if custom_field.location == 'address' %}
     {% if custom_field.type == 'select' %}
 
-    html += '  <div class="form-group custom-field custom-field{{ custom_field.custom_field_id }}" data-sort="{{ custom_field.sort_order + 2 }}">';
+    html += '  <div class="form-group custom-field custom-field{{ custom_field.custom_field_id }}" data-sort="{{ custom_field.sort_order }}">';
     html += '  		<label class="col-sm-2 control-label" for="input-address' + address_row + '-custom-field{{ custom_field.custom_field_id }}">{{ custom_field.name|e('js') }}</label>';
     html += '  		<div class="col-sm-10">';
     html += '  		  <select name="address[' + address_row + '][custom_field][{{ custom_field.custom_field_id }}]" id="input-address' + address_row + '-custom-field{{ custom_field.custom_field_id }}" class="form-control">';
@@ -786,7 +786,7 @@
     {% endif %}
 
     {% if custom_field.type == 'checkbox' %}
-    html += '	  <div class="form-group custom-field custom-field{{ custom_field.custom_field_id }}" data-sort="{{ custom_field.sort_order + 2 }}">';
+    html += '	  <div class="form-group custom-field custom-field{{ custom_field.custom_field_id }}" data-sort="{{ custom_field.sort_order }}">';
     html += '		<label class="col-sm-2 control-label">{{ custom_field.name|e('js') }}</label>';
     html += '		<div class="col-sm-10">';
     html += '		  <div>';
@@ -801,7 +801,7 @@
     {% endif %}
 
     {% if custom_field.type == 'text' %}
-    html += '	  <div class="form-group custom-field custom-field{{ custom_field.custom_field_id }}" data-sort="{{ custom_field.sort_order + 2 }}">';
+    html += '	  <div class="form-group custom-field custom-field{{ custom_field.custom_field_id }}" data-sort="{{ custom_field.sort_order }}">';
     html += '		<label class="col-sm-2 control-label" for="input-address' + address_row + '-custom-field{{ custom_field.custom_field_id }}">{{ custom_field.name|e('js') }}</label>';
     html += '		<div class="col-sm-10">';
     html += '		  <input type="text" name="address[' + address_row + '][custom_field][{{ custom_field.custom_field_id }}]" value="{{ custom_field.value|e('js') }}" placeholder="{{ custom_field.name|e('js') }}" id="input-address' + address_row + '-custom-field{{ custom_field.custom_field_id }}" class="form-control" />';
@@ -810,7 +810,7 @@
     {% endif %}
 
     {% if custom_field.type == 'textarea' %}
-    html += '	  <div class="form-group custom-field custom-field{{ custom_field.custom_field_id }}" data-sort="{{ custom_field.sort_order + 2 }}">';
+    html += '	  <div class="form-group custom-field custom-field{{ custom_field.custom_field_id }}" data-sort="{{ custom_field.sort_order }}">';
     html += '		<label class="col-sm-2 control-label" for="input-address' + address_row + '-custom-field{{ custom_field.custom_field_id }}">{{ custom_field.name|e('js') }}</label>';
     html += '		<div class="col-sm-10">';
     html += '		  <textarea name="address[' + address_row + '][custom_field][{{ custom_field.custom_field_id }}]" rows="5" placeholder="{{ custom_field.name|e('js') }}" id="input-address' + address_row + '-custom-field{{ custom_field.custom_field_id }}" class="form-control">{{ custom_field.value|e('js') }}</textarea>';
@@ -819,7 +819,7 @@
     {% endif %}
 
     {% if custom_field.type == 'file' %}
-    html += '	  <div class="form-group custom-field custom-field{{ custom_field.custom_field_id }}" data-sort="{{ custom_field.sort_order + 2 }}">';
+    html += '	  <div class="form-group custom-field custom-field{{ custom_field.custom_field_id }}" data-sort="{{ custom_field.sort_order }}">';
     html += '		<label class="col-sm-2 control-label">{{ custom_field.name|e('js') }}</label>';
     html += '		<div class="col-sm-10">';
     html += '		  <button type="button" id="button-address' + address_row + '-custom-field{{ custom_field.custom_field_id }}" data-loading-text="{{ text_loading }}" class="btn btn-default"><i class="fa fa-upload"></i> {{ button_upload }}</button>';
@@ -829,7 +829,7 @@
     {% endif %}
 
     {% if custom_field.type == 'date' %}
-    html += '	  <div class="form-group custom-field custom-field{{ custom_field.custom_field_id }}" data-sort="{{ custom_field.sort_order + 2 }}">';
+    html += '	  <div class="form-group custom-field custom-field{{ custom_field.custom_field_id }}" data-sort="{{ custom_field.sort_order }}">';
     html += '		<label class="col-sm-2 control-label" for="input-address' + address_row + '-custom-field{{ custom_field.custom_field_id }}">{{ custom_field.name|e('js') }}</label>';
     html += '		<div class="col-sm-10">';
     html += '		  <div class="input-group date"><input type="text" name="address[' + address_row + '][custom_field][{{ custom_field.custom_field_id }}]" value="{{ custom_field.value|e('js') }}" placeholder="{{ custom_field.name|e('js') }} data-date-format="YYYY-MM-DD" id="input-address' + address_row + '-custom-field{{ custom_field.custom_field_id }}" class="form-control" /><span class="input-group-btn"><button type="button" class="btn btn-default"><i class="fa fa-calendar"></i></button></span></div>';
@@ -838,7 +838,7 @@
     {% endif %}
 
     {% if custom_field.type == 'time' %}
-    html += '	  <div class="form-group custom-field custom-field{{ custom_field.custom_field_id }}" data-sort="{{ custom_field.sort_order + 2 }}">';
+    html += '	  <div class="form-group custom-field custom-field{{ custom_field.custom_field_id }}" data-sort="{{ custom_field.sort_order }}">';
     html += '		<label class="col-sm-2 control-label" for="input-address' + address_row + '-custom-field{{ custom_field.custom_field_id }}">{{ custom_field.name|e('js') }}</label>';
     html += '		<div class="col-sm-10">';
     html += '		  <div class="input-group time"><input type="text" name="address[' + address_row + '][custom_field][{{ custom_field.custom_field_id }}]" value="{{ custom_field.value|e('js') }}" placeholder="{{ custom_field.name|e('js') }}" data-date-format="HH:mm" id="input-address' + address_row + '-custom-field{{ custom_field.custom_field_id }}" class="form-control" /><span class="input-group-btn"><button type="button" class="btn btn-default"><i class="fa fa-calendar"></i></button></span></div>';
@@ -847,7 +847,7 @@
     {% endif %}
 
     {% if custom_field.type == 'datetime' %}
-    html += '	  <div class="form-group custom-field custom-field{{ custom_field.custom_field_id }}" data-sort="{{ custom_field.sort_order + 2 }}">';
+    html += '	  <div class="form-group custom-field custom-field{{ custom_field.custom_field_id }}" data-sort="{{ custom_field.sort_order }}">';
     html += '		<label class="col-sm-2 control-label" for="input-address' + address_row + '-custom-field{{ custom_field.custom_field_id }}">{{ custom_field.name|e('js') }}</label>';
     html += '		<div class="col-sm-10">';
     html += '		  <div class="input-group datetime"><input type="text" name="address[' + address_row + '][custom_field][{{ custom_field.custom_field_id }}]" value="{{ custom_field.value|e('js') }}" placeholder="{{ custom_field.name|e('js') }}" data-date-format="YYYY-MM-DD HH:mm" id="input-address' + address_row + '-custom-field{{ custom_field.custom_field_id }}" class="form-control" /><span class="input-group-btn"><button type="button" class="btn btn-default"><i class="fa fa-calendar"></i></button></span></div>';
@@ -876,33 +876,34 @@
     $('#address a[href=\'#tab-address' + address_row + '\']').tab('show');
 
     $('.date').datetimepicker({
-		language: '{{ datepicker }}',
-		pickTime: false
+        language: '{{ datepicker }}',
+        pickTime: false
     });
 
-	$('.datetime').datetimepicker({
-		language: '{{ datepicker }}',
-		pickDate: true,
-		pickTime: true
+    $('.datetime').datetimepicker({
+        language: '{{ datepicker }}',
+        pickDate: true,
+        pickTime: true
     });
 
     $('.time').datetimepicker({
-		language: '{{ datepicker }}',
-		pickDate: false
+        language: '{{ datepicker }}',
+        pickDate: false
     });
 
+    // Sort the custom fields
     $('#tab-address' + address_row + ' .form-group[data-sort]').detach().each(function() {
-		if ($(this).attr('data-sort') >= 0 && $(this).attr('data-sort') <= $('#tab-address' + address_row + ' .form-group').length) {
-			$('#tab-address' + address_row + ' .form-group').eq($(this).attr('data-sort')).before(this);
-		}
-		
-		if ($(this).attr('data-sort') > $('#tab-address' + address_row + ' .form-group').length) {
-			$('#tab-address' + address_row + ' .form-group:last').after(this);
-		}
-		
-		if ($(this).attr('data-sort') < -$('#tab-address' + address_row + ' .form-group').length) {
-			$('#tab-address' + address_row + ' .form-group:first').before(this);
-		}
+        if ($(this).attr('data-sort') <= 0) {
+            $('#tab-address' + address_row + ' .form-group:first').before(this);
+        }
+
+        if ($(this).attr('data-sort') > 0 && $(this).attr('data-sort') <= $('#tab-address' + address_row + ' .form-group').length) {
+            $('#tab-address' + address_row + ' .form-group').eq(parseInt($(this).attr('data-sort'))-1).before(this);
+        }
+
+        if ($(this).attr('data-sort') > $('#tab-address' + address_row + ' .form-group').length) {
+            $('#tab-address' + address_row + ' .form-group:last').after(this);
+        }
     });
 
     address_row++;
@@ -1167,45 +1168,40 @@
   // Sort the custom fields
   {% set address_row = 1 %}
   {% for address in addresses %}
+
+  // Sort the custom fields
   $('#tab-address{{ address_row }} .form-group[data-sort]').detach().each(function() {
-    if ($(this).attr('data-sort') >= 0 && $(this).attr('data-sort') <= $('#tab-address{{ address_row }} .form-group').length) {
-      $('#tab-address{{ address_row }} .form-group').eq($(this).attr('data-sort')).before(this);
+    if ($(this).attr('data-sort') <= 0) {
+        $('#tab-address{{ address_row }} .form-group:first').before(this);
+    }
+
+    if ($(this).attr('data-sort') > 0 && $(this).attr('data-sort') <= $('#tab-address{{ address_row }} .form-group').length) {
+      $('#tab-address{{ address_row }} .form-group').eq(parseInt($(this).attr('data-sort'))-1).before(this);
     }
 
     if ($(this).attr('data-sort') > $('#tab-address{{ address_row }} .form-group').length) {
       $('#tab-address{{ address_row }} .form-group:last').after(this);
     }
-
-    if ($(this).attr('data-sort') == $('#tab-address{{ address_row }} .form-group').length) {
-      $('#tab-address{{ address_row }} .form-group:last').after(this);
-    }
-
-    if ($(this).attr('data-sort') < -$('#tab-address{{ address_row }} .form-group').length) {
-      $('#tab-address{{ address_row }} .form-group:first').before(this);
-    }
   });
   {% set address_row = address_row + 1 %}
   {% endfor %}
 
+  // Sort the custom fields
   $('#tab-customer .form-group[data-sort]').detach().each(function() {
-    if ($(this).attr('data-sort') >= 0 && $(this).attr('data-sort') <= $('#tab-customer .form-group').length) {
-      $('#tab-customer .form-group').eq($(this).attr('data-sort')).before(this);
+    if ($(this).attr('data-sort') <= 0) {
+        $('#tab-customer .form-group:first').before(this);
+    }
+
+    if ($(this).attr('data-sort') > 0 && $(this).attr('data-sort') <= $('#tab-customer .form-group').length) {
+      $('#tab-customer .form-group').eq(parseInt($(this).attr('data-sort'))-1).before(this);
     }
 
     if ($(this).attr('data-sort') > $('#tab-customer .form-group').length) {
       $('#tab-customer .form-group:last').after(this);
     }
-
-    if ($(this).attr('data-sort') == $('#tab-customer .form-group').length) {
-      $('#tab-customer .form-group:last').after(this);
-    }
-
-    if ($(this).attr('data-sort') < -$('#tab-customer .form-group').length) {
-      $('#tab-customer .form-group:first').before(this);
-    }
   });
 
-//--></script> 
+//--></script>
 <script type="text/javascript"><!--
   $('input[name=\'payment\']').on('change', function() {
     $('.payment').hide();

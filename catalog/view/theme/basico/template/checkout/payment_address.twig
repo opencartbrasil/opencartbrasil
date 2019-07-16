@@ -222,22 +222,22 @@
   });
 //--></script>
 <script type="text/javascript"><!--
-// Sort the custom fields
+  // Sort the custom fields
+  var payment_fields_length = $('#collapse-payment-address .form-group').length;
+
   $('#collapse-payment-address .form-group[data-sort]').detach().each(function() {
-    if ($(this).attr('data-sort') >= 0 && $(this).attr('data-sort') <= $('#collapse-payment-address .form-group').length-2) {
-      $('#collapse-payment-address .form-group').eq(parseInt($(this).attr('data-sort'))+2).before(this);
-    }
+    var data_sort = $(this).attr('data-sort');
 
-    if ($(this).attr('data-sort') > $('#collapse-payment-address .form-group').length-2) {
-      $('#collapse-payment-address .form-group:last').after(this);
-    }
-
-    if ($(this).attr('data-sort') == $('#collapse-payment-address .form-group').length-2) {
-      $('#collapse-payment-address .form-group:last').after(this);
-    }
-
-    if ($(this).attr('data-sort') < -$('#collapse-payment-address .form-group').length-2) {
+    if (data_sort <= 0) {
       $('#collapse-payment-address .form-group:first').before(this);
+    }
+
+    if (data_sort > 0 && data_sort <= payment_fields_length) {
+      $('#collapse-payment-address .form-group').eq(parseInt(data_sort)-1).before(this);
+    }
+
+    if (data_sort > payment_fields_length) {
+      $('#collapse-payment-address .form-group:last').after(this);
     }
   });
 //--></script>
