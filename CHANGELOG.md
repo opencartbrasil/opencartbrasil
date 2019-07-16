@@ -6,6 +6,11 @@ e utiliza [Semantic Versioning](https://semver.org/lang/pt-BR/spec/v2.0.0.html).
 
 ## [Não lançada]
 
+## [1.4.3] (Data de lançamento: 16.07.2019)
+### Corrigido
+- Melhorias e correções na posição dos campos personalizados
+- Correção no carrgeamento do bootstrap.min.js
+
 ## [1.4.2] (Data de lançamento: 12.07.2019)
 ### Corrigido
 - Correção nos relatórios de produtos visualizados, palavras pesquisadas e atividades por clientes
@@ -363,7 +368,8 @@ e utiliza [Semantic Versioning](https://semver.org/lang/pt-BR/spec/v2.0.0.html).
 - Cupons de descontos para demonstração.
 - Moedas: Euro e Libra esterlina.
 
-[Não lançada]: https://github.com/opencartbrasil/opencartbrasil/compare/v1.4.2...HEAD
+[Não lançada]: https://github.com/opencartbrasil/opencartbrasil/compare/v1.4.3...HEAD
+[1.4.3]: https://github.com/opencartbrasil/opencartbrasil/compare/v1.4.2...v1.4.3
 [1.4.2]: https://github.com/opencartbrasil/opencartbrasil/compare/v1.4.1...v1.4.2
 [1.4.1]: https://github.com/opencartbrasil/opencartbrasil/compare/v1.4.0...v1.4.1
 [1.4.0]: https://github.com/opencartbrasil/opencartbrasil/compare/v1.3.4...v1.4.0
