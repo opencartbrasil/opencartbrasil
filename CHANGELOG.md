@@ -9,7 +9,7 @@ e utiliza [Semantic Versioning](https://semver.org/lang/pt-BR/spec/v2.0.0.html).
 ## [1.4.3] (Data de lançamento: 16.07.2019)
 ### Corrigido
 - Melhorias e correções na posição dos campos personalizados
-- Correção no carrgeamento do bootstrap.min.js
+- Correção no carregamento do bootstrap.min.js
 
 ## [1.4.2] (Data de lançamento: 12.07.2019)
 ### Corrigido
