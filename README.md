@@ -101,10 +101,10 @@ Após executar os procedimentos, acesse a administração da loja e vá no menu 
 
 ### Tarefas em andamento:
 
+- [ ] Melhorias na API REST para inclusão de produtos, clientes, pedidos, etc.
 
 ### Próximas tarefas:
 
-- [ ] API REST para inclusão de produtos, clientes, pedidos, etc.
 - [ ] Webhook que enviará notificações para aplicações externas.
 
 ## Requisitos
