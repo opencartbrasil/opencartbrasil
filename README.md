@@ -64,7 +64,9 @@ Para realizar a atualização automática do OpenCart Brasil, na administração
 - O cache de arquivos criado pelas modificações OCMOD estão causando o problema.
 - O tema que foi instalado na loja sobrescreveu arquivos nativos do OpenCart.
 
-Para resolver, apague todos os arquivos (com exceção do arquivo index.html) e as pastas que estão dentro da pasta storage/**modification** (veja o caminho para a pasta storage dentro do arquivo **config.php**), e por último reenvie os arquivos do tema que você está utilizando na loja (caso esteja utilizando um tema personalizado).
+Para resolver, apague todos os arquivos (com exceção do arquivo index.html) e as pastas que estão dentro da pasta storage/**modification** (veja o caminho para a pasta storage dentro do arquivo **config.php**), e reenvie os arquivos do tema que você está utilizando na loja (caso esteja utilizando um tema personalizado).
+
+Dependendo da hospedagem (com baixa qualidade), pode ser necessário fazer o download da versão mais recente do OpenCart Brasil, e reenviar todos os arquivos da pasta "**system**", sobrescrevendo os arquivos que já estão lá.
 
 Após executar os procedimentos, acesse a administração da loja e vá no menu **Extensões→Modificações**, clique no botão **Atualizar** para atualizar o cache de modificações, depois vá na página principal do painel de controle da administração da loja, abaixo do botão "**Sair**", você verá um botão na cor azul com o desenho de uma engrenagem branca dentro dele, clique neste botão, e no popup que vai abrir, clique nos dois botões na cor laranja que estão dentro da coluna "**Ação**" para atualizar o cache do tema.
 
