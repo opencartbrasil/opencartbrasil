@@ -257,7 +257,7 @@ Lista de parâmetros para instalação através da linha de comando:
 
 ## Configurações adicionais
 
-### Habilitar as tarefas agendadas
+### Habilitar as tarefas agendadas:
 
 A execução das tarefas agendadas são essenciais para o funcionamento do OpenCart Brasil, sendo que a execução das tarefas agendadas não sobrecarrega a navegação da loja, pois elas ocorrem em segundo plano.
 
