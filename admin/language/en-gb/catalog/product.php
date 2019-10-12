@@ -36,6 +36,7 @@ $_['entry_store']            = 'Stores';
 $_['entry_keyword']          = 'Keyword';
 $_['entry_model']            = 'Model';
 $_['entry_sku']              = 'SKU';
+$_['entry_ncm']              = 'NCM';
 $_['entry_upc']              = 'UPC';
 $_['entry_ean']              = 'EAN';
 $_['entry_jan']              = 'JAN';
@@ -85,6 +86,7 @@ $_['entry_recurring']        = 'Recurring Profile';
 
 // Help
 $_['help_sku']               = 'Stock Keeping Unit';
+$_['help_ncm']               = 'Mercosur Common Nomenclature';
 $_['help_upc']               = 'Universal Product Code';
 $_['help_ean']               = 'European Article Number';
 $_['help_jan']               = 'Japanese Article Number';

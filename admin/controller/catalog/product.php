@@ -30,12 +30,16 @@ class ControllerCatalogProduct extends Controller {
 				$url .= '&filter_name=' . urlencode(html_entity_decode($this->request->get['filter_name'], ENT_QUOTES, 'UTF-8'));
 			}
 
+			if (isset($this->request->get['filter_model'])) {
+				$url .= '&filter_model=' . urlencode(html_entity_decode($this->request->get['filter_model'], ENT_QUOTES, 'UTF-8'));
+			}
+
 			if (isset($this->request->get['filter_sku'])) {
 				$url .= '&filter_sku=' . urlencode(html_entity_decode($this->request->get['filter_sku'], ENT_QUOTES, 'UTF-8'));
 			}
 
-			if (isset($this->request->get['filter_model'])) {
-				$url .= '&filter_model=' . urlencode(html_entity_decode($this->request->get['filter_model'], ENT_QUOTES, 'UTF-8'));
+			if (isset($this->request->get['filter_ncm'])) {
+				$url .= '&filter_ncm=' . $this->request->get['filter_ncm'];
 			}
 
 			if (isset($this->request->get['filter_price'])) {
@@ -86,12 +90,16 @@ class ControllerCatalogProduct extends Controller {
 				$url .= '&filter_name=' . urlencode(html_entity_decode($this->request->get['filter_name'], ENT_QUOTES, 'UTF-8'));
 			}
 
+			if (isset($this->request->get['filter_model'])) {
+				$url .= '&filter_model=' . urlencode(html_entity_decode($this->request->get['filter_model'], ENT_QUOTES, 'UTF-8'));
+			}
+
 			if (isset($this->request->get['filter_sku'])) {
 				$url .= '&filter_sku=' . urlencode(html_entity_decode($this->request->get['filter_sku'], ENT_QUOTES, 'UTF-8'));
 			}
 
-			if (isset($this->request->get['filter_model'])) {
-				$url .= '&filter_model=' . urlencode(html_entity_decode($this->request->get['filter_model'], ENT_QUOTES, 'UTF-8'));
+			if (isset($this->request->get['filter_ncm'])) {
+				$url .= '&filter_ncm=' . $this->request->get['filter_ncm'];
 			}
 
 			if (isset($this->request->get['filter_price'])) {
@@ -144,12 +152,16 @@ class ControllerCatalogProduct extends Controller {
 				$url .= '&filter_name=' . urlencode(html_entity_decode($this->request->get['filter_name'], ENT_QUOTES, 'UTF-8'));
 			}
 
+			if (isset($this->request->get['filter_model'])) {
+				$url .= '&filter_model=' . urlencode(html_entity_decode($this->request->get['filter_model'], ENT_QUOTES, 'UTF-8'));
+			}
+
 			if (isset($this->request->get['filter_sku'])) {
 				$url .= '&filter_sku=' . urlencode(html_entity_decode($this->request->get['filter_sku'], ENT_QUOTES, 'UTF-8'));
 			}
 
-			if (isset($this->request->get['filter_model'])) {
-				$url .= '&filter_model=' . urlencode(html_entity_decode($this->request->get['filter_model'], ENT_QUOTES, 'UTF-8'));
+			if (isset($this->request->get['filter_ncm'])) {
+				$url .= '&filter_ncm=' . $this->request->get['filter_ncm'];
 			}
 
 			if (isset($this->request->get['filter_price'])) {
@@ -202,12 +214,16 @@ class ControllerCatalogProduct extends Controller {
 				$url .= '&filter_name=' . urlencode(html_entity_decode($this->request->get['filter_name'], ENT_QUOTES, 'UTF-8'));
 			}
 
+			if (isset($this->request->get['filter_model'])) {
+				$url .= '&filter_model=' . urlencode(html_entity_decode($this->request->get['filter_model'], ENT_QUOTES, 'UTF-8'));
+			}
+
 			if (isset($this->request->get['filter_sku'])) {
 				$url .= '&filter_sku=' . urlencode(html_entity_decode($this->request->get['filter_sku'], ENT_QUOTES, 'UTF-8'));
 			}
 
-			if (isset($this->request->get['filter_model'])) {
-				$url .= '&filter_model=' . urlencode(html_entity_decode($this->request->get['filter_model'], ENT_QUOTES, 'UTF-8'));
+			if (isset($this->request->get['filter_ncm'])) {
+				$url .= '&filter_ncm=' . $this->request->get['filter_ncm'];
 			}
 
 			if (isset($this->request->get['filter_price'])) {
@@ -247,16 +263,22 @@ class ControllerCatalogProduct extends Controller {
 			$filter_name = '';
 		}
 
+		if (isset($this->request->get['filter_model'])) {
+			$filter_model = $this->request->get['filter_model'];
+		} else {
+			$filter_model = '';
+		}
+
 		if (isset($this->request->get['filter_sku'])) {
 			$filter_sku = $this->request->get['filter_sku'];
 		} else {
 			$filter_sku = '';
 		}
 
-		if (isset($this->request->get['filter_model'])) {
-			$filter_model = $this->request->get['filter_model'];
+		if (isset($this->request->get['filter_ncm'])) {
+			$filter_ncm = $this->request->get['filter_ncm'];
 		} else {
-			$filter_model = '';
+			$filter_ncm = '';
 		}
 
 		if (isset($this->request->get['filter_price'])) {
@@ -301,12 +323,16 @@ class ControllerCatalogProduct extends Controller {
 			$url .= '&filter_name=' . urlencode(html_entity_decode($this->request->get['filter_name'], ENT_QUOTES, 'UTF-8'));
 		}
 
+		if (isset($this->request->get['filter_model'])) {
+			$url .= '&filter_model=' . urlencode(html_entity_decode($this->request->get['filter_model'], ENT_QUOTES, 'UTF-8'));
+		}
+
 		if (isset($this->request->get['filter_sku'])) {
 			$url .= '&filter_sku=' . urlencode(html_entity_decode($this->request->get['filter_sku'], ENT_QUOTES, 'UTF-8'));
 		}
 
-		if (isset($this->request->get['filter_model'])) {
-			$url .= '&filter_model=' . urlencode(html_entity_decode($this->request->get['filter_model'], ENT_QUOTES, 'UTF-8'));
+		if (isset($this->request->get['filter_ncm'])) {
+			$url .= '&filter_ncm=' . $this->request->get['filter_ncm'];
 		}
 
 		if (isset($this->request->get['filter_price'])) {
@@ -349,8 +375,9 @@ class ControllerCatalogProduct extends Controller {
 
 		$filter_data = array(
 			'filter_name'	  => $filter_name,
-			'filter_sku'	  => $filter_sku,
 			'filter_model'	  => $filter_model,
+			'filter_sku'	  => $filter_sku,
+			'filter_ncm'	  => $filter_ncm,
 			'filter_price'	  => $filter_price,
 			'filter_quantity' => $filter_quantity,
 			'filter_status'   => $filter_status,
@@ -426,12 +453,16 @@ class ControllerCatalogProduct extends Controller {
 			$url .= '&filter_name=' . urlencode(html_entity_decode($this->request->get['filter_name'], ENT_QUOTES, 'UTF-8'));
 		}
 
+		if (isset($this->request->get['filter_model'])) {
+			$url .= '&filter_model=' . urlencode(html_entity_decode($this->request->get['filter_model'], ENT_QUOTES, 'UTF-8'));
+		}
+
 		if (isset($this->request->get['filter_sku'])) {
 			$url .= '&filter_sku=' . urlencode(html_entity_decode($this->request->get['filter_sku'], ENT_QUOTES, 'UTF-8'));
 		}
 
-		if (isset($this->request->get['filter_model'])) {
-			$url .= '&filter_model=' . urlencode(html_entity_decode($this->request->get['filter_model'], ENT_QUOTES, 'UTF-8'));
+		if (isset($this->request->get['filter_ncm'])) {
+			$url .= '&filter_ncm=' . $this->request->get['filter_ncm'];
 		}
 
 		if (isset($this->request->get['filter_price'])) {
@@ -469,12 +500,16 @@ class ControllerCatalogProduct extends Controller {
 			$url .= '&filter_name=' . urlencode(html_entity_decode($this->request->get['filter_name'], ENT_QUOTES, 'UTF-8'));
 		}
 
+		if (isset($this->request->get['filter_model'])) {
+			$url .= '&filter_model=' . urlencode(html_entity_decode($this->request->get['filter_model'], ENT_QUOTES, 'UTF-8'));
+		}
+
 		if (isset($this->request->get['filter_sku'])) {
 			$url .= '&filter_sku=' . urlencode(html_entity_decode($this->request->get['filter_sku'], ENT_QUOTES, 'UTF-8'));
 		}
 
-		if (isset($this->request->get['filter_model'])) {
-			$url .= '&filter_model=' . urlencode(html_entity_decode($this->request->get['filter_model'], ENT_QUOTES, 'UTF-8'));
+		if (isset($this->request->get['filter_ncm'])) {
+			$url .= '&filter_ncm=' . $this->request->get['filter_ncm'];
 		}
 
 		if (isset($this->request->get['filter_price'])) {
@@ -508,8 +543,9 @@ class ControllerCatalogProduct extends Controller {
 		$data['results'] = sprintf($this->language->get('text_pagination'), ($product_total) ? (($page - 1) * $this->config->get('config_limit_admin')) + 1 : 0, ((($page - 1) * $this->config->get('config_limit_admin')) > ($product_total - $this->config->get('config_limit_admin'))) ? $product_total : ((($page - 1) * $this->config->get('config_limit_admin')) + $this->config->get('config_limit_admin')), $product_total, ceil($product_total / $this->config->get('config_limit_admin')));
 
 		$data['filter_name'] = $filter_name;
-		$data['filter_sku'] = $filter_sku;
 		$data['filter_model'] = $filter_model;
+		$data['filter_sku'] = $filter_sku;
+		$data['filter_ncm'] = $filter_ncm;
 		$data['filter_price'] = $filter_price;
 		$data['filter_quantity'] = $filter_quantity;
 		$data['filter_status'] = $filter_status;
@@ -563,12 +599,16 @@ class ControllerCatalogProduct extends Controller {
 			$url .= '&filter_name=' . urlencode(html_entity_decode($this->request->get['filter_name'], ENT_QUOTES, 'UTF-8'));
 		}
 
+		if (isset($this->request->get['filter_model'])) {
+			$url .= '&filter_model=' . urlencode(html_entity_decode($this->request->get['filter_model'], ENT_QUOTES, 'UTF-8'));
+		}
+
 		if (isset($this->request->get['filter_sku'])) {
 			$url .= '&filter_sku=' . urlencode(html_entity_decode($this->request->get['filter_sku'], ENT_QUOTES, 'UTF-8'));
 		}
 
-		if (isset($this->request->get['filter_model'])) {
-			$url .= '&filter_model=' . urlencode(html_entity_decode($this->request->get['filter_model'], ENT_QUOTES, 'UTF-8'));
+		if (isset($this->request->get['filter_ncm'])) {
+			$url .= '&filter_ncm=' . $this->request->get['filter_ncm'];
 		}
 
 		if (isset($this->request->get['filter_price'])) {
@@ -647,6 +687,14 @@ class ControllerCatalogProduct extends Controller {
 			$data['sku'] = $product_info['sku'];
 		} else {
 			$data['sku'] = '';
+		}
+
+		if (isset($this->request->post['ncm'])) {
+			$data['ncm'] = $this->request->post['ncm'];
+		} elseif (!empty($product_info)) {
+			$data['ncm'] = $product_info['ncm'];
+		} else {
+			$data['ncm'] = '';
 		}
 
 		if (isset($this->request->post['upc'])) {
