@@ -257,7 +257,20 @@ Lista de parâmetros para instalação através da linha de comando:
 
 ## Configurações adicionais
 
-### Caso utilize o servidor web Nginx:
+### Habilitar as tarefas agendadas
+
+A execução das tarefas agendadas são essenciais para o funcionamento do OpenCart Brasil, sendo que a execução das tarefas agendadas não sobrecarrega a navegação da loja, pois elas ocorrem em segundo plano.
+
+Atualmente as seguintes tarefas estão agendadas para serem executadas no OpenCart Brasil:
+
+- Higienizar as sessões de login uma vez ao dia.
+- Atualizar a cotação das moedas uma vez ao dia.
+
+Para executar as tarefas agendadas do OpenCart Brasil, você necessitará acessar através da administração da loja o menu **Extensões→Tarefas agendadas**, copiar a linha que está no campo **Comando**, e adicioná-la para ser executada a cada 1 (uma) hora no Agendador de Tarefas (Cronjobs ou Tarefas Cron) de sua hospedagem.
+
+**Importante:** Se você nunca utilizou o Agendador de Tarefas de sua hospedagem, solicite ajuda ao suporte de sua hospedagem para saber como utilizá-lo.
+
+### Habilitar URL amigável em servidor web Nginx (opcional):
 
 Adicione no arquivo **nginx.conf** dentro do bloco "**location / { }**":
 
