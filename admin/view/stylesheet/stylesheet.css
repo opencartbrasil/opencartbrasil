@@ -566,9 +566,6 @@ input[type="checkbox"]:checked::after, .checkbox input[type="checkbox"]:checked:
 .jqvmap-label {
 	z-index: 999;
 }
-.alert {
-	overflow: auto;
-}
 
 /* Fix form-group margin inside the modal */
 .modal-body .form-group {
