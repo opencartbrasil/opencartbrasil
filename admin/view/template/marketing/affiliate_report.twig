@@ -11,19 +11,19 @@
     </thead>
     <tbody>
       {% if reports %}
-        {% for report in reports %}
-          <tr>
-            <td class="text-left"><a href="http://www.geoiptool.com/pt/?IP={{ report.ip }}" target="_blank">{{ report.ip }}</a></td>
-            <td class="text-right"><a href="{{ report.filter_ip }}" target="_blank">{{ report.account }}</a></td>
-            <td class="text-left">{{ report.store }}</td>
-            <td class="text-left">{{ report.country }}</td>
-            <td class="text-left">{{ report.date_added }}</td>
-          </tr>
-        {% endfor %}
+      {% for report in reports %}
+      <tr>
+        <td class="text-left"><a href="http://www.geoiptool.com/pt/?IP={{ report.ip }}" target="_blank">{{ report.ip }}</a></td>
+        <td class="text-right"><a href="{{ report.filter_ip }}" target="_blank">{{ report.account }}</a></td>
+        <td class="text-left">{{ report.store }}</td>
+        <td class="text-left">{{ report.country }}</td>
+        <td class="text-left">{{ report.date_added }}</td>
+      </tr>
+      {% endfor %}
       {% else %}
-        <tr>
-          <td class="text-center" colspan="5">{{ text_no_results }}</td>
-        </tr>
+      <tr>
+        <td class="text-center" colspan="5">{{ text_no_results }}</td>
+      </tr>
       {% endif %}
     </tbody>
   </table>

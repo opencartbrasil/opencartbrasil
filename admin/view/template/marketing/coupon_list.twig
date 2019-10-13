@@ -2,7 +2,8 @@
 <div id="content">
   <div class="page-header">
     <div class="container-fluid">
-      <div class="pull-right"><a href="{{ add }}" data-toggle="tooltip" title="{{ button_add }}" class="btn btn-primary"><i class="fa fa-plus"></i></a>
+      <div class="pull-right">
+        <a href="{{ add }}" data-toggle="tooltip" title="{{ button_add }}" class="btn btn-primary"><i class="fa fa-plus"></i></a>
         <button type="button" data-toggle="tooltip" title="{{ button_delete }}" class="btn btn-danger" onclick="confirm('{{ text_confirm }}') ? $('#form-coupon').submit() : false;"><i class="fa fa-trash-o"></i></button>
       </div>
       <h1>{{ heading_title }}</h1>
@@ -35,36 +36,48 @@
               <thead>
                 <tr>
                   <td style="width: 1px;" class="text-center"><input type="checkbox" onclick="$('input[name*=\'selected\']').prop('checked', this.checked);" /></td>
-                  <td class="text-left">{% if sort == 'name' %}
+                  <td class="text-left">
+                    {% if sort == 'name' %}
                     <a href="{{ sort_name }}" class="{{ order|lower }}">{{ column_name }}</a>
                     {% else %}
                     <a href="{{ sort_name }}">{{ column_name }}</a>
-                    {% endif %}</td>
-                  <td class="text-left">{% if sort == 'code' %}
+                    {% endif %}
+                  </td>
+                  <td class="text-left">
+                    {% if sort == 'code' %}
                     <a href="{{ sort_code }}" class="{{ order|lower }}">{{ column_code }}</a>
                     {% else %}
                     <a href="{{ sort_code }}">{{ column_code }}</a>
-                    {% endif %}</td>
-                  <td class="text-right">{% if sort == 'discount' %}
+                    {% endif %}
+                  </td>
+                  <td class="text-right">
+                    {% if sort == 'discount' %}
                     <a href="{{ sort_discount }}" class="{{ order|lower }}">{{ column_discount }}</a>
                     {% else %}
                     <a href="{{ sort_discount }}">{{ column_discount }}</a>
-                    {% endif %}</td>
-                  <td class="text-left">{% if sort == 'date_start' %}
+                    {% endif %}
+                  </td>
+                  <td class="text-left">
+                    {% if sort == 'date_start' %}
                     <a href="{{ sort_date_start }}" class="{{ order|lower }}">{{ column_date_start }}</a>
                     {% else %}
                     <a href="{{ sort_date_start }}">{{ column_date_start }}</a>
-                    {% endif %}</td>
-                  <td class="text-left">{% if sort == 'date_end' %}
+                    {% endif %}
+                  </td>
+                  <td class="text-left">
+                    {% if sort == 'date_end' %}
                     <a href="{{ sort_date_end }}" class="{{ order|lower }}">{{ column_date_end }}</a>
                     {% else %}
                     <a href="{{ sort_date_end }}">{{ column_date_end }}</a>
-                    {% endif %}</td>
-                  <td class="text-left">{% if sort == 'status' %}
+                    {% endif %}
+                  </td>
+                  <td class="text-left">
+                    {% if sort == 'status' %}
                     <a href="{{ sort_status }}" class="{{ order|lower }}">{{ column_status }}</a>
                     {% else %}
                     <a href="{{ sort_status }}">{{ column_status }}</a>
-                    {% endif %}</td>
+                    {% endif %}
+                  </td>
                   <td class="text-right">{{ column_action }}</td>
                 </tr>
               </thead>
@@ -76,7 +89,8 @@
                     <input type="checkbox" name="selected[]" value="{{ coupon.coupon_id }}" checked="checked" />
                     {% else %}
                     <input type="checkbox" name="selected[]" value="{{ coupon.coupon_id }}" />
-                    {% endif %}</td>
+                    {% endif %}
+                  </td>
                   <td class="text-left">{{ coupon.name }}</td>
                   <td class="text-left">{{ coupon.code }}</td>
                   <td class="text-right">{{ coupon.discount }}</td>
