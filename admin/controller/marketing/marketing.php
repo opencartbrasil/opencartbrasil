@@ -546,6 +546,7 @@ class ControllerMarketingMarketing extends Controller {
 		$pagination->url = $this->url->link('marketing/marketing/report', 'user_token=' . $this->session->data['user_token'] . '&marketing_id=' . $marketing_id . '&page={page}', true);
 
 		$data['pagination'] = $pagination->render();
+
 		$data['results'] = sprintf($this->language->get('text_pagination'), ($report_total) ? (($page - 1) * 10) + 1 : 0, ((($page - 1) * 10) > ($report_total - 10)) ? $report_total : ((($page - 1) * 10) + 10), $report_total, ceil($report_total / 10));
 
 		$this->response->setOutput($this->load->view('marketing/marketing_report', $data));
