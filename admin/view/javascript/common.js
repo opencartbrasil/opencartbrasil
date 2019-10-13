@@ -23,7 +23,7 @@ function getURLVar(key) {
 }
 
 $(document).ready(function() {
-	//Form Submit for IE Browser
+	// Form Submit for IE Browser
 	$('button[type=\'submit\']').on('click', function(e) {
 		if ($("form[id*='form-']").length > 0) {
 			e.preventDefault();
@@ -40,7 +40,7 @@ $(document).ready(function() {
 		}
 	});
 
-	// tooltips on hover
+	// Tooltip on hover
 	$('[data-toggle=\'tooltip\']').tooltip({container: 'body', html: true});
 
 	// Makes tooltips work on ajax generated content
@@ -57,7 +57,7 @@ $(document).ready(function() {
 		}
 	}
 
-	// tooltip remove
+	// Tooltip remove
 	$('[data-toggle=\'tooltip\']').on('remove', function() {
 		$(this).tooltip('destroy');
 	});
@@ -67,13 +67,22 @@ $(document).ready(function() {
 		$('body > .tooltip').remove();
 	});
 
-	// Fix for overflow in responsive tables
-	$('.table-responsive').on('show.bs.dropdown', function() {
-		$('.table-responsive').css('overflow', 'inherit');
-	});
-
-	$('.table-responsive').on('hide.bs.dropdown', function() {
-		$('.table-responsive').css('overflow', 'auto');
+	// Responsive tables fixed
+	$('.table-responsive').on('shown.bs.dropdown', function (e) {
+		var t = $(this),
+			m = $(e.target).find('.dropdown-menu'),
+			tb = t.offset().top + t.height(),
+			mb = m.offset().top + m.outerHeight(true),
+			d = 20;
+		if (t[0].scrollWidth > t.innerWidth()) {
+			if (mb + d > tb) {
+				t.css('padding-bottom', ((mb + d) - tb));
+			}
+		} else {
+			t.css('overflow', 'visible');
+		}
+	}).on('hidden.bs.dropdown', function () {
+		$(this).css({'padding-bottom': '', 'overflow': ''});
 	});
 
 	$('#button-menu').on('click', function(e) {
@@ -103,14 +112,14 @@ $(document).ready(function() {
 	// Image Manager
 	$(document).on('click', 'a[data-toggle=\'image\']', function(e) {
 		var $element = $(this);
-		var $popover = $element.data('bs.popover'); // element has bs popover?
+		var $popover = $element.data('bs.popover'); // Element has bs popover?
 
 		e.preventDefault();
 
-		// destroy all image popovers
+		// Destroy all image popovers
 		$('a[data-toggle="image"]').popover('destroy');
 
-		// remove flickering (do not re-add popover when clicking for removal)
+		// Remove flickering (do not re-add popover when clicking for removal)
 		if ($popover) {
 			return;
 		}
@@ -197,7 +206,7 @@ $(document).ready(function() {
 			// Keydown
 			$this.on('keydown', function(event) {
 				switch(event.keyCode) {
-					case 27: // escape
+					case 27: // Escape
 						this.hide();
 						break;
 					default:
@@ -252,14 +261,14 @@ $(document).ready(function() {
 
 				if (json.length) {
 					for (i = 0; i < json.length; i++) {
-						// update element items
+						// Update element items
 						this.items[json[i]['value']] = json[i];
 
 						if (!json[i]['category']) {
-							// ungrouped items
+							// Ungrouped items
 							html += '<li data-value="' + json[i]['value'] + '"><a href="#">' + json[i]['label'] + '</a></li>';
 						} else {
-							// grouped items
+							// Grouped items
 							name = json[i]['category'];
 							if (!category[name]) {
 								category[name] = [];
