@@ -1,7 +1,7 @@
 <?php
 class ModelCatalogDownload extends Model {
 	public function addDownload($data) {
-		$this->db->query("INSERT INTO " . DB_PREFIX . "download SET filename = '" . $this->db->escape($data['filename']) . "', mask = '" . $this->db->escape($data['mask']) . "', date_added = NOW()");
+		$this->db->query("INSERT INTO " . DB_PREFIX . "download SET filename = '" . $this->db->escape(basename($data['filename'])) . "', mask = '" . $this->db->escape($data['mask']) . "', date_added = NOW()");
 
 		$download_id = $this->db->getLastId();
 
@@ -13,7 +13,7 @@ class ModelCatalogDownload extends Model {
 	}
 
 	public function editDownload($download_id, $data) {
-		$this->db->query("UPDATE " . DB_PREFIX . "download SET filename = '" . $this->db->escape($data['filename']) . "', mask = '" . $this->db->escape($data['mask']) . "' WHERE download_id = '" . (int)$download_id . "'");
+		$this->db->query("UPDATE " . DB_PREFIX . "download SET filename = '" . $this->db->escape(basename($data['filename'])) . "', mask = '" . $this->db->escape($data['mask']) . "' WHERE download_id = '" . (int)$download_id . "'");
 
 		$this->db->query("DELETE FROM " . DB_PREFIX . "download_description WHERE download_id = '" . (int)$download_id . "'");
 
