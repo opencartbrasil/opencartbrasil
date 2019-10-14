@@ -30,6 +30,7 @@ $_['error_permission']  = 'Warning: You do not have permission to modify languag
 $_['error_exists']      = 'Warning: You added before the language!';
 $_['error_name']        = 'Language Name must be between 3 and 32 characters!';
 $_['error_code']        = 'Language Code must at least 2 characters!';
+$_['error_invalid']     = 'Language Code invalid!';
 $_['error_locale']      = 'Locale required!';
 $_['error_default']     = 'Warning: This language cannot be deleted as it is currently assigned as the default store language!';
 $_['error_admin']       = 'Warning: This Language cannot be deleted as it is currently assigned as the administration language!';

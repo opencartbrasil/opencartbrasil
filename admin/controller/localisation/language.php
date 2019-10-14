@@ -380,6 +380,10 @@ class ControllerLocalisationLanguage extends Controller {
 			$this->error['code'] = $this->language->get('error_code');
 		}
 
+		if (!preg_match('/^[A-Za-z0-9-]+$/', $this->request->post['code'])) {
+			$this->error['code'] = $this->language->get('error_invalid');
+		}
+
 		if (!$this->request->post['locale']) {
 			$this->error['locale'] = $this->language->get('error_locale');
 		}

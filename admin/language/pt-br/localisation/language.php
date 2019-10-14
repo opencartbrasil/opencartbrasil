@@ -30,6 +30,7 @@ $_['error_permission']  = 'Atenção: Você não tem permissão para modificar o
 $_['error_exists']      = 'Atenção: O idioma já está cadastrado!';
 $_['error_name']        = 'O idioma deve ter entre 3 e 32 caracteres!';
 $_['error_code']        = 'O código deve ter pelo menos 2 caracteres!';
+$_['error_invalid']     = 'O código não é válido!';
 $_['error_locale']      = 'A localidade é obrigatório!';
 $_['error_default']     = 'Atenção: Este idioma não pode ser excluído, pois ele está definido como o idioma padrão da loja!';
 $_['error_admin']       = 'Atenção: Este idioma não pode ser excluído, pois ele está definido como o idioma padrão da administração!';
