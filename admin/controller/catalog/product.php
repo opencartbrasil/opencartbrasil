@@ -697,6 +697,14 @@ class ControllerCatalogProduct extends Controller {
 			$data['ncm'] = '';
 		}
 
+		if (isset($this->request->post['cest'])) {
+			$data['cest'] = $this->request->post['cest'];
+		} elseif (!empty($product_info)) {
+			$data['cest'] = $product_info['cest'];
+		} else {
+			$data['cest'] = '';
+		}
+
 		if (isset($this->request->post['upc'])) {
 			$data['upc'] = $this->request->post['upc'];
 		} elseif (!empty($product_info)) {

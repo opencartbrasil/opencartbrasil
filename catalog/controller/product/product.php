@@ -240,6 +240,7 @@ class ControllerProductProduct extends Controller {
 			$data['model'] = $product_info['model'];
 			$data['sku'] = $product_info['sku'];
 			$data['ncm'] = $product_info['ncm'];
+			$data['cest'] = $product_info['cest'];
 			$data['reward'] = $product_info['reward'];
 			$data['points'] = $product_info['points'];
 			$data['description'] = html_entity_decode($product_info['description'], ENT_QUOTES, 'UTF-8');

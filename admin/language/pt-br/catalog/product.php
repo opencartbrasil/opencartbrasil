@@ -37,6 +37,7 @@ $_['entry_keyword']          = 'URL amigável';
 $_['entry_model']            = 'Modelo';
 $_['entry_sku']              = 'SKU';
 $_['entry_ncm']              = 'NCM';
+$_['entry_cest']             = 'CEST';
 $_['entry_upc']              = 'UPC';
 $_['entry_ean']              = 'EAN';
 $_['entry_jan']              = 'JAN';
@@ -86,7 +87,8 @@ $_['entry_recurring']        = 'Tipo de assinatura';
 
 // Help
 $_['help_sku']               = 'É o código ligado à logística de armazém, e deve conter até 64 caracteres.';
-$_['help_ncm']               = 'Significa Nomenclatura Comum do Mercosul , e deve conter 8 números.';
+$_['help_ncm']               = 'Significa Nomenclatura Comum do Mercosul, e deve conter 8 números.';
+$_['help_cest']              = 'Significa Código Especificador da Substituição Tributária, e deve conter 7 números.';
 $_['help_upc']               = 'Significa Código universal de produto, e deve conter 12 números.';
 $_['help_ean']               = 'Significa Número de artigo europeu, e deve conter 13 números, mas pode ter 8 ou 14 números.';
 $_['help_jan']               = 'Significa Número de artigo japonês, e deve conter 13 números, mas pode ter 8 números.';

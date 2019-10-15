@@ -19,6 +19,7 @@ class ModelCatalogProduct extends Model {
 				'model'            => $query->row['model'],
 				'sku'              => $query->row['sku'],
 				'ncm'              => $query->row['ncm'],
+				'cest'             => $query->row['cest'],
 				'upc'              => $query->row['upc'],
 				'ean'              => $query->row['ean'],
 				'jan'              => $query->row['jan'],
