@@ -3,7 +3,7 @@
 $_['text_captcha']  = 'Imagem antispam';
 
 // Entry
-$_['entry_captcha'] = 'Digite o código no campo abaixo';
+$_['entry_captcha'] = 'Faça a validação do captcha';
 
 // Error
-$_['error_captcha'] = 'O código no campo não é o mesmo da imagem!';
+$_['error_captcha'] = 'A verificação não está correta!';
