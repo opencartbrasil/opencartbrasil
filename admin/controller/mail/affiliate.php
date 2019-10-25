@@ -12,10 +12,10 @@ class ControllerMailAffiliate extends Controller {
 
 			if ($store_info) {
 				$store_name = html_entity_decode($store_info['name'], ENT_QUOTES, 'UTF-8');
-				$store_url = $store_info['url'] . 'index.php?route=account/login';
+				$store_url = $store_info['url'];
 			} else {
 				$store_name = html_entity_decode($this->config->get('config_name'), ENT_QUOTES, 'UTF-8');
-				$store_url = HTTP_CATALOG . 'index.php?route=account/login';
+				$store_url = HTTPS_CATALOG;
 			}
 
 			$this->load->model('localisation/language');
@@ -68,10 +68,10 @@ class ControllerMailAffiliate extends Controller {
 
 			if ($store_info) {
 				$store_name = html_entity_decode($store_info['name'], ENT_QUOTES, 'UTF-8');
-				$store_url = $store_info['url'] . 'index.php?route=account/login';
+				$store_url = $store_info['url'];
 			} else {
 				$store_name = html_entity_decode($this->config->get('config_name'), ENT_QUOTES, 'UTF-8');
-				$store_url = HTTP_CATALOG . 'index.php?route=account/login';
+				$store_url = HTTPS_CATALOG ;
 			}
 
 			$this->load->model('localisation/language');

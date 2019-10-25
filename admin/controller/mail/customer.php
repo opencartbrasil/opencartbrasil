@@ -12,10 +12,10 @@ class ControllerMailCustomer extends Controller {
 
 			if ($store_info) {
 				$store_name = html_entity_decode($store_info['name'], ENT_QUOTES, 'UTF-8');
-				$store_url = $store_info['url'] . 'index.php?route=account/login';
+				$store_url = $store_info['url'];
 			} else {
 				$store_name = html_entity_decode($this->config->get('config_name'), ENT_QUOTES, 'UTF-8');
-				$store_url = HTTP_CATALOG . 'index.php?route=account/login';
+				$store_url = HTTPS_CATALOG;
 			}
 
 			$this->load->model('localisation/language');
@@ -36,7 +36,7 @@ class ControllerMailCustomer extends Controller {
 
 			$data['text_welcome'] = sprintf($language->get('text_welcome'), $store_name);
 
-			$data['login'] = $store_url;
+			$data['login'] = $store_url . 'index.php?route=account/login';
 			$data['store'] = $store_name;
 
 			$mail = new Mail($this->config->get('config_mail_engine'));
@@ -68,10 +68,10 @@ class ControllerMailCustomer extends Controller {
 
 			if ($store_info) {
 				$store_name = html_entity_decode($store_info['name'], ENT_QUOTES, 'UTF-8');
-				$store_url = $store_info['url'] . 'index.php?route=account/login';
+				$store_url = $store_info['url'];
 			} else {
 				$store_name = html_entity_decode($this->config->get('config_name'), ENT_QUOTES, 'UTF-8');
-				$store_url = HTTP_CATALOG . 'index.php?route=account/login';
+				$store_url = HTTPS_CATALOG;
 			}
 
 			$this->load->model('localisation/language');
