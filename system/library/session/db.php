@@ -1,7 +1,7 @@
 <?php
 namespace Session;
 final class DB {
-	public $expire = '';
+	public $expire = 3600;
 
 	public function __construct($registry) {
 		$this->db = $registry->get('db');
