@@ -176,6 +176,14 @@ class ModelSaleOrder extends Model {
 			$sql .= " AND CONCAT(o.firstname, ' ', o.lastname) LIKE '%" . $this->db->escape($data['filter_customer']) . "%'";
 		}
 
+		if (isset($data['filter_comment'])) {
+			if ($data['filter_comment'] == '0') {
+				$sql .= " AND (o.comment = '0' OR o.comment = '')";
+			} else if ($data['filter_comment'] == '1') {
+				$sql .= " AND (o.comment != '0' AND o.comment != '')";
+			}
+		}
+
 		if (!empty($data['filter_date_added'])) {
 			$sql .= " AND DATE(o.date_added) = DATE('" . $this->db->escape($data['filter_date_added']) . "')";
 		}
@@ -285,6 +293,14 @@ class ModelSaleOrder extends Model {
 			$sql .= " AND CONCAT(firstname, ' ', lastname) LIKE '%" . $this->db->escape($data['filter_customer']) . "%'";
 		}
 
+		if (isset($data['filter_comment'])) {
+			if ($data['filter_comment'] == '0') {
+				$sql .= " AND (comment = '0' OR comment = '')";
+			} else if ($data['filter_comment'] == '1') {
+				$sql .= " AND (comment != '0' AND comment != '')";
+			}
+		}
+
 		if (!empty($data['filter_date_added'])) {
 			$sql .= " AND DATE(date_added) = DATE('" . $this->db->escape($data['filter_date_added']) . "')";
 		}
@@ -389,6 +405,14 @@ class ModelSaleOrder extends Model {
 
 		if (!empty($data['filter_customer'])) {
 			$sql .= " AND CONCAT(firstname, ' ', lastname) LIKE '%" . $this->db->escape($data['filter_customer']) . "%'";
+		}
+
+		if (isset($data['filter_comment'])) {
+			if ($data['filter_comment'] == '0') {
+				$sql .= " AND (comment = '0' OR comment = '')";
+			} else if ($data['filter_comment'] == '1') {
+				$sql .= " AND (comment != '0' AND comment != '')";
+			}
 		}
 
 		if (!empty($data['filter_date_added'])) {

@@ -61,6 +61,24 @@
             </select>
           </div>
           <div class="form-group">
+            <label class="control-label" for="input-comment">{{ entry_comment }}</label>
+            <select name="filter_comment" id="input-comment" class="form-control">
+              {% if filter_comment == '0' %}
+              <option value=""></option>
+              <option value="0" selected="selected">{{ text_no }}</option>
+              <option value="1">{{ text_yes }}</option>
+              {% elseif filter_comment == '1' %}
+              <option value=""></option>
+              <option value="0">{{ text_no }}</option>
+              <option value="1" selected="selected">{{ text_yes }}</option>
+              {% else %}
+              <option value="" selected="selected"></option>
+              <option value="0">{{ text_no }}</option>
+              <option value="1">{{ text_yes }}</option>
+              {% endif %}
+            </select>
+          </div>
+          <div class="form-group">
             <label class="control-label" for="input-total">{{ entry_total }}</label>
             <input type="text" name="filter_total" value="{{ filter_total }}" placeholder="{{ entry_total }}" id="input-total" class="form-control" />
           </div>
@@ -176,6 +194,12 @@ $('#button-filter').on('click', function() {
 
 	if (filter_order_status_id !== '') {
 		url += '&filter_order_status_id=' + encodeURIComponent(filter_order_status_id);
+	}
+
+	var filter_comment = $('select[name=\'filter_comment\']').val();
+
+	if (filter_comment !== '') {
+		url += '&filter_comment=' + encodeURIComponent(filter_comment);
 	}
 
 	var filter_total = $('input[name=\'filter_total\']').val();

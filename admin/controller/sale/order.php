@@ -57,6 +57,10 @@ class ControllerSaleOrder extends Controller {
 			$url .= '&filter_order_status_id=' . $this->request->get['filter_order_status_id'];
 		}
 
+		if (isset($this->request->get['filter_comment'])) {
+			$url .= '&filter_comment=' . $this->request->get['filter_comment'];
+		}
+
 		if (isset($this->request->get['filter_total'])) {
 			$url .= '&filter_total=' . $this->request->get['filter_total'];
 		}
@@ -107,6 +111,12 @@ class ControllerSaleOrder extends Controller {
 			$filter_order_status_id = $this->request->get['filter_order_status_id'];
 		} else {
 			$filter_order_status_id = '';
+		}
+
+		if (isset($this->request->get['filter_comment'])) {
+			$filter_comment = $this->request->get['filter_comment'];
+		} else {
+			$filter_comment = '';
 		}
 
 		if (isset($this->request->get['filter_total'])) {
@@ -163,6 +173,10 @@ class ControllerSaleOrder extends Controller {
 			$url .= '&filter_order_status_id=' . $this->request->get['filter_order_status_id'];
 		}
 
+		if (isset($this->request->get['filter_comment'])) {
+			$url .= '&filter_comment=' . $this->request->get['filter_comment'];
+		}
+
 		if (isset($this->request->get['filter_total'])) {
 			$url .= '&filter_total=' . $this->request->get['filter_total'];
 		}
@@ -211,6 +225,7 @@ class ControllerSaleOrder extends Controller {
 			'filter_customer'	     => $filter_customer,
 			'filter_order_status'    => $filter_order_status,
 			'filter_order_status_id' => $filter_order_status_id,
+			'filter_comment'         => $filter_comment,
 			'filter_total'           => $filter_total,
 			'filter_date_added'      => $filter_date_added,
 			'filter_date_modified'   => $filter_date_modified,
@@ -278,6 +293,10 @@ class ControllerSaleOrder extends Controller {
 			$url .= '&filter_order_status_id=' . $this->request->get['filter_order_status_id'];
 		}
 
+		if (isset($this->request->get['filter_comment'])) {
+			$url .= '&filter_comment=' . $this->request->get['filter_comment'];
+		}
+
 		if (isset($this->request->get['filter_total'])) {
 			$url .= '&filter_total=' . $this->request->get['filter_total'];
 		}
@@ -320,9 +339,13 @@ class ControllerSaleOrder extends Controller {
 		if (isset($this->request->get['filter_order_status'])) {
 			$url .= '&filter_order_status=' . $this->request->get['filter_order_status'];
 		}
-	
+
 		if (isset($this->request->get['filter_order_status_id'])) {
 			$url .= '&filter_order_status_id=' . $this->request->get['filter_order_status_id'];
+		}
+
+		if (isset($this->request->get['filter_comment'])) {
+			$url .= '&filter_comment=' . $this->request->get['filter_comment'];
 		}
 
 		if (isset($this->request->get['filter_total'])) {
@@ -359,6 +382,7 @@ class ControllerSaleOrder extends Controller {
 		$data['filter_customer'] = $filter_customer;
 		$data['filter_order_status'] = $filter_order_status;
 		$data['filter_order_status_id'] = $filter_order_status_id;
+		$data['filter_comment'] = $filter_comment;
 		$data['filter_total'] = $filter_total;
 		$data['filter_date_added'] = $filter_date_added;
 		$data['filter_date_modified'] = $filter_date_modified;
@@ -420,6 +444,10 @@ class ControllerSaleOrder extends Controller {
 
 		if (isset($this->request->get['filter_order_status_id'])) {
 			$url .= '&filter_order_status_id=' . $this->request->get['filter_order_status_id'];
+		}
+
+		if (isset($this->request->get['filter_comment'])) {
+			$url .= '&filter_comment=' . $this->request->get['filter_comment'];
 		}
 
 		if (isset($this->request->get['filter_total'])) {
@@ -745,6 +773,10 @@ class ControllerSaleOrder extends Controller {
 
 			if (isset($this->request->get['filter_order_status_id'])) {
 				$url .= '&filter_order_status_id=' . $this->request->get['filter_order_status_id'];
+			}
+
+			if (isset($this->request->get['filter_comment'])) {
+				$url .= '&filter_comment=' . $this->request->get['filter_comment'];
 			}
 
 			if (isset($this->request->get['filter_total'])) {
