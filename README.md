@@ -79,6 +79,8 @@ Após executar os procedimentos, acesse a administração da loja e vá no menu 
 - [x] Atualização automática.
 - [x] Instalação 100% traduzida.
 - [x] Suporte para tarefas agendadas.
+- [x] Campo NCM no cadastro do produto.
+- [x] Campo CEST no cadastro do produto.
 - [x] Campo SKU nas opções dos produtos.
 - [x] Novas extensões do tipo conversor de moedas.
 - [x] Correção nas estátisticas.
