@@ -6,6 +6,40 @@ e utiliza [Semantic Versioning](https://semver.org/lang/pt-BR/spec/v2.0.0.html).
 
 ## [Não lançada]
 
+## [1.4.4] (Data de lançamento: 26.10.2019)
+### Corrigido
+- Correção na extensão UPS
+- Correção na extensão Square
+- Correção na extensão Amazon Pay
+- Correção na tradução do captcha
+- Correção no CSS do alert no admin
+- Correção na listagem de localizações
+- Correção no formulário de localização
+- Correção nas extensões PayPoint e Worldpay
+- Correção nos termos de afiliado e devolução
+- Correção na paginação de históricos do cupom
+- Correção no e-mail de cadastro do cliente e afiliado
+- Correção na visualização de pedidos na administração
+- Correção na visualização de afiliados na administração
+- Correções nas extensões LIQPAY, First Data e Cardinity
+- Correção para o estouro em tabelas responsivas mobile
+- Correção na mensagem que exibe a contagem de informativos enviados
+- Melhoria na busca por nome do produto no admin @rafaelmarrichi
+- Melhoria na biblioteca de sessão em banco de dados
+- Melhorias nos templates do menu marketing no admin
+- Melhorias no gerenciamento de downloads
+- Melhorias no gerenciamento de idiomas
+- Melhorias nas consultas SQL
+- Melhorias no tiny.api.php
+- Melhoria no php.ini
+- Atualização do extension.php
+
+### Adicionado
+- Inclusão dos campos SKU e NCM controller e model no catalog
+- Novo filtro de pedidos com ou sem comentários
+- Novo campo CEST no cadastro do produto
+- Novo campo NCM no cadastro do produto
+
 ## [1.4.3] (Data de lançamento: 16.07.2019)
 ### Corrigido
 - Melhorias e correções na posição dos campos personalizados
@@ -368,7 +402,8 @@ e utiliza [Semantic Versioning](https://semver.org/lang/pt-BR/spec/v2.0.0.html).
 - Cupons de descontos para demonstração.
 - Moedas: Euro e Libra esterlina.
 
-[Não lançada]: https://github.com/opencartbrasil/opencartbrasil/compare/v1.4.3...HEAD
+[Não lançada]: https://github.com/opencartbrasil/opencartbrasil/compare/v1.4.4...HEAD
+[1.4.4]: https://github.com/opencartbrasil/opencartbrasil/compare/v1.4.3...v1.4.4
 [1.4.3]: https://github.com/opencartbrasil/opencartbrasil/compare/v1.4.2...v1.4.3
 [1.4.2]: https://github.com/opencartbrasil/opencartbrasil/compare/v1.4.1...v1.4.2
 [1.4.1]: https://github.com/opencartbrasil/opencartbrasil/compare/v1.4.0...v1.4.1
