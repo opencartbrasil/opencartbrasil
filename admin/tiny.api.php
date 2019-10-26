@@ -187,8 +187,11 @@ class Product {
 	public $aditionalFields;
 	public $categories;
 	public $special_price;
+	public $height;
+	public $width;
+	public $length;
 
-	function __construct($name, $name_and_options, $model, $id = null, $price = null, $stock_quantity = null, $weight = null, $categories = array(), $special_price = 0) {
+	function __construct($name, $name_and_options, $model, $id = null, $price = null, $stock_quantity = null, $weight = null, $categories = array(), $special_price = 0, $height = null, $width = null, $length = null) {
 		$this->name = $name;
 		$this->name_and_options = $name_and_options;
 		$this->model = $model;
@@ -198,6 +201,9 @@ class Product {
 		$this->weight = $weight;
 		$this->categories = $categories;
 		$this->special_price = $special_price;
+		$this->height = $height;
+		$this->width = $width;
+		$this->length = $length;
 		$aditionalFields = array();
 	}
 
