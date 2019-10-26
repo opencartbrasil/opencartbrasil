@@ -74,7 +74,7 @@ class ModelCatalogProduct extends Model {
 				$sql .= " LEFT JOIN `" . DB_PREFIX . "product` p ON (p2c.product_id = p.product_id)";
 			}
 		} else {
-			$sql .= " FROM `" . DB_PREFIX . "product p`";
+			$sql .= " FROM `" . DB_PREFIX . "product` p";
 		}
 
 		$sql .= " LEFT JOIN `" . DB_PREFIX . "product_description` pd ON (p.product_id = pd.product_id) LEFT JOIN `" . DB_PREFIX . "product_to_store` p2s ON (p.product_id = p2s.product_id) WHERE pd.language_id = '" . (int)$this->config->get('config_language_id') . "' AND p.status = '1' AND p.date_available <= NOW() AND p2s.store_id = '" . (int)$this->config->get('config_store_id') . "'";
