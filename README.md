@@ -39,6 +39,7 @@ Para acessar uma demonstração online do OpenCart Brasil e visualizar a loja em
 - Bootstrap atualizado.
 - Suporte para tarefas agendadas.
 - Sistema de afiliados 100% funcional.
+- Campos NCM e CEST nos produtos.
 - Campos SKU nas opções dos produtos.
 - **Atualização automática do OpenCart Brasil**.
 - Novas extensões do tipo conversor de moedas.
