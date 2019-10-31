@@ -15,7 +15,8 @@
       </ul>
     </div>
   </div>
-  <div class="container-fluid">{% if error_warning %}
+  <div class="container-fluid">
+    {% if error_warning %}
     <div class="alert alert-danger alert-dismissible"><i class="fa fa-exclamation-circle"></i> {{ error_warning }}
       <button type="button" class="close" data-dismiss="alert">&times;</button>
     </div>
@@ -56,61 +57,13 @@
               <label class="control-label" for="input-return-status">{{ entry_return_status }}</label>
               <select name="filter_return_status_id" id="input-return-status" class="form-control">
                 <option value=""></option>
-                
-                  
-                
-                
-                
-                
-            
-                  
-                  {% for return_status in return_statuses %}
-                  {% if return_status.return_status_id == filter_return_status_id %}
-                  
-                  
-            
-                
-                
-                
-                
-                  
+                {% for return_status in return_statuses %}
+                {% if return_status.return_status_id == filter_return_status_id %}
                 <option value="{{ return_status.return_status_id }}" selected="selected">{{ return_status.name }}</option>
-                
-                  
-                
-                
-                
-                
-            
-                  
-                  {% else %}
-                  
-                  
-            
-                
-                
-                
-                
-                  
+                {% else %}
                 <option value="{{ return_status.return_status_id }}">{{ return_status.name }}</option>
-                
-                  
-                
-                
-                
-                
-            
-                  
-                  {% endif %}
-                  {% endfor %}
-                
-                
-          
-              
-              
-              
-              
-                
+                {% endif %}
+                {% endfor %}
               </select>
             </div>
             <div class="form-group">
@@ -119,7 +72,8 @@
                 <input type="text" name="filter_date_added" value="{{ filter_date_added }}" placeholder="{{ entry_date_added }}" data-date-format="YYYY-MM-DD" id="input-date-added" class="form-control" />
                 <span class="input-group-btn">
                 <button type="button" class="btn btn-default"><i class="fa fa-calendar"></i></button>
-                </span></div>
+                </span>
+              </div>
             </div>
             <div class="form-group">
               <label class="control-label" for="input-date-modified">{{ entry_date_modified }}</label>
@@ -127,7 +81,8 @@
                 <input type="text" name="filter_date_modified" value="{{ filter_date_modified }}" placeholder="{{ entry_date_modified }}" data-date-format="YYYY-MM-DD" id="input-date-modified" class="form-control" />
                 <span class="input-group-btn">
                 <button type="button" class="btn btn-default"><i class="fa fa-calendar"></i></button>
-                </span></div>
+                </span>
+              </div>
             </div>
             <div class="form-group text-right">
               <button type="button" id="button-filter" class="btn btn-default"><i class="fa fa-filter"></i> {{ button_filter }}</button>
@@ -159,33 +114,33 @@
                     </tr>
                   </thead>
                   <tbody>
-                  
-                  {% if returns %}
-                  {% for return in returns %}
-                  <tr>
-                    <td class="text-center">{% if return.return_id in selected %}
-                      <input type="checkbox" name="selected[]" value="{{ return.return_id }}" checked="checked" />
-                      {% else %}
-                      <input type="checkbox" name="selected[]" value="{{ return.return_id }}" />
-                      {% endif %}</td>
-                    <td class="text-right">{{ return.return_id }}</td>
-                    <td class="text-right">{{ return.order_id }}</td>
-                    <td class="text-left">{{ return.customer }}</td>
-                    <td class="text-left">{{ return.product }}</td>
-                    <td class="text-left">{{ return.model }}</td>
-                    <td class="text-left">{{ return.return_status }}</td>
-                    <td class="text-left">{{ return.date_added }}</td>
-                    <td class="text-left">{{ return.date_modified }}</td>
-                    <td class="text-right"><a href="{{ return.edit }}" data-toggle="tooltip" title="{{ button_edit }}" class="btn btn-primary"><i class="fa fa-pencil"></i></a></td>
-                  </tr>
-                  {% endfor %}
-                  {% else %}
-                  <tr>
-                    <td class="text-center" colspan="10">{{ text_no_results }}</td>
-                  </tr>
-                  {% endif %}
-                    </tbody>
-                  
+                    {% if returns %}
+                    {% for return in returns %}
+                    <tr>
+                      <td class="text-center">
+                        {% if return.return_id in selected %}
+                        <input type="checkbox" name="selected[]" value="{{ return.return_id }}" checked="checked" />
+                        {% else %}
+                        <input type="checkbox" name="selected[]" value="{{ return.return_id }}" />
+                        {% endif %}
+                      </td>
+                      <td class="text-right">{{ return.return_id }}</td>
+                      <td class="text-right">{{ return.order_id }}</td>
+                      <td class="text-left">{{ return.customer }}</td>
+                      <td class="text-left">{{ return.product }}</td>
+                      <td class="text-left">{{ return.model }}</td>
+                      <td class="text-left">{{ return.return_status }}</td>
+                      <td class="text-left">{{ return.date_added }}</td>
+                      <td class="text-left">{{ return.date_modified }}</td>
+                      <td class="text-right"><a href="{{ return.edit }}" data-toggle="tooltip" title="{{ button_edit }}" class="btn btn-primary"><i class="fa fa-pencil"></i></a></td>
+                    </tr>
+                    {% endfor %}
+                    {% else %}
+                    <tr>
+                      <td class="text-center" colspan="10">{{ text_no_results }}</td>
+                    </tr>
+                    {% endif %}
+                  </tbody>
                 </table>
               </div>
             </form>
@@ -198,67 +153,67 @@
       </div>
     </div>
   </div>
-  <script type="text/javascript"><!--
+<script type="text/javascript"><!--
 $('#button-filter').on('click', function() {
 	url = 'index.php?route=sale/return&user_token={{ user_token }}';
-	
+
 	var filter_return_id = $('input[name=\'filter_return_id\']').val();
-	
+
 	if (filter_return_id) {
 		url += '&filter_return_id=' + encodeURIComponent(filter_return_id);
 	}
-	
+
 	var filter_order_id = $('input[name=\'filter_order_id\']').val();
-	
+
 	if (filter_order_id) {
 		url += '&filter_order_id=' + encodeURIComponent(filter_order_id);
-	}	
-		
+	}
+
 	var filter_customer = $('input[name=\'filter_customer\']').val();
-	
+
 	if (filter_customer) {
 		url += '&filter_customer=' + encodeURIComponent(filter_customer);
 	}
-	
+
 	var filter_product = $('input[name=\'filter_product\']').val();
-	
+
 	if (filter_product) {
 		url += '&filter_product=' + encodeURIComponent(filter_product);
 	}
 
 	var filter_model = $('input[name=\'filter_model\']').val();
-	
+
 	if (filter_model) {
 		url += '&filter_model=' + encodeURIComponent(filter_model);
 	}
-		
+
 	var filter_return_status_id = $('select[name=\'filter_return_status_id\']').val();
-	
+
 	if (filter_return_status_id !== '') {
 		url += '&filter_return_status_id=' + encodeURIComponent(filter_return_status_id);
-	}	
-	
+	}
+
 	var filter_date_added = $('input[name=\'filter_date_added\']').val();
-	
+
 	if (filter_date_added) {
 		url += '&filter_date_added=' + encodeURIComponent(filter_date_added);
 	}
 
 	var filter_date_modified = $('input[name=\'filter_date_modified\']').val();
-	
+
 	if (filter_date_modified) {
 		url += '&filter_date_modified=' + encodeURIComponent(filter_date_modified);
 	}
-			
+
 	location = url;
 });
 //--></script> 
-  <script type="text/javascript"><!--
+<script type="text/javascript"><!--
 $('input[name=\'filter_customer\']').autocomplete({
 	'source': function(request, response) {
 		$.ajax({
 			url: 'index.php?route=customer/customer/autocomplete&user_token={{ user_token }}&filter_name=' +  encodeURIComponent(request),
-			dataType: 'json',			
+			dataType: 'json',
 			success: function(json) {
 				response($.map(json, function(item) {
 					return {
@@ -271,14 +226,14 @@ $('input[name=\'filter_customer\']').autocomplete({
 	},
 	'select': function(item) {
 		$('input[name=\'filter_customer\']').val(item['label']);
-	}	
+	}
 });
 
 $('input[name=\'filter_product\']').autocomplete({
 	'source': function(request, response) {
 		$.ajax({
 			url: 'index.php?route=catalog/product/autocomplete&user_token={{ user_token }}&filter_name=' +  encodeURIComponent(request),
-			dataType: 'json',			
+			dataType: 'json',
 			success: function(json) {
 				response($.map(json, function(item) {
 					return {
@@ -291,14 +246,14 @@ $('input[name=\'filter_product\']').autocomplete({
 	},
 	'select': function(item) {
 		$('input[name=\'filter_product\']').val(item['label']);
-	}	
+	}
 });
 
 $('input[name=\'filter_model\']').autocomplete({
 	'source': function(request, response) {
 		$.ajax({
 			url: 'index.php?route=catalog/product/autocomplete&user_token={{ user_token }}&filter_model=' +  encodeURIComponent(request),
-			dataType: 'json',			
+			dataType: 'json',
 			success: function(json) {
 				response($.map(json, function(item) {
 					return {
@@ -311,14 +266,14 @@ $('input[name=\'filter_model\']').autocomplete({
 	},
 	'select': function(item) {
 		$('input[name=\'filter_model\']').val(item['label']);
-	}	
+	}
 });
 //--></script> 
-  <script type="text/javascript"><!--
+<script type="text/javascript"><!--
 $('.date').datetimepicker({
 	language: '{{ datepicker }}',
 	pickTime: false
 });
-//--></script> 
+//--></script>
 </div>
 {{ footer }}
