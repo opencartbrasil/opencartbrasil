@@ -6,6 +6,18 @@ e utiliza [Semantic Versioning](https://semver.org/lang/pt-BR/spec/v2.0.0.html).
 
 ## [Não lançada]
 
+## [1.4.5] (Data de lançamento: 05.11.2019)
+### Corrigido
+- Correção na extensão LiqPay
+- Correção na gestão de devoluções
+- Correção na listagem de localizações
+- Correção no placeholder do option_form.twig
+- Correção na listagem das campanhas de marketing
+- Correção de bug na instalação através do console
+- Melhorias na edição de campos personalizados no admin
+- Atualização de referências no carousel.twig e slideshow.twig
+- Remoção de parâmetro desnecessário na função que carrega as lojas
+
 ## [1.4.4] (Data de lançamento: 26.10.2019)
 ### Corrigido
 - Correção na extensão UPS
@@ -402,7 +414,8 @@ e utiliza [Semantic Versioning](https://semver.org/lang/pt-BR/spec/v2.0.0.html).
 - Cupons de descontos para demonstração.
 - Moedas: Euro e Libra esterlina.
 
-[Não lançada]: https://github.com/opencartbrasil/opencartbrasil/compare/v1.4.4...HEAD
+[Não lançada]: https://github.com/opencartbrasil/opencartbrasil/compare/v1.4.5...HEAD
+[1.4.5]: https://github.com/opencartbrasil/opencartbrasil/compare/v1.4.4...v1.4.5
 [1.4.4]: https://github.com/opencartbrasil/opencartbrasil/compare/v1.4.3...v1.4.4
 [1.4.3]: https://github.com/opencartbrasil/opencartbrasil/compare/v1.4.2...v1.4.3
 [1.4.2]: https://github.com/opencartbrasil/opencartbrasil/compare/v1.4.1...v1.4.2
