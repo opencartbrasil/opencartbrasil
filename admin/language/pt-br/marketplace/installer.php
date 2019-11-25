@@ -24,6 +24,7 @@ $_['help_upload']       = 'O nome do arquivo da extensão, deve terminar com \'.
 // Error
 $_['error_permission']  = 'Atenção: Você não tem permissão para utilizar o Instalador de extensões!';
 $_['error_install']     = 'Aguarde alguns segundos antes de tentar instalar!';
+$_['error_directory']   = 'A pasta para upload não existe dentro do diretório storage ou não possui permissão de escrita!';
 $_['error_upload']      = 'O arquivo não foi enviado!';
 $_['error_filetype']    = 'O tipo de arquivo não é válido!';
 $_['error_file']        = 'O arquivo não foi encontrado!';
