@@ -6,6 +6,22 @@ e utiliza [Semantic Versioning](https://semver.org/lang/pt-BR/spec/v2.0.0.html).
 
 ## [Não lançada]
 
+## [1.4.6] (Data de lançamento: 06.12.2019)
+### Corrigido
+- Correção no menu da administração
+- Correção na remoção de filtros na loja
+- Correção no Editor de traduções da administração
+- Correção na tradução dos comentários no marketplace
+- Correção no slideshow para quando só tiver um banner
+- Correção na busca de produtos com carga duplicada de model
+- Correção no filtro de colunas das assinaturas na administração
+- Correção no login do cliente pela administração com multilojas
+- Correção na validação de país no cadastro do cliente na administração
+- Melhorias no instalador de extensões
+- Melhoria na aplicação do cupom de desconto
+- Melhorias na validação do Google reCAPTCHA V2
+- Melhoria no filtro de produtos na administração
+
 ## [1.4.5] (Data de lançamento: 05.11.2019)
 ### Corrigido
 - Correção na extensão LiqPay
