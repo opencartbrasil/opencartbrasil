@@ -4,7 +4,8 @@
     <div class="container-fluid">
       <div class="pull-right">
         <button type="button" data-toggle="tooltip" title="{{ button_filter }}" onclick="$('#filter-online').toggleClass('hidden-sm hidden-xs');" class="btn btn-default hidden-md hidden-lg"><i class="fa fa-filter"></i></button>
-        <a href="{{ refresh }}" data-toggle="tooltip" title="{{ button_refresh }}" class="btn btn-default"><i class="fa fa-refresh"></i></a></div>
+        <a href="{{ refresh }}" data-toggle="tooltip" title="{{ button_refresh }}" class="btn btn-default"><i class="fa fa-refresh"></i></a>
+      </div>
       <h1>{{ heading_title }}</h1>
       <ul class="breadcrumb">
         {% for breadcrumb in breadcrumbs %}
@@ -54,29 +55,29 @@
                   </tr>
                 </thead>
                 <tbody>
-                
-                {% if customers %}
-                {% for customer in customers %}
-                <tr>
-                  <td class="text-left"><a href="//whatismyipaddress.com/ip/{{ customer.ip }}" target="_blank">{{ customer.ip }}</a></td>
-                  <td class="text-left">{{ customer.customer }}</td>
-                  <td class="text-left"><a href="{{ customer.url }}" target="_blank" rel="noreferrer">{{ customer.url|split('', 30)|join('<br/>
-                    ') }}</a></td>
-                  <td class="text-left">{% if customer.referer %}<a href="{{ customer.referer }}" target="_blank">{{ customer.referer|split('', 30)|join('<br/>
-                    ') }}</a>{% endif %}</td>
-                  <td class="text-left">{{ customer.date_added }}</td>
-                  <td class="text-right">{% if customer.customer_id %}<a href="{{ customer.edit }}" data-toggle="tooltip" title="{{ button_edit }}" class="btn btn-primary"><i class="fa fa-pencil"></i></a>{% else %}
-                    <button type="button" data-toggle="tooltip" title="{{ button_edit }}" class="btn btn-primary" disabled="disabled"><i class="fa fa-pencil"></i></button>
-                    {% endif %}</td>
-                </tr>
-                {% endfor %}
-                {% else %}
-                <tr>
-                  <td class="text-center" colspan="6">{{ text_no_results }}</td>
-                </tr>
-                {% endif %}
-                  </tbody>
-                
+                  {% if customers %}
+                  {% for customer in customers %}
+                  <tr>
+                    <td class="text-left"><a href="//whatismyipaddress.com/ip/{{ customer.ip }}" target="_blank">{{ customer.ip }}</a></td>
+                    <td class="text-left">{{ customer.customer }}</td>
+                    <td class="text-left"><a href="{{ customer.url }}" target="_blank" rel="noreferrer">{{ customer.url|split('', 30)|join('<br/>') }}</a></td>
+                    <td class="text-left">{% if customer.referer %}<a href="{{ customer.referer }}" target="_blank">{{ customer.referer|split('', 30)|join('<br/>') }}</a>{% endif %}</td>
+                    <td class="text-left">{{ customer.date_added }}</td>
+                    <td class="text-right">
+                      {% if customer.customer_id %}
+                      <a href="{{ customer.edit }}" data-toggle="tooltip" title="{{ button_edit }}" class="btn btn-primary"><i class="fa fa-pencil"></i></a>
+                      {% else %}
+                      <button type="button" data-toggle="tooltip" title="{{ button_edit }}" class="btn btn-primary" disabled="disabled"><i class="fa fa-pencil"></i></button>
+                      {% endif %}
+                    </td>
+                  </tr>
+                  {% endfor %}
+                  {% else %}
+                  <tr>
+                    <td class="text-center" colspan="6">{{ text_no_results }}</td>
+                  </tr>
+                  {% endif %}
+                </tbody>
               </table>
             </div>
             <div class="row">
@@ -88,44 +89,44 @@
       </div>
     </div>
   </div>
-  <script type="text/javascript"><!--
+<script type="text/javascript"><!--
 $('#button-filter').on('click', function() {
-	var url = 'index.php?route=report/online&user_token={{ user_token }}';
+    var url = 'index.php?route=report/online&user_token={{ user_token }}';
 
-	var filter_customer = $('input[name=\'filter_customer\']').val();
+    var filter_customer = $('input[name=\'filter_customer\']').val();
 
-	if (filter_customer) {
-		url += '&filter_customer=' + encodeURIComponent(filter_customer);
-	}
+    if (filter_customer) {
+        url += '&filter_customer=' + encodeURIComponent(filter_customer);
+    }
 
-	var filter_ip = $('input[name=\'filter_ip\']').val();
+    var filter_ip = $('input[name=\'filter_ip\']').val();
 
-	if (filter_ip) {
-		url += '&filter_ip=' + encodeURIComponent(filter_ip);
-	}
+    if (filter_ip) {
+        url += '&filter_ip=' + encodeURIComponent(filter_ip);
+    }
 
-	location = url;
+    location = url;
 });
 //--></script> 
   <script type="text/javascript"><!--
 $('input[name=\'filter_customer\']').autocomplete({
-	'source': function(request, response) {
-		$.ajax({
-			url: 'index.php?route=customer/customer/autocomplete&user_token={{ user_token }}&filter_name=' +  encodeURIComponent(request),
-			dataType: 'json',
-			success: function(json) {
-				response($.map(json, function(item) {
-					return {
-						label: item['name'],
-						value: item['customer_id']
-					}
-				}));
-			}
-		});
-	},
-	'select': function(item) {
-		$('input[name=\'filter_customer\']').val(item['label']);
-	}
+    'source': function(request, response) {
+        $.ajax({
+            url: 'index.php?route=customer/customer/autocomplete&user_token={{ user_token }}&filter_name=' +  encodeURIComponent(request),
+            dataType: 'json',
+            success: function(json) {
+                response($.map(json, function(item) {
+                    return {
+                        label: item['name'],
+                        value: item['customer_id']
+                    }
+                }));
+            }
+        });
+    },
+    'select': function(item) {
+        $('input[name=\'filter_customer\']').val(item['label']);
+    }
 });
 //--></script>
 </div>
