@@ -30,6 +30,9 @@
                 <label for="input-password">{{ entry_password }}</label>
                 <div class="input-group"><span class="input-group-addon"><i class="fa fa-lock"></i></span>
                   <input type="password" name="password" value="{{ password }}" placeholder="{{ entry_password }}" id="input-password" class="form-control" />
+                  <span class="input-group-btn">
+                    <button class="btn btn-default" type="button" onclick="$('#input-password').attr('type') === 'password' ? $('#input-password').attr('type', 'text') : $('#input-password').attr('type', 'password'); $('#toggle-password').toggleClass('fa-eye fa-eye-slash');"><i id="toggle-password" class="fa fa-eye-slash"></i></button>
+                  </span>
                 </div>
                 {% if forgotten %}
                 <span class="help-block"><a href="{{ forgotten }}">{{ text_forgotten }}</a></span>

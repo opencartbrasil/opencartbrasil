@@ -141,11 +141,21 @@
       <legend>{{ text_your_password }}</legend>
       <div class="form-group required">
         <label class="control-label" for="input-payment-password">{{ entry_password }}</label>
-        <input type="password" name="password" value="" placeholder="{{ entry_password }}" id="input-payment-password" class="form-control" />
+        <div class="input-group">
+          <input type="password" name="password" value="" placeholder="{{ entry_password }}" id="input-payment-password" class="form-control" />
+          <span class="input-group-btn">
+            <button class="btn btn-default" type="button" onclick="$('#input-password').attr('type') === 'password' ? $('#input-password').attr('type', 'text') : $('#input-password').attr('type', 'password'); $('#toggle-password').toggleClass('fa-eye fa-eye-slash');"><i id="toggle-password" class="fa fa-eye-slash"></i></button>
+          </span>
+        </div>
       </div>
       <div class="form-group required">
         <label class="control-label" for="input-payment-confirm">{{ entry_confirm }}</label>
-        <input type="password" name="confirm" value="" placeholder="{{ entry_confirm }}" id="input-payment-confirm" class="form-control" />
+        <div class="input-group">
+          <input type="password" name="confirm" value="" placeholder="{{ entry_confirm }}" id="input-payment-confirm" class="form-control" />
+          <span class="input-group-btn">
+            <button class="btn btn-default" type="button" onclick="$('#input-confirm').attr('type') === 'password' ? $('#input-confirm').attr('type', 'text') : $('#input-confirm').attr('type', 'password'); $('#toggle-confirm').toggleClass('fa-eye fa-eye-slash');"><i id="toggle-confirm" class="fa fa-eye-slash"></i></button>
+          </span>
+        </div>
       </div>
     </fieldset>
   </div>
@@ -384,7 +394,7 @@
   });
 
   $('#collapse-payment-address input[name=\'customer_group_id\']:checked').trigger('change');
-//--></script> 
+//--></script>
 <script type="text/javascript"><!--
   $('#collapse-payment-address button[id^=\'button-payment-custom-field\']').on('click', function() {
     var node = this;
@@ -437,7 +447,7 @@
       }
     }, 500);
   });
-//--></script> 
+//--></script>
 <script type="text/javascript"><!--
   $('.date').datetimepicker({
     language: '{{ datepicker }}',
@@ -454,7 +464,7 @@
     pickDate: true,
     pickTime: true
   });
-//--></script> 
+//--></script>
 <script type="text/javascript"><!--
   $('#collapse-payment-address select[name=\'country_id\']').on('change', function() {
     $.ajax({

@@ -34,8 +34,14 @@
     </div>
     <div class="form-group">
       <label class="control-label" for="input-password">{{ entry_password }}</label>
-      <input type="password" name="password" value="" placeholder="{{ entry_password }}" id="input-password" class="form-control" />
-      <a href="{{ forgotten }}">{{ text_forgotten }}</a></div>
+      <div class="input-group">
+        <input type="password" name="password" value="" placeholder="{{ entry_password }}" id="input-password" class="form-control" />
+        <span class="input-group-btn">
+          <button class="btn btn-default" type="button" onclick="$('#input-password').attr('type') === 'password' ? $('#input-password').attr('type', 'text') : $('#input-password').attr('type', 'password'); $('#toggle-password').toggleClass('fa-eye fa-eye-slash');"><i id="toggle-password" class="fa fa-eye-slash"></i></button>
+        </span>
+      </div>
+      <a href="{{ forgotten }}">{{ text_forgotten }}</a>
+    </div>
     <input type="button" value="{{ button_login }}" id="button-login" data-loading-text="{{ text_loading }}" class="btn btn-primary" />
   </div>
 </div>
