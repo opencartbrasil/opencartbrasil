@@ -216,68 +216,68 @@
   </div>
 <script type="text/javascript"><!--
 $('input[name=\'product\']').autocomplete({
-	'source': function(request, response) {
-		$.ajax({
-			url: 'index.php?route=catalog/product/autocomplete&user_token={{ user_token }}&filter_name=' +  encodeURIComponent(request),
-			dataType: 'json',
-			success: function(json) {
-				response($.map(json, function(item) {
-					return {
-						label: item['name'],
-						value: item['product_id']
-					}
-				}));
-			}
-		});
-	},
-	'select': function(item) {
-		$('input[name=\'product\']').val('');
+    'source': function(request, response) {
+        $.ajax({
+            url: 'index.php?route=catalog/product/autocomplete&user_token={{ user_token }}&filter_name=' +  encodeURIComponent(request),
+            dataType: 'json',
+            success: function(json) {
+                response($.map(json, function(item) {
+                    return {
+                        label: item['name'],
+                        value: item['product_id']
+                    }
+                }));
+            }
+        });
+    },
+    'select': function(item) {
+        $('input[name=\'product\']').val('');
 
-		$('#coupon-product' + item['value']).remove();
+        $('#coupon-product' + item['value']).remove();
 
-		$('#coupon-product').append('<div id="coupon-product' + item['value'] + '"><i class="fa fa-minus-circle"></i> ' + item['label'] + '<input type="hidden" name="coupon_product[]" value="' + item['value'] + '" /></div>');	
-	}
+        $('#coupon-product').append('<div id="coupon-product' + item['value'] + '"><i class="fa fa-minus-circle"></i> ' + item['label'] + '<input type="hidden" name="coupon_product[]" value="' + item['value'] + '" /></div>');    
+    }
 });
 
 $('#coupon-product').delegate('.fa-minus-circle', 'click', function() {
-	$(this).parent().remove();
+    $(this).parent().remove();
 });
 
 // Category
 $('input[name=\'category\']').autocomplete({
-	'source': function(request, response) {
-		$.ajax({
-			url: 'index.php?route=catalog/category/autocomplete&user_token={{ user_token }}&filter_name=' +  encodeURIComponent(request),
-			dataType: 'json',
-			success: function(json) {
-				response($.map(json, function(item) {
-					return {
-						label: item['name'],
-						value: item['category_id']
-					}
-				}));
-			}
-		});
-	},
-	'select': function(item) {
-		$('input[name=\'category\']').val('');
+    'source': function(request, response) {
+        $.ajax({
+            url: 'index.php?route=catalog/category/autocomplete&user_token={{ user_token }}&filter_name=' +  encodeURIComponent(request),
+            dataType: 'json',
+            success: function(json) {
+                response($.map(json, function(item) {
+                    return {
+                        label: item['name'],
+                        value: item['category_id']
+                    }
+                }));
+            }
+        });
+    },
+    'select': function(item) {
+        $('input[name=\'category\']').val('');
 
-		$('#coupon-category' + item['value']).remove();
+        $('#coupon-category' + item['value']).remove();
 
-		$('#coupon-category').append('<div id="coupon-category' + item['value'] + '"><i class="fa fa-minus-circle"></i> ' + item['label'] + '<input type="hidden" name="coupon_category[]" value="' + item['value'] + '" /></div>');
-	}
+        $('#coupon-category').append('<div id="coupon-category' + item['value'] + '"><i class="fa fa-minus-circle"></i> ' + item['label'] + '<input type="hidden" name="coupon_category[]" value="' + item['value'] + '" /></div>');
+    }
 });
 
 $('#coupon-category').delegate('.fa-minus-circle', 'click', function() {
-	$(this).parent().remove();
+    $(this).parent().remove();
 });
-//--></script> 
-{% if coupon_id %} 
+//--></script>
+{% if coupon_id %}
 <script type="text/javascript"><!--
 $('#history').delegate('.pagination a', 'click', function(e) {
-	e.preventDefault();
+    e.preventDefault();
 
-	$('#history').load(this.href);
+    $('#history').load(this.href);
 });
 
 $('#history').load('index.php?route=marketing/coupon/history&user_token={{ user_token }}&coupon_id={{ coupon_id }}');
@@ -285,8 +285,8 @@ $('#history').load('index.php?route=marketing/coupon/history&user_token={{ user_
 {% endif %}
 <script type="text/javascript"><!--
 $('.date').datetimepicker({
-	language: '{{ datepicker }}',
-	pickTime: false
+    language: '{{ datepicker }}',
+    pickTime: false
 });
 //--></script>
 </div>

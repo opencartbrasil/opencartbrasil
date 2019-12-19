@@ -2,11 +2,13 @@
 <div id="content">
   <div class="page-header">
     <div class="container-fluid">
-      <div class="pull-right">{% if not error_signature %}
+      <div class="pull-right">
+        {% if not error_signature %}
         <button type="button" id="button-opencart" data-toggle="tooltip" title="{{ button_opencart }}" class="btn btn-info"><i class="fa fa-cog"></i></button>
         {% else %}
         <button type="button" id="button-opencart" data-toggle="tooltip" title="{{ error_signature }}"  data-placement="left" class="btn btn-danger"><i class="fa fa-exclamation-triangle"></i></button>
-        {% endif %}</div>
+        {% endif %}
+      </div>
       <h1>{{ heading_title }}</h1>
       <ul class="breadcrumb">
         {% for breadcrumb in breadcrumbs %}
@@ -48,19 +50,20 @@
           <div class="col-sm-9 col-xs-7">
             <div class="btn-group">{% for license in licenses %}
               {% if license.value == filter_license %}<a href="{{ license.href }}" class="btn btn-default active">{{ license.text }}</a>{% else %}<a href="{{ license.href }}" class="btn btn-default">{{ license.text }}</a>{% endif %}
-              {% endfor %}</div>
+              {% endfor %}
+            </div>
           </div>
           <div class="col-sm-3 col-xs-5">
             <div class="input-group pull-right">
               <div class="input-group-addon"><i class="fa fa-sort-amount-asc"></i></div>
               <select onchange="location = this.value;" class="form-control">
-                  {% for sorts in sorts %}
-                  {% if sorts.value == sort %}
+                {% for sorts in sorts %}
+                {% if sorts.value == sort %}
                 <option value="{{ sorts.href }}" selected="selected">{{ sorts.text }}</option>
-                  {% else %}
+                {% else %}
                 <option value="{{ sorts.href }}">{{ sorts.text }}</option>
-                  {% endif %}
-                  {% endfor %}
+                {% endif %}
+                {% endfor %}
               </select>
             </div>
           </div>
@@ -68,16 +71,19 @@
         <br />
         <div id="extension-list">{% if promotions %}
           <h3>Featured</h3>
-          <div class="row">{% for extension in promotions %}
+          <div class="row">
+            {% for extension in promotions %}
             {% if extension %}
             <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12">
               <section>
                 <div class="extension-preview"><a href="{{ extension.href }}">
                   <div class="extension-description"></div>
-                  <img src="{{ extension.image }}" alt="{{ extension.name }}" title="{{ extension.name }}" class="img-responsive" /></a></div>
+                  <img src="{{ extension.image }}" alt="{{ extension.name }}" title="{{ extension.name }}" class="img-responsive" /></a>
+                </div>
                 <div class="extension-name">
                   <h4><a href="{{ extension.href }}">{{ extension.name }}</a></h4>
-                  {{ extension.price }}</div>
+                  {{ extension.price }}
+                </div>
                 <div class="extension-rate">
                   <div class="row">
                     <div class="col-xs-6">{% for i in 1..5 %}
@@ -91,7 +97,8 @@
               </section>
             </div>
             {% endif %}
-            {% endfor %}</div>
+            {% endfor %}
+          </div>
           <hr />
           {% endif %}
           {% if extensions %}
@@ -101,15 +108,18 @@
               <section>
                 <div class="extension-preview"><a href="{{ extension.href }}">
                   <div class="extension-description"></div>
-                  <img src="{{ extension.image }}" alt="{{ extension.name }}" title="{{ extension.name }}" class="img-responsive" /></a></div>
+                  <img src="{{ extension.image }}" alt="{{ extension.name }}" title="{{ extension.name }}" class="img-responsive" /></a>
+                </div>
                 <div class="extension-name">
                   <h4><a href="{{ extension.href }}">{{ extension.name }}</a></h4>
-                  {{ extension.price }}</div>
+                  {{ extension.price }}
+                </div>
                 <div class="extension-rate">
                   <div class="row">
                     <div class="col-xs-6">{% for i in 1..5 %}
                       {% if extension.rating >= i %}<i class="fa fa-star"></i>{% else %}<i class="fa fa-star-o"></i>{% endif %}
-                      {% endfor %}</div>
+                      {% endfor %}
+                    </div>
                     <div class="col-xs-6">
                       <div class="text-right">{{ extension.rating_total }} {{ text_reviews }}</div>
                     </div>
@@ -118,10 +128,12 @@
               </section>
             </div>
             {% endif %}
-            {% endfor %} </div>
+            {% endfor %}
+          </div>
           {% else %}
           <p class="text-center">{{ text_no_results }}</p>
-          {% endif %} </div>
+          {% endif %}
+        </div>
         <div class="row">
           <div class="col-sm-12 text-center">{{ pagination }}</div>
         </div>
@@ -130,49 +142,49 @@
   </div>
 <script type="text/javascript"><!--
 $('#button-opencart').on('click', function(e) {
-	$('#modal-opencart').remove();
-	
-	$.ajax({
-		url: 'index.php?route=marketplace/api&user_token={{ user_token }}',
-		dataType: 'html',
-		beforeSend: function() {
-			$('#button-opencart').button('loading');
-		},
-		complete: function() {
-			$('#button-opencart').button('reset');
-		},
-		success: function(html) {
-			$('body').append('<div id="modal-opencart" class="modal">' + html + '</div>');
-			
-			$('#modal-opencart').modal('show');
-		},
-		error: function(xhr, ajaxOptions, thrownError) {
-			alert(thrownError + "\r\n" + xhr.statusText + "\r\n" + xhr.responseText);
-		}
-	});
+    $('#modal-opencart').remove();
+
+    $.ajax({
+        url: 'index.php?route=marketplace/api&user_token={{ user_token }}',
+        dataType: 'html',
+        beforeSend: function() {
+            $('#button-opencart').button('loading');
+        },
+        complete: function() {
+            $('#button-opencart').button('reset');
+        },
+        success: function(html) {
+            $('body').append('<div id="modal-opencart" class="modal">' + html + '</div>');
+            
+            $('#modal-opencart').modal('show');
+        },
+        error: function(xhr, ajaxOptions, thrownError) {
+            alert(thrownError + "\r\n" + xhr.statusText + "\r\n" + xhr.responseText);
+        }
+    });
 });
 //--></script> 
 <script type="text/javascript"><!--
 $('#button-filter').on('click', function(e) {
-	var url = 'index.php?route=marketplace/marketplace&user_token={{ user_token }}';
+    var url = 'index.php?route=marketplace/marketplace&user_token={{ user_token }}';
 
-	var input = $('#extension-filter :input');
+    var input = $('#extension-filter :input');
 
-	for (i = 0; i < input.length; i++) {
-		if ($(input[i]).val() != '' && $(input[i]).val() != null) {
-			url += '&' + $(input[i]).attr('name') + '=' + $(input[i]).val()
-		}
-	}
+    for (i = 0; i < input.length; i++) {
+        if ($(input[i]).val() != '' && $(input[i]).val() != null) {
+            url += '&' + $(input[i]).attr('name') + '=' + $(input[i]).val()
+        }
+    }
 
-	location = url;
+    location = url;
 });
 
 $('input[name="filter_search"]').keydown(function(e) {
-	if (e.keyCode == 13) {
-		e.preventDefault();
+    if (e.keyCode == 13) {
+        e.preventDefault();
 
-		$('#button-filter').trigger('click');
-	}
+        $('#button-filter').trigger('click');
+    }
 });
 //--></script>
 </div>

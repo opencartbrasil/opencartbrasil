@@ -45,11 +45,13 @@
               {% if events %}
               {% for event in events %}
               <tr>
-                <td class="text-center">{% if event.event_id in selected %}
+                <td class="text-center">
+                  {% if event.event_id in selected %}
                   <input type="checkbox" name="selected[]" value="{{ event.event_id }}" checked="checked" />
                   {% else %}
                   <input type="checkbox" name="selected[]" value="{{ event.event_id }}" />
-                  {% endif %}</td>
+                  {% endif %}
+                </td>
                 <td class="text-left">{{ event.code }}</td>
                 <td class="text-left">{{ event.status }}</td>
                 <td class="text-right">{{ event.sort_order }}</td>
@@ -70,7 +72,8 @@
                         </div>
                       </div>
                     </div>
-                  </div></td>
+                  </div>
+                </td>
               </tr>
               {% endfor %}
               {% else %}

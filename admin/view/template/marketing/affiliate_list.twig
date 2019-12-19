@@ -167,55 +167,55 @@
 </div>
 <script type="text/javascript"><!--
 $('#button-filter').on('click', function() {
-	url = 'index.php?route=marketing/affiliate&user_token={{ user_token }}';
-	var filter_name = $('input[name=\'filter_name\']').val();
-	if (filter_name) {
-		url += '&filter_customer=' + encodeURIComponent(filter_name);
-	}
-	var filter_tracking = $('input[name=\'filter_tracking\']').val();
-	if (filter_tracking) {
-		url += '&filter_tracking=' + encodeURIComponent(filter_tracking);
-	}
-	var filter_commission = $('input[name=\'filter_commission\']').val();
-	if (filter_commission) {
-		url += '&filter_commission=' + filter_commission;
-	}
-	var filter_status = $('select[name=\'filter_status\']').val();
-	if (filter_status !== '') {
-		url += '&filter_status=' + filter_status;
-	}
-	var filter_date_added = $('input[name=\'filter_date_added\']').val();
-	if (filter_date_added) {
-		url += '&filter_date_added=' + filter_date_added;
-	}
-	location = url;
+    url = 'index.php?route=marketing/affiliate&user_token={{ user_token }}';
+    var filter_name = $('input[name=\'filter_name\']').val();
+    if (filter_name) {
+        url += '&filter_customer=' + encodeURIComponent(filter_name);
+    }
+    var filter_tracking = $('input[name=\'filter_tracking\']').val();
+    if (filter_tracking) {
+        url += '&filter_tracking=' + encodeURIComponent(filter_tracking);
+    }
+    var filter_commission = $('input[name=\'filter_commission\']').val();
+    if (filter_commission) {
+        url += '&filter_commission=' + filter_commission;
+    }
+    var filter_status = $('select[name=\'filter_status\']').val();
+    if (filter_status !== '') {
+        url += '&filter_status=' + filter_status;
+    }
+    var filter_date_added = $('input[name=\'filter_date_added\']').val();
+    if (filter_date_added) {
+        url += '&filter_date_added=' + filter_date_added;
+    }
+    location = url;
 });
 //--></script>
 <script type="text/javascript"><!--
 $('input[name=\'filter_customer\']').autocomplete({
-	'source': function(request, response) {
-		$.ajax({
-			url: 'index.php?route=customer/customer/autocomplete&user_token={{ user_token }}&filter_name=' + encodeURIComponent(request),
-			dataType: 'json',
-			success: function(json) {
-				response($.map(json, function(item) {
-					return {
-						label: item['name'],
-						value: item['customer_id']
-					}
-				}));
-			}
-		});
-	},
-	'select': function(item) {
-		$('input[name=\'filter_customer\']').val(item['label']);
-	}
+    'source': function(request, response) {
+        $.ajax({
+            url: 'index.php?route=customer/customer/autocomplete&user_token={{ user_token }}&filter_name=' + encodeURIComponent(request),
+            dataType: 'json',
+            success: function(json) {
+                response($.map(json, function(item) {
+                    return {
+                        label: item['name'],
+                        value: item['customer_id']
+                    }
+                }));
+            }
+        });
+    },
+    'select': function(item) {
+        $('input[name=\'filter_customer\']').val(item['label']);
+    }
 });
 //--></script>
 <script type="text/javascript"><!--
 $('.date').datetimepicker({
-	language: '{{ datepicker }}',
-	pickTime: false
+    language: '{{ datepicker }}',
+    pickTime: false
 });
 //--></script>
 {{ footer }}

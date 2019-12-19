@@ -43,27 +43,29 @@
                 </tr>
               </thead>
               <tbody>
-              {% if translations %}
-              {% for translation in translations %}
-              <tr>
-                <td class="text-center">{% if translation.translation_id in selected %}
-                  <input type="checkbox" name="selected[]" value="{{ translation.translation_id }}" checked="checked" />
-                  {% else %}
-                  <input type="checkbox" name="selected[]" value="{{ translation.translation_id }}" />
-                  {% endif %}</td>
-                <td class="text-left">{{ translation.store }}</td>
-                <td class="text-left">{{ translation.language }}</td>
-                <td class="text-left">{{ translation.route }}</td>
-                <td class="text-left">{{ translation.key }}</td>
-                <td class="text-left">{{ translation.value }}</td>
-                <td class="text-right"><a href="{{ translation.edit }}" data-toggle="tooltip" title="{{ button_edit }}" class="btn btn-primary"><i class="fa fa-pencil"></i></a></td>
-              </tr>
-              {% endfor %}
-              {% else %}
-              <tr>
-                <td class="text-center" colspan="7">{{ text_no_results }}</td>
-              </tr>
-              {% endif %}
+                {% if translations %}
+                {% for translation in translations %}
+                <tr>
+                  <td class="text-center">
+                    {% if translation.translation_id in selected %}
+                    <input type="checkbox" name="selected[]" value="{{ translation.translation_id }}" checked="checked" />
+                    {% else %}
+                    <input type="checkbox" name="selected[]" value="{{ translation.translation_id }}" />
+                    {% endif %}
+                  </td>
+                  <td class="text-left">{{ translation.store }}</td>
+                  <td class="text-left">{{ translation.language }}</td>
+                  <td class="text-left">{{ translation.route }}</td>
+                  <td class="text-left">{{ translation.key }}</td>
+                  <td class="text-left">{{ translation.value }}</td>
+                  <td class="text-right"><a href="{{ translation.edit }}" data-toggle="tooltip" title="{{ button_edit }}" class="btn btn-primary"><i class="fa fa-pencil"></i></a></td>
+                </tr>
+                {% endfor %}
+                {% else %}
+                <tr>
+                  <td class="text-center" colspan="7">{{ text_no_results }}</td>
+                </tr>
+                {% endif %}
               </tbody>
             </table>
           </div>
