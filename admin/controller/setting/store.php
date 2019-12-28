@@ -690,6 +690,14 @@ class ControllerSettingStore extends Controller {
 			$this->error['warning'] = $this->language->get('error_warning');
 		}
 
+		if (!isset($this->request->post['config_location'])) {
+			$this->request->post['config_location'] = array();
+		}
+
+		if (!isset($this->request->post['config_customer_group_display'])) {
+			$this->request->post['config_customer_group_display'] = array();
+		}
+
 		return !$this->error;
 	}
 
