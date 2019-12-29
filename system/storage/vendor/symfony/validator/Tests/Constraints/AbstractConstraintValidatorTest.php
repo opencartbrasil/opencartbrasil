@@ -169,8 +169,8 @@ abstract class AbstractConstraintValidatorTest extends TestCase
     protected function setObject($object)
     {
         $this->object = $object;
-        $this->metadata = is_object($object)
-            ? new ClassMetadata(get_class($object))
+        $this->metadata = \is_object($object)
+            ? new ClassMetadata(\get_class($object))
             : null;
 
         $this->context->setNode($this->value, $this->object, $this->metadata, $this->propertyPath);
@@ -179,8 +179,8 @@ abstract class AbstractConstraintValidatorTest extends TestCase
     protected function setProperty($object, $property)
     {
         $this->object = $object;
-        $this->metadata = is_object($object)
-            ? new PropertyMetadata(get_class($object), $property)
+        $this->metadata = \is_object($object)
+            ? new PropertyMetadata(\get_class($object), $property)
             : null;
 
         $this->context->setNode($this->value, $this->object, $this->metadata, $this->propertyPath);
@@ -240,7 +240,7 @@ abstract class AbstractConstraintValidatorTest extends TestCase
 
     protected function assertNoViolation()
     {
-        $this->assertSame(0, $violationsCount = count($this->context->getViolations()), sprintf('0 violation expected. Got %u.', $violationsCount));
+        $this->assertSame(0, $violationsCount = \count($this->context->getViolations()), sprintf('0 violation expected. Got %u.', $violationsCount));
     }
 
     /**
@@ -256,7 +256,7 @@ abstract class AbstractConstraintValidatorTest extends TestCase
      */
     protected function assertViolation($message, array $parameters = array(), $propertyPath = 'property.path', $invalidValue = 'InvalidValue', $plural = null, $code = null)
     {
-        @trigger_error('The '.__METHOD__.' method is deprecated since version 2.3 and will be removed in 3.0. Use the buildViolation() method instead.', E_USER_DEPRECATED);
+        @trigger_error('The '.__METHOD__.' method is deprecated since Symfony 2.3 and will be removed in 3.0. Use the buildViolation() method instead.', E_USER_DEPRECATED);
 
         $this->buildViolation($message)
             ->setParameters($parameters)
@@ -275,11 +275,11 @@ abstract class AbstractConstraintValidatorTest extends TestCase
      */
     protected function assertViolations(array $expected)
     {
-        @trigger_error('The '.__METHOD__.' method is deprecated since version 2.3 and will be removed in 3.0. Use the buildViolation() method instead.', E_USER_DEPRECATED);
+        @trigger_error('The '.__METHOD__.' method is deprecated since Symfony 2.3 and will be removed in 3.0. Use the buildViolation() method instead.', E_USER_DEPRECATED);
 
         $violations = $this->context->getViolations();
 
-        $this->assertCount(count($expected), $violations);
+        $this->assertCount(\count($expected), $violations);
 
         $i = 0;
 
@@ -413,7 +413,7 @@ class ConstraintViolationAssertion
 
         $violations = iterator_to_array($this->context->getViolations());
 
-        Assert::assertSame($expectedCount = count($expected), $violationsCount = count($violations), sprintf('%u violation(s) expected. Got %u.', $expectedCount, $violationsCount));
+        Assert::assertSame($expectedCount = \count($expected), $violationsCount = \count($violations), sprintf('%u violation(s) expected. Got %u.', $expectedCount, $violationsCount));
 
         reset($violations);
 

@@ -11,7 +11,7 @@
 
 namespace Symfony\Component\Validator\Mapping\Cache;
 
-@trigger_error('The '.__NAMESPACE__.'\ApcCache class is deprecated since version 2.5 and will be removed in 3.0. Use DoctrineCache with the Doctrine\Common\Cache\ApcCache class instead.', E_USER_DEPRECATED);
+@trigger_error('The '.__NAMESPACE__.'\ApcCache class is deprecated since Symfony 2.5 and will be removed in 3.0. Use DoctrineCache with the Doctrine\Common\Cache\ApcCache class instead.', E_USER_DEPRECATED);
 
 use Symfony\Component\Validator\Mapping\ClassMetadata;
 
@@ -25,7 +25,7 @@ class ApcCache implements CacheInterface
 
     public function __construct($prefix)
     {
-        if (!extension_loaded('apc')) {
+        if (!\extension_loaded('apc')) {
             throw new \RuntimeException('Unable to use ApcCache to cache validator mappings as APC is not enabled.');
         }
 
@@ -34,7 +34,7 @@ class ApcCache implements CacheInterface
 
     public function has($class)
     {
-        if (!function_exists('apc_exists')) {
+        if (!\function_exists('apc_exists')) {
             $exists = false;
 
             apc_fetch($this->prefix.$class, $exists);

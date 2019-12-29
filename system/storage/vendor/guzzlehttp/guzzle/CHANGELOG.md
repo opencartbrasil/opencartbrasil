@@ -1,5 +1,20 @@
 # CHANGELOG
 
+## 5.3.4 - 2019-10-30
+
+* Fix: Prevent concurrent writes in `FileCookieJar`
+
+## 5.3.3 - 2018-07-31
+
+* Fix bug parsing 0 epoch expiry times
+* Fix PHP 7.3 compatibility
+
+## 5.3.2 - 2018-01-15
+
+* Improve tests
+* Fix react promise dependency
+* Fix PHP 7 compatibility
+
 ## 5.3.1 - 2016-07-18
 
 * Address HTTP_PROXY security vulnerability, CVE-2016-5385:

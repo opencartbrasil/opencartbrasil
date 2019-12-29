@@ -11,8 +11,8 @@
 
 namespace Symfony\Component\Validator\Constraints;
 
-use Symfony\Component\Validator\Context\ExecutionContextInterface;
 use Symfony\Component\Validator\Constraint;
+use Symfony\Component\Validator\Context\ExecutionContextInterface;
 use Symfony\Component\Validator\Exception\ConstraintDefinitionException;
 use Symfony\Component\Validator\Exception\UnexpectedTypeException;
 
@@ -34,11 +34,11 @@ class ImageValidator extends FileValidator
             throw new UnexpectedTypeException($constraint, __NAMESPACE__.'\Image');
         }
 
-        $violations = count($this->context->getViolations());
+        $violations = \count($this->context->getViolations());
 
         parent::validate($value, $constraint);
 
-        $failed = count($this->context->getViolations()) !== $violations;
+        $failed = \count($this->context->getViolations()) !== $violations;
 
         if ($failed || null === $value || '' === $value) {
             return;
@@ -53,7 +53,7 @@ class ImageValidator extends FileValidator
 
         $size = @getimagesize($value);
 
-        if (empty($size) || ($size[0] === 0) || ($size[1] === 0)) {
+        if (empty($size) || (0 === $size[0]) || (0 === $size[1])) {
             if ($this->context instanceof ExecutionContextInterface) {
                 $this->context->buildViolation($constraint->sizeNotDetectedMessage)
                     ->setCode(Image::SIZE_NOT_DETECTED_ERROR)

@@ -11,9 +11,9 @@
 
 namespace Symfony\Component\Validator\Constraints;
 
-use Symfony\Component\Validator\Context\ExecutionContextInterface;
 use Symfony\Component\Validator\Constraint;
 use Symfony\Component\Validator\ConstraintValidator;
+use Symfony\Component\Validator\Context\ExecutionContextInterface;
 use Symfony\Component\Validator\Exception\UnexpectedTypeException;
 
 /**
@@ -40,7 +40,7 @@ class IsbnValidator extends ConstraintValidator
             return;
         }
 
-        if (!is_scalar($value) && !(is_object($value) && method_exists($value, '__toString'))) {
+        if (!is_scalar($value) && !(\is_object($value) && method_exists($value, '__toString'))) {
             throw new UnexpectedTypeException($value, 'string');
         }
 
@@ -49,10 +49,10 @@ class IsbnValidator extends ConstraintValidator
 
         if (null === $constraint->type) {
             if ($constraint->isbn10 && !$constraint->isbn13) {
-                @trigger_error('The "isbn10" option of the Isbn constraint is deprecated since version 2.5 and will be removed in 3.0. Use the "type" option instead.', E_USER_DEPRECATED);
+                @trigger_error('The "isbn10" option of the Isbn constraint is deprecated since Symfony 2.5 and will be removed in 3.0. Use the "type" option instead.', E_USER_DEPRECATED);
                 $constraint->type = 'isbn10';
             } elseif ($constraint->isbn13 && !$constraint->isbn10) {
-                @trigger_error('The "isbn13" option of the Isbn constraint is deprecated since version 2.5 and will be removed in 3.0. Use the "type" option instead.', E_USER_DEPRECATED);
+                @trigger_error('The "isbn13" option of the Isbn constraint is deprecated since Symfony 2.5 and will be removed in 3.0. Use the "type" option instead.', E_USER_DEPRECATED);
                 $constraint->type = 'isbn13';
             }
         }
@@ -177,7 +177,7 @@ class IsbnValidator extends ConstraintValidator
             return Isbn::INVALID_CHARACTERS_ERROR;
         }
 
-        $length = strlen($isbn);
+        $length = \strlen($isbn);
 
         if ($length < 13) {
             return Isbn::TOO_SHORT_ERROR;

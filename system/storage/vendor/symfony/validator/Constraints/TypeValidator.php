@@ -11,9 +11,9 @@
 
 namespace Symfony\Component\Validator\Constraints;
 
-use Symfony\Component\Validator\Context\ExecutionContextInterface;
 use Symfony\Component\Validator\Constraint;
 use Symfony\Component\Validator\ConstraintValidator;
+use Symfony\Component\Validator\Context\ExecutionContextInterface;
 use Symfony\Component\Validator\Exception\UnexpectedTypeException;
 
 /**
@@ -35,13 +35,13 @@ class TypeValidator extends ConstraintValidator
         }
 
         $type = strtolower($constraint->type);
-        $type = $type == 'boolean' ? 'bool' : $constraint->type;
+        $type = 'boolean' == $type ? 'bool' : $constraint->type;
         $isFunction = 'is_'.$type;
         $ctypeFunction = 'ctype_'.$type;
 
-        if (function_exists($isFunction) && $isFunction($value)) {
+        if (\function_exists($isFunction) && $isFunction($value)) {
             return;
-        } elseif (function_exists($ctypeFunction) && $ctypeFunction($value)) {
+        } elseif (\function_exists($ctypeFunction) && $ctypeFunction($value)) {
             return;
         } elseif ($value instanceof $constraint->type) {
             return;

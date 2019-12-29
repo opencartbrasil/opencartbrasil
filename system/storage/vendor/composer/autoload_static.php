@@ -9,6 +9,7 @@ class ComposerStaticInit529edf555723ee7d6785bff5252964ab
     public static $files = array (
         'ad155f8f1cf0d418fe49e248db8c661b' => __DIR__ . '/..' . '/react/promise/src/functions_include.php',
         '0e6d7bf4a5811bfa5cf40c5ccd6fae6a' => __DIR__ . '/..' . '/symfony/polyfill-mbstring/bootstrap.php',
+        '320cde22f66dd4f5d3fd621d3e88b98f' => __DIR__ . '/..' . '/symfony/polyfill-ctype/bootstrap.php',
     );
 
     public static $prefixLengthsPsr4 = array (
@@ -19,6 +20,7 @@ class ComposerStaticInit529edf555723ee7d6785bff5252964ab
         'S' => 
         array (
             'Symfony\\Polyfill\\Mbstring\\' => 26,
+            'Symfony\\Polyfill\\Ctype\\' => 23,
             'Symfony\\Component\\Validator\\' => 28,
             'Symfony\\Component\\Translation\\' => 30,
         ),
@@ -57,6 +59,10 @@ class ComposerStaticInit529edf555723ee7d6785bff5252964ab
         'Symfony\\Polyfill\\Mbstring\\' => 
         array (
             0 => __DIR__ . '/..' . '/symfony/polyfill-mbstring',
+        ),
+        'Symfony\\Polyfill\\Ctype\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/symfony/polyfill-ctype',
         ),
         'Symfony\\Component\\Validator\\' => 
         array (
@@ -318,6 +324,7 @@ class ComposerStaticInit529edf555723ee7d6785bff5252964ab
         'Composer\\Installers\\CraftInstaller' => __DIR__ . '/..' . '/composer/installers/src/Composer/Installers/CraftInstaller.php',
         'Composer\\Installers\\CroogoInstaller' => __DIR__ . '/..' . '/composer/installers/src/Composer/Installers/CroogoInstaller.php',
         'Composer\\Installers\\DecibelInstaller' => __DIR__ . '/..' . '/composer/installers/src/Composer/Installers/DecibelInstaller.php',
+        'Composer\\Installers\\DframeInstaller' => __DIR__ . '/..' . '/composer/installers/src/Composer/Installers/DframeInstaller.php',
         'Composer\\Installers\\DokuWikiInstaller' => __DIR__ . '/..' . '/composer/installers/src/Composer/Installers/DokuWikiInstaller.php',
         'Composer\\Installers\\DolibarrInstaller' => __DIR__ . '/..' . '/composer/installers/src/Composer/Installers/DolibarrInstaller.php',
         'Composer\\Installers\\DrupalInstaller' => __DIR__ . '/..' . '/composer/installers/src/Composer/Installers/DrupalInstaller.php',
@@ -335,6 +342,7 @@ class ComposerStaticInit529edf555723ee7d6785bff5252964ab
         'Composer\\Installers\\JoomlaInstaller' => __DIR__ . '/..' . '/composer/installers/src/Composer/Installers/JoomlaInstaller.php',
         'Composer\\Installers\\KanboardInstaller' => __DIR__ . '/..' . '/composer/installers/src/Composer/Installers/KanboardInstaller.php',
         'Composer\\Installers\\KirbyInstaller' => __DIR__ . '/..' . '/composer/installers/src/Composer/Installers/KirbyInstaller.php',
+        'Composer\\Installers\\KnownInstaller' => __DIR__ . '/..' . '/composer/installers/src/Composer/Installers/KnownInstaller.php',
         'Composer\\Installers\\KodiCMSInstaller' => __DIR__ . '/..' . '/composer/installers/src/Composer/Installers/KodiCMSInstaller.php',
         'Composer\\Installers\\KohanaInstaller' => __DIR__ . '/..' . '/composer/installers/src/Composer/Installers/KohanaInstaller.php',
         'Composer\\Installers\\LanManagementSystemInstaller' => __DIR__ . '/..' . '/composer/installers/src/Composer/Installers/LanManagementSystemInstaller.php',
@@ -369,6 +377,7 @@ class ComposerStaticInit529edf555723ee7d6785bff5252964ab
         'Composer\\Installers\\PxcmsInstaller' => __DIR__ . '/..' . '/composer/installers/src/Composer/Installers/PxcmsInstaller.php',
         'Composer\\Installers\\RadPHPInstaller' => __DIR__ . '/..' . '/composer/installers/src/Composer/Installers/RadPHPInstaller.php',
         'Composer\\Installers\\ReIndexInstaller' => __DIR__ . '/..' . '/composer/installers/src/Composer/Installers/ReIndexInstaller.php',
+        'Composer\\Installers\\Redaxo5Installer' => __DIR__ . '/..' . '/composer/installers/src/Composer/Installers/Redaxo5Installer.php',
         'Composer\\Installers\\RedaxoInstaller' => __DIR__ . '/..' . '/composer/installers/src/Composer/Installers/RedaxoInstaller.php',
         'Composer\\Installers\\RoundcubeInstaller' => __DIR__ . '/..' . '/composer/installers/src/Composer/Installers/RoundcubeInstaller.php',
         'Composer\\Installers\\SMFInstaller' => __DIR__ . '/..' . '/composer/installers/src/Composer/Installers/SMFInstaller.php',
@@ -379,6 +388,7 @@ class ComposerStaticInit529edf555723ee7d6785bff5252964ab
         'Composer\\Installers\\Symfony1Installer' => __DIR__ . '/..' . '/composer/installers/src/Composer/Installers/Symfony1Installer.php',
         'Composer\\Installers\\TYPO3CmsInstaller' => __DIR__ . '/..' . '/composer/installers/src/Composer/Installers/TYPO3CmsInstaller.php',
         'Composer\\Installers\\TYPO3FlowInstaller' => __DIR__ . '/..' . '/composer/installers/src/Composer/Installers/TYPO3FlowInstaller.php',
+        'Composer\\Installers\\TaoInstaller' => __DIR__ . '/..' . '/composer/installers/src/Composer/Installers/TaoInstaller.php',
         'Composer\\Installers\\TheliaInstaller' => __DIR__ . '/..' . '/composer/installers/src/Composer/Installers/TheliaInstaller.php',
         'Composer\\Installers\\TuskInstaller' => __DIR__ . '/..' . '/composer/installers/src/Composer/Installers/TuskInstaller.php',
         'Composer\\Installers\\UserFrostingInstaller' => __DIR__ . '/..' . '/composer/installers/src/Composer/Installers/UserFrostingInstaller.php',
@@ -542,6 +552,7 @@ class ComposerStaticInit529edf555723ee7d6785bff5252964ab
         'Klarna\\Rest\\Transport\\UserAgentInterface' => __DIR__ . '/..' . '/klarna/kco_rest/src/Klarna/Rest/Transport/UserAgentInterface.php',
         'Leafo\\ScssPhp\\Base\\Range' => __DIR__ . '/..' . '/leafo/scssphp/src/Base/Range.php',
         'Leafo\\ScssPhp\\Block' => __DIR__ . '/..' . '/leafo/scssphp/src/Block.php',
+        'Leafo\\ScssPhp\\Cache' => __DIR__ . '/..' . '/leafo/scssphp/src/Cache.php',
         'Leafo\\ScssPhp\\Colors' => __DIR__ . '/..' . '/leafo/scssphp/src/Colors.php',
         'Leafo\\ScssPhp\\Compiler' => __DIR__ . '/..' . '/leafo/scssphp/src/Compiler.php',
         'Leafo\\ScssPhp\\Compiler\\Environment' => __DIR__ . '/..' . '/leafo/scssphp/src/Compiler/Environment.php',
@@ -560,6 +571,8 @@ class ComposerStaticInit529edf555723ee7d6785bff5252964ab
         'Leafo\\ScssPhp\\Node' => __DIR__ . '/..' . '/leafo/scssphp/src/Node.php',
         'Leafo\\ScssPhp\\Node\\Number' => __DIR__ . '/..' . '/leafo/scssphp/src/Node/Number.php',
         'Leafo\\ScssPhp\\Parser' => __DIR__ . '/..' . '/leafo/scssphp/src/Parser.php',
+        'Leafo\\ScssPhp\\SourceMap\\Base64' => __DIR__ . '/..' . '/leafo/scssphp/src/SourceMap/Base64.php',
+        'Leafo\\ScssPhp\\SourceMap\\Base64VLQ' => __DIR__ . '/..' . '/leafo/scssphp/src/SourceMap/Base64VLQ.php',
         'Leafo\\ScssPhp\\SourceMap\\Base64VLQEncoder' => __DIR__ . '/..' . '/leafo/scssphp/src/SourceMap/Base64VLQEncoder.php',
         'Leafo\\ScssPhp\\SourceMap\\SourceMapGenerator' => __DIR__ . '/..' . '/leafo/scssphp/src/SourceMap/SourceMapGenerator.php',
         'Leafo\\ScssPhp\\Type' => __DIR__ . '/..' . '/leafo/scssphp/src/Type.php',
@@ -575,6 +588,7 @@ class ComposerStaticInit529edf555723ee7d6785bff5252964ab
         'Psr\\Log\\NullLogger' => __DIR__ . '/..' . '/psr/log/Psr/Log/NullLogger.php',
         'Psr\\Log\\Test\\DummyTest' => __DIR__ . '/..' . '/psr/log/Psr/Log/Test/LoggerInterfaceTest.php',
         'Psr\\Log\\Test\\LoggerInterfaceTest' => __DIR__ . '/..' . '/psr/log/Psr/Log/Test/LoggerInterfaceTest.php',
+        'Psr\\Log\\Test\\TestLogger' => __DIR__ . '/..' . '/psr/log/Psr/Log/Test/TestLogger.php',
         'React\\Promise\\CancellablePromiseInterface' => __DIR__ . '/..' . '/react/promise/src/CancellablePromiseInterface.php',
         'React\\Promise\\CancellationQueue' => __DIR__ . '/..' . '/react/promise/src/CancellationQueue.php',
         'React\\Promise\\Deferred' => __DIR__ . '/..' . '/react/promise/src/Deferred.php',
@@ -828,6 +842,7 @@ class ComposerStaticInit529edf555723ee7d6785bff5252964ab
         'Symfony\\Component\\Validator\\Violation\\ConstraintViolationBuilder' => __DIR__ . '/..' . '/symfony/validator/Violation/ConstraintViolationBuilder.php',
         'Symfony\\Component\\Validator\\Violation\\ConstraintViolationBuilderInterface' => __DIR__ . '/..' . '/symfony/validator/Violation/ConstraintViolationBuilderInterface.php',
         'Symfony\\Component\\Validator\\Violation\\LegacyConstraintViolationBuilder' => __DIR__ . '/..' . '/symfony/validator/Violation/LegacyConstraintViolationBuilder.php',
+        'Symfony\\Polyfill\\Ctype\\Ctype' => __DIR__ . '/..' . '/symfony/polyfill-ctype/Ctype.php',
         'Symfony\\Polyfill\\Mbstring\\Mbstring' => __DIR__ . '/..' . '/symfony/polyfill-mbstring/Mbstring.php',
         'Wechat\\Lib\\Cache' => __DIR__ . '/..' . '/zoujingli/wechat-php-sdk/Wechat/Lib/Cache.php',
         'Wechat\\Lib\\Common' => __DIR__ . '/..' . '/zoujingli/wechat-php-sdk/Wechat/Lib/Common.php',
@@ -837,8 +852,10 @@ class ComposerStaticInit529edf555723ee7d6785bff5252964ab
         'Wechat\\WechatCustom' => __DIR__ . '/..' . '/zoujingli/wechat-php-sdk/Wechat/WechatCustom.php',
         'Wechat\\WechatDevice' => __DIR__ . '/..' . '/zoujingli/wechat-php-sdk/Wechat/WechatDevice.php',
         'Wechat\\WechatExtends' => __DIR__ . '/..' . '/zoujingli/wechat-php-sdk/Wechat/WechatExtends.php',
+        'Wechat\\WechatHardware' => __DIR__ . '/..' . '/zoujingli/wechat-php-sdk/Wechat/WechatHardware.php',
         'Wechat\\WechatMedia' => __DIR__ . '/..' . '/zoujingli/wechat-php-sdk/Wechat/WechatMedia.php',
         'Wechat\\WechatMenu' => __DIR__ . '/..' . '/zoujingli/wechat-php-sdk/Wechat/WechatMenu.php',
+        'Wechat\\WechatMessage' => __DIR__ . '/..' . '/zoujingli/wechat-php-sdk/Wechat/WechatMessage.php',
         'Wechat\\WechatOauth' => __DIR__ . '/..' . '/zoujingli/wechat-php-sdk/Wechat/WechatOauth.php',
         'Wechat\\WechatPay' => __DIR__ . '/..' . '/zoujingli/wechat-php-sdk/Wechat/WechatPay.php',
         'Wechat\\WechatPoi' => __DIR__ . '/..' . '/zoujingli/wechat-php-sdk/Wechat/WechatPoi.php',

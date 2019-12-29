@@ -89,17 +89,17 @@
     },
     {
         "name": "composer/installers",
-        "version": "v1.6.0",
-        "version_normalized": "1.6.0.0",
+        "version": "v1.7.0",
+        "version_normalized": "1.7.0.0",
         "source": {
             "type": "git",
             "url": "https://github.com/composer/installers.git",
-            "reference": "cfcca6b1b60bc4974324efb5783c13dca6932b5b"
+            "reference": "141b272484481432cda342727a427dc1e206bfa0"
         },
         "dist": {
             "type": "zip",
-            "url": "https://api.github.com/repos/composer/installers/zipball/cfcca6b1b60bc4974324efb5783c13dca6932b5b",
-            "reference": "cfcca6b1b60bc4974324efb5783c13dca6932b5b",
+            "url": "https://api.github.com/repos/composer/installers/zipball/141b272484481432cda342727a427dc1e206bfa0",
+            "reference": "141b272484481432cda342727a427dc1e206bfa0",
             "shasum": ""
         },
         "require": {
@@ -113,7 +113,7 @@
             "composer/composer": "1.0.*@dev",
             "phpunit/phpunit": "^4.8.36"
         },
-        "time": "2018-08-27T06:10:37+00:00",
+        "time": "2019-08-12T15:00:31+00:00",
         "type": "composer-plugin",
         "extra": {
             "class": "Composer\\Installers\\Plugin",
@@ -157,6 +157,7 @@
             "RadPHP",
             "SMF",
             "Thelia",
+            "Whmcs",
             "WolfCMS",
             "agl",
             "aimeos",
@@ -179,6 +180,7 @@
             "installer",
             "itop",
             "joomla",
+            "known",
             "kohana",
             "laravel",
             "lavalite",
@@ -211,24 +213,24 @@
     },
     {
         "name": "divido/divido-php",
-        "version": "v1.9-stable",
-        "version_normalized": "1.9.0.0",
+        "version": "v1.15-stable",
+        "version_normalized": "1.15.0.0",
         "source": {
             "type": "git",
             "url": "git@github.com:DividoFinancialServices/divido-api-php.git",
-            "reference": "799c8945aae76caba1970e429e2e0ad0510a940f"
+            "reference": "8edd902ec2be8151331985021107031292b41ca1"
         },
         "dist": {
             "type": "zip",
-            "url": "https://api.github.com/repos/DividoFinancialServices/divido-api-php/zipball/799c8945aae76caba1970e429e2e0ad0510a940f",
-            "reference": "799c8945aae76caba1970e429e2e0ad0510a940f",
+            "url": "https://api.github.com/repos/DividoFinancialServices/divido-api-php/zipball/8edd902ec2be8151331985021107031292b41ca1",
+            "reference": "8edd902ec2be8151331985021107031292b41ca1",
             "shasum": ""
         },
         "require": {
             "ext-curl": "*",
             "php": ">=5.2.0"
         },
-        "time": "2016-12-22T02:27:39+00:00",
+        "time": "2018-01-21T15:38:57+00:00",
         "type": "library",
         "extra": {
             "branch-alias": {
@@ -258,28 +260,29 @@
     },
     {
         "name": "guzzlehttp/guzzle",
-        "version": "5.3.1",
-        "version_normalized": "5.3.1.0",
+        "version": "5.3.4",
+        "version_normalized": "5.3.4.0",
         "source": {
             "type": "git",
             "url": "https://github.com/guzzle/guzzle.git",
-            "reference": "70f1fa53b71c4647bf2762c09068a95f77e12fb8"
+            "reference": "b87eda7a7162f95574032da17e9323c9899cb6b2"
         },
         "dist": {
             "type": "zip",
-            "url": "https://api.github.com/repos/guzzle/guzzle/zipball/70f1fa53b71c4647bf2762c09068a95f77e12fb8",
-            "reference": "70f1fa53b71c4647bf2762c09068a95f77e12fb8",
+            "url": "https://api.github.com/repos/guzzle/guzzle/zipball/b87eda7a7162f95574032da17e9323c9899cb6b2",
+            "reference": "b87eda7a7162f95574032da17e9323c9899cb6b2",
             "shasum": ""
         },
         "require": {
             "guzzlehttp/ringphp": "^1.1",
-            "php": ">=5.4.0"
+            "php": ">=5.4.0",
+            "react/promise": "^2.2"
         },
         "require-dev": {
             "ext-curl": "*",
             "phpunit/phpunit": "^4.0"
         },
-        "time": "2016-07-15T19:28:39+00:00",
+        "time": "2019-10-30T09:32:00+00:00",
         "type": "library",
         "installation-source": "dist",
         "autoload": {
@@ -420,17 +423,17 @@
     },
     {
         "name": "guzzlehttp/ringphp",
-        "version": "1.1.0",
-        "version_normalized": "1.1.0.0",
+        "version": "1.1.1",
+        "version_normalized": "1.1.1.0",
         "source": {
             "type": "git",
             "url": "https://github.com/guzzle/RingPHP.git",
-            "reference": "dbbb91d7f6c191e5e405e900e3102ac7f261bc0b"
+            "reference": "5e2a174052995663dd68e6b5ad838afd47dd615b"
         },
         "dist": {
             "type": "zip",
-            "url": "https://api.github.com/repos/guzzle/RingPHP/zipball/dbbb91d7f6c191e5e405e900e3102ac7f261bc0b",
-            "reference": "dbbb91d7f6c191e5e405e900e3102ac7f261bc0b",
+            "url": "https://api.github.com/repos/guzzle/RingPHP/zipball/5e2a174052995663dd68e6b5ad838afd47dd615b",
+            "reference": "5e2a174052995663dd68e6b5ad838afd47dd615b",
             "shasum": ""
         },
         "require": {
@@ -445,7 +448,7 @@
         "suggest": {
             "ext-curl": "Guzzle will use specific adapters if cURL is present"
         },
-        "time": "2015-05-20T03:37:09+00:00",
+        "time": "2018-07-31T13:22:33+00:00",
         "type": "library",
         "extra": {
             "branch-alias": {
@@ -575,27 +578,29 @@
     },
     {
         "name": "leafo/scssphp",
-        "version": "v0.7.5",
-        "version_normalized": "0.7.5.0",
+        "version": "v0.8.4",
+        "version_normalized": "0.8.4.0",
         "source": {
             "type": "git",
             "url": "https://github.com/leafo/scssphp.git",
-            "reference": "8b538d828bbb75276974605c4a1a435e939da74e"
+            "reference": "b9cdea3e42c3bcb1a9faafd04ccce4e8ec860ad9"
         },
         "dist": {
             "type": "zip",
-            "url": "https://api.github.com/repos/leafo/scssphp/zipball/8b538d828bbb75276974605c4a1a435e939da74e",
-            "reference": "8b538d828bbb75276974605c4a1a435e939da74e",
+            "url": "https://api.github.com/repos/leafo/scssphp/zipball/b9cdea3e42c3bcb1a9faafd04ccce4e8ec860ad9",
+            "reference": "b9cdea3e42c3bcb1a9faafd04ccce4e8ec860ad9",
             "shasum": ""
         },
         "require": {
-            "php": ">=5.4.0"
+            "php": "^5.4.0 || ^7"
         },
         "require-dev": {
             "phpunit/phpunit": "~4.6",
-            "squizlabs/php_codesniffer": "~2.5"
+            "squizlabs/php_codesniffer": "~2.5",
+            "twbs/bootstrap": "~4.3",
+            "zurb/foundation": "~6.5"
         },
-        "time": "2018-02-09T02:04:21+00:00",
+        "time": "2019-06-18T21:15:44+00:00",
         "bin": [
             "bin/pscss"
         ],
@@ -629,27 +634,27 @@
     },
     {
         "name": "psr/log",
-        "version": "1.0.2",
-        "version_normalized": "1.0.2.0",
+        "version": "1.1.2",
+        "version_normalized": "1.1.2.0",
         "source": {
             "type": "git",
             "url": "https://github.com/php-fig/log.git",
-            "reference": "4ebe3a8bf773a19edfe0a84b6585ba3d401b724d"
+            "reference": "446d54b4cb6bf489fc9d75f55843658e6f25d801"
         },
         "dist": {
             "type": "zip",
-            "url": "https://api.github.com/repos/php-fig/log/zipball/4ebe3a8bf773a19edfe0a84b6585ba3d401b724d",
-            "reference": "4ebe3a8bf773a19edfe0a84b6585ba3d401b724d",
+            "url": "https://api.github.com/repos/php-fig/log/zipball/446d54b4cb6bf489fc9d75f55843658e6f25d801",
+            "reference": "446d54b4cb6bf489fc9d75f55843658e6f25d801",
             "shasum": ""
         },
         "require": {
             "php": ">=5.3.0"
         },
-        "time": "2016-10-10T12:19:37+00:00",
+        "time": "2019-11-01T11:05:21+00:00",
         "type": "library",
         "extra": {
             "branch-alias": {
-                "dev-master": "1.0.x-dev"
+                "dev-master": "1.1.x-dev"
             }
         },
         "installation-source": "dist",
@@ -678,17 +683,17 @@
     },
     {
         "name": "react/promise",
-        "version": "v2.5.1",
-        "version_normalized": "2.5.1.0",
+        "version": "v2.7.1",
+        "version_normalized": "2.7.1.0",
         "source": {
             "type": "git",
             "url": "https://github.com/reactphp/promise.git",
-            "reference": "62785ae604c8d69725d693eb370e1d67e94c4053"
+            "reference": "31ffa96f8d2ed0341a57848cbb84d88b89dd664d"
         },
         "dist": {
             "type": "zip",
-            "url": "https://api.github.com/repos/reactphp/promise/zipball/62785ae604c8d69725d693eb370e1d67e94c4053",
-            "reference": "62785ae604c8d69725d693eb370e1d67e94c4053",
+            "url": "https://api.github.com/repos/reactphp/promise/zipball/31ffa96f8d2ed0341a57848cbb84d88b89dd664d",
+            "reference": "31ffa96f8d2ed0341a57848cbb84d88b89dd664d",
             "shasum": ""
         },
         "require": {
@@ -697,7 +702,7 @@
         "require-dev": {
             "phpunit/phpunit": "~4.8"
         },
-        "time": "2017-03-25T12:08:31+00:00",
+        "time": "2019-01-07T21:25:54+00:00",
         "type": "library",
         "installation-source": "dist",
         "autoload": {
@@ -725,18 +730,78 @@
         ]
     },
     {
-        "name": "symfony/polyfill-mbstring",
-        "version": "v1.4.0",
-        "version_normalized": "1.4.0.0",
+        "name": "symfony/polyfill-ctype",
+        "version": "v1.13.1",
+        "version_normalized": "1.13.1.0",
         "source": {
             "type": "git",
-            "url": "https://github.com/symfony/polyfill-mbstring.git",
-            "reference": "f29dca382a6485c3cbe6379f0c61230167681937"
+            "url": "https://github.com/symfony/polyfill-ctype.git",
+            "reference": "f8f0b461be3385e56d6de3dbb5a0df24c0c275e3"
         },
         "dist": {
             "type": "zip",
-            "url": "https://api.github.com/repos/symfony/polyfill-mbstring/zipball/f29dca382a6485c3cbe6379f0c61230167681937",
-            "reference": "f29dca382a6485c3cbe6379f0c61230167681937",
+            "url": "https://api.github.com/repos/symfony/polyfill-ctype/zipball/f8f0b461be3385e56d6de3dbb5a0df24c0c275e3",
+            "reference": "f8f0b461be3385e56d6de3dbb5a0df24c0c275e3",
+            "shasum": ""
+        },
+        "require": {
+            "php": ">=5.3.3"
+        },
+        "suggest": {
+            "ext-ctype": "For best performance"
+        },
+        "time": "2019-11-27T13:56:44+00:00",
+        "type": "library",
+        "extra": {
+            "branch-alias": {
+                "dev-master": "1.13-dev"
+            }
+        },
+        "installation-source": "dist",
+        "autoload": {
+            "psr-4": {
+                "Symfony\\Polyfill\\Ctype\\": ""
+            },
+            "files": [
+                "bootstrap.php"
+            ]
+        },
+        "notification-url": "https://packagist.org/downloads/",
+        "license": [
+            "MIT"
+        ],
+        "authors": [
+            {
+                "name": "Gert de Pagter",
+                "email": "BackEndTea@gmail.com"
+            },
+            {
+                "name": "Symfony Community",
+                "homepage": "https://symfony.com/contributors"
+            }
+        ],
+        "description": "Symfony polyfill for ctype functions",
+        "homepage": "https://symfony.com",
+        "keywords": [
+            "compatibility",
+            "ctype",
+            "polyfill",
+            "portable"
+        ]
+    },
+    {
+        "name": "symfony/polyfill-mbstring",
+        "version": "v1.13.1",
+        "version_normalized": "1.13.1.0",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/symfony/polyfill-mbstring.git",
+            "reference": "7b4aab9743c30be783b73de055d24a39cf4b954f"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/symfony/polyfill-mbstring/zipball/7b4aab9743c30be783b73de055d24a39cf4b954f",
+            "reference": "7b4aab9743c30be783b73de055d24a39cf4b954f",
             "shasum": ""
         },
         "require": {
@@ -745,11 +810,11 @@
         "suggest": {
             "ext-mbstring": "For best performance"
         },
-        "time": "2017-06-09T14:24:12+00:00",
+        "time": "2019-11-27T14:18:11+00:00",
         "type": "library",
         "extra": {
             "branch-alias": {
-                "dev-master": "1.4-dev"
+                "dev-master": "1.13-dev"
             }
         },
         "installation-source": "dist",
@@ -853,21 +918,22 @@
     },
     {
         "name": "symfony/validator",
-        "version": "v2.8.24",
-        "version_normalized": "2.8.24.0",
+        "version": "v2.8.52",
+        "version_normalized": "2.8.52.0",
         "source": {
             "type": "git",
             "url": "https://github.com/symfony/validator.git",
-            "reference": "6c019627f2a69b9ab2ac41fd53102148a55af564"
+            "reference": "d5d2090bba3139d8ddb79959fbf516e87238fe3a"
         },
         "dist": {
             "type": "zip",
-            "url": "https://api.github.com/repos/symfony/validator/zipball/6c019627f2a69b9ab2ac41fd53102148a55af564",
-            "reference": "6c019627f2a69b9ab2ac41fd53102148a55af564",
+            "url": "https://api.github.com/repos/symfony/validator/zipball/d5d2090bba3139d8ddb79959fbf516e87238fe3a",
+            "reference": "d5d2090bba3139d8ddb79959fbf516e87238fe3a",
             "shasum": ""
         },
         "require": {
             "php": ">=5.3.9",
+            "symfony/polyfill-ctype": "~1.8",
             "symfony/polyfill-mbstring": "~1.0",
             "symfony/translation": "~2.4|~3.0.0"
         },
@@ -893,7 +959,7 @@
             "symfony/property-access": "For using the 2.4 Validator API",
             "symfony/yaml": ""
         },
-        "time": "2017-07-03T08:04:30+00:00",
+        "time": "2018-11-14T14:06:48+00:00",
         "type": "library",
         "extra": {
             "branch-alias": {
@@ -928,23 +994,26 @@
     },
     {
         "name": "zoujingli/wechat-php-sdk",
-        "version": "v1.3.10",
-        "version_normalized": "1.3.10.0",
+        "version": "v1.3.18",
+        "version_normalized": "1.3.18.0",
         "source": {
             "type": "git",
             "url": "https://github.com/zoujingli/wechat-php-sdk.git",
-            "reference": "38f86a42b1c0058d889a0969190540037629606a"
+            "reference": "d37d0c1919ede2ee54e65100ac3792e947b1e0ef"
         },
         "dist": {
             "type": "zip",
-            "url": "https://api.github.com/repos/zoujingli/wechat-php-sdk/zipball/38f86a42b1c0058d889a0969190540037629606a",
-            "reference": "38f86a42b1c0058d889a0969190540037629606a",
+            "url": "https://api.github.com/repos/zoujingli/wechat-php-sdk/zipball/d37d0c1919ede2ee54e65100ac3792e947b1e0ef",
+            "reference": "d37d0c1919ede2ee54e65100ac3792e947b1e0ef",
             "shasum": ""
         },
         "require": {
+            "ext-json": "*",
+            "ext-libxml": "*",
+            "ext-simplexml": "*",
             "php": ">=5.3.3"
         },
-        "time": "2017-04-19T13:34:58+00:00",
+        "time": "2019-10-10T09:42:15+00:00",
         "type": "project",
         "installation-source": "dist",
         "autoload": {
