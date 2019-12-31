@@ -6,6 +6,23 @@ e utiliza [Semantic Versioning](https://semver.org/lang/pt-BR/spec/v2.0.0.html).
 
 ## [Não lançada]
 
+## [1.4.8] (Data de lançamento: 31.12.2019)
+### Corrigido
+- Correção nas configurações da loja
+- Correção ao vincular assinaturas no produto
+- Correção no layout de cadastro dos produtos
+- Correção na tradução das configurações da loja
+- Correção na exibição das tags do produto na loja
+- Correção no fechamento de tags de comentário HTML
+- Correção no cadastro de afiliados na administração
+- Correção na biblioteca de sessão por banco de dados
+- Correção na integração com o marketplace do OpenCart
+- Correção no layout e tradução do procedimento de segurança
+- Indentação do tema da instalação
+
+### Adicionado
+- Atualizações para compatibilização com PHP 7.4
+
 ## [1.4.7] (Data de lançamento: 19.12.2019)
 ### Corrigido
 - Correção no filtro de produtos na administração
@@ -439,7 +456,8 @@ e utiliza [Semantic Versioning](https://semver.org/lang/pt-BR/spec/v2.0.0.html).
 - Cupons de descontos para demonstração.
 - Moedas: Euro e Libra esterlina.
 
-[Não lançada]: https://github.com/opencartbrasil/opencartbrasil/compare/v1.4.7...HEAD
+[Não lançada]: https://github.com/opencartbrasil/opencartbrasil/compare/v1.4.8...HEAD
+[1.4.8]: https://github.com/opencartbrasil/opencartbrasil/compare/v1.4.7...v1.4.8
 [1.4.7]: https://github.com/opencartbrasil/opencartbrasil/compare/v1.4.6...v1.4.7
 [1.4.6]: https://github.com/opencartbrasil/opencartbrasil/compare/v1.4.5...v1.4.6
 [1.4.5]: https://github.com/opencartbrasil/opencartbrasil/compare/v1.4.4...v1.4.5
