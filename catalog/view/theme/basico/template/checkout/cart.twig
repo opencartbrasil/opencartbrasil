@@ -72,7 +72,7 @@
             {% endfor %}
             {% for voucher in vouchers %}
             <tr>
-              <td></td>
+              <td class="text-center">{% if voucher.thumb %} <img src="{{ voucher.thumb }}" alt="{{ voucher.description }}" title="{{ voucher.description }}" class="img-thumbnail" />{% endif %}</td>
               <td class="text-left">{{ voucher.description }}</td>
               <td class="text-left"></td>
               <td class="text-left"><div class="input-group btn-block" style="max-width: 200px;">

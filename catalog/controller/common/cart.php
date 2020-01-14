@@ -112,9 +112,20 @@ class ControllerCommonCart extends Controller {
 		$data['vouchers'] = array();
 
 		if (!empty($this->session->data['vouchers'])) {
+			$this->load->model('extension/total/voucher_theme');
+
 			foreach ($this->session->data['vouchers'] as $key => $voucher) {
+				$voucher_theme = $this->model_extension_total_voucher_theme->getVoucherTheme($voucher['voucher_theme_id']);
+
+				if ($voucher_theme['image']) {
+					$image = $this->model_tool_image->resize($voucher_theme['image'], $this->config->get('theme_' . $this->config->get('config_theme') . '_image_cart_width'), $this->config->get('theme_' . $this->config->get('config_theme') . '_image_cart_height'));
+				} else {
+					$image = '';
+				}
+
 				$data['vouchers'][] = array(
 					'key'         => $key,
+					'thumb'       => $image,
 					'description' => $voucher['description'],
 					'amount'      => $this->currency->format($voucher['amount'], $this->session->data['currency'])
 				);
