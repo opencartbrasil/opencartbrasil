@@ -27,5 +27,10 @@ class ModelUpdate03 extends Model {
 		if (!$table_query->num_rows) {
 			$this->db->query("ALTER TABLE `" . DB_PREFIX . "customer_ip` ADD `country` VARCHAR(2) NOT NULL AFTER `ip`;");
 		}
+
+		$table_query = $this->db->query("SELECT * FROM '" . DB_PREFIX . "setting' WHERE `key` = 'sub_total_sort_order'");
+		if (!$table_query->num_rows) {
+			$this->db->query("UPDATE `" . DB_PREFIX . "setting` SET `key` = 'total_sub_total_sort_order' WHERE `key` = 'sub_total_sort_order';");
+		}
 	}
 }
