@@ -17,6 +17,7 @@ $_['entry_email']                  = 'E-mail';
 $_['entry_password']               = 'Senha';
 
 // Error
+$_['error_email']                  = 'Atenção: O e-mail informado não é válido.';
 $_['error_login']                  = 'Atenção: Seus dados de acesso não estão corretos. Se você tem certeza que o e-mail está correto, solicite uma nova senha.';
 $_['error_attempts']               = 'Atenção: Você excedeu o limite de tentativas de acesso. Por segurança, tente acessar novamente após 1 hora.';
 $_['error_approved']               = 'Atenção: Sua conta ainda não foi aprovada. Quando sua conta for aprovada, você receberá um e-mail de confirmação.';

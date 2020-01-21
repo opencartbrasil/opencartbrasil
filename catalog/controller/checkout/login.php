@@ -32,6 +32,11 @@ class ControllerCheckoutLogin extends Controller {
 		$this->load->model('account/customer');
 
 		if (!$json) {
+			// Check if the email is valid.
+			if (!isset($this->request->post['email']) || (utf8_strlen($this->request->post['email']) > 96) || !filter_var($this->request->post['email'], FILTER_VALIDATE_EMAIL)) {
+				$json['error']['warning'] = $this->language->get('error_email');
+			}
+
 			// Check how many login attempts have been made.
 			$login_info = $this->model_account_customer->getLoginAttempts($this->request->post['email']);
 

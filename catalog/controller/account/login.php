@@ -123,6 +123,11 @@ class ControllerAccountLogin extends Controller {
 	}
 
 	protected function validate() {
+		// Check if the email is valid.
+		if (!isset($this->request->post['email']) || (utf8_strlen($this->request->post['email']) > 96) || !filter_var($this->request->post['email'], FILTER_VALIDATE_EMAIL)) {
+			$this->error['warning'] = $this->language->get('error_email');
+		}
+
 		// Check how many login attempts have been made.
 		$login_info = $this->model_account_customer->getLoginAttempts($this->request->post['email']);
 
