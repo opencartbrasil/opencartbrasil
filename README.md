@@ -8,17 +8,7 @@
 <a href="./LICENSE"><img src="https://img.shields.io/github/license/opencartbrasil/opencartbrasil.svg" alt="Licença"></a>
 </p>
 
-## Apresentação
-
-O projeto OpenCart Brasil é um fork do OpenCart 3, que tem o objetivo de oferecer uma versão do OpenCart otimizada, atualizada e segura, com foco especial no mercado brasileiro, sempre compatível com a última versão estável do OpenCart, e mantendo a licença GPLv3 para garantir que **o projeto OpenCart Brasil é livre e sempre será**.
-
-Aqui você poderá analisar o código, relatar erros e enviar correções ou melhorias para o projeto.
-
-Recomendamos que todos os desenvolvedores sigam este repositório para receberem atualizações sobre o projeto.
-
-## Imagens
-
-### Início da instalação:
+### Instalação traduzida:
 
 <img src="./.github/IMAGES/01.jpg">
 
@@ -30,23 +20,32 @@ Recomendamos que todos os desenvolvedores sigam este repositório para receberem
 
 <img src="./.github/IMAGES/03.jpg">
 
+## Apresentação
+
+O projeto OpenCart Brasil é um fork do OpenCart 3, que tem o objetivo de oferecer uma versão do OpenCart otimizada, atualizada e segura, com foco especial no mercado brasileiro, sempre compatível com a última versão estável do OpenCart, e mantendo a licença GPLv3 para garantir que **o projeto OpenCart Brasil é livre e sempre será**.
+
+Aqui você poderá analisar o código, relatar erros e enviar correções ou melhorias para o projeto.
+
+Recomendamos que todos os desenvolvedores sigam este repositório para receberem atualizações sobre o projeto.
+
 ## Demonstração
 
 Para acessar uma demonstração online do OpenCart Brasil e visualizar a loja em funcionamento <a href="https://www.opencartbrasil.com.br/test-drive-loja" target="_blank">clique aqui</a>.
 
 ## Diferenciais
 
-- Bootstrap atualizado.
+- Bootstrap 3.3.7 atualizado.
 - Suporte para tarefas agendadas.
 - Sistema de afiliados 100% funcional.
+- Correção de bugs e otimizações no código.
 - Campo NCM e CEST nos produtos.
 - Campo SKU nas opções dos produtos.
 - **Atualização automática do OpenCart Brasil**.
-- Novas extensões do tipo conversor de moedas.
+- Melhorias no gerenciamento de downloads.
+- Melhorias no processo de login dos clientes.
 - Melhorias no gerenciamento de sessões do PHP.
-- Melhorias no processo de download e instalação.
 - Melhorias na criptografia das senhas dos clientes.
-- Correção de bugs, melhorias e otimizações no código.
+- Novas extensões do tipo conversor de moedas.
 - O processo de instalação ocorre em português do Brasil.
 - Ferramenta de instalação por linha de comando em português do Brasil.
 - Após a instalação, a loja já estará em português do Brasil com a moeda Real.
@@ -260,7 +259,7 @@ Lista de parâmetros para instalação através da linha de comando:
 
 ## Configurações adicionais
 
-### Habilitar as tarefas agendadas:
+### Habilitar as tarefas agendadas (obrigatório):
 
 A execução das tarefas agendadas são essenciais para o funcionamento do OpenCart Brasil, sendo que a execução das tarefas agendadas não sobrecarrega a navegação da loja, pois elas ocorrem em segundo plano.
 
