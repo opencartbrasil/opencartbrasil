@@ -6,6 +6,15 @@ e utiliza [Semantic Versioning](https://semver.org/lang/pt-BR/spec/v2.0.0.html).
 
 ## [Não lançada]
 
+## [1.4.9] (Data de lançamento: 12.02.2020)
+### Corrigido
+- Melhorias no login
+- Melhorias ao cadastrar filtros
+- Melhorias ao cadastrar atributos
+- Correção no campo sort_order do subtotal
+- Informação sobre a moeda padrão na listagem de moedas
+- Suporte para exibir a imagem do vale presentes do carrinho
+
 ## [1.4.8] (Data de lançamento: 31.12.2019)
 ### Corrigido
 - Correção nas configurações da loja
@@ -456,7 +465,8 @@ e utiliza [Semantic Versioning](https://semver.org/lang/pt-BR/spec/v2.0.0.html).
 - Cupons de descontos para demonstração.
 - Moedas: Euro e Libra esterlina.
 
-[Não lançada]: https://github.com/opencartbrasil/opencartbrasil/compare/v1.4.8...HEAD
+[Não lançada]: https://github.com/opencartbrasil/opencartbrasil/compare/v1.4.9...HEAD
+[1.4.9]: https://github.com/opencartbrasil/opencartbrasil/compare/v1.4.8...v1.4.9
 [1.4.8]: https://github.com/opencartbrasil/opencartbrasil/compare/v1.4.7...v1.4.8
 [1.4.7]: https://github.com/opencartbrasil/opencartbrasil/compare/v1.4.6...v1.4.7
 [1.4.6]: https://github.com/opencartbrasil/opencartbrasil/compare/v1.4.5...v1.4.6
