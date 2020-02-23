@@ -45,7 +45,7 @@ RewriteRule ^([^?]*) index.php?_route_=$1 [L,QSA]
 # php_value post_max_size 100M
 
 ## 5. Se você tem muitas opções nos produtos ou está recebendo erros ao tentar salvar formulários na loja, remova o # da linha abaixo:
-# php_value max_execution_time 3600
+# php_value max_execution_time 360
 
 ## 6. Se você tem muitas opções nos produtos ou está recebendo erros ao tentar salvar formulários na loja, remova o # da linha abaixo:
 # php_value max_input_time 200
