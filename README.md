@@ -82,6 +82,7 @@ Após executar os procedimentos, acesse a administração da loja e vá no menu 
 - [x] Campo CEST no cadastro do produto.
 - [x] Campo SKU nas opções dos produtos.
 - [x] Novas extensões do tipo conversor de moedas.
+- [x] Correção nas sessões.
 - [x] Correção nas estátisticas.
 - [x] Correção nos arquivos config.
 - [x] Correção na API do catálogo.
@@ -158,9 +159,14 @@ Se você é o profissional que administra os servidores que armazenam os arquivo
 | `memory_limit` | 128M |
 | `session.auto_start` | Off |
 | `session.use_only_cookies` | On |
+| `session.use_cookies` | On |
 | `session.use_trans_sid` | Off |
 | `session.cookie_httponly` | On |
+| `*session.cookie_secure` | On |
+| `session.cache_limiter` | nocache |
 | `session.gc_maxlifetime` | 3600 |
+
+**Aviso:** Habilite **session.cookie_secure** somente quando o HTTPS estiver funcionando em todas as páginas.
 
 ### Configurações mínimas recomendadas no MySQL/MariaDB:
 
