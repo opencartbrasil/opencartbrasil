@@ -18,7 +18,7 @@ $_['db_port']            = DB_PORT;
 // Session
 $_['session_autostart']  = false;
 $_['session_engine']     = 'db';
-$_['session_name']       = 'OCSESSID';
+$_['session_name']       = 'OCSESSION';
 
 // Template
 $_['template_engine']    = 'twig';
