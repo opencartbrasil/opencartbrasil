@@ -22,8 +22,6 @@ class Session {
 	 * @param	object	$registry
 	*/
 	public function __construct($adaptor, $registry = '') {
-		$this->config = $registry->get('config');
-
 		$class = 'Session\\' . $adaptor;
 
 		if (class_exists($class)) {

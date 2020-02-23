@@ -39,13 +39,13 @@ RewriteRule ^([^?]*) index.php?_route_=$1 [L,QSA]
 # php_flag magic_quotes_gpc Off
 
 ## 3. Se você não estiver conseguindo enviar arquivos grandes por upload através da loja, remova o # da linha abaixo:
-# php_value upload_max_filesize 999M
+# php_value upload_max_filesize 100M
 
 ## 4. Se você tem muitas opções nos produtos ou está recebendo erros ao tentar salvar formulários na loja, remova o # da linha abaixo:
-# php_value post_max_size 999M
+# php_value post_max_size 100M
 
 ## 5. Se você tem muitas opções nos produtos ou está recebendo erros ao tentar salvar formulários na loja, remova o # da linha abaixo:
-# php_value max_execution_time 200
+# php_value max_execution_time 3600
 
 ## 6. Se você tem muitas opções nos produtos ou está recebendo erros ao tentar salvar formulários na loja, remova o # da linha abaixo:
 # php_value max_input_time 200
