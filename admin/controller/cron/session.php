@@ -5,7 +5,13 @@ class ControllerCronSession extends Controller {
 
 		$this->model_cron_session->deleteExpires();
 
-		$expire = time() - ini_get('session.gc_maxlifetime');
+		if (ini_get('session.gc_maxlifetime')) {
+			$gc_maxlifetime = ini_get('session.gc_maxlifetime');
+		} else {
+			$gc_maxlifetime = 3600;
+		}
+
+		$expire = time() - $gc_maxlifetime;
 
 		$files = glob(DIR_SESSION . 'sess_*');
 
