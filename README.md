@@ -41,9 +41,9 @@ Para acessar uma demonstração online do OpenCart Brasil e visualizar a loja em
 - Campo NCM e CEST nos produtos.
 - Campo SKU nas opções dos produtos.
 - **Atualização automática do OpenCart Brasil**.
+- Melhorias no gerenciamento de sessões.
 - Melhorias no gerenciamento de downloads.
 - Melhorias no processo de login dos clientes.
-- Melhorias no gerenciamento de sessões do PHP.
 - Melhorias na criptografia das senhas dos clientes.
 - Novas extensões do tipo conversor de moedas.
 - O processo de instalação ocorre em português do Brasil.
@@ -135,12 +135,12 @@ Se você é o profissional que administra os servidores que armazenam os arquivo
 
 ### Bancos de dados compatíveis:
 
-- MySQL 5.5 ou superior (Recomendado 5.7).
-- MariaDB 5.5 ou superior (Recomendado 10.3).
+- MySQL 5.5 ou superior (Recomendado 5.7 ou superior).
+- MariaDB 5.5 ou superior (Recomendado 10.3 ou superior).
 
 ### Versões do PHP compatíveis:
 
-- 5.6 ou superior (recomendado 7.3).
+- 5.6 ou superior (recomendado 7.3 ou superior).
 
 ### Configurações mínimas necessárias no PHP:
 
@@ -193,7 +193,7 @@ Se você é o profissional que administra os servidores que armazenam os arquivo
 
 Não é compatível com sistema operacional Windows utilizando servidor web IIS.
 
-Em breve a versão mínima aceita pelo OpenCart será o PHP 7.1 (recomendado PHP 7.3), pois o suporte para o PHP até as versões 7.0 encerraram em dezembro de 2018, ou seja, não faz sentido continuar o suporte para versões do PHP que os próprios desenvolvedores abandonaram, o que significa que essas versões não receberão correções de bugs e falhas.
+Em breve a versão mínima aceita pelo OpenCart será o PHP 7.1 (recomendado PHP 7.3 ou superior), pois o suporte para o PHP até as versões 7.0 encerraram em dezembro de 2018, ou seja, não faz sentido continuar o suporte para versões do PHP que os próprios desenvolvedores abandonaram, o que significa que essas versões não receberão correções de bugs e falhas.
 
 ## Download
 
