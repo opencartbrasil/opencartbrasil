@@ -9,6 +9,7 @@ e utiliza [Semantic Versioning](https://semver.org/lang/pt-BR/spec/v2.0.0.html).
 ## [1.4.10] (Data de lançamento: 25.02.2020)
 ### Corrigido:
 
+- O session_id agora possui 32 caracteres.
 - Biblioteca de sessão corrigida, otimizada e segura para tráfegos pequenos a grandes
 
 ### Adicionado:
