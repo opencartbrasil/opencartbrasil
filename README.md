@@ -169,7 +169,7 @@ Se você é o profissional que administra os servidores que armazenam os arquivo
 | `session.gc_probability` | 1 |
 | `session.gc_divisor` | 100 |
 
-**Notas sobre as configurações do PHP:**
+### ⚠ Notas:
 
 Só habilite a diretiva **session.cookie_secure** quando o HTTPS estiver funcionando em todas as páginas da sua loja, caso contrário o usuário não conseguirá logar. Lembrando que toda loja deve utilizar certificado de segurança para conexão segura por HTTPS.
 
