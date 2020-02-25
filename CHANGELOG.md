@@ -7,13 +7,19 @@ e utiliza [Semantic Versioning](https://semver.org/lang/pt-BR/spec/v2.0.0.html).
 ## [Não lançada]
 
 ## [1.4.10] (Data de lançamento: 25.02.2020)
-### Corrigido
-- Correção e melhoria na tarefa cron para limpeza de sessão.
-- Biblioteca de sessão mais segura, otimizada e preparada para gerenciar de pequenos a grandes volumes de acessos.
+### Corrigido:
 
-### Adicionado
-- Suporte para cookie SameSite com PHP 7.3
-- O cookie seguro é ativado automaticamente caso o HTTPS esteja ativado.
+- Biblioteca de sessão corrigida, otimizada e segura para tráfegos pequenos a grandes
+
+### Adicionado:
+
+- Novo gerenciamento do cookie de sessão
+- Suporte para cookie seguro quando detectado HTTPS
+- Suporte para cookie SameSite com PHP 7.3 ou superior
+- Suporte para garbage collector com atraso na execução
+- Suporte para verificar se o novo session_id já está em uso, caso esteja gera um novo e único
+- Suporte para regerar o session_id quando: login, troca de senha e edição de dados
+- Suporte para limpar a sessão e invalidar o cookie quando for realizado o logout
 
 ## [1.4.9] (Data de lançamento: 12.02.2020)
 ### Corrigido
