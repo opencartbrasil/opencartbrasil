@@ -49,15 +49,15 @@ class ControllerCommonFooter extends Controller {
 				}
 			}
 
-			if(isset($this->request->server['HTTP_CF_CONNECTING_IP']) && filter_var($this->request->server['HTTP_CF_CONNECTING_IP'], FILTER_VALIDATE_IP)){
+			if (isset($this->request->server['HTTP_CF_CONNECTING_IP']) && filter_var($this->request->server['HTTP_CF_CONNECTING_IP'], FILTER_VALIDATE_IP)) {
 				$ip = $this->request->server['HTTP_CF_CONNECTING_IP'];
 			}
 
-			if(isset($this->request->server['HTTP_INCAP_CLIENT_IP']) && filter_var($this->request->server['HTTP_INCAP_CLIENT_IP'], FILTER_VALIDATE_IP)){
+			if (isset($this->request->server['HTTP_INCAP_CLIENT_IP']) && filter_var($this->request->server['HTTP_INCAP_CLIENT_IP'], FILTER_VALIDATE_IP)) {
 				$ip = $this->request->server['HTTP_INCAP_CLIENT_IP'];
 			}
 
-			if(isset($this->request->server['HTTP_X_SUCURI_CLIENTIP']) && filter_var($this->request->server['HTTP_X_SUCURI_CLIENTIP'], FILTER_VALIDATE_IP)){
+			if (isset($this->request->server['HTTP_X_SUCURI_CLIENTIP']) && filter_var($this->request->server['HTTP_X_SUCURI_CLIENTIP'], FILTER_VALIDATE_IP)) {
 				$ip = $this->request->server['HTTP_X_SUCURI_CLIENTIP'];
 			}
 
