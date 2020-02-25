@@ -13,6 +13,7 @@ e utiliza [Semantic Versioning](https://semver.org/lang/pt-BR/spec/v2.0.0.html).
 
 ### Adicionado
 - Suporte para cookie SameSite com PHP 7.3
+- O cookie seguro é ativado automaticamente caso o HTTPS esteja ativado.
 
 ## [1.4.9] (Data de lançamento: 12.02.2020)
 ### Corrigido
