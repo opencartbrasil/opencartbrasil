@@ -9,18 +9,19 @@ e utiliza [Semantic Versioning](https://semver.org/lang/pt-BR/spec/v2.0.0.html).
 ## [1.4.10] (Data de lançamento: 25.02.2020)
 ### Corrigido:
 
-- O session_id agora possui 32 caracteres
 - Biblioteca de sessão corrigida, otimizada e segura para tráfegos pequenos a grandes
 
 ### Adicionado:
 
-- Novo gerenciamento do cookie de sessão
-- Suporte para cookie seguro quando detectado HTTPS
-- Suporte para cookie SameSite com PHP 7.3 ou superior
-- Suporte para garbage collector com atraso na execução
-- Suporte para verificar se o novo session_id já está em uso, caso esteja gera um novo e único
-- Suporte para regerar o session_id quando: login, troca de senha e edição de dados
-- Suporte para limpar a sessão e invalidar o cookie quando for realizado o logout
+- Novo session_id com 32 caracteres
+- Gerenciamento de cookies de sessão
+- Cookies HTTPOnly por padrão
+- Cookies Secure quando o HTTPS é detectado
+- Cookie SameSite quando PHP 7.3 ou superior
+- Suporte para coletor de lixo com atraso na execução
+- Suporte para verificar se o novo session_id já está em uso, se estiver gera um novo e exclusivo
+- Suporte para regenerar o session_id quando: login, alteração de senha e edição de dados
+- Suporte para limpar a sessão e invalidar o cookie ao fazer logoff
 
 ## [1.4.9] (Data de lançamento: 12.02.2020)
 ### Corrigido
