@@ -1,8 +1,6 @@
 <?php
 namespace Session;
 class File {
-	private $directory;
-
 	public function read($session_id) {
 		$file = DIR_SESSION . 'sess_' . basename($session_id);
 
@@ -60,6 +58,18 @@ class File {
 
 		if (is_file($file)) {
 			unlink($file);
+		}
+	}
+
+	public function gc($expire) {
+		$expire = time() - $expire;
+
+		$files = glob(DIR_SESSION . 'sess_*');
+
+		foreach ($files as $file) {
+			if (filemtime($file) < $expire) {
+				unlink($file);
+			}
 		}
 	}
 }

@@ -20,20 +20,21 @@ class ControllerStartupSession extends Controller {
 				}
 			}
 
-			if(isset($this->request->server['HTTP_CF_CONNECTING_IP']) && filter_var($this->request->server['HTTP_CF_CONNECTING_IP'], FILTER_VALIDATE_IP)){
+			if (isset($this->request->server['HTTP_CF_CONNECTING_IP']) && filter_var($this->request->server['HTTP_CF_CONNECTING_IP'], FILTER_VALIDATE_IP)) {
 				$ip = $this->request->server['HTTP_CF_CONNECTING_IP'];
 			}
 
-			if(isset($this->request->server['HTTP_INCAP_CLIENT_IP']) && filter_var($this->request->server['HTTP_INCAP_CLIENT_IP'], FILTER_VALIDATE_IP)){
+			if (isset($this->request->server['HTTP_INCAP_CLIENT_IP']) && filter_var($this->request->server['HTTP_INCAP_CLIENT_IP'], FILTER_VALIDATE_IP)) {
 				$ip = $this->request->server['HTTP_INCAP_CLIENT_IP'];
 			}
 
-			if(isset($this->request->server['HTTP_X_SUCURI_CLIENTIP']) && filter_var($this->request->server['HTTP_X_SUCURI_CLIENTIP'], FILTER_VALIDATE_IP)){
+			if (isset($this->request->server['HTTP_X_SUCURI_CLIENTIP']) && filter_var($this->request->server['HTTP_X_SUCURI_CLIENTIP'], FILTER_VALIDATE_IP)) {
 				$ip = $this->request->server['HTTP_X_SUCURI_CLIENTIP'];
 			}
 
 			// Make sure the IP is allowed
 			$api_token = (array_key_exists('api_token', $this->request->get)) ? (string)$this->request->get['api_token'] : '';
+
 			$api_query = $this->db->query("SELECT DISTINCT * FROM `" . DB_PREFIX . "api` `a` LEFT JOIN `" . DB_PREFIX . "api_session` `as` ON (a.api_id = as.api_id) LEFT JOIN " . DB_PREFIX . "api_ip `ai` ON (a.api_id = ai.api_id) WHERE a.status = '1' AND `as`.`session_id` = '" . $this->db->escape((string)$api_token) . "' AND ai.ip = '" . $this->db->escape((string)$ip) . "'");
 
 			if ($api_query->num_rows) {
@@ -43,15 +44,9 @@ class ControllerStartupSession extends Controller {
 				$this->db->query("UPDATE `" . DB_PREFIX . "api_session` SET `date_modified` = NOW() WHERE `api_session_id` = '" . (int)$api_query->row['api_session_id'] . "'");
 			}
 		} else {
-			if (isset($this->request->cookie[$this->config->get('session_name')])) {
-				$session_id = $this->request->cookie[$this->config->get('session_name')];
-			} else {
-				$session_id = '';
-			}
-
+			$session_id = $this->session->get_cookie();
 			$this->session->start($session_id);
-
-			setcookie($this->config->get('session_name'), $this->session->getId(), (ini_get('session.cookie_lifetime') ? (time() + ini_get('session.cookie_lifetime')) : 0), ini_get('session.cookie_path'), ini_get('session.cookie_domain'), ini_get('session.cookie_secure'), ini_get('session.cookie_httponly'));
+			$this->session->set_cookie();
 		}
 	}
 }

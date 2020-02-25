@@ -99,15 +99,9 @@ $session = new Session($config->get('session_engine'), $registry);
 $registry->set('session', $session);
 
 if ($config->get('session_autostart')) {
-	if (isset($_COOKIE[$config->get('session_name')])) {
-		$session_id = $_COOKIE[$config->get('session_name')];
-	} else {
-		$session_id = '';
-	}
-
+	$session_id = $session->get_cookie();
 	$session->start($session_id);
-
-	setcookie($config->get('session_name'), $session->getId(), (ini_get('session.cookie_lifetime') ? (time() + ini_get('session.cookie_lifetime')) : 0), ini_get('session.cookie_path'), ini_get('session.cookie_domain'), ini_get('session.cookie_secure'), ini_get('session.cookie_httponly'));
+	$session->set_cookie();
 }
 
 // Cache

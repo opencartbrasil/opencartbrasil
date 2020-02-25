@@ -22,6 +22,9 @@ class ControllerAccountForgotten extends Controller {
 
 			$this->session->data['success'] = $this->language->get('text_success');
 
+			// Regenerate session_id
+			$this->session->regenerate_session_id();
+
 			$this->response->redirect($this->url->link('account/login', '', true));
 		}
 
