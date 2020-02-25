@@ -473,7 +473,8 @@ e utiliza [Semantic Versioning](https://semver.org/lang/pt-BR/spec/v2.0.0.html).
 - Cupons de descontos para demonstração.
 - Moedas: Euro e Libra esterlina.
 
-[Não lançada]: https://github.com/opencartbrasil/opencartbrasil/compare/v1.4.9...HEAD
+[Não lançada]: https://github.com/opencartbrasil/opencartbrasil/compare/v1.4.10...HEAD
+[1.4.10]: https://github.com/opencartbrasil/opencartbrasil/compare/v1.4.9...v1.4.10
 [1.4.9]: https://github.com/opencartbrasil/opencartbrasil/compare/v1.4.8...v1.4.9
 [1.4.8]: https://github.com/opencartbrasil/opencartbrasil/compare/v1.4.7...v1.4.8
 [1.4.7]: https://github.com/opencartbrasil/opencartbrasil/compare/v1.4.6...v1.4.7
