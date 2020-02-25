@@ -42,6 +42,7 @@ Para acessar uma demonstração online do OpenCart Brasil e visualizar a loja em
 - Campo SKU nas opções dos produtos.
 - **Atualização automática do OpenCart Brasil**.
 - Melhorias no gerenciamento de sessões.
+- Melhorias no gerenciamento de cookies.
 - Melhorias no gerenciamento de downloads.
 - Melhorias no processo de login dos clientes.
 - Melhorias na criptografia das senhas dos clientes.
@@ -165,8 +166,32 @@ Se você é o profissional que administra os servidores que armazenam os arquivo
 | `*session.cookie_secure` | On |
 | `session.cache_limiter` | nocache |
 | `session.gc_maxlifetime` | 3600 |
+| `session.gc_probability` | 1 |
+| `session.gc_divisor` | 100 |
 
-**Aviso:** Habilite **session.cookie_secure** somente quando o HTTPS estiver funcionando em todas as páginas.
+**Notas sobre as configurações do PHP:**
+
+Só habilite a diretiva **session.cookie_secure** quando o HTTPS estiver funcionando em todas as páginas da sua loja, caso contrário o usuário não conseguirá logar. Lembrando que toda loja deve obrigatoriamente um certificado de segurança para conexão segura.
+
+Configure as diretivas **session.gc_probability** e **session.gc_divisor** conforme o número de visitas simultâneas/diárias que você recebe em sua loja, pois elas são as responsáveis pelo momento em que ocorrerá a higienização de sessões expiradas, ou seja, se você configurá-las conforme abaixo:
+
+| Diretiva | Valor |
+| -------- | ----- |
+| `session.gc_probability` | 1 |
+| `session.gc_divisor` | 100 |
+
+Siginifica que "*em média*" a cada **100 visitas**, há **1% de probabilidade** da higienização de sessões expiradas ser executada, o que é mais que suficiente para uma loja de pequeno porte, sendo que você pode configurar higienizações mais agressivas (não recomendado), como abaixo:
+
+| Diretiva | Valor |
+| -------- | ----- |
+| `session.gc_probability` | 1 |
+| `session.gc_divisor` | 4 |
+
+Significa que "*em média*" a cada **4 visitas**, há **25% de probabilidade** da higienização de sessões expiradas ser executada.
+
+O importante é **configurar as diretivas com sabedoria**, levando em consideração a quantidade de visitas simultâneas/diárias que a loja recebe, para não executar higienizações desnecessárias ou poucas higienizações, sempre levando em consideração que as configurações devem ser reavaliadas quando houver alterações na quantidade de visitas simultâneas/diárias da loja, ou quando a loja estiver se preperarando para receber um número de visitas acima do rotineiro.
+
+**Importante:** Não esqueça de habilitar as tarefas agendadas, pois elas são complementares na higienização de sessões expiradas (há instruções mais abaixo sobre como habilitar).
 
 ### Configurações mínimas recomendadas no MySQL/MariaDB:
 
@@ -271,7 +296,7 @@ A execução das tarefas agendadas são essenciais para o funcionamento do OpenC
 
 Atualmente as seguintes tarefas estão agendadas para serem executadas no OpenCart Brasil:
 
-- Higienizar as sessões de login uma vez ao dia.
+- Higienizar as sessões expiradas uma vez ao dia.
 - Atualizar a cotação das moedas uma vez ao dia.
 
 Para executar as tarefas agendadas do OpenCart Brasil, você necessitará acessar através da administração da loja o menu **Extensões→Tarefas agendadas**, copiar a linha que está no campo **Comando**, e adicioná-la para ser executada a cada 1 (uma) hora no Agendador de Tarefas (Cronjobs ou Tarefas Cron) de sua hospedagem.
