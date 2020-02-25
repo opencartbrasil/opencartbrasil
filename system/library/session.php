@@ -57,7 +57,7 @@ class Session {
 		if ($this->config->get('session_name')) {
 			$name = $this->config->get('session_name');
 		} else {
-			$name = 'OCSESSID';
+			$name = 'OCSESSION';
 		}
 
 		if (ini_get('session.cookie_lifetime')) {
