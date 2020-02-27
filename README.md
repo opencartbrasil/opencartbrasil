@@ -164,6 +164,7 @@ Se você é o profissional que administra os servidores que armazenam os arquivo
 | `session.use_trans_sid` | Off |
 | `session.cookie_httponly` | On |
 | `*session.cookie_secure` | On |
+| `*session.cookie_samesite` | Lax |
 | `session.cache_limiter` | nocache |
 | `session.gc_maxlifetime` | 3600 |
 | `session.gc_probability` | 1 |
@@ -172,6 +173,8 @@ Se você é o profissional que administra os servidores que armazenam os arquivo
 ### ⚠ Notas:
 
 Só habilite a diretiva **session.cookie_secure** quando o HTTPS estiver funcionando em todas as páginas da sua loja, caso contrário o usuário não conseguirá logar. Lembrando que toda loja deve utilizar certificado de segurança para conexão segura por HTTPS.
+
+Só habilite a diretiva **session.cookie_samesite** se você estiver utilizando o PHP 7.3 ou superior.
 
 Configure as diretivas **session.gc_probability** e **session.gc_divisor** conforme o número de visitas simultâneas/diárias que a loja recebe, pois elas são as responsáveis pelo momento em que ocorrerá a higienização de sessões expiradas, ou seja, se você configurá-las conforme abaixo:
 
