@@ -10,7 +10,7 @@ $_['language_autoload'] = array('pt-br');
 // Session
 $_['session_engine']    = 'file';
 $_['session_autostart'] = true;
-$_['session_name']      = 'OCSESSID';
+$_['session_name']      = 'OCSESSION';
 
 // Template
 $_['template_engine']   = 'twig';
