@@ -39,9 +39,6 @@ class ControllerAccountLogin extends Controller {
 				}
 			}
 
-			// Regenerate session_id
-			$this->session->regenerate_session_id();
-
 			// Log the IP info
 			$this->model_account_customer->addLogin($this->customer->getId(), $this->request->server['REMOTE_ADDR']);
 
