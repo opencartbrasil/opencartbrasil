@@ -6,6 +6,11 @@ e utiliza [Semantic Versioning](https://semver.org/lang/pt-BR/spec/v2.0.0.html).
 
 ## [Não lançada]
 
+## [1.4.11] (Data de lançamento: 05.04.2020)
+### Corrigido:
+
+- Correção na renovação da sessão ao logar e editar dados do cliente na loja
+
 ## [1.4.10] (Data de lançamento: 25.02.2020)
 ### Corrigido:
 
@@ -482,7 +487,8 @@ e utiliza [Semantic Versioning](https://semver.org/lang/pt-BR/spec/v2.0.0.html).
 - Cupons de descontos para demonstração.
 - Moedas: Euro e Libra esterlina.
 
-[Não lançada]: https://github.com/opencartbrasil/opencartbrasil/compare/v1.4.10...HEAD
+[Não lançada]: https://github.com/opencartbrasil/opencartbrasil/compare/v1.4.11...HEAD
+[1.4.11]: https://github.com/opencartbrasil/opencartbrasil/compare/v1.4.10...v1.4.11
 [1.4.10]: https://github.com/opencartbrasil/opencartbrasil/compare/v1.4.9...v1.4.10
 [1.4.9]: https://github.com/opencartbrasil/opencartbrasil/compare/v1.4.8...v1.4.9
 [1.4.8]: https://github.com/opencartbrasil/opencartbrasil/compare/v1.4.7...v1.4.8
