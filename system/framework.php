@@ -41,11 +41,11 @@ set_error_handler(function($code, $message, $file, $line) use($log, $config) {
 	}
 
 	if ($config->get('error_display')) {
-		echo '<b>' . $error . '</b>: ' . $message . ' no arquivo <b>' . $file . '</b> na linha <b>' . $line . '</b>';
+		echo $error . ': ' . $message . ' no arquivo ' . $file . ' na linha ' . $line;
 	}
 
 	if ($config->get('error_log')) {
-		$log->write('PHP ' . $error . ':  ' . $message . ' no arquivo ' . $file . ' na linha ' . $line);
+		$log->write($error . ':  ' . $message . ' no arquivo ' . $file . ' na linha ' . $line);
 	}
 
 	return true;
@@ -53,7 +53,7 @@ set_error_handler(function($code, $message, $file, $line) use($log, $config) {
 
 set_exception_handler(function($e) use ($log, $config) {
 	if ($config->get('error_display')) {
-		echo '<b>' . get_class($e) . '</b>: ' . $e->getMessage() . ' no arquivo <b>' . $e->getFile() . '</b> na linha <b>' . $e->getLine() . '</b>';
+		echo get_class($e) . ': ' . $e->getMessage() . ' no arquivo ' . $e->getFile() . ' na linha ' . $e->getLine();
 	}
 
 	if ($config->get('error_log')) {
