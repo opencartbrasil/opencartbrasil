@@ -97,10 +97,6 @@ class ControllerExtensionModuleCarousel extends Controller {
 			$data['banner_id'] = '';
 		}
 
-		$this->load->model('design/banner');
-
-		$data['banners'] = $this->model_design_banner->getBanners();
-
 		if (isset($this->request->post['width'])) {
 			$data['width'] = $this->request->post['width'];
 		} elseif (!empty($module_info)) {
