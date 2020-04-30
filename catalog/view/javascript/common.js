@@ -23,6 +23,13 @@ function getURLVar(key) {
 }
 
 $(document).ready(function() {
+	// Security Fix https://blog.jquery.com/2020/04/10/jquery-3-5-0-released/
+	if ($.isFunction($.htmlPrefilter)) {
+		$.htmlPrefilter = function(html) {
+			return html;
+		};
+	};
+
 	// Highlight any found errors
 	$('.text-danger').each(function() {
 		var element = $(this).parent().parent();
