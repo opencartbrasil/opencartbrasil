@@ -320,7 +320,7 @@ Adicione no arquivo **nginx.conf** dentro do bloco "**location / { }**":
   if (!-f $request_filename) { set $rule_0 1$rule_0; }
   if (!-d $request_filename){ set $rule_0 2$rule_0; }
   if ($uri !~ ".*.(ico|gif|jpg|jpeg|png|js|css)"){ set $rule_0 3$rule_0; }
-  if ($rule_0 = "321"){ rewrite ^/([^?]*) /index.php?_route_=$1 last; }
+  if ($rule_0 = "321"){ rewrite ^/(.+)$ /index.php?_route_=$1 last; }
 ```
 
 ## Versionamento
