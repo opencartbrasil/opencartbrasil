@@ -7,7 +7,7 @@ Options +SymLinksIfOwnerMatch
 Options -Indexes
 
 ## As linhas abaixo evitam o acesso direto a arquivos críticos do OpenCart.
-<FilesMatch "(?i)((\.tpl|.twig|\.ini|\.log|(?<!robots)\.txt))">
+<FilesMatch "(?i)((\.tpl|\.twig|\.ini|\.log|(?<!robots)\.txt))">
  Require all denied
 ## Se estiver utilizando o Apache 2.2 ou versão inferior, acrescente o # na frente da linha "Require all denied" que fica acima, e remova o # das duas linhas abaixo:
 # Order deny,allow
