@@ -104,6 +104,7 @@ Após executar os procedimentos, acesse a administração da loja e vá no menu 
 - [x] Melhorias na comunicação com o banco de dados.
 - [x] Melhorias na criptografia das senhas dos clientes.
 - [x] Melhorias na redefinição de senha do cliente na loja.
+- [x] Melhorias ao criar pastas e enviar imagens através do gerenciador de arquivos.
 
 ### Tarefas em andamento:
 
