@@ -229,7 +229,7 @@ class ControllerCommonFileManager extends Controller {
 			foreach ($files as $file) {
 				if (is_file($file['tmp_name'])) {
 					// Sanitize the filename
-					$filename = basename(html_entity_decode($file['name'], ENT_QUOTES, 'UTF-8'));
+					$filename = $this->sanitize_file($file['name']);
 
 					// Validate the filename length
 					if ((utf8_strlen($filename) < 3) || (utf8_strlen($filename) > 255)) {
@@ -244,7 +244,7 @@ class ControllerCommonFileManager extends Controller {
 						'png'
 					);
 
-					if (!in_array(utf8_strtolower(utf8_substr(strrchr($filename, '.'), 1)), $allowed)) {
+					if (!in_array(utf8_substr(strrchr($filename, '.'), 1), $allowed)) {
 						$json['error'] = $this->language->get('error_filetype');
 					}
 
@@ -307,7 +307,7 @@ class ControllerCommonFileManager extends Controller {
 
 		if ($this->request->server['REQUEST_METHOD'] == 'POST') {
 			// Sanitize the folder name
-			$folder = basename(html_entity_decode($this->request->post['folder'], ENT_QUOTES, 'UTF-8'));
+			$folder = $this->sanitize_folder($this->request->post['folder']);
 
 			// Validate the filename length
 			if ((utf8_strlen($folder) < 3) || (utf8_strlen($folder) > 128)) {
@@ -411,5 +411,21 @@ class ControllerCommonFileManager extends Controller {
 
 		$this->response->addHeader('Content-Type: application/json');
 		$this->response->setOutput(json_encode($json));
+	}
+
+	private function sanitize_folder($string) {
+		setlocale(LC_ALL, 'en_US.UTF8');
+
+		$string = iconv('UTF-8', 'ASCII//TRANSLIT', $string);
+		$string = preg_replace("/[^a-zA-Z0-9-]/", '', $string);
+		return strtolower(trim($string, '-'));
+	}
+
+	private function sanitize_file($string) {
+		setlocale(LC_ALL, 'en_US.UTF8');
+
+		$string = iconv('UTF-8', 'ASCII//TRANSLIT', $string);
+		$string = preg_replace("/[^a-zA-Z0-9-.]/", '', $string);
+		return strtolower(trim($string, '-'));
 	}
 }
