@@ -7,8 +7,7 @@ e utiliza [Semantic Versioning](https://semver.org/lang/pt-BR/spec/v2.0.0.html).
 ## [Não lançada]
 
 ## [1.4.12] (Data de lançamento: 04.05.2020)
-### Corrigido:
-
+### Corrigido
 - Correção no .htaccess
 - Correção na exibição das avaliações
 - Correção no módulo Opções de filtro
@@ -21,22 +20,18 @@ e utiliza [Semantic Versioning](https://semver.org/lang/pt-BR/spec/v2.0.0.html).
 - Remoção de chamada model duplicada no módulo Carrossel de imagens
 
 ### Adicionado
-
 - Suporte para CDN no tema da administração
 - Atualização da biblioteca jQuery para versão 2.2.4 no tema default, basico e administração
 
 ## [1.4.11] (Data de lançamento: 05.04.2020)
-### Corrigido:
-
+### Corrigido
 - Correção na renovação da sessão ao logar e editar dados do cliente na loja
 
 ## [1.4.10] (Data de lançamento: 25.02.2020)
-### Corrigido:
-
+### Corrigido
 - Biblioteca de sessão corrigida, otimizada e segura para tráfegos pequenos a grandes
 
-### Adicionado:
-
+### Adicionado
 - Novo session_id com 32 caracteres
 - Gerenciamento de cookies de sessão
 - Cookies HTTPOnly por padrão
@@ -506,7 +501,7 @@ e utiliza [Semantic Versioning](https://semver.org/lang/pt-BR/spec/v2.0.0.html).
 - Cupons de descontos para demonstração.
 - Moedas: Euro e Libra esterlina.
 
-[Não lançada]: https://github.com/opencartbrasil/opencartbrasil/compare/v1.4.12...HEAD
+[Não lançada]: https://github.com/opencartbrasil/opencartbrasil/compare/v1.5.0...HEAD
 [1.4.12]: https://github.com/opencartbrasil/opencartbrasil/compare/v1.4.11...v1.4.12
 [1.4.11]: https://github.com/opencartbrasil/opencartbrasil/compare/v1.4.10...v1.4.11
 [1.4.10]: https://github.com/opencartbrasil/opencartbrasil/compare/v1.4.9...v1.4.10
