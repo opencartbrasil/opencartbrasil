@@ -23,13 +23,6 @@ function getURLVar(key) {
 }
 
 $(document).ready(function() {
-	// Security Fix https://blog.jquery.com/2020/04/10/jquery-3-5-0-released/
-	if ($.isFunction($.htmlPrefilter)) {
-		$.htmlPrefilter = function(html) {
-			return html;
-		};
-	};
-
 	// Form Submit for IE Browser
 	$('button[type=\'submit\']').on('click', function(e) {
 		if ($("form[id*='form-']").length > 0) {
