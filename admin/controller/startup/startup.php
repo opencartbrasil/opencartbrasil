@@ -67,5 +67,10 @@ class ControllerStartupStartup extends Controller {
 
 		// Encryption
 		$this->registry->set('encryption', new Encryption($this->config->get('config_encryption')));
+
+		// OpenBay Pro
+		if ($this->config->get('feed_openbaypro_status') == '1') {
+			$this->registry->set('openbay', new Openbay($this->registry));
+		}
 	}
 }
