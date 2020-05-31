@@ -269,13 +269,13 @@ class ControllerExtensionPaymentSquareup extends Controller {
 
         if ($api_info && $this->user->hasPermission('modify', 'sale/order')) {
             $session = new Session($this->config->get('session_engine'), $this->registry);
-            
+
             $session->start();
-                    
-            $this->model_user_api->deleteApiSessionBySessonId($session->getId());
-            
+
+            $this->model_user_api->deleteApiSessionBySessionId($session->getId());
+
             $this->model_user_api->addApiSession($api_info['api_id'], $session->getId(), $this->request->server['REMOTE_ADDR']);
-            
+
             $session->data['api_id'] = $api_info['api_id'];
 
             $data['api_token'] = $session->getId();
@@ -431,7 +431,7 @@ class ControllerExtensionPaymentSquareup extends Controller {
             
             $session->start();
                     
-            $this->model_user_api->deleteApiSessionBySessonId($session->getId());
+            $this->model_user_api->deleteApiSessionBySessionId($session->getId());
             
             $this->model_user_api->addApiSession($api_info['api_id'], $session->getId(), $this->request->server['REMOTE_ADDR']);
             
@@ -796,13 +796,13 @@ class ControllerExtensionPaymentSquareup extends Controller {
 
         if ($api_info && $this->user->hasPermission('modify', 'sale/order')) {
             $session = new Session($this->config->get('session_engine'), $this->registry);
-            
+
             $session->start();
-                    
-            $this->model_user_api->deleteApiSessionBySessonId($session->getId());
-            
+
+            $this->model_user_api->deleteApiSessionBySessionId($session->getId());
+
             $this->model_user_api->addApiSession($api_info['api_id'], $session->getId(), $this->request->server['REMOTE_ADDR']);
-            
+
             $session->data['api_id'] = $api_info['api_id'];
 
             $data['api_token'] = $session->getId();
@@ -815,7 +815,7 @@ class ControllerExtensionPaymentSquareup extends Controller {
 
     public function install() {
         $this->load->model('extension/payment/squareup');
-        
+
         $this->model_extension_payment_squareup->createTables();
     }
 
@@ -869,13 +869,13 @@ class ControllerExtensionPaymentSquareup extends Controller {
 
         if ($api_info && $this->user->hasPermission('modify', 'sale/order')) {
             $session = new Session($this->config->get('session_engine'), $this->registry);
-            
+
             $session->start();
-                    
-            $this->model_user_api->deleteApiSessionBySessonId($session->getId());
-            
+
+            $this->model_user_api->deleteApiSessionBySessionId($session->getId());
+
             $this->model_user_api->addApiSession($api_info['api_id'], $session->getId(), $this->request->server['REMOTE_ADDR']);
-            
+
             $session->data['api_id'] = $api_info['api_id'];
 
             $data['api_token'] = $session->getId();
@@ -892,18 +892,18 @@ class ControllerExtensionPaymentSquareup extends Controller {
         $this->load->language('extension/payment/squareup');
 
         $json = array();
-        
+
         if (!$this->user->hasPermission('modify', 'sale/recurring')) {
             $json['error'] = $this->language->get('error_permission_recurring');
         } else {
             $this->load->model('sale/recurring');
-            
+
             if (isset($this->request->get['order_recurring_id'])) {
                 $order_recurring_id = $this->request->get['order_recurring_id'];
             } else {
                 $order_recurring_id = 0;
             }
-            
+
             $recurring_info = $this->model_sale_recurring->getRecurring($order_recurring_id);
 
             if ($recurring_info) {
@@ -912,7 +912,7 @@ class ControllerExtensionPaymentSquareup extends Controller {
                 $this->model_extension_payment_squareup->editOrderRecurringStatus($order_recurring_id, ModelExtensionPaymentSquareup::RECURRING_CANCELLED);
 
                 $json['success'] = $this->language->get('text_canceled_success');
-                
+
             } else {
                 $json['error'] = $this->language->get('error_not_found');
             }
