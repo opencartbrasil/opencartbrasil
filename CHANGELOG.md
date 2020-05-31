@@ -6,6 +6,31 @@ e utiliza [Semantic Versioning](https://semver.org/lang/pt-BR/spec/v2.0.0.html).
 
 ## [Não lançada]
 
+## [1.4.13] (Data de lançamento: 01.06.2020)
+### Corrigido
+- Correção para extensão Openbay
+- Correção no módulo dashboard chart
+- Correção no e-mail de afiliado aprovado
+- Correção de bug no editor Summernote @redbraz
+- Correção no nome da função para deletar sessão da API
+- Correção nas configurações da extensão depósito bancário
+- Correção no link para login no e-mail de afiliado aprovado
+- Correção na permissão de acesso a tela do procedimento de segurança @condor2
+- Correção na seleção de endereço quando o cliente realiza o login no checkout @condor2
+- Melhoria na segurança da paginação @condor2
+- Melhorias e correções na instalação do OpenCart
+
+### Modificado
+- Atualização da extensão para Frenet
+- Atualização no stylesheet.css do admin
+- Atualização no stylesheet.css do install
+- Atualização da integração com a Tiny ERP
+- Novo endpoint para verificação do IP do cliente
+- Remoção do AddThis por problemas com cookie e lentidão no carregamento
+
+### Adicionado
+- Compatível com OpenCart 3.0.3.3
+
 ## [1.4.12] (Data de lançamento: 04.05.2020)
 ### Corrigido
 - Correção no .htaccess
@@ -501,7 +526,8 @@ e utiliza [Semantic Versioning](https://semver.org/lang/pt-BR/spec/v2.0.0.html).
 - Cupons de descontos para demonstração.
 - Moedas: Euro e Libra esterlina.
 
-[Não lançada]: https://github.com/opencartbrasil/opencartbrasil/compare/v1.4.12...HEAD
+[Não lançada]: https://github.com/opencartbrasil/opencartbrasil/compare/v1.4.13...HEAD
+[1.4.13]: https://github.com/opencartbrasil/opencartbrasil/compare/v1.4.12...v1.4.13
 [1.4.12]: https://github.com/opencartbrasil/opencartbrasil/compare/v1.4.11...v1.4.12
 [1.4.11]: https://github.com/opencartbrasil/opencartbrasil/compare/v1.4.10...v1.4.11
 [1.4.10]: https://github.com/opencartbrasil/opencartbrasil/compare/v1.4.9...v1.4.10
