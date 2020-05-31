@@ -4,7 +4,7 @@
 <p align="center">
 <a href="https://github.com/opencartbrasil/opencartbrasil/releases"><img src="https://img.shields.io/github/downloads/opencartbrasil/opencartbrasil/total.svg"></a>
 <a href="./CHANGELOG.md"><img src="https://img.shields.io/github/release/opencartbrasil/opencartbrasil.svg" alt="Última versão"></a>
-<img src="https://img.shields.io/badge/opencart-3.0.3.2-blue.svg" alt="Compatibilidade">
+<img src="https://img.shields.io/badge/opencart-3.0.3.3-blue.svg" alt="Compatibilidade">
 <a href="./LICENSE"><img src="https://img.shields.io/github/license/opencartbrasil/opencartbrasil.svg" alt="Licença"></a>
 </p>
 
