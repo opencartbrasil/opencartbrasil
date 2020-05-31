@@ -1,191 +1,209 @@
 <?php
 class ModelExtensionShippingFrenet extends Model {
-	private $servicos = array();
-	private $url = '';
-	private $quote_data = array();
+    private $servicos = array();
+    private $url = '';
+    private $quote_data = array();
 
-	private $cep_destino;
-	private $cep_origem;
-	private $pais_destino;
+    private $cep_destino;
+    private $cep_origem;
+    private $pais_destino;
 
-	private $mensagem_erro = array();
+    private $mensagem_erro = array();
 
-	// função responsável pelo retorno à loja dos valores finais dos valores dos fretes
-	/**
-	 * @param $address
-	 * @return array
-	 */
-	public function getQuote($address) {
+    protected function get_coupon() {
+        if (!isset($this->session->data['coupon'])) {
+            return null;
+        }
 
-		$this->load->language('extension/shipping/frenet');
+        return $this->session->data['coupon'];
+    }
 
-		$method_data = array();
+    // função responsável pelo retorno à loja dos valores finais dos valores dos fretes
+    /**
+     * @param $address
+     * @return array
+     */
+    public function getQuote($address) {
+        $this->load->language('extension/shipping/frenet');
 
-		$produtos = $this->cart->getProducts();
+        $method_data = array();
 
-		// obtém só a parte numérica do CEP
-		$this->cep_origem = preg_replace ("/[^0-9]/", '', $this->config->get('shipping_frenet_postcode'));
-		$this->cep_destino = preg_replace ("/[^0-9]/", '', $address['postcode']);
+        $produtos = $this->cart->getProducts();
 
-		$this->pais_destino='BR';
-		$this->load->model('localisation/country');
-		$country_info = $this->model_localisation_country->getCountry($address['country_id']);
-		if ($country_info) {
-			$this->pais_destino = $country_info['iso_code_2'];
-		}
+        // obtém só a parte numérica do CEP
+        $this->cep_origem = preg_replace ("/[^0-9]/", '', $this->config->get('shipping_frenet_postcode'));
+        $this->cep_destino = preg_replace ("/[^0-9]/", '', $address['postcode']);
 
-		// product array
-		$shippingItemArray = array();
-		$count = 0;
+        $this->pais_destino='BR';
+        $this->load->model('localisation/country');
+        $country_info = $this->model_localisation_country->getCountry($address['country_id']);
+        if ($country_info) {
+            $this->pais_destino = $country_info['iso_code_2'];
+        }
 
-		foreach ($produtos as $prod) {
-			$qty = $prod['quantity'];
-			$shippingItem = new stdClass();
+        // product array
+        $shippingItemArray = array();
+        $count = 0;
 
-			$shippingItem->Weight = $this->getPesoEmKg($prod['weight_class_id'], $prod['weight']) / $qty;
-			$shippingItem->Length = $this->getDimensaoEmCm($prod['length_class_id'], $prod['length']);
-			$shippingItem->Height = $this->getDimensaoEmCm($prod['length_class_id'], $prod['height']);
-			$shippingItem->Width = $this->getDimensaoEmCm($prod['length_class_id'], $prod['width']);
-			$shippingItem->Diameter = 0;
-			$shippingItem->SKU = '';
-			$shippingItem->Category = '';
-			$shippingItem->isFragile=false;
+        foreach ($produtos as $prod) {
+            $qty = $prod['quantity'];
+            $shippingItem = new stdClass();
 
-			// $this->log->write( 'shippingItem: ' . print_r($shippingItem, true));
+            $shippingItem->Weight = $this->getPesoEmKg($prod['weight_class_id'], $prod['weight']) / $qty;
+            $shippingItem->Length = $this->getDimensaoEmCm($prod['length_class_id'], $prod['length']);
+            $shippingItem->Height = $this->getDimensaoEmCm($prod['length_class_id'], $prod['height']);
+            $shippingItem->Width = $this->getDimensaoEmCm($prod['length_class_id'], $prod['width']);
+            $shippingItem->Diameter = 0;
+            $shippingItem->SKU = '';
+            $shippingItem->Category = '';
+            $shippingItem->isFragile=false;
 
-			$shippingItem->Quantity = $qty;
+            //$this->log->write( 'shippingItem: ' . print_r($shippingItem, true));
 
-			$shippingItemArray[$count] = $shippingItem;
-			$count++;
-		}
+            $shippingItem->Quantity = $qty;
 
-		$service_param = array (
-			'quoteRequest' => array(
-				'Username' => $this->config->get('shipping_frenet_contrato_codigo'),
-				'Password' => $this->config->get('shipping_frenet_contrato_senha'),
-				'SellerCEP' => $this->cep_origem,
-				'RecipientCEP' => $this->cep_destino,
-				'RecipientDocument' => '',
-				'ShipmentInvoiceValue' => $this->cart->getSubTotal(),
-				'ShippingItemArray' => $shippingItemArray,
-				'RecipientCountry' => $this->pais_destino
-			)
-		);
-		//$this->log->write('service_param: ' . print_r($service_param, true));
+            $shippingItemArray[$count] = $shippingItem;
+            $count++;
+        }
 
-		$this->setUrl();
+        $coupon = $this->get_coupon();
 
-		// Gets the WebServices response.
-		ini_set('soap.wsdl_cache_enabled', '0');
-		$client = new SoapClient($this->url, array("soap_version" => SOAP_1_1,"trace" => 1));
-		$response = $client->__soapCall("GetShippingQuote", array($service_param));
-		//$this->log->write(  $client->__getLastRequest());
-		//$this->log->write(  $client->__getLastResponse());
+        $service_param = array (
+            'quoteRequest' => array(
+                'Username' => $this->config->get('shipping_frenet_contrato_codigo'),
+                'Password' => $this->config->get('shipping_frenet_contrato_senha'),
+                'Token' => $this->config->get('shipping_frenet_contrato_token'),
+                'Coupom' => $coupon,
+                'PlatformName' => 'Magento',
+                'PlatformVersion' => VERSION,
+                'SellerCEP' => $this->cep_origem,
+                'RecipientCEP' => $this->cep_destino,
+                'RecipientDocument' => '',
+                'ShipmentInvoiceValue' => $this->cart->getSubTotal(),
+                'ShippingItemArray' => $shippingItemArray,
+                'RecipientCountry' => $this->pais_destino
+            )
+        );
 
-		$values = array();
+        //invocarFrenet($service_param);
 
-		if ( isset( $response->GetShippingQuoteResult ) && isset($response->GetShippingQuoteResult->ShippingSevicesArray)
-			&& isset($response->GetShippingQuoteResult->ShippingSevicesArray->ShippingSevices)) {
-			if(count($response->GetShippingQuoteResult->ShippingSevicesArray->ShippingSevices)==1)
-				$servicosArray[0] = $response->GetShippingQuoteResult->ShippingSevicesArray->ShippingSevices;
-			else
-				$servicosArray = $response->GetShippingQuoteResult->ShippingSevicesArray->ShippingSevices;
+        //$this->log->write('service_param: ' . print_r($service_param, true));
 
-			foreach($servicosArray as $servicos){
-				if (!isset($servicos->ServiceCode) || $servicos->ServiceCode . '' == '' || !isset($servicos->ShippingPrice)) {
-					continue;
-				}
+        $this->setUrl();
 
-				if(!isset($servicos->ShippingPrice))
-					continue;
+        // Gets the WebServices response.
+        ini_set('soap.wsdl_cache_enabled', '0');
+        $client = new SoapClient($this->url, array("soap_version" => SOAP_1_1,"trace" => 1));
+        $response = $client->__soapCall("GetShippingQuote", array($service_param));
 
-				if (isset($servicos->DeliveryTime))
-					$deliveryTime=$servicos->DeliveryTime;
+        //$this->log->write(  $client->__getLastRequest());
+        //$this->log->write(  $client->__getLastResponse());
 
-				if ( $deliveryTime > 0 && $this->config->get('shipping_frenet_msg_prazo') ) {
-					$label = sprintf($this->config->get('shipping_frenet_msg_prazo'), $servicos->ServiceDescription, (int)$deliveryTime);
-				}
-				else{
-					$label = $servicos->ServiceDescription;
-				}
+        $values = array();
 
-				$cost  = floatval(str_replace(",", ".", (string) $servicos->ShippingPrice));
-				if (version_compare(VERSION, '2.2') < 0) {
-					$text = $this->currency->format($this->tax->calculate($cost, $this->config->get('frenet_tax_class_id'), $this->config->get('config_tax')));
-				} else {
-					$text = $this->currency->format($this->tax->calculate($cost, $this->config->get('frenet_tax_class_id'), $this->config->get('config_tax')), $this->session->data['currency']);
-				}
+        if ( isset( $response->GetShippingQuoteResult ) && isset($response->GetShippingQuoteResult->ShippingSevicesArray)
+            && isset($response->GetShippingQuoteResult->ShippingSevicesArray->ShippingSevices)) {
+            if(count($response->GetShippingQuoteResult->ShippingSevicesArray->ShippingSevices)==1)
+                $servicosArray[0] = $response->GetShippingQuoteResult->ShippingSevicesArray->ShippingSevices;
+            else
+                $servicosArray = $response->GetShippingQuoteResult->ShippingSevicesArray->ShippingSevices;
 
-				$this->quote_data[$servicos->ServiceCode] = array(
-					'code'         => 'frenet.' . $servicos->ServiceCode,
-					'title'        => $label,
-					'cost'         => $cost,
-					'tax_class_id' => $this->config->get('frenet_tax_class_id'),
-					'text'         => $text
-				);
+            foreach($servicosArray as $servicos){
+                if (!isset($servicos->ServiceCode) || $servicos->ServiceCode . '' == '' || !isset($servicos->ShippingPrice)) {
+                    continue;
+                }
 
-			}
-		}
+                if (!isset($servicos->ShippingPrice))
+                    continue;
 
-		// ajustes finais
-		if ($this->quote_data) {
+                if (isset($servicos->DeliveryTime))
+                    $deliveryTime=$servicos->DeliveryTime;
 
-			$method_data = array(
-				'code'       => 'frenet',
-				'title'      => $this->language->get('text_title'),
-				'quote'      => $this->quote_data,
-				'sort_order' => $this->config->get('shipping_frenet_sort_order'),
-				'error'      => false
-			);
-		}
-		else if(!empty($this->mensagem_erro)){
-			$method_data = array(
-				'code'       => 'frenet',
-				'title'      => $this->language->get('text_title'),
-				'quote'      => $this->quote_data,
-				'sort_order' => $this->config->get('shipping_frenet_sort_order'),
-				'error'      => implode('<br />', $this->mensagem_erro)
-			);
-		}
+                if ( $deliveryTime > 0 && $this->config->get('shipping_frenet_msg_prazo') ) {
+                    $label = sprintf($this->config->get('shipping_frenet_msg_prazo'), $servicos->ServiceDescription, (int)$deliveryTime);
+                } else {
+                    $label = $servicos->ServiceDescription;
+                }
 
-		return $method_data;
-	}
+                $cost  = floatval(str_replace(",", ".", (string) $servicos->ShippingPrice));
+                if (version_compare(VERSION, '2.2') < 0) {
+                    $text = $this->currency->format($this->tax->calculate($cost, $this->config->get('frenet_tax_class_id'), $this->config->get('config_tax')));
+                } else {
+                    $text = $this->currency->format($this->tax->calculate($cost, $this->config->get('frenet_tax_class_id'), $this->config->get('config_tax')), $this->session->data['currency']);
+                }
 
-	// prepara a url de chamada ao site dos frenet
-	private function setUrl(){
-		$url = "http://services.frenet.com.br/logistics/ShippingQuoteWS.asmx?wsdl";
+                $this->quote_data[$servicos->ServiceCode] = array(
+                    'code'         => 'frenet.' . $servicos->ServiceCode,
+                    'title'        => $label,
+                    'cost'         => $cost,
+                    'tax_class_id' => $this->config->get('frenet_tax_class_id'),
+                    'text'         => $text
+                );
+            }
+        }
 
-		$this->url = $url;
-	}
+        // ajustes finais
+        if ($this->quote_data) {
+            $method_data = array(
+                'code'       => 'frenet',
+                'title'      => $this->language->get('text_title'),
+                'quote'      => $this->quote_data,
+                'sort_order' => $this->config->get('shipping_frenet_sort_order'),
+                'error'      => false
+            );
+        } else if (!empty($this->mensagem_erro)) {
+            $method_data = array(
+                'code'       => 'frenet',
+                'title'      => $this->language->get('text_title'),
+                'quote'      => $this->quote_data,
+                'sort_order' => $this->config->get('shipping_frenet_sort_order'),
+                'error'      => implode('<br />', $this->mensagem_erro)
+            );
+        }
 
-	// retorna a dimensão em centímetros
-	private function getDimensaoEmCm($unidade_id, $dimensao){
-		if(is_numeric($dimensao)){
-			$length_class_product_query = $this->db->query("SELECT * FROM " . DB_PREFIX . "length_class mc LEFT JOIN " . DB_PREFIX . "length_class_description mcd ON (mc.length_class_id = mcd.length_class_id) WHERE mcd.language_id = '" . (int)$this->config->get('config_language_id') . "' AND mc.length_class_id =  '" . (int)$unidade_id . "'");
+        return $method_data;
+    }
 
-			if(isset($length_class_product_query->row['unit'])){
-				if($length_class_product_query->row['unit'] == 'mm'){
-					return $dimensao / 10;
-				}
-			}
-		}
+    // prepara a url de chamada ao site dos frenet
+    private function setUrl(){
+        $url = "http://services.frenet.com.br/logistics/ShippingQuoteWS.asmx?wsdl";
 
-		return $dimensao;
-	}
+        $this->url = $url;
+    }
 
-	// retorna o peso em quilogramas
-	private function getPesoEmKg($unidade_id, $peso){
+    // prepara a url de chamada ao site dos frenet
+    private function setApiUrl(){
+        $url = "http://api.frenet.com.br/shipping/quote";
 
-		if(is_numeric($peso)) {
-			$weight_class_product_query = $this->db->query("SELECT * FROM " . DB_PREFIX . "weight_class wc LEFT JOIN " . DB_PREFIX . "weight_class_description wcd ON (wc.weight_class_id = wcd.weight_class_id) WHERE wcd.language_id = '" . (int)$this->config->get('config_language_id') . "' AND wc.weight_class_id =  '" . (int)$unidade_id . "'");
+        $this->url = $url;
+    }
 
-			if(isset($weight_class_product_query->row['unit'])){
-				if($weight_class_product_query->row['unit'] == 'g'){
-					return ($peso / 1000);
-				}
-			}
-		}
+    // retorna a dimensão em centímetros
+    private function getDimensaoEmCm($unidade_id, $dimensao){
+        if (is_numeric($dimensao)) {
+            $length_class_product_query = $this->db->query("SELECT * FROM " . DB_PREFIX . "length_class mc LEFT JOIN " . DB_PREFIX . "length_class_description mcd ON (mc.length_class_id = mcd.length_class_id) WHERE mcd.language_id = '" . (int)$this->config->get('config_language_id') . "' AND mc.length_class_id =  '" . (int)$unidade_id . "'");
 
-		return $peso;
-	}
+            if (isset($length_class_product_query->row['unit'])) {
+                if ($length_class_product_query->row['unit'] == 'mm') {
+                    return $dimensao / 10;
+                }
+            }
+        }
+        return $dimensao;
+    }
+
+    // retorna o peso em quilogramas
+    private function getPesoEmKg($unidade_id, $peso){
+        if (is_numeric($peso)) {
+            $weight_class_product_query = $this->db->query("SELECT * FROM " . DB_PREFIX . "weight_class wc LEFT JOIN " . DB_PREFIX . "weight_class_description wcd ON (wc.weight_class_id = wcd.weight_class_id) WHERE wcd.language_id = '" . (int)$this->config->get('config_language_id') . "' AND wc.weight_class_id =  '" . (int)$unidade_id . "'");
+
+            if (isset($weight_class_product_query->row['unit'])) {
+                if ($weight_class_product_query->row['unit'] == 'g') {
+                    return ($peso / 1000);
+                }
+            }
+        }
+        return $peso;
+    }
 }
+?>

@@ -18,6 +18,9 @@ $_['entry_msg_prazo']         = 'Mensagem que exibe o prazo de entrega';
 $_['entry_frenet_key_codigo'] = 'Chave';
 $_['entry_frenet_key_senha']  = 'Senha';
 
+$_['entry_frenet_token']        = 'Token';
+$_['entry_frenet_key_token']   	= 'Token';
+
 // Help
 $_['help_frenet_key']         = 'Chave e senha de acesso ao webservice do Frenet.';
 $_['help_msg_prazo']          = '%s - Em média %d dia(s)';
