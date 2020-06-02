@@ -54,7 +54,7 @@ class ControllerToolBackup extends Controller {
 
 			move_uploaded_file($this->request->files['import']['tmp_name'], $filename);
 		} elseif (isset($this->request->get['import'])) {
-			$filename = html_entity_decode($this->request->get['import'], ENT_QUOTES, 'UTF-8');
+			$filename = DIR_UPLOAD . basename(html_entity_decode($this->request->get['import'], ENT_QUOTES, 'UTF-8'));
 		} else {
 			$filename = '';
 		}
@@ -66,7 +66,7 @@ class ControllerToolBackup extends Controller {
 		if (isset($this->request->get['position'])) {
 			$position = $this->request->get['position'];
 		} else {
-			$position = 0; 	
+			$position = 0;
 		}
 
 		if (!$json) {
@@ -154,7 +154,7 @@ class ControllerToolBackup extends Controller {
 
 			$this->load->model('tool/backup');
 
-			$this->response->setOutput($this->model_tool_backup->backup($this->request->post['backup']));		
+			$this->response->setOutput($this->model_tool_backup->backup($this->request->post['backup']));
 		}
 	}
 }
