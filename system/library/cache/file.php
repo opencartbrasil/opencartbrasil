@@ -25,23 +25,27 @@ class File {
 		$files = glob(DIR_CACHE . 'cache.' . basename($key) . '.*');
 
 		if ($files) {
-			$handle = fopen($files[0], 'r');
+			$file = $files[0];
 
-			flock($handle, LOCK_SH);
+			if (is_file($file)) {
+				$handle = fopen($file, 'r');
 
-			$size = filesize($files[0]);
+				flock($handle, LOCK_SH);
 
-			if ($size > 0) {
-				$data = fread($handle, $size);
-			} else {
-				$data = '';
+				$size = filesize($file);
+
+				if ($size > 0) {
+					$data = fread($handle, $size);
+				} else {
+					$data = '';
+				}
+
+				flock($handle, LOCK_UN);
+
+				fclose($handle);
+
+				return json_decode($data, true);
 			}
-
-			flock($handle, LOCK_UN);
-
-			fclose($handle);
-
-			return json_decode($data, true);
 		}
 
 		return false;
