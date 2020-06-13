@@ -6,6 +6,13 @@ e utiliza [Semantic Versioning](https://semver.org/lang/pt-BR/spec/v2.0.0.html).
 
 ## [Não lançada]
 
+## [1.4.14] (Data de lançamento: 13.06.2020)
+### Corrigido
+- Melhoria na importação do backup
+- Melhoria no gerenciamento de cache por arquivo
+- Correção na exibição do número da fatura na administração
+- Correção na listagem de extensões por desenvolvedor no Marketplace
+
 ## [1.4.13] (Data de lançamento: 01.06.2020)
 ### Corrigido
 - Correção para extensão Openbay
@@ -526,7 +533,8 @@ e utiliza [Semantic Versioning](https://semver.org/lang/pt-BR/spec/v2.0.0.html).
 - Cupons de descontos para demonstração.
 - Moedas: Euro e Libra esterlina.
 
-[Não lançada]: https://github.com/opencartbrasil/opencartbrasil/compare/v1.4.13...HEAD
+[Não lançada]: https://github.com/opencartbrasil/opencartbrasil/compare/v1.4.14...HEAD
+[1.4.14]: https://github.com/opencartbrasil/opencartbrasil/compare/v1.4.13...v1.4.14
 [1.4.13]: https://github.com/opencartbrasil/opencartbrasil/compare/v1.4.12...v1.4.13
 [1.4.12]: https://github.com/opencartbrasil/opencartbrasil/compare/v1.4.11...v1.4.12
 [1.4.11]: https://github.com/opencartbrasil/opencartbrasil/compare/v1.4.10...v1.4.11
