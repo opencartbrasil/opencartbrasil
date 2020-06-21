@@ -29,6 +29,7 @@ $_['entry_date_added']  = 'Cadastro';
 $_['help_product']      = 'Pesquisa do tipo autocompletar';
 
 // Error
+$_['error_warning']     = 'Atenção: Faltou você preencher alguma informação, verifique todos os campos.';
 $_['error_permission']  = 'Atenção: Você não tem permissão para modificar os comentários!';
 $_['error_product']     = 'O produto é obrigatório!';
 $_['error_author']      = 'O autor deve ter entre 3 e 64 caracteres!';
