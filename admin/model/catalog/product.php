@@ -47,7 +47,7 @@ class ModelCatalogProduct extends Model {
 						}
 					}
 				} else {
-					$this->db->query("INSERT INTO " . DB_PREFIX . "product_option SET product_id = '" . (int)$product_id . "', option_id = '" . (int)$product_option['option_id'] . "', value = '" . $this->db->escape($product_option['value']) . "', required = '" . (int)$product_option['required'] . "'");
+					$this->db->query("INSERT INTO " . DB_PREFIX . "product_option SET product_id = '" . (int)$product_id . "', option_id = '" . (int)$product_option['option_id'] . "', `value` = '" . $this->db->escape($product_option['value']) . "', required = '" . (int)$product_option['required'] . "'");
 				}
 			}
 		}
@@ -189,7 +189,7 @@ class ModelCatalogProduct extends Model {
 						}
 					}
 				} else {
-					$this->db->query("INSERT INTO " . DB_PREFIX . "product_option SET product_option_id = '" . (int)$product_option['product_option_id'] . "', product_id = '" . (int)$product_id . "', option_id = '" . (int)$product_option['option_id'] . "', value = '" . $this->db->escape($product_option['value']) . "', required = '" . (int)$product_option['required'] . "'");
+					$this->db->query("INSERT INTO " . DB_PREFIX . "product_option SET product_option_id = '" . (int)$product_option['product_option_id'] . "', product_id = '" . (int)$product_id . "', option_id = '" . (int)$product_option['option_id'] . "', `value` = '" . $this->db->escape($product_option['value']) . "', required = '" . (int)$product_option['required'] . "'");
 				}
 			}
 		}
