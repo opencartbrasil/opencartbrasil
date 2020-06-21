@@ -359,7 +359,7 @@ class ControllerMailOrder extends Controller {
 
 		$order_info = $this->model_checkout_order->getOrder($order_id);
 
-		if ($order_info && !$order_info['order_status_id'] && $order_status_id && in_array('order', (array)$this->config->get('config_mail_alert'))) {	
+		if ($order_info && !$order_info['order_status_id'] && $order_status_id && in_array('order', (array)$this->config->get('config_mail_alert'))) {
 			$this->load->language('mail/order_alert');
 
 			// HTML Mail
@@ -383,7 +383,7 @@ class ControllerMailOrder extends Controller {
 			}
 
 			$this->load->model('tool/upload');
-			
+
 			$data['products'] = array();
 
 			$order_products = $this->model_checkout_order->getOrderProducts($order_id);
