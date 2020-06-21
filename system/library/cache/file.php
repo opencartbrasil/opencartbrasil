@@ -27,9 +27,9 @@ class File {
 		if ($files) {
 			$file = $files[0];
 
-			if (is_file($file)) {
-				$handle = fopen($file, 'r');
+			$handle = @fopen($file, 'r');
 
+			if ($handle) {
 				flock($handle, LOCK_SH);
 
 				$size = filesize($file);
