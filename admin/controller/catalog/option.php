@@ -332,12 +332,6 @@ class ControllerCatalogOption extends Controller {
 			$data['error_type'] = '';
 		}
 
-		if (isset($this->error['type_option'])) {
-			$data['error_type_option'] = $this->error['type_option'];
-		} else {
-			$data['error_type_option'] = '';
-		}
-
 		if (isset($this->error['option_value'])) {
 			$data['error_option_value'] = $this->error['option_value'];
 		} else {
@@ -474,10 +468,6 @@ class ControllerCatalogOption extends Controller {
 			$this->error['type'] = $this->language->get('error_type');
 		}
 
-		if (($this->request->post['type'] == 'select' || $this->request->post['type'] == 'radio' || $this->request->post['type'] == 'checkbox') && !isset($this->request->post['option_value'])) {
-			$this->error['type_option'] = $this->language->get('error_type_option');
-		}
-
 		if (isset($this->request->post['option_value'])) {
 			foreach ($this->request->post['option_value'] as $option_value_id => $option_value) {
 				foreach ($option_value['option_value_description'] as $language_id => $option_value_description) {
@@ -486,6 +476,10 @@ class ControllerCatalogOption extends Controller {
 					}
 				}
 			}
+		}
+
+		if (($this->request->post['type'] == 'select' || $this->request->post['type'] == 'radio' || $this->request->post['type'] == 'checkbox') && !isset($this->request->post['option_value'])) {
+			$this->error['warning'] = $this->language->get('error_values');
 		}
 
 		if ($this->error && !isset($this->error['warning'])) {

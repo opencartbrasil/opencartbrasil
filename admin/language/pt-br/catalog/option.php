@@ -36,8 +36,8 @@ $_['entry_sort_order']   = 'Posição';
 // Error
 $_['error_warning']      = 'Atenção: Faltou você preencher alguma informação, verifique todos os campos.';
 $_['error_permission']   = 'Atenção: Você não tem permissão para modificar as opções!';
+$_['error_values']       = 'Atenção: É necessário adicionar pelo menos uma opção!';
 $_['error_name']         = 'A opção deve ter entre 1 e 128 caracteres!';
 $_['error_type']         = 'O tipo de opção é obrigatório!';
-$_['error_type_option']  = 'O valor é obrigatório!';
 $_['error_option_value'] = 'O valor deve ter entre 1 e 128 caracteres!';
 $_['error_product']      = 'Atenção: Esta opção não pode ser excluída, pois está vinculada a %s produtos!';
