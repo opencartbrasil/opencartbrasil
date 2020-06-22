@@ -29,6 +29,7 @@ $_['help_filename']     = 'Você pode fazer o upload através do botão Upload, 
 $_['help_mask']         = 'Recomenda-se que o nome do arquivo e da máscara sejam diferentes, para impedir que as pessoas tentem baixar o arquivo diretamente do diretório download.';
 
 // Error
+$_['error_warning']     = 'Atenção: Faltou você preencher alguma informação, verifique todos os campos.';
 $_['error_permission']  = 'Atenção: Você não tem permissão para modificar os downloads!';
 $_['error_name']        = 'O download deve ter entre 3 e 64 caracteres!';
 $_['error_upload']      = 'Não há arquivo para esse download!';
