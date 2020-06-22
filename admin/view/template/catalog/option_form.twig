@@ -4,7 +4,8 @@
     <div class="container-fluid">
       <div class="pull-right">
         <button type="submit" form="form-option" data-toggle="tooltip" title="{{ button_save }}" class="btn btn-primary"><i class="fa fa-save"></i></button>
-        <a href="{{ cancel }}" data-toggle="tooltip" title="{{ button_cancel }}" class="btn btn-default"><i class="fa fa-reply"></i></a></div>
+        <a href="{{ cancel }}" data-toggle="tooltip" title="{{ button_cancel }}" class="btn btn-default"><i class="fa fa-reply"></i></a>
+      </div>
       <h1>{{ heading_title }}</h1>
       <ul class="breadcrumb">
         {% for breadcrumb in breadcrumbs %}
@@ -28,7 +29,8 @@
             <legend>{{ text_option }}</legend>
             <div class="form-group required">
               <label class="col-sm-2 control-label">{{ entry_name }}</label>
-              <div class="col-sm-10"> {% for language in languages %}
+              <div class="col-sm-10">
+                {% for language in languages %}
                 <div class="input-group"><span class="input-group-addon"><img src="language/{{ language.code }}/{{ language.code }}.png" title="{{ language.name }}" /></span>
                   <input type="text" name="option_description[{{ language.language_id }}][name]" value="{{ option_description[language.language_id] ? option_description[language.language_id].name }}" placeholder="{{ entry_name }}" class="form-control" />
                 </div>
@@ -96,6 +98,9 @@
                     {% endif %}
                   </optgroup>
                 </select>
+                {% if error_type %}
+                <div class="text-danger">{{ error_type }}</div>
+                {% endif %}
               </div>
             </div>
             <div class="form-group">
@@ -107,6 +112,9 @@
           </fieldset>
           <fieldset>
             <legend>{{ text_value }}</legend>
+            {% if error_type_option %}
+            <div class="text-danger">{{ error_type_option }}</div>
+            {% endif %}
             <table id="option-value" class="table table-striped table-bordered table-hover">
               <thead>
                 <tr>
@@ -120,7 +128,8 @@
                 {% set option_value_row = 0 %}
                 {% for option_value in option_values %}
                 <tr id="option-value-row{{ option_value_row }}">
-                  <td class="text-center"><input type="hidden" name="option_value[{{ option_value_row }}][option_value_id]" value="{{ option_value.option_value_id }}" />
+                  <td class="text-center">
+                    <input type="hidden" name="option_value[{{ option_value_row }}][option_value_id]" value="{{ option_value.option_value_id }}" />
                     {% for language in languages %}
                     <div class="input-group"><span class="input-group-addon"><img src="language/{{ language.code }}/{{ language.code }}.png" title="{{ language.name }}" /></span>
                       <input type="text" name="option_value[{{ option_value_row }}][option_value_description][{{ language.language_id }}][name]" value="{{ option_value.option_value_description[language.language_id] ? option_value.option_value_description[language.language_id].name }}" placeholder="{{ entry_option_value }}" class="form-control" />
@@ -130,7 +139,8 @@
                     {% endif %}
                     {% endfor %}
                   </td>
-                  <td class="text-left"><a href="" id="thumb-image{{ option_value_row }}" data-toggle="image" class="img-thumbnail"><img src="{{ option_value.thumb }}" alt="" title="" data-placeholder="{{ placeholder }}" /></a>
+                  <td class="text-left">
+                    <a href="" id="thumb-image{{ option_value_row }}" data-toggle="image" class="img-thumbnail"><img src="{{ option_value.thumb }}" alt="" title="" data-placeholder="{{ placeholder }}" /></a>
                     <input type="hidden" name="option_value[{{ option_value_row }}][image]" value="{{ option_value.image }}" id="input-image{{ option_value_row }}" />
                   </td>
                   <td class="text-right"><input type="text" name="option_value[{{ option_value_row }}][sort_order]" value="{{ option_value.sort_order }}" class="form-control" placeholder="{{ entry_sort_order }}" /></td>
