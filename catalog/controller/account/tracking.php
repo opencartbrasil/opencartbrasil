@@ -9,6 +9,10 @@ class ControllerAccountTracking extends Controller {
 
 		$this->load->model('account/affiliate');
 
+		if (!$this->isEnabled()) {
+			$this->response->redirect($this->url->link('account/account', '', true));
+		}
+
 		$affiliate_info = $this->model_account_affiliate->getAffiliate($this->customer->getId());
 
 		if ($affiliate_info) {
@@ -55,7 +59,9 @@ class ControllerAccountTracking extends Controller {
 	public function autocomplete() {
 		$json = array();
 
-		if (isset($this->request->get['filter_name'])) {
+		$this->load->model('account/affiliate');
+
+		if (isset($this->request->get['filter_name']) && $this->customer->isLogged() && $this->isEnabled()) {
 			if (isset($this->request->get['tracking'])) {
 				$tracking = $this->request->get['tracking'];
 			} else {
@@ -82,5 +88,17 @@ class ControllerAccountTracking extends Controller {
 
 		$this->response->addHeader('Content-Type: application/json');
 		$this->response->setOutput(json_encode($json));
+	}
+
+	private function isEnabled() {
+		$this->load->language('account/affiliate');
+
+		$affiliate_enabled = $this->model_account_affiliate->getAffiliateEnabled($this->customer->getId());
+		if (!$affiliate_enabled) {
+			$this->session->data['success'] = $this->language->get('text_account_disabled');
+			return false;
+		}
+
+		return true;
 	}
 }

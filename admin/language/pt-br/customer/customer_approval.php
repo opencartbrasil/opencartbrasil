@@ -13,7 +13,7 @@ $_['text_affiliate']        = 'Afiliado';
 $_['column_name']           = 'Cliente';
 $_['column_email']          = 'E-mail';
 $_['column_customer_group'] = 'Tipo de cliente';
-$_['column_type']           = 'Tipo';
+$_['column_type']           = 'Tipo de conta';
 $_['column_date_added']     = 'Adicionado em';
 $_['column_action']         = 'Ação';
 
@@ -21,7 +21,7 @@ $_['column_action']         = 'Ação';
 $_['entry_name']            = 'Cliente';
 $_['entry_email']           = 'E-mail';
 $_['entry_customer_group']  = 'Tipo de cliente';
-$_['entry_type']            = 'Tipo';
+$_['entry_type']            = 'Tipo de conta';
 $_['entry_date_added']      = 'Adicionado em';
 
 // Error

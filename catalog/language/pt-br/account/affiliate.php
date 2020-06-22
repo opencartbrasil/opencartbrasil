@@ -10,8 +10,9 @@ $_['text_payment']              = 'Informações financeiras';
 $_['text_cheque']               = 'Cheque';
 $_['text_paypal']               = 'PayPal';
 $_['text_bank']                 = 'Transferência bancária';
-$_['text_success']              = 'As informações da sua conta foram modificadas.';
+$_['text_success']              = 'As informações da sua conta de afiliado foram atualizadas.';
 $_['text_agree']                = 'Você precisa aceitar o contrato de <a href="%s" class="agree"><b>%s</b></a>';
+$_['text_account_disabled']     = '<b>Atenção:</b> Sua conta de afiliado não está ativada. Para mais informações entre em contato com nosso atendimento.';
 
 // Entry
 $_['entry_company']             = 'Referência';

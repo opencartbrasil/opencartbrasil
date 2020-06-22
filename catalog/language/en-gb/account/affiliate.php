@@ -12,6 +12,7 @@ $_['text_paypal']               = 'PayPal';
 $_['text_bank']                 = 'Bank Transfer';
 $_['text_success']              = 'Success: Your account has been successfully updated.';
 $_['text_agree']                = 'I have read and agree to the <a href="%s" class="agree"><b>%s</b></a>';
+$_['text_account_disabled']     = '<b>Warning:</b> Your affiliate account is not active. For more information contact our customer service.';
 
 // Entry
 $_['entry_company']             = 'Company';
