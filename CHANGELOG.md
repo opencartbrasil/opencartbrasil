@@ -6,6 +6,27 @@ e utiliza [Semantic Versioning](https://semver.org/lang/pt-BR/spec/v2.0.0.html).
 
 ## [Não lançada]
 
+## [1.4.15] (Data de lançamento: 22.06.2020)
+### Corrigido
+- Melhoria no cadastro de produtos
+- Melhoria no gerenciamento de cache por arquivo
+- Melhoria na validação do cadastro de opções no admin
+- Melhoria na validação do cadastro de marcas no admin
+- Melhoria na validação do cadastro de filtros no admin
+- Melhoria na validação do cadastro de downloads no admin
+- Melhoria na validação do cadastro de atributos no admin
+- Melhoria na validação do cadastro de comentários no admin
+- Melhoria na validação do cadastro de grupos de atributos no admin
+- Correções na aprovação de afiliados
+- Correções no e-mail de aprovação de clientes
+- Correção na validação por regex dos campos personalizados
+- Correção no envio do e-mail de notificação de novo pedido
+- Correção no envio do e-mail de notificação de novo cliente
+- Correção no envio do e-mail de notificação de novo afiliado
+
+### Adicionado
+- Filtro na listagem de filtros no admin
+
 ## [1.4.14] (Data de lançamento: 13.06.2020)
 ### Corrigido
 - Melhoria na importação do backup
@@ -533,7 +554,8 @@ e utiliza [Semantic Versioning](https://semver.org/lang/pt-BR/spec/v2.0.0.html).
 - Cupons de descontos para demonstração.
 - Moedas: Euro e Libra esterlina.
 
-[Não lançada]: https://github.com/opencartbrasil/opencartbrasil/compare/v1.4.14...HEAD
+[Não lançada]: https://github.com/opencartbrasil/opencartbrasil/compare/v1.4.15...HEAD
+[1.4.15]: https://github.com/opencartbrasil/opencartbrasil/compare/v1.4.14...v1.4.15
 [1.4.14]: https://github.com/opencartbrasil/opencartbrasil/compare/v1.4.13...v1.4.14
 [1.4.13]: https://github.com/opencartbrasil/opencartbrasil/compare/v1.4.12...v1.4.13
 [1.4.12]: https://github.com/opencartbrasil/opencartbrasil/compare/v1.4.11...v1.4.12
