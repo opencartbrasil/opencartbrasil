@@ -69,6 +69,10 @@ class ModelCatalogFilter extends Model {
 	public function getFilterGroups($data = array()) {
 		$sql = "SELECT * FROM `" . DB_PREFIX . "filter_group` fg LEFT JOIN " . DB_PREFIX . "filter_group_description fgd ON (fg.filter_group_id = fgd.filter_group_id) WHERE fgd.language_id = '" . (int)$this->config->get('config_language_id') . "'";
 
+		if (!empty($data['filter_group'])) {
+			$sql .= " AND fgd.name LIKE '%" . $this->db->escape($data['filter_group']) . "%'";
+		}
+
 		$sort_data = array(
 			'fgd.name',
 			'fg.sort_order'
@@ -171,8 +175,14 @@ class ModelCatalogFilter extends Model {
 		return $filter_data;
 	}
 
-	public function getTotalFilterGroups() {
-		$query = $this->db->query("SELECT COUNT(*) AS total FROM `" . DB_PREFIX . "filter_group`");
+	public function getTotalFilterGroups($data = array()) {
+		$sql = "SELECT COUNT(*) AS total FROM `" . DB_PREFIX . "filter_group` fg LEFT JOIN " . DB_PREFIX . "filter_group_description fgd ON (fg.filter_group_id = fgd.filter_group_id) WHERE fgd.language_id = '" . (int)$this->config->get('config_language_id') . "'";
+
+		if (!empty($data['filter_group'])) {
+			$sql .= " AND fgd.name LIKE '%" . $this->db->escape($data['filter_group']) . "%'";
+		}
+
+		$query = $this->db->query($sql);
 
 		return $query->row['total'];
 	}

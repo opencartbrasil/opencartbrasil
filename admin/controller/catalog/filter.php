@@ -26,6 +26,10 @@ class ControllerCatalogFilter extends Controller {
 
 			$url = '';
 
+			if (isset($this->request->get['filter_group'])) {
+				$url .= '&filter_group=' . urlencode(html_entity_decode($this->request->get['filter_group'], ENT_QUOTES, 'UTF-8'));
+			}
+
 			if (isset($this->request->get['sort'])) {
 				$url .= '&sort=' . $this->request->get['sort'];
 			}
@@ -57,6 +61,10 @@ class ControllerCatalogFilter extends Controller {
 			$this->session->data['success'] = $this->language->get('text_success');
 
 			$url = '';
+
+			if (isset($this->request->get['filter_group'])) {
+				$url .= '&filter_group=' . urlencode(html_entity_decode($this->request->get['filter_group'], ENT_QUOTES, 'UTF-8'));
+			}
 
 			if (isset($this->request->get['sort'])) {
 				$url .= '&sort=' . $this->request->get['sort'];
@@ -92,6 +100,10 @@ class ControllerCatalogFilter extends Controller {
 
 			$url = '';
 
+			if (isset($this->request->get['filter_group'])) {
+				$url .= '&filter_group=' . urlencode(html_entity_decode($this->request->get['filter_group'], ENT_QUOTES, 'UTF-8'));
+			}
+
 			if (isset($this->request->get['sort'])) {
 				$url .= '&sort=' . $this->request->get['sort'];
 			}
@@ -111,6 +123,12 @@ class ControllerCatalogFilter extends Controller {
 	}
 
 	protected function getList() {
+		if (isset($this->request->get['filter_group'])) {
+			$filter_group = $this->request->get['filter_group'];
+		} else {
+			$filter_group = '';
+		}
+
 		if (isset($this->request->get['sort'])) {
 			$sort = $this->request->get['sort'];
 		} else {
@@ -130,6 +148,10 @@ class ControllerCatalogFilter extends Controller {
 		}
 
 		$url = '';
+
+		if (isset($this->request->get['filter_group'])) {
+			$url .= '&filter_group=' . urlencode(html_entity_decode($this->request->get['filter_group'], ENT_QUOTES, 'UTF-8'));
+		}
 
 		if (isset($this->request->get['sort'])) {
 			$url .= '&sort=' . $this->request->get['sort'];
@@ -161,13 +183,14 @@ class ControllerCatalogFilter extends Controller {
 		$data['filters'] = array();
 
 		$filter_data = array(
+			'filter_group' => $filter_group,
 			'sort'  => $sort,
 			'order' => $order,
 			'start' => ($page - 1) * $this->config->get('config_limit_admin'),
 			'limit' => $this->config->get('config_limit_admin')
 		);
 
-		$filter_total = $this->model_catalog_filter->getTotalFilterGroups();
+		$filter_total = $this->model_catalog_filter->getTotalFilterGroups($filter_data);
 
 		$results = $this->model_catalog_filter->getFilterGroups($filter_data);
 
@@ -179,6 +202,8 @@ class ControllerCatalogFilter extends Controller {
 				'edit'            => $this->url->link('catalog/filter/edit', 'user_token=' . $this->session->data['user_token'] . '&filter_group_id=' . $result['filter_group_id'] . $url, true)
 			);
 		}
+
+		$data['user_token'] = $this->session->data['user_token'];
 
 		if (isset($this->error['warning'])) {
 			$data['error_warning'] = $this->error['warning'];
@@ -202,6 +227,10 @@ class ControllerCatalogFilter extends Controller {
 
 		$url = '';
 
+		if (isset($this->request->get['filter_group'])) {
+			$url .= '&filter_group=' . urlencode(html_entity_decode($this->request->get['filter_group'], ENT_QUOTES, 'UTF-8'));
+		}
+
 		if ($order == 'ASC') {
 			$url .= '&order=DESC';
 		} else {
@@ -216,6 +245,10 @@ class ControllerCatalogFilter extends Controller {
 		$data['sort_sort_order'] = $this->url->link('catalog/filter', 'user_token=' . $this->session->data['user_token'] . '&sort=fg.sort_order' . $url, true);
 
 		$url = '';
+
+		if (isset($this->request->get['filter_group'])) {
+			$url .= '&filter_group=' . urlencode(html_entity_decode($this->request->get['filter_group'], ENT_QUOTES, 'UTF-8'));
+		}
 
 		if (isset($this->request->get['sort'])) {
 			$url .= '&sort=' . $this->request->get['sort'];
@@ -235,6 +268,7 @@ class ControllerCatalogFilter extends Controller {
 
 		$data['results'] = sprintf($this->language->get('text_pagination'), ($filter_total) ? (($page - 1) * $this->config->get('config_limit_admin')) + 1 : 0, ((($page - 1) * $this->config->get('config_limit_admin')) > ($filter_total - $this->config->get('config_limit_admin'))) ? $filter_total : ((($page - 1) * $this->config->get('config_limit_admin')) + $this->config->get('config_limit_admin')), $filter_total, ceil($filter_total / $this->config->get('config_limit_admin')));
 
+		$data['filter_group'] = $filter_group;
 		$data['sort'] = $sort;
 		$data['order'] = $order;
 
@@ -267,6 +301,10 @@ class ControllerCatalogFilter extends Controller {
 		}
 
 		$url = '';
+
+		if (isset($this->request->get['filter_group'])) {
+			$url .= '&filter_group=' . urlencode(html_entity_decode($this->request->get['filter_group'], ENT_QUOTES, 'UTF-8'));
+		}
 
 		if (isset($this->request->get['sort'])) {
 			$url .= '&sort=' . $this->request->get['sort'];
