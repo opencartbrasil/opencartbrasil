@@ -26,6 +26,7 @@ $_['entry_sort_order']  = 'Posição';
 $_['entry_type']        = 'Tipo';
 
 // Error
+$_['error_warning']     = 'Atenção: Faltou você preencher alguma informação, verifique todos os campos.';
 $_['error_permission']  = 'Atenção: Você não tem permissão para modificar as marcas!';
 $_['error_name']        = 'A marca deve ter entre 1 e 64 caracteres!';
 $_['error_keyword']     = 'A URL amigável já está em uso!';
