@@ -18,6 +18,7 @@ $_['entry_name']        = 'Grupo de atributos';
 $_['entry_sort_order']  = 'Posição';
 
 // Error
+$_['error_warning']     = 'Atenção: Faltou você preencher alguma informação, verifique todos os campos.';
 $_['error_permission']  = 'Atenção: Você não tem permissão para modificar os grupos de atributos!';
 $_['error_name']        = 'O grupo de atributos deve ter entre 1 e 64 caracteres!';
 $_['error_attribute']   = 'Atenção: Este grupo de atributos não pode ser excluído, pois está vinculado a %s atributos!';
