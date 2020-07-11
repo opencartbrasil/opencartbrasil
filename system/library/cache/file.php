@@ -32,7 +32,9 @@ class File {
 			if ($handle) {
 				flock($handle, LOCK_SH);
 
-				$size = filesize($file);
+				$size = 0;
+
+				$size = @filesize($file);
 
 				if ($size > 0) {
 					$data = fread($handle, $size);
