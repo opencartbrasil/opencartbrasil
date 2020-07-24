@@ -1,9 +1,8 @@
 ## Para utilizar o recurso de alias para URL, você precisa estar executando o Apache com o mod_rewrite ativado.
-## Para dúvidas, visite: https://forum.opencartbrasil.com.br
-
+## Para dúvidas visite: https://forum.opencartbrasil.com.br
 Options +SymLinksIfOwnerMatch
 
-## A linha abaixo evita a listagem de pastas e arquivos em um diretório acessado diretamente pelo navegador.
+## A linha abaixo evita a listagem de pastas e arquivos nos diretórios quando acessados diretamente pelo navegador.
 Options -Indexes
 
 ## As linhas abaixo evitam o acesso direto a arquivos críticos do OpenCart.
@@ -16,8 +15,8 @@ Options -Indexes
 
 ## Abaixo iniciamos as configurações para URL amigável.
 RewriteEngine On
-## Se a sua instalação do OpenCart não estiver sendo executada na pasta raiz, adicione abaixo a pasta referente a pasta em que os arquivos da hospdagem estão, como: /loja/
 
+## Se as pastas e arquivos do OpenCart não estiverem no diretório raiz, adicione na linha abaixo o nome do diretório que as pastas e arquivos estão, como: /loja/
 RewriteBase /
 RewriteRule ^sitemap.xml$ index.php?route=extension/feed/google_sitemap [L]
 RewriteRule ^googlebase.xml$ index.php?route=extension/feed/google_base [L]
@@ -29,8 +28,8 @@ RewriteRule ^([^?]*) index.php?_route_=$1 [L,QSA]
 
 ## Abaixo estão comandos que podem ser utilizados em algumas hospedagens para alterar as configurações do PHP.
 ## Se você receber um erro "Internal Server Error 500" após remover o # de qualquer uma das linhas abaixo, basta adicionar o # novamente na frente da linha.
-## Algumas hospedagens só permitem alterações nas configurações do PHP através de arquivos do tipo php.ini ou .user.ini, e em outras somente através do cPanel.
-## Em alguns casos a única maneira de alterar as configurações do PHP é entrando em contato com o susporte de sua hsopedagem.
+## Algumas hospedagens só permitem alterações nas configurações do PHP através de arquivos php.ini ou .user.ini, e outras somente através de painel próprio.
+## Em alguns casos a única maneira de alterar as configurações do PHP é entrando em contato com o susporte de sua hospedagem.
 
 ## 1. Se o seu carrinho só está permitindo um produto de cada vez, é possível que o register_globals esteja ativado, para desativá-lo remova o # da linha abaixo:
 # php_flag register_globals off
