@@ -272,9 +272,9 @@ Através da interface de linha de comandos, a loja pode ser instalada automatica
 
 **Exemplo de instalação através da linha de comando no servidor local:**
 
-``
+```bash
 php install/cli_install.php install --db_hostname localhost --db_username root --db_password 123456 --db_database opencartbrasil --username admin --password 123456 --email usuario@dominio.com.br --http_server http://localhost/opencartbrasil/
-``
+```
 
 Lista de parâmetros para instalação através da linha de comando:
 
@@ -309,19 +309,24 @@ Para executar as tarefas agendadas do OpenCart Brasil, você necessitará acessa
 
 ### Habilitar URL amigável em servidor web Nginx (opcional):
 
-Adicione no arquivo **nginx.conf** dentro do bloco "**location / { }**":
+Substitua o bloco `location / { }` do seu arquivo **nginx.conf** por:
 
 ```
-  location ~ (?i)((\.twig|\.tpl|\.ini|\.log|(?<!robots)\.txt)) { deny all; }
+location / {
+  try_files $uri $uri/ @opencart;
+}
 
+location @opencart {
   rewrite ^/sitemap.xml$ /index.php?route=extension/feed/google_sitemap last;
   rewrite ^/googlebase.xml$ /index.php?route=extension/feed/google_base last;
   rewrite ^/system/storage/(.*) /index.php?route=error/not_found last;
 
-  if (!-f $request_filename) { set $rule_0 1$rule_0; }
-  if (!-d $request_filename){ set $rule_0 2$rule_0; }
-  if ($uri !~ ".*.(ico|gif|jpg|jpeg|png|js|css)"){ set $rule_0 3$rule_0; }
-  if ($rule_0 = "321"){ rewrite ^/(.+)$ /index.php?_route_=$1 last; }
+  rewrite ^/(.+)$ /index.php?_route_=$1 last;
+}
+
+location ~* \.(twig|tpl|ini|log|txt)$ {
+  deny all;
+}
 ```
 
 ## Versionamento
