@@ -272,9 +272,9 @@ Através da interface de linha de comandos, a loja pode ser instalada automatica
 
 **Exemplo de instalação através da linha de comando no servidor local:**
 
-```bash
+``
 php install/cli_install.php install --db_hostname localhost --db_username root --db_password 123456 --db_database opencartbrasil --username admin --password 123456 --email usuario@dominio.com.br --http_server http://localhost/opencartbrasil/
-```
+``
 
 Lista de parâmetros para instalação através da linha de comando:
 
@@ -324,7 +324,7 @@ location @opencart {
   rewrite ^/(.+)$ /index.php?_route_=$1 last;
 }
 
-location ~* \.(twig|tpl|ini|log|txt)$ {
+location ~* (\.twig|\.tpl|\.ini|\.log|(?<!robots)\.txt)$ {
   deny all;
 }
 ```
