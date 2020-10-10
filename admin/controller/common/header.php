@@ -24,7 +24,7 @@ class ControllerCommonHeader extends Controller {
 		if (!isset($this->request->get['user_token']) || !isset($this->session->data['user_token']) || ($this->request->get['user_token'] != $this->session->data['user_token'])) {
 			$data['logged'] = '';
 
-			$data['home'] = $this->url->link('common/dashboard', '', true);
+			$data['home'] = $this->url->link('common/login', '', true);
 		} else {
 			$data['logged'] = true;
 
