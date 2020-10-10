@@ -97,6 +97,10 @@ class ControllerExtensionModuleCarousel extends Controller {
 			$data['banner_id'] = '';
 		}
 
+		$this->load->model('design/banner');
+
+		$data['banners'] = $this->model_design_banner->getBanners();
+
 		if (isset($this->request->post['width'])) {
 			$data['width'] = $this->request->post['width'];
 		} elseif (!empty($module_info)) {
@@ -120,10 +124,6 @@ class ControllerExtensionModuleCarousel extends Controller {
 		} else {
 			$data['status'] = '';
 		}
-
-		$this->load->model('design/banner');
-
-		$data['banners'] = $this->model_design_banner->getBanners();
 
 		$data['header'] = $this->load->controller('common/header');
 		$data['column_left'] = $this->load->controller('common/column_left');
