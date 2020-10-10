@@ -219,7 +219,7 @@ class ModelCustomerCustomer extends Model {
 	}
 
 	public function getTotalCustomers($data = array()) {
-		$sql = "SELECT COUNT(*) AS total FROM " . DB_PREFIX . "customer";
+		$sql = "SELECT COUNT(*) AS total FROM " . DB_PREFIX . "customer c";
 
 		if (!empty($data['filter_affiliate'])) {
 			$sql .= " LEFT JOIN " . DB_PREFIX . "customer_affiliate ca ON (ca.customer_id = c.customer_id)";
@@ -228,31 +228,31 @@ class ModelCustomerCustomer extends Model {
 		$implode = array();
 
 		if (!empty($data['filter_name'])) {
-			$implode[] = "CONCAT(firstname, ' ', lastname) LIKE '%" . $this->db->escape((string)$data['filter_name']) . "%'";
+			$implode[] = "CONCAT(c.firstname, ' ', c.lastname) LIKE '%" . $this->db->escape((string)$data['filter_name']) . "%'";
 		}
 
 		if (!empty($data['filter_email'])) {
-			$implode[] = "email LIKE '" . $this->db->escape((string)$data['filter_email']) . "%'";
+			$implode[] = "c.email LIKE '" . $this->db->escape((string)$data['filter_email']) . "%'";
 		}
 
 		if (isset($data['filter_newsletter']) && !is_null($data['filter_newsletter'])) {
-			$implode[] = "newsletter = '" . (int)$data['filter_newsletter'] . "'";
+			$implode[] = "c.newsletter = '" . (int)$data['filter_newsletter'] . "'";
 		}
 
 		if (!empty($data['filter_customer_group_id'])) {
-			$implode[] = "customer_group_id = '" . (int)$data['filter_customer_group_id'] . "'";
+			$implode[] = "c.customer_group_id = '" . (int)$data['filter_customer_group_id'] . "'";
 		}
 
 		if (!empty($data['filter_ip'])) {
-			$implode[] = "customer_id IN (SELECT customer_id FROM " . DB_PREFIX . "customer_ip WHERE ip = '" . $this->db->escape((string)$data['filter_ip']) . "')";
+			$implode[] = "c.customer_id IN (SELECT customer_id FROM " . DB_PREFIX . "customer_ip WHERE ip = '" . $this->db->escape((string)$data['filter_ip']) . "')";
 		}
 
 		if (isset($data['filter_status']) && $data['filter_status'] !== '') {
-			$implode[] = "status = '" . (int)$data['filter_status'] . "'";
+			$implode[] = "c.status = '" . (int)$data['filter_status'] . "'";
 		}
 
 		if (!empty($data['filter_date_added'])) {
-			$implode[] = "DATE(date_added) = DATE('" . $this->db->escape((string)$data['filter_date_added']) . "')";
+			$implode[] = "DATE(c.date_added) = DATE('" . $this->db->escape((string)$data['filter_date_added']) . "')";
 		}
 
 		if ($implode) {
