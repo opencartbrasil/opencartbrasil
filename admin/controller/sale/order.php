@@ -495,7 +495,7 @@ class ControllerSaleOrder extends Controller {
 		}
 
 		if (!empty($order_info)) {
-			$data['order_id'] = $this->request->get['order_id'];
+			$data['order_id'] = (int)$this->request->get['order_id'];
 			$data['store_id'] = $order_info['store_id'];
 			$data['store_url'] = $this->request->server['HTTPS'] ? HTTPS_CATALOG : HTTP_CATALOG;
 
@@ -742,7 +742,7 @@ class ControllerSaleOrder extends Controller {
 		$this->load->model('sale/order');
 
 		if (isset($this->request->get['order_id'])) {
-			$order_id = $this->request->get['order_id'];
+			$order_id = (int)$this->request->get['order_id'];
 		} else {
 			$order_id = 0;
 		}
@@ -822,7 +822,7 @@ class ControllerSaleOrder extends Controller {
 
 			$data['user_token'] = $this->session->data['user_token'];
 
-			$data['order_id'] = $this->request->get['order_id'];
+			$data['order_id'] = (int)$this->request->get['order_id'];
 
 			$data['store_id'] = $order_info['store_id'];
 			$data['store_name'] = $order_info['store_name'];
@@ -1305,7 +1305,7 @@ class ControllerSaleOrder extends Controller {
 			$json['error'] = $this->language->get('error_permission');
 		} elseif (isset($this->request->get['order_id'])) {
 			if (isset($this->request->get['order_id'])) {
-				$order_id = $this->request->get['order_id'];
+				$order_id = (int)$this->request->get['order_id'];
 			} else {
 				$order_id = 0;
 			}
@@ -1334,7 +1334,7 @@ class ControllerSaleOrder extends Controller {
 			$json['error'] = $this->language->get('error_permission');
 		} else {
 			if (isset($this->request->get['order_id'])) {
-				$order_id = $this->request->get['order_id'];
+				$order_id = (int)$this->request->get['order_id'];
 			} else {
 				$order_id = 0;
 			}
@@ -1369,7 +1369,7 @@ class ControllerSaleOrder extends Controller {
 			$json['error'] = $this->language->get('error_permission');
 		} else {
 			if (isset($this->request->get['order_id'])) {
-				$order_id = $this->request->get['order_id'];
+				$order_id = (int)$this->request->get['order_id'];
 			} else {
 				$order_id = 0;
 			}
@@ -1400,7 +1400,7 @@ class ControllerSaleOrder extends Controller {
 			$json['error'] = $this->language->get('error_permission');
 		} else {
 			if (isset($this->request->get['order_id'])) {
-				$order_id = $this->request->get['order_id'];
+				$order_id = (int)$this->request->get['order_id'];
 			} else {
 				$order_id = 0;
 			}
@@ -1435,7 +1435,7 @@ class ControllerSaleOrder extends Controller {
 			$json['error'] = $this->language->get('error_permission');
 		} else {
 			if (isset($this->request->get['order_id'])) {
-				$order_id = $this->request->get['order_id'];
+				$order_id = (int)$this->request->get['order_id'];
 			} else {
 				$order_id = 0;
 			}
@@ -1521,7 +1521,7 @@ class ControllerSaleOrder extends Controller {
 		if (isset($this->request->post['selected'])) {
 			$orders = $this->request->post['selected'];
 		} elseif (isset($this->request->get['order_id'])) {
-			$orders[] = $this->request->get['order_id'];
+			$orders[] = (int)$this->request->get['order_id'];
 		}
 
 		foreach ($orders as $order_id) {
@@ -1732,7 +1732,7 @@ class ControllerSaleOrder extends Controller {
 		if (isset($this->request->post['selected'])) {
 			$orders = $this->request->post['selected'];
 		} elseif (isset($this->request->get['order_id'])) {
-			$orders[] = $this->request->get['order_id'];
+			$orders[] = (int)$this->request->get['order_id'];
 		}
 
 		foreach ($orders as $order_id) {
