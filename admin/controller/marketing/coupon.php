@@ -259,7 +259,7 @@ class ControllerMarketingCoupon extends Controller {
 		$data['user_token'] = $this->session->data['user_token'];
 
 		if (isset($this->request->get['coupon_id'])) {
-			$data['coupon_id'] = $this->request->get['coupon_id'];
+			$data['coupon_id'] = (int)$this->request->get['coupon_id'];
 		} else {
 			$data['coupon_id'] = 0;
 		}
@@ -490,7 +490,7 @@ class ControllerMarketingCoupon extends Controller {
 			$this->error['name'] = $this->language->get('error_name');
 		}
 
-		if ((utf8_strlen($this->request->post['code']) < 3) || (utf8_strlen($this->request->post['code']) > 10)) {
+		if ((utf8_strlen($this->request->post['code']) < 3) || (utf8_strlen($this->request->post['code']) > 20)) {
 			$this->error['code'] = $this->language->get('error_code');
 		}
 
