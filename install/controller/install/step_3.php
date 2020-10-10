@@ -61,7 +61,7 @@ class ControllerInstallStep3 extends Controller {
 			$output .= '// DIR' . "\n";
 			$output .= 'define(\'DIR_APPLICATION\', \'' . addslashes(DIR_OPENCART) . 'admin/\');' . "\n";
 			$output .= 'define(\'DIR_SYSTEM\', \'' . addslashes(DIR_OPENCART) . 'system/\');' . "\n";
-			$output .= 'define(\'DIR_IMAGE\', \'' . addslashes(DIR_OPENCART) . 'image/\');' . "\n";	
+			$output .= 'define(\'DIR_IMAGE\', \'' . addslashes(DIR_OPENCART) . 'image/\');' . "\n";
 			$output .= 'define(\'DIR_STORAGE\', DIR_SYSTEM . \'storage/\');' . "\n";
 			$output .= 'define(\'DIR_CATALOG\', \'' . addslashes(DIR_OPENCART) . 'catalog/\');' . "\n";
 			$output .= 'define(\'DIR_LANGUAGE\', DIR_APPLICATION . \'language/\');' . "\n";
@@ -193,7 +193,7 @@ class ControllerInstallStep3 extends Controller {
 		foreach ($db_drivers as $db_driver) {
 			if (extension_loaded($db_driver)) {
 				$data['drivers'][] = array(
-					'text' => $this->language->get('text_' . $db_driver),
+					'text'  => $this->language->get('text_' . $db_driver),
 					'value' => $db_driver
 				);
 			}
@@ -299,7 +299,7 @@ class ControllerInstallStep3 extends Controller {
 			$this->error['db_driver'] = $this->language->get('error_db_driver');
 		} else {
 			try {
-				$db = new \DB($this->request->post['db_driver'], $this->request->post['db_hostname'], $this->request->post['db_username'], html_entity_decode($this->request->post['db_password'], ENT_QUOTES, 'UTF-8'), $this->request->post['db_database'], $this->request->post['db_port']);
+				$db = new \DB($this->request->post['db_driver'], html_entity_decode($this->request->post['db_hostname'], ENT_QUOTES, 'UTF-8'), html_entity_decode($this->request->post['db_username'], ENT_QUOTES, 'UTF-8'), html_entity_decode($this->request->post['db_password'], ENT_QUOTES, 'UTF-8'), html_entity_decode($this->request->post['db_database'], ENT_QUOTES, 'UTF-8'), $this->request->post['db_port']);
 			} catch(Exception $e) {
 				$this->error['warning'] = $e->getMessage();
 			}
@@ -309,12 +309,12 @@ class ControllerInstallStep3 extends Controller {
 			$this->error['username'] = $this->language->get('error_username');
 		}
 
-		if (!$this->request->post['password']) {
-			$this->error['password'] = $this->language->get('error_password');
-		}
-
 		if ((utf8_strlen($this->request->post['email']) > 96) || !filter_var($this->request->post['email'], FILTER_VALIDATE_EMAIL)) {
 			$this->error['email'] = $this->language->get('error_email');
+		}
+
+		if (!$this->request->post['password']) {
+			$this->error['password'] = $this->language->get('error_password');
 		}
 
 		if (!is_writable(DIR_OPENCART . 'config.php')) {

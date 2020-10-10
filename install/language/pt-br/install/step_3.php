@@ -23,7 +23,7 @@ $_['entry_password']         = 'Senha';
 $_['entry_email']            = 'E-mail';
 
 // Error
-$_['error_db_driver']        = 'Driver é obrigatório!';
+$_['error_db_driver']        = 'Driver obrigatório!';
 $_['error_db_hostname']      = 'Servidor obrigatório!';
 $_['error_db_username']      = 'Usuário obrigatório!';
 $_['error_db_database']      = 'Banco de dados obrigatório!';
