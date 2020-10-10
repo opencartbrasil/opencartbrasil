@@ -19,14 +19,73 @@ class ControllerInstallStep2 extends Controller {
 
 		$data['action'] = $this->url->link('install/step_2');
 
-		$data['php_version'] = phpversion();
-
-		if (version_compare(phpversion(), '5.6.0', '<')) {
-			$data['version'] = false;
+		// catalog config
+		if (!is_file(DIR_OPENCART . 'config.php')) {
+			$data['error_catalog_config'] = $this->language->get('error_missing');
+		} elseif (!is_writable(DIR_OPENCART . 'config.php')) {
+			$data['error_catalog_config'] = $this->language->get('error_unwritable');
 		} else {
-			$data['version'] = true;
+			$data['error_catalog_config'] = '';
 		}
 
+		// admin configs
+		if (!is_file(DIR_OPENCART . 'admin/config.php')) {
+			$data['error_admin_config'] = $this->language->get('error_missing');
+		} elseif (!is_writable(DIR_OPENCART . 'admin/config.php')) {
+			$data['error_admin_config'] = $this->language->get('error_unwritable');
+		} else {
+			$data['error_admin_config'] = '';
+		}
+ 
+		if (!is_writable(DIR_OPENCART . 'image/')) {
+			$data['error_image'] = $this->language->get('error_unwritable');
+		} else {
+			$data['error_image'] = '';
+		}
+
+		if (!is_writable(DIR_OPENCART . 'image/cache/')) {
+			$data['error_image_cache'] = $this->language->get('error_unwritable');
+		} else {
+			$data['error_image_cache'] = '';
+		}
+
+		if (!is_writable(DIR_OPENCART . 'image/catalog/')) {
+			$data['error_image_catalog'] = $this->language->get('error_unwritable');
+		} else {
+			$data['error_image_catalog'] = '';
+		}
+
+		if (!is_writable(DIR_SYSTEM . 'storage/cache/')) {
+			$data['error_cache'] = $this->language->get('error_unwritable');
+		} else {
+			$data['error_cache'] = '';
+		}
+
+		if (!is_writable(DIR_SYSTEM . 'storage/logs/')) {
+			$data['error_logs'] = $this->language->get('error_unwritable');
+		} else {
+			$data['error_logs'] = '';
+		}
+
+		if (!is_writable(DIR_SYSTEM . 'storage/download/')) {
+			$data['error_download'] = $this->language->get('error_unwritable');
+		} else {
+			$data['error_download'] = '';
+		}
+
+		if (!is_writable(DIR_SYSTEM . 'storage/upload/')) {
+			$data['error_upload'] = $this->language->get('error_unwritable');
+		} else {
+			$data['error_upload'] = '';
+		}
+
+		if (!is_writable(DIR_SYSTEM . 'storage/modification/')) {
+			$data['error_modification'] = $this->language->get('error_unwritable');
+		} else {
+			$data['error_modification'] = '';
+		}
+
+		$data['php_version'] = phpversion();
 		$data['register_globals'] = ini_get('register_globals');
 		$data['magic_quotes_gpc'] = ini_get('magic_quotes_gpc');
 		$data['file_uploads'] = ini_get('file_uploads');
@@ -54,27 +113,14 @@ class ControllerInstallStep2 extends Controller {
 
 		$data['catalog_config'] = DIR_OPENCART . 'config.php';
 		$data['admin_config'] = DIR_OPENCART . 'admin/config.php';
-
-		// catalog config
-		if (!is_file(DIR_OPENCART . 'config.php')) {
-			$data['error_catalog_config'] = $this->language->get('text_missing');
-		} elseif (!is_writable(DIR_OPENCART . 'config.php')) {
-			$data['error_catalog_config'] = $this->language->get('text_unwritable');
-		} else {
-			$data['error_catalog_config'] = '';
-		}
-
-		// admin configs
-		if (!is_file(DIR_OPENCART . 'admin/config.php')) {
-			$data['error_admin_config'] = $this->language->get('text_missing');
-		} elseif (!is_writable(DIR_OPENCART . 'admin/config.php')) {
-			$data['error_admin_config'] = $this->language->get('text_unwritable');
-		} else {
-			$data['error_admin_config'] = '';
-		}
-
-		$data['catalog_config'] = DIR_OPENCART . 'config.php';
-		$data['admin_config'] = DIR_OPENCART . 'admin/config.php';
+		$data['image'] = DIR_OPENCART . 'image';
+		$data['image_cache'] = DIR_OPENCART . 'image/cache';
+		$data['image_catalog'] = DIR_OPENCART . 'image/catalog';
+		$data['cache'] = DIR_SYSTEM . 'storage/cache';
+		$data['logs'] = DIR_SYSTEM . 'storage/logs';
+		$data['download'] = DIR_SYSTEM . 'storage/download';
+		$data['upload'] = DIR_SYSTEM . 'storage/upload';
+		$data['modification'] = DIR_SYSTEM . 'storage/modification';
 
 		$data['back'] = $this->url->link('install/step_1');
 
@@ -86,7 +132,7 @@ class ControllerInstallStep2 extends Controller {
 	}
 
 	private function validate() {
-		if (version_compare(phpversion(), '5.6.0', '<')) {
+		if (phpversion() < '5.6') {
 			$this->error['warning'] = $this->language->get('error_version');
 		}
 
@@ -99,7 +145,6 @@ class ControllerInstallStep2 extends Controller {
 		}
 
 		$db = array(
-			'mysql',
 			'mysqli',
 			'pdo',
 			'pgsql'
@@ -133,14 +178,48 @@ class ControllerInstallStep2 extends Controller {
 			$this->error['warning'] = $this->language->get('error_mbstring');
 		}
 
-		if (!is_file(DIR_OPENCART . 'config.php')) {
+		if (!file_exists(DIR_OPENCART . 'config.php')) {
 			$this->error['warning'] = $this->language->get('error_catalog_exist');
 		} elseif (!is_writable(DIR_OPENCART . 'config.php')) {
 			$this->error['warning'] = $this->language->get('error_catalog_writable');
-		} elseif (!is_file(DIR_OPENCART . 'admin/config.php')) {
+		}
+
+		if (!file_exists(DIR_OPENCART . 'admin/config.php')) {
 			$this->error['warning'] = $this->language->get('error_admin_exist');
 		} elseif (!is_writable(DIR_OPENCART . 'admin/config.php')) {
 			$this->error['warning'] = $this->language->get('error_admin_writable');
+		}
+
+		if (!is_writable(DIR_OPENCART . 'image')) {
+			$this->error['warning'] = $this->language->get('error_image');
+		}
+
+		if (!is_writable(DIR_OPENCART . 'image/cache')) {
+			$this->error['warning'] = $this->language->get('error_image_cache');
+		}
+
+		if (!is_writable(DIR_OPENCART . 'image/catalog')) {
+			$this->error['warning'] = $this->language->get('error_image_catalog');
+		}
+
+		if (!is_writable(DIR_SYSTEM . 'storage/cache')) {
+			$this->error['warning'] = $this->language->get('error_cache');
+		}
+
+		if (!is_writable(DIR_SYSTEM . 'storage/logs')) {
+			$this->error['warning'] = $this->language->get('error_log');
+		}
+
+		if (!is_writable(DIR_SYSTEM . 'storage/download')) {
+			$this->error['warning'] = $this->language->get('error_download');
+		}
+
+		if (!is_writable(DIR_SYSTEM . 'storage/upload')) {
+			$this->error['warning'] = $this->language->get('error_upload');
+		}
+
+		if (!is_writable(DIR_SYSTEM . 'storage/modification')) {
+			$this->error['warning'] = $this->language->get('error_modification');
 		}
 
 		return !$this->error;
