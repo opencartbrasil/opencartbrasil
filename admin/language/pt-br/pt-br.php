@@ -99,6 +99,7 @@ $_['button_category_add']           = 'Adicionar departamento';
 $_['button_order']                  = 'Visualizar pedido';
 $_['button_order_recurring']        = 'Visualizar assinatura';
 $_['button_buy']                    = 'Comprar';
+$_['button_developer']              = 'Configurações de desenvolvimento';
 
 // Tab
 $_['tab_affiliate']                 = 'Afiliado';
