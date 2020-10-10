@@ -11,7 +11,7 @@ $_['text_telephone'] = 'Telefone';
 $_['text_fax']       = 'Fax';
 $_['text_open']      = 'Horário de funcionamento';
 $_['text_comment']   = 'Comentários';
-$_['text_success']   = '<p>Sua mensagem foi enviada para nosso atendimento.</p><p>Retornaremos o contato em breve.</p>';
+$_['text_message']   = '<p>Sua mensagem foi enviada para nosso atendimento.</p><p>Retornaremos o contato em breve.</p>';
 
 // Entry
 $_['entry_name']     = 'Seu nome';
