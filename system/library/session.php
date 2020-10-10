@@ -301,18 +301,18 @@ class Session {
 	 */
 	private function gc_session() {
 		if (ini_get('session.gc_probability')) {
-			$gc_probability = ini_get('session.gc_probability');
+			$gc_probability = (int)ini_get('session.gc_probability');
 		} else {
 			$gc_probability = 1;
 		}
 
 		if (ini_get('session.gc_divisor')) {
-			$gc_divisor = ini_get('session.gc_divisor');
+			$gc_divisor = (int)ini_get('session.gc_divisor');
 		} else {
 			$gc_divisor = 100;
 		}
 
-		if ((mt_rand() % $gc_divisor) < $gc_probability) {
+		if (mt_rand() / mt_getrandmax() > $gc_probability / $gc_divisor) {
 			$this->called = true;
 		}
 	}
