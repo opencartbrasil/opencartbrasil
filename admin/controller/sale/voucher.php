@@ -268,7 +268,7 @@ class ControllerSaleVoucher extends Controller {
 		$data['text_form'] = !isset($this->request->get['voucher_id']) ? $this->language->get('text_add') : $this->language->get('text_edit');
 
 		if (isset($this->request->get['voucher_id'])) {
-			$data['voucher_id'] = $this->request->get['voucher_id'];
+			$data['voucher_id'] = (int)$this->request->get['voucher_id'];
 		} else {
 			$data['voucher_id'] = 0;
 		}
@@ -567,9 +567,12 @@ class ControllerSaleVoucher extends Controller {
 			}
 
 			if ($vouchers) {
+				$this->load->model('sale/order');
+				$this->load->model('sale/voucher_theme');
+				$this->load->model('localisation/language');
+
 				foreach ($vouchers as $voucher_id) {
 					$voucher_info = $this->model_sale_voucher->getVoucher($voucher_id);
-			
 					if ($voucher_info) {
 						if ($voucher_info['order_id']) {
 							$order_id = $voucher_info['order_id'];
@@ -577,14 +580,10 @@ class ControllerSaleVoucher extends Controller {
 							$order_id = 0;
 						}
 
-						$this->load->model('sale/order');
-
 						$order_info = $this->model_sale_order->getOrder($order_id);
 
 						// If voucher belongs to an order
 						if ($order_info) {
-							$this->load->model('localisation/language');
-
 							$language = new Language($order_info['language_code']);
 							$language->load($order_info['language_code']);
 							$language->load('mail/voucher');
@@ -597,8 +596,6 @@ class ControllerSaleVoucher extends Controller {
 							$data['text_message'] = $language->get('text_message');
 							$data['text_redeem'] = sprintf($language->get('text_redeem'), $voucher_info['code']);
 							$data['text_footer'] = $language->get('text_footer');
-
-							$this->load->model('sale/voucher_theme');
 
 							$voucher_theme_info = $this->model_sale_voucher_theme->getVoucherTheme($voucher_info['voucher_theme_id']);
 
