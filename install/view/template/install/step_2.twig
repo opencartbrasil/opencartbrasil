@@ -295,39 +295,6 @@
             </tbody>
           </table>
         </fieldset>
-        <p>{{ text_install_file }}</p>
-        <fieldset>
-          <table class="table">
-            <thead>
-              <tr>
-                <td><b>{{ text_file }}</b></td>
-                <td><b>{{ text_status }}</b></td>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td>{{ catalog_config }}</td>
-                <td>
-                  {% if not error_catalog_config %}
-                  <span class="text-success">{{ text_writable }}</span>
-                  {% else %}
-                  <span class="text-danger">{{ error_catalog_config }}</span>
-                  {% endif %}
-                </td>
-              </tr>
-              <tr>
-                <td>{{ admin_config }}</td>
-                <td>
-                  {% if not error_admin_config %}
-                  <span class="text-success">{{ text_writable }}</span>
-                  {% else %}
-                  <span class="text-danger">{{ error_admin_config }}</span>
-                  {% endif %}
-                </td>
-              </tr>
-            </tbody>
-          </table>
-        </fieldset>
         <p>{{ text_install_directory }}</p>
         <fieldset>
           <table class="table">
