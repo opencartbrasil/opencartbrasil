@@ -6,6 +6,60 @@ e utiliza [Semantic Versioning](https://semver.org/lang/pt-BR/spec/v2.0.0.html).
 
 ## [Não lançada]
 
+## [1.5.0] (Data de lançamento: 10.10.2020)
+### Corrigido
+- Correção ao excluir idioma no admin
+- Correção no backup das tabelas no admin
+- Correção na tradução do voucher no admin
+- Correção na paginação de clientes no admin
+- Correção ao carregar cache de idioma no admin
+- Correção no breadcrumbs da tela de login no admin
+- Correção na exibição do código da fatura no admin
+- Correção na ordem de exibição dos impostos no admin
+- Correção no pedido com pagamento recorrente no admin
+- Correção no help do campo cliente confiável no admin
+- Correção no layout da tabela de localizações no admin
+- Correção no carregamento de model de voucher no admin
+- Correção na tradução do envio de informativo no admin
+- Correção de segurança no gerenciador de arquivos do admin
+- Correção na exibição de extensões do tipo dashboard no admin
+- Correção no tamanho do código do cupom para 20 caracteres no admin
+- Correção no cadastro e edição de produtos com assinaturas no admin
+- Correção no arquivo .htaccess
+- Correção na edição do cliente no catalog
+- Correção no cadastro do cliente no catalog
+- Correção no cadastro de afiliado no catalog
+- Correção na extensão Fraudlabs Pro no catalog
+- Correção no formulário de devolução no catalog
+- Correção no módulo que exibe produtos novos no catalog
+- Correção no cadastro de endereço do cliente no catalog
+- Correção no layout do e-mail com resumo do pedido no catalog
+- Correção na validação do endereço na cotação de frete no catalog
+- Reornganização do código em arquivos
+- Remoção de espaços em branco em arquivos
+- Remoção de model desnecessário nas marcas
+- Remoção de histórico nulo após a atualização da situação do pedido
+- Verificação de tipo inteiro em parâmetros recebidos por GET
+
+### Modificado
+- Melhoria no formulário de contato
+- Melhoria no processo de instalação
+- Melhoria na biblioteca de cache Redis
+- Melhoria na extensão de frete por peso
+- Melhoria no garbage collector da sessão
+- Melhoria na leitura dos arquivos de cache
+- Melhoria na validação do endereço no startup
+- Melhoria na biblioteca SMTP para envio de e-mail
+- Melhoria no botão configurações de desenvolvimento
+- Melhoria no registro da conexão com o banco de dados
+- Melhoria no envio de notificação para e-mail adicional
+- Melhoria na validação durante a compra de vale presente
+- Exibe imagem padrão no produto dentro do carrinho quando o produto não possuir imagem
+
+### Removido
+- Remoção da extensão Frenet
+- Remoção da integração Tiny ERP
+
 ## [1.4.15] (Data de lançamento: 22.06.2020)
 ### Corrigido
 - Melhoria no cadastro de produtos
@@ -554,7 +608,8 @@ e utiliza [Semantic Versioning](https://semver.org/lang/pt-BR/spec/v2.0.0.html).
 - Cupons de descontos para demonstração.
 - Moedas: Euro e Libra esterlina.
 
-[Não lançada]: https://github.com/opencartbrasil/opencartbrasil/compare/v1.4.15...HEAD
+[Não lançada]: https://github.com/opencartbrasil/opencartbrasil/compare/v1.5.0...HEAD
+[1.5.0]: https://github.com/opencartbrasil/opencartbrasil/compare/v1.4.15...v1.5.0
 [1.4.15]: https://github.com/opencartbrasil/opencartbrasil/compare/v1.4.14...v1.4.15
 [1.4.14]: https://github.com/opencartbrasil/opencartbrasil/compare/v1.4.13...v1.4.14
 [1.4.13]: https://github.com/opencartbrasil/opencartbrasil/compare/v1.4.12...v1.4.13
