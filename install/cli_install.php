@@ -62,17 +62,17 @@ function usage() {
 	echo "======\n";
 	echo "\n";
 	$options = implode(" ", array(
-		'--db_driver', 'mysqli',
-		'--db_hostname', 'localhost',
-		'--db_username', 'root',
-		'--db_password', 'senha',
-		'--db_database', 'opencartbrasil',
-		'--db_port', '3306',
-		'--db_prefix', 'oc_',
-		'--username', 'admin',
-		'--password', 'admin',
-		'--email', 'usuario@dominio.com.br',
-		'--http_server', 'http://localhost/opencartbrasil/'
+		'--db_driver', '"mysqli" \\' . PHP_EOL,
+		'--db_hostname', '"localhost" \\' . PHP_EOL,
+		'--db_username', '"root" \\' . PHP_EOL,
+		'--db_password', '"senha" \\' . PHP_EOL,
+		'--db_database', '"opencartbrasil" \\' . PHP_EOL,
+		'--db_port', '"3306" \\' . PHP_EOL,
+		'--db_prefix', '"oc_" \\' . PHP_EOL,
+		'--username', '"admin" \\' . PHP_EOL,
+		'--password', '"admin" \\' . PHP_EOL,
+		'--email', '"usuario@dominio.com.br" \\' . PHP_EOL,
+		'--http_server', '"http://localhost/opencartbrasil/"'
 	));
 	echo 'php cli_install.php install ' . $options . "\n\n";
 }
@@ -135,51 +135,51 @@ function valid($options) {
 
 function install($options) {
 	$check = check_requirements();
-	if ($check[0]) {
+
+	if ($check === true) {
 		setup_db($options);
 		write_config_files($options);
 		dir_permissions();
 	} else {
-		echo 'Erro: Falha na pré-instalação: ' . $check[1] . "\n\n";
+		echo 'Erro: Falha na pré-instalação: ' . $check . "\n\n";
 		exit(1);
 	}
 }
 
 function check_requirements() {
-	$error = null;
-	if (version_compare(phpversion(), '5.6', '<')) {
-		$error = 'Atenção: Você precisa utilizar o PHP 5.6 ou superior para o projeto OpenCart Brasil funcionar!';
+	if (version_compare(phpversion(), '7.4', '<')) {
+		return 'Atenção: Você precisa utilizar o PHP 7.4 ou superior para o projeto OpenCart Brasil funcionar!';
 	}
 
 	if (!ini_get('file_uploads')) {
-		$error = 'Atenção: file_uploads precisa ser ativado nas configurações do PHP!';
+		return 'Atenção: file_uploads precisa ser ativado nas configurações do PHP!';
 	}
 
 	if (ini_get('session.auto_start')) {
-		$error = 'Atenção: O projeto OpenCart Brasil não funcionará com session.auto_start ativado!';
+		return 'Atenção: O projeto OpenCart Brasil não funcionará com session.auto_start ativado!';
 	}
 
-	if (!extension_loaded('mysqli')) {
-		$error = 'Atenção: A extensão MySQLi precisa ser carregada para o OpenCart Brasil funcionar!';
+	if (!extension_loaded('mysqli') && !extension_loaded('pdo') && !extension_loaded('pgsql')) {
+		return 'Atenção: A extensão MySQLi, PDO ou PostgreSQL precisa ser carregada para o OpenCart Brasil funcionar!';
 	}
 
 	if (!extension_loaded('gd')) {
-		$error = 'Atenção: A extensão GD precisa ser carregada para o OpenCart Brasil funcionar!';
+		return 'Atenção: A extensão GD precisa ser carregada para o OpenCart Brasil funcionar!';
 	}
 
 	if (!extension_loaded('curl')) {
-		$error = 'Atenção: A extensão CURL precisa ser carregada para o OpenCart Brasil funcionar!';
+		return 'Atenção: A extensão CURL precisa ser carregada para o OpenCart Brasil funcionar!';
 	}
 
 	if (!function_exists('openssl_encrypt')) {
-		$error = 'Atenção: A extensão OpenSSL precisa ser carregada para o OpenCart Brasil funcionar!';
+		return 'Atenção: A extensão OpenSSL precisa ser carregada para o OpenCart Brasil funcionar!';
 	}
 
 	if (!extension_loaded('zlib')) {
-		$error = 'Atenção: A extensão ZLIB precisa ser carregada para o OpenCart Brasil funcionar!';
+		return 'Atenção: A extensão ZLIB precisa ser carregada para o OpenCart Brasil funcionar!';
 	}
 
-	return array($error === null, $error);
+	return true;
 }
 
 function setup_db($data) {
@@ -188,10 +188,14 @@ function setup_db($data) {
 	$file = DIR_APPLICATION . 'opencart.sql';
 
 	if (!file_exists($file)) {
-		exit('Não foi possível carregar o arquivo sql: ' . $file);
+		exit('O arquivo "' . $file . '" não foi encontrado.');
 	}
 
 	$lines = file($file);
+
+	if ($lines === false) {
+		exit('Não foi possível carregar o arquivo sql: ' . $file);
+	}
 
 	if ($lines) {
 		$sql = '';
