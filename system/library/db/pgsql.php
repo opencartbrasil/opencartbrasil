@@ -7,7 +7,9 @@ final class PgSQL {
 		$this->connection = @pg_connect('hostname=' . $hostname . ' port=' . $port .  ' username=' . $username . ' password='	. $password . ' database=' . $database);
 
 		if (!$this->connection) {
-			throw new \Exception('Erro: Não foi possível conectar no banco de dados usando!');
+			$message = $e->getMessage();
+			$message = str_replace(array($hostname, $username, $password, $database, $port), '*********', $message);
+			throw new \Exception($message, $e->getCode());
 		}
 
 		pg_query($this->connection, "SET CLIENT_ENCODING TO 'UTF8'");

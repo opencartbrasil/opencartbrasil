@@ -10,7 +10,9 @@ final class MySQLi {
 
 			$this->connection = @new \mysqli($hostname, $username, $password, $database, $port);
 		} catch (\mysqli_sql_exception $e) {
-			throw new \Exception('Erro: Não foi possível conectar-se ao banco de dados!');
+			$message = $e->getMessage();
+			$message = str_replace(array($hostname, $username, $password, $database, $port), '*********', $message);
+			throw new \Exception($message, $e->getCode());
 		}
 
 		$this->connection->set_charset("utf8");
