@@ -39,7 +39,10 @@ RUN set -aux; \
     [ ! -f /var/www/html/config.php ] && touch /var/www/html/config.php; \
     [ ! -f /var/www/html/admin/config.php ] && touch /var/www/html/admin/config.php; \
     \
-    chown -R www-data: .
+    chown -R www-data: /var/www/html/image/; \
+    chown -R www-data: /var/www/html/system/storage/; \
+    chown -R www-data: /var/www/html/admin/config.php; \
+    chown -R www-data: /var/www/html/config.php;
 
 # Configura regras de exibição do log
 RUN { \
