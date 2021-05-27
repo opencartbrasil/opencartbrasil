@@ -76,8 +76,6 @@ RUN { \
         echo 'session.use_trans_sid = Off'; \
         echo 'session.cookie_httponly = Off'; \
         echo 'session.cache_limiter = nocache'; \
-        echo 'session.gc_maxlifetime = 1'; \
-        echo 'session.gc_divisor = 100'; \
     } > /usr/local/etc/php/conf.d/opencart-brasil.ini;
 
 RUN set -aux; \
