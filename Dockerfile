@@ -99,4 +99,8 @@ EXPOSE 80
 
 VOLUME /var/www/html
 
+COPY docker-entrypoint.sh /
+
+ENTRYPOINT ["/docker-entrypoint.sh"]
+
 CMD ["apache2-foreground"]
