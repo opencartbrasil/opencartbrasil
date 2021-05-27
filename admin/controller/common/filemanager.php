@@ -320,13 +320,16 @@ class ControllerCommonFileManager extends Controller {
 			}
 		}
 
+		if (!is_writable($directory)) {
+			$json['error'] = $this->language->get('error_forbidden');
+		}
+
 		if (!isset($json['error'])) {
 			mkdir($directory . '/' . $folder, 0777);
-			chmod($directory . '/' . $folder, 0777);
-
-			@touch($directory . '/' . $folder . '/' . 'index.html');
-
+			touch($directory . '/' . $folder . '/' . 'index.html');
+			
 			$json['success'] = $this->language->get('text_directory');
+
 		}
 
 		$this->response->addHeader('Content-Type: application/json');
