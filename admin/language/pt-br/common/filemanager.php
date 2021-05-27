@@ -21,3 +21,4 @@ $_['error_filesize']   = 'Aviso: O tamanho do arquivo não é válido!';
 $_['error_filetype']   = 'Aviso: Tipo de arquivo incorreto!';
 $_['error_upload']     = 'Aviso: O arquivo não pode ser carregado por um motivo desconhecido!';
 $_['error_delete']     = 'Aviso: Você não pode excluir esta pasta!';
+$_['error_forbidden']  = 'Aviso: Você não tem permissão para modificar o conteúdo desta pasta!';
