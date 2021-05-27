@@ -183,7 +183,12 @@ function check_requirements() {
 }
 
 function setup_db($data) {
-	$db = new DB($data['db_driver'], htmlspecialchars_decode($data['db_hostname']), htmlspecialchars_decode($data['db_username']), htmlspecialchars_decode($data['db_password']), htmlspecialchars_decode($data['db_database']), $data['db_port']);
+	try {
+		$db = new DB($data['db_driver'], htmlspecialchars_decode($data['db_hostname']), htmlspecialchars_decode($data['db_username']), htmlspecialchars_decode($data['db_password']), htmlspecialchars_decode($data['db_database']), $data['db_port']);
+	} catch (Exception $e) {
+		echo $e->getMessage();
+		exit(1);
+	}
 
 	$file = DIR_APPLICATION . 'opencart.sql';
 
