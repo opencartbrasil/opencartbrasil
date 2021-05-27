@@ -1,3 +1,10 @@
 .git
 image/cache
 system/storage
+Dockerfile
+README.md
+php.ini
+LICENSE
+SECURITY.md
+CODE_OF_CONDUCT.md
+CHANGELOG.md

@@ -1,19 +1,5 @@
 FROM php:7.4-apache
 
-# Define as variáveis de ambiente
-ENV ENV_MOD="development" \
-    DB_DRIVER="pdo" \
-    DB_HOSTNAME="" \
-    DB_USERNAME="" \
-    DB_PASSWORD="" \
-    DB_DATABASE="opencartbrasil" \
-    DB_PORT="3306" \
-    DB_PREFIX="oc_" \
-    USERNAME="admin" \
-    PASSWORD="" \
-    EMAIL="webmaster@localhost" \
-    HTTP_SERVER=""
-
 # Instala as dependências necessárias e habilita as extensões do PHP
 RUN set -ex; \
     apt update; \
@@ -40,13 +26,28 @@ WORKDIR /var/www/html
 
 COPY . .
 
+# Cria as pastas necessárias
+RUN set -aux; \
+    mkdir -p /var/www/html/image/cache/; \
+    mkdir -p /var/www/html/image/catalog/; \
+    mkdir -p /var/www/html/system/storage/cache/; \
+    mkdir -p /var/www/html/system/storage/logs/; \
+    mkdir -p /var/www/html/system/storage/download/; \
+    mkdir -p /var/www/html/system/storage/upload/; \
+    mkdir -p /var/www/html/system/storage/session/; \
+    mkdir -p /var/www/html/system/storage/modification/; \
+    [ ! -f /var/www/html/config.php ] && touch /var/www/html/config.php; \
+    [ ! -f /var/www/html/admin/config.php ] && touch /var/www/html/admin/config.php; \
+    \
+    chown -R www-data: .
+
 # Configura regras de exibição do log
 RUN { \
         echo 'error_reporting = E_ERROR | E_WARNING | E_PARSE | E_CORE_ERROR | E_CORE_WARNING | E_COMPILE_ERROR | E_COMPILE_WARNING | E_RECOVERABLE_ERROR'; \
         echo 'display_errors = Off'; \
         echo 'display_startup_errors = Off'; \
-        echo 'log_errors = On'; \
         echo 'error_log = /dev/stderr'; \
+        echo 'log_errors = On'; \
         echo 'log_errors_max_len = 1024'; \
         echo 'ignore_repeated_errors = On'; \
         echo 'ignore_repeated_source = Off'; \
@@ -70,26 +71,28 @@ RUN { \
         echo 'session.use_only_cookies = On'; \
         echo 'session.use_cookies = On'; \
         echo 'session.use_trans_sid = Off'; \
-        echo 'session.cookie_httponly = On'; \
-        echo 'session.cookie_samesite = Lax'; \
+        echo 'session.cookie_httponly = Off'; \
         echo 'session.cache_limiter = nocache'; \
         echo 'session.gc_maxlifetime = 1'; \
         echo 'session.gc_divisor = 100'; \
     } > /usr/local/etc/php/conf.d/opencart-brasil.ini;
 
-# Cria as pastas necessárias
 RUN set -aux; \
-    mkdir -p /var/www/html/image/cache/; \
-    mkdir -p /var/www/html/image/catalog/; \
-    mkdir -p /var/www/html/system/storage/cache/; \
-    mkdir -p /var/www/html/system/storage/logs/; \
-    mkdir -p /var/www/html/system/storage/download/; \
-    mkdir -p /var/www/html/system/storage/upload/; \
-    mkdir -p /var/www/html/system/storage/session/; \
-    mkdir -p /var/www/html/system/storage/modification/; \
-    [ ! -f /var/www/html/config.php ] && touch /var/www/html/config.php; \
-    [ ! -f /var/www/html/admin/config.php ] && touch /var/www/html/admin/config.php; \
-    chown -R www-data: .
+    { \
+        echo "<VirtualHost *:80>"; \
+        echo "    ServerAdmin webmaster@localhost"; \
+        echo "    DocumentRoot /var/www/html"; \
+        echo ""; \
+        echo "    ErrorLog /dev/stderr"; \
+        echo "    CustomLog /dev/stdout combined"; \
+        echo "</VirtualHost>"; \
+    } > /etc/apache2/sites-available/000-default.conf; \
+    \
+    if [ ! -f .htaccess ]; then \
+        mv .htaccess.txt .htaccess; \
+    fi; \
+    \
+    a2enmod rewrite;
 
 EXPOSE 80
 
