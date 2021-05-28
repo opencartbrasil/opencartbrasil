@@ -1,0 +1,41 @@
+version: '3.7'
+
+volumes: 
+    ocbr_database:
+
+networks: 
+    ocbr_network:
+
+services: 
+    ocbr:
+        container_name: opencartbrasil
+        build: .
+        ports: 
+            - 8080:80
+        environment: 
+            - DB_HOSTNAME=ocbr_db
+            - DB_USERNAME=store
+            - DB_PASSWORD=store
+            - DB_DATABASE=opencartbrasil
+            - USERNAME=admin
+            - PASSWORD=admin
+            - HTTP_SERVER=http://localhost:8080/
+        networks: 
+            - ocbr_network
+        volumes: 
+            - ./:/var/www/html
+        depends_on: 
+            - ocbr_db
+    
+    ocbr_db:
+        image: mysql:5.7
+        container_name: opencartbrasil_db
+        environment: 
+            - MYSQL_RANDOM_ROOT_PASSWORD=yes
+            - MYSQL_USER=store
+            - MYSQL_PASSWORD=store
+            - MYSQL_DATABASE=opencartbrasil
+        networks: 
+            - ocbr_network
+        volumes: 
+            - ocbr_database:/var/lib/mysql

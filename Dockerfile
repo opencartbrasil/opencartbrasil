@@ -12,6 +12,7 @@ RUN set -ex; \
         libonig-dev \
         libzip-dev \
         zip \
+        netcat \
         libcurl4-openssl-dev; \
     docker-php-ext-configure gd --with-jpeg --with-freetype; \
     docker-php-ext-install -j$(nproc) \

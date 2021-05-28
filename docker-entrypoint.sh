@@ -1,19 +1,24 @@
 #!/usr/bin/env bash
 
-if [ ! -s config.php ]; then
+if [ ! -f config.php ] || [ ! -s config.php ]; then
+    until nc -z -w30 $DB_HOSTNAME ${DB_PORT:-3306}; do
+        echo "Aguardando inicialização do banco de dados"
+        sleep 5
+    done
+
     password_default=$(cat /dev/urandom | tr -cd A-Za-z0-9 | head -c 10)
 
     cli_arguments=(
         --db_driver "pdo" \
-        --db_hostname "${DB_HOSTNAME:-'0.0.0.0'}" \
-        --db_username "${DB_USERNAME:-'root'}" \
-        --db_password "${DB_PASSWORD:-''}" \
-        --db_database "${DB_DATABASE:-'opencartbrasil'}" \
+        --db_hostname "${DB_HOSTNAME}" \
+        --db_username "${DB_USERNAME:-root}" \
+        --db_password "${DB_PASSWORD}" \
+        --db_database "${DB_DATABASE:-opencartbrasil}" \
         --db_port "${DB_PORT:-3306}" \
-        --db_prefix "${DB_PREFIX:-'ocbr_'}" \
-        --username "${USERNAME:-'admin'}" \
+        --db_prefix "${DB_PREFIX:-ocbr_}" \
+        --username "${USERNAME:-admin}" \
         --password "${PASSWORD:-$password_default}" \
-        --email "${EMAIL:-'web@master'}" \
+        --email "${EMAIL:-web@master}" \
         --http_server "${HTTP_SERVER%/}/"
     )
 
