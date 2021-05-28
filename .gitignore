@@ -2,3 +2,8 @@
 admin/config.php
 
 !index.html
+
+system/storage
+!system/storage/vendor
+
+image/cache
