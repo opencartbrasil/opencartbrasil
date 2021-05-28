@@ -9,6 +9,7 @@ $_['text_db_administration'] = '2. Preencha os campos abaixo com um nome de usu�
 $_['text_mysqli']            = 'MySQLi';
 $_['text_mpdo']              = 'mPDO';
 $_['text_pgsql']             = 'PostgreSQL';
+$_['text_loading']           = 'Por favor! Aguarde a instalação ser concluída.';
 
 // Entry
 $_['entry_db_driver']        = 'Driver';

@@ -378,3 +378,35 @@ a.button, input.button {
 .terms p, .terms ul, .terms ol {
     color: #000000;
 }
+
+/* Loading */
+body.loading {
+  overflow: none;
+}
+div.loading {
+  align-items: center;
+  background: #0000004a;
+  display: none;
+  opacity: 0;
+  visibility: hidden;
+  height: 100vh;
+  justify-content: center;
+  left: 0;
+  margin: 0;
+  padding: 0;
+  position: fixed;
+  top: 0;
+  width: 100vw;
+}
+div.loading.active {
+  display: flex;
+  opacity: 1;
+  visibility: visible;
+}
+.loading-body {
+  background: #FFF;
+  border-radius: 10px;
+  min-width: 500px;
+  padding: 28px;
+  text-align: center;
+}

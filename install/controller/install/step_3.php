@@ -105,6 +105,7 @@ class ControllerInstallStep3 extends Controller {
 		$data['text_mysqli'] = $this->language->get('text_mysqli');
 		$data['text_mpdo'] = $this->language->get('text_mpdo');
 		$data['text_pgsql'] = $this->language->get('text_pgsql');
+		$data['text_loading'] = $this->language->get('text_loading');
 
 		$data['entry_db_driver'] = $this->language->get('entry_db_driver');
 		$data['entry_db_hostname'] = $this->language->get('entry_db_hostname');

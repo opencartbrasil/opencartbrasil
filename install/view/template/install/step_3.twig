@@ -21,7 +21,7 @@
   {% endif %}
   <div class="row">
     <div class="col-sm-9">
-      <form action="{{ action }}" method="post" enctype="multipart/form-data" class="form-horizontal">
+      <form action="{{ action }}" method="post" enctype="multipart/form-data" id="form-step-3" class="form-horizontal">
         <p>{{ text_db_connection }}</p>
         <fieldset>
           <div class="form-group">
@@ -126,7 +126,7 @@
         <div class="buttons">
           <div class="pull-left"><a href="{{ back }}" class="btn btn-default">{{ button_back }}</a></div>
           <div class="pull-right">
-            <input type="submit" value="{{ button_continue }}" class="btn btn-primary"/>
+            <input type="button" id="button-continue" value="{{ button_continue }}" class="btn btn-primary" />
           </div>
         </div>
       </form>
@@ -134,4 +134,14 @@
     <div class="col-sm-3">{{ column_left }}</div>
   </div>
 </div>
+<div class="loading">
+  <div class="loading-body">{{ text_loading }}</div>
+</div>
+<script>
+$('#button-continue').on('click', function() {
+  $('.loading').addClass('active');
+  $('body').addClass('loading');
+  $('#form-step-3').submit();
+})
+</script>
 {{ footer }}
