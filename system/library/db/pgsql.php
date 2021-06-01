@@ -4,17 +4,19 @@ final class PgSQL {
     private $connection;
 
     public function __construct($hostname, $username, $password, $database, $port = '5432') {
-        $pgsql = @pg_connect('hostname=' . $hostname . ' port=' . $port .  ' username=' . $username . ' password='    . $password . ' database=' . $database);
-
-        if (!$pgsql) {
+        try {
+            $pg = @pg_connect('hostname=' . $hostname . ' port=' . $port . ' username=' . $username . ' password=' . $password . ' database=' . $database);
+        } catch (\Exception $e) {
             $message = $e->getMessage();
             $message = str_replace(array($hostname, $username, $password, $database, $port), '*********', $message);
 
             throw new \Exception($message, $e->getCode());
         }
 
-        $this->connection = $pgsql;
-        pg_query($this->connection, "SET CLIENT_ENCODING TO 'UTF8'");
+        if ($pg) {
+            $this->connection = $pg;
+            pg_query($this->connection, "SET CLIENT_ENCODING TO 'UTF8'");
+        }
     }
 
     public function query($sql) {
