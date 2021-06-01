@@ -1,78 +1,85 @@
 <?php
 namespace DB;
 final class PgSQL {
-	private $connection;
+    private $connection;
 
-	public function __construct($hostname, $username, $password, $database, $port = '5432') {
-		$this->connection = @pg_connect('hostname=' . $hostname . ' port=' . $port .  ' username=' . $username . ' password='	. $password . ' database=' . $database);
+    public function __construct($hostname, $username, $password, $database, $port = '5432') {
+        $pgsql = @pg_connect('hostname=' . $hostname . ' port=' . $port .  ' username=' . $username . ' password='    . $password . ' database=' . $database);
 
-		if (!$this->connection) {
-			$message = $e->getMessage();
-			$message = str_replace(array($hostname, $username, $password, $database, $port), '*********', $message);
-			throw new \Exception($message, $e->getCode());
-		}
+        if (!$pgsql) {
+            $message = $e->getMessage();
+            $message = str_replace(array($hostname, $username, $password, $database, $port), '*********', $message);
 
-		pg_query($this->connection, "SET CLIENT_ENCODING TO 'UTF8'");
-	}
+            throw new \Exception($message, $e->getCode());
+        }
 
-	public function query($sql) {
-		$resource = pg_query($this->connection, $sql);
+        $this->connection = $pgsql;
+        pg_query($this->connection, "SET CLIENT_ENCODING TO 'UTF8'");
+    }
 
-		if ($resource) {
-			if (is_resource($resource)) {
-				$i = 0;
+    public function query($sql) {
+        $resource = pg_query($this->connection, $sql);
 
-				$data = array();
+        if ($resource) {
+            if (is_resource($resource)) {
+                $i = 0;
 
-				while ($result = pg_fetch_assoc($resource)) {
-					$data[$i] = $result;
+                $data = array();
 
-					$i++;
-				}
+                while ($result = pg_fetch_assoc($resource)) {
+                    $data[$i] = $result;
 
-				pg_free_result($resource);
+                    $i++;
+                }
 
-				$query = new \stdClass();
-				$query->row = isset($data[0]) ? $data[0] : array();
-				$query->rows = $data;
-				$query->num_rows = $i;
+                pg_free_result($resource);
 
-				unset($data);
+                $result = new \stdClass();
+                $result->num_rows = $i;
+                $result->row = isset($data[0]) ? $data[0] : array();
+                $result->rows = $data;
 
-				return $query;
-			} else {
-				return true;
-			}
-		} else {
-			throw new \Exception('Erro: ' . pg_result_error($this->connection) . '<br>Código: ' . $sql);
-		}
-	}
+                unset($data);
+            }
+        } else {
+            throw new \Exception('Erro: ' . pg_result_error($this->connection) . '<br>Código: ' . $sql);
+        }
 
-	public function escape($value) {
-		return pg_escape_string($this->connection, $value);
-	}
+        if (!isset($result)) {
+            $result = new \stdClass();
+            $result->num_rows = 0;
+            $result->row = array();
+            $result->rows = array();
+        }
 
-	public function countAffected() {
-		return pg_affected_rows($this->connection);
-	}
+        return $result;
+    }
 
-	public function isConnected() {
-		if (pg_connection_status($this->connection) == PGSQL_CONNECTION_OK) {
-			return true;
-		} else {
-			return false;
-		}
-	}
+    public function escape($value) {
+        return pg_escape_string($this->connection, $value);
+    }
 
-	public function getLastId() {
-		$query = $this->query("SELECT LASTVAL() AS `id`");
+    public function countAffected() {
+        return pg_affected_rows($this->connection);
+    }
 
-		return $query->row['id'];
-	}
+    public function isConnected() {
+        if (pg_connection_status($this->connection) == PGSQL_CONNECTION_OK) {
+            return true;
+        } else {
+            return false;
+        }
+    }
 
-	public function __destruct() {
-		if ($this->isConnected()) {
-			pg_close($this->connection);
-		}
-	}
+    public function getLastId() {
+        $query = $this->query("SELECT LASTVAL() AS `id`");
+
+        return $query->row['id'];
+    }
+
+    public function __destruct() {
+        if ($this->isConnected()) {
+            pg_close($this->connection);
+        }
+    }
 }

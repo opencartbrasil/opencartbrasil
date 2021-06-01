@@ -1,114 +1,82 @@
 <?php
 namespace DB;
 final class PDO {
-	private $connection;
-	private $statement;
+    private $connection;
+    private $data = array();
+    private $affected;
 
-	public function __construct($hostname, $username, $password, $database, $port = '3306') {
-		try {
-			$this->connection = @new \PDO("mysql:host=" . $hostname . ";port=" . $port . ";dbname=" . $database, $username, $password, array(\PDO::ATTR_PERSISTENT => true));
-		} catch (\PDOException $e) {
-			$message = $e->getMessage();
-			$message = str_replace(array($hostname, $username, $password, $database, $port), '*********', $message);
-			throw new \Exception($message, $e->getCode());
-		}
+    public function __construct($hostname, $username, $password, $database, $port = '3306') {
+        try {
+            $pdo = @new \PDO("mysql:host=" . $hostname . ";port=" . $port . ";dbname=" . $database . ";charset=UTF8", $username, $password, array(\PDO::ATTR_PERSISTENT => false));
+        } catch (\PDOException $e) {
+            $message = $e->getMessage();
+            $message = str_replace(array($hostname, $username, $password, $database, $port), '*********', $message);
 
-		$this->connection->exec("SET NAMES 'utf8'");
-		$this->connection->exec("SET CHARACTER SET utf8");
-		$this->connection->exec("SET CHARACTER_SET_CONNECTION=utf8");
-		$this->connection->exec("SET SQL_MODE = ''");
-	}
+            throw new \Exception($message, $e->getCode());
+        }
 
-	public function execute() {
-		try {
-			if ($this->statement && $this->statement->execute()) {
-				$data = array();
+        if ($pdo) {
+            $this->connection = $pdo;
+            $this->connection->query("SET SESSION sql_mode = 'NO_ZERO_IN_DATE,NO_ZERO_DATE,NO_ENGINE_SUBSTITUTION'");
+        }
+    }
 
-				while ($row = $this->statement->fetch(\PDO::FETCH_ASSOC)) {
-					$data[] = $row;
-				}
+    public function query($sql) {
+        $this->statement = $this->connection->prepare($sql);
 
-				$result = new \stdClass();
-				$result->row = (isset($data[0])) ? $data[0] : array();
-				$result->rows = $data;
-				$result->num_rows = $this->statement->rowCount();
-			}
-		} catch (\PDOException $e) {
-			throw new \Exception('Erro: ' . $e->getMessage() . ' Código : ' . $e->getCode());
-		}
-	}
+        try {
+            if ($this->statement && $this->statement->execute($this->data)) {
+                $data = array();
+                $this->data = array();
 
-	public function query($sql, $params = array()) {
-		$this->statement = $this->connection->prepare($sql);
+                while ($row = $this->statement->fetch(\PDO::FETCH_ASSOC)) {
+                    $data[] = $row;
+                }
 
-		$result = false;
+                $result = new \stdClass();
+                $result->row = (isset($data[0]) ? $data[0] : array());
+                $result->rows = $data;
+                $result->num_rows = $this->statement->rowCount();
+            }
+        } catch (\PDOException $e) {
+            throw new \Exception('Erro: ' . $e->getMessage() . '<br>Código : ' . $e->getCode() . '<br>' . $sql);
+        }
 
-		try {
-			if ($this->statement && $this->statement->execute($params)) {
-				$data = array();
+        if (!isset($result)) {
+            $result = new \stdClass();
+            $result->num_rows = 0;
+            $result->row = array();
+            $result->rows = array();
+        }
 
-				while ($row = $this->statement->fetch(\PDO::FETCH_ASSOC)) {
-					$data[] = $row;
-				}
+        return $result;
+    }
 
-				$result = new \stdClass();
-				$result->row = (isset($data[0]) ? $data[0] : array());
-				$result->rows = $data;
-				$result->num_rows = $this->statement->rowCount();
-			}
-		} catch (\PDOException $e) {
-			throw new \Exception('Erro: ' . $e->getMessage() . '<br>Código: ' . $e->getCode() . ' <br>' . $sql);
-		}
+    public function escape($value) {
+        return str_replace(array("\\", "\0", "\n", "\r", "\x1a", "'", '"'), array("\\\\", "\\0", "\\n", "\\r", "\Z", "\'", '\"'), $value);
+    }
 
-		if ($result) {
-			return $result;
-		} else {
-			$result = new \stdClass();
-			$result->row = array();
-			$result->rows = array();
-			$result->num_rows = 0;
+    public function countAffected() {
+        if ($this->statement) {
+            return $this->statement->rowCount();
+        } else {
+            return 0;
+        }
+    }
 
-			return $result;
-		}
-	}
+    public function getLastId() {
+        return $this->connection->lastInsertId();
+    }
 
-	public function prepare($sql) {
-		$this->statement = $this->connection->prepare($sql);
-	}
+    public function isConnected() {
+        if ($this->connection) {
+            return true;
+        } else {
+            return false;
+        }
+    }
 
-	public function bindParam($parameter, $variable, $data_type = \PDO::PARAM_STR, $length = 0) {
-		if ($length) {
-			$this->statement->bindParam($parameter, $variable, $data_type, $length);
-		} else {
-			$this->statement->bindParam($parameter, $variable, $data_type);
-		}
-	}
-
-	public function escape($value) {
-		return str_replace(array("\\", "\0", "\n", "\r", "\x1a", "'", '"'), array("\\\\", "\\0", "\\n", "\\r", "\Z", "\'", '\"'), $value);
-	}
-
-	public function countAffected() {
-		if ($this->statement) {
-			return $this->statement->rowCount();
-		} else {
-			return 0;
-		}
-	}
-
-	public function getLastId() {
-		return $this->connection->lastInsertId();
-	}
-
-	public function isConnected() {
-		if ($this->connection) {
-			return true;
-		} else {
-			return false;
-		}
-	}
-
-	public function __destruct() {
-		$this->connection = null;
-	}
+    public function __destruct() {
+        unset($this->connection);
+    }
 }
