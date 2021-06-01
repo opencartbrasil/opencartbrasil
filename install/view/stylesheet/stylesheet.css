@@ -395,12 +395,13 @@ div.loading {
   margin: 0;
   padding: 0;
   position: fixed;
+  transition: all 250ms linear;
   top: 0;
   width: 100vw;
 }
 div.loading.active {
+  animation: loading-anim 250ms;
   display: flex;
-  opacity: 1;
   visibility: visible;
 }
 .loading-body {
@@ -409,4 +410,8 @@ div.loading.active {
   min-width: 500px;
   padding: 28px;
   text-align: center;
+}
+@keyframes loading-anim {
+  from { opacity: 0; }
+  to { opacity: 1; }
 }

@@ -25,10 +25,6 @@ RUN set -ex; \
         zip; \
     rm -rf /var/lib/apt/lists/*
 
-WORKDIR /var/www/html
-
-COPY ./ .
-
 # Configura regras de exibição do log
 RUN { \
         echo 'error_reporting = E_ERROR | E_WARNING | E_PARSE | E_CORE_ERROR | E_CORE_WARNING | E_COMPILE_ERROR | E_COMPILE_WARNING | E_RECOVERABLE_ERROR'; \
@@ -81,6 +77,10 @@ RUN set -aux; \
     a2enmod rewrite;
 
 EXPOSE 80
+
+WORKDIR /var/www/html
+
+COPY ./ .
 
 VOLUME /var/www/html
 
