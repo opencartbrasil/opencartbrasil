@@ -2,7 +2,6 @@
 namespace DB;
 final class PDO {
     private $connection;
-    private $data = array();
     private $affected;
 
     public function __construct($hostname, $username, $password, $database, $port = '3306') {
@@ -21,13 +20,12 @@ final class PDO {
         }
     }
 
-    public function query($sql) {
+    public function query($sql, $params = array()) {
         $this->statement = $this->connection->prepare($sql);
 
         try {
-            if ($this->statement && $this->statement->execute($this->data)) {
+            if ($this->statement && $this->statement->execute($params)) {
                 $data = array();
-                $this->data = array();
 
                 while ($row = $this->statement->fetch(\PDO::FETCH_ASSOC)) {
                     $data[] = $row;
