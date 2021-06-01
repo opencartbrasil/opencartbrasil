@@ -79,7 +79,7 @@ function usage() {
 
 function get_options($argv) {
 	$defaults = array(
-		'db_driver'   => 'mysqli',
+		'db_driver'   => 'pdo',
 		'db_hostname' => 'localhost',
 		'db_password' => '',
 		'db_port'     => '3306',
@@ -193,13 +193,15 @@ function setup_db($data) {
 	$file = DIR_APPLICATION . 'opencart.sql';
 
 	if (!file_exists($file)) {
-		exit('O arquivo "' . $file . '" não foi encontrado.');
+		echo('O arquivo "' . $file . '" não foi encontrado.');
+		exit(1);
 	}
 
 	$lines = file($file);
 
 	if ($lines === false) {
-		exit('Não foi possível carregar o arquivo sql: ' . $file);
+		echo('Não foi possível carregar o arquivo sql: ' . $file);
+		exit(1);
 	}
 
 	if ($lines) {
@@ -287,7 +289,7 @@ function write_config_files($options) {
 	$output .= '// DIR' . "\n";
 	$output .= 'define(\'DIR_APPLICATION\', \'' . addslashes(DIR_OPENCART) . 'admin/\');' . "\n";
 	$output .= 'define(\'DIR_SYSTEM\', \'' . addslashes(DIR_OPENCART) . 'system/\');' . "\n";
-	$output .= 'define(\'DIR_IMAGE\', \'' . addslashes(DIR_OPENCART) . 'image/\');' . "\n";	
+	$output .= 'define(\'DIR_IMAGE\', \'' . addslashes(DIR_OPENCART) . 'image/\');' . "\n";
 	$output .= 'define(\'DIR_STORAGE\', DIR_SYSTEM . \'storage/\');' . "\n";
 	$output .= 'define(\'DIR_CATALOG\', \'' . addslashes(DIR_OPENCART) . 'catalog/\');' . "\n";
 	$output .= 'define(\'DIR_LANGUAGE\', DIR_APPLICATION . \'language/\');' . "\n";
@@ -343,13 +345,13 @@ switch ($subcommand) {
 case "install":
 	try {
 		$options = get_options($argv);
-		define('HTTP_OPENCART', $options['http_server']);
 		$valid = valid($options);
-		if (!$valid[0]) {
+		if ($valid === false) {
 			echo "Erro: As seguintes entradas estão ausentes ou são inválidas: ";
-			echo implode(', ', $valid[1]) . "\n\n";
+			echo implode(', ', $valid) . "\n\n";
 			exit(1);
 		}
+		define('HTTP_OPENCART', $options['http_server']);
 		install($options);
 		echo "\n### INSTALAÇÃO CONCLUÍDA! ###\n\n";
 		echo "O projeto OpenCart Brasil foi instalado em seu servidor\n\n";
