@@ -1,18 +1,22 @@
 version: '3.7'
 
-volumes: 
+volumes:
     ocbr_database:
 
-networks: 
+networks:
     ocbr_network:
 
-services: 
+services:
     ocbr:
         container_name: opencartbrasil
-        build: .
-        ports: 
+        build:
+          context: .docker
+          dockerfile: Dockerfile
+          args:
+            VERSION: "1.x"
+        ports:
             - 8080:80
-        environment: 
+        environment:
             - DB_HOSTNAME=ocbr_db
             - DB_USERNAME=store
             - DB_PASSWORD=store
@@ -20,22 +24,22 @@ services:
             - USERNAME=admin
             - PASSWORD=admin
             - HTTP_SERVER=http://localhost:8080/
-        networks: 
+        networks:
             - ocbr_network
-        volumes: 
+        volumes:
             - ./:/var/www/html
-        depends_on: 
+        depends_on:
             - ocbr_db
-    
+
     ocbr_db:
         image: mysql:5.7
         container_name: opencartbrasil_db
-        environment: 
+        environment:
             - MYSQL_RANDOM_ROOT_PASSWORD=yes
             - MYSQL_USER=store
             - MYSQL_PASSWORD=store
             - MYSQL_DATABASE=opencartbrasil
-        networks: 
+        networks:
             - ocbr_network
-        volumes: 
+        volumes:
             - ocbr_database:/var/lib/mysql

@@ -32,4 +32,34 @@ if [ ! -f config.php ] || [ ! -s config.php ]; then
     fi
 fi
 
+folders=(
+  "/var/www/html/image/cache/"
+  "/var/www/html/image/catalog/"
+  "/var/www/html/system/storage/cache/"
+  "/var/www/html/system/storage/logs/"
+  "/var/www/html/system/storage/download/"
+  "/var/www/html/system/storage/upload/"
+  "/var/www/html/system/storage/session/"
+  "/var/www/html/system/storage/modification/"
+)
+
+for folder in ${folders[@]}; do
+  if [ ! -d "$folder" ]; then
+    mkdir -p "$folder"
+    chown -R www-data:www-data "$folder"
+  fi
+done
+
+files=(
+  "/var/www/html/config.php"
+  "/var/www/html/admin/config.php"
+)
+
+for f in ${files[@]}; do
+  if [ ! -d "$f" ]; then
+    touch "$f"
+    chown www-data:www-data "$f"
+  fi
+done
+
 exec "$@"

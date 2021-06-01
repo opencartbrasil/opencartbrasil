@@ -1,0 +1,6 @@
+.git
+image/cache
+system/storage
+*.md
+php.ini
+LICENSE

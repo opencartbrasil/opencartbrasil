@@ -1,5 +1,7 @@
 FROM php:7.4-apache
 
+ARG VERSION="1.x"
+
 # Instala as dependências necessárias e habilita as extensões do PHP
 RUN set -ex; \
     apt update; \
@@ -25,25 +27,7 @@ RUN set -ex; \
 
 WORKDIR /var/www/html
 
-COPY . .
-
-# Cria as pastas necessárias
-RUN set -aux; \
-    mkdir -p /var/www/html/image/cache/; \
-    mkdir -p /var/www/html/image/catalog/; \
-    mkdir -p /var/www/html/system/storage/cache/; \
-    mkdir -p /var/www/html/system/storage/logs/; \
-    mkdir -p /var/www/html/system/storage/download/; \
-    mkdir -p /var/www/html/system/storage/upload/; \
-    mkdir -p /var/www/html/system/storage/session/; \
-    mkdir -p /var/www/html/system/storage/modification/; \
-    [ ! -f /var/www/html/config.php ] && touch /var/www/html/config.php; \
-    [ ! -f /var/www/html/admin/config.php ] && touch /var/www/html/admin/config.php; \
-    \
-    chown -R www-data: /var/www/html/image/; \
-    chown -R www-data: /var/www/html/system/storage/; \
-    chown -R www-data: /var/www/html/admin/config.php; \
-    chown -R www-data: /var/www/html/config.php;
+COPY ./ .
 
 # Configura regras de exibição do log
 RUN { \
@@ -69,7 +53,7 @@ RUN { \
         echo 'memory_limit = 128M'; \
         echo 'upload_max_filesize = 200M'; \
         echo 'open_basedir = none'; \
-        echo 'user_agent = "Curl-OpenCartBrasil/1.5.0"'; \
+        echo "user_agent = \"Curl-OpenCartBrasil/${VERSION}\""; \
         echo 'post_max_size = 200M'; \
         echo 'session.auto_start = Off'; \
         echo 'session.use_only_cookies = On'; \
@@ -100,7 +84,7 @@ EXPOSE 80
 
 VOLUME /var/www/html
 
-COPY docker-entrypoint.sh /
+COPY ./scripts/docker-entrypoint.sh /
 
 ENTRYPOINT ["/docker-entrypoint.sh"]
 
