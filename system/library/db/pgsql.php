@@ -26,8 +26,8 @@ final class PgSQL {
 
                 $data = array();
 
-                while ($result = pg_fetch_assoc($resource)) {
-                    $data[$i] = $result;
+                while ($row = pg_fetch_assoc($resource)) {
+                    $data[$i] = $row;
 
                     $i++;
                 }
