@@ -37,7 +37,7 @@ $_['text_missing']           = 'Não encontrado';
 // Error
 $_['error_missing']          = 'Não encontrado';
 $_['error_unwritable']       = 'Não gravável';
-$_['error_version']          = 'Atenção: Você precisa utilizar no mínimo o PHP 5.6 para o OpenCart funcionar corretamente.';
+$_['error_version']          = 'Atenção: Você precisa utilizar no mínimo o PHP 5.6 e no máximo o PHP 7.4 para o OpenCart funcionar corretamente.';
 $_['error_file_upload']      = 'Atenção: A diretiva file_uploads do PHP precisa ser ativada.';
 $_['error_session']          = 'Atenção: A diretiva session.auto_start do PHP precisa ser desativada.';
 $_['error_db']               = 'Atenção: Pelo menos uma extensão de banco de dados precisa ser carregada no php.ini';

@@ -128,13 +128,11 @@ function valid($options) {
 		$options['http_server'] = $options['http_server'] . '/';
 	}
 
-	$valid = count($missing) === 0;
-
-	return array($valid, $missing);
+	return count($missing) > 0 ? $missing : false;
 }
 
 function install($options) {
-	$check = check_requirements();
+	$check = check_requirements($options);
 
 	if ($check === true) {
 		setup_db($options);
@@ -146,33 +144,43 @@ function install($options) {
 	}
 }
 
-function check_requirements() {
-	if (version_compare(phpversion(), '7.4', '<')) {
-		return 'Atenção: Você precisa utilizar o PHP 7.4 ou superior para o projeto OpenCart Brasil funcionar!';
+function check_requirements($options) {
+	if (version_compare(phpversion(), '5.6', '<') || version_compare(phpversion(), '8.0', '>=')) {
+		return 'Atenção: Você precisa utilizar o PHP 5.6 ou 7.x para o projeto OpenCart Brasil funcionar!';
 	}
 
 	if (!ini_get('file_uploads')) {
-		return 'Atenção: file_uploads precisa ser ativado nas configurações do PHP!';
+		return 'Atenção: A opção "file_uploads" precisa ser ativada nas configurações do PHP!';
 	}
 
 	if (ini_get('session.auto_start')) {
-		return 'Atenção: O projeto OpenCart Brasil não funcionará com session.auto_start ativado!';
+		return 'Atenção: O projeto OpenCart Brasil não funcionará com a configuração "session.auto_start" ativada!';
 	}
 
-	if (!extension_loaded('mysqli') && !extension_loaded('pdo') && !extension_loaded('pgsql')) {
-		return 'Atenção: A extensão MySQLi, PDO ou PostgreSQL precisa ser carregada para o OpenCart Brasil funcionar!';
+	$db_drivers = array(
+		'mysql',
+		'pdo',
+		'pgsql'
+	);
+
+	if (!in_array($options['db_driver'], $db_drivers)) {
+		return 'Atenção: Não há suporte para o driver "' . $options['db_driver'] . '" para banco de dados!';
+	}
+
+	if (!extension_loaded($options['db_driver'])) {
+		return 'Atenção: A extensão "' . $options['db_driver'] . '" precisa ser carregada para o OpenCart Brasil funcionar!';
 	}
 
 	if (!extension_loaded('gd')) {
-		return 'Atenção: A extensão GD precisa ser carregada para o OpenCart Brasil funcionar!';
+		return 'Atenção: A extensão "GD" precisa ser carregada para o OpenCart Brasil funcionar!';
 	}
 
 	if (!extension_loaded('curl')) {
-		return 'Atenção: A extensão CURL precisa ser carregada para o OpenCart Brasil funcionar!';
+		return 'Atenção: A extensão "CURL" precisa ser carregada para o OpenCart Brasil funcionar!';
 	}
 
 	if (!function_exists('openssl_encrypt')) {
-		return 'Atenção: A extensão OpenSSL precisa ser carregada para o OpenCart Brasil funcionar!';
+		return 'Atenção: A extensão "OpenSSL" precisa ser carregada para o OpenCart Brasil funcionar!';
 	}
 
 	if (!extension_loaded('zlib')) {
