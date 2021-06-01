@@ -6,8 +6,6 @@
 
 -----------------------------------------------------------
 
-SET sql_mode = '';
-
 --
 -- Table structure for table `oc_address`
 --
@@ -3785,7 +3783,7 @@ DROP TABLE IF EXISTS `oc_seo_url`;
 CREATE TABLE `oc_seo_url` (
   `seo_url_id` int(11) NOT NULL AUTO_INCREMENT,
   `store_id` int(11) NOT NULL,
-  `language_id` int(11) NOT NULL,  
+  `language_id` int(11) NOT NULL,
   `query` varchar(255) NOT NULL,
   `keyword` varchar(255) NOT NULL,
   PRIMARY KEY (`seo_url_id`),
@@ -7547,12 +7545,12 @@ INSERT INTO `oc_zone` (`zone_id`, `country_id`, `name`, `code`, `status`) VALUES
 (3503, 220, 'Zakarpats''ka Oblast''', '21', 1),
 (3504, 220, 'Zaporiz''ka Oblast''', '23', 1),
 (3505, 220, 'Zhytomyrs''ka oblast''', '18', 1),
-(3506, 221, 'Abu Dhabi', 'ADH', 1),
-(3507, 221, '''Ajman', 'AJ', 1),
+(3506, 221, 'Abū Z̧aby', 'AZ', 1),
+(3507, 221, '‘Ajmān', 'AJ', 1),
 (3508, 221, 'Al Fujayrah', 'FU', 1),
-(3509, 221, 'Ash Shariqah', 'SH', 1),
+(3509, 221, 'Ash Shāriqah', 'SH', 1),
 (3510, 221, 'Dubai', 'DU', 1),
-(3511, 221, 'R''as al Khaymah', 'RK', 1),
+(3511, 221, 'Ra’s al Khaymah', 'RK', 1),
 (3512, 221, 'Umm al Qaywayn', 'UQ', 1),
 (3513, 222, 'Aberdeen', 'ABN', 1),
 (3514, 222, 'Aberdeenshire', 'ABNS', 1),
