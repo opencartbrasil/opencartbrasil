@@ -2,7 +2,6 @@
 namespace DB;
 final class PDO {
     private $connection;
-    private $affected;
 
     public function __construct($hostname, $username, $password, $database, $port = '3306') {
         try {
