@@ -43,6 +43,7 @@
     {% set i = i + 1 %}
     {% endfor %}
   </ul>
+  {% if statistics_status %}
   <div id="stats">
     <ul>
       <li>
@@ -65,4 +66,5 @@
       </li>
     </ul>
   </div>
+  {% endif %}
 </nav>
