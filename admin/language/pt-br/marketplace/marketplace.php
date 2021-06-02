@@ -50,6 +50,7 @@ $_['text_name']          = 'Nome do download';
 $_['text_progress']      = 'Progresso';
 $_['text_available']     = 'Arquivos para download';
 $_['text_action']        = 'Ação';
+$_['text_see_more']      = 'veja mais respostas...';
 
 // Entry
 $_['entry_pin']          = 'PIN';
@@ -67,6 +68,7 @@ $_['button_view_all']    = 'Ver todas as extensões';
 $_['button_get_support'] = 'Solicitar suporte';
 $_['button_comment']     = 'Comentar';
 $_['button_reply']       = 'Responder';
+$_['button_refresh']     = 'Atualizar';
 
 // Error
 $_['error_permission']   = 'Atenção: Você não tem permissão para modificar extensões no Marketplace!';
