@@ -14,6 +14,9 @@ $_['text_to']          = 'Para:';
 $_['text_config']      = 'Edite o arquivo config.php e modifique a linha abaixo:';
 $_['text_admin']       = 'Edite o arquivo admin/config.php e modifique a linha abaixo:';
 
+// Entry
+$_['entry_directory']  = 'Diretório';
+
 // Button
 $_['button_move']      = 'Modificar';
 $_['button_manual']    = 'Manual';
