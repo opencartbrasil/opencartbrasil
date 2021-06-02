@@ -64,7 +64,7 @@ class ControllerStartupStartup extends Controller {
 				foreach ($languages as $key => $value) {
 					if ($value['status']) {
 						$locale = explode(',', $value['locale']);
-						
+
 						if (in_array($browser_language, $locale)) {
 							$detect = $key;
 							break 2;
@@ -73,7 +73,7 @@ class ControllerStartupStartup extends Controller {
 				}
 			}
 
-			if (!$detect) { 
+			if (!$detect) {
 				// Try using language folder to detect the language
 				foreach ($browser_languages as $browser_language) {
 					if (array_key_exists(strtolower($browser_language), $languages)) {
@@ -155,6 +155,7 @@ class ControllerStartupStartup extends Controller {
 		// Tax
 		$this->registry->set('tax', new Cart\Tax($this->registry));
 
+		// PHP v7.4+ validation compatibility.
 		if (isset($this->session->data['shipping_address']['country_id']) && isset($this->session->data['shipping_address']['zone_id'])) {
 			$this->tax->setShippingAddress($this->session->data['shipping_address']['country_id'], $this->session->data['shipping_address']['zone_id']);
 		} elseif ($this->config->get('config_tax_default') == 'shipping') {
