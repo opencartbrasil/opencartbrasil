@@ -28,7 +28,7 @@ class ControllerProductCategory extends Controller {
 		}
 
 		if (isset($this->request->get['page'])) {
-			$page = (int) $this->request->get['page'];
+			$page = (int)$this->request->get['page'];
 		} else {
 			$page = 1;
 		}
@@ -36,7 +36,7 @@ class ControllerProductCategory extends Controller {
 		if (isset($this->request->get['limit'])) {
 			$limit = (int)$this->request->get['limit'];
 		} else {
-			$limit = $this->config->get('theme_' . $this->config->get('config_theme') . '_product_limit');
+			$limit = (int)$this->config->get('theme_' . $this->config->get('config_theme') . '_product_limit');
 		}
 
 		$data['breadcrumbs'] = array();

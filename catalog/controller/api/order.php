@@ -95,7 +95,7 @@ class ControllerApiOrder extends Controller {
 
 			if (!$json) {
 				$json['success'] = $this->language->get('text_success');
-				
+
 				$order_data = array();
 
 				// Store Details
@@ -371,7 +371,7 @@ class ControllerApiOrder extends Controller {
 			$this->load->model('checkout/order');
 
 			if (isset($this->request->get['order_id'])) {
-				$order_id = $this->request->get['order_id'];
+				$order_id = (int)$this->request->get['order_id'];
 			} else {
 				$order_id = 0;
 			}
@@ -465,7 +465,7 @@ class ControllerApiOrder extends Controller {
 
 				if (!$json) {
 					$json['success'] = $this->language->get('text_success');
-					
+
 					$order_data = array();
 
 					// Store Details
@@ -614,7 +614,7 @@ class ControllerApiOrder extends Controller {
 					$taxes = $this->cart->getTaxes();
 					$total = 0;
 
-					// Because __call can not keep var references so we put them into an array. 
+					// Because __call can not keep var references so we put them into an array.
 					$total_data = array(
 						'totals' => &$totals,
 						'taxes'  => &$taxes,
@@ -634,7 +634,7 @@ class ControllerApiOrder extends Controller {
 					foreach ($results as $result) {
 						if ($this->config->get('total_' . $result['code'] . '_status')) {
 							$this->load->model('extension/total/' . $result['code']);
-							
+
 							// We have to put the totals in an array so that they pass by reference.
 							$this->{'model_extension_total_' . $result['code']}->getTotal($total_data);
 						}
@@ -712,7 +712,7 @@ class ControllerApiOrder extends Controller {
 			$this->load->model('checkout/order');
 
 			if (isset($this->request->get['order_id'])) {
-				$order_id = $this->request->get['order_id'];
+				$order_id = (int)$this->request->get['order_id'];
 			} else {
 				$order_id = 0;
 			}
@@ -743,7 +743,7 @@ class ControllerApiOrder extends Controller {
 			$this->load->model('checkout/order');
 
 			if (isset($this->request->get['order_id'])) {
-				$order_id = $this->request->get['order_id'];
+				$order_id = (int)$this->request->get['order_id'];
 			} else {
 				$order_id = 0;
 			}
@@ -788,7 +788,7 @@ class ControllerApiOrder extends Controller {
 			$this->load->model('checkout/order');
 
 			if (isset($this->request->get['order_id'])) {
-				$order_id = $this->request->get['order_id'];
+				$order_id = (int)$this->request->get['order_id'];
 			} else {
 				$order_id = 0;
 			}

@@ -30,7 +30,7 @@ class ControllerProductSearch extends Controller {
 		}
 
 		if (isset($this->request->get['category_id'])) {
-			$category_id = $this->request->get['category_id'];
+			$category_id = (int)$this->request->get['category_id'];
 		} else {
 			$category_id = 0;
 		}
@@ -54,7 +54,7 @@ class ControllerProductSearch extends Controller {
 		}
 
 		if (isset($this->request->get['page'])) {
-			$page = (int) $this->request->get['page'];
+			$page = (int)$this->request->get['page'];
 		} else {
 			$page = 1;
 		}
