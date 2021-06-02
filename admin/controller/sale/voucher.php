@@ -172,7 +172,7 @@ class ControllerSaleVoucher extends Controller {
 		$results = $this->model_sale_voucher->getVouchers($filter_data);
 
 		foreach ($results as $result) {
-			if ($result['order_id']) {	
+			if ($result['order_id']) {
 				$order_href = $this->url->link('sale/order/info', 'user_token=' . $this->session->data['user_token'] . '&order_id=' . $result['order_id'] . $url, true);
 			} else {
 				$order_href = '';
@@ -569,7 +569,6 @@ class ControllerSaleVoucher extends Controller {
 			if ($vouchers) {
 				$this->load->model('sale/order');
 				$this->load->model('sale/voucher_theme');
-				$this->load->model('localisation/language');
 
 				foreach ($vouchers as $voucher_id) {
 					$voucher_info = $this->model_sale_voucher->getVoucher($voucher_id);
