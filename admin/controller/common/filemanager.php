@@ -261,6 +261,10 @@ class ControllerCommonFileManager extends Controller {
 						$json['error'] = $this->language->get('error_filetype');
 					}
 
+					if ($file['size'] > $this->config->get('config_file_max_size')) {
+						$json['error'] = $this->language->get('error_filesize');
+					}
+
 					// Return any upload error
 					if ($file['error'] != UPLOAD_ERR_OK) {
 						$json['error'] = $this->language->get('error_upload_' . $file['error']);
@@ -327,7 +331,7 @@ class ControllerCommonFileManager extends Controller {
 		if (!isset($json['error'])) {
 			mkdir($directory . '/' . $folder, 0777);
 			touch($directory . '/' . $folder . '/' . 'index.html');
-			
+
 			$json['success'] = $this->language->get('text_directory');
 
 		}
