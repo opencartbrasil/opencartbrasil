@@ -40,42 +40,18 @@
             </div>
             <div class="form-group">
               <label class="control-label" for="input-order-id">{{ entry_order_id }}</label>
-              <input type="text" name="filter_order_recurring_id" value="{{ filter_order_recurring_id }}" placeholder="{{ entry_order_id }}" id="input-order-id" class="form-control" />
+              <input type="text" name="filter_order_id" value="{{ filter_order_id }}" placeholder="{{ entry_order_id }}" id="input-order-id" class="form-control" />
             </div>
             <div class="form-group">
               <label class="control-label" for="input-status">{{ entry_status }}</label>
               <select name="filter_status" id="input-status" class="form-control">
-                
-                  
-                
-                
-                  {% for recurring_status in recurring_statuses %}
-                  {% if filter_status == recurring_status.value %}
-                  
-                
-                
-                  
+                {% for recurring_status in recurring_statuses %}
+                {% if filter_status == recurring_status.value %}
                 <option value="{{ recurring_status.value }}" selected="selected">{{ recurring_status.text }}</option>
-                
-                  
-                
-                
-                  {% else %}
-                  
-                
-                
-                  
+                {% else %}
                 <option value="{{ recurring_status.value }}">{{ recurring_status.text }}</option>
-                
-                  
-                
-                
-                  {% endif %}
-                  {% endfor %}
-                
-              
-              
-                
+                {% endif %}
+                {% endfor %}
               </select>
             </div>
             <div class="form-group">
@@ -88,7 +64,8 @@
                 <input type="text" name="filter_date_added" value="{{ filter_date_added }}" placeholder="{{ entry_date_added }}" data-date-format="YYYY-MM-DD" id="input-date-date_added" class="form-control" />
                 <span class="input-group-btn">
                 <button type="button" class="btn btn-default"><i class="fa fa-calendar"></i></button>
-                </span> </div>
+                </span>
+              </div>
             </div>
             <div class="form-group text-right">
               <button type="button" id="button-filter" class="btn btn-default"><i class="fa fa-filter"></i> {{ button_filter }}</button>
@@ -117,26 +94,24 @@
                     </tr>
                   </thead>
                   <tbody>
-                  
-                  {% if recurrings %}
-                  {% for recurring in recurrings %}
-                  <tr>
-                    <td class="text-right">{{ recurring.order_recurring_id }}</td>
-                    <td class="text-right">{{ recurring.order_id }}</td>
-                    <td class="text-left">{{ recurring.reference }}</td>
-                    <td class="text-left">{{ recurring.customer }}</td>
-                    <td class="text-left">{{ recurring.status }}</td>
-                    <td class="text-left">{{ recurring.date_added }}</td>
-                    <td class="text-right"><a href="{{ recurring.view }}" data-toggle="tooltip" title="{{ button_order_recurring }}" class="btn btn-info"><i class="fa fa-eye"></i></a> <a href="{{ recurring.order }}" data-toggle="tooltip" title="{{ button_order }}" class="btn btn-info"><i class="fa fa-shopping-cart"></i></a></td>
-                  </tr>
-                  {% endfor %}
-                  {% else %}
+                    {% if recurrings %}
+                    {% for recurring in recurrings %}
+                    <tr>
+                      <td class="text-right">{{ recurring.order_recurring_id }}</td>
+                      <td class="text-right">{{ recurring.order_id }}</td>
+                      <td class="text-left">{{ recurring.reference }}</td>
+                      <td class="text-left">{{ recurring.customer }}</td>
+                      <td class="text-left">{{ recurring.status }}</td>
+                      <td class="text-left">{{ recurring.date_added }}</td>
+                      <td class="text-right"><a href="{{ recurring.view }}" data-toggle="tooltip" title="{{ button_order_recurring }}" class="btn btn-info"><i class="fa fa-eye"></i></a> <a href="{{ recurring.order }}" data-toggle="tooltip" title="{{ button_order }}" class="btn btn-info"><i class="fa fa-shopping-cart"></i></a></td>
+                    </tr>
+                    {% endfor %}
+                    {% else %}
                   <tr>
                     <td class="text-center" colspan="7">{{ text_no_results }}</td>
                   </tr>
                   {% endif %}
-                    </tbody>
-                  
+                  </tbody>
                 </table>
               </div>
             </form>
@@ -149,7 +124,7 @@
       </div>
     </div>
   </div>
-  <script type="text/javascript"><!--
+<script type="text/javascript"><!--
 $('#button-filter').on('click', function() {
 	url = 'index.php?route=sale/recurring&user_token={{ user_token }}';
 
@@ -166,29 +141,29 @@ $('#button-filter').on('click', function() {
 	}
 
 	var filter_reference = $('input[name=\'filter_reference\']').val();
-	
+
 	if (filter_reference) {
 		url += '&filter_reference=' + encodeURIComponent(filter_reference);
 	}
 
 	var filter_customer = $('input[name=\'filter_customer\']').val();
-	
+
 	if (filter_customer) {
 		url += '&filter_customer=' + encodeURIComponent(filter_customer);
 	}
 
 	var filter_status = $('select[name=\'filter_status\']').val();
-	
+
 	if (filter_status != 0) {
 		url += '&filter_status=' + encodeURIComponent(filter_status);
 	}
-	
+
 	var filter_date_added = $('input[name=\'filter_date_added\']').val();
-	
+
 	if (filter_date_added != '') {
 		url += '&filter_date_added=' + encodeURIComponent(filter_date_added);
 	}
-		
+
 	location = url;
 });
 
@@ -198,11 +173,11 @@ $('#form input').keydown(function(e) {
 	}
 });
 
-$('.date').datetimepicker({ 
+$('.date').datetimepicker({
 	language: '{{ datepicker }}',
-	pickTime: false 
+	pickTime: false
 });
-//--></script> 
+//--></script>
   <script type="text/javascript"><!--
 $('input[name=\'filter_customer\']').autocomplete({
 	'source': function(request, response) {
