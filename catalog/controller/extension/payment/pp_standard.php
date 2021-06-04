@@ -16,9 +16,15 @@ class ControllerExtensionPaymentPPStandard extends Controller {
 
 		$this->load->model('checkout/order');
 
+		if(!isset($this->session->data['order_id'])) {
+			return false;
+		}
+
 		$order_info = $this->model_checkout_order->getOrder($this->session->data['order_id']);
 
 		if ($order_info) {
+			$this->load->model('tool/upload');
+
 			$data['business'] = $this->config->get('payment_pp_standard_email');
 			$data['item_name'] = html_entity_decode($this->config->get('config_name'), ENT_QUOTES, 'UTF-8');
 
@@ -31,9 +37,8 @@ class ControllerExtensionPaymentPPStandard extends Controller {
 					if ($option['type'] != 'file') {
 						$value = $option['value'];
 					} else {
-						$this->load->model('tool/upload');
 						$upload_info = $this->model_tool_upload->getUploadByCode($option['value']);
-						
+
 						if ($upload_info) {
 							$value = $upload_info['name'];
 						} else {
@@ -42,7 +47,7 @@ class ControllerExtensionPaymentPPStandard extends Controller {
 					}
 
 					$option_data[] = array(
-						'name'  => $option['name'],
+						'name'  => (utf8_strlen($option['name']) > 64 ? utf8_substr($option['name'], 0, 62) . '..' : $option['name']),
 						'value' => (utf8_strlen($value) > 20 ? utf8_substr($value, 0, 20) . '..' : $value)
 					);
 				}
@@ -74,14 +79,47 @@ class ControllerExtensionPaymentPPStandard extends Controller {
 				$data['discount_amount_cart'] -= $total;
 			}
 
+			$ship_to_state_codes = array(
+				'BR', // Brazil
+				'CA', // Canada
+				'IT', // Italy
+				'MX', // Mexico
+				'US'  // USA
+			);
+
+			if ($this->cart->hasShipping()) {
+				$data['no_shipping'] = 2;
+				$data['address_override'] = 1;
+				$data['first_name'] = $order_info['shipping_firstname'];
+				$data['last_name'] = $order_info['shipping_lastname'];
+				$data['address1'] = $order_info['shipping_address_1'];
+				$data['address2'] = $order_info['shipping_address_2'];
+				$data['city'] = $order_info['shipping_city'];
+				if (in_array($order_info['shipping_iso_code_2'], $ship_to_state_codes)) {
+					$data['state'] = $order_info['shipping_zone_code'];
+				} else {
+					$data['state'] = $order_info['shipping_zone'];
+				}
+				$data['zip'] = $order_info['shipping_postcode'];
+				$data['country'] = $order_info['shipping_iso_code_2'];
+			} else {
+				$data['no_shipping'] = 1;
+				$data['address_override'] = 0;
+				$data['first_name'] = $order_info['payment_firstname'];
+				$data['last_name'] = $order_info['payment_lastname'];
+				$data['address1'] = $order_info['payment_address_1'];
+				$data['address2'] = $order_info['payment_address_2'];
+				$data['city'] = $order_info['payment_city'];
+				if (in_array($order_info['payment_iso_code_2'], $ship_to_state_codes)) {
+					$data['state'] = $order_info['payment_zone_code'];
+				} else {
+					$data['state'] = $order_info['payment_zone'];
+				}
+				$data['zip'] = $order_info['payment_postcode'];
+				$data['country'] = $order_info['payment_iso_code_2'];
+			}
+
 			$data['currency_code'] = $order_info['currency_code'];
-			$data['first_name'] = $order_info['payment_firstname'];
-			$data['last_name'] = $order_info['payment_lastname'];
-			$data['address1'] = $order_info['payment_address_1'];
-			$data['address2'] = $order_info['payment_address_2'];
-			$data['city'] = $order_info['payment_city'];
-			$data['zip'] = $order_info['payment_postcode'];
-			$data['country'] = $order_info['payment_iso_code_2'];
 			$data['email'] = $order_info['email'];
 			$data['invoice'] = $this->session->data['order_id'] . ' - ' . $order_info['payment_firstname'] . ' ' . $order_info['payment_lastname'];
 			$data['lc'] = $this->session->data['language'];
@@ -158,11 +196,11 @@ class ControllerExtensionPaymentPPStandard extends Controller {
 						if ($receiver_match && $total_paid_match) {
 							$order_status_id = $this->config->get('payment_pp_standard_completed_status_id');
 						}
-						
+
 						if (!$receiver_match) {
 							$this->log->write('PP_STANDARD :: RECEIVER EMAIL MISMATCH! ' . strtolower($this->request->post['receiver_email']));
 						}
-						
+
 						if (!$total_paid_match) {
 							$this->log->write('PP_STANDARD :: TOTAL PAID MISMATCH! ' . $this->request->post['mc_gross']);
 						}
