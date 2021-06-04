@@ -1,5 +1,7 @@
 <?php
 function token($length = 32) {
+	$token = null;
+
 	if (!isset($length) || intval($length) <= 8) {
 		$length = 32;
 	}
@@ -8,11 +10,11 @@ function token($length = 32) {
 		$token = bin2hex(random_bytes($length));
 	}
 
-	if (function_exists('mcrypt_create_iv') && version_compare(phpversion(), '7.1', '<')) {
+	if (empty($token) && function_exists('mcrypt_create_iv') && version_compare(phpversion(), '7.1', '<')) {
 		$token = bin2hex(mcrypt_create_iv($length, MCRYPT_DEV_URANDOM));
 	}
 
-	if (function_exists('openssl_random_pseudo_bytes')) {
+	if (empty($token) && function_exists('openssl_random_pseudo_bytes')) {
 		$token = bin2hex(openssl_random_pseudo_bytes($length));
 	}
 
