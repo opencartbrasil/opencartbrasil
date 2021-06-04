@@ -89,7 +89,7 @@ class ControllerDesignSeoUrl extends Controller {
 			if (isset($this->request->get['filter_language_id'])) {
 				$url .= '&filter_language_id=' . $this->request->get['filter_language_id'];
 			}
-			
+
 			if (isset($this->request->get['sort'])) {
 				$url .= '&sort=' . $this->request->get['sort'];
 			}
@@ -123,7 +123,7 @@ class ControllerDesignSeoUrl extends Controller {
 			$this->session->data['success'] = $this->language->get('text_success');
 
 			$url = '';
-			
+
 			if (isset($this->request->get['filter_query'])) {
 				$url .= '&filter_query=' . urlencode(html_entity_decode($this->request->get['filter_query'], ENT_QUOTES, 'UTF-8'));
 			}
@@ -297,7 +297,7 @@ class ControllerDesignSeoUrl extends Controller {
 		}
 
 		$url = '';
-			
+
 		if (isset($this->request->get['filter_query'])) {
 			$url .= '&filter_query=' . urlencode(html_entity_decode($this->request->get['filter_query'], ENT_QUOTES, 'UTF-8'));
 		}
@@ -518,9 +518,9 @@ class ControllerDesignSeoUrl extends Controller {
 		}
 
 		$seo_urls = $this->model_design_seo_url->getSeoUrlsByKeyword($this->request->post['keyword']);
-   	
+
         $seo_urls_duplicated = array_filter($seo_urls, function($item) {
-            return $item['seo_url_id'] != ($this->request->get['seo_url_id'] ?? 0)
+            return $item['seo_url_id'] != (isset($this->request->get['seo_url_id']) ? $this->request->get['seo_url_id'] : 0)
                 && $item['store_id'] == $this->request->post['store_id'];
         });
 
