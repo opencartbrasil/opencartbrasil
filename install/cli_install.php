@@ -351,7 +351,6 @@ switch ($subcommand) {
 case "install":
 	try {
 		$options = get_options($argv);
-		define('HTTP_OPENCART', $options['http_server']);
 		$valid = valid($options);
 
 		if ($valid === false) {
@@ -359,6 +358,8 @@ case "install":
 			echo implode(', ', $valid) . "\n\n";
 			exit(1);
 		}
+
+		define('HTTP_OPENCART', $options['http_server']);
 
 		install($options);
 
