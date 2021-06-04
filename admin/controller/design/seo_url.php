@@ -519,14 +519,14 @@ class ControllerDesignSeoUrl extends Controller {
 
 		$seo_urls = $this->model_design_seo_url->getSeoUrlsByKeyword($this->request->post['keyword']);
 
-        $seo_urls_duplicated = array_filter($seo_urls, function($item) {
-            return $item['seo_url_id'] != (isset($this->request->get['seo_url_id']) ? $this->request->get['seo_url_id'] : 0)
-                && $item['store_id'] == $this->request->post['store_id'];
-        });
+		$seo_urls_duplicated = array_filter($seo_urls, function($item) {
+			return $item['seo_url_id'] != (isset($this->request->get['seo_url_id']) ? $this->request->get['seo_url_id'] : 0)
+			&& $item['store_id'] == $this->request->post['store_id'];
+		});
 
-        if (count($seo_urls_duplicated) > 0) {
-            $this->error['keyword'] = $this->language->get('error_exists');
-        }
+		if (count($seo_urls_duplicated) > 0) {
+			$this->error['keyword'] = $this->language->get('error_exists');
+		}
 
 		if (preg_match('/[^a-zA-Z0-9_-]|[\p{Cyrillic}]+/u', $this->request->post['keyword'])) {
 			$this->error['keyword'] = $this->language->get('error_keyword');
