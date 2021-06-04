@@ -123,9 +123,7 @@ function valid($options) {
 		}
 	}
 
-	if (!preg_match('#/$#', $options['http_server'])) {
-		$options['http_server'] = $options['http_server'] . '/';
-	}
+	$options['http_server'] = rtrim($options['http_server'], '/') . '/';
 
 	return count($missing) > 0 ? $missing : false;
 }
@@ -163,27 +161,27 @@ function check_requirements($options) {
 	);
 
 	if (!in_array($options['db_driver'], $db_drivers)) {
-		return 'Atenção: Não há suporte para o driver "' . $options['db_driver'] . '" para banco de dados!';
+		return 'Atenção: Não há suporte para o driver "' . $options['db_driver'] . '" de banco de dados!';
 	}
 
 	if (!extension_loaded($options['db_driver'])) {
-		return 'Atenção: A extensão "' . $options['db_driver'] . '" precisa ser carregada para o OpenCart Brasil funcionar!';
+		return 'Atenção: A extensão "' . $options['db_driver'] . '" precisa estar habilitada para o OpenCart Brasil funcionar!';
 	}
 
 	if (!extension_loaded('gd')) {
-		return 'Atenção: A extensão "GD" precisa ser carregada para o OpenCart Brasil funcionar!';
+		return 'Atenção: A extensão "GD" precisa estar habilitada para o OpenCart Brasil funcionar!';
 	}
 
 	if (!extension_loaded('curl')) {
-		return 'Atenção: A extensão "CURL" precisa ser carregada para o OpenCart Brasil funcionar!';
+		return 'Atenção: A extensão "CURL" precisa estar habilitada para o OpenCart Brasil funcionar!';
 	}
 
 	if (!function_exists('openssl_encrypt')) {
-		return 'Atenção: A extensão "OpenSSL" precisa ser carregada para o OpenCart Brasil funcionar!';
+		return 'Atenção: A extensão "OpenSSL" precisa estar habilitada para o OpenCart Brasil funcionar!';
 	}
 
 	if (!extension_loaded('zlib')) {
-		return 'Atenção: A extensão ZLIB precisa ser carregada para o OpenCart Brasil funcionar!';
+		return 'Atenção: A extensão ZLIB precisa estar habilitada para o OpenCart Brasil funcionar!';
 	}
 
 	return true;
