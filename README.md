@@ -236,15 +236,62 @@ Faça o download da última versão estável marcada como **latest release** [cl
 
 ### Utilizando o composer:
 
-``
+```bash
 composer create-project opencartbrasil/opencartbrasil nome_da_pasta
-``
+```
 
 ### Utilizando o Git Bash:
 
-``
-git clone https://github.com/opencartbrasil/opencartbrasil.git
-``
+```bash
+git clone --depth 1 https://github.com/opencartbrasil/opencartbrasil.git
+```
+
+### Utilizando o Docker
+
+```bash
+docker run -p 80:8888 opencartbrasil:latest
+```
+
+### Utilizando o Docker-compose
+
+```yaml
+version: '3'
+
+networks:
+    app-network:
+
+services:
+  app:
+    image: opencartbrasil:latest
+    container_name: app
+    volumes: 
+      - ./src:/var/www/html
+    networks:
+      - app-network
+    ports: 
+      - 80:80
+    environment: 
+      OCBR_HTTP_SERVER: "http://localhost/"
+      OCBR_DB_HOST: "db"
+      OCBR_DB_USER: "store"
+      OCBR_DB_PASS: "store"
+      OCBR_ADMIN_USER: "admin"
+      OCBR_ADMIN_PASS: "123456"
+      OCBR_ADMIN_EMAIL: "webmaster@localhost"
+    depends_on: 
+      - db
+
+  db:
+    image: mysql:5.7
+    container_name: db
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_USER: store
+      MYSQL_PASSWORD: store
+      MYSQL_DATABASE: opencartbrasil
+    networks:
+      - app-network
+```
 
 ## Instalação
 
@@ -272,9 +319,17 @@ Através da interface de linha de comandos, a loja pode ser instalada automatica
 
 **Exemplo de instalação através da linha de comando no servidor local:**
 
-``
-php install/cli_install.php install --db_hostname localhost --db_username root --db_password 123456 --db_database opencartbrasil --username admin --password 123456 --email usuario@dominio.com.br --http_server http://localhost/opencartbrasil/
-``
+```bash
+php install/cli_install.php install \
+  --db_hostname localhost \
+  --db_username root \
+  --db_password 123456 \
+  --db_database opencartbrasil \
+  --username admin \
+  --password 123456 \
+  --email usuario@dominio.com.br \
+  --http_server http://localhost/opencartbrasil/
+```
 
 Lista de parâmetros para instalação através da linha de comando:
 
