@@ -48,3 +48,4 @@ $_['tab_review']               = 'Comentários (%s)';
 $_['error_name']               = 'Atenção: Seu nome deve ter entre 3 e 25 caracteres.';
 $_['error_text']               = 'Atenção: Seu comentário deve ter entre 25 e 1000 caracteres.';
 $_['error_rating']             = 'Atenção: Faça a avaliação.';
+$_['error_product']            = "Atenção: Não foi informado qual produto está vinculado ao comentário.";
