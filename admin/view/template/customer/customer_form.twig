@@ -14,7 +14,8 @@
       </ul>
     </div>
   </div>
-  <div class="container-fluid"> {% if error_warning %}
+  <div class="container-fluid">
+    {% if error_warning %}
     <div class="alert alert-danger alert-dismissible"><i class="fa fa-exclamation-circle"></i> {{ error_warning }}
       <button type="button" class="close" data-dismiss="alert">&times;</button>
     </div>
@@ -206,7 +207,8 @@
                           <label class="col-sm-2 control-label">{{ custom_field.name }}</label>
                           <div class="col-sm-10">
                             <button type="button" id="button-custom-field{{ custom_field.custom_field_id }}" data-loading-text="{{ text_loading }}" class="btn btn-default"><i class="fa fa-upload"></i> {{ button_upload }}</button>
-                            <input type="hidden" name="custom_field[{{ custom_field.custom_field_id }}]" value="{{ account_custom_field[custom_field.custom_field_id] ? account_custom_field[custom_field.custom_field_id] }}" id="input-custom-field{{ custom_field.custom_field_id }}" />
+                            <input type="hidden" name="custom_field[{{ custom_field.custom_field_id }}]" value="{{ account_custom_field[custom_field.custom_field_id]['code'] ? account_custom_field[custom_field.custom_field_id]['code'] }}" id="input-custom-field{{ custom_field.custom_field_id }}" />
+                            <span>{{ account_custom_field[custom_field.custom_field_id]['name'] }}</span>
                             {% if error_custom_field[custom_field.custom_field_id] %}
                             <div class="text-danger">{{ error_custom_field[custom_field.custom_field_id] }}</div>
                             {% endif %}
@@ -527,7 +529,8 @@
                         <label class="col-sm-2 control-label">{{ custom_field.name }}</label>
                         <div class="col-sm-10">
                           <button type="button" id="button-address{{ address_row }}-custom-field{{ custom_field.custom_field_id }}" data-loading-text="{{ text_loading }}" class="btn btn-default"><i class="fa fa-upload"></i> {{ button_upload }}</button>
-                          <input type="hidden" name="address[{{ address_row }}][custom_field][{{ custom_field.custom_field_id }}]" value="{{ address.custom_field[custom_field.custom_field_id] ? address.custom_field[custom_field.custom_field_id] }}" />
+                          <input type="hidden" name="address[{{ address_row }}][custom_field][{{ custom_field.custom_field_id }}]" value="{{ address.custom_field[custom_field.custom_field_id]['code'] ? address.custom_field[custom_field.custom_field_id]['code'] }}" />
+                          <span>{{ address.custom_field[custom_field.custom_field_id]['name'] }}</span>
                           {% if error_address[address_row]['custom_field'][custom_field.custom_field_id] %}
                           <div class="text-danger">{{ error_address[address_row].custom_field[custom_field.custom_field_id] }}</div>
                           {% endif %}
@@ -711,7 +714,7 @@
   });
 
   $('select[name=\'customer_group_id\']').trigger('change');
-//--></script> 
+//--></script>
 <script type="text/javascript"><!--
   var address_row = {{ address_row }};
 
