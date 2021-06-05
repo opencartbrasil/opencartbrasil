@@ -251,8 +251,9 @@ class ControllerUserApi extends Controller {
 
 	protected function getForm() {
 		$data['text_form'] = !isset($this->request->get['api_id']) ? $this->language->get('text_add') : $this->language->get('text_edit');
+
 		$data['text_ip'] = sprintf($this->language->get('text_ip'), $this->request->server['REMOTE_ADDR']);
-		
+
 		$data['user_token'] = $this->session->data['user_token'];
 
 		if (isset($this->error['warning'])) {
@@ -272,7 +273,7 @@ class ControllerUserApi extends Controller {
 		} else {
 			$data['error_key'] = '';
 		}
-		
+
 		$url = '';
 
 		if (isset($this->request->get['sort'])) {
@@ -380,7 +381,7 @@ class ControllerUserApi extends Controller {
 		if ((utf8_strlen($this->request->post['key']) < 64) || (utf8_strlen($this->request->post['key']) > 256)) {
 			$this->error['key'] = $this->language->get('error_key');
 		}
-		
+
 		if (!isset($this->error['warning']) && !isset($this->request->post['api_ip'])) {
 			$this->error['warning'] = $this->language->get('error_ip');
 		}
