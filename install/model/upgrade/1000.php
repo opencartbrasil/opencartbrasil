@@ -181,7 +181,6 @@ class ModelUpgrade1000 extends Model {
 				$i = 0;
 
 				foreach ($table['field'] as $field) {
-
 					// If field is not found create it
 					if (!in_array($field['name'], $table_old_data[$table['name']]['field_list'])) {
 
@@ -267,6 +266,7 @@ class ModelUpgrade1000 extends Model {
 				$query = $this->db->query("SHOW INDEXES FROM `" . $table['name'] . "`");
 
 				$last_key_name = '';
+
 				if ($query->num_rows) {
 					foreach ($query->rows as $result) {
 						if ($result['Key_name'] != 'PRIMARY' && $result['Key_name'] != $last_key_name) {

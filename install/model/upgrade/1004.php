@@ -127,10 +127,10 @@ class ModelUpgrade1004 extends Model {
 				$value = json_decode($result['value'], true);
 
 				$module_data = array();
+
 				if (in_array($result['code'], array('latest', 'bestseller', 'special', 'featured'))) {
 					if ($value) {
 						foreach ($value as $k => $v) {
-
 							// Since 2.x doesn't look good with modules as side boxes, set to content bottom
 							if ($v['position'] == 'column_left' || $v['position'] == 'column_right') {
 								$v['position'] = 'content_bottom';
@@ -138,6 +138,7 @@ class ModelUpgrade1004 extends Model {
 
 							$module_data['name'] = ($result['key'] . '_' . $k);
 							$module_data['status'] = $v['status'];
+
 							if (isset($v['image_width'])) {	$module_data['width'] = $v['image_width']; }
 							if (isset($v['image_height'])) { $module_data['height'] = $v['image_height']; }
 							if (isset($v['limit'])) { $module_data['limit'] = $v['limit']; } else { $module_data['limit'] = 4; }
@@ -170,9 +171,6 @@ class ModelUpgrade1004 extends Model {
 					foreach ($value as $k => $v) {
 						$this->db->query("DELETE FROM `" . DB_PREFIX . "setting` WHERE store_id = '" . $result['store_id'] . "' AND `code` = '" . $result['code'] . "'");
 						$this->db->query("INSERT INTO `" . DB_PREFIX . "setting` SET store_id = '" . $result['store_id'] . "', `code` = '" . $result['code'] . "', `key` = '" . ($result['code'] . '_status') . "', value = 1");
-						if ($v['status']) {
-							$this->db->query("INSERT INTO `" . DB_PREFIX . "layout_module` (`layout_id`, `code`, `position`, `sort_order`) values ('" . (int)$v['layout_id'] . "', '" . ($result['code'])  . "', '" . $this->db->escape($v['position']) . "', '" . (int)$v['sort_order'] . "')");
-						}
 					}
 				} elseif (in_array($result['code'], array('banner', 'carousel', 'slideshow'))) {
 					if ($value) {
@@ -180,6 +178,7 @@ class ModelUpgrade1004 extends Model {
 							$module_data['name'] = ($result['key'] . '_' . $k);
 							$module_data['status'] = $v['status'];
 							$module_data['banner_id'] = $v['banner_id'];
+
 							if (isset($v['image_width'])) { $module_data['width'] = $v['image_width']; }
 							if (isset($v['image_height'])) { $module_data['height'] = $v['image_height']; }
 							if (isset($v['width'])) { $module_data['width'] = $v['width']; }
@@ -197,13 +196,17 @@ class ModelUpgrade1004 extends Model {
 					if ($value) {
 						// Install HTML module if not already installed
 						$html_query = $this->db->query("SELECT count(*) FROM " . DB_PREFIX . "extension WHERE code = 'html'");
+
 						if ($html_query->row['count(*)'] == '0') {
 							$this->db->query("INSERT INTO `" . DB_PREFIX . "extension` SET `type` = 'module', `code` = 'html'");
 						}
+
 						$result['code'] = 'html';
+
 						foreach ($value as $k => $v) {
 							$module_data['name'] = ($result['key'] . '_' . $k);
 							$module_data['status'] = $v['status'];
+
 							foreach($v['description'] as $language_id => $description) {
 								$module_data['module_description'][$language_id]['title'] = '';
 								$module_data['module_description'][$language_id]['description'] = str_replace('image/data', 'image/catalog', $description);
@@ -238,8 +241,6 @@ class ModelUpgrade1004 extends Model {
 						$this->db->query("UPDATE `" . DB_PREFIX . "setting` SET `value` = '" . $this->db->escape(json_encode($value)) . "' WHERE `setting_id` = '" . (int)$result['setting_id'] . "'");
 					}
 				}
-			} else {
-
 			}
 		}
 	}

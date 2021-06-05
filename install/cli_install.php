@@ -62,7 +62,7 @@ function usage() {
 		'--db_driver', '"mysqli" \\' . PHP_EOL,
 		'--db_hostname', '"localhost" \\' . PHP_EOL,
 		'--db_username', '"root" \\' . PHP_EOL,
-		'--db_password', '"senha" \\' . PHP_EOL,
+		'--db_password', '"123456" \\' . PHP_EOL,
 		'--db_database', '"opencartbrasil" \\' . PHP_EOL,
 		'--db_port', '"3306" \\' . PHP_EOL,
 		'--db_prefix', '"ocbr_" \\' . PHP_EOL,
@@ -143,7 +143,7 @@ function install($options) {
 
 function check_requirements($options) {
 	if (version_compare(phpversion(), '5.6', '<') || version_compare(phpversion(), '8.0', '>=')) {
-		return 'Atenção: Você precisa utilizar o PHP 5.6 ou 7.x para o projeto OpenCart Brasil funcionar!';
+		return 'Atenção: Você precisa utilizar PHP 5.6 até 7.4 para o projeto OpenCart Brasil funcionar!';
 	}
 
 	if (!ini_get('file_uploads')) {

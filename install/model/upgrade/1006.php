@@ -123,8 +123,7 @@ class ModelUpgrade1006 extends Model {
 							// If file just delete
 							if (is_file($file)) {
 								@unlink($file);
-
-								// If directory use the remove directory function
+							// If directory use the remove directory function
 							} elseif (is_dir($file)) {
 								@rmdir($file);
 							}
@@ -173,7 +172,6 @@ class ModelUpgrade1006 extends Model {
 	}
 
 	private function recursive_move($src, $dest){
-
 		// If source is not a directory stop processing
 		if (!is_dir($src)) return false;
 
