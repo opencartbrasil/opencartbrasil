@@ -32,6 +32,7 @@ e utiliza [Semantic Versioning](https://semver.org/lang/pt-BR/spec/v2.0.0.html).
 - Correção na remoção de extensões através do instalador
 - Correção ao carregar campos personalizados do tipo file
 - Correção no carregamento de fontes no arquivo bootstrap.css
+- Correção ao capturar o IP por $this->request->server["REMOTE_ADDR"]
 - Correção no cálculo das taxas no módulo besteseller, featured e special
 - Correção no cálculo das taxas no category, manufacturer, product, search e special
 
