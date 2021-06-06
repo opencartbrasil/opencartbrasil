@@ -590,18 +590,6 @@ class ControllerProductProduct extends Controller {
 
 		if (isset($this->request->get['product_id']) && $this->request->get['product_id']) {
 			if ($this->request->server['REQUEST_METHOD'] == 'POST') {
-				if (empty($this->request->post['name'])) {
-					$this->request->post['name'] = filter_var($this->request->post['name'], FILTER_SANITIZE_STRING);
-				}
-
-				if (empty($this->request->post['text'])) {
-					$this->request->post['text'] = filter_var($this->request->post['text'], FILTER_SANITIZE_STRING);
-				}
-
-				if (empty($this->request->post['rating'])) {
-					$this->request->post['rating'] = filter_var($this->request->post['rating'], FILTER_SANITIZE_NUMBER_INT);
-				}
-
 				if ((utf8_strlen($this->request->post['name']) < 3) || (utf8_strlen($this->request->post['name']) > 25)) {
 					$json['error'] = $this->language->get('error_name');
 				}
