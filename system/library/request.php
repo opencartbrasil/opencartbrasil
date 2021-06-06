@@ -26,7 +26,7 @@ class Request {
 		$this->request = $this->clean($_REQUEST);
 		$this->cookie = $this->clean($_COOKIE);
 		$this->files = $this->clean($_FILES);
-		$this->server = $this->clean($_SERVER);
+		$this->server = $this->getServer();
 	}
 
 	/**
@@ -47,5 +47,46 @@ class Request {
 		}
 
 		return $data;
+	}
+
+	private function getServer() {
+		$_SERVER["REMOTE_ADDR"] = $this->getRealRemoteAddr();
+
+		return $this->clean($_SERVER);
+	}
+
+	private function getRealRemoteAddr() {
+		$ip = '';
+
+		if (isset($_SERVER['REMOTE_ADDR']) && filter_var($_SERVER['REMOTE_ADDR'], FILTER_VALIDATE_IP)) {
+			$ip = $_SERVER['REMOTE_ADDR'];
+		}
+
+		if (isset($_SERVER['HTTP_X_FORWARDED_FOR'])) {
+			$xip = trim(current(explode(',', $_SERVER['HTTP_X_FORWARDED_FOR'])));
+
+			if (filter_var($xip, FILTER_VALIDATE_IP, FILTER_FLAG_NO_PRIV_RANGE | FILTER_FLAG_NO_RES_RANGE)) {
+				if (isset($_SERVER['SERVER_ADDR']) && $_SERVER['SERVER_ADDR'] != $xip) {
+					$ip = $xip;
+				}
+			}
+		}
+
+		// Cloudflare
+		if (isset($_SERVER['HTTP_CF_CONNECTING_IP']) && filter_var($_SERVER['HTTP_CF_CONNECTING_IP'], FILTER_VALIDATE_IP)) {
+			$ip = $_SERVER['HTTP_CF_CONNECTING_IP'];
+		}
+
+		// Incapsula
+		if (isset($_SERVER['HTTP_INCAP_CLIENT_IP']) && filter_var($_SERVER['HTTP_INCAP_CLIENT_IP'], FILTER_VALIDATE_IP)) {
+			$ip = $_SERVER['HTTP_INCAP_CLIENT_IP'];
+		}
+
+		// Sucuri
+		if (isset($_SERVER['HTTP_X_SUCURI_CLIENTIP']) && filter_var($_SERVER['HTTP_X_SUCURI_CLIENTIP'], FILTER_VALIDATE_IP)) {
+			$ip = $_SERVER['HTTP_X_SUCURI_CLIENTIP'];
+		}
+
+		return $ip;
 	}
 }

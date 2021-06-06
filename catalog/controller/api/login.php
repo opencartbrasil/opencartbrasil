@@ -22,11 +22,7 @@ class ControllerApiLogin extends Controller {
 						$ip_data[] = trim($result['ip']);
 					}
 
-					$ip = '';
-
-					if (isset($this->request->server['REMOTE_ADDR']) && filter_var($this->request->server['REMOTE_ADDR'], FILTER_VALIDATE_IP)) {
-						$ip = $this->request->server['REMOTE_ADDR'];
-					}
+					$ip = $this->request->server['REMOTE_ADDR'];
 
 					if (in_array($ip, $ip_data)) {
 						$session = new Session($this->config->get('session_engine'), $this->registry);

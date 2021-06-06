@@ -4,11 +4,7 @@ class ControllerStartupSession extends Controller {
 		if (isset($this->request->get['route']) && substr((string)$this->request->get['route'], 0, 4) == 'api/') {
 			$this->db->query("DELETE FROM `" . DB_PREFIX . "api_session` WHERE TIMESTAMPADD(HOUR, 1, date_modified) < NOW()");
 
-			$ip = '';
-
-			if (isset($this->request->server['REMOTE_ADDR']) && filter_var($this->request->server['REMOTE_ADDR'], FILTER_VALIDATE_IP)) {
-				$ip = $this->request->server['REMOTE_ADDR'];
-			}
+			$ip = $this->request->server['REMOTE_ADDR'];
 
 			// Make sure the IP is allowed
 			$api_token = (array_key_exists('api_token', $this->request->get)) ? (string)$this->request->get['api_token'] : '';
