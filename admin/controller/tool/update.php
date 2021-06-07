@@ -372,10 +372,15 @@ class ControllerToolUpdate extends Controller {
             }
         }
 
-        $files = array('admin/config-dist.php','config-dist.php','php.ini','.htaccess');
+        $files = array(
+            'admin/config-dist.php',
+            'config-dist.php',
+            'php.ini',
+            'robots.txt'
+        );
 
         foreach ($files as $file) {
-            $file = DIR_DOWNLOAD . 'opencartbrasil/'.$file;
+            $file = DIR_DOWNLOAD . 'opencartbrasil/' . $file;
             if (is_file($file)) {
                 @unlink($file);
             }
@@ -475,7 +480,7 @@ class ControllerToolUpdate extends Controller {
             if (empty($xml)){
                 continue;
             }
-            
+
             $dom = new DOMDocument('1.0', 'UTF-8');
             $dom->preserveWhiteSpace = false;
             $dom->loadXml($xml);
@@ -496,7 +501,7 @@ class ControllerToolUpdate extends Controller {
 
                 $error_file = $file->getAttribute('error');
 
-                $files = explode('|', $file->getAttribute('path'));
+                $files = explode('|', str_replace("\\", '/', $file->getAttribute('path')));
                 foreach ($files as $file) {
                     $path = '';
 
