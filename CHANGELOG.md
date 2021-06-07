@@ -46,9 +46,9 @@ e utiliza [Semantic Versioning](https://semver.org/lang/pt-BR/spec/v2.0.0.html).
 - Melhorias no gerenciamento de layouts
 - Melhorias no gerenciamento de uploads
 - Melhorias na adição de style no footer
-- Melhorias no processo de instalação manual
-- Melhorias no processo de instação pela CLI
 - Melhorias na bibliotecas de banco de dados
+- Melhorias no processo de instalação manual
+- Melhorias no processo de instalação pela CLI
 
 ### Adicionado
 - Adição do arquivo robots.txt
