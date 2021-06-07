@@ -973,7 +973,8 @@ CREATE TABLE `oc_cron` (
 --
 
 INSERT INTO `oc_cron` (`cron_id`, `code`, `cycle`, `action`, `status`, `date_added`, `date_modified`) VALUES
-(3, 'session', 'day', 'cron/session', 1, '2019-03-19 04:33:00', '2019-03-19 04:33:00');
+(1, 'currency', 'day', 'cron/currency', 1, '2021-06-25 14:40:00', '2021-06-05 14:40:00'),
+(3, 'session', 'day', 'cron/session', 1, '2021-06-25 14:40:00', '2021-06-05 14:40:00');
 
 -----------------------------------------------------------
 
