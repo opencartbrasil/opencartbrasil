@@ -11,7 +11,7 @@
  *                             --db_password senha
  *                             --db_database opencartbrasil
  *                             --db_port 3306
- *                             --db_prefix oc_
+ *                             --db_prefix ocbr_
  *                             --username admin
  *                             --password admin
  *                             --email usuario@dominio.com.br
@@ -23,20 +23,15 @@ ini_set('display_errors', 1);
 error_reporting(E_ALL);
 
 // DIR
-define('DIR_OPENCART', str_replace('\\', '/', realpath(dirname(__FILE__) . '/../')) . '/');
-define('DIR_APPLICATION', DIR_OPENCART . 'install/');
-define('DIR_SYSTEM', DIR_OPENCART . '/system/');
-define('DIR_IMAGE', DIR_OPENCART . '/image/');
+define('DIR_APPLICATION', str_replace('\\', '/', realpath(dirname(__FILE__))) . '/');
+define('DIR_SYSTEM', str_replace('\\', '/', realpath(dirname(__FILE__) . '/../')) . '/system/');
+define('DIR_OPENCART', str_replace('\\', '/', realpath(DIR_APPLICATION . '../')) . '/');
 define('DIR_STORAGE', DIR_SYSTEM . 'storage/');
+define('DIR_DATABASE', DIR_SYSTEM . 'database/');
 define('DIR_LANGUAGE', DIR_APPLICATION . 'language/');
 define('DIR_TEMPLATE', DIR_APPLICATION . 'view/template/');
 define('DIR_CONFIG', DIR_SYSTEM . 'config/');
-define('DIR_CACHE', DIR_SYSTEM . 'storage/cache/');
-define('DIR_DOWNLOAD', DIR_SYSTEM . 'storage/download/');
-define('DIR_LOGS', DIR_SYSTEM . 'storage/logs/');
-define('DIR_MODIFICATION', DIR_SYSTEM . 'storage/modification/');
-define('DIR_SESSION', DIR_SYSTEM . 'storage/session/');
-define('DIR_UPLOAD', DIR_SYSTEM . 'storage/upload/');
+define('DIR_MODIFICATION', DIR_SYSTEM . 'modification/');
 
 // Startup
 require_once(DIR_SYSTEM . 'startup.php');
@@ -50,29 +45,31 @@ $registry->set('load', $loader);
 
 set_error_handler(function ($code, $message, $file, $line, array $errcontext) {
 	// error was suppressed with the @-operator
-	if (error_reporting() === 0) {
+	if (0 === error_reporting()) {
 		return false;
 	}
 
 	throw new ErrorException($message, 0, $code, $file, $line);
 });
 
+set_error_handler('handleError');
+
 function usage() {
 	echo "Uso:\n";
-	echo "======\n";
+	echo "====\n";
 	echo "\n";
 	$options = implode(" ", array(
-		'--db_driver', 'mysqli',
-		'--db_hostname', 'localhost',
-		'--db_username', 'root',
-		'--db_password', 'senha',
-		'--db_database', 'opencartbrasil',
-		'--db_port', '3306',
-		'--db_prefix', 'oc_',
-		'--username', 'admin',
-		'--password', 'admin',
-		'--email', 'usuario@dominio.com.br',
-		'--http_server', 'http://localhost/opencartbrasil/'
+		'--db_driver', '"mysqli" \\' . PHP_EOL,
+		'--db_hostname', '"localhost" \\' . PHP_EOL,
+		'--db_username', '"root" \\' . PHP_EOL,
+		'--db_password', '"123456" \\' . PHP_EOL,
+		'--db_database', '"opencartbrasil" \\' . PHP_EOL,
+		'--db_port', '"3306" \\' . PHP_EOL,
+		'--db_prefix', '"ocbr_" \\' . PHP_EOL,
+		'--username', '"admin" \\' . PHP_EOL,
+		'--password', '"admin" \\' . PHP_EOL,
+		'--email', '"usuario@dominio.com.br" \\' . PHP_EOL,
+		'--http_server', '"http://localhost/opencartbrasil/"'
 	));
 	echo 'php cli_install.php install ' . $options . "\n\n";
 }
@@ -83,12 +80,13 @@ function get_options($argv) {
 		'db_hostname' => 'localhost',
 		'db_password' => '',
 		'db_port'     => '3306',
-		'db_prefix'   => 'oc_',
+		'db_prefix'   => 'ocbr_',
 		'username'    => 'admin'
 	);
 
 	$options = array();
 	$total = count($argv);
+
 	for ($i=0; $i < $total; $i=$i+2) {
 		$is_flag = preg_match('/^--(.*)$/', $argv[$i], $match);
 
@@ -118,80 +116,98 @@ function valid($options) {
 	);
 
 	$missing = array();
+
 	foreach ($required as $r) {
 		if (!array_key_exists($r, $options)) {
 			$missing[] = $r;
 		}
 	}
 
-	if (!preg_match('#/$#', $options['http_server'])) {
-		$options['http_server'] = $options['http_server'] . '/';
-	}
+	$options['http_server'] = rtrim($options['http_server'], '/') . '/';
 
-	$valid = count($missing) === 0;
-
-	return array($valid, $missing);
+	return count($missing) > 0 ? $missing : false;
 }
 
 function install($options) {
-	$check = check_requirements();
-	if ($check[0]) {
+	$check = check_requirements($options);
+
+	if ($check === true) {
 		setup_db($options);
 		write_config_files($options);
 		dir_permissions();
 	} else {
-		echo 'Erro: Falha na pré-instalação: ' . $check[1] . "\n\n";
+		echo 'Erro: Falha na pré-instalação: ' . $check . "\n\n";
 		exit(1);
 	}
 }
 
-function check_requirements() {
-	$error = null;
-	if (version_compare(phpversion(), '5.6', '<')) {
-		$error = 'Atenção: Você precisa utilizar o PHP 5.6 ou superior para o projeto OpenCart Brasil funcionar!';
+function check_requirements($options) {
+	if (version_compare(phpversion(), '5.6', '<') || version_compare(phpversion(), '8.0', '>=')) {
+		return 'Atenção: Você precisa utilizar PHP 5.6 até 7.4 para o projeto OpenCart Brasil funcionar!';
 	}
 
 	if (!ini_get('file_uploads')) {
-		$error = 'Atenção: file_uploads precisa ser ativado nas configurações do PHP!';
+		return 'Atenção: A opção "file_uploads" precisa ser ativada nas configurações do PHP!';
 	}
 
 	if (ini_get('session.auto_start')) {
-		$error = 'Atenção: O projeto OpenCart Brasil não funcionará com session.auto_start ativado!';
+		return 'Atenção: O projeto OpenCart Brasil não funcionará com a configuração "session.auto_start" ativada!';
 	}
 
-	if (!extension_loaded('mysqli')) {
-		$error = 'Atenção: A extensão MySQLi precisa ser carregada para o OpenCart Brasil funcionar!';
+	$db_drivers = array(
+		'mysql',
+		'pdo',
+		'pgsql'
+	);
+
+	if (!in_array($options['db_driver'], $db_drivers)) {
+		return 'Atenção: Não há suporte para o driver "' . $options['db_driver'] . '" de banco de dados!';
+	}
+
+	if (!extension_loaded($options['db_driver'])) {
+		return 'Atenção: A extensão "' . $options['db_driver'] . '" precisa estar habilitada para o OpenCart Brasil funcionar!';
 	}
 
 	if (!extension_loaded('gd')) {
-		$error = 'Atenção: A extensão GD precisa ser carregada para o OpenCart Brasil funcionar!';
+		return 'Atenção: A extensão "GD" precisa estar habilitada para o OpenCart Brasil funcionar!';
 	}
 
 	if (!extension_loaded('curl')) {
-		$error = 'Atenção: A extensão CURL precisa ser carregada para o OpenCart Brasil funcionar!';
+		return 'Atenção: A extensão "CURL" precisa estar habilitada para o OpenCart Brasil funcionar!';
 	}
 
 	if (!function_exists('openssl_encrypt')) {
-		$error = 'Atenção: A extensão OpenSSL precisa ser carregada para o OpenCart Brasil funcionar!';
+		return 'Atenção: A extensão "OpenSSL" precisa estar habilitada para o OpenCart Brasil funcionar!';
 	}
 
 	if (!extension_loaded('zlib')) {
-		$error = 'Atenção: A extensão ZLIB precisa ser carregada para o OpenCart Brasil funcionar!';
+		return 'Atenção: A extensão ZLIB precisa estar habilitada para o OpenCart Brasil funcionar!';
 	}
 
-	return array($error === null, $error);
+	return true;
 }
 
 function setup_db($data) {
-	$db = new DB($data['db_driver'], htmlspecialchars_decode($data['db_hostname']), htmlspecialchars_decode($data['db_username']), htmlspecialchars_decode($data['db_password']), htmlspecialchars_decode($data['db_database']), $data['db_port']);
+	try {
+		$db = new DB($data['db_driver'], htmlspecialchars_decode($data['db_hostname']), htmlspecialchars_decode($data['db_username']), htmlspecialchars_decode($data['db_password']), htmlspecialchars_decode($data['db_database']), $data['db_port']);
+	} catch (Exception $e) {
+		echo $e->getMessage();
+		exit(1);
+	}
 
 	$file = DIR_APPLICATION . 'opencart.sql';
 
 	if (!file_exists($file)) {
-		exit('Não foi possível carregar o arquivo sql: ' . $file);
+		echo('O arquivo "' . $file . '" não foi encontrado.');
+		exit(1);
 	}
 
 	$lines = file($file);
+
+	if ($lines === false) {
+		echo('Não foi possível carregar o arquivo sql: ' . $file);
+		exit(1);
+	}
 
 	if ($lines) {
 		$sql = '';
@@ -224,7 +240,6 @@ function setup_db($data) {
 		$api_id = $db->getLastId();
 		$db->query("DELETE FROM `" . $data['db_prefix'] . "setting` WHERE `key` = 'config_api_id'");
 		$db->query("INSERT INTO `" . $data['db_prefix'] . "setting` SET `code` = 'config', `key` = 'config_api_id', value = '" . (int)$api_id . "'");
-		$db->query("UPDATE `" . $data['db_prefix'] . "setting` SET `value` = 'FAT-" . date('Y') . "-' WHERE `key` = 'config_invoice_prefix'");
 	}
 }
 
@@ -278,7 +293,7 @@ function write_config_files($options) {
 	$output .= '// DIR' . "\n";
 	$output .= 'define(\'DIR_APPLICATION\', \'' . addslashes(DIR_OPENCART) . 'admin/\');' . "\n";
 	$output .= 'define(\'DIR_SYSTEM\', \'' . addslashes(DIR_OPENCART) . 'system/\');' . "\n";
-	$output .= 'define(\'DIR_IMAGE\', \'' . addslashes(DIR_OPENCART) . 'image/\');' . "\n";	
+	$output .= 'define(\'DIR_IMAGE\', \'' . addslashes(DIR_OPENCART) . 'image/\');' . "\n";
 	$output .= 'define(\'DIR_STORAGE\', DIR_SYSTEM . \'storage/\');' . "\n";
 	$output .= 'define(\'DIR_CATALOG\', \'' . addslashes(DIR_OPENCART) . 'catalog/\');' . "\n";
 	$output .= 'define(\'DIR_LANGUAGE\', DIR_APPLICATION . \'language/\');' . "\n";
@@ -334,14 +349,18 @@ switch ($subcommand) {
 case "install":
 	try {
 		$options = get_options($argv);
-		define('HTTP_OPENCART', $options['http_server']);
 		$valid = valid($options);
-		if (!$valid[0]) {
+
+		if ($valid === false) {
 			echo "Erro: As seguintes entradas estão ausentes ou são inválidas: ";
-			echo implode(', ', $valid[1]) . "\n\n";
+			echo implode(', ', $valid) . "\n\n";
 			exit(1);
 		}
+
+		define('HTTP_OPENCART', $options['http_server']);
+
 		install($options);
+
 		echo "\n### INSTALAÇÃO CONCLUÍDA! ###\n\n";
 		echo "O projeto OpenCart Brasil foi instalado em seu servidor\n\n";
 		echo "- IMPORTANTE:\n\n";

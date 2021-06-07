@@ -11,5 +11,8 @@ $_['text_edit']        = 'Editando Menu de lojas';
 $_['entry_admin']      = 'Somente para usuários admin';
 $_['entry_status']     = 'Situação';
 
+//Help
+$_['help_admin']       = 'Se sim, então a lista de múltiplas lojas ficará visível apenas quando o usuário administrador fizer login!';
+
 // Error
 $_['error_permission'] = 'Atenção: Você não tem permissão para modificar a extensão Menu de lojas!';

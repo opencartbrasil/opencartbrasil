@@ -108,7 +108,7 @@ Após executar os procedimentos, acesse a administração da loja e vá no menu 
 
 ### Tarefas em andamento:
 
-- [ ] Melhorias na API REST para inclusão de produtos, clientes, pedidos, etc.
+- [ ] API REST para inclusão de produtos, clientes, pedidos, etc.
 
 ### Próximas tarefas:
 
@@ -126,6 +126,8 @@ Se você é o profissional que administra os servidores que armazenam os arquivo
 
 - Apache 2.4 ou superior.
 - Nginx 1.14 ou superior.
+- LiteSpeed 5.4 ou superior.
+- OpenLiteSpeed 1.6 ou superior.
 
 ### OpenSSL:
 
@@ -142,7 +144,7 @@ Se você é o profissional que administra os servidores que armazenam os arquivo
 
 ### Versões do PHP compatíveis:
 
-- 5.6 ou superior (recomendado 7.3 ou superior).
+- 5.6 ou superior (recomendado 7.4).
 
 ### Configurações mínimas necessárias no PHP:
 
@@ -222,7 +224,7 @@ O importante é **configurar as diretivas com sabedoria**, levando em considera�
 
 Não é compatível com sistema operacional Windows utilizando servidor web IIS.
 
-Em breve a versão mínima aceita pelo OpenCart será o PHP 7.1 (recomendado PHP 7.3 ou superior), pois o suporte para o PHP até as versões 7.0 encerraram em dezembro de 2018, ou seja, não faz sentido continuar o suporte para versões do PHP que os próprios desenvolvedores abandonaram, o que significa que essas versões não receberão correções de bugs e falhas.
+Em breve a versão mínima aceita pelo OpenCart Brasil será o PHP 7.4, pois o suporte para o PHP até a versão 7.3 encerrará em dezembro de 2021, ou seja, não faz sentido continuar o suporte para versões do PHP que os próprios desenvolvedores abandonaram, o que significa que essas versões não receberão correções de bugs e falhas.
 
 ## Download
 
@@ -236,15 +238,62 @@ Faça o download da última versão estável marcada como **latest release** [cl
 
 ### Utilizando o composer:
 
-``
+```bash
 composer create-project opencartbrasil/opencartbrasil nome_da_pasta
-``
+```
 
 ### Utilizando o Git Bash:
 
-``
-git clone https://github.com/opencartbrasil/opencartbrasil.git
-``
+```bash
+git clone --depth 1 https://github.com/opencartbrasil/opencartbrasil.git
+```
+
+### Utilizando o Docker
+
+```bash
+docker run -p 80:8888 opencartbrasil:latest
+```
+
+### Utilizando o Docker-compose
+
+```yaml
+version: '3'
+
+networks:
+    app-network:
+
+services:
+  app:
+    image: opencartbrasil:latest
+    container_name: app
+    volumes: 
+      - ./src:/var/www/html
+    networks:
+      - app-network
+    ports: 
+      - 80:80
+    environment: 
+      OCBR_HTTP_SERVER: "http://localhost/"
+      OCBR_DB_HOST: "db"
+      OCBR_DB_USER: "store"
+      OCBR_DB_PASS: "store"
+      OCBR_ADMIN_USER: "admin"
+      OCBR_ADMIN_PASS: "123456"
+      OCBR_ADMIN_EMAIL: "webmaster@localhost"
+    depends_on: 
+      - db
+
+  db:
+    image: mysql:5.7
+    container_name: db
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_USER: store
+      MYSQL_PASSWORD: store
+      MYSQL_DATABASE: opencartbrasil
+    networks:
+      - app-network
+```
 
 ## Instalação
 
@@ -272,23 +321,34 @@ Através da interface de linha de comandos, a loja pode ser instalada automatica
 
 **Exemplo de instalação através da linha de comando no servidor local:**
 
-``
-php install/cli_install.php install --db_hostname localhost --db_username root --db_password 123456 --db_database opencartbrasil --username admin --password 123456 --email usuario@dominio.com.br --http_server http://localhost/opencartbrasil/
-``
+```bash
+php install/cli_install.php install \
+  --db_driver mysqli \
+  --db_hostname localhost \
+  --db_username root \
+  --db_password 123456 \
+  --db_database opencartbrasil \
+  --db_port 3306 \
+  --db_prefix ocbr_ \
+  --username admin \
+  --password admin \
+  --email usuario@dominio.com.br \
+  --http_server http://localhost/opencartbrasil/
+```
 
 Lista de parâmetros para instalação através da linha de comando:
 
 | Parâmetro | Descrição | Padrão | Obrigatório |
 | --------- | --------- | ------ | ----------- |
-| `db_driver` | Driver para conexão com o banco de dados. | mysqli | Não |
+| `db_driver` | Driver para conexão com o banco de dados (mysqli, pdo ou pgsql). | mysqli | Não |
 | `db_hostname` | Nome do servidor de banco de dados. | localhost | Não |
 | `db_username` | Usuário com permissão para o banco de dados. | | Sim |
 | `db_password` | Senha do usuário com permissão para o banco de dados. | | Sim |
 | `db_database` | Nome do banco de dados para instalar as tabelas da loja. | | Sim |
 | `db_port` | Porta para acesso ao banco de dados MySQL. | 3306 | Não |
-| `db_prefix` | Prefixo adicionado nas tabelas criadas no banco de dados. | oc_ | Não |
-| `username` | Usuário administrador da loja que será cadastrado durante a instalação. | admin | Não |
-| `password` | Senha do usuário administrador da loja. | | Sim |
+| `db_prefix` | Prefixo adicionado nas tabelas criadas no banco de dados. | ocbr_ | Não |
+| `username` | Usuário de acesso do administrador da loja. | admin | Não |
+| `password` | Senha de acesso do usuário administrador da loja. | | Sim |
 | `email` | E-mail do usuário administrador da loja. | | Sim |
 | `http_server` | Domínio da loja com uma / (barra) no final. | | Sim |
 

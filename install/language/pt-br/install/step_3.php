@@ -7,8 +7,9 @@ $_['text_step_3']            = 'Preencha os dados para instalação';
 $_['text_db_connection']     = '1. Preencha os campos abaixo para o OpenCart se conectar com o banco de dados.';
 $_['text_db_administration'] = '2. Preencha os campos abaixo com um nome de usuário e senha para acessar a administração do OpenCart.';
 $_['text_mysqli']            = 'MySQLi';
-$_['text_mpdo']              = 'mPDO';
+$_['text_mpdo']              = 'PDO';
 $_['text_pgsql']             = 'PostgreSQL';
+$_['text_loading']           = 'Por favor! Aguarde a instalação ser concluída.';
 
 // Entry
 $_['entry_db_driver']        = 'Driver';

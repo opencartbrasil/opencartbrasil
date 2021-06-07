@@ -95,13 +95,13 @@
   </div>
 <link href="view/javascript/codemirror/lib/codemirror.css" rel="stylesheet" />
 <link href="view/javascript/codemirror/theme/monokai.css" rel="stylesheet" />
-<script type="text/javascript" src="view/javascript/codemirror/lib/codemirror.js"></script> 
-<script type="text/javascript" src="view/javascript/codemirror/lib/xml.js"></script> 
-<script type="text/javascript" src="view/javascript/codemirror/lib/formatting.js"></script> 
+<script type="text/javascript" src="view/javascript/codemirror/lib/codemirror.js"></script>
+<script type="text/javascript" src="view/javascript/codemirror/lib/xml.js"></script>
+<script type="text/javascript" src="view/javascript/codemirror/lib/formatting.js"></script>
 <script type="text/javascript" src="view/javascript/summernote/summernote.js"></script>
 <link href="view/javascript/summernote/summernote.css" rel="stylesheet" />
-<script type="text/javascript" src="view/javascript/summernote/summernote-image-attributes.js"></script> 
-<script type="text/javascript" src="view/javascript/summernote/opencart.js"></script> 
+<script type="text/javascript" src="view/javascript/summernote/summernote-image-attributes.js"></script>
+<script type="text/javascript" src="view/javascript/summernote/opencart.js"></script>
 <script type="text/javascript"><!--
 $('select[name=\'to\']').on('change', function() {
     $('.to').hide();
@@ -110,7 +110,7 @@ $('select[name=\'to\']').on('change', function() {
 });
 
 $('select[name=\'to\']').trigger('change');
-//--></script> 
+//--></script>
 <script type="text/javascript"><!--
 // Customers
 $('input[name=\'customers\']').autocomplete({
@@ -134,7 +134,7 @@ $('input[name=\'customers\']').autocomplete({
     'select': function(item) {
         $('input[name=\'customers\']').val('');
 
-        $('#input-customer' + item['value']).remove();
+        $('#customer' + item['value']).remove();
 
         $('#input-customer').parent().find('.well').append('<div id="customer' + item['value'] + '"><i class="fa fa-minus-circle"></i> ' + item['label'] + '<input type="hidden" name="customer[]" value="' + item['value'] + '" /></div>');
     }
@@ -166,7 +166,7 @@ $('input[name=\'affiliates\']').autocomplete({
     'select': function(item) {
         $('input[name=\'affiliates\']').val('');
 
-        $('#input-affiliate' + item['value']).remove();
+        $('#affiliate' + item['value']).remove();
 
         $('#input-affiliate').parent().find('.well').append('<div id="affiliate' + item['value'] + '"><i class="fa fa-minus-circle"></i> ' + item['label'] + '<input type="hidden" name="affiliate[]" value="' + item['value'] + '" /></div>');
     }
@@ -198,7 +198,7 @@ $('input[name=\'products\']').autocomplete({
     'select': function(item) {
         $('input[name=\'products\']').val('');
 
-        $('#input-product' + item['value']).remove();
+        $('#product' + item['value']).remove();
 
         $('#input-product').parent().find('.well').append('<div id="product' + item['value'] + '"><i class="fa fa-minus-circle"></i> ' + item['label'] + '<input type="hidden" name="product[]" value="' + item['value'] + '" /></div>');
     }
@@ -216,9 +216,6 @@ function send(url) {
         dataType: 'json',
         beforeSend: function() {
             $('#button-send').button('loading');
-        },
-        complete: function() {
-            $('#button-send').button('reset');
         },
         success: function(json) {
             $('.alert-dismissible, .text-danger').remove();
@@ -247,6 +244,8 @@ function send(url) {
 
             if (json['next']) {
                 send(json['next']);
+            } else {
+                $('#button-send').button('reset');
             }
         },
         error: function(xhr, ajaxOptions, thrownError) {

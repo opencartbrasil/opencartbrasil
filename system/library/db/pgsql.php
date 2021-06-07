@@ -4,13 +4,19 @@ final class PgSQL {
 	private $connection;
 
 	public function __construct($hostname, $username, $password, $database, $port = '5432') {
-		$this->connection = @pg_connect('hostname=' . $hostname . ' port=' . $port .  ' username=' . $username . ' password='	. $password . ' database=' . $database);
+		try {
+			$pg = @pg_connect('hostname=' . $hostname . ' port=' . $port . ' username=' . $username . ' password=' . $password . ' database=' . $database);
+		} catch (\Exception $e) {
+			$message = $e->getMessage();
+			$message = str_replace(array($hostname, $username, $password, $database, $port), '*********', $message);
 
-		if (!$this->connection) {
-			throw new \Exception('Erro: Não foi possível conectar no banco de dados usando!');
+			throw new \Exception($message, $e->getCode());
 		}
 
-		pg_query($this->connection, "SET CLIENT_ENCODING TO 'UTF8'");
+		if ($pg) {
+			$this->connection = $pg;
+			pg_query($this->connection, "SET CLIENT_ENCODING TO 'UTF8'");
+		}
 	}
 
 	public function query($sql) {
@@ -22,28 +28,33 @@ final class PgSQL {
 
 				$data = array();
 
-				while ($result = pg_fetch_assoc($resource)) {
-					$data[$i] = $result;
+				while ($row = pg_fetch_assoc($resource)) {
+					$data[$i] = $row;
 
 					$i++;
 				}
 
 				pg_free_result($resource);
 
-				$query = new \stdClass();
-				$query->row = isset($data[0]) ? $data[0] : array();
-				$query->rows = $data;
-				$query->num_rows = $i;
+				$result = new \stdClass();
+				$result->num_rows = $i;
+				$result->row = isset($data[0]) ? $data[0] : array();
+				$result->rows = $data;
 
 				unset($data);
-
-				return $query;
-			} else {
-				return true;
 			}
 		} else {
 			throw new \Exception('Erro: ' . pg_result_error($this->connection) . '<br>Código: ' . $sql);
 		}
+
+		if (!isset($result)) {
+			$result = new \stdClass();
+			$result->num_rows = 0;
+			$result->row = array();
+			$result->rows = array();
+		}
+
+		return $result;
 	}
 
 	public function escape($value) {

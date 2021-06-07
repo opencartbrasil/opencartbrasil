@@ -33,32 +33,12 @@ class ControllerCommonFooter extends Controller {
 
 		// Whos Online
 		if ($this->config->get('config_customer_online')) {
-			$ip = '';
+			$this->load->model('tool/online');
 
-			if (isset($this->request->server['REMOTE_ADDR']) && filter_var($this->request->server['REMOTE_ADDR'], FILTER_VALIDATE_IP)) {
+			if (isset($this->request->server['REMOTE_ADDR'])) {
 				$ip = $this->request->server['REMOTE_ADDR'];
-			}
-
-			if (isset($this->request->server['HTTP_X_FORWARDED_FOR'])) {
-				$xip = trim(current(explode(',', $this->request->server['HTTP_X_FORWARDED_FOR'])));
-
-				if (filter_var($xip, FILTER_VALIDATE_IP, FILTER_FLAG_NO_PRIV_RANGE | FILTER_FLAG_NO_RES_RANGE)) {
-					if (isset($this->request->server['SERVER_ADDR']) && $this->request->server['SERVER_ADDR'] != $xip) {
-						$ip = $xip;
-					}
-				}
-			}
-
-			if (isset($this->request->server['HTTP_CF_CONNECTING_IP']) && filter_var($this->request->server['HTTP_CF_CONNECTING_IP'], FILTER_VALIDATE_IP)) {
-				$ip = $this->request->server['HTTP_CF_CONNECTING_IP'];
-			}
-
-			if (isset($this->request->server['HTTP_INCAP_CLIENT_IP']) && filter_var($this->request->server['HTTP_INCAP_CLIENT_IP'], FILTER_VALIDATE_IP)) {
-				$ip = $this->request->server['HTTP_INCAP_CLIENT_IP'];
-			}
-
-			if (isset($this->request->server['HTTP_X_SUCURI_CLIENTIP']) && filter_var($this->request->server['HTTP_X_SUCURI_CLIENTIP'], FILTER_VALIDATE_IP)) {
-				$ip = $this->request->server['HTTP_X_SUCURI_CLIENTIP'];
+			} else {
+				$ip = '';
 			}
 
 			if (isset($this->request->server['HTTP_HOST']) && isset($this->request->server['REQUEST_URI'])) {
@@ -73,11 +53,11 @@ class ControllerCommonFooter extends Controller {
 				$referer = '';
 			}
 
-			$this->load->model('tool/online');
 			$this->model_tool_online->addOnline($ip, $this->customer->getId(), $url, $referer);
 		}
 
 		$data['scripts'] = $this->document->getScripts('footer');
+		$data['styles'] = $this->document->getStyles('footer');
 
 		return $this->load->view('common/footer', $data);
 	}

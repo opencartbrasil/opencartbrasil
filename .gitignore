@@ -1,4 +1,8 @@
 /config.php
-admin/config.php
+/admin/config.php
+/system/storage
+/image/cache
+/composer.lock
 
+!system/storage/vendor
 !index.html

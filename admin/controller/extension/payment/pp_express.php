@@ -512,7 +512,7 @@ class ControllerExtensionPaymentPPExpress extends Controller {
 			if ($paypal_info) {
 				$data['user_token'] = $this->session->data['user_token'];
 
-				$data['order_id'] = $this->request->get['order_id'];
+				$data['order_id'] = (int)$this->request->get['order_id'];
 
 				$data['capture_status'] = $paypal_info['capture_status'];
 
@@ -1056,7 +1056,7 @@ class ControllerExtensionPaymentPPExpress extends Controller {
 		$this->load->language('extension/payment/pp_express_view');
 
 		$this->document->setTitle($this->language->get('heading_title'));
-		
+
 		$data['breadcrumbs'] = array();
 
 		$data['breadcrumbs'][] = array(

@@ -11,6 +11,7 @@ $_['text_add']           = 'O endereço foi cadastrado.';
 $_['text_edit']          = 'O endereço foi atualizado.';
 $_['text_delete']        = 'O endereço foi excluído.';
 $_['text_empty']         = 'Você não possui endereços vinculados a sua conta.';
+$_['text_confirm']       = 'Você tem certeza? ';
 
 // Entry
 $_['entry_firstname']    = 'Nome';

@@ -1,41 +1,7 @@
+
 <?php
 class ModelUpgrade1005 extends Model {
 	public function upgrade() {
-		// api
-		$query = $this->db->query("SELECT * FROM information_schema.COLUMNS WHERE TABLE_SCHEMA = '" . DB_DATABASE . "' AND TABLE_NAME = '" . DB_PREFIX . "api' AND COLUMN_NAME = 'username'");
-
-		if ($query->num_rows) {
-			$query = $this->db->query("SELECT * FROM information_schema.COLUMNS WHERE TABLE_SCHEMA = '" . DB_DATABASE . "' AND TABLE_NAME = '" . DB_PREFIX . "api' AND COLUMN_NAME = 'name'");
-
-			if ($query->num_rows) {
-				$this->db->query("UPDATE `" . DB_PREFIX . "api` SET `name` = `username` WHERE `name` IS NULL or `name` = ''");
-				$this->db->query("ALTER TABLE `" . DB_PREFIX . "api` DROP `username`");
-			} else {
-				$this->db->query("ALTER TABLE `" . DB_PREFIX . "api` CHANGE `username` `name` varchar(64) NOT NULL");
-			}
-		}
-
-		// api
-		$query = $this->db->query("SELECT * FROM information_schema.COLUMNS WHERE TABLE_SCHEMA = '" . DB_DATABASE . "' AND TABLE_NAME = '" . DB_PREFIX . "api' AND COLUMN_NAME = 'password'");
-
-		if ($query->num_rows) {
-			$query = $this->db->query("SELECT * FROM information_schema.COLUMNS WHERE TABLE_SCHEMA = '" . DB_DATABASE . "' AND TABLE_NAME = '" . DB_PREFIX . "api' AND COLUMN_NAME = 'key'");
-
-			if ($query->num_rows) {
-				$this->db->query("UPDATE `" . DB_PREFIX . "api` SET `key` = `password` WHERE `key` IS NULL or `key` = ''");
-				$this->db->query("ALTER TABLE `" . DB_PREFIX . "api` DROP `password`");
-			} else {
-				$this->db->query("ALTER TABLE `" . DB_PREFIX . "api` CHANGE `password` `key` text NOT NULL");
-			}
-		}
-
-		// Insert default API record if not set
-		$query = $this->db->query("SELECT * FROM " . DB_PREFIX . "api");
-
-		if (!$query->num_rows) {
-			$this->db->query("INSERT INTO " . DB_PREFIX . "api (api_id, name, `key`, status, date_added, date_modified) values(1, 'json', '" . hash('sha512', mt_rand()) . "' , 1, now(), now())");
-		}
-
 		// customer
 		$this->db->query("ALTER TABLE `" . DB_PREFIX . "customer` CHANGE `token` `token` text NOT NULL");
 
@@ -43,7 +9,7 @@ class ModelUpgrade1005 extends Model {
 		$query = $this->db->query("SELECT * FROM information_schema.COLUMNS WHERE TABLE_SCHEMA = '" . DB_DATABASE . "' AND TABLE_NAME = '" . DB_PREFIX . "customer' AND COLUMN_NAME = 'code'");
 
 		if (!$query->num_rows) {
-			$this->db->query("ALTER TABLE `" . DB_PREFIX . "customer` ADD `code` tinyint(1) NOT NULL AFTER `token`");
+			$this->db->query("ALTER TABLE `" . DB_PREFIX . "customer` ADD `code` varchar(40) NOT NULL AFTER `token`");
 		}
 
 		// custom_field
@@ -218,6 +184,7 @@ class ModelUpgrade1005 extends Model {
 			$this->db->query("DELETE FROM `" . DB_PREFIX . "setting` WHERE `key` = 'config_encryption'");
 			$this->db->query("INSERT INTO `" . DB_PREFIX . "setting` SET `key` = 'config_encryption', `value` = '" . hash('sha512', mt_rand()) . "', `code` = 'config', `serialized` = '0', `store_id` = 0");
 		}
+
 		// force some settings to prevent errors
 		$this->db->query("UPDATE " . DB_PREFIX . "setting set value = 'default' WHERE `key` = 'config_template'");
 		$this->db->query("UPDATE " . DB_PREFIX . "setting set value = '1' WHERE `key` = 'config_error_display'");

@@ -119,25 +119,44 @@ class ControllerAccountEdit extends Controller {
 			$data['telephone'] = '';
 		}
 
-		// Custom Fields
-		$data['custom_fields'] = array();
-		
-		$this->load->model('account/custom_field');
-
-		$custom_fields = $this->model_account_custom_field->getCustomFields($this->config->get('config_customer_group_id'));
-
-		foreach ($custom_fields as $custom_field) {
-			if ($custom_field['location'] == 'account') {
-				$data['custom_fields'][] = $custom_field;
-			}
-		}
-
 		if (isset($this->request->post['custom_field']['account'])) {
 			$data['account_custom_field'] = $this->request->post['custom_field']['account'];
 		} elseif (isset($customer_info)) {
 			$data['account_custom_field'] = json_decode($customer_info['custom_field'], true);
 		} else {
 			$data['account_custom_field'] = array();
+		}
+
+		// Custom Fields
+		$data['custom_fields'] = array();
+
+		$this->load->model('tool/upload');
+		$this->load->model('account/custom_field');
+
+		$custom_fields = $this->model_account_custom_field->getCustomFields($this->config->get('config_customer_group_id'));
+
+		foreach ($custom_fields as $custom_field) {
+			if ($custom_field['location'] == 'account') {
+				if ($custom_field['type'] == 'file' && isset($data['account_custom_field'][$custom_field['custom_field_id']])) {
+					$code = $data['account_custom_field'][$custom_field['custom_field_id']];
+
+					$data['account_custom_field'][$custom_field['custom_field_id']] = array();
+
+					$upload_result = $this->model_tool_upload->getUploadByCode($code);
+
+					if ($upload_result) {
+						$data['account_custom_field'][$custom_field['custom_field_id']]['name'] = $upload_result['name'];
+						$data['account_custom_field'][$custom_field['custom_field_id']]['code'] = $upload_result['code'];
+					} else {
+						$data['account_custom_field'][$custom_field['custom_field_id']]['name'] = "";
+						$data['account_custom_field'][$custom_field['custom_field_id']]['code'] = $code;
+					}
+
+					$data['custom_fields'][] = $custom_field;
+				} else {
+					$data['custom_fields'][] = $custom_field;
+				}
+			}
 		}
 
 		$data['back'] = $this->url->link('account/account', '', true);
@@ -182,7 +201,7 @@ class ControllerAccountEdit extends Controller {
 			if ($custom_field['location'] == 'account') {
 				if ($custom_field['required'] && empty($this->request->post['custom_field'][$custom_field['location']][$custom_field['custom_field_id']])) {
 					$this->error['custom_field'][$custom_field['custom_field_id']] = sprintf($this->language->get('error_custom_field'), $custom_field['name']);
-				} elseif (($custom_field['type'] == 'text') && !empty($custom_field['validation']) && !filter_var($this->request->post['custom_field'][$custom_field['location']][$custom_field['custom_field_id']], FILTER_VALIDATE_REGEXP, array('options' => array('regexp' => html_entity_decode($custom_field['validation'], ENT_QUOTES, 'UTF-8'))))) {
+				} elseif (($custom_field['type'] == 'text') && !empty($custom_field['validation']) && !filter_var($this->request->post['custom_field'][$custom_field['location']][$custom_field['custom_field_id']], FILTER_VALIDATE_REGEXP, array('options' => array('regexp' => $custom_field['validation'])))) {
 					$this->error['custom_field'][$custom_field['custom_field_id']] = sprintf($this->language->get('error_custom_field'), $custom_field['name']);
 				}
 			}

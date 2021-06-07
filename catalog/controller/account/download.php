@@ -31,7 +31,7 @@ class ControllerAccountDownload extends Controller {
 		$this->load->model('account/download');
 
 		if (isset($this->request->get['page'])) {
-			$page = (int) $this->request->get['page'];
+			$page = (int)$this->request->get['page'];
 		} else {
 			$page = 1;
 		}
@@ -84,7 +84,7 @@ class ControllerAccountDownload extends Controller {
 		$data['pagination'] = $pagination->render();
 
 		$data['results'] = sprintf($this->language->get('text_pagination'), ($download_total) ? (($page - 1) * 10) + 1 : 0, ((($page - 1) * 10) > ($download_total - 10)) ? $download_total : ((($page - 1) * 10) + 10), $download_total, ceil($download_total / 10));
-		
+
 		$data['continue'] = $this->url->link('account/account', '', true);
 
 		$data['column_left'] = $this->load->controller('common/column_left');
@@ -107,7 +107,7 @@ class ControllerAccountDownload extends Controller {
 		$this->load->model('account/download');
 
 		if (isset($this->request->get['download_id'])) {
-			$download_id = $this->request->get['download_id'];
+			$download_id = (int)$this->request->get['download_id'];
 		} else {
 			$download_id = 0;
 		}

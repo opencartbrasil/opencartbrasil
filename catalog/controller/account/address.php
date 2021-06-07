@@ -38,7 +38,7 @@ class ControllerAccountAddress extends Controller {
 
 		if (($this->request->server['REQUEST_METHOD'] == 'POST') && $this->validateForm()) {
 			$this->model_account_address->addAddress($this->customer->getId(), $this->request->post);
-			
+
 			$this->session->data['success'] = $this->language->get('text_add');
 
 			$this->response->redirect($this->url->link('account/address', '', true));
@@ -64,7 +64,7 @@ class ControllerAccountAddress extends Controller {
 		$this->document->addStyle('catalog/view/javascript/jquery/datetimepicker/bootstrap-datetimepicker.min.css');
 
 		$this->load->model('account/address');
-		
+
 		if (($this->request->server['REQUEST_METHOD'] == 'POST') && $this->validateForm()) {
 			$this->model_account_address->editAddress($this->request->get['address_id'], $this->request->post);
 
@@ -297,7 +297,7 @@ class ControllerAccountAddress extends Controller {
 		} else {
 			$data['error_custom_field'] = array();
 		}
-		
+
 		if (!isset($this->request->get['address_id'])) {
 			$data['action'] = $this->url->link('account/address/add', '', true);
 		} else {
@@ -380,29 +380,48 @@ class ControllerAccountAddress extends Controller {
 			$data['zone_id'] = '';
 		}
 
+		if (isset($this->request->post['custom_field']['address'])) {
+			$data['address_custom_field'] = $this->request->post['custom_field']['address'];
+		} elseif (isset($address_info['custom_field'])) {
+			$data['address_custom_field'] = $address_info['custom_field'];
+		} else {
+			$data['address_custom_field'] = array();
+		}
+
 		$this->load->model('localisation/country');
 
 		$data['countries'] = $this->model_localisation_country->getCountries();
 
 		// Custom fields
 		$data['custom_fields'] = array();
-		
+
+		$this->load->model('tool/upload');
 		$this->load->model('account/custom_field');
 
 		$custom_fields = $this->model_account_custom_field->getCustomFields($this->config->get('config_customer_group_id'));
 
 		foreach ($custom_fields as $custom_field) {
 			if ($custom_field['location'] == 'address') {
-				$data['custom_fields'][] = $custom_field;
-			}
-		}
+				if ($custom_field['type'] == 'file' && isset($data['address_custom_field'][$custom_field['custom_field_id']])) {
+					$code = $data['address_custom_field'][$custom_field['custom_field_id']];
 
-		if (isset($this->request->post['custom_field']['address'])) {
-			$data['address_custom_field'] = $this->request->post['custom_field']['address'];
-		} elseif (isset($address_info)) {
-			$data['address_custom_field'] = $address_info['custom_field'];
-		} else {
-			$data['address_custom_field'] = array();
+					$upload_result = $this->model_tool_upload->getUploadByCode($code);
+
+					$data['address_custom_field'][$custom_field['custom_field_id']] = array();
+
+					if ($upload_result) {
+						$data['address_custom_field'][$custom_field['custom_field_id']]['name'] = $upload_result['name'];
+						$data['address_custom_field'][$custom_field['custom_field_id']]['code'] = $upload_result['code'];
+					} else {
+						$data['address_custom_field'][$custom_field['custom_field_id']]['name'] = "";
+						$data['address_custom_field'][$custom_field['custom_field_id']]['code'] = $code;
+					}
+
+					$data['custom_fields'][] = $custom_field;
+				} else {
+					$data['custom_fields'][] = $custom_field;
+				}
+			}
 		}
 
 		if (isset($this->request->post['default'])) {
@@ -467,7 +486,7 @@ class ControllerAccountAddress extends Controller {
 			if ($custom_field['location'] == 'address') {
 				if ($custom_field['required'] && empty($this->request->post['custom_field'][$custom_field['location']][$custom_field['custom_field_id']])) {
 					$this->error['custom_field'][$custom_field['custom_field_id']] = sprintf($this->language->get('error_custom_field'), $custom_field['name']);
-				} elseif (($custom_field['type'] == 'text') && !empty($custom_field['validation']) && !filter_var($this->request->post['custom_field'][$custom_field['location']][$custom_field['custom_field_id']], FILTER_VALIDATE_REGEXP, array('options' => array('regexp' => html_entity_decode($custom_field['validation'], ENT_QUOTES, 'UTF-8'))))) {
+				} elseif (($custom_field['type'] == 'text') && !empty($custom_field['validation']) && !filter_var($this->request->post['custom_field'][$custom_field['location']][$custom_field['custom_field_id']], FILTER_VALIDATE_REGEXP, array('options' => array('regexp' => $custom_field['validation'])))) {
 					$this->error['custom_field'][$custom_field['custom_field_id']] = sprintf($this->language->get('error_custom_field'), $custom_field['name']);
 				}
 			}

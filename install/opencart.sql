@@ -6,8 +6,6 @@
 
 -----------------------------------------------------------
 
-SET sql_mode = '';
-
 --
 -- Table structure for table `oc_address`
 --
@@ -975,7 +973,8 @@ CREATE TABLE `oc_cron` (
 --
 
 INSERT INTO `oc_cron` (`cron_id`, `code`, `cycle`, `action`, `status`, `date_added`, `date_modified`) VALUES
-(3, 'session', 'day', 'cron/session', 1, '2019-03-19 04:33:00', '2019-03-19 04:33:00');
+(1, 'currency', 'day', 'cron/currency', 1, '2021-06-25 14:40:00', '2021-06-05 14:40:00'),
+(3, 'session', 'day', 'cron/session', 1, '2021-06-25 14:40:00', '2021-06-05 14:40:00');
 
 -----------------------------------------------------------
 
@@ -1502,7 +1501,7 @@ INSERT INTO `oc_event` (`event_id`, `code`, `trigger`, `action`, `status`) VALUE
 INSERT INTO `oc_event` (`event_id`, `code`, `trigger`, `action`, `status`) VALUES
 (31, 'admin_mail_transaction', 'admin/model/customer/customer/addTransaction/after', 'mail/transaction', 1);
 INSERT INTO `oc_event` (`event_id`, `code`, `trigger`, `action`, `status`) VALUES
-(32, 'admin_mail_return', 'admin/model/sale/return/addReturn/after', 'mail/return', 1);
+(32, 'admin_mail_return', 'admin/model/sale/return/addReturnHistory/after', 'mail/return', 1);
 INSERT INTO `oc_event` (`event_id`, `code`, `trigger`, `action`, `status`) VALUES
 (33, 'admin_mail_forgotten', 'admin/model/user/user/editCode/after', 'mail/forgotten', 1);
 INSERT INTO `oc_event` (`event_id`, `code`, `trigger`, `action`, `status`) VALUES
@@ -3473,7 +3472,7 @@ INSERT INTO `oc_setting` (`store_id`, `code`, `key`, `value`, `serialized`) VALU
 (0, 'config', 'config_affiliate_id', '3', 0),
 (0, 'config', 'config_return_id', '5', 0),
 (0, 'config', 'config_return_status_id', '2', 0),
-(0, 'config', 'config_logo', 'catalog/logo.png', 0),
+(0, 'config', 'config_logo', 'catalog/opencart-logo.png', 0),
 (0, 'config', 'config_icon', 'catalog/cart.png', 0),
 (0, 'config', 'config_comment', '', 0),
 (0, 'config', 'config_open', '', 0),
@@ -3487,8 +3486,8 @@ INSERT INTO `oc_setting` (`store_id`, `code`, `key`, `value`, `serialized`) VALU
 (0, 'config', 'config_name', 'Sua loja', 0),
 (0, 'config', 'config_seo_url', '0', 0),
 (0, 'config', 'config_file_max_size', '300000', 0),
-(0, 'config', 'config_file_ext_allowed', 'zip\r\ntxt\r\npng\r\njpe\r\njpeg\r\njpg\r\ngif\r\nbmp\r\nico\r\ntiff\r\ntif\r\nsvg\r\nsvgz\r\nzip\r\nrar\r\nmsi\r\ncab\r\nmp3\r\nqt\r\nmov\r\npdf\r\npsd\r\nai\r\neps\r\nps\r\ndoc', 0),
-(0, 'config', 'config_file_mime_allowed', 'text/plain\r\nimage/png\r\nimage/jpeg\r\nimage/gif\r\nimage/bmp\r\nimage/tiff\r\nimage/svg+xml\r\napplication/zip\r\n&quot;application/zip&quot;\r\napplication/x-zip\r\n&quot;application/x-zip&quot;\r\napplication/x-zip-compressed\r\n&quot;application/x-zip-compressed&quot;\r\napplication/rar\r\n&quot;application/rar&quot;\r\napplication/x-rar\r\n&quot;application/x-rar&quot;\r\napplication/x-rar-compressed\r\n&quot;application/x-rar-compressed&quot;\r\napplication/octet-stream\r\n&quot;application/octet-stream&quot;\r\naudio/mpeg\r\nvideo/quicktime\r\napplication/pdf', 0),
+(0, 'config', 'config_file_ext_allowed', 'zip\r\ntxt\r\npng\r\njpe\r\njpeg\r\njpg\r\ngif\r\nwebp\r\nbmp\r\nico\r\ntiff\r\ntif\r\nsvg\r\nsvgz\r\nzip\r\nrar\r\nmsi\r\ncab\r\nmp3\r\nqt\r\nmov\r\npdf\r\npsd\r\nai\r\neps\r\nps\r\ndoc', 0),
+(0, 'config', 'config_file_mime_allowed', 'text/plain\r\nimage/png\r\nimage/jpeg\r\nimage/gif\r\nimage/webp\r\nimage/bmp\r\nimage/tiff\r\nimage/svg+xml\r\napplication/zip\r\n&quot;application/zip&quot;\r\napplication/x-zip\r\n&quot;application/x-zip&quot;\r\napplication/x-zip-compressed\r\n&quot;application/x-zip-compressed&quot;\r\napplication/rar\r\n&quot;application/rar&quot;\r\napplication/x-rar\r\n&quot;application/x-rar&quot;\r\napplication/x-rar-compressed\r\n&quot;application/x-rar-compressed&quot;\r\napplication/octet-stream\r\n&quot;application/octet-stream&quot;\r\naudio/mpeg\r\nvideo/quicktime\r\napplication/pdf', 0),
 (0, 'config', 'config_maintenance', '0', 0),
 (0, 'config', 'config_password', '1', 0),
 (0, 'config', 'config_encryption', '', 0),
@@ -3785,7 +3784,7 @@ DROP TABLE IF EXISTS `oc_seo_url`;
 CREATE TABLE `oc_seo_url` (
   `seo_url_id` int(11) NOT NULL AUTO_INCREMENT,
   `store_id` int(11) NOT NULL,
-  `language_id` int(11) NOT NULL,  
+  `language_id` int(11) NOT NULL,
   `query` varchar(255) NOT NULL,
   `keyword` varchar(255) NOT NULL,
   PRIMARY KEY (`seo_url_id`),
@@ -7547,12 +7546,12 @@ INSERT INTO `oc_zone` (`zone_id`, `country_id`, `name`, `code`, `status`) VALUES
 (3503, 220, 'Zakarpats''ka Oblast''', '21', 1),
 (3504, 220, 'Zaporiz''ka Oblast''', '23', 1),
 (3505, 220, 'Zhytomyrs''ka oblast''', '18', 1),
-(3506, 221, 'Abu Dhabi', 'ADH', 1),
-(3507, 221, '''Ajman', 'AJ', 1),
+(3506, 221, 'Abū Z̧aby', 'AZ', 1),
+(3507, 221, '‘Ajmān', 'AJ', 1),
 (3508, 221, 'Al Fujayrah', 'FU', 1),
-(3509, 221, 'Ash Shariqah', 'SH', 1),
+(3509, 221, 'Ash Shāriqah', 'SH', 1),
 (3510, 221, 'Dubai', 'DU', 1),
-(3511, 221, 'R''as al Khaymah', 'RK', 1),
+(3511, 221, 'Ra’s al Khaymah', 'RK', 1),
 (3512, 221, 'Umm al Qaywayn', 'UQ', 1),
 (3513, 222, 'Aberdeen', 'ABN', 1),
 (3514, 222, 'Aberdeenshire', 'ABNS', 1),

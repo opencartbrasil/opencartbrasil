@@ -45,7 +45,7 @@ class ControllerCommonFileManager extends Controller {
 			}
 
 			// Get files
-			$files = glob($directory . '/' . $filter_name . '*.{jpg,jpeg,png,gif,JPG,JPEG,PNG,GIF}', GLOB_BRACE);
+			$files = glob($directory . '/' . $filter_name . '*.{jpg,jpeg,png,gif,webp,JPG,JPEG,PNG,GIF,WEBP}', GLOB_BRACE);
 
 			if (!$files) {
 				$files = array();
@@ -241,7 +241,8 @@ class ControllerCommonFileManager extends Controller {
 						'jpg',
 						'jpeg',
 						'gif',
-						'png'
+						'png',
+						'webp'
 					);
 
 					if (!in_array(utf8_substr(strrchr($filename, '.'), 1), $allowed)) {
@@ -254,11 +255,16 @@ class ControllerCommonFileManager extends Controller {
 						'image/pjpeg',
 						'image/png',
 						'image/x-png',
-						'image/gif'
+						'image/gif',
+						'image/webp'
 					);
 
 					if (!in_array($file['type'], $allowed)) {
 						$json['error'] = $this->language->get('error_filetype');
+					}
+
+					if ($file['size'] > $this->config->get('config_file_max_size')) {
+						$json['error'] = $this->language->get('error_filesize');
 					}
 
 					// Return any upload error
@@ -320,13 +326,16 @@ class ControllerCommonFileManager extends Controller {
 			}
 		}
 
+		if (!is_writable($directory)) {
+			$json['error'] = $this->language->get('error_forbidden');
+		}
+
 		if (!isset($json['error'])) {
 			mkdir($directory . '/' . $folder, 0777);
-			chmod($directory . '/' . $folder, 0777);
-
-			@touch($directory . '/' . $folder . '/' . 'index.html');
+			touch($directory . '/' . $folder . '/' . 'index.html');
 
 			$json['success'] = $this->language->get('text_directory');
+
 		}
 
 		$this->response->addHeader('Content-Type: application/json');

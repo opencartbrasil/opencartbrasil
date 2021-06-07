@@ -20,4 +20,5 @@ $_['entry_name']       = 'Nome do módulo';
 // Error
 $_['error_permission'] = 'Atenção: Você não tem permissão para modificar as extensões do tipo módulo!';
 $_['error_name']       = 'O nome do módulo deve ter entre 3 e 64 caracteres!';
+$_['error_code_name']  = 'O código do módulo deve ter entre 3 e 32 caracteres!';
 $_['error_code']       = 'É necessário selecionar um módulo!';

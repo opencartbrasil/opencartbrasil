@@ -36,7 +36,7 @@ class ControllerInstallStep2 extends Controller {
 		} else {
 			$data['error_admin_config'] = '';
 		}
- 
+
 		if (!is_writable(DIR_OPENCART . 'image/')) {
 			$data['error_image'] = $this->language->get('error_unwritable');
 		} else {
@@ -132,7 +132,7 @@ class ControllerInstallStep2 extends Controller {
 	}
 
 	private function validate() {
-		if (phpversion() < '5.6') {
+		if (phpversion() < '5.6' || phpversion() >= '8.0') {
 			$this->error['warning'] = $this->language->get('error_version');
 		}
 

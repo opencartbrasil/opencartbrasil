@@ -64,7 +64,7 @@ class ControllerStartupStartup extends Controller {
 				foreach ($languages as $key => $value) {
 					if ($value['status']) {
 						$locale = explode(',', $value['locale']);
-						
+
 						if (in_array($browser_language, $locale)) {
 							$detect = $key;
 							break 2;
@@ -73,7 +73,7 @@ class ControllerStartupStartup extends Controller {
 				}
 			}
 
-			if (!$detect) { 
+			if (!$detect) {
 				// Try using language folder to detect the language
 				foreach ($browser_languages as $browser_language) {
 					if (array_key_exists(strtolower($browser_language), $languages)) {
@@ -121,6 +121,15 @@ class ControllerStartupStartup extends Controller {
 			$this->config->set('config_customer_group_id', $this->customer->getGroupId());
 		} elseif (isset($this->session->data['guest']) && isset($this->session->data['guest']['customer_group_id'])) {
 			$this->config->set('config_customer_group_id', $this->session->data['guest']['customer_group_id']);
+		} else {
+			$this->config->set('config_customer_group_id', $this->config->get('config_customer_group_id'));
+		}
+
+		// Tracking Code
+		if (isset($this->request->get['tracking'])) {
+			setcookie('tracking', $this->request->get['tracking'], time() + 3600 * 24 * 1000, '/');
+
+			$this->db->query("UPDATE `" . DB_PREFIX . "marketing` SET clicks = (clicks + 1) WHERE code = '" . $this->db->escape($this->request->get['tracking']) . "'");
 		}
 
 		// Currency
@@ -155,6 +164,7 @@ class ControllerStartupStartup extends Controller {
 		// Tax
 		$this->registry->set('tax', new Cart\Tax($this->registry));
 
+		// PHP v7.4+ validation compatibility.
 		if (isset($this->session->data['shipping_address']['country_id']) && isset($this->session->data['shipping_address']['zone_id'])) {
 			$this->tax->setShippingAddress($this->session->data['shipping_address']['country_id'], $this->session->data['shipping_address']['zone_id']);
 		} elseif ($this->config->get('config_tax_default') == 'shipping') {

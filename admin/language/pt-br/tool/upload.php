@@ -19,3 +19,5 @@ $_['entry_date_added']  = 'Enviado';
 
 // Error
 $_['error_permission']  = 'Atenção: Você não tem permissão para gerenciar os uploads!';
+$_['error_upload']      = 'Upload inválido!';
+$_['error_file']        = 'O arquivo não foi encontrado!';

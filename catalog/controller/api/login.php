@@ -22,33 +22,7 @@ class ControllerApiLogin extends Controller {
 						$ip_data[] = trim($result['ip']);
 					}
 
-					$ip = '';
-
-					if (isset($this->request->server['REMOTE_ADDR']) && filter_var($this->request->server['REMOTE_ADDR'], FILTER_VALIDATE_IP)) {
-						$ip = $this->request->server['REMOTE_ADDR'];
-					}
-
-					if (isset($this->request->server['HTTP_X_FORWARDED_FOR'])) {
-						$xip = trim(current(explode(',', $this->request->server['HTTP_X_FORWARDED_FOR'])));
-
-						if (filter_var($xip, FILTER_VALIDATE_IP, FILTER_FLAG_NO_PRIV_RANGE | FILTER_FLAG_NO_RES_RANGE)) {
-							if (isset($this->request->server['SERVER_ADDR']) && $this->request->server['SERVER_ADDR'] != $xip) {
-								$ip = $xip;
-							}
-						}
-					}
-
-					if(isset($this->request->server['HTTP_CF_CONNECTING_IP']) && filter_var($this->request->server['HTTP_CF_CONNECTING_IP'], FILTER_VALIDATE_IP)){
-						$ip = $this->request->server['HTTP_CF_CONNECTING_IP'];
-					}
-
-					if(isset($this->request->server['HTTP_INCAP_CLIENT_IP']) && filter_var($this->request->server['HTTP_INCAP_CLIENT_IP'], FILTER_VALIDATE_IP)){
-						$ip = $this->request->server['HTTP_INCAP_CLIENT_IP'];
-					}
-
-					if(isset($this->request->server['HTTP_X_SUCURI_CLIENTIP']) && filter_var($this->request->server['HTTP_X_SUCURI_CLIENTIP'], FILTER_VALIDATE_IP)){
-						$ip = $this->request->server['HTTP_X_SUCURI_CLIENTIP'];
-					}
+					$ip = $this->request->server['REMOTE_ADDR'];
 
 					if (in_array($ip, $ip_data)) {
 						$session = new Session($this->config->get('session_engine'), $this->registry);

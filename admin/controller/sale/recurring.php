@@ -142,7 +142,7 @@ class ControllerSaleRecurring extends Controller {
 			} else {
 				$status = '';
 			}
-			
+
 			$data['recurrings'][] = array(
 				'order_recurring_id' => $result['order_recurring_id'],
 				'order_id'           => $result['order_id'],
@@ -170,7 +170,7 @@ class ControllerSaleRecurring extends Controller {
 		} else {
 			$data['success'] = '';
 		}
-		
+
 		$url = '';
 
 		if (isset($this->request->get['filter_order_recurring_id'])) {
@@ -279,7 +279,7 @@ class ControllerSaleRecurring extends Controller {
 		for ($i = 1; $i <= 6; $i++) {
 			$data['recurring_statuses'][$i] = array(
 				'text'  => $this->language->get('text_status_' . $i),
-				'value' => 1
+				'value' => $i
 			);
 		}
 

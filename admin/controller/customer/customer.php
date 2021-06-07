@@ -349,7 +349,7 @@ class ControllerCustomerCustomer extends Controller {
 		$this->load->model('setting/store');
 
 		$stores = $this->model_setting_store->getStores();
-		
+
 		$data['customers'] = array();
 
 		$filter_data = array(
@@ -731,8 +731,25 @@ class ControllerCustomerCustomer extends Controller {
 			$data['telephone'] = '';
 		}
 
+		if (isset($this->request->post['custom_field'])) {
+			$data['account_custom_field'] = $this->request->post['custom_field'];
+		} elseif (!empty($customer_info)) {
+			$data['account_custom_field'] = json_decode($customer_info['custom_field'], true);
+		} else {
+			$data['account_custom_field'] = array();
+		}
+
+		if (isset($this->request->post['address'])) {
+			$data['addresses'] = $this->request->post['address'];
+		} elseif (isset($this->request->get['customer_id'])) {
+			$data['addresses'] = $this->model_customer_customer->getAddresses($this->request->get['customer_id']);
+		} else {
+			$data['addresses'] = array();
+		}
+
 		// Custom Fields
 		$this->load->model('customer/custom_field');
+		$this->load->model('tool/upload');
 
 		$data['custom_fields'] = array();
 
@@ -754,6 +771,42 @@ class ControllerCustomerCustomer extends Controller {
 					'location'           => $custom_field['location'],
 					'sort_order'         => $custom_field['sort_order']
 				);
+			}
+
+			if ($custom_field['type'] == 'file') {
+				if (isset($data['account_custom_field'][$custom_field['custom_field_id']])) {
+					$code = $data['account_custom_field'][$custom_field['custom_field_id']];
+
+					$upload_result = $this->model_tool_upload->getUploadByCode($code);
+
+					$data['account_custom_field'][$custom_field['custom_field_id']] = array();
+
+					if ($upload_result) {
+						$data['account_custom_field'][$custom_field['custom_field_id']]['name'] = $upload_result['name'];
+						$data['account_custom_field'][$custom_field['custom_field_id']]['code'] = $upload_result['code'];
+					} else {
+						$data['account_custom_field'][$custom_field['custom_field_id']]['name'] = "";
+						$data['account_custom_field'][$custom_field['custom_field_id']]['code'] = $code;
+					}
+				}
+
+				foreach ($data['addresses'] as $address_id => $address) {
+					if (isset($address['custom_field'][$custom_field['custom_field_id']])) {
+						$code = $address['custom_field'][$custom_field['custom_field_id']];
+
+						$upload_result = $this->model_tool_upload->getUploadByCode($code);
+
+						$data['addresses'][$address_id]['custom_field'][$custom_field['custom_field_id']] = array();
+
+						if ($upload_result) {
+							$data['addresses'][$address_id]['custom_field'][$custom_field['custom_field_id']]['name'] = $upload_result['name'];
+							$data['addresses'][$address_id]['custom_field'][$custom_field['custom_field_id']]['code'] = $upload_result['code'];
+						} else {
+							$data['addresses'][$address_id]['custom_field'][$custom_field['custom_field_id']]['name'] = "";
+							$data['addresses'][$address_id]['custom_field'][$custom_field['custom_field_id']]['code'] = $code;
+						}
+					}
+				}
 			}
 		}
 
@@ -804,14 +857,6 @@ class ControllerCustomerCustomer extends Controller {
 		$this->load->model('localisation/country');
 
 		$data['countries'] = $this->model_localisation_country->getCountries();
-
-		if (isset($this->request->post['address'])) {
-			$data['addresses'] = $this->request->post['address'];
-		} elseif (!empty($customer_info)) {
-			$data['addresses'] = $this->model_customer_customer->getAddresses($this->request->get['customer_id']);
-		} else {
-			$data['addresses'] = array();
-		}
 
 		if (isset($this->request->post['address_id'])) {
 			$data['address_id'] = $this->request->post['address_id'];
@@ -1026,9 +1071,11 @@ class ControllerCustomerCustomer extends Controller {
 			$page = 1;
 		}
 
+		$limit = $this->config->get('config_limit_admin');
+
 		$data['histories'] = array();
 
-		$results = $this->model_customer_customer->getHistories($customer_id, ($page - 1) * 10, 10);
+		$results = $this->model_customer_customer->getHistories($this->request->get['customer_id'], ($page - 1) * $limit, $limit);
 
 		foreach ($results as $result) {
 			$data['histories'][] = array(
@@ -1042,12 +1089,12 @@ class ControllerCustomerCustomer extends Controller {
 		$pagination = new Pagination();
 		$pagination->total = $history_total;
 		$pagination->page = $page;
-		$pagination->limit = 10;
+		$pagination->limit = $limit;
 		$pagination->url = $this->url->link('customer/customer/history', 'user_token=' . $this->session->data['user_token'] . '&customer_id=' . $customer_id . '&page={page}', true);
 
 		$data['pagination'] = $pagination->render();
 
-		$data['results'] = sprintf($this->language->get('text_pagination'), ($history_total) ? (($page - 1) * 10) + 1 : 0, ((($page - 1) * 10) > ($history_total - 10)) ? $history_total : ((($page - 1) * 10) + 10), $history_total, ceil($history_total / 10));
+		$data['results'] = sprintf($this->language->get('text_pagination'), ($history_total) ? (($page - 1) * $limit) + 1 : 0, ((($page - 1) * $limit) > ($history_total - $limit)) ? $history_total : ((($page - 1) * $limit) + $limit), $history_total, ceil($history_total / $limit));
 
 		$this->response->setOutput($this->load->view('customer/customer_history', $data));
 	}
@@ -1096,7 +1143,9 @@ class ControllerCustomerCustomer extends Controller {
 
 		$data['transactions'] = array();
 
-		$results = $this->model_customer_customer->getTransactions($customer_id, ($page - 1) * 10, 10);
+		$limit = $this->config->get('config_limit_admin');
+
+		$results = $this->model_customer_customer->getTransactions($customer_id, ($page - 1) * $limit, $limit);
 
 		foreach ($results as $result) {
 			$data['transactions'][] = array(
@@ -1113,12 +1162,12 @@ class ControllerCustomerCustomer extends Controller {
 		$pagination = new Pagination();
 		$pagination->total = $transaction_total;
 		$pagination->page = $page;
-		$pagination->limit = 10;
+		$pagination->limit = $limit;
 		$pagination->url = $this->url->link('customer/customer/transaction', 'user_token=' . $this->session->data['user_token'] . '&customer_id=' . $customer_id . '&page={page}', true);
 
 		$data['pagination'] = $pagination->render();
 
-		$data['results'] = sprintf($this->language->get('text_pagination'), ($transaction_total) ? (($page - 1) * 10) + 1 : 0, ((($page - 1) * 10) > ($transaction_total - 10)) ? $transaction_total : ((($page - 1) * 10) + 10), $transaction_total, ceil($transaction_total / 10));
+		$data['results'] = sprintf($this->language->get('text_pagination'), ($transaction_total) ? (($page - 1) * $limit) + 1 : 0, ((($page - 1) * $limit) > ($transaction_total - $limit)) ? $transaction_total : ((($page - 1) * $limit) + $limit), $transaction_total, ceil($transaction_total / $limit));
 
 		$this->response->setOutput($this->load->view('customer/customer_transaction', $data));
 	}
@@ -1167,7 +1216,9 @@ class ControllerCustomerCustomer extends Controller {
 
 		$data['rewards'] = array();
 
-		$results = $this->model_customer_customer->getRewards($customer_id, ($page - 1) * 10, 10);
+		$limit = $this->config->get('config_limit_admin');
+
+		$results = $this->model_customer_customer->getRewards($customer_id, ($page - 1) * $limit, $limit);
 
 		foreach ($results as $result) {
 			$data['rewards'][] = array(
@@ -1184,12 +1235,12 @@ class ControllerCustomerCustomer extends Controller {
 		$pagination = new Pagination();
 		$pagination->total = $reward_total;
 		$pagination->page = $page;
-		$pagination->limit = 10;
+		$pagination->limit = $limit;
 		$pagination->url = $this->url->link('customer/customer/reward', 'user_token=' . $this->session->data['user_token'] . '&customer_id=' . $customer_id . '&page={page}', true);
 
 		$data['pagination'] = $pagination->render();
 
-		$data['results'] = sprintf($this->language->get('text_pagination'), ($reward_total) ? (($page - 1) * 10) + 1 : 0, ((($page - 1) * 10) > ($reward_total - 10)) ? $reward_total : ((($page - 1) * 10) + 10), $reward_total, ceil($reward_total / 10));
+		$data['results'] = sprintf($this->language->get('text_pagination'), ($reward_total) ? (($page - 1) * $limit) + 1 : 0, ((($page - 1) * $limit) > ($reward_total - $limit)) ? $reward_total : ((($page - 1) * $limit) + $limit), $reward_total, ceil($reward_total / $limit));
 
 		$this->response->setOutput($this->load->view('customer/customer_reward', $data));
 	}
@@ -1239,7 +1290,9 @@ class ControllerCustomerCustomer extends Controller {
 
 		$data['ips'] = array();
 
-		$results = $this->model_customer_customer->getIps($customer_id, ($page - 1) * 10, 10);
+		$limit = $this->config->get('config_limit_admin');
+
+		$results = $this->model_customer_customer->getIps($customer_id, ($page - 1) * $limit, $limit);
 
 		foreach ($results as $result) {
 			$store_info = $this->model_setting_store->getStore($result['store_id']);
@@ -1267,12 +1320,12 @@ class ControllerCustomerCustomer extends Controller {
 		$pagination = new Pagination();
 		$pagination->total = $ip_total;
 		$pagination->page = $page;
-		$pagination->limit = 10;
+		$pagination->limit = $limit;
 		$pagination->url = $this->url->link('customer/customer/ip', 'user_token=' . $this->session->data['user_token'] . '&customer_id=' . $customer_id . '&page={page}', true);
 
 		$data['pagination'] = $pagination->render();
 
-		$data['results'] = sprintf($this->language->get('text_pagination'), ($ip_total) ? (($page - 1) * 10) + 1 : 0, ((($page - 1) * 10) > ($ip_total - 10)) ? $ip_total : ((($page - 1) * 10) + 10), $ip_total, ceil($ip_total / 10));
+		$data['results'] = sprintf($this->language->get('text_pagination'), ($ip_total) ? (($page - 1) * $limit) + 1 : 0, ((($page - 1) * $limit) > ($ip_total - $limit)) ? $ip_total : ((($page - 1) * $limit) + $limit), $ip_total, ceil($ip_total / $limit));
 
 		$this->response->setOutput($this->load->view('customer/customer_ip', $data));
 	}

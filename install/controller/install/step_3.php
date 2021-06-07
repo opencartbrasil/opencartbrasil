@@ -105,6 +105,7 @@ class ControllerInstallStep3 extends Controller {
 		$data['text_mysqli'] = $this->language->get('text_mysqli');
 		$data['text_mpdo'] = $this->language->get('text_mpdo');
 		$data['text_pgsql'] = $this->language->get('text_pgsql');
+		$data['text_loading'] = $this->language->get('text_loading');
 
 		$data['entry_db_driver'] = $this->language->get('entry_db_driver');
 		$data['entry_db_hostname'] = $this->language->get('entry_db_hostname');
@@ -238,7 +239,7 @@ class ControllerInstallStep3 extends Controller {
 		if (isset($this->request->post['db_prefix'])) {
 			$data['db_prefix'] = $this->request->post['db_prefix'];
 		} else {
-			$data['db_prefix'] = 'oc_';
+			$data['db_prefix'] = 'ocbr_';
 		}
 
 		if (isset($this->request->post['username'])) {

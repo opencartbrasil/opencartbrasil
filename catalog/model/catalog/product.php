@@ -284,7 +284,7 @@ class ModelCatalogProduct extends Model {
 			foreach ($query->rows as $result) {
 				$product_data[$result['product_id']] = $this->getProduct($result['product_id']);
 			}
-			
+
 			$this->cache->set('product.popular.' . (int)$this->config->get('config_language_id') . '.' . (int)$this->config->get('config_store_id') . '.' . $this->config->get('config_customer_group_id') . '.' . (int)$limit, $product_data);
 		}
 
@@ -540,5 +540,11 @@ class ModelCatalogProduct extends Model {
 		} else {
 			return 0;
 		}
+	}
+
+	public function checkProductCategory($product_id, $category_ids) {
+		$query = $this->db->query("SELECT * FROM `" . DB_PREFIX . "product_to_category` WHERE product_id = '" . (int)$product_id . "' AND category_id IN(" . implode("', '", $category_ids) . ")");
+
+		return $query->row;
 	}
 }

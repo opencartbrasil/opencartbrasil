@@ -172,7 +172,7 @@ class ControllerSaleVoucher extends Controller {
 		$results = $this->model_sale_voucher->getVouchers($filter_data);
 
 		foreach ($results as $result) {
-			if ($result['order_id']) {	
+			if ($result['order_id']) {
 				$order_href = $this->url->link('sale/order/info', 'user_token=' . $this->session->data['user_token'] . '&order_id=' . $result['order_id'] . $url, true);
 			} else {
 				$order_href = '';
@@ -569,7 +569,6 @@ class ControllerSaleVoucher extends Controller {
 			if ($vouchers) {
 				$this->load->model('sale/order');
 				$this->load->model('sale/voucher_theme');
-				$this->load->model('localisation/language');
 
 				foreach ($vouchers as $voucher_id) {
 					$voucher_info = $this->model_sale_voucher->getVoucher($voucher_id);
@@ -625,7 +624,9 @@ class ControllerSaleVoucher extends Controller {
 							$mail->send();
 
 						// If voucher does not belong to an order
-						}  else {
+						} else {
+							$this->language->load('mail/voucher');
+
 							$data['title'] = sprintf($this->language->get('text_subject'), $voucher_info['from_name']);
 
 							$data['text_greeting'] = sprintf($this->language->get('text_greeting'), $this->currency->format($voucher_info['amount'], $this->config->get('config_currency')));

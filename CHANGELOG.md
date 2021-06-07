@@ -6,6 +6,54 @@ e utiliza [Semantic Versioning](https://semver.org/lang/pt-BR/spec/v2.0.0.html).
 
 ## [Não lançada]
 
+## [1.5.1] (Data de lançamento: 07.06.2021)
+### Corrigido
+- Correção no voucher
+- Correção no marketplace
+- Correção no módulo lojas
+- Correção no captcha básico
+- Correção na validação do regex
+- Correção da paginação das marcas
+- Correção no módulo Google Hongouts
+- Correção no gerenciamento de pontos
+- Correção na extensão de frete Fedex
+- Correção nos glyphicons do bootstrap
+- Correção no gerenciamento de campanhas
+- Correção no gerenciamento de informativo
+- Correção na validação ao incluir comentário
+- Correção na exibição de moedas desabilitadas
+- Correção do erro non-numeric value no PHP 7.3
+- Correção na exibição do icon na administração
+- Correção ao cadastrar ou alterar URLs amigáveis
+- Correção na extensão de pagamento PayPal Express
+- Correção nas permissões do menu na administração
+- Correção na extensão de pagamento PayPal Standard
+- Correção na inclusão de taxas no cálculo de frete
+- Correção na remoção de extensões através do instalador
+- Correção ao carregar campos personalizados do tipo file
+- Correção no carregamento de fontes no arquivo bootstrap.css
+- Correção ao capturar o IP por $this->request->server["REMOTE_ADDR"]
+- Correção no cálculo das taxas no módulo besteseller, featured e special
+- Correção na instalação que não adicionava a cron de atualização da moeda
+- Correção no cálculo das taxas no category, manufacturer, product, search e special
+
+### Modificado
+- Melhorias no OCMOD
+- Melhorias na criação do token
+- Melhorias na verificação do IP
+- Melhorias no sistema de atividades
+- Melhorias no gerenciador de arquivos
+- Melhorias no gerenciamento de layouts
+- Melhorias no gerenciamento de uploads
+- Melhorias na adição de style no footer
+- Melhorias no processo de instalação manual
+- Melhorias no processo de instação pela CLI
+- Melhorias na bibliotecas de banco de dados
+
+### Adicionado
+- Adição do arquivo robots.txt
+- Suporte para webp na biblioteca de imagem
+
 ## [1.5.0] (Data de lançamento: 10.10.2020)
 ### Corrigido
 - Correção ao excluir idioma no admin
@@ -608,7 +656,8 @@ e utiliza [Semantic Versioning](https://semver.org/lang/pt-BR/spec/v2.0.0.html).
 - Cupons de descontos para demonstração.
 - Moedas: Euro e Libra esterlina.
 
-[Não lançada]: https://github.com/opencartbrasil/opencartbrasil/compare/v1.5.0...HEAD
+[Não lançada]: https://github.com/opencartbrasil/opencartbrasil/compare/v1.5.1...HEAD
+[1.5.1]: https://github.com/opencartbrasil/opencartbrasil/compare/v1.5.0...v1.5.1
 [1.5.0]: https://github.com/opencartbrasil/opencartbrasil/compare/v1.4.15...v1.5.0
 [1.4.15]: https://github.com/opencartbrasil/opencartbrasil/compare/v1.4.14...v1.4.15
 [1.4.14]: https://github.com/opencartbrasil/opencartbrasil/compare/v1.4.13...v1.4.14

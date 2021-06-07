@@ -586,7 +586,7 @@ class ControllerSaleOrder extends Controller {
 			$data['order_id'] = 0;
 			$data['store_id'] = 0;
 			$data['store_url'] = $this->request->server['HTTPS'] ? HTTPS_CATALOG : HTTP_CATALOG;
-			
+
 			$data['customer'] = '';
 			$data['customer_id'] = '';
 			$data['customer_group_id'] = $this->config->get('config_customer_group_id');
@@ -665,8 +665,15 @@ class ControllerSaleOrder extends Controller {
 
 		// Custom Fields
 		$this->load->model('customer/custom_field');
+		$this->load->model('tool/upload');
 
 		$data['custom_fields'] = array();
+
+		$custom_field_locations = array(
+			'account_custom_field',
+			'payment_custom_field',
+			'shipping_custom_field'
+		);
 
 		$filter_data = array(
 			'sort'  => 'cf.sort_order',
@@ -686,6 +693,26 @@ class ControllerSaleOrder extends Controller {
 					'location'           => $custom_field['location'],
 					'sort_order'         => $custom_field['sort_order']
 				);
+			}
+
+			if ($custom_field['type'] == 'file') {
+				foreach ($custom_field_locations as $location) {
+					if (isset($data[$location][$custom_field['custom_field_id']])) {
+						$code = $data[$location][$custom_field['custom_field_id']];
+
+						$upload_result = $this->model_tool_upload->getUploadByCode($code);
+
+						$data[$location][$custom_field['custom_field_id']] = array();
+
+						if ($upload_result) {
+							$data[$location][$custom_field['custom_field_id']]['name'] = $upload_result['name'];
+							$data[$location][$custom_field['custom_field_id']]['code'] = $upload_result['code'];
+						} else {
+							$data[$location][$custom_field['custom_field_id']]['name'] = "";
+							$data[$location][$custom_field['custom_field_id']]['code'] = $code;
+						}
+					}
+				}
 			}
 		}
 
@@ -717,7 +744,7 @@ class ControllerSaleOrder extends Controller {
 
 		if ($api_info && $this->user->hasPermission('modify', 'sale/order')) {
 			$session = new Session($this->config->get('session_engine'), $this->registry);
-			
+
 			$session->start();
 
 			$this->model_user_api->deleteApiSessionBySessionId($session->getId());
@@ -1527,6 +1554,8 @@ class ControllerSaleOrder extends Controller {
 		foreach ($orders as $order_id) {
 			$order_info = $this->model_sale_order->getOrder($order_id);
 
+			$data['text_order'] = sprintf($this->language->get('text_order'), $order_id);
+
 			if ($order_info) {
 				$store_info = $this->model_setting_setting->getSetting('config', $order_info['store_id']);
 
@@ -1827,6 +1856,8 @@ class ControllerSaleOrder extends Controller {
 							);
 
 							$product_option_value_info = $this->model_catalog_product->getProductOptionValue($product['product_id'], $option['product_option_value_id']);
+
+							$option_weight = 0;
 
 							if (!empty($product_option_value_info['weight'])) {
 								if ($product_option_value_info['weight_prefix'] == '+') {

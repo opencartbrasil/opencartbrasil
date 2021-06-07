@@ -54,10 +54,10 @@ class ModelCatalogProduct extends Model {
 
 		if (isset($data['product_recurring'])) {
 			foreach ($data['product_recurring'] as $recurring) {
-				$query = $this->db->query("SELECT `product_id` FROM `" . DB_PREFIX . "product_recurring` WHERE `product_id` = '" . (int)$product_id . "' AND `customer_group_id = '" . (int)$recurring['customer_group_id'] . "' AND `recurring_id` = '" . (int)$recurring['recurring_id'] . "'");
+				$query = $this->db->query("SELECT `product_id` FROM `" . DB_PREFIX . "product_recurring` WHERE `product_id` = '" . (int)$product_id . "' AND `customer_group_id` = '" . (int)$recurring['customer_group_id'] . "' AND `recurring_id` = '" . (int)$recurring['recurring_id'] . "'");
 
 				if (!$query->num_rows) {
-					$this->db->query("INSERT INTO `" . DB_PREFIX . "product_recurring` SET `product_id` = '" . (int)$product_id . "', customer_group_id = '" . (int)$recurring['customer_group_id'] . "', `recurring_id` = '" . (int)$recurring['recurring_id'] . "'");
+					$this->db->query("INSERT INTO `" . DB_PREFIX . "product_recurring` SET `product_id` = '" . (int)$product_id . "', `customer_group_id` = '" . (int)$recurring['customer_group_id'] . "', `recurring_id` = '" . (int)$recurring['recurring_id'] . "'");
 				}
 			}
 		}
@@ -278,7 +278,7 @@ class ModelCatalogProduct extends Model {
 
 		// SEO URL
 		$this->db->query("DELETE FROM " . DB_PREFIX . "seo_url WHERE query = 'product_id=" . (int)$product_id . "'");
-		
+
 		if (isset($data['product_seo_url'])) {
 			foreach ($data['product_seo_url']as $store_id => $language) {
 				foreach ($language as $language_id => $keyword) {
@@ -609,7 +609,7 @@ class ModelCatalogProduct extends Model {
 
 	public function getProductSeoUrls($product_id) {
 		$product_seo_url_data = array();
-		
+
 		$query = $this->db->query("SELECT * FROM " . DB_PREFIX . "seo_url WHERE query = 'product_id=" . (int)$product_id . "'");
 
 		foreach ($query->rows as $result) {
@@ -618,7 +618,7 @@ class ModelCatalogProduct extends Model {
 
 		return $product_seo_url_data;
 	}
-	
+
 	public function getProductLayouts($product_id) {
 		$product_layout_data = array();
 

@@ -168,7 +168,7 @@ class ControllerMarketingMarketing extends Controller {
 		if (isset($this->request->get['sort'])) {
 			$sort = $this->request->get['sort'];
 		} else {
-			$sort = 'name';
+			$sort = 'm.name';
 		}
 
 		if (isset($this->request->get['order'])) {
@@ -478,7 +478,8 @@ class ControllerMarketingMarketing extends Controller {
 		}
 
 		$marketing_info = $this->model_marketing_marketing->getMarketingByCode($this->request->post['code']);
-		if ($marketing_info && !isset($this->request->get['marketing_id']) || ($this->request->get['marketing_id'] != $marketing_info['marketing_id'])) {
+
+		if ($marketing_info || (isset($this->request->get['marketing_id']) && $this->request->get['marketing_id'] != $marketing_info['marketing_id'])) {
 			$this->error['code'] = $this->language->get('error_exists');
 		}
 

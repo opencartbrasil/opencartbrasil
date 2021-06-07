@@ -34,4 +34,4 @@ $_['help_product']         = 'Enviar somente para clientes que compraram os prod
 $_['error_permission']     = 'Atenção: Você não tem permissão para enviar informativos!';
 $_['error_subject']        = 'O assunto é obrigatório!';
 $_['error_message']        = 'A mensagem é obrigatória!';
-$_['error_email']          = 'O e-mail é obrigatório!';
+$_['error_email']          = 'Não foi encontrado o e-mail para enviar o informativo.';
