@@ -6,7 +6,7 @@ e utiliza [Semantic Versioning](https://semver.org/lang/pt-BR/spec/v2.0.0.html).
 
 ## [Não lançada]
 
-## [1.5.1] (Data de lançamento: 05.06.2021)
+## [1.5.1] (Data de lançamento: 07.06.2021)
 ### Corrigido
 - Correção no voucher
 - Correção no marketplace
@@ -34,6 +34,7 @@ e utiliza [Semantic Versioning](https://semver.org/lang/pt-BR/spec/v2.0.0.html).
 - Correção no carregamento de fontes no arquivo bootstrap.css
 - Correção ao capturar o IP por $this->request->server["REMOTE_ADDR"]
 - Correção no cálculo das taxas no módulo besteseller, featured e special
+- Correção na instalação que não adicionava a cron de atualização da moeda
 - Correção no cálculo das taxas no category, manufacturer, product, search e special
 
 ### Modificado
