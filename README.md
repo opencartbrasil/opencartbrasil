@@ -57,7 +57,7 @@ Para acessar uma demonstração online do OpenCart Brasil e visualizar a loja em
 
 ## Changelog
 
-Para analisar todas as correções, modificações e melhorias realizadas a cada versão lançada <a href="https://github.com/opencartbrasil/opencartbrasil/blob/main/CHANGELOG.md">clique aqui</a>.
+Para analisar todas as correções, modificações e melhorias realizadas a cada versão lançada <a href="./CHANGELOG.md">clique aqui</a>.
 
 ## Atualização
 
@@ -269,13 +269,13 @@ services:
   app:
     image: opencartbrasil:latest
     container_name: app
-    volumes: 
+    volumes:
       - ./src:/var/www/html
     networks:
       - app-network
-    ports: 
+    ports:
       - 80:80
-    environment: 
+    environment:
       OCBR_HTTP_SERVER: "http://localhost/"
       OCBR_DB_HOST: "db"
       OCBR_DB_USER: "store"
@@ -283,7 +283,7 @@ services:
       OCBR_ADMIN_USER: "admin"
       OCBR_ADMIN_PASS: "123456"
       OCBR_ADMIN_EMAIL: "webmaster@localhost"
-    depends_on: 
+    depends_on:
       - db
 
   db:
