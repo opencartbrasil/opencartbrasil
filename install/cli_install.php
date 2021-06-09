@@ -125,7 +125,7 @@ function valid($options) {
 
 	$options['http_server'] = rtrim($options['http_server'], '/') . '/';
 
-	return count($missing) > 0 ? $missing : false;
+	return count($missing) > 0 ? $missing : true;
 }
 
 function install($options) {
@@ -351,7 +351,7 @@ case "install":
 		$options = get_options($argv);
 		$valid = valid($options);
 
-		if ($valid === false) {
+		if ($valid !== true) {
 			echo "Erro: As seguintes entradas estão ausentes ou são inválidas: ";
 			echo implode(', ', $valid) . "\n\n";
 			exit(1);

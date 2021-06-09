@@ -9,12 +9,12 @@ cli_arguments=(
 is_valid=1
 
 for cli_arg in ${cli_arguments[@]}; do
-  if [ $cli_arg -eq 0 ]; then
+  if [ $cli_arg = 0 ]; then
     is_valid=0
   fi
 done
 
-if [ $is_valid -eq 1 ]; then
+if [ $is_valid = 1 ]; then
   if [ ! -f config.php ] || [ ! -s config.php ]; then
       until nc -z -w30 $DB_HOSTNAME ${DB_PORT:-3306}; do
           echo "Aguardando inicialização do banco de dados"
