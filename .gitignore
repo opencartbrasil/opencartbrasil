@@ -3,6 +3,6 @@
 /system/storage
 /image/cache
 /composer.lock
+/system/storage/vendor
 
-!system/storage/vendor
 !index.html
