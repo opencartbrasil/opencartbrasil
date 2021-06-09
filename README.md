@@ -249,12 +249,14 @@ composer create-project opencartbrasil/opencartbrasil nome_da_pasta
 
 ```bash
 git clone --depth 1 https://github.com/opencartbrasil/opencartbrasil.git
+cd opencartbrasil
+composer install
 ```
 
 ### Utilizando o Docker
 
 ```bash
-docker run -p 80:8888 opencartbrasil:latest
+docker run -p 80:80 opencartbrasil/opencartbrasil:latest
 ```
 
 ### Utilizando o Docker-compose
@@ -267,7 +269,7 @@ networks:
 
 services:
   app:
-    image: opencartbrasil:latest
+    image: opencartbrasil/opencartbrasil:latest
     container_name: app
     volumes:
       - ./src:/var/www/html
