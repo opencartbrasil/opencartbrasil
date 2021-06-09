@@ -1,4 +1,7 @@
-<p align="center"><a href="https://www.opencartbrasil.com.br/"><img src="https://forum.opencartbrasil.com.br/ext/sitesplat/flatbootsminicms/images/logo/logo-colorida.png" alt="OpenCart Brasil"></a>
+<p align="center">
+    <a href="https://www.opencartbrasil.com.br/" title="OpenCart Brasil">
+        <img src="https://user-images.githubusercontent.com/630535/121281061-b1a1cb00-c8ad-11eb-9c58-82accf999857.png" alt="Logo OpenCart Brasil">
+    </a>
 </p>
 
 <p align="center">
@@ -54,7 +57,7 @@ Para acessar uma demonstração online do OpenCart Brasil e visualizar a loja em
 
 ## Changelog
 
-Para analisar todas as correções, modificações e melhorias realizadas a cada versão lançada <a href="https://github.com/opencartbrasil/opencartbrasil/blob/master/CHANGELOG.md">clique aqui</a>.
+Para analisar todas as correções, modificações e melhorias realizadas a cada versão lançada <a href="https://github.com/opencartbrasil/opencartbrasil/blob/main/CHANGELOG.md">clique aqui</a>.
 
 ## Atualização
 
