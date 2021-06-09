@@ -78,4 +78,8 @@ for f in ${files[@]}; do
   fi
 done
 
+if [ ! -f composer.lock ]; then
+  composer install
+fi
+
 exec "$@"

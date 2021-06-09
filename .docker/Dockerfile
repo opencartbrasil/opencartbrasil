@@ -23,7 +23,9 @@ RUN set -ex; \
         mbstring \
         pdo_mysql \
         zip; \
-    rm -rf /var/lib/apt/lists/*
+    rm -rf /var/lib/apt/lists/*; \
+    \
+    curl -sSLo- https://getcomposer.org/installer | php -- --filename=composer --install-dir=/bin;
 
 # Configura regras de exibição do log
 RUN { \
