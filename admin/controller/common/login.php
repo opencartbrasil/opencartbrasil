@@ -98,6 +98,16 @@ class ControllerCommonLogin extends Controller {
 
 			if ($login_info && ($login_info['total'] >= $this->config->get('config_login_attempts')) && strtotime('-1 hour') < strtotime($login_info['date_modified'])) {
 				$this->error['error_attempts'] = $this->language->get('error_attempts');
+			}
+		}
+
+		if (!$this->error) {
+			if (!$this->user->login($this->request->post['username'], html_entity_decode($this->request->post['password'], ENT_QUOTES, 'UTF-8'))) {
+				$this->error['warning'] = $this->language->get('error_login');
+
+				$this->model_user_user->addLoginAttempt($this->request->post['username']);
+
+				unset($this->session->data['user_token']);
 			} else {
 				$this->model_user_user->deleteLoginAttempts($this->request->post['username']);
 			}
