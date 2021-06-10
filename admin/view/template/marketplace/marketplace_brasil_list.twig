@@ -1,0 +1,116 @@
+{{ header }}{{ column_left }}
+<div id="content" class="marketplace-brasil">
+  <div class="page-header">
+    <div class="container-fluid">
+      <h1>{{ heading_title }}</h1>
+      <ul class="breadcrumb">
+        {% for breadcrumb in breadcrumbs %}
+        <li><a href="{{ breadcrumb.href }}">{{ breadcrumb.text }}</a></li>
+        {% endfor %}
+      </ul>
+    </div>
+  </div>
+
+  <div class="container-fluid">
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <h3 class="panel-title">
+          <i class="fa fa-puzzle-piece"></i> {{ text_available }}
+        </h3>
+      </div>
+
+      <div class="panel-body">
+        <div class="well">
+          <div class="input-group" id="extension-filter">
+            <input type="text" name="filter_search" value="{{ filter_search }}" placeholder="{{ text_search }}" class="form-control" />
+            <div class="input-group-btn">{% for category in categories %}
+              {% if category.value == filter_category %}
+              <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">{{ text_category }} ({{ category.text }}) <span class="caret"></span></button>
+              {% endif %}
+              {% endfor %}
+              <ul class="dropdown-menu">
+                {% for category in categories %}
+                <li><a href="{{ category.href }}">{{ category.text }}</a></li>
+                {% endfor %}
+              </ul>
+              <input type="hidden" name="filter_category" value="{{ filter_category }}" class="form-control" />
+              <input type="hidden" name="sort" value="{{ sort }}" class="form-control" />
+              <button type="button" id="button-filter" class="btn btn-primary"><i class="fa fa-filter"></i></button>
+            </div>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-sm-3 col-xs-5 pull-right">
+            <div class="input-group">
+              <div class="input-group-addon"><i class="fa fa-sort-amount-asc"></i></div>
+              <select onchange="location = this.value;" class="form-control">
+                {% for sorts in sorts %}
+                {% if sorts.value == sort %}
+                <option value="{{ sorts.href }}" selected="selected">{{ sorts.text }}</option>
+                {% else %}
+                <option value="{{ sorts.href }}">{{ sorts.text }}</option>
+                {% endif %}
+                {% endfor %}
+              </select>
+            </div>
+          </div>
+        </div>
+
+        <div id="extensions-list" class="row">
+          {% for extension in extensions %}
+          <div class="col-xs-12 col-sm-6 col-md-3">
+            <div class="extension">
+              <div class="details">
+                <div class="image text-center">
+                  <a href="{{ extension.href }}"><img src="{{ extension.image }}" alt="{{ extension.name }}" /></a>
+                </div>
+                <h4 class="title">
+                  <a href="{{ extension.href }}">{{ extension.name }}</a>
+                </h4>
+                <p class="price">{{ extension.price }}</p>
+              </div>
+              <div class="buttons" style="">
+                <a href="{{ extension.href }}" style="" data-toggle="tooltip" title="{{ text_access_info }}">
+                  <i class="fa fa-eye"></i> {{ button_info }}
+                </a>
+              </div>
+            </div>
+          </div>
+          {% endfor %}
+        </div>
+
+        <div class="row">
+          <div class="col-sm-12 text-right">
+            {{ pagination }}
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+$('#button-filter').on('click', function(e) {
+  var url = `index.php?route=marketplace/brasil&user_token=${ getURLVar('user_token') }`;
+
+  var input = $('#extension-filter :input');
+
+  for (i = 0; i < input.length; i++) {
+    if ($(input[i]).val() != '' && $(input[i]).val() != null) {
+      url += '&' + $(input[i]).attr('name') + '=' + $(input[i]).val()
+    }
+  }
+
+  location = url;
+});
+
+$('input[name="filter_search"]').keydown(function(e) {
+  if (e.keyCode == 13) {
+    e.preventDefault();
+
+    $('#button-filter').trigger('click');
+  }
+});
+</script>
+{{ footer }}
