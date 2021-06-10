@@ -3943,7 +3943,7 @@ CREATE TABLE `oc_user` (
   `user_id` int(11) NOT NULL AUTO_INCREMENT,
   `user_group_id` int(11) NOT NULL,
   `username` varchar(20) NOT NULL,
-  `password` varchar(40) NOT NULL,
+  `password` varchar(255) NOT NULL,
   `salt` varchar(9) NOT NULL,
   `firstname` varchar(32) NOT NULL,
   `lastname` varchar(32) NOT NULL,
@@ -3954,6 +3954,25 @@ CREATE TABLE `oc_user` (
   `status` tinyint(1) NOT NULL,
   `date_added` datetime NOT NULL,
   PRIMARY KEY (`user_id`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+
+-----------------------------------------------------------
+
+--
+-- Table structure for table `oc_user_login`
+--
+
+DROP TABLE IF EXISTS `oc_user_login`;
+CREATE TABLE `oc_user_login` (
+  `user_login_id` int(11) NOT NULL AUTO_INCREMENT,
+  `username` varchar(20) NOT NULL,
+  `ip` varchar(40) NOT NULL,
+  `total` int(4) NOT NULL,
+  `date_added` datetime NOT NULL,
+  `date_modified` datetime NOT NULL,
+  PRIMARY KEY (`user_login_id`),
+  KEY `username` (`username`),
+  KEY `ip` (`ip`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 -----------------------------------------------------------

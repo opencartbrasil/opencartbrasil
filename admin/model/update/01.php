@@ -49,5 +49,19 @@ class ModelUpdate01 extends Model {
 				PRIMARY KEY (`marketing_report_id`)
 			) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 		");
+
+		$this->db->query("
+			CREATE TABLE IF NOT EXISTS `" . DB_PREFIX . "user_login` (
+				`user_login_id` int(11) NOT NULL AUTO_INCREMENT,
+				`username` varchar(20) NOT NULL,
+				`ip` varchar(40) NOT NULL,
+				`total` int(4) NOT NULL,
+				`date_added` datetime NOT NULL,
+				`date_modified` datetime NOT NULL,
+				PRIMARY KEY (`user_login_id`),
+				KEY `username` (`username`),
+				KEY `ip` (`ip`)
+			) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+		");
 	}
 }
