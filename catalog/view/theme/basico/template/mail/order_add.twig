@@ -5,7 +5,7 @@
 <title>{{ title }}</title>
 </head>
 <body style="font-family: Arial, Helvetica, sans-serif; font-size: 12px; color: #000000;">
-<div style="width: 680px;"><a href="{{ store_url }}" title="{{ store_name }}"><img src="{{ logo }}" alt="{{ store_name }}" style="margin-bottom: 20px; border: none;" /></a>
+<div style="width: 680px;"><a href="{{ store_url }}" title="{{ store_name }}"><img src="{{ logo }}" loading="lazy" alt="{{ store_name }}" style="margin-bottom: 20px; border: none;" /></a>
   <p style="margin-top: 0px; margin-bottom: 20px;">{{ text_greeting }}</p>
   {% if customer_id %}
   <p style="margin-top: 0px; margin-bottom: 20px;">{{ text_link }}</p>
