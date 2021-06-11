@@ -1,5 +1,6 @@
-/config.php
+config.php
 /admin/config.php
+/api/config.php
 /system/storage
 /image/cache
 /composer.lock
