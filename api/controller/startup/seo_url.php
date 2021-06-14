@@ -1,25 +1,67 @@
 <?php
 class ControllerStartupSeoUrl extends Controller {
-	public function index() {
-		if (isset($this->request->get['_route_'])) {
-			$parts = explode('/', $this->request->get['_route_']);
+	private $routers = [];
 
-			if ($parts[0] == 'product') {
-				if ($parts[1] == '') {
-					$this->request->get['route'] = 'product/list';
-				} elseif ($parts[1] == 'create') {
-					$this->request->get['route'] = 'product/create';
-				} elseif ($parts[1] == 'update') {
-					$this->request->get['route'] = 'product/update';
-				} elseif (is_numeric($parts[1])) {
-					$this->request->get['route'] = 'product/info';
-					$this->request->get['product_id'] = intval($parts[1]);
-				} else {
-					$this->request->get['route'] = 'error/not_found';
-				}
-			} else {
-				$this->request->get['route'] = 'error/not_found';
+	public function index() {
+		$this->routers[] = [
+			'path' => '/api/product',
+			'action' => 'product/create',
+			'methods' => [
+				'POST'
+			]
+		];
+
+		$this->start();
+	}
+
+	private function start() {
+		$parsed_url = parse_url($_SERVER['REQUEST_URI']);
+
+		$requestMethod = $_SERVER['REQUEST_METHOD'];
+
+		$path_default = '/';
+
+		$pathMatchFound = false;
+
+		foreach($this->routers as $route) {
+			$path = $path_default;
+
+			if (empty($route['path'])) {
+				continue;
 			}
+
+			if (empty($route['action'])) {
+				$route['action'] = $this->config->get('action_default');
+			}
+
+			if (isset($parsed_url['path']) && !empty($parsed_url['path'])) {
+				$path = $parsed_url['path'];
+			}
+
+			$regex  = '~^' . $route['path'] . '$~i';
+
+			$matches = [];
+
+			$isValid = preg_match($regex, $path, $matches);
+
+			if (!$isValid) {
+				continue;
+			}
+
+			array_shift($matches);
+
+			$allowedMethod = array_map('strtoupper', $route['methods']);
+
+			if (in_array($requestMethod, $allowedMethod)) {
+				$this->request->get['route'] = $route['action'];
+				$this->request->params = $matches;
+
+				$pathMatchFound = true;
+			}
+		}
+
+		if ($pathMatchFound === false && isset($this->request->get['route'])) {
+			unset($this->request->get['route']);
 		}
 	}
 }
