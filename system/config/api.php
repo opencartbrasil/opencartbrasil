@@ -21,9 +21,16 @@ $_['session_engine']     = 'db';
 $_['session_name']       = 'OCSESSION';
 
 // Template
-$_['template_engine']    = 'twig';
-$_['template_directory'] = '';
-$_['template_cache']     = true;
+$_['image_max_filesize']       = 2 * 1024 * 1024; // 2MB in bytes
+$_['image_dir_download']       = DIR_IMAGE . 'catalog/api/';
+$_['image_download_overwrite'] = false;
+$_['image_mimetypes']          = [
+	'image/jpeg',
+	'image/pjpeg',
+	'image/png',
+	'image/x-png',
+	'image/gif',
+];
 
 // Autoload Libraries
 $_['library_autoload']   = array();
