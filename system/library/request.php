@@ -16,6 +16,8 @@ class Request {
 	public $cookie = array();
 	public $files = array();
 	public $server = array();
+	public $params = array(); //API
+	public $json = array(); //API
 
 	/**
 	 * Constructor
@@ -27,6 +29,13 @@ class Request {
 		$this->cookie = $this->clean($_COOKIE);
 		$this->files = $this->clean($_FILES);
 		$this->server = $this->getServer();
+
+		$json = json_decode(file_get_contents('php://input'), true);
+
+		if (json_last_error() == JSON_ERROR_NONE) {
+			$this->post = $json;
+			$this->json = json_decode(file_get_contents('php://input'));
+		}
 	}
 
 	/**
