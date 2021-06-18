@@ -3,6 +3,8 @@ class ModelUpdate03 extends Model {
 	public function update() {
 		$this->db->query("ALTER TABLE `" . DB_PREFIX . "customer` CHANGE `password` `password` VARCHAR(255) NOT NULL");
 
+		$this->db->query("ALTER TABLE `" . DB_PREFIX . "user` CHANGE `password` `password` VARCHAR(255) NOT NULL");
+
 		$table_query = $this->db->query("SELECT * FROM information_schema.COLUMNS WHERE TABLE_SCHEMA = '" . DB_DATABASE . "' AND TABLE_NAME = '" . DB_PREFIX . "product' AND COLUMN_NAME = 'ncm'");
 		if (!$table_query->num_rows) {
 			$this->db->query("ALTER TABLE `" . DB_PREFIX . "product` ADD `ncm` VARCHAR(12) NOT NULL AFTER `sku`;");

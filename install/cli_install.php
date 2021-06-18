@@ -52,8 +52,6 @@ set_error_handler(function ($code, $message, $file, $line, array $errcontext) {
 	throw new ErrorException($message, 0, $code, $file, $line);
 });
 
-set_error_handler('handleError');
-
 function usage() {
 	echo "Uso:\n";
 	echo "====\n";
@@ -125,7 +123,7 @@ function valid($options) {
 
 	$options['http_server'] = rtrim($options['http_server'], '/') . '/';
 
-	return count($missing) > 0 ? $missing : false;
+	return count($missing) > 0 ? $missing : true;
 }
 
 function install($options) {
@@ -351,7 +349,7 @@ case "install":
 		$options = get_options($argv);
 		$valid = valid($options);
 
-		if ($valid === false) {
+		if ($valid !== true) {
 			echo "Erro: As seguintes entradas estão ausentes ou são inválidas: ";
 			echo implode(', ', $valid) . "\n\n";
 			exit(1);

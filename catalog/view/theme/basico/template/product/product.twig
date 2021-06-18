@@ -22,11 +22,11 @@
         <div class="{{ class }}"> {% if thumb or images %}
           <ul class="thumbnails">
             {% if thumb %}
-            <li><a class="thumbnail" href="{{ popup }}" title="{{ heading_title }}"><img src="{{ thumb }}" title="{{ heading_title }}" alt="{{ heading_title }}" /></a></li>
+            <li><a class="thumbnail" href="{{ popup }}" title="{{ heading_title }}"><img src="{{ thumb }}" loading="lazy" title="{{ heading_title }}" alt="{{ heading_title }}" /></a></li>
             {% endif %}
             {% if images %}
             {% for image in images %}
-            <li class="image-additional"><a class="thumbnail" href="{{ image.popup }}" title="{{ heading_title }}"> <img src="{{ image.thumb }}" title="{{ heading_title }}" alt="{{ heading_title }}" /></a></li>
+            <li class="image-additional"><a class="thumbnail" href="{{ image.popup }}" title="{{ heading_title }}"> <img src="{{ image.thumb }}" loading="lazy" title="{{ heading_title }}" alt="{{ heading_title }}" /></a></li>
             {% endfor %}
             {% endif %}
           </ul>
@@ -184,7 +184,7 @@
                 <div class="radio">
                   <label>
                     <input type="radio" name="option[{{ option.product_option_id }}]" value="{{ option_value.product_option_value_id }}" />
-                    {% if option_value.image %} <img src="{{ option_value.image }}" alt="{{ option_value.name }} {% if option_value.price %} {{ option_value.price_prefix }} {{ option_value.price }} {% endif %}" class="img-thumbnail" /> {% endif %}                  
+                    {% if option_value.image %} <img src="{{ option_value.image }}" loading="lazy" alt="{{ option_value.name }} {% if option_value.price %} {{ option_value.price_prefix }} {{ option_value.price }} {% endif %}" class="img-thumbnail" /> {% endif %}
                     {{ option_value.name }}
                     {% if option_value.price %}
                     ({{ option_value.price_prefix }}{{ option_value.price }})
@@ -200,7 +200,7 @@
                 <div class="checkbox">
                   <label>
                     <input type="checkbox" name="option[{{ option.product_option_id }}][]" value="{{ option_value.product_option_value_id }}" />
-                    {% if option_value.image %} <img src="{{ option_value.image }}" alt="{{ option_value.name }} {% if option_value.price %} {{ option_value.price_prefix }} {{ option_value.price }} {% endif %}" class="img-thumbnail" /> {% endif %}
+                    {% if option_value.image %} <img src="{{ option_value.image }}" loading="lazy" alt="{{ option_value.name }} {% if option_value.price %} {{ option_value.price_prefix }} {{ option_value.price }} {% endif %}" class="img-thumbnail" /> {% endif %}
                     {{ option_value.name }}
                     {% if option_value.price %}
                     ({{ option_value.price_prefix }}{{ option_value.price }})
@@ -309,7 +309,7 @@
         {% endif %}
         <div class="{{ class }}">
           <div class="product-thumb transition">
-            <div class="image"><a href="{{ product.href }}"><img src="{{ product.thumb }}" alt="{{ product.name }}" title="{{ product.name }}" class="img-responsive" /></a></div>
+            <div class="image"><a href="{{ product.href }}"><img src="{{ product.thumb }}" loading="lazy" alt="{{ product.name }}" title="{{ product.name }}" class="img-responsive" /></a></div>
             <div class="caption">
               <h4><a href="{{ product.href }}">{{ product.name }}</a></h4>
               <p>{{ product.description }}</p>
@@ -372,7 +372,7 @@
         }
     });
   });
-//--></script> 
+//--></script>
 <script type="text/javascript"><!--
   $('#button-cart').on('click', function() {
     $.ajax({
@@ -426,7 +426,7 @@
         }
     });
 });
-//--></script> 
+//--></script>
 <script type="text/javascript"><!--
   $('.date').datetimepicker({
     language: '{{ datepicker }}',
@@ -495,7 +495,7 @@
         }
     }, 500);
   });
-//--></script> 
+//--></script>
 <script type="text/javascript"><!--
   $('#review').delegate('.pagination a', 'click', function(e) {
     e.preventDefault();

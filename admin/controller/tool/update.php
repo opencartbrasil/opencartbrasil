@@ -282,6 +282,8 @@ class ControllerToolUpdate extends Controller {
                     $this->load->model('update/' . $update);
 
                     $this->{'model_update_' . $update}->update();
+
+                    usleep(300000);
                 }
             }
 

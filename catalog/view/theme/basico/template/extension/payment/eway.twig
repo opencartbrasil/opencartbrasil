@@ -14,21 +14,21 @@
           {% if payment_type.visa == 1 or payment_type.mastercard == 1 or payment_type.diners == 1 or payment_type.jcb == 1 or payment_type.amex == 1 %}
           <label>
             <input type="radio" name="EWAY_PAYMENTTYPE" id="eway-radio-cc" value="creditcard" checked="checked" onchange="javascript:select_eWAYPaymentOption('creditcard')" />
-            {% if payment_type.visa == 1 %} <img src="catalog/view/theme/default/image/eway_creditcard_visa.png" height="30" alt="Visa" /> {% endif %}
-            {% if payment_type.mastercard == 1 %} <img src="catalog/view/theme/default/image/eway_creditcard_master.png" height="30" alt="MasterCard" /> {% endif %}
-            {% if payment_type.diners == 1 %} <img src="catalog/view/theme/default/image/eway_creditcard_diners.png" height="30" alt="Diners Club" /> {% endif %}
-            {% if payment_type.jcb == 1 %} <img src="catalog/view/theme/default/image/eway_creditcard_jcb.png" height="30" alt="JCB" /> {% endif %}
-            {% if payment_type.amex == 1 %} <img src="catalog/view/theme/default/image/eway_creditcard_amex.png" height="30" alt="AMEX" /> {% endif %} </label>
+            {% if payment_type.visa == 1 %} <img src="catalog/view/theme/default/image/eway_creditcard_visa.png" loading="lazy" height="30" alt="Visa" /> {% endif %}
+            {% if payment_type.mastercard == 1 %} <img src="catalog/view/theme/default/image/eway_creditcard_master.png" loading="lazy" height="30" alt="MasterCard" /> {% endif %}
+            {% if payment_type.diners == 1 %} <img src="catalog/view/theme/default/image/eway_creditcard_diners.png" loading="lazy" height="30" alt="Diners Club" /> {% endif %}
+            {% if payment_type.jcb == 1 %} <img src="catalog/view/theme/default/image/eway_creditcard_jcb.png" loading="lazy" height="30" alt="JCB" /> {% endif %}
+            {% if payment_type.amex == 1 %} <img src="catalog/view/theme/default/image/eway_creditcard_amex.png" loading="lazy" height="30" alt="AMEX" /> {% endif %} </label>
           {% endif %}
           {% if payment_type.paypal == 1 %}
           <label>
             <input type="radio" name="EWAY_PAYMENTTYPE" value="paypal" onchange="javascript:select_eWAYPaymentOption(paypal)" />
-            <img src="catalog/view/theme/default/image/eway_paypal.png" height="30" alt="{{ text_card_type_pp }}" /></label>
+            <img src="catalog/view/theme/default/image/eway_paypal.png" loading="lazy" height="30" alt="{{ text_card_type_pp }}" /></label>
           {% endif %}
           {% if payment_type.masterpass == 1 %}
           <label>
             <input type="radio" name="EWAY_PAYMENTTYPE" value="masterpass" onchange="javascript:select_eWAYPaymentOption(masterpass)" />
-            <img src="catalog/view/theme/default/image/eway_masterpass.png" height="30" alt="{{ text_card_type_mp }}" /></label>
+            <img src="catalog/view/theme/default/image/eway_masterpass.png" loading="lazy" height="30" alt="{{ text_card_type_mp }}" /></label>
           {% endif %}
         </ul>
       </div>
@@ -57,32 +57,32 @@
       <label class="col-sm-2 control-label" for="eway-card-expiry-month">{{ entry_cc_expire_date }}</label>
       <div class="col-sm-2">
         <select name="EWAY_CARDEXPIRYMONTH" id="eway-card-expiry-month" class="form-control">
-          
-          
+
+
 					% for month in months %}
-						
-          
+
+
           <option value="{{ month.value }}">{{ month.text }}</option>
-          
-          
+
+
 					{% endfor %}
-				  
-        
+
+
         </select>
       </div>
       <div class="col-sm-2">
         <select name="EWAY_CARDEXPIRYYEAR" id="eway-card-expiry-year" class="form-control">
-          
-          
+
+
 					% for year in year_expire %}
-						
-          
+
+
           <option value="{{ year.value }}">{{ year.text }}</option>
-          
-          
+
+
 					{% endfor %}
-				  
-        
+
+
         </select>
         <div id="expiry-error" class="text-danger"></div>
       </div>
@@ -125,7 +125,7 @@
 	        $("#tip-" + v).show();
 	      }
 	    }
-	//--></script> 
+	//--></script>
 <script type="text/javascript"><!--
 	$('#button-confirm').bind('click', function () {
 
@@ -186,5 +186,5 @@
 	      return !(d % 10)
 	    };
 
-	//--></script> 
+	//--></script>
 {% endif %}
