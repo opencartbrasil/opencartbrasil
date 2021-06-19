@@ -20,14 +20,12 @@
 {% for robot in robots %}
 <meta name="{{ robot.name }}" content="{{ robot.content }}" />
 {% endfor %}
-<link rel="dns-prefetch" href="https://cdnjs.cloudflare.com">
-<link rel="preconnect" href="https://cdnjs.cloudflare.com/" crossorigin>
 <link rel="dns-prefetch" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin>
-<link href="catalog/view/theme/basico/stylesheet/font-awesome.min.css" rel="stylesheet" type="text/css" />
 <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,400i,300,700&display=swap" rel="stylesheet" type="text/css" />
+<link href="catalog/view/theme/basico/stylesheet/font-awesome.min.css" rel="stylesheet" type="text/css" />
 <link href="catalog/view/javascript/bootstrap/css/bootstrap.min.css" rel="stylesheet" media="screen" />
-<link href="catalog/view/theme/default/stylesheet/stylesheet.css" rel="stylesheet">
+<link href="catalog/view/theme/basico/stylesheet/stylesheet.css" rel="stylesheet">
 {% for style in styles %}
 <link href="{{ style.href }}" type="text/css" rel="{{ style.rel }}" media="{{ style.media }}" />
 {% endfor %}
