@@ -1,7 +1,7 @@
 {% if error_warning %}
 <div class="alert alert-warning alert-dismissible">{{ error_warning }}</div>
 {% endif %}
-<p><img src="https://cdn.klarna.com/public/images/{{ iso_code_2 }}/badges/v1/account/{{ iso_code_2 }}_account_badge_std_blue.png?width=150&eid={{ merchant }}" /></p>
+<p><img src="https://cdn.klarna.com/public/images/{{ iso_code_2 }}/badges/v1/account/{{ iso_code_2 }}_account_badge_std_blue.png?width=150&eid={{ merchant }}" loading="lazy" /></p>
 <form id="payment" class="form-horizontal">
   <fieldset>
     <legend>{{ text_payment_option }}</legend>
@@ -28,37 +28,25 @@
       <div class="col-sm-3">
         <select name="pno_day" id="input-dob" class="form-control">
           <option value="">{{ text_day }}</option>
-          
          {% for day in days %}
-          
           <option value="{{ day.value }}">{{ day.text }}</option>
-          
           {% endfor %}
-        
         </select>
       </div>
       <div class="col-sm-3">
         <select name="pno_month" class="form-control">
           <option value="">{{ text_month }}</option>
-          
          {% for month in months %}
-          
           <option value="{{ month.value }}">{{ month.text }}</option>
-          
           {% endfor %}
-        
         </select>
       </div>
       <div class="col-sm-3">
         <select name="pno_year" class="form-control">
           <option value="">{{ text_year }}</option>
-          
          {% for year in years %}
-          
           <option value="{{ year.value }}">{{ year.text }}</option>
-          
           {% endfor %}
-        
         </select>
       </div>
     </div>
@@ -157,4 +145,4 @@ $('#button-confirm').on('click', function() {
 		}
 	});
 });
-//--></script> 
+//--></script>

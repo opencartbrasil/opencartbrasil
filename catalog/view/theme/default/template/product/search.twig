@@ -113,7 +113,7 @@
         {% for product in products %}
         <div class="product-layout product-list col-xs-12">
           <div class="product-thumb">
-            <div class="image"><a href="{{ product.href }}"><img src="{{ product.thumb }}" alt="{{ product.name }}" title="{{ product.name }}" class="img-responsive" /></a></div>
+            <div class="image"><a href="{{ product.href }}"><img src="{{ product.thumb }}" loading="lazy" alt="{{ product.name }}" title="{{ product.name }}" class="img-responsive" /></a></div>
             <div>
               <div class="caption">
                 <h4><a href="{{ product.href }}">{{ product.name }}</a></h4>

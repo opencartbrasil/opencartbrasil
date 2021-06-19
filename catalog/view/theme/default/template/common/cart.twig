@@ -6,7 +6,7 @@
       <table class="table table-striped">
         {% for product in products %}
         <tr>
-          <td class="text-center">{% if product.thumb %} <a href="{{ product.href }}"><img src="{{ product.thumb }}" alt="{{ product.name }}" title="{{ product.name }}" class="img-thumbnail" /></a> {% endif %}</td>
+          <td class="text-center">{% if product.thumb %} <a href="{{ product.href }}"><img src="{{ product.thumb }}" loading="lazy" alt="{{ product.name }}" title="{{ product.name }}" class="img-thumbnail" /></a> {% endif %}</td>
           <td class="text-left"><a href="{{ product.href }}">{{ product.name }}</a> {% if product.option %}
             {% for option in product.option %} <br />
             - <small>{{ option.name }} {{ option.value }}</small> {% endfor %}
@@ -20,7 +20,7 @@
         {% endfor %}
         {% for voucher in vouchers %}
         <tr>
-          <td class="text-center">{% if voucher.thumb %} <img src="{{ voucher.thumb }}" alt="{{ voucher.description }}" title="{{ voucher.description }}" class="img-thumbnail" />{% endif %}</td>
+          <td class="text-center">{% if voucher.thumb %} <img src="{{ voucher.thumb }}" loading="lazy" alt="{{ voucher.description }}" title="{{ voucher.description }}" class="img-thumbnail" />{% endif %}</td>
           <td class="text-left">{{ voucher.description }}</td>
           <td class="text-right">x&nbsp;1</td>
           <td class="text-right">{{ voucher.amount }}</td>
