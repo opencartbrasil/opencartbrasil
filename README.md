@@ -284,7 +284,7 @@ services:
       OCBR_DB_PASS: "store"
       OCBR_ADMIN_USER: "admin"
       OCBR_ADMIN_PASS: "123456"
-      OCBR_ADMIN_EMAIL: "webmaster@localhost"
+      OCBR_ADMIN_EMAIL: "usuario@dominio.com.br"
     depends_on:
       - db
 
@@ -338,7 +338,7 @@ php install/cli_install.php install \
   --username admin \
   --password admin \
   --email usuario@dominio.com.br \
-  --http_server http://localhost/opencartbrasil/
+  --http_server http://localhost/
 ```
 
 Lista de parâmetros para instalação através da linha de comando:
