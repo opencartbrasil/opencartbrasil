@@ -7,31 +7,30 @@ on:
 
 jobs:
   create_release:
-
     name: New Release
-
     runs-on: ubuntu-latest
-
     steps:
-      - name: Checkout repository
+      - name: Checkout
         uses: actions/checkout@v2
+        with:
+          path: main
 
       - name: Setup PHP
         uses: shivammathur/setup-php@v2
         with:
           php-version: 7.4
 
-      - name: Install and Running composer
+      - name: Running Composer
         run: |
           curl -o- https://getcomposer.org/installer | php
           php composer.phar install --no-dev
 
-      - name: Zip files
+      - name: Zip Files
         run: |
           rm -r .git .docker .github .{editorconfig,gitattributes,gitignore} composer.phar *.md *.yaml
           zip -r opencartbrasil.zip .
 
-      - name: Create release
+      - name: Create Release
         id: create_release
         uses: actions/create-release@v1
         env:
@@ -39,8 +38,11 @@ jobs:
         with:
           tag_name: ${{ github.ref }}
           release_name: ${{ github.ref }}
+          draft: true
+          prerelease: false
 
-      - name: Upload release file
+      - name: Upload Release Asset
+        id: upload-release-asset
         uses: actions/upload-release-asset@v1
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
