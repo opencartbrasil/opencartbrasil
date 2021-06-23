@@ -33,8 +33,7 @@ class Request {
 		$json = json_decode(file_get_contents('php://input'), true);
 
 		if (json_last_error() == JSON_ERROR_NONE) {
-			$this->post = $json;
-			$this->json = json_decode(file_get_contents('php://input'));
+			$this->json = $this->clean($json);
 		}
 	}
 
