@@ -1,5 +1,5 @@
 config.php
-/admin/config.php
+*.log
 /api/config.php
 /system/storage
 /image/cache

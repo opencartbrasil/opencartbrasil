@@ -53,10 +53,15 @@ class ControllerStartupSeoUrl extends Controller {
 			$allowedMethod = array_map('strtoupper', $route['methods']);
 
 			if (in_array($requestMethod, $allowedMethod)) {
+				foreach ($matches as $key => $value) {
+					$this->request->get[$key] = $value;
+				}
+
 				$this->request->get['route'] = $route['action'];
-				$this->request->params = $matches;
 
 				$pathMatchFound = true;
+			} else {
+				header('HTTP/1.1 405');
 			}
 		}
 
