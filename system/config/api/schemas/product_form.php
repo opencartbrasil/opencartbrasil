@@ -415,7 +415,7 @@ $_['api_schema_product_form'] = json_decode(<<<'JSON'
       },
       "default": []
     },
-    "discount": {
+    "discounts": {
       "type": "array",
       "items": {
         "type": "object",
