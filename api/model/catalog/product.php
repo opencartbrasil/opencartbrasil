@@ -50,7 +50,7 @@ class ModelCatalogProduct extends Model {
 				`date_modified` = NOW();
 		');
 
-		$product_id = $this->db->getLastId();
+		$product_id = intval($this->db->getLastId());
 
 		/** Register Product Description */
 		foreach ($this->config->get('languages') as $language_code => $language) {
@@ -112,11 +112,80 @@ class ModelCatalogProduct extends Model {
 			');
 		}
 
+		/** Register Attributes */
+		if (isset($product->attributes)) {
+			foreach ($product->attributes as $attribute) {
+				foreach ($this->config->get('languages') as $language_code => $language) {
+					if (isset($attribute[$language_code])) {
+						$attribute_text = $attribute[$language_code];
+					} elseif (isset($attribute["default"])) {
+						$attribute_text = $attribute["default"];
+					} else {
+						$attribute_text = '';
+					}
+
+					$this->db->query('
+						INSERT INTO `' . DB_PREFIX . 'product_attribute`
+						SET `product_id` = "' . $product_id . '",
+							`attribute_id` = "' . intval($attribute->id) . '",
+							`language_id` = "' . intval($language['language_id']) . '",
+							`text` = "' . $this->db->escape($attribute_text) . '"
+					');
+				}
+			}
+		}
+
+		/** Register Discounts */
+		if (isset($product->discounts)) {
+			foreach ($product->discount as $discount) {
+				$this->db->query('
+					INSERT INTO `' . DB_PREFIX . 'product_discount`
+					SET `product_id` = "' . $product_id . '",
+						`customer_group_id` = "' . intval($discount->customer_group_id) . '",
+						`quantity` = "' . intval(isset($discount->quantity) ? $discount->quantity : 0) . '",
+						`priority` = "' . intval(isset($discount->priority) ? $discount->priority : 1) . '",
+						`price` = "' . floatval($discount->price) . '",
+						`date_start` = "' . $this->db->escape($discount->date_start) . '",
+						`date_end` = "' . $this->db->escape($discount->date_end) . '"
+				');
+			}
+		}
+
+		/** Register Filters */
+		if (isset($product->filters)) {
+			foreach ($product->filters as $filter_id) {
+				$this->db->query('
+					INSERT INTO `' . DB_PREFIX . 'product_filter`
+					SET `product_id` = "' . $product_id . '",
+						`filter_id` = "' . intval($filter_id) . '"
+				');
+			}
+		}
+
+		/** Register Additional Images */
+		if (isset($product->additional_images)) {
+			foreach ($product->additional_images as $key => $image) {
+				$this->db->query('
+					INSERT INTO `' . DB_PREFIX . 'product_image`
+					SET `product_id` = "' . $product_id . '",
+						`image` = "' . $this->db->escape($image) . '",
+						`sort_order` = "' . intval($key) . '"
+				');
+			}
+		}
+
 		$product->id = $product_id;
 
 		return $product;
 	}
 
+	/**
+	 * Verifica se um ou mais produto existe, através do ID
+	 *
+	 * @param int[] $data
+	 *
+	 * @return bool|array Retorna true/false ou um array com as diferenças de IDs
+	 */
 	public function getHasProductById(array $data = array()) {
 		$products_id = array_map('intval', $data);
 
