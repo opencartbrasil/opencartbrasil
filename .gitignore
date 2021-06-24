@@ -3,6 +3,7 @@ config.php
 /api/config.php
 /system/storage
 /image/cache
+/image/catalog/api
 /composer.lock
 /system/storage/vendor
 
