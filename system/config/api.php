@@ -6,6 +6,10 @@ $_['site_ssl']           = HTTPS_SERVER;
 // Url
 $_['url_autostart']      = false;
 
+// Credentials
+$_['secret_key'] 		 = 'opencartbrasil';
+
+
 // Database
 $_['db_autostart']       = true;
 $_['db_engine']          = DB_DRIVER; // mysqli, pdo or pgsql
@@ -39,7 +43,7 @@ $_['library_autoload']   = array();
 $_['action_pre_action']  = array(
 	'startup/startup',
 	'startup/event',
-	'startup/seo_url'
+	'startup/login',
 );
 
 // Action Events
