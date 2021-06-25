@@ -6,6 +6,24 @@ e utiliza [Semantic Versioning](https://semver.org/lang/pt-BR/spec/v2.0.0.html).
 
 ## [Não lançada]
 
+## [1.6.0] (Data de lançamento: 25.06.2021)
+### Corrigido
+- Correção na instalação por CLI
+- Correção no dns-prefetch das fontes Google
+- Correção na exibição do rodapé na página de atualização da versão OpenCart Brasil
+- Correção ao visualizar os detalhes de um produto na loja através dos departamentos
+
+### Modificado
+- Melhorias na verificação de nova versão
+- A biblioteca jquery agora é carregada localmente
+- A biblioteca swiper agora é carregada minificada
+- A biblioteca fontawsome agora é carregada localmente
+- As tags de imagens agora possuem a o parâmetro loading="lazy"
+- O password do usuário administrativo é gerado utilizando o hash de criptografia mais recente
+
+### Adicionado
+- Limite de tentativa de login na administração da loja com bloqueio de 1 (uma) hora após ultrapassar o limite
+
 ## [1.5.1] (Data de lançamento: 07.06.2021)
 ### Corrigido
 - Correção no voucher
@@ -656,7 +674,8 @@ e utiliza [Semantic Versioning](https://semver.org/lang/pt-BR/spec/v2.0.0.html).
 - Cupons de descontos para demonstração.
 - Moedas: Euro e Libra esterlina.
 
-[Não lançada]: https://github.com/opencartbrasil/opencartbrasil/compare/v1.5.1...HEAD
+[Não lançada]: https://github.com/opencartbrasil/opencartbrasil/compare/v1.6.0...HEAD
+[1.6.0]: https://github.com/opencartbrasil/opencartbrasil/compare/v1.5.1...v1.6.0
 [1.5.1]: https://github.com/opencartbrasil/opencartbrasil/compare/v1.5.0...v1.5.1
 [1.5.0]: https://github.com/opencartbrasil/opencartbrasil/compare/v1.4.15...v1.5.0
 [1.4.15]: https://github.com/opencartbrasil/opencartbrasil/compare/v1.4.14...v1.4.15
