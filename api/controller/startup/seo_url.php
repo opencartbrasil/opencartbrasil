@@ -4,14 +4,28 @@ class ControllerStartupSeoUrl extends Controller {
 
 	public function index() {
 		$this->routers[] = [
+			'path' => '/api/credentials/access_token',
+			'action' => 'credentials/token',
+			'methods' => ['POST']
+		];
+		$this->routers[] = [
 			'path' => '/api/product',
-			'action' => 'product/create',
-			'methods' => [
-				'POST'
-			]
+			'action' => 'product/info',
+			'methods' => ['GET', 'DELETE']
 		];
 
-		$this->start();
+		$this->routers[] = [
+			'path' => '/api/product/(?P<product_id>\d+)',
+			'action' => 'product/info',
+		];
+
+		$this->routers[] = [
+			'path' => '/api/product/(?P<product_id>\d+)',
+			'action' => 'product/update',
+			'methods' => ['PUT']
+		];
+
+		return $this->start();
 	}
 
 	private function start() {
