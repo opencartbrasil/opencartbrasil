@@ -171,5 +171,7 @@ class ControllerStartupStartup extends Controller {
 
 		// Set available languages codes
 		$this->config->set('languages', $languages);
+
+		$this->response->addHeader('Content-Type: application/json');
 	}
 }
