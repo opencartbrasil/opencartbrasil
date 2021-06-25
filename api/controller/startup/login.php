@@ -2,6 +2,8 @@
 
 use Firebase\JWT\JWT;
 use Firebase\JWT\ExpiredException;
+use Firebase\JWT\SignatureInvalidException;
+use Firebase\JWT\ExpiredException;
 
 class ControllerStartupLogin extends Controller {
 
