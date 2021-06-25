@@ -22,7 +22,7 @@ class ControllerToolUpdate extends Controller {
         $data['version'] = OPENCART_BRASIL;
         $data['update'] = true;
 
-        $curl = curl_init('https://api.github.com/repos/opencartbrasil/opencartbrasil/releases');
+        $curl = curl_init('https://api.github.com/repos/opencartbrasil/opencartbrasil/releases?per_page=3');
 
         curl_setopt($curl, CURLOPT_USERAGENT, 'OpenCart Brasil ' . OPENCART_BRASIL);
         curl_setopt($curl, CURLOPT_SSL_VERIFYPEER, 0);
@@ -39,23 +39,24 @@ class ControllerToolUpdate extends Controller {
             $releases = json_decode($response, true);
 
             $release = $releases[0];
+
             $version = $release['tag_name'];
-            $release_local = str_replace("v", "", OPENCART_BRASIL);
-            $release_atual = str_replace("v", "", $version);
+            $current_release = str_replace("v", "", OPENCART_BRASIL);
+            $new_release = str_replace("v", "", $version);
 
             $this->session->data['version'] = $version;
 
             $data['version'] = $version;
             $data['log'] = $release['body'];
 
-            $data['text_change'] = sprintf($this->language->get('text_change'), $release_atual);
+            $data['text_change'] = sprintf($this->language->get('text_change'), $new_release);
 
-            if (version_compare($release_local, $release_atual, '>=')) {
+            if (version_compare($current_release, $new_release, '>=')) {
                 $data['button_update'] = $this->language->get('button_again');
-                $data['success'] = sprintf($this->language->get('text_success'), $release_atual);
+                $data['success'] = sprintf($this->language->get('text_success'), $new_release);
             } else {
-                $data['button_update'] = sprintf($this->language->get('button_start'), $release_atual);
-                $data['warning'] = sprintf($this->language->get('error_version'), $release_atual);
+                $data['button_update'] = sprintf($this->language->get('button_start'), $new_release);
+                $data['warning'] = sprintf($this->language->get('error_version'), $new_release);
             }
         } else {
             $data['update'] = false;
