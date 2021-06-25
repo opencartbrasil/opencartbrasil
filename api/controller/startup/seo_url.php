@@ -23,7 +23,19 @@ class ControllerStartupSeoUrl extends Controller {
 
 		$pathMatchFound = false;
 
-		foreach($this->routers as $route) {
+		$routers = array_filter($this->routers, function($route) use ($requestMethod) {
+			if (!isset($route['methods'])) {
+				$route['methods'] = ['GET'];
+			}
+
+			return in_array($requestMethod, $route['methods']);
+		});
+
+		if (empty($routers)) {
+			return new Action('status_code/method_not_allowed');
+		}
+
+		foreach($routers as $route) {
 			$path = $path_default;
 
 			if (empty($route['path'])) {
@@ -49,6 +61,10 @@ class ControllerStartupSeoUrl extends Controller {
 			}
 
 			array_shift($matches);
+
+			if (!isset($route['methods'])) {
+				$route['methods'] = ['GET'];
+			}
 
 			$allowedMethod = array_map('strtoupper', $route['methods']);
 
