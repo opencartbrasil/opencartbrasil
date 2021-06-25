@@ -50,9 +50,9 @@ $_['action_pre_action']  = array(
 // Action Events
 $_['action_event']       = array(
 	'controller/*/before' => array(
-		'event/language/before'
+		'middlewares/response_time/before',
 	),
 	'controller/*/after' => array(
-		'event/language/after'
+		'middlewares/response_time/after',
 	)
 );
