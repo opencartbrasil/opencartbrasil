@@ -90,13 +90,13 @@ class ControllerStartupSeoUrl extends Controller {
 				$this->request->get['route'] = $route['action'];
 
 				$pathMatchFound = true;
-			} else {
-				header('HTTP/1.1 405');
+
+				break;
 			}
 		}
 
-		if ($pathMatchFound === false && isset($this->request->get['route'])) {
-			unset($this->request->get['route']);
+		if ($pathMatchFound === false) {
+			return new Action('status_code/bad_request');
 		}
 	}
 }
