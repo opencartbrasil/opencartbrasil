@@ -9,6 +9,8 @@ $_['url_autostart']      = false;
 // Credentials
 $_['secret_key'] 		 = 'opencartbrasil';
 
+// Log
+$_['error_filename']     = sprintf('api-%d-%s-%d.log', date('Y'), date('m'), date('d'));
 
 // Database
 $_['db_autostart']       = true;
@@ -43,6 +45,7 @@ $_['library_autoload']   = array();
 $_['action_pre_action']  = array(
 	'startup/startup',
 	'startup/event',
+	'startup/seo_url',
 	'startup/login',
 	'startup/permission',
 );
@@ -50,9 +53,11 @@ $_['action_pre_action']  = array(
 // Action Events
 $_['action_event']       = array(
 	'controller/*/before' => array(
+		'middlewares/logs/before',
 		'middlewares/response_time/before',
 	),
 	'controller/*/after' => array(
 		'middlewares/response_time/after',
+		'middlewares/logs/after',
 	)
 );
