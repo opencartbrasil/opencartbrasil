@@ -54,6 +54,7 @@ $_['action_pre_action']  = array(
 $_['action_event']       = array(
 	'controller/*/before' => array(
 		'middlewares/logs/before',
+		'middlewares/ip/before',
 		'middlewares/response_time/before',
 	),
 	'controller/*/after' => array(
