@@ -16,7 +16,7 @@ class Request {
 	public $cookie = array();
 	public $files = array();
 	public $server = array();
-	public $params = array(); //API
+	public $headers = array(); //API
 	public $json = array(); //API
 
 	/**
@@ -34,6 +34,14 @@ class Request {
 
 		if (json_last_error() == JSON_ERROR_NONE) {
 			$this->json = $this->clean($json);
+		}
+
+		if (function_exists('apache_request_headers')) {
+			$headers = apache_request_headers();
+			$headers_keys = array_map('strtolower', array_keys($headers));
+			$headers_values = array_map([$this, 'clean'], array_values($headers));
+
+			$this->headers = array_combine($headers_keys, $headers_values);
 		}
 	}
 
