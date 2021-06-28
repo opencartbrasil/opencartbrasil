@@ -43,6 +43,7 @@ $_['library_autoload']   = array();
 
 // Actions
 $_['action_pre_action']  = array(
+	'middlewares/response_time/before',
 	'startup/startup',
 	'startup/event',
 	'startup/seo_url',
@@ -50,15 +51,18 @@ $_['action_pre_action']  = array(
 	'startup/permission',
 );
 
+// Actions
+$_['action_pos_action']  = array(
+	'middlewares/response_time/after',
+);
+
 // Action Events
 $_['action_event']       = array(
 	'controller/*/before' => array(
 		'middlewares/logs/before',
 		'middlewares/ip/before',
-		'middlewares/response_time/before',
 	),
 	'controller/*/after' => array(
-		'middlewares/response_time/after',
 		'middlewares/logs/after',
 	)
 );
