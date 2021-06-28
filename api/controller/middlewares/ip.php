@@ -12,9 +12,11 @@ class ControllerMiddlewaresIp extends Controller {
 
 		$this->load->model('middlewares/ip');
 
+		$this->config->load('api/settings/ip_blocked');
+
 		$ip = $this->request->server['REMOTE_ADDR'];
 
-		$has_blocked = $this->model_middlewares_ip->hasBlocked($ip);
+		$has_blocked = in_array($ip, $this->config->get('ip_blocked'));
 
 		if ($has_blocked) {
 			$this->log->write(array(
