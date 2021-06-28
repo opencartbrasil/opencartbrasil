@@ -46,11 +46,15 @@ class ControllerCredentialsToken extends Controller {
 		if (!isset($json['errors'])) {
 			$time = time();
 
+			$jti_hash = sprintf('%s:%s', $client_id, microtime(true));
+			$jti = hash_hmac('sha256', $jti_hash, $client_secret);
+
 			$payload = array(
 				'iss' => $this->config->get('config_url'),
 				'iat' => $time,
 				'sub' => '<username here>', /** @todo Integrar ao banco de dados */
 				'exp' => $time + self::EXPIRE,
+				'jti' => $jti,
 				'application_name' 	=> 'V5Market', /** @todo Integrar ao banco de dados */
 			);
 

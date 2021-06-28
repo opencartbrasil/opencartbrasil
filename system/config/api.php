@@ -6,8 +6,10 @@ $_['site_ssl']           = HTTPS_SERVER;
 // Url
 $_['url_autostart']      = false;
 
-// Credentials
-$_['secret_key'] 		 = 'opencartbrasil';
+// Security
+$_['secret_key'] 		 			= 'opencartbrasil';
+$_['expiration_interval_format']	= 'PT30S';
+$_['max_request_per_time']			= 2;
 
 // Log
 $_['error_filename']     = sprintf('api-%d-%s-%d.log', date('Y'), date('m'), date('d'));
@@ -61,6 +63,7 @@ $_['action_event']       = array(
 	'controller/*/before' => array(
 		'middlewares/logs/before',
 		'middlewares/ip/before',
+		'middlewares/rate_limit/before',
 	),
 	'controller/*/after' => array(
 		'middlewares/logs/after',
