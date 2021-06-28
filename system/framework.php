@@ -171,10 +171,10 @@ if ($config->has('action_pre_action')) {
 	}
 }
 
-// Pos Actions
-if ($config->has('action_pos_action')) {
-	foreach ($config->get('action_pos_action') as $value) {
-		$route->addPosAction(new Action($value));
+// Post Actions
+if ($config->has('action_post_action')) {
+	foreach ($config->get('action_post_action') as $value) {
+		$route->addPostAction(new Action($value));
 	}
 }
 
