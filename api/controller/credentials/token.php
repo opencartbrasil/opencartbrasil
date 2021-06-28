@@ -13,6 +13,10 @@ class ControllerCredentialsToken extends Controller {
 
 		$json = [];
 
+		if (!isset($this->request->headers['authorization'])) {
+			return new Action('status_code/unauthorized');
+		}
+
 		$authorization = $this->request->headers['authorization'];
 
 		@list($token_type, $credentials) = explode(' ', $authorization);
