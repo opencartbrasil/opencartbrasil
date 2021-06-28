@@ -73,6 +73,6 @@ $_['action_default']       = 'common/home';
 $_['action_router']        = 'startup/router';
 $_['action_error']         = 'error/not_found';
 $_['action_pre_action']    = array();
-$_['action_pos_action']    = array();
+$_['action_post_action']    = array();
 $_['action_event']         = array();
 $_['action_cron']          = array();
