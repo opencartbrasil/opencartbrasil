@@ -13,6 +13,7 @@
 final class Router {
 	private $registry;
 	private $pre_action = array();
+	private $pos_action = array();
 	private $error;
 
     /**
@@ -25,17 +26,19 @@ final class Router {
 	}
 
     /**
-     *
-     *
      * @param    object $pre_action
      */
 	public function addPreAction(Action $pre_action) {
 		$this->pre_action[] = $pre_action;
 	}
+	/**
+     * @param    object $pos_action
+     */
+	public function addPosAction(Action $pos_action) {
+		$this->pos_action[] = $pos_action;
+	}
 
     /**
-     *
-     *
      * @param    object $action
      * @param    object $error
      */
@@ -55,11 +58,13 @@ final class Router {
 		while ($action instanceof Action) {
 			$action = $this->execute($action);
 		}
+
+		foreach ($this->pos_action as $pos_action) {
+			$result = $this->execute($pos_action);
+		}
 	}
 
     /**
-     *
-     *
      * @param    object $action
      * @return    object
      */
