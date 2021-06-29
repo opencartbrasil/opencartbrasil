@@ -40,32 +40,37 @@ class ControllerCredentialsToken extends Controller {
 		$logged = $this->model_credentials_token->login($client_id, $client_secret);
 
 		if ($logged === false) {
+			$this->response->setOutput(json_encode(array(
+				'success' => false,
+				'errors' => array(
+					'code' => 'invalid_credential',
+					'message' => 'Credentials are invalid.'
+				)
+			)));
 			return new Action('status_code/unauthorized');
 		}
 
-		if (!isset($json['errors'])) {
-			$time = time();
+		$time = time();
 
-			$jti_hash = sprintf('%s:%s', $client_id, microtime(true));
-			$jti = hash_hmac('sha256', $jti_hash, $client_secret);
+		$jti_hash = sprintf('%s:%s', $client_id, microtime(true));
+		$jti = hash_hmac('sha256', $jti_hash, $client_secret);
 
-			$payload = array(
-				'iss' => $this->config->get('config_url'),
-				'iat' => $time,
-				'sub' => '<username here>', /** @todo Integrar ao banco de dados */
-				'exp' => $time + self::EXPIRE,
-				'jti' => $jti,
-				'application_name' 	=> 'V5Market', /** @todo Integrar ao banco de dados */
-			);
+		$payload = array(
+			'iss' => $this->config->get('config_url'),
+			'iat' => $time,
+			'sub' => '<username here>', /** @todo Integrar ao banco de dados */
+			'exp' => $time + self::EXPIRE,
+			'jti' => $jti,
+			'application_name' 	=> 'V5Market', /** @todo Integrar ao banco de dados */
+		);
 
-			$jwt = JWT::encode($payload, $this->config->get('secret_key'));
+		$jwt = JWT::encode($payload, $this->config->get('secret_key'));
 
-			$json = [
-				'access_token' 		=> (string)$jwt,
-				'token_type' 		=> 'Bearer',
-				'expires_in' 		=> self::EXPIRE - 1,
-			];
-		}
+		$json = [
+			'access_token' 		=> (string)$jwt,
+			'token_type' 		=> 'Bearer',
+			'expires_in' 		=> self::EXPIRE - 1,
+		];
 
 		$this->response->setOutput(json_encode($json));
 	}
