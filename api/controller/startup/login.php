@@ -16,6 +16,13 @@ class ControllerStartupLogin extends Controller {
 		}
 
 		if (!isset($this->request->headers['authorization'])) {
+			$this->response->setOutput(json_encode(array(
+				'success' => false,
+				'errors' => array(
+					'code' => 'forgotten_authorization',
+					'message' => 'It is necessary to inform the authorization header.'
+				)
+			)));
 			return new Action('status_code/unauthorized');
 		}
 
@@ -28,10 +35,24 @@ class ControllerStartupLogin extends Controller {
 		@list($token_type, $access_token) = explode(' ', $authorization);
 
 		if (strtolower($token_type) !== 'bearer') {
+			$this->response->setOutput(json_encode(array(
+				'success' => false,
+				'errors' => array(
+					'code' => 'invalid_authorization_type',
+					'message' => 'It is necessary to inform the type "Bearer" in the authentication header.'
+				)
+			)));
 			return new Action('status_code/bad_request');
 		}
 
 		if (empty($access_token)) {
+			$this->response->setOutput(json_encode(array(
+				'success' => false,
+				'errors' => array(
+					'code' => 'forgotten_access_token',
+					'message' => 'It is necessary to inform the "access_token".'
+				)
+			)));
 			return new Action('status_code/bad_request');
 		}
 
@@ -44,10 +65,31 @@ class ControllerStartupLogin extends Controller {
 
 			$this->registry->set('jwt', $jwt_decoded);
 		} catch (ExpiredException $ignored) {
+			$this->response->setOutput(json_encode(array(
+				'success' => false,
+				'errors' => array(
+					'code' => 'expired_access_token',
+					'message' => 'The access_token is expired.'
+				)
+			)));
 			return new Action('status_code/unauthorized');
 		} catch (SignatureInvalidException $ignored) {
+			$this->response->setOutput(json_encode(array(
+				'success' => false,
+				'errors' => array(
+					'code' => 'invalid_access_token',
+					'message' => 'Invalid access_token.'
+				)
+			)));
 			return new Action('status_code/bad_request');
 		} catch (UnexpectedValueException $ignored) {
+			$this->response->setOutput(json_encode(array(
+				'success' => false,
+				'errors' => array(
+					'code' => 'invalid_access_token',
+					'message' => 'Invalid access_token.'
+				)
+			)));
 			return new Action('status_code/bad_request');
 		}
 	}

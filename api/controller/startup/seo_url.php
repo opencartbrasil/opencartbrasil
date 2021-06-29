@@ -96,6 +96,13 @@ class ControllerStartupSeoUrl extends Controller {
 		}
 
 		if ($pathMatchFound === false) {
+			$this->response->setOutput(json_encode(array(
+				'success' => false,
+				'errors' => array(
+					'code' => 'invalid_route',
+					'message' => 'The route accessed is invalid.'
+				)
+			)));
 			return new Action('status_code/bad_request');
 		}
 	}

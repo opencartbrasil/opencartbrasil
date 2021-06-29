@@ -13,25 +13,42 @@ class ControllerCredentialsToken extends Controller {
 
 		$json = [];
 
-		if (!isset($this->request->headers['authorization'])) {
-			return new Action('status_code/unauthorized');
-		}
-
 		$authorization = $this->request->headers['authorization'];
 
 		@list($token_type, $credentials) = explode(' ', $authorization);
 
 		if (strtolower($token_type) !== 'basic') {
+			$this->response->setOutput(json_encode(array(
+				'success' => false,
+				'errors' => array(
+					'code' => 'invalid_authorization_type',
+					'message' => 'It is necessary to inform the type "Basic" in the authentication header.'
+				)
+			)));
 			return new Action('status_code/bad_request');
 		}
 
 		if (empty($credentials)) {
+			$this->response->setOutput(json_encode(array(
+				'success' => false,
+				'errors' => array(
+					'code' => 'forgotten_credentials',
+					'message' => 'It is necessary to inform the credentials.'
+				)
+			)));
 			return new Action('status_code/bad_request');
 		}
 
 		$credentials_decoded = base64_decode($credentials);
 
 		if (!preg_match('/^[a-z]+:[a-z]+$/i', $credentials_decoded)) {
+			$this->response->setOutput(json_encode(array(
+				'success' => false,
+				'errors' => array(
+					'code' => 'invalid_credential_format',
+					'message' => 'The credential must be "client_id:client_secret" encoded with base64.'
+				)
+			)));
 			return new Action('status_code/bad_request');
 		}
 

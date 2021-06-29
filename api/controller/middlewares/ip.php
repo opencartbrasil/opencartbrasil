@@ -23,6 +23,14 @@ class ControllerMiddlewaresIp extends Controller {
 				'failed' => "IP \"{$ip}\" is blocked."
 			));
 
+			$this->response->setOutput(json_encode(array(
+				'success' => false,
+				'errors' => array(
+					'code' => 'no_permission',
+					'message' => 'You do not have permission.'
+				)
+			)));
+
 			return new Action('status_code/forbidden');
 		}
 	}
