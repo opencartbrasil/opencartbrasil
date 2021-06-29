@@ -54,7 +54,7 @@ $_['action_pre_action']  = array(
 );
 
 // Actions
-$_['action_pos_action']  = array(
+$_['action_post_action']  = array(
 	'middlewares/response_time/after',
 );
 

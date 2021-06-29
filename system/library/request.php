@@ -41,7 +41,7 @@ class Request {
 			$headers_keys = array_map('strtolower', array_keys($headers));
 			$headers_values = array_map([$this, 'clean'], array_values($headers));
 
-			$this->headers = array_combine($headers_keys, $headers_values);
+			$this->headers = array_combine($headers_keys, array_map('trim', $headers_values));
 		}
 	}
 
