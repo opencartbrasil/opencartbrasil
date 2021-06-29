@@ -7,9 +7,9 @@ $_['site_ssl']           = HTTPS_SERVER;
 $_['url_autostart']      = false;
 
 // Security
-$_['secret_key'] 		 			= 'opencartbrasil';
-$_['expiration_interval_format']	= 'PT30S';
-$_['max_request_per_time']			= 2;
+$_['secret_key']			= 'opencartbrasil';
+$_['api_cache_expire']		= 60;
+$_['max_request_per_time']  = 5;
 
 // Log
 $_['error_filename']     = sprintf('api-%d-%s-%d.log', date('Y'), date('m'), date('d'));
