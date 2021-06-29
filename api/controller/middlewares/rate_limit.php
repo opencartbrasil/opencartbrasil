@@ -11,12 +11,24 @@ class ControllerMiddlewaresRateLimit extends Controller {
 		}
 
 		if (!isset($this->jwt) && !isset($this->jwt->jti)) {
+			$this->response->setOutput(json_encode(array(
+				'success' => false,
+				'errors' => array(
+					'code' => 'invalid_access_token',
+					'message' => 'Invalid access_token.'
+				)
+			)));
+
 			return new Action('status_code/bad_request');
 		}
 
+		$max_request_per_time = $this->config->get('max_request_per_time');
+
+		$cache = new Cache($this->config->get('cache_engine'), $this->config->get('api_cache_expire'));
+
 		$token_hash = $this->jwt->jti;
 
-		$details = $this->cache->get($token_hash);
+		$details = $cache->get($token_hash);
 
 		if ($details === false) {
 			$details = $this->generate_data();
@@ -24,17 +36,37 @@ class ControllerMiddlewaresRateLimit extends Controller {
 
 		$expired = time() > $details['expire_at'];
 
-		if ($details['count'] >= $this->config->get('max_request_per_time') && $expired === false) {
+		if ($expired === true) {
+			$details = $this->generate_data();
+			$rate_remaining = $max_request_per_time - $details['count'];
+		}
+
+		$rate_remaining = $max_request_per_time - $details['count'];
+		$rate_reset = $details['expire_at'] - time();
+
+		if ($rate_remaining < 0 && $expired === false) {
+			header('RateLimit-Limit: ' . $max_request_per_time);
+			header('RateLimit-Reset: ' . $rate_reset);
+			header('RateLimit-Remaining: 0');
+
+			$this->response->setOutput(json_encode(array(
+				'success' => false,
+				'errors' => array(
+					'code' => 'rate_limit',
+					'message' => 'You made many requests in a short time.'
+				)
+			)));
+
 			return new Action('status_code/too_many_requests');
 		}
 
-		if ($expired === true) {
-			$details = $this->generate_data();
-		} else {
-			$details['count']++;
-		}
+		$details['count']++;
 
-		$this->cache->set($token_hash, $details);
+		header('RateLimit-Limit: ' . $max_request_per_time);
+		header('RateLimit-Reset: ' . $rate_reset);
+		header('RateLimit-Remaining: ' . $rate_remaining);
+
+		$cache->set($token_hash, $details);
 	}
 
 	/**
@@ -43,14 +75,9 @@ class ControllerMiddlewaresRateLimit extends Controller {
 	 * @return void
 	 */
 	private function generate_data() {
-		$expire_interval = new DateInterval($this->config->get('expiration_interval_format'));
-
-		$expire_date = new DateTime();
-		$expire_date->add($expire_interval);
-
 		return [
 			'count' => 1,
-			'expire_at' => $expire_date->format('U')
+			'expire_at' => time() + $this->config->get('api_cache_expire')
 		];
 	}
 }
