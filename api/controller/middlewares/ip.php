@@ -26,8 +26,10 @@ class ControllerMiddlewaresIp extends Controller {
 			$this->response->setOutput(json_encode(array(
 				'success' => false,
 				'errors' => array(
-					'code' => 'no_permission',
-					'message' => 'You do not have permission.'
+					array(
+						'code' => 'no_permission',
+						'message' => 'You do not have permission.'
+					)
 				)
 			)));
 

@@ -19,8 +19,10 @@ class ControllerStartupLogin extends Controller {
 			$this->response->setOutput(json_encode(array(
 				'success' => false,
 				'errors' => array(
-					'code' => 'forgotten_authorization',
-					'message' => 'It is necessary to inform the authorization header.'
+					array(
+						'code' => 'forgotten_authorization',
+						'message' => 'It is necessary to inform the authorization header.'
+					)
 				)
 			)));
 			return new Action('status_code/unauthorized');
@@ -38,8 +40,10 @@ class ControllerStartupLogin extends Controller {
 			$this->response->setOutput(json_encode(array(
 				'success' => false,
 				'errors' => array(
-					'code' => 'invalid_authorization_type',
-					'message' => 'It is necessary to inform the type "Bearer" in the authentication header.'
+					array(
+						'code' => 'invalid_authorization_type',
+						'message' => 'It is necessary to inform the type "Bearer" in the authentication header.'
+					)
 				)
 			)));
 			return new Action('status_code/bad_request');
@@ -49,8 +53,10 @@ class ControllerStartupLogin extends Controller {
 			$this->response->setOutput(json_encode(array(
 				'success' => false,
 				'errors' => array(
-					'code' => 'forgotten_access_token',
-					'message' => 'It is necessary to inform the "access_token".'
+					array(
+						'code' => 'forgotten_access_token',
+						'message' => 'It is necessary to inform the "access_token".'
+					)
 				)
 			)));
 			return new Action('status_code/bad_request');
@@ -68,8 +74,10 @@ class ControllerStartupLogin extends Controller {
 			$this->response->setOutput(json_encode(array(
 				'success' => false,
 				'errors' => array(
-					'code' => 'expired_access_token',
-					'message' => 'The access_token is expired.'
+					array(
+						'code' => 'expired_access_token',
+						'message' => 'The access_token is expired.'
+					)
 				)
 			)));
 			return new Action('status_code/unauthorized');
@@ -77,17 +85,21 @@ class ControllerStartupLogin extends Controller {
 			$this->response->setOutput(json_encode(array(
 				'success' => false,
 				'errors' => array(
-					'code' => 'invalid_access_token',
-					'message' => 'Invalid access_token.'
+					array(
+						'code' => 'invalid_access_token',
+						'message' => 'Invalid access_token.'
+					)
 				)
 			)));
-			return new Action('status_code/bad_request');
+			return new Action('status_code/unauthorized');
 		} catch (UnexpectedValueException $ignored) {
 			$this->response->setOutput(json_encode(array(
 				'success' => false,
 				'errors' => array(
-					'code' => 'invalid_access_token',
-					'message' => 'Invalid access_token.'
+					array(
+						'code' => 'invalid_access_token',
+						'message' => 'Invalid access_token.'
+					)
 				)
 			)));
 			return new Action('status_code/bad_request');

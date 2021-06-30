@@ -14,8 +14,10 @@ class ControllerMiddlewaresRateLimit extends Controller {
 			$this->response->setOutput(json_encode(array(
 				'success' => false,
 				'errors' => array(
-					'code' => 'invalid_access_token',
-					'message' => 'Invalid access_token.'
+					array(
+						'code' => 'invalid_access_token',
+						'message' => 'Invalid access_token.'
+					)
 				)
 			)));
 
@@ -45,15 +47,17 @@ class ControllerMiddlewaresRateLimit extends Controller {
 		$rate_reset = $details['expire_at'] - time();
 
 		if ($rate_remaining < 0 && $expired === false) {
-			header('RateLimit-Limit: ' . $max_request_per_time);
-			header('RateLimit-Reset: ' . $rate_reset);
-			header('RateLimit-Remaining: 0');
+			header('X-RateLimit-Limit: ' . $max_request_per_time);
+			header('X-RateLimit-Reset: ' . $rate_reset);
+			header('X-RateLimit-Remaining: 0');
 
 			$this->response->setOutput(json_encode(array(
 				'success' => false,
 				'errors' => array(
-					'code' => 'rate_limit',
-					'message' => 'You made many requests in a short time.'
+					array(
+						'code' => 'rate_limit',
+						'message' => 'You made many requests in a short time.'
+					)
 				)
 			)));
 
