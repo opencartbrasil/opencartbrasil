@@ -71,16 +71,16 @@ class ControllerSettingSetting extends Controller {
 			$data['error_zone'] = '';
 		}
 
+		if (isset($this->error['limit_admin'])) {
+			$data['error_limit_admin'] = $this->error['limit_admin'];
+		} else {
+			$data['error_limit_admin'] = '';
+		}
+
 		if (isset($this->error['customer_group_display'])) {
 			$data['error_customer_group_display'] = $this->error['customer_group_display'];
 		} else {
 			$data['error_customer_group_display'] = '';
-		}
-
-		if (isset($this->error['login_attempts'])) {
-			$data['error_login_attempts'] = $this->error['login_attempts'];
-		} else {
-			$data['error_login_attempts'] = '';
 		}
 
 		if (isset($this->error['voucher_min'])) {
@@ -116,13 +116,13 @@ class ControllerSettingSetting extends Controller {
 		if (isset($this->error['log'])) {
 			$data['error_log'] = $this->error['log'];
 		} else {
-			$data['error_log'] = '';
+			$data['error_admin_login_attempts'] = '';
 		}
 
-		if (isset($this->error['limit_admin'])) {
-			$data['error_limit_admin'] = $this->error['limit_admin'];
+		if (isset($this->error['log'])) {
+			$data['error_log'] = $this->error['log'];
 		} else {
-			$data['error_limit_admin'] = '';
+			$data['error_log'] = '';
 		}
 
 		if (isset($this->error['encryption'])) {
@@ -867,6 +867,14 @@ class ControllerSettingSetting extends Controller {
 			$data['config_maintenance'] = $this->request->post['config_maintenance'];
 		} else {
 			$data['config_maintenance'] = $this->config->get('config_maintenance');
+		}
+
+		if (isset($this->request->post['config_admin_login_attempts'])) {
+			$data['config_admin_login_attempts'] = $this->request->post['config_admin_login_attempts'];
+		} elseif ($this->config->has('config_admin_login_attempts')) {
+			$data['config_admin_login_attempts'] = $this->config->get('config_admin_login_attempts');
+		} else {
+			$data['config_admin_login_attempts'] = 5;
 		}
 
 		if (isset($this->request->post['config_password'])) {
