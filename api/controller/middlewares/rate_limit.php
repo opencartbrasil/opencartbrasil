@@ -66,9 +66,9 @@ class ControllerMiddlewaresRateLimit extends Controller {
 
 		$details['count']++;
 
-		header('RateLimit-Limit: ' . $max_request_per_time);
-		header('RateLimit-Reset: ' . $rate_reset);
-		header('RateLimit-Remaining: ' . $rate_remaining);
+		header('X-RateLimit-Limit: ' . $max_request_per_time);
+		header('X-RateLimit-Reset: ' . $rate_reset);
+		header('X-RateLimit-Remaining: ' . $rate_remaining);
 
 		$cache->set($token_hash, $details);
 	}
