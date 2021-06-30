@@ -6,6 +6,12 @@ e utiliza [Semantic Versioning](https://semver.org/lang/pt-BR/spec/v2.0.0.html).
 
 ## [Não lançada]
 
+## [1.6.1] (Data de lançamento: 30.06.2021)
+### Corrigido
+- Correção na tradução da página de atualização do OpenCart Brasil
+- Opção de configurar a quantidade de tentativas de login na administração
+- Melhorias no carregamento de fontes, arquivos de estilos e arquivos de scripts
+
 ## [1.6.0] (Data de lançamento: 25.06.2021)
 ### Corrigido
 - Correção na instalação por CLI
@@ -674,7 +680,8 @@ e utiliza [Semantic Versioning](https://semver.org/lang/pt-BR/spec/v2.0.0.html).
 - Cupons de descontos para demonstração.
 - Moedas: Euro e Libra esterlina.
 
-[Não lançada]: https://github.com/opencartbrasil/opencartbrasil/compare/v1.6.0...HEAD
+[Não lançada]: https://github.com/opencartbrasil/opencartbrasil/compare/v1.6.1...HEAD
+[1.6.1]: https://github.com/opencartbrasil/opencartbrasil/compare/v1.6.0...v1.6.1
 [1.6.0]: https://github.com/opencartbrasil/opencartbrasil/compare/v1.5.1...v1.6.0
 [1.5.1]: https://github.com/opencartbrasil/opencartbrasil/compare/v1.5.0...v1.5.1
 [1.5.0]: https://github.com/opencartbrasil/opencartbrasil/compare/v1.4.15...v1.5.0

@@ -43,10 +43,10 @@
   </div>
 </footer>
 {% for style in styles %}
-<link href="{{ style.href }}" type="text/css" rel="{{ style.rel }}" media="{{ style.media }}" />
+<link rel="{{ style.rel }}" type="text/css" href="{{ style.href }}" media="{{ style.media }}" />
 {% endfor %}
 {% for script in scripts %}
-<script src="{{ script }}" type="text/javascript"></script>
+<script type="text/javascript" src="{{ script }}"></script>
 {% endfor %}
 <!--
 OpenCart is open source software and you are free to remove the powered by OpenCart if you want, but its generally accepted practise to make a small donation.

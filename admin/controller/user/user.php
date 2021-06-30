@@ -54,6 +54,10 @@ class ControllerUserUser extends Controller {
 		if (($this->request->server['REQUEST_METHOD'] == 'POST') && $this->validateForm()) {
 			$this->model_user_user->editUser($this->request->get['user_id'], $this->request->post);
 
+			if ($this->request->post['password']) {
+				$this->model_user_user->deleteLoginAttempts($this->request->post['username']);
+			}
+
 			$this->session->data['success'] = $this->language->get('text_success');
 
 			$url = '';
@@ -403,7 +407,7 @@ class ControllerUserUser extends Controller {
 		} else {
 			$data['thumb'] = $this->model_tool_image->resize('no_image.png', 100, 100);
 		}
-		
+
 		$data['placeholder'] = $this->model_tool_image->resize('no_image.png', 100, 100);
 
 		if (isset($this->request->post['status'])) {
