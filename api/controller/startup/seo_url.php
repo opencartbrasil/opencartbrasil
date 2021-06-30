@@ -82,17 +82,13 @@ class ControllerStartupSeoUrl extends Controller {
 
 			$allowedMethod = array_map('strtoupper', $route['methods']);
 
-			if (in_array($requestMethod, $allowedMethod)) {
-				foreach ($matches as $key => $value) {
-					$this->request->get[$key] = $value;
-				}
-
-				$this->request->get['route'] = $route['action'];
-
-				$pathMatchFound = true;
-
-				break;
+			foreach ($matches as $key => $value) {
+				$this->request->get[$key] = $value;
 			}
+
+			$this->request->get['route'] = $route['action'];
+
+			$pathMatchFound = true;
 		}
 
 		if ($pathMatchFound === false) {

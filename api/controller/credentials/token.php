@@ -6,8 +6,6 @@ class ControllerCredentialsToken extends Controller {
 
 	private const EXPIRE = 3600;
 
-	private const HTTP_STATUS_401 = 'HTTP/1.1 401 Unauthorized';
-
 	public function index() {
 		$this->load->model('credentials/token');
 
