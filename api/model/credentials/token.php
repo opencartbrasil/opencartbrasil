@@ -13,7 +13,7 @@ class ModelCredentialsToken extends Model {
 	 * @return bool|array
 	 */
 	public function login($client_id, $client_secret) {
-		return true;
+		return $client_id === "opencartbrasil" && $client_secret === "v5market";
 	}
 
 	/**
