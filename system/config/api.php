@@ -11,6 +11,11 @@ $_['secret_key']			= 'opencartbrasil';
 $_['api_cache_expire']		= 60;
 $_['max_request_per_time']  = 5;
 
+// Ignore middlewares in
+$_['ignored_routers']		= array(
+	'credentials/token'
+);
+
 // Log
 $_['error_filename']     = sprintf('api-%d-%s-%d.log', date('Y'), date('m'), date('d'));
 

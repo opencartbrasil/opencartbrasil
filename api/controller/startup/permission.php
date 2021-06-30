@@ -2,11 +2,7 @@
 
 class ControllerStartupPermission extends Controller {
 	public function index() {
-		$ignoredRoutes = [
-			'credentials/token',
-		];
-
-		if (in_array($this->request->get['route'], $ignoredRoutes)) {
+		if (in_array($this->request->get['route'], $this->config->get('ignored_routers'))) {
 			return;
 		}
 
