@@ -32,18 +32,16 @@ class ControllerStartupSeoUrl extends Controller {
 		$parsed_url = parse_url($_SERVER['REQUEST_URI']);
 
 		$requestMethod = $_SERVER['REQUEST_METHOD'];
-
 		$path_default = '/';
-
 		$pathMatchFound = false;
 
-		$routers = array_filter($this->routers, function($route) use ($requestMethod) {
-			if (!isset($route['methods'])) {
-				$route['methods'] = ['GET'];
-			}
+		$routers = $this->filterRoutersByMethod($requestMethod, $this->routers);
 
-			return in_array($requestMethod, $route['methods']);
-		});
+		if (empty($routers)) {
+			return new Action('status_code/method_not_allowed');
+		}
+
+		$routers = $this->filterRoutersByPath($parsed_url, $routers);
 
 		if (empty($routers)) {
 			return new Action('status_code/method_not_allowed');
@@ -99,7 +97,38 @@ class ControllerStartupSeoUrl extends Controller {
 					'message' => 'The route accessed is invalid.'
 				)
 			)));
+
 			return new Action('status_code/bad_request');
 		}
+	}
+
+	/**
+	 * Filtra as rotas com base no método
+	 *
+	 * @param array $routers
+	 *
+	 * @return array
+	 */
+	public function filterRoutersByMethod(string $requestMethod, array $routers = []) {
+		return array_filter($routers, function($route) use ($requestMethod) {
+			if (!isset($route['methods'])) {
+				$route['methods'] = ['GET'];
+			}
+
+			return in_array($requestMethod, $route['methods']);
+		});
+	}
+
+	/**
+	 * Filtra as rotas com base no caminho da URL
+	 *
+	 * @param array $routers
+	 *
+	 * @return array
+	 */
+	public function filterRoutersByPath($parsed_url, array $routers = []) {
+		return array_filter($routers, function($route) use ($parsed_url) {
+			return preg_match('~^' . $route['path'] . '$~i', $parsed_url['path']);
+		});
 	}
 }
