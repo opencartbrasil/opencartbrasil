@@ -17,10 +17,12 @@ class ControllerStartupPermission extends Controller {
 		if ($has_permission === false) {
 			$this->response->setOutput(json_encode([
 				'success' => false,
-				'errors' => [
-					'code' => 'invalid_permission',
-					'message' => 'You don\'t have permission'
-				]
+				'errors' => array(
+					array(
+						'code' => 'invalid_permission',
+						'message' => 'You don\'t have permission'
+					)
+				)
 			]));
 			return new Action('status_code/forbidden');
 		}
