@@ -309,7 +309,7 @@ $_['api_schema_product_form'] = json_decode(<<<'JSON'
               "select",
               "date",
               "time",
-              "datetime",
+              "date-time",
               "file"
             ]
           },
@@ -366,10 +366,7 @@ $_['api_schema_product_form'] = json_decode(<<<'JSON'
                     ]
                   }
                 }
-              },
-              "required": [
-                "option_id"
-              ]
+              }
             }
           },
           {
@@ -381,14 +378,68 @@ $_['api_schema_product_form'] = json_decode(<<<'JSON'
               }
             },
             "then": {
-              "additionalProperties": {
-                "type": "string"
+              "properties": {
+                "value": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          {
+            "if": {
+              "properties": {
+                "type": {
+                  "pattern": "date"
+                }
+              }
+            },
+            "then": {
+              "properties": {
+                "value": {
+                  "type": "string",
+                  "format": "date"
+                }
+              }
+            }
+          },
+          {
+            "if": {
+              "properties": {
+                "type": {
+                  "pattern": "date-time"
+                }
+              }
+            },
+            "then": {
+              "properties": {
+                "value": {
+                  "type": "string",
+                  "format": "date-time"
+                }
+              }
+            }
+          },
+          {
+            "if": {
+              "properties": {
+                "type": {
+                  "pattern": "time"
+                }
+              }
+            },
+            "then": {
+              "properties": {
+                "value": {
+                  "type": "string",
+                  "format": "time"
+                }
               }
             }
           }
         ],
         "required": [
-          "type"
+          "type",
+          "option_id"
         ]
       },
       "default": []
@@ -404,7 +455,11 @@ $_['api_schema_product_form'] = json_decode(<<<'JSON'
           "customer_group_id": {
             "$ref": "#/definitions/customer_group"
           }
-        }
+        },
+        "required": [
+          "recurring_id",
+          "customer_group_id"
+        ]
       },
       "default": []
     },
