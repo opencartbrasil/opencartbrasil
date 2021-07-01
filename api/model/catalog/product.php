@@ -174,6 +174,128 @@ class ModelCatalogProduct extends Model {
 			}
 		}
 
+		/** Register Options */
+		if (isset($product->options)) {
+			foreach ($product->options as $option) {
+				if (isset($option->value)) {
+					$value = $option->value;
+				} else {
+					$value = '';
+				}
+
+				if (isset($option->required)) {
+					$required = $option->required ? 1 : 0;
+				} else {
+					$required = 0;
+				}
+
+				$this->db->query('
+					INSERT INTO `' . DB_PREFIX . 'product_option`
+					SET `product_id` = "' . $product_id . '",
+						`option_id` = "' . intval($option->option_id) . '",
+						`value` = "' . $this->db->escape($value) . '",
+						`required` = "' . $required . '"
+				');
+
+				$product_option_id = intval($this->db->getLastId());
+
+				if (in_array($option->type, ['radio', 'checkbox', 'select'])) {
+					foreach ($option->values as $option_value) {
+						if (isset($option_value->price)) {
+							$price_value = $option_value->price->value ? $option_value->price->value : 0;
+							$price_prefix = isset($option_value->price->prefix) ? $option_value->price->prefix : '+';
+						} else {
+							$price_value = 0;
+							$price_prefix = '+';
+						}
+
+						if (isset($option_value->points)) {
+							$points_value = $option_value->points->value ? $option_value->points->value : 0;
+							$points_prefix = isset($option_value->points->prefix) ? $option_value->points->prefix : '+';
+						} else {
+							$points_value = 0;
+							$points_prefix = '+';
+						}
+
+						if (isset($option_value->weight)) {
+							$weight_value = $option_value->weight->value ? $option_value->weight->value : 0;
+							$weight_prefix = isset($option_value->weight->prefix) ? $option_value->weight->prefix : '+';
+						} else {
+							$weight_value = 0;
+							$weight_prefix = '+';
+						}
+
+						$this->db->query('
+							INSERT INTO `' . DB_PREFIX . 'product_option_value`
+							SET `product_option_id` = "' . $product_option_id . '",
+								`product_id` = "' . $product_id . '",
+								`option_id` = "' . intval($option->option_id) . '",
+								`option_value_id` = "' . intval($option_value->option_value_id) . '",
+								`sku` = "' . $this->db->escape($option_value->sku) . '",
+								`quantity` = "' . intval($option_value->quantity) . '",
+								`subtract` = "' . intval($option_value->subtract) . '",
+								`price` = "' . floatval($price_value) . '",
+								`price_prefix` = "' . $this->db->escape($price_prefix) . '",
+								`points` = "' . floatval($points_value) . '",
+								`points_prefix` = "' . $this->db->escape($points_prefix) . '",
+								`weight` = "' . floatval($weight_value) . '",
+								`weight_prefix` = "' . $this->db->escape($weight_prefix) . '"
+						');
+					}
+				}
+			}
+		}
+
+		/** Register Recurrings */
+		if (isset($product->recurring)) {
+			foreach ($product->recurring as $recurring) {
+				$this->db->query('
+					INSERT INTO `' . DB_PREFIX . 'product_recurring`
+					SET `product_id` = "' . $product_id . '",
+						`recurring_id` = "' . intval($recurring->recurring_id) . '",
+						`customer_group_id` = "' . intval($recurring->customer_group_id) . '"
+				');
+			}
+		}
+
+		/** Register Related */
+		if (isset($product->product_related)) {
+			foreach ($product->product_related as $related_id) {
+				$this->db->query('
+					INSERT INTO `' . DB_PREFIX . 'product_related`
+					SET `product_id` = "' . intval($product_id) . '",
+						`related_id` = "' . intval($related_id) . '"
+				');
+			}
+		}
+
+		/** Register Points */
+		if (isset($product->points_reward)) {
+			foreach ($product->points_reward as $reward) {
+				$this->db->query('
+					INSERT INTO `' . DB_PREFIX . 'product_reward`
+					SET `product_id` = "' . intval($product_id) . '",
+						`customer_group_id` = "' . intval($reward->customer_group_id) . '",
+						`points` = "' . intval($reward->points) . '"
+				');
+			}
+		}
+
+		/** Register Special */
+		if (isset($product->special)) {
+			foreach ($product->special as $special) {
+				$this->db->query('
+					INSERT INTO `' . DB_PREFIX . 'product_special`
+					SET `product_id` = "' . $product_id . '",
+						`customer_group_id` = "' . intval($special->customer_group_id) . '",
+						`priority` = "' . intval($special->priority) . '",
+						`price` = "' . intval($special->price) . '",
+						`date_start` = "' . $this->db->escape($special->date_start) . '",
+						`date_end` = "' . $this->db->escape($special->date_end) . '"
+				');
+			}
+		}
+
 		$product->id = $product_id;
 
 		return $product;
