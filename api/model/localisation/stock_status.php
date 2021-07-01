@@ -7,7 +7,7 @@ class ModelLocalisationStockStatus extends Model {
 		$result = $this->cache->get($cache_key);
 
 		if (!$result) {
-			$query = $this->db->query("SELECT * FROM " . DB_PREFIX . "stock_status WHERE stock_status_id = '" . $stock_status_id . "' AND language_id = '" . (int)$this->config->get('config_language_id') . "'");
+			$query = $this->db->query("SELECT * FROM " . DB_PREFIX . "stock_status WHERE stock_status_id = '" . $stock_status_id . "'");
 
 			$result = $query->row;
 
