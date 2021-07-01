@@ -26,7 +26,7 @@ class ControllerProductCreate extends Controller {
 		$data = $result->data;
 
 		/** Validate Request */
-		$isValid = $this->validateRequest($this->request->post);
+		$isValid = $this->validateRequest($this->request->json);
 
 		if ($isValid !== true) {
 			return $this->response($isValid, self::HTTP_STATUS_400);
@@ -143,16 +143,16 @@ class ControllerProductCreate extends Controller {
 	/**
 	 * Valida os dados de entrada
 	 *
-	 * @param array $data
+	 * @param stdClass $data
 	 *
 	 * @return bool
 	 */
-	protected function validateRequest(array $data = array()) {
+	protected function validateRequest(\stdClass $data) {
 		// Tax
-		if (isset($data['tax_class_id'])) {
+		if (isset($data->tax_class_id)) {
 			$this->load->model('localisation/tax_class');
 
-			$tax_class = !!$this->model_localisation_tax_class->getTaxClass($data['tax_class_id']);
+			$tax_class = !!$this->model_localisation_tax_class->getTaxClass($data->tax_class_id);
 
 			if ($tax_class === false) {
 				$errors[] = [
@@ -163,10 +163,10 @@ class ControllerProductCreate extends Controller {
 		}
 
 		// Stock
-		if (isset($data['stock_status_id'])) {
+		if (isset($data->stock_status_id)) {
 			$this->load->model('localisation/stock_status');
 
-			$stock_status = !!$this->model_localisation_stock_status->getStockStatus($data['stock_status_id']);
+			$stock_status = !!$this->model_localisation_stock_status->getStockStatus($data->stock_status_id);
 
 			if ($stock_status === false) {
 				$errors[] = [
@@ -177,15 +177,15 @@ class ControllerProductCreate extends Controller {
 		}
 
 		// Dimensions
-		if (isset($data['dimensions'])) {
+		if (isset($data->dimensions)) {
 			$this->load->model('localisation/length_class');
 
-			$dimensions = $data['dimensions'];
+			$dimensions = $data->dimensions;
 
-			if (isset($dimensions['length_class_unit'])) {
-				$length_class = !!$this->model_localisation_length_class->getLengthClassIdByUnit($dimensions['length_class_unit']);
+			if (isset($dimensions->length_class_unit)) {
+				$length_class = !!$this->model_localisation_length_class->getLengthClassIdByUnit($dimensions->length_class_unit);
 			} else {
-				$length_class = !!$this->model_localisation_length_class->getLengthClass($dimensions['length_class_id']);
+				$length_class = !!$this->model_localisation_length_class->getLengthClass($dimensions->length_class_id);
 			}
 
 			if ($stock_status === false) {
@@ -199,10 +199,10 @@ class ControllerProductCreate extends Controller {
 		}
 
 		// Manufacturer
-		if (isset($data['manufacturer_id'])) {
+		if (isset($data->manufacturer_id)) {
 			$this->load->model('catalog/manufacturer');
 
-			$manufacturer = !!$this->model_catalog_manufacturer->getManufacturer($data['manufacturer_id']);
+			$manufacturer = !!$this->model_catalog_manufacturer->getManufacturer($data->manufacturer_id);
 
 			if ($manufacturer === false) {
 				$errors[] = [
@@ -213,10 +213,10 @@ class ControllerProductCreate extends Controller {
 		}
 
 		// Categories
-		if (isset($data['categories'])) {
+		if (isset($data->categories)) {
 			$this->load->model('catalog/category');
 
-			$categories = $this->model_catalog_category->getHasCategoryById($data['categories']);
+			$categories = $this->model_catalog_category->getHasCategoryById($data->categories);
 
 			if ($categories !== true) {
 				$errors[] = [
@@ -227,10 +227,10 @@ class ControllerProductCreate extends Controller {
 		}
 
 		// Filters
-		if (isset($data['filters'])) {
+		if (isset($data->filters)) {
 			$this->load->model('catalog/filter');
 
-			$filters = $this->model_catalog_filter->getHasFilterById($data['filters']);
+			$filters = $this->model_catalog_filter->getHasFilterById($data->filters);
 
 			if ($filters !== true) {
 				$errors[] = [
@@ -241,10 +241,10 @@ class ControllerProductCreate extends Controller {
 		}
 
 		// Stores
-		if (isset($data['stores'])) {
+		if (isset($data->stores)) {
 			$this->load->model('setting/store');
 
-			$stores = $this->model_setting_store->getHasStoreById($data['stores']);
+			$stores = $this->model_setting_store->getHasStoreById($data->stores);
 
 			if ($stores !== true) {
 				$errors[] = [
@@ -255,10 +255,10 @@ class ControllerProductCreate extends Controller {
 		}
 
 		// Download
-		if (isset($data['downloads'])) {
+		if (isset($data->downloads)) {
 			$this->load->model('catalog/download');
 
-			$downloads_id = array_filter($data['downloads'], 'is_numeric');
+			$downloads_id = array_filter($data->downloads, 'is_numeric');
 
 			if ($downloads_id) {
 				$downloads = $this->model_catalog_download->getHasDownloadById($downloads_id);
@@ -273,7 +273,7 @@ class ControllerProductCreate extends Controller {
 				unset($downloads);
 			}
 
-			$downloads_url = array_filter($data['downloads'], 'is_string');
+			$downloads_url = array_filter($data->downloads, 'is_string');
 
 			if ($downloads_url) {
 				$this->validateUrl($errors, $downloads_url);
@@ -284,8 +284,8 @@ class ControllerProductCreate extends Controller {
 		}
 
 		// Product Related
-		if (isset($data['product_related'])) {
-			$products_related = $this->model_catalog_product->getHasProductById($data['product_related']);
+		if (isset($data->product_related)) {
+			$products_related = $this->model_catalog_product->getHasProductById($data->product_related);
 
 			if ($products_related !== true) {
 				$errors[] = [
@@ -298,12 +298,12 @@ class ControllerProductCreate extends Controller {
 		}
 
 		// Attributes
-		if (isset($data['attributes'])) {
+		if (isset($data->attributes)) {
 			$this->load->model('catalog/attribute');
 
 			$attributes_id = array_map(function($attribute) {
-				return $attribute['id'];
-			}, $data['attributes']);
+				return $attribute->id;
+			}, $data->attributes);
 
 			$attributes = $this->model_catalog_attribute->getHasAttributeById($attributes_id);
 
@@ -314,8 +314,8 @@ class ControllerProductCreate extends Controller {
 				];
 			}
 
-			foreach ($data['attributes'] as $attribute) {
-				if (!isset($attribute['default'])) {
+			foreach ($data->attributes as $attribute) {
+				if (!isset($attribute->default)) {
 					$errors[] = [
 						'code' => 12,
 						'message' => 'O campo "default" é obrigatório para os atributos'
@@ -327,18 +327,18 @@ class ControllerProductCreate extends Controller {
 		}
 
 		// Options
-		if (isset($data['options'])) {
+		if (isset($data->options)) {
 			$this->load->model('catalog/option');
 
-			foreach ($data['options'] as $option) {
-				if (in_array($option['type'], ['radio', 'checkbox', 'select'])) {
-					$option_id = $option['option_id'];
+			foreach ($data->options as $option) {
+				if (in_array($option->type, ['radio', 'checkbox', 'select'])) {
+					$option_id = $option->option_id;
 
 					$option_exist = !!$this->model_catalog_option->getOption($option_id);
 
 					if ($option_exist) {
-						foreach ($option['values'] as $value) {
-							$option_value_id = $value['option_value_id'];
+						foreach ($option->values as $value) {
+							$option_value_id = $value->option_value_id;
 
 							$option_value_exist = !!$this->model_catalog_option->optionValueIsRelatedToOptionId($option_id, $option_value_id);
 
@@ -366,23 +366,23 @@ class ControllerProductCreate extends Controller {
 		}
 
 		// Recurring
-		if (isset($data['recurring'])) {
+		if (isset($data->recurring)) {
 			$this->load->model('catalog/recurring');
 			$this->load->model('customer/customer_group');
 
-			$recurrings = $data['recurring'];
+			$recurrings = $data->recurring;
 
 			foreach ($recurrings as $recurring) {
-				$recurring_exist = !!$this->model_catalog_recurring->getRecurring($recurring['recurring_id']);
+				$recurring_exist = !!$this->model_catalog_recurring->getRecurring($recurring->recurring_id);
 
 				if ($recurring_exist === false) {
 					$errors[] = [
 						'code' => 15,
-						'message' => 'O tipo de assinatura "' . $recurring['recurring_id'] . '" não existe'
+						'message' => 'O tipo de assinatura "' . $recurring->recurring_id . '" não existe'
 					];
 				}
 
-				$this->validateCustomerGroupById($errors, (int)$recurring['customer_group_id']);
+				$this->validateCustomerGroupById($errors, (int)$recurring->customer_group_id);
 			}
 
 			unset($recurrings);
@@ -392,43 +392,43 @@ class ControllerProductCreate extends Controller {
 		}
 
 		// Price special
-		if (isset($data['special'])) {
+		if (isset($data->special)) {
 			$this->load->model('customer/customer_group');
 
-			foreach ($data['special'] as $special) {
-				$this->validateCustomerGroupById($errors, (int)$special['customer_group_id']);
+			foreach ($data->special as $special) {
+				$this->validateCustomerGroupById($errors, (int)$special->customer_group_id);
 			}
 
 			unset($special);
 		}
 
 		// Price discount
-		if (isset($data['discount'])) {
+		if (isset($data->discount)) {
 			$this->load->model('customer/customer_group');
 
-			foreach ($data['discount'] as $discount) {
-				$this->validateCustomerGroupById($errors, (int)$discount['customer_group_id']);
+			foreach ($data->discount as $discount) {
+				$this->validateCustomerGroupById($errors, (int)$discount->customer_group_id);
 			}
 
 			unset($discount);
 		}
 
 		// Image
-		if (isset($data['image'])) {
-			$this->validateUrl($errors, (array)$data['image']);
+		if (isset($data->image)) {
+			$this->validateUrl($errors, (array)$data->image);
 		}
 
 		// Additional Images
-		if (isset($data['additional_images'])) {
-			$this->validateUrl($errors, $data['additional_images']);
+		if (isset($data->additional_images)) {
+			$this->validateUrl($errors, $data->additional_images);
 		}
 
 		// Points Reward
-		if (isset($data['points_reward'])) {
+		if (isset($data->points_reward)) {
 			$this->load->model('customer/customer_group');
 
-			foreach ($data['points_reward'] as $points_reward) {
-				$this->validateCustomerGroupById($errors, (int)$points_reward['customer_group_id']);
+			foreach ($data->points_reward as $points_reward) {
+				$this->validateCustomerGroupById($errors, (int)$points_reward->customer_group_id);
 			}
 
 			unset($points_reward);
