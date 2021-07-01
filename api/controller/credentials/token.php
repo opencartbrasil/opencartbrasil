@@ -103,9 +103,9 @@ class ControllerCredentialsToken extends Controller {
 		$jwt = JWT::encode($payload, $this->config->get('secret_key'));
 
 		$json = [
-			'access_token' 		=> (string)$jwt,
-			'token_type' 		=> 'Bearer',
-			'expires_in' 		=> self::EXPIRE - 1,
+			'access_token' 	=> (string)$jwt,
+			'token_type' 	=> 'Bearer',
+			'expires_in' 	=> self::EXPIRE - 1,
 		];
 
 		$this->response->setOutput(json_encode($json));
