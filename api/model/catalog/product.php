@@ -1,16 +1,16 @@
 <?php
 
 class ModelCatalogProduct extends Model {
-	public function create($product) {
+	public function add($product) {
 		// Reset values
-		if (!isset($product->dimentions)) {
-			$product->dimentions = new \stdClass;
-			$product->dimentions->weight = 0;
-			$product->dimentions->weight_class_id = $this->config->get('config_weight_class_id');
-			$product->dimentions->length = 0;
-			$product->dimentions->width = 0;
-			$product->dimentions->height = 0;
-			$product->dimentions->length_class_id = $this->config->get('config_length_class_id');
+		if (!isset($product->dimensions)) {
+			$product->dimensions = new \stdClass;
+			$product->dimensions->weight = 0;
+			$product->dimensions->weight_class_id = $this->config->get('config_weight_class_id');
+			$product->dimensions->length = 0;
+			$product->dimensions->width = 0;
+			$product->dimensions->height = 0;
+			$product->dimensions->length_class_id = $this->config->get('config_length_class_id');
 		}
 
 		/** Register Product */
@@ -35,12 +35,12 @@ class ModelCatalogProduct extends Model {
 				`points` = "' . intval($product->points_to_buy) . '",
 				`tax_class_id` = "' . intval($product->tax_class_id) . '",
 				`date_available` = "' . $this->db->escape($product->date_available) . '",
-				`weight` = "' . floatval($product->dimentions->weight) . '",
-				`weight_class_id` = "' . intval($product->dimentions->weight_class_id) . '",
-				`length` = "' . floatval($product->dimentions->length) . '",
-				`width` = "' . floatval($product->dimentions->width) . '",
-				`height` = "' . floatval($product->dimentions->height) . '",
-				`length_class_id` = "' . intval($product->dimentions->length_class_id) . '",
+				`weight` = "' . floatval($product->dimensions->weight) . '",
+				`weight_class_id` = "' . intval($product->dimensions->weight_class_id) . '",
+				`length` = "' . floatval($product->dimensions->length) . '",
+				`width` = "' . floatval($product->dimensions->width) . '",
+				`height` = "' . floatval($product->dimensions->height) . '",
+				`length_class_id` = "' . intval($product->dimensions->length_class_id) . '",
 				`subtract` = "' . !!$product->subtract . '",
 				`minimum` = "' . intval($product->minimum) . '",
 				`sort_order` = "' . intval($product->sort_order) . '",
@@ -339,7 +339,7 @@ class ModelCatalogProduct extends Model {
 
 		/** Register Discounts */
 		if (isset($product->discounts)) {
-			foreach ($product->discount as $discount) {
+			foreach ($product->discounts as $discount) {
 				$this->db->query('
 					INSERT INTO `' . DB_PREFIX . 'product_discount`
 					SET `product_id` = "' . $product_id . '",
