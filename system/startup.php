@@ -101,6 +101,7 @@ require_once(modification(DIR_SYSTEM . 'engine/webhook.php'));
 // Helper
 require_once(DIR_SYSTEM . 'helper/general.php');
 require_once(DIR_SYSTEM . 'helper/utf8.php');
+require_once(DIR_SYSTEM . 'helper/slug.php');
 
 function start($application_config) {
 	require_once(DIR_SYSTEM . 'framework.php');

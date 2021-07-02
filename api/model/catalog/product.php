@@ -498,31 +498,68 @@ class ModelCatalogProduct extends Model {
 			}
 		}
 
-		$product->id = $product_id;
-
-		return $product;
-	}
-
-	/**
-	 * Verifica se um ou mais produto existe, através do ID
-	 *
-	 * @param int[] $data
-	 *
-	 * @return bool|array Retorna true/false ou um array com as diferenças de IDs
-	 */
-	public function getHasProductById(array $data = array()) {
-		$products_id = array_map('intval', $data);
-
-		$result = $this->db->query('SELECT product_id FROM `' . DB_PREFIX . 'product` WHERE `product_id` IN (' . implode(',', $products_id) . ')');
-
-		if (count($products_id) > $result->num_rows) {
-			$products_founds = array_map(function($item) {
-				return $item['product_id'];
-			}, $result->rows);
-
-			return array_diff($products_id, $products_founds);
+		/** Register Categories */
+		if (isset($product->categories)) {
+			foreach ($product->categories as $category_id) {
+				$this->db->query('
+					INSERT INTO `' . DB_PREFIX . 'product_to_category`
+					SET `product_id` = "' . $product_id . '",
+						`category_id` = "' . intval($category_id) . '"
+				');
+			}
 		}
 
-		return true;
+		/** Register Downloads */
+		if (isset($product->downloads)) {
+			foreach ($product->downloads as $download_id) {
+				$this->db->query('
+					INSERT INTO `' . DB_PREFIX . 'product_to_download`
+					SET `product_id` = "' . $product_id . '",
+						`download_id` = "' . intval($download_id) . '"
+				');
+			}
+		}
+
+		/** Register SEO URL */
+		if (isset($product->seo_url_generate)) {
+			$seo_url_generate_auto = isset($product->seo_url_generate->auto) ? !!$product->seo_url_generate->auto : false;
+
+			if ($seo_url_generate_auto) {
+				$seo_url_suffix = isset($product->seo_url_generate->suffix) ? !!$product->seo_url_generate->suffix : false;
+				$seo_url_prefix = isset($product->seo_url_generate->prefix) ? !!$product->seo_url_generate->prefix : false;
+
+				foreach ($this->config->get('languages') as $language_code => $language) {
+					if (isset($product->name[$language_code])) {
+						$product_name = $product->name[$language_code];
+					} else {
+						$product_name = $product->name["default"];
+					}
+
+					$seo_url[$language['language_id']] = slug("{$seo_url_prefix}{$product_name}{$seo_url_suffix}");
+				}
+
+				foreach ($product->stores as $store_id) {
+					foreach ($seo_url as $language_id => $query) {
+						$query_has_exist = !!$this->db->query('
+							SELECT seo_url_id
+							FROM `' . DB_PREFIX . 'seo_url`
+							WHERE `keyword` = "' . $this->db->escape($query) . '"
+						')->num_rows;
+
+						if ($query_has_exist) {
+							$query .= "-{$product_id}";
+						}
+
+						$this->db->query('
+							INSERT INTO `' . DB_PREFIX . 'seo_url`
+							SET `store_id` = "' . intval($store_id) . '",
+								`language_id` = "' . intval($language_id) . '",
+								`query` = "product_id=' . $product_id . '",
+								`keyword` = "' . $this->db->escape($query) . '"
+						');
+					}
+				}
+			}
+		}
 	}
 }
