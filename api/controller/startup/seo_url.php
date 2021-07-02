@@ -10,8 +10,8 @@ class ControllerStartupSeoUrl extends Controller {
 		];
 		$this->routers[] = [
 			'path' => '/api/product',
-			'action' => 'product/info',
-			'methods' => ['GET', 'DELETE']
+			'action' => 'product/create',
+			'methods' => ['POST']
 		];
 
 		$this->routers[] = [
@@ -21,7 +21,7 @@ class ControllerStartupSeoUrl extends Controller {
 
 		$this->routers[] = [
 			'path' => '/api/product/(?P<product_id>\d+)',
-			'action' => 'product/update',
+			'action' => 'product/create',
 			'methods' => ['PUT']
 		];
 

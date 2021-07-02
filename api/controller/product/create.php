@@ -16,6 +16,12 @@ class ControllerProductCreate extends Controller {
 
 		$errors = [];
 
+		if (isset($this->request->get['product_id'])) {
+			$product_id = intval($this->request->get['product_id']);
+		} else {
+			$product_id = null;
+		}
+
 		/** Validate Schema */
 		$result = $this->validateJsonSchema($this->request->json);
 
@@ -35,12 +41,14 @@ class ControllerProductCreate extends Controller {
 		/** Download main image and additional images */
 		$this->downloadImages($data);
 
-		$result = $this->model_catalog_product->create($data);
+		if ($product_id === null) {
+			$result = $this->model_catalog_product->add($data);
 
-		$this->response(
-			[ "id" => $result->id ],
-			self::HTTP_STATUS_201
-		);
+			return $this->response(
+				[ "id" => $result->id ],
+				self::HTTP_STATUS_201
+			);
+		}
 	}
 
 	/**
