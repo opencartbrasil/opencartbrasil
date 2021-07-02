@@ -52,6 +52,208 @@ class ModelCatalogProduct extends Model {
 
 		$product_id = intval($this->db->getLastId());
 
+		$this->saveData($product_id, $product);
+
+		$product->id = $product_id;
+
+		return $product;
+	}
+
+	public function update(int $product_id, $product) {
+		// Reset values
+		if (!isset($product->dimensions)) {
+			$product->dimensions = new \stdClass;
+			$product->dimensions->weight = 0;
+			$product->dimensions->weight_class_id = $this->config->get('config_weight_class_id');
+			$product->dimensions->length = 0;
+			$product->dimensions->width = 0;
+			$product->dimensions->height = 0;
+			$product->dimensions->length_class_id = $this->config->get('config_length_class_id');
+		}
+
+		/** Register Product */
+		$this->db->query('
+			UPDATE `' . DB_PREFIX . 'product`
+			SET `model` = "' . $this->db->escape($product->model) . '",
+				`sku` = "' . $this->db->escape($product->sku) . '",
+				`ncm` = "' . $this->db->escape($product->ncm) . '",
+				`cest` = "' . $this->db->escape($product->cest) . '",
+				`upc` = "' . $this->db->escape($product->upc) . '",
+				`ean` = "' . $this->db->escape($product->ean) . '",
+				`jan` = "' . $this->db->escape($product->jan) . '",
+				`isbn` = "' . $this->db->escape($product->isbn) . '",
+				`mpn` = "' . $this->db->escape($product->mpn) . '",
+				`location` = "' . $this->db->escape($product->location) . '",
+				`quantity` = "' . intval($product->quantity) . '",
+				`stock_status_id` = "' . intval($product->stock_status_id) . '",
+				`image` = "' . $this->db->escape($product->image) . '",
+				`manufacturer_id` = "' . intval($product->manufacturer_id) . '",
+				`shipping` = "' . !!$product->shipping . '",
+				`price` = "' . floatval($product->price) . '",
+				`points` = "' . intval($product->points_to_buy) . '",
+				`tax_class_id` = "' . intval($product->tax_class_id) . '",
+				`date_available` = "' . $this->db->escape($product->date_available) . '",
+				`weight` = "' . floatval($product->dimensions->weight) . '",
+				`weight_class_id` = "' . intval($product->dimensions->weight_class_id) . '",
+				`length` = "' . floatval($product->dimensions->length) . '",
+				`width` = "' . floatval($product->dimensions->width) . '",
+				`height` = "' . floatval($product->dimensions->height) . '",
+				`length_class_id` = "' . intval($product->dimensions->length_class_id) . '",
+				`subtract` = "' . !!$product->subtract . '",
+				`minimum` = "' . intval($product->minimum) . '",
+				`sort_order` = "' . intval($product->sort_order) . '",
+				`status` = "' . !!$product->status . '",
+				`viewed` = "' . intval($product->viewed) . '",
+				`date_added` = NOW(),
+				`date_modified` = NOW()
+			WHERE `product_id` = "' . intval($product_id) . '";
+		');
+	}
+
+	public function getProduct(int $product_id) {
+		$query = $this->db->query('
+			SELECT DISTINCT *
+			FROM `' . DB_PREFIX . 'product`
+			WHERE `product_id` = "' . $product_id . '"');
+
+		return $query->row;
+	}
+
+	public function getProductAttributes(int $product_id) {
+		$query = $this->db->query('
+			SELECT pa.*, l.code
+			FROM `' . DB_PREFIX . 'product_attribute` pa
+			LEFT JOIN `' . DB_PREFIX . 'language` l ON (l.language_id = pa.language_id)
+			WHERE pa.`product_id` = "' . $product_id . '"');
+
+		if (!$query->num_rows) {
+			return array();
+		}
+
+		$result = array();
+
+		foreach ($query->rows as $key => $row) {
+			$result[$row['attribute_id']]['attribute_id'] = $row['attribute_id'];
+			$result[$row['attribute_id']][$row['code']] = $row['text'];
+		}
+
+		return array_values($result);
+	}
+
+	public function getProductDescriptions(int $product_id) {
+		$query = $this->db->query('
+			SELECT pd.*, l.code AS language_code
+			FROM `' . DB_PREFIX . 'product_description` pd
+			LEFT JOIN `' . DB_PREFIX . 'language` l ON (l.language_id = pd.language_id)
+			WHERE pd.`product_id` = "' . $product_id . '"');
+
+		if (!$query->num_rows) {
+			return array();
+		}
+
+		$result = array();
+
+		foreach ($query->rows as $key => $row) {
+			$result['name'][$row['language_code']] = $row['name'];
+			$result['description'][$row['language_code']] = $row['description'];
+			$result['tag'][$row['language_code']] = empty($row['tag']) ? [] : explode(',', $row['tag']);
+			$result['meta_title'][$row['language_code']] = $row['meta_title'];
+			$result['meta_description'][$row['language_code']] = $row['meta_description'];
+			$result['meta_keyword'][$row['language_code']] = $row['meta_keyword'];
+		}
+
+		return $result;
+	}
+
+	public function getProductDiscounts(int $product_id) {
+		$query = $this->db->query('
+			SELECT * FROM `' . DB_PREFIX . 'product_discount`
+			WHERE `product_id` = "' . $product_id . '"
+		');
+
+		$result = array();
+
+		foreach ($query->rows as $row) {
+			$result[] = [
+				'customer_group_id' => intval($row['customer_group_id']),
+				'price' => floatval($row['price']),
+				'priority' => intval($row['priority']),
+				'date_start' => $row['date_start'],
+				'date_end' => $row['date_end'],
+				'quantity' => intval($row['quantity']),
+			];
+		}
+
+		return $result;
+	}
+
+	public function getProductFilters(int $product_id) {
+		$query = $this->db->query('
+			SELECT `filter_id`
+			FROM `' . DB_PREFIX . 'product_filter`
+			WHERE `product_id` = "' . $product_id . '"
+		');
+
+		return $query->rows;
+	}
+
+	public function getProductRecurrings(int $product_id) {
+		$query = $this->db->query('
+			SELECT `recurring_id`, `customer_group_id`
+			FROM `' . DB_PREFIX . 'product_recurring`
+			WHERE `product_id` = "' . intval($product_id) . '"
+		');
+
+		return $query->rows;
+	}
+
+	public function getProductsRelated(int $product_id) {
+		/* $query = $this->db->query('
+			SELECT ``
+		'); */
+	}
+
+	public function getProductImages(int $product_id) {
+		$query = $this->db->query('
+			SELECT `image` FROM `' . DB_PREFIX . 'product_image`
+			WHERE `product_id` = "' . $product_id . '"
+		');
+
+		return $query->rows;
+	}
+
+	/**
+	 * Verifica se um ou mais produto existe, através do ID
+	 *
+	 * @param int[] $data
+	 *
+	 * @return bool|array Retorna true/false ou um array com as diferenças de IDs
+	 */
+	public function getHasProductById(array $data = array()) {
+		$products_id = array_map('intval', $data);
+
+		$result = $this->db->query('SELECT product_id FROM `' . DB_PREFIX . 'product` WHERE `product_id` IN (' . implode(',', $products_id) . ')');
+
+		if (count($products_id) > $result->num_rows) {
+			$products_founds = array_map(function($item) {
+				return $item['product_id'];
+			}, $result->rows);
+
+			return array_diff($products_id, $products_founds);
+		}
+
+		return true;
+	}
+
+	/**
+	 * Salva os detalhes de atributos, descrição, descontos, promoções, opções etc.
+	 *
+	 * @param int $product_id
+	 * @param \stdClass $product
+	 *
+	 * @return void
+	 */
+	private function saveData(int $product_id, $product) {
 		/** Register Product Description */
 		foreach ($this->config->get('languages') as $language_code => $language) {
 			if (isset($product->name[$language_code])) {
