@@ -190,26 +190,26 @@ $_['api_schema_product_form'] = json_decode(<<<'JSON'
       "type": "string",
       "format": "date"
     },
-    "dimentions": {
+    "dimensions": {
       "type": "object",
       "properties": {
         "length": {
-          "$ref": "#/definitions/dimention"
+          "$ref": "#/definitions/dimension"
         },
         "width": {
-          "$ref": "#/definitions/dimention"
+          "$ref": "#/definitions/dimension"
         },
         "height": {
-          "$ref": "#/definitions/dimention"
+          "$ref": "#/definitions/dimension"
         },
         "weight": {
-          "$ref": "#/definitions/dimention"
+          "$ref": "#/definitions/dimension"
         },
         "length_class_id": {
-          "$ref": "#/definitions/dimention"
+          "$ref": "#/definitions/dimension"
         },
         "weight_class_id": {
-          "$ref": "#/definitions/dimention"
+          "$ref": "#/definitions/dimension"
         }
       },
       "required": [
@@ -595,7 +595,7 @@ $_['api_schema_product_form'] = json_decode(<<<'JSON'
       "minimum": 0,
       "default": 0
     },
-    "dimention": {
+    "dimension": {
       "type": "number",
       "minimum": 0,
       "default": 0

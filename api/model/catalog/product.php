@@ -112,7 +112,10 @@ class ModelCatalogProduct extends Model {
 
 	public function getProduct(int $product_id) {
 		$query = $this->db->query('
-			SELECT DISTINCT *
+			SELECT
+				DISTINCT *,
+				CONVERT_TZ(`date_added`, @@time_zone, "+00:00") AS `date_added`,
+				CONVERT_TZ(`date_modified`, @@time_zone, "+00:00") AS `date_modified`
 			FROM `' . DB_PREFIX . 'product`
 			WHERE `product_id` = "' . $product_id . '"');
 
@@ -126,18 +129,7 @@ class ModelCatalogProduct extends Model {
 			LEFT JOIN `' . DB_PREFIX . 'language` l ON (l.language_id = pa.language_id)
 			WHERE pa.`product_id` = "' . $product_id . '"');
 
-		if (!$query->num_rows) {
-			return array();
-		}
-
-		$result = array();
-
-		foreach ($query->rows as $key => $row) {
-			$result[$row['attribute_id']]['attribute_id'] = $row['attribute_id'];
-			$result[$row['attribute_id']][$row['code']] = $row['text'];
-		}
-
-		return array_values($result);
+		return $query->rows;
 	}
 
 	public function getProductDescriptions(int $product_id) {
@@ -165,28 +157,6 @@ class ModelCatalogProduct extends Model {
 		return $result;
 	}
 
-	public function getProductDiscounts(int $product_id) {
-		$query = $this->db->query('
-			SELECT * FROM `' . DB_PREFIX . 'product_discount`
-			WHERE `product_id` = "' . $product_id . '"
-		');
-
-		$result = array();
-
-		foreach ($query->rows as $row) {
-			$result[] = [
-				'customer_group_id' => intval($row['customer_group_id']),
-				'price' => floatval($row['price']),
-				'priority' => intval($row['priority']),
-				'date_start' => $row['date_start'],
-				'date_end' => $row['date_end'],
-				'quantity' => intval($row['quantity']),
-			];
-		}
-
-		return $result;
-	}
-
 	public function getProductFilters(int $product_id) {
 		$query = $this->db->query('
 			SELECT `filter_id`
@@ -208,9 +178,104 @@ class ModelCatalogProduct extends Model {
 	}
 
 	public function getProductsRelated(int $product_id) {
-		/* $query = $this->db->query('
-			SELECT ``
-		'); */
+		$query = $this->db->query('
+			SELECT `related_id`
+			FROM `' . DB_PREFIX . 'product_related`
+			WHERE `product_id` = "' . $product_id . '"
+		');
+
+		return $query->rows;
+	}
+
+	public function getProductsReward(int $product_id) {
+		$query = $this->db->query('
+			SELECT `customer_group_id`, `points`
+			FROM `' . DB_PREFIX . 'product_reward`
+			WHERE `product_id` = "' . intval($product_id) . '"
+		');
+
+		return $query->rows;
+	}
+
+	public function getProductSpecial(int $product_id) {
+		$query = $this->db->query('
+			SELECT `customer_group_id`, `priority`, `price`, `date_start`, `date_end`
+			FROM `' . DB_PREFIX . 'product_special`
+			WHERE `product_id` = "' . intval($product_id) . '"
+		');
+
+		return $query->rows;
+	}
+
+	public function getProductDiscounts(int $product_id) {
+		$query = $this->db->query('
+			SELECT `customer_group_id`, `priority`, `price`, `quantity`, `date_start`, `date_end`
+			FROM `' . DB_PREFIX . 'product_discount`
+			WHERE `product_id` = "' . intval($product_id) . '"
+		');
+
+		return $query->rows;
+	}
+
+	public function getProductCategories(int $product_id) {
+		$query = $this->db->query('
+			SELECT `category_id`
+			FROM `' . DB_PREFIX . 'product_to_category`
+			WHERE `product_id` = "' . intval($product_id) . '"
+		');
+
+		return $query->rows;
+	}
+
+	public function getProductDownloads(int $product_id) {
+		$query = $this->db->query('
+			SELECT `download_id`
+			FROM `' . DB_PREFIX . 'product_to_download`
+			WHERE `product_id` = "' . intval($product_id) . '"
+		');
+
+		return $query->rows;
+	}
+
+	public function getProductStores(int $product_id) {
+		$query = $this->db->query('
+			SELECT `store_id`
+			FROM `' . DB_PREFIX . 'product_to_store`
+			WHERE `product_id` = "' . $product_id . '"
+		');
+
+		return $query->rows;
+	}
+
+	public function getProductOptions(int $product_id) {
+		$query = $this->db->query('
+			SELECT po.`option_id`, po.`value`, po.`required`, o.`type`, po.`product_option_id`
+			FROM `' . DB_PREFIX . 'product_option` po
+			LEFT JOIN `' . DB_PREFIX . 'option` o ON (o.`option_id` = po.`option_id`)
+			WHERE po.`product_id` = "' . $product_id . '"
+		');
+
+		return $query->rows;
+	}
+
+	public function getProductOptionValues(int $product_option_id) {
+		$query = $this->db->query('
+			SELECT
+				pov.option_value_id,
+				pov.sku,
+				pov.quantity,
+				pov.subtract,
+				pov.price_prefix,
+				pov.price,
+				pov.points_prefix,
+				pov.points,
+				pov.weight_prefix,
+				pov.weight
+			FROM ' . DB_PREFIX . 'product_option_value pov
+			WHERE pov.product_option_id = "' . $product_option_id . '";
+		');
+
+		return $query->rows;
 	}
 
 	public function getProductImages(int $product_id) {
@@ -491,7 +556,7 @@ class ModelCatalogProduct extends Model {
 					SET `product_id` = "' . $product_id . '",
 						`customer_group_id` = "' . intval($special->customer_group_id) . '",
 						`priority` = "' . intval($special->priority) . '",
-						`price` = "' . intval($special->price) . '",
+						`price` = "' . floatval($special->price) . '",
 						`date_start` = "' . $this->db->escape($special->date_start) . '",
 						`date_end` = "' . $this->db->escape($special->date_end) . '"
 				');

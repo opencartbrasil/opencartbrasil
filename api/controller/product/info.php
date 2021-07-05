@@ -16,11 +16,56 @@ class ControllerProductInfo extends Controller {
 			return $this->response([], self::HTTP_STATUS_404);
 		}
 
+		$product_info = array(
+			'product_id' => intval($product_info['product_id']),
+			'model' => $product_info['model'],
+			'sku' => $product_info['sku'],
+			'ncm' => $product_info['ncm'],
+			'cest' => $product_info['cest'],
+			'upc' => $product_info['upc'],
+			'ean' => $product_info['ean'],
+			'jan' => $product_info['jan'],
+			'isbn' => $product_info['isbn'],
+			'mpn' => $product_info['mpn'],
+			'location' => $product_info['location'],
+			'quantity' => intval($product_info['quantity']),
+			'stock_status_id' => intval($product_info['stock_status_id']),
+			'image' => HTTPS_SERVER . $product_info['image'],
+			'manufacturer_id' => intval($product_info['manufacturer_id']),
+			'shipping' => !!$product_info['shipping'],
+			'price' => floatval($product_info['price']),
+			'points' => intval($product_info['points']),
+			'tax_class_id' => intval($product_info['tax_class_id']),
+			'date_available' => $product_info['date_available'],
+			'dimensions' => array(
+				'length' => floatval($product_info['length']),
+				'width' => floatval($product_info['width']),
+				'height' => floatval($product_info['height']),
+				'weight' => floatval($product_info['weight']),
+				'length_class_id' => intval($product_info['length_class_id']),
+				'weight_class_id' => intval($product_info['weight_class_id']),
+			),
+			'subtract' => !!$product_info['subtract'],
+			'minimum' => intval($product_info['minimum']),
+			'sort_order' => intval($product_info['sort_order']),
+			'status' => !!$product_info['status'],
+			'viewed' => intval($product_info['viewed']),
+			'date_added' => date('Y-m-d\TH:i:s\+00:00', strtotime($product_info['date_added'])),
+			'date_modified' => date('Y-m-d\TH:i:s\+00:00', strtotime($product_info['date_modified'])),
+		);
+
 		/** Attributes */
 		$product_attributes = $this->model_catalog_product->getProductAttributes($product_id);
 
 		if ($product_attributes) {
-			$product_info['attributes'] = $product_attributes;
+			$attributes = array();
+
+			foreach ($product_attributes as $key => $attribute) {
+				$attributes[$attribute['attribute_id']]['id'] = intval($attribute['attribute_id']);
+				$attributes[$attribute['attribute_id']][$attribute['code']] = $attribute['text'];
+			}
+
+			$product_info['attributes'] = array_values($attributes);
 		}
 
 		/** Descriptions */
@@ -34,7 +79,16 @@ class ControllerProductInfo extends Controller {
 		$product_discounts = $this->model_catalog_product->getProductDiscounts($product_id);
 
 		if ($product_discounts) {
-			$product_info['discounts'] = $product_discounts;
+			foreach ($product_discounts as $discount) {
+				$product_info['discounts'][] = array(
+					'customer_group_id' => intval($discount['customer_group_id']),
+					'priority' => intval($discount['priority']),
+					'price' => floatval($discount['price']),
+					'quantity' => intval($discount['quantity']),
+					'date_start' => $discount['date_start'],
+					'date_end' => $discount['date_end'],
+				);
+			}
 		}
 
 		/** Filters */
@@ -49,11 +103,47 @@ class ControllerProductInfo extends Controller {
 
 		if ($product_images) {
 			foreach ($product_images as $image) {
-				$product_info['additional_images'][] = $image['image'];
+				$product_info['additional_images'][] = HTTPS_SERVER . $image['image'];
 			}
 		}
 
 		/** Options */
+		$options = $this->model_catalog_product->getProductOptions($product_id);
+
+		foreach ($options as $option) {
+			$option_value = $this->model_catalog_product->getProductOptionValues($option['product_option_id']);
+
+			$product_option_values = array();
+
+			foreach ($option_value as $value) {
+				$product_option_values[] = array(
+					'option_value_id' => intval($value['option_value_id']),
+					'sku' => $value['sku'],
+					'quantity' => intval($value['quantity']),
+					'subtract' => !!$value['subtract'],
+					'price' => array(
+						'prefix' => $value['price_prefix'],
+						'value' => floatval($value['price']),
+					),
+					'points' => array(
+						'prefix' => $value['points_prefix'],
+						'value' => floatval($value['points']),
+					),
+					'weight' => array(
+						'prefix' => $value['weight_prefix'],
+						'value' => floatval($value['weight']),
+					),
+				);
+			}
+
+			$product_info['options'][] = array_filter(array(
+				'type' => $option['type'],
+				'option_id' => intval($option['option_id']),
+				'required' => !!$option['required'],
+				'value' => $option['value'],
+				'values' => $product_option_values
+			));
+		}
 
 		/** Recurring */
 		$product_recurrings = $this->model_catalog_product->getProductRecurrings($product_id);
@@ -68,9 +158,88 @@ class ControllerProductInfo extends Controller {
 		}
 
 		/** Products Related */
-		$product_related = $this->model_catalog_product->getProductsRelated($product_id);
+		$products_related = $this->model_catalog_product->getProductsRelated($product_id);
 
-		return $this->response($product_info);
+		if ($products_related) {
+			foreach ($products_related as $product_related) {
+				$product_info['product_related'][] = intval($product_related['related_id']);
+			}
+		}
+
+		/** Products Reward */
+		$products_reward = $this->model_catalog_product->getProductsReward($product_id);
+
+		if ($products_reward) {
+			foreach ($products_reward as $reward) {
+				$product_info['points_reward'][] = array(
+					'customer_group_id' => intval($reward['customer_group_id']),
+					'points' => intval($reward['points'])
+				);
+			}
+		}
+
+		/** Price Special */
+		$special = $this->model_catalog_product->getProductSpecial($product_id);
+
+		if ($special) {
+			foreach ($special as $value) {
+				$product_info['special'][] = array(
+					'customer_group_id' => intval($value['customer_group_id']),
+					'price' => floatval($value['price']),
+					'priority' => intval($value['priority']),
+					'date_start' => $value['date_start'],
+					'date_end' => $value['date_end'],
+				);
+			}
+		}
+
+		/** Discounts */
+		$discounts = $this->model_catalog_product->getProductDiscounts($product_id);
+
+		if ($discounts) {
+			foreach ($discounts as $discount) {
+				$product_info['discounts'][] = array(
+					'customer_group_id' => intval($discount['customer_group_id']),
+					'price' => floatval($discount['price']),
+					'priority' => intval($discount['priority']),
+					'quantity' => intval($discount['quantity']),
+					'date_start' => $discount['date_start'],
+					'date_end' => $discount['date_end'],
+				);
+			}
+		}
+
+		/** Categories */
+		$categories = $this->model_catalog_product->getProductCategories($product_id);
+
+		if ($categories) {
+			foreach ($categories as $category) {
+				$product_info['categories'][] = intval($category['category_id']);
+			}
+		}
+
+		/** Downloads */
+		$downloads = $this->model_catalog_product->getProductDownloads($product_id);
+
+		if ($downloads) {
+			foreach ($downloads as $download) {
+				$product_info['downloads'][] = intval($download['download_id']);
+			}
+		}
+
+		/** Stores */
+		$stores = $this->model_catalog_product->getProductStores($product_id);
+
+		if ($stores) {
+			foreach ($stores as $store) {
+				$product_info['stores'][] = intval($store['store_id']);
+			}
+		}
+
+		return $this->response(array(
+			'result' => true,
+			'data' => $product_info
+		));
 	}
 
 	/**
