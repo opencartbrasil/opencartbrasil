@@ -3,13 +3,11 @@ class ControllerProductInfo extends Controller {
 
 	private const HTTP_STATUS_404 = 404;
 
-	public function index() {
+	public function index(int $product_id = 0) {
 		$this->load->model('catalog/product');
 
 		if (isset($this->request->get['product_id'])) {
 			$product_id = intval($this->request->get['product_id']);
-		} else {
-			$product_id = null;
 		}
 
 		$product_info = $this->model_catalog_product->getProduct($product_id);
