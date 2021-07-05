@@ -43,11 +43,9 @@ class ControllerProductCreate extends Controller {
 
 		if ($product_id === null) {
 			$result = $this->model_catalog_product->add($data);
+			$product_info = $this->load->controller('product/info/index', $result->id);
 
-			return $this->response(
-				[ "id" => $result->id ],
-				self::HTTP_STATUS_201
-			);
+			return $this->load->controller('product/info/index', $result->id);
 		}
 	}
 
