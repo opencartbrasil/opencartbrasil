@@ -328,9 +328,9 @@ class ModelCatalogProduct extends Model {
 			}
 
 			if (isset($product->description[$language_code])) {
-				$product_description = $product->description[$language_code];
+				$product_description = htmlspecialchars($product->description[$language_code], ENT_COMPAT, 'UTF-8');
 			} elseif (isset($product->description["default"])) {
-				$product_description = $product->description["default"];
+				$product_description = htmlspecialchars($product->description["default"], ENT_COMPAT, 'UTF-8');
 			} else {
 				$product_description = '';
 			}
@@ -369,12 +369,12 @@ class ModelCatalogProduct extends Model {
 				INSERT INTO `' . DB_PREFIX . 'product_description`
 				SET `product_id` = "' . intval($product_id) . '",
 					`language_id` = "' . intval($language['language_id']) . '",
-					`name` = "' . $product_name . '",
-					`description` = "' . $product_description . '",
-					`tag` = "' . $product_tags . '",
-					`meta_title` = "' . $product_meta_title . '",
-					`meta_description` = "' . $product_meta_description . '",
-					`meta_keyword` = "' . $product_meta_keyword . '"
+					`name` = "' . $this->db->escape($product_name) . '",
+					`description` = "' . $this->db->escape($product_description) . '",
+					`tag` = "' . $this->db->escape($product_tags) . '",
+					`meta_title` = "' . $this->db->escape($product_meta_title) . '",
+					`meta_description` = "' . $this->db->escape($product_meta_description) . '",
+					`meta_keyword` = "' . $this->db->escape($product_meta_keyword) . '"
 			');
 		}
 
