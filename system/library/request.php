@@ -33,9 +33,8 @@ class Request {
 		$json = json_decode(file_get_contents('php://input'), true);
 
 		if (json_last_error() == JSON_ERROR_NONE) {
-			$json_values = array_map([$this, 'clean'], $json);
-			$new_json = array_combine(array_keys($json), $json_values);
-			$json = json_encode($new_json);
+			$json = array_map([$this, 'clean'], $json);
+			$json = json_encode($json);
 			$this->json = json_decode($json);
 		}
 
