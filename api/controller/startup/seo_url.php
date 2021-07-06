@@ -8,6 +8,13 @@ class ControllerStartupSeoUrl extends Controller {
 			'action' => 'credentials/token',
 			'methods' => ['POST']
 		];
+
+		$this->routers[] = [
+			'path' => '/api/credentials/refresh_token',
+			'action' => 'credentials/token/refresh',
+			'methods' => ['POST']
+		];
+
 		$this->routers[] = [
 			'path' => '/api/product',
 			'action' => 'product/create',
