@@ -33,7 +33,10 @@ class Request {
 		$json = json_decode(file_get_contents('php://input'), true);
 
 		if (json_last_error() == JSON_ERROR_NONE) {
-			$this->json = $this->clean($json);
+			$json_values = array_map([$this, 'clean'], $json);
+			$new_json = array_combine(array_keys($json), $json_values);
+			$json = json_encode($new_json);
+			$this->json = json_decode($json);
 		}
 
 		if (function_exists('apache_request_headers')) {
@@ -58,7 +61,7 @@ class Request {
 
 				$data[$this->clean($key)] = $this->clean($value);
 			}
-		} else {
+		} elseif (!is_double($data) && !is_int($data) && !is_float($data) && !is_bool($data)) {
 			$data = htmlspecialchars($data, ENT_COMPAT, 'UTF-8');
 		}
 
