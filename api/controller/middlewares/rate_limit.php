@@ -2,11 +2,7 @@
 
 class ControllerMiddlewaresRateLimit extends Controller {
 	public function before() {
-		$ignoredRoutes = [
-			'credentials/token',
-		];
-
-		if (in_array($this->request->get['route'], $ignoredRoutes)) {
+		if (in_array($this->request->get['route'], $this->config->get('ignored_routers'))) {
 			return;
 		}
 
