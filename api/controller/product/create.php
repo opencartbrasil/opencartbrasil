@@ -45,7 +45,8 @@ class ControllerProductCreate extends Controller {
 			$result = $this->model_catalog_product->add($data);
 			$product_info = $this->load->controller('product/info/index', $result->id);
 
-			return $this->load->controller('product/info/index', $result->id);
+			$this->load->controller('product/info/index', $result->id);
+			$this->response->addHeader('HTTP/1.1 ' . self::HTTP_STATUS_201);
 		}
 	}
 
