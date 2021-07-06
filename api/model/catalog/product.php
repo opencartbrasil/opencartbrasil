@@ -459,7 +459,7 @@ class ModelCatalogProduct extends Model {
 				}
 
 				if (isset($option->required)) {
-					$required = $option->required ? 1 : 0;
+					$required = intval(!!$option->required);
 				} else {
 					$required = 0;
 				}
