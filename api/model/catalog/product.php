@@ -357,6 +357,14 @@ class ModelCatalogProduct extends Model {
 				$product_meta_keyword = "";
 			}
 
+			if (isset($product->meta_description[$language_code])) {
+				$product_meta_description = $product->meta_description[$language_code];
+			} elseif (isset($product->meta_description["default"])) {
+				$product_meta_description = $product->meta_description["default"];
+			} else {
+				$product_meta_description = "";
+			}
+
 			$this->db->query('
 				INSERT INTO `' . DB_PREFIX . 'product_description`
 				SET `product_id` = "' . intval($product_id) . '",
@@ -365,7 +373,7 @@ class ModelCatalogProduct extends Model {
 					`description` = "' . $product_description . '",
 					`tag` = "' . $product_tags . '",
 					`meta_title` = "' . $product_meta_title . '",
-					`meta_description` = "",
+					`meta_description` = "' . $product_meta_description . '",
 					`meta_keyword` = "' . $product_meta_keyword . '"
 			');
 		}
