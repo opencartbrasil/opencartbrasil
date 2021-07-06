@@ -30,7 +30,7 @@ class ControllerProductInfo extends Controller {
 			'location' => $product_info['location'],
 			'quantity' => intval($product_info['quantity']),
 			'stock_status_id' => intval($product_info['stock_status_id']),
-			'image' => HTTPS_SERVER . $product_info['image'],
+			'image' => HTTPS_SERVER . 'image/' . $product_info['image'],
 			'manufacturer_id' => intval($product_info['manufacturer_id']),
 			'shipping' => !!$product_info['shipping'],
 			'price' => floatval($product_info['price']),
@@ -103,7 +103,7 @@ class ControllerProductInfo extends Controller {
 
 		if ($product_images) {
 			foreach ($product_images as $image) {
-				$product_info['additional_images'][] = HTTPS_SERVER . $image['image'];
+				$product_info['additional_images'][] = HTTPS_SERVER . 'image/' . $image['image'];
 			}
 		}
 
