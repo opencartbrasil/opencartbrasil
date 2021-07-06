@@ -26,10 +26,6 @@ class ControllerStartupLogin extends Controller {
 
 		$authorization = $this->request->headers['authorization'];
 
-		$this->load->model('credentials/token');
-
-		$is_valid = $this->model_credentials_token->isValid($authorization);
-
 		@list($token_type, $access_token) = explode(' ', $authorization);
 
 		if (strtolower($token_type) !== 'bearer') {
