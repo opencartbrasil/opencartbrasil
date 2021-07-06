@@ -80,6 +80,23 @@ $_['api_schema_product_form'] = json_decode(<<<'JSON'
         "default"
       ]
     },
+    "meta_description": {
+      "type": "object",
+      "properties": {
+        "default": {
+          "type": "string",
+          "maxLength": 255
+        }
+      },
+      "additionalProperties": {
+        "type": "string",
+        "maxLength": 255
+      },
+      "minProperties": 1,
+      "required": [
+        "default"
+      ]
+    },
     "tags": {
       "type": "object",
       "properties": {
