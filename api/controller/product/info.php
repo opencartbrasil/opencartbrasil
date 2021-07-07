@@ -236,6 +236,23 @@ class ControllerProductInfo extends Controller {
 			}
 		}
 
+		/** Seo URL */
+		$product_links = array();
+
+		if ($this->config->get('config_seo_url')) {
+			$seo_url = $this->model_catalog_product->getProductSeoUrls($product_id);
+
+			if ($seo_url) {
+				foreach ($seo_url as $url) {
+					$product_links[$url['language_code']] = HTTPS_SERVER . $url['keyword'];
+				}
+			}
+		}
+
+		$product_links['default'] = HTTPS_SERVER . 'index.php?route=product/product&product_id=' . intval($product_id);
+
+		$product_info['links'] = $product_links;
+
 		return $this->response(array(
 			'result' => true,
 			'data' => $product_info
