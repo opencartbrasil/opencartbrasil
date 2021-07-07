@@ -56,7 +56,15 @@ class ControllerCredentialsToken extends Controller {
 			return new Action('status_code/unauthorized');
 		}
 
-		$json = $this->generateToken($client_id, $client_secret);
+		$username = 'default'; 			/** @todo Integrar ao banco de dados */
+		$application_name = 'V5Market';	/** @todo Integrar ao banco de dados */
+
+		$json = $this->generateToken(
+			$client_id,
+			$client_secret,
+			$username,
+			$application_name
+		);
 
 		$this->response->setOutput(json_encode($json));
 	}
@@ -138,10 +146,10 @@ class ControllerCredentialsToken extends Controller {
 		$payload = array(
 			'iss' => $this->config->get('config_url'),
 			'iat' => $time,
-			'sub' => '<username here>', /** @todo Integrar ao banco de dados */
+			'sub' => $username,
 			'exp' => $time + self::EXPIRE,
 			'jti' => $jti,
-			'application_name' 	=> 'V5Market', /** @todo Integrar ao banco de dados */
+			'application_name' 	=> $application_name,
 		);
 
 		$jwt = JWT::encode($payload, $this->config->get('secret_key'));
