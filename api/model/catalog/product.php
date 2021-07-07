@@ -123,9 +123,89 @@ class ModelCatalogProduct extends Model {
 				CONVERT_TZ(`date_added`, @@time_zone, "+00:00") AS `date_added`,
 				CONVERT_TZ(`date_modified`, @@time_zone, "+00:00") AS `date_modified`
 			FROM `' . DB_PREFIX . 'product`
-			WHERE `product_id` = "' . $product_id . '"');
+			WHERE `product_id` = "' . $product_id . '"
+		');
 
 		return $query->row;
+	}
+
+	public function getProducts(array $filter_data = array()) {
+		$sql = '
+			SELECT
+				DISTINCT *,
+				CONVERT_TZ(`date_added`, @@time_zone, "+00:00") AS `date_added`,
+				CONVERT_TZ(`date_modified`, @@time_zone, "+00:00") AS `date_modified`
+			FROM `' . DB_PREFIX . 'product`
+			WHERE `product_id` > 0
+		';
+
+		if (!empty($filter_data['quantity'])) {
+			$sql .= ' AND `quantity` <= "' . intval($filter_data['quantity']) . '"';
+		}
+
+		if (!empty($filter_data['status'])) {
+			$sql .= ' AND `status` = "' . !!$filter_data['status'] . '"';
+		}
+
+		if (!empty($filter_data['date_added'])) {
+			$sql .= ' AND `date_added` <= DATE("' . $this->db->escape($filter_data['date_added']) . '")';
+		}
+
+		if (!empty($filter_data['date_modified'])) {
+			$sql .= ' AND `date_modified` <= DATE("' . $this->db->escape($filter_data['date_modified']) . '")';
+		}
+
+		if (!empty($filter_data['manufacturer_id'])) {
+			$sql .= ' AND `manufacturer_id` = "' . intval($filter_data['manufacturer_id']) . '"';
+		}
+
+		if (!empty($filter_data['per_page'])) {
+			$sql .= ' LIMIT ' . intval($filter_data['per_page']);
+		} else {
+			$sql .= ' LIMIT ' . intval($this->config->get('db_list_per_page'));
+		}
+
+		if (!empty($filter_data['limit']) && !empty($filter_data['offset'])) {
+			$sql .= ' OFFSET ' . intval($filter_data['offset']) . '';
+		} else {
+			$sql .= ' OFFSET 0';
+		}
+
+		$query = $this->db->query($sql);
+
+		return $query->rows;
+	}
+
+	public function getTotalProducts(array $filter_data = array()) {
+		$sql = '
+			SELECT COUNT(DISTINCT `product_id`) AS total
+			FROM `' . DB_PREFIX . 'product`
+			WHERE `product_id` > 0
+		';
+
+		if (!empty($filter_data['quantity'])) {
+			$sql .= ' AND `quantity` <= "' . intval($filter_data['quantity']) . '"';
+		}
+
+		if (!empty($filter_data['status'])) {
+			$sql .= ' AND `status` = "' . !!$filter_data['status'] . '"';
+		}
+
+		if (!empty($filter_data['date_added'])) {
+			$sql .= ' AND `date_added` <= DATE("' . $this->db->escape($filter_data['date_added']) . '")';
+		}
+
+		if (!empty($filter_data['date_modified'])) {
+			$sql .= ' AND `date_modified` <= DATE("' . $this->db->escape($filter_data['date_modified']) . '")';
+		}
+
+		if (!empty($filter_data['manufacturer_id'])) {
+			$sql .= ' AND `manufacturer_id` = "' . intval($filter_data['manufacturer_id']) . '"';
+		}
+
+		$query = $this->db->query($sql);
+
+		return $query->num_rows ? intval($query->row['total']) : 0;
 	}
 
 	public function getProductAttributes(int $product_id) {

@@ -28,6 +28,7 @@ $_['db_username']        = DB_USERNAME;
 $_['db_password']        = DB_PASSWORD;
 $_['db_database']        = DB_DATABASE;
 $_['db_port']            = DB_PORT;
+$_['db_list_per_page']   = 50;
 
 // Session
 $_['session_autostart']  = true;
