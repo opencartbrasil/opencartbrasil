@@ -287,6 +287,17 @@ class ModelCatalogProduct extends Model {
 		return $query->rows;
 	}
 
+	public function getProductSeoUrls(int $product_id) {
+		$query = $this->db->query('
+			SELECT su.`keyword`, l.`code` AS language_code
+			FROM `' . DB_PREFIX . 'seo_url` su
+			LEFT JOIN `' . DB_PREFIX . 'language` l ON (l.`language_id` = su.`language_id`)
+			WHERE `query` = "product_id=' . $product_id . '";
+		');
+
+		return $query->rows;
+	}
+
 	/**
 	 * Verifica se um ou mais produto existe, através do ID
 	 *
