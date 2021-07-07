@@ -27,6 +27,11 @@ class ControllerStartupSeoUrl extends Controller {
 		];
 
 		$this->routers[] = [
+			'path' => '/api/product',
+			'action' => 'product/list',
+		];
+
+		$this->routers[] = [
 			'path' => '/api/product/(?P<product_id>\d+)',
 			'action' => 'product/delete',
 			'methods' => ['DELETE']
