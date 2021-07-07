@@ -153,6 +153,13 @@ class ControllerCredentialsToken extends Controller {
 		];
 	}
 
+	/**
+	 * Valida requisição
+	 *
+	 * @param bool $tokenTypeIsBasic Define se o tipo de token é "Basic", true; ou "Bearer", false.
+	 *
+	 * @return Action|string Retorna Action quando houver um erro de validação
+	 */
 	protected function validate($tokenTypeIsBasic = true) {
 		if (!isset($this->request->headers['authorization'])) {
 			$this->response->setOutput(json_encode(array(
