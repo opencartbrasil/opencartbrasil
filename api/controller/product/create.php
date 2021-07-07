@@ -47,7 +47,13 @@ class ControllerProductCreate extends Controller {
 
 			$this->load->controller('product/info/index', $result->id);
 			$this->response->addHeader('HTTP/1.1 ' . self::HTTP_STATUS_201);
+			return;
 		}
+
+		$result = $this->model_catalog_product->update($product_id, $data);
+		$product_info = $this->load->controller('product/info/index', $result->id);
+
+		return $this->load->controller('product/info/index', $result->id);
 	}
 
 	/**
@@ -92,7 +98,9 @@ class ControllerProductCreate extends Controller {
 	protected function validateJsonSchema($data) {
 		$this->config->load('api/schemas/product_form');
 
-		$schema = Schema::import($this->config->get('api_schema_product_form'));
+		$jsonSchema = $this->config->get('api_schema_product_form');
+
+		$schema = Schema::import($jsonSchema);
 
 		$result = new \stdClass;
 		$result->success = true;

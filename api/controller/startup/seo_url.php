@@ -16,20 +16,14 @@ class ControllerStartupSeoUrl extends Controller {
 		];
 
 		$this->routers[] = [
-			'path' => '/api/product',
+			'path' => '/api/product(?:/(?P<product_id>\d+))?',
 			'action' => 'product/create',
-			'methods' => ['POST']
+			'methods' => ['POST', 'PUT']
 		];
 
 		$this->routers[] = [
 			'path' => '/api/product/(?P<product_id>\d+)',
 			'action' => 'product/info',
-		];
-
-		$this->routers[] = [
-			'path' => '/api/product/(?P<product_id>\d+)',
-			'action' => 'product/create',
-			'methods' => ['PUT']
 		];
 
 		$this->routers[] = [

@@ -108,6 +108,12 @@ class ModelCatalogProduct extends Model {
 				`date_modified` = NOW()
 			WHERE `product_id` = "' . intval($product_id) . '";
 		');
+
+		$this->saveData($product_id, $product);
+
+		$product->id = $product_id;
+
+		return $product;
 	}
 
 	public function getProduct(int $product_id) {
@@ -356,6 +362,8 @@ class ModelCatalogProduct extends Model {
 	 */
 	private function saveData(int $product_id, $product) {
 		/** Register Product Description */
+		$this->db->query('DELETE FROM `' . DB_PREFIX . 'product_description` WHERE product_id = "' . $product_id . '"');
+
 		foreach ($this->config->get('languages') as $language_code => $language) {
 			if (isset($product->name[$language_code])) {
 				$product_name = $product->name[$language_code];
@@ -415,6 +423,8 @@ class ModelCatalogProduct extends Model {
 		}
 
 		/** Register in Stores */
+		$this->db->query('DELETE FROM `' . DB_PREFIX . 'product_to_store` WHERE product_id = "' . $product_id . '"');
+
 		foreach ($product->stores as $store_id) {
 			$this->db->query('
 				INSERT INTO `' . DB_PREFIX . 'product_to_store`
@@ -424,6 +434,8 @@ class ModelCatalogProduct extends Model {
 		}
 
 		/** Register Attributes */
+		$this->db->query('DELETE FROM `' . DB_PREFIX . 'product_attribute` WHERE product_id = "' . $product_id . '"');
+
 		if (isset($product->attributes)) {
 			foreach ($product->attributes as $attribute) {
 				foreach ($this->config->get('languages') as $language_code => $language) {
@@ -447,6 +459,8 @@ class ModelCatalogProduct extends Model {
 		}
 
 		/** Register Discounts */
+		$this->db->query('DELETE FROM `' . DB_PREFIX . 'product_discount` WHERE product_id = "' . $product_id . '"');
+
 		if (isset($product->discounts)) {
 			foreach ($product->discounts as $discount) {
 				$this->db->query('
@@ -463,6 +477,8 @@ class ModelCatalogProduct extends Model {
 		}
 
 		/** Register Filters */
+		$this->db->query('DELETE FROM `' . DB_PREFIX . 'product_filter` WHERE product_id = "' . $product_id . '"');
+
 		if (isset($product->filters)) {
 			foreach ($product->filters as $filter_id) {
 				$this->db->query('
@@ -474,6 +490,8 @@ class ModelCatalogProduct extends Model {
 		}
 
 		/** Register Additional Images */
+		$this->db->query('DELETE FROM `' . DB_PREFIX . 'product_image` WHERE product_id = "' . $product_id . '"');
+
 		if (isset($product->additional_images)) {
 			foreach ($product->additional_images as $key => $image) {
 				$this->db->query('
@@ -486,6 +504,9 @@ class ModelCatalogProduct extends Model {
 		}
 
 		/** Register Options */
+		$this->db->query('DELETE FROM `' . DB_PREFIX . 'product_option` WHERE product_id = "' . $product_id . '"');
+		$this->db->query('DELETE FROM `' . DB_PREFIX . 'product_option_value` WHERE product_id = "' . $product_id . '"');
+
 		if (isset($product->options)) {
 			foreach ($product->options as $option) {
 				if (isset($option->value)) {
@@ -558,6 +579,8 @@ class ModelCatalogProduct extends Model {
 		}
 
 		/** Register Recurrings */
+		$this->db->query('DELETE FROM `' . DB_PREFIX . 'product_recurring` WHERE product_id = "' . $product_id . '"');
+
 		if (isset($product->recurring)) {
 			foreach ($product->recurring as $recurring) {
 				$this->db->query('
@@ -570,6 +593,8 @@ class ModelCatalogProduct extends Model {
 		}
 
 		/** Register Related */
+		$this->db->query('DELETE FROM `' . DB_PREFIX . 'product_related` WHERE product_id = "' . $product_id . '"');
+
 		if (isset($product->product_related)) {
 			foreach ($product->product_related as $related_id) {
 				$this->db->query('
@@ -581,6 +606,8 @@ class ModelCatalogProduct extends Model {
 		}
 
 		/** Register Points */
+		$this->db->query('DELETE FROM `' . DB_PREFIX . 'product_reward` WHERE product_id = "' . $product_id . '"');
+
 		if (isset($product->points_reward)) {
 			foreach ($product->points_reward as $reward) {
 				$this->db->query('
@@ -593,6 +620,8 @@ class ModelCatalogProduct extends Model {
 		}
 
 		/** Register Special */
+		$this->db->query('DELETE FROM `' . DB_PREFIX . 'product_special` WHERE product_id = "' . $product_id . '"');
+
 		if (isset($product->special)) {
 			foreach ($product->special as $special) {
 				$this->db->query('
@@ -608,6 +637,8 @@ class ModelCatalogProduct extends Model {
 		}
 
 		/** Register Categories */
+		$this->db->query('DELETE FROM `' . DB_PREFIX . 'product_to_category` WHERE product_id = "' . $product_id . '"');
+
 		if (isset($product->categories)) {
 			foreach ($product->categories as $category_id) {
 				$this->db->query('
@@ -619,6 +650,8 @@ class ModelCatalogProduct extends Model {
 		}
 
 		/** Register Downloads */
+		$this->db->query('DELETE FROM `' . DB_PREFIX . 'product_to_download` WHERE product_id = "' . $product_id . '"');
+
 		if (isset($product->downloads)) {
 			foreach ($product->downloads as $download_id) {
 				$this->db->query('
@@ -630,6 +663,8 @@ class ModelCatalogProduct extends Model {
 		}
 
 		/** Register SEO URL */
+		$this->db->query('DELETE FROM `' . DB_PREFIX . 'seo_url` WHERE product_id = "' . $product_id . '"');
+
 		if (isset($product->seo_url_generate)) {
 			$seo_url_generate_auto = isset($product->seo_url_generate->auto) ? !!$product->seo_url_generate->auto : false;
 
