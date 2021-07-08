@@ -16,4 +16,30 @@ class ModelLocalisationTaxClass extends Model {
 
 		return $result;
 	}
+
+	public function getTaxClasses($data = array()) {
+		$sql = 'SELECT * FROM `' . DB_PREFIX . 'tax_class`';
+
+		if (isset($data['offset']) || isset($data['limit'])) {
+			if ($data['offset'] < 0) {
+				$data['offset'] = 0;
+			}
+
+			if ($data['limit'] < 1) {
+				$data['limit'] = 20;
+			}
+
+			$sql .= ' LIMIT ' . (int)$data['offset'] . ',' . (int)$data['limit'];
+		}
+
+		$query = $this->db->query($sql);
+
+		return $query->rows;
+	}
+
+	public function getTotalTaxClasses() {
+		$query = $this->db->query('SELECT COUNT(*) AS total FROM `' . DB_PREFIX . 'tax_class`');
+
+		return $query->row['total'];
+	}
 }
