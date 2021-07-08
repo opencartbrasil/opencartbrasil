@@ -337,6 +337,7 @@ class ControllerProductList extends Controller {
 		$prev_page = max(1, $page - 1);
 		$last_page = ceil($product_total_count / $per_page);
 		$next_page = intval(min($page + 1, $last_page));
+		$links = '/languages?page=%d&per_page=%d';
 
 		$result = array(
 			'items' => $result_items,
@@ -346,11 +347,11 @@ class ControllerProductList extends Controller {
 				'page_count' => count($result_items),
 				'total_count' => $product_total_count,
 				'links' => array(
-					'self' => "/products?page={$page}&per_page={$per_page}",
-					'first' => "/products?page=1&per_page={$per_page}",
-					'previous' => ($page > 1) ? "/products?page={$prev_page}&per_page={$per_page}" : null,
-					'next' => ($next_page !== $page) ? "/products?page={$next_page}&per_page={$per_page}" : null,
-					'last' => "/products?page={$last_page}&per_page={$per_page}"
+					'self' => sprintf($links, $page, $per_page),
+					'first' => sprintf($links, 1, $per_page),
+					'previous' => ($page > 1) ? sprintf($links, $prev_page, $per_page) : null,
+					'next' => ($next_page !== $page) ? sprintf($links, $next_page, $per_page) : null,
+					'last' => sprintf($links, $last_page, $per_page)
 				)
 			)
 		);
