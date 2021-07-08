@@ -1,78 +1,72 @@
 <?php
 class ModelLocalisationLanguage extends Model {
-	public function getLanguage($language_id) {
-		$query = $this->db->query("SELECT DISTINCT * FROM " . DB_PREFIX . "language WHERE language_id = '" . (int)$language_id . "'");
+	public function getLanguage(int $language_id) {
+		$query = $this->db->query('
+			SELECT DISTINCT *
+			FROM `' . DB_PREFIX . 'language`
+			WHERE language_id = "' . $language_id . '"
+		');
 
 		return $query->row;
 	}
 
-	public function getLanguages($data = array()) {
-		if ($data) {
-			$sql = "SELECT * FROM " . DB_PREFIX . "language";
+	public function getLanguages(array $filter_data = array()) {
+		$sql = '
+			SELECT DISTINCT *
+			FROM `' . DB_PREFIX . 'language`
+			WHERE `language_id` > 0
+		';
 
-			$sort_data = array(
-				'name',
-				'code',
-				'sort_order'
-			);
-
-			if (isset($data['sort']) && in_array($data['sort'], $sort_data)) {
-				$sql .= " ORDER BY " . $data['sort'];
-			} else {
-				$sql .= " ORDER BY sort_order, name";
-			}
-
-			if (isset($data['order']) && ($data['order'] == 'DESC')) {
-				$sql .= " DESC";
-			} else {
-				$sql .= " ASC";
-			}
-
-			if (isset($data['start']) || isset($data['limit'])) {
-				if ($data['start'] < 0) {
-					$data['start'] = 0;
-				}
-
-				if ($data['limit'] < 1) {
-					$data['limit'] = 20;
-				}
-
-				$sql .= " LIMIT " . (int)$data['start'] . "," . (int)$data['limit'];
-			}
-
-			$query = $this->db->query($sql);
-
-			return $query->rows;
-		} else {
-			$language_data = $this->cache->get('admin.language');
-
-			if (!$language_data) {
-				$language_data = array();
-
-				$query = $this->db->query("SELECT * FROM " . DB_PREFIX . "language ORDER BY sort_order, name");
-
-				foreach ($query->rows as $result) {
-					$language_data[$result['code']] = array(
-						'language_id' => $result['language_id'],
-						'name'        => $result['name'],
-						'code'        => $result['code'],
-						'locale'      => $result['locale'],
-						'image'       => $result['image'],
-						'directory'   => $result['directory'],
-						'sort_order'  => $result['sort_order'],
-						'status'      => $result['status']
-					);
-				}
-
-				$this->cache->set('admin.language', $language_data);
-			}
-
-			return $language_data;
+		if (!empty($filter_data['code'])) {
+			$sql .= ' AND `code` = "' . $this->db->escape($filter_data['code']) . '"';
 		}
+
+		if (isset($filter_data['status'])) {
+			$sql .= ' AND `status` = "' . $this->db->escape($filter_data['status']) . '"';
+		}
+
+		if (!empty($filter_data['per_page'])) {
+			$sql .= ' LIMIT ' . intval($filter_data['per_page']);
+		} else {
+			$sql .= ' LIMIT ' . intval($this->config->get('db_list_per_page'));
+		}
+
+		if (!empty($filter_data['per_page']) && !empty($filter_data['offset'])) {
+			$sql .= ' OFFSET ' . intval($filter_data['offset']) . '';
+		} else {
+			$sql .= ' OFFSET 0';
+		}
+
+		$query = $this->db->query($sql);
+
+		return $query->rows;
+	}
+
+	public function getTotalLanguages($filter_data = array()) {
+		$sql = '
+			SELECT DISTINCT *
+			FROM `' . DB_PREFIX . 'language`
+			WHERE `language_id` > 0
+		';
+
+		if (!empty($filter_data['code'])) {
+			$sql .= ' AND `code` = "' . $this->db->escape($filter_data['code']) . '"';
+		}
+
+		if (!empty($filter_data['status'])) {
+			$sql .= ' AND `status` = "' . !!$filter_data['status'] . '"';
+		}
+
+		$query = $this->db->query($sql);
+
+		return $query->num_rows;
 	}
 
 	public function getLanguageByCode($code) {
-		$query = $this->db->query("SELECT * FROM `" . DB_PREFIX . "language` WHERE code = '" . $this->db->escape($code) . "'");
+		$query = $this->db->query('
+			SELECT * FROM `' . DB_PREFIX . 'language`
+			WHERE code = "' . $this->db->escape($code) . '"
+		');
 
 		return $query->row;
 	}
