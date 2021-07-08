@@ -56,6 +56,12 @@ class ControllerStartupSeoUrl extends Controller {
 		];
 
 		$this->routers[] = [
+			'path' => '/api/length',
+			'action' => 'length/list',
+			'methods' => ['GET']
+		];
+
+		$this->routers[] = [
 			'path' => '/api/weight',
 			'action' => 'weight/list',
 			'methods' => ['GET']
