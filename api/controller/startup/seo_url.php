@@ -37,6 +37,12 @@ class ControllerStartupSeoUrl extends Controller {
 			'methods' => ['DELETE']
 		];
 
+
+		$this->routers[] = [
+			'path' => '/api/weight',
+			'action' => 'weight/list',
+			'methods' => ['GET']
+		];
 		return $this->start();
 	}
 
