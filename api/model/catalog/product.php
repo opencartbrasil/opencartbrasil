@@ -165,7 +165,7 @@ class ModelCatalogProduct extends Model {
 			$sql .= ' LIMIT ' . intval($this->config->get('db_list_per_page'));
 		}
 
-		if (!empty($filter_data['limit']) && !empty($filter_data['offset'])) {
+		if (!empty($filter_data['per_page']) && !empty($filter_data['offset'])) {
 			$sql .= ' OFFSET ' . intval($filter_data['offset']) . '';
 		} else {
 			$sql .= ' OFFSET 0';

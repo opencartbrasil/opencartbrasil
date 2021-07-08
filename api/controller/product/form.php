@@ -5,7 +5,7 @@ use Swaggest\JsonSchema\Context;
 use Swaggest\JsonSchema\Exception\LogicException;
 use Swaggest\JsonSchema\InvalidValue;
 
-class ControllerProductCreate extends Controller {
+class ControllerProductForm extends Controller {
 
 	private const HTTP_STATUS_201 = 201;
 	private const HTTP_STATUS_400 = 400;
