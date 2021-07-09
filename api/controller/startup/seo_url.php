@@ -66,6 +66,13 @@ class ControllerStartupSeoUrl extends Controller {
 			'action' => 'weight/list',
 			'methods' => ['GET']
 		];
+
+		$this->routers[] = [
+			'path' => '/api/category',
+			'action' => 'category/list',
+			'methods' => ['GET']
+		];
+
 		$this->routers[] = [
 			'path' => '/api/filter_group',
 			'action' => 'filter/group_list',
