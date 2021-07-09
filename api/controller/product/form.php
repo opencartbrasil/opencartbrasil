@@ -355,7 +355,7 @@ class ControllerProductForm extends Controller {
 						foreach ($option->values as $value) {
 							$option_value_id = $value->option_value_id;
 
-							$option_value_exist = !!$this->model_catalog_option->optionValueIsRelatedToOptionId($option_id, $option_value_id);
+							$option_value_exist = !!$this->model_catalog_option->getOptionValueIsRelatedToOptionId($option_id, $option_value_id);
 
 							if (!$option_value_exist) {
 								$errors[] = [

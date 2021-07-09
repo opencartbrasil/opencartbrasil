@@ -16,7 +16,7 @@ class ModelCatalogOption extends Model {
 		return $result;
 	}
 
-	public function optionValueIsRelatedToOptionId(int $option_id, int $option_value_id) {
+	public function getOptionValueIsRelatedToOptionId(int $option_id, int $option_value_id) {
 		$cache_key = sprintf('api_option_%d_option_value_%d', $option_id, $option_value_id);
 
 		$result = $this->cache->get($cache_key);
