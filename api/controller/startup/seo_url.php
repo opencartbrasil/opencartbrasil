@@ -81,7 +81,9 @@ class ControllerStartupSeoUrl extends Controller {
 
 		$this->routers[] = [
 			'path' => '/api/attribute_group',
-			'action' => 'attribute/group_list',
+			'action' => 'attribute/attribute_group_list',
+			'methods' => ['GET']
+		];
 			'methods' => ['GET']
 		];
 

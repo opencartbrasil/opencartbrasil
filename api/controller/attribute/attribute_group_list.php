@@ -1,6 +1,6 @@
 <?php
 
-class ControllerAttributeGroupList extends Controller {
+class ControllerAttributeAttributeGroupList extends Controller {
 
 	private const HTTP_STATUS_400 = 400;
 
