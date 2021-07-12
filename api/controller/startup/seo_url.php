@@ -91,6 +91,11 @@ class ControllerStartupSeoUrl extends Controller {
 			'methods' => ['GET']
 		];
 
+		$this->routers[] = [
+			'path' => '/api/manufacturer',
+			'action' => 'manufacturer/list',
+			'methods' => ['GET']
+		];
 			'methods' => ['GET']
 		];
 
