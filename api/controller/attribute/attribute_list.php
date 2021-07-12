@@ -23,8 +23,7 @@ class ControllerAttributeAttributeList extends Controller {
 		 * Page
 		 */
 		if (isset($this->request->get['page'])) {
-			$page = intval($this->request->get['page']);
-			$page = max($page, 1);
+			$page = max($this->request->get['page'], 1);
 		} else {
 			$page = 1;
 		}
@@ -33,8 +32,7 @@ class ControllerAttributeAttributeList extends Controller {
 		 * Items per page
 		 */
 		if (isset($this->request->get['per_page'])) {
-			$per_page = intval($this->request->get['per_page']);
-			$per_page = min($this->config->get('db_list_per_page'), $per_page);
+			$per_page = min($this->config->get('db_list_per_page'), $this->request->get['per_page']);
 		} else {
 			$per_page = $this->config->get('db_list_per_page');
 		}

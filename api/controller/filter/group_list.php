@@ -11,8 +11,7 @@ class ControllerFilterGroupList extends Controller {
 		 * Page
 		 */
 		if (isset($this->request->get['page'])) {
-			$page = intval($this->request->get['page']);
-			$page = max($page, 1);
+			$page = max($this->request->get['page'], 1);
 		} else {
 			$page = 1;
 		}
@@ -21,8 +20,7 @@ class ControllerFilterGroupList extends Controller {
 		 * Items per page
 		 */
 		if (isset($this->request->get['per_page'])) {
-			$per_page = intval($this->request->get['per_page']);
-			$per_page = min($this->config->get('db_list_per_page'), $per_page);
+			$per_page = min($this->config->get('db_list_per_page'), $this->request->get['per_page']);
 		} else {
 			$per_page = $this->config->get('db_list_per_page');
 		}
@@ -34,7 +32,7 @@ class ControllerFilterGroupList extends Controller {
 
 		$filters = $this->model_catalog_filter->getFilterGroups($filter_data);
 
-		$filter_total_count = $this->model_catalog_filter->getTotalFilters();
+		$filter_total_count = $this->model_catalog_filter->getTotalFilterGroups();
 
 		$result_items = array();
 

@@ -20,8 +20,7 @@ class ControllerDownloadList extends Controller {
 		 * Page
 		 */
 		if (isset($this->request->get['page'])) {
-			$page = intval($this->request->get['page']);
-			$page = max($page, 1);
+			$page = max($this->request->get['page'], 1);
 		} else {
 			$page = 1;
 		}
