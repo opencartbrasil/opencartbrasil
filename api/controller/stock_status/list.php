@@ -49,13 +49,13 @@ class ControllerStockStatusList extends Controller {
 		$prev_page = max(1, $page - 1);
 		$last_page = ceil($stock_status_total_count / $per_page);
 		$next_page = intval(min($page + 1, $last_page));
-		$links = '/category?page=%d&per_page=%d';
+		$links = '/stock_status?page=%d&per_page=%d';
 
 		$result = array(
 			'items' => array_values($result_items),
 			'_metadata' => array(
-				'page' => $page,
-				'per_page' => $per_page,
+				'page' => intval($page),
+				'per_page' => intval($per_page),
 				'page_count' => count($result_items),
 				'total_count' => intval($stock_status_total_count),
 				'links' => array(

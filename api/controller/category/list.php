@@ -104,8 +104,8 @@ class ControllerCategoryList extends Controller {
 		$result = array(
 			'items' => array_values($result_items),
 			'_metadata' => array(
-				'page' => $page,
-				'per_page' => $per_page,
+				'page' => intval($page),
+				'per_page' => intval($per_page),
 				'page_count' => count($result_items),
 				'total_count' => intval($categories_total_count),
 				'links' => array(
