@@ -46,17 +46,19 @@ class ModelLocalisationLengthClass extends Model {
 		return $result;
 	}
 
-	public function getLengthClasses($data = array()) {
+	public function getLengthClasses(array $data = array()) {
 		$sql = '
-			SELECT lc.*, lcd.`unit`, lcd.`title`, l.`code` AS language_code FROM `' . DB_PREFIX . 'length_class` lc
+			SELECT lc.*, lcd.`unit`
+			FROM `' . DB_PREFIX . 'length_class` lc
 			LEFT JOIN `' . DB_PREFIX . 'length_class_description` lcd ON (lc.`length_class_id` = lcd.`length_class_id`)
-			LEFT JOIN `' . DB_PREFIX . 'language` l ON (l.`language_id` = lcd.`language_id`)
 			WHERE lc.length_class_id > 0
 		';
 
-		if (isset($data['unit'])) {
-			$sql .= ' AND lcd.`unit` = "' . $this->db->escape($data['unit']) . '"';
+		if (isset($data['filter_unit'])) {
+			$sql .= ' AND lcd.`unit` = "' . $this->db->escape($data['filter_unit']) . '"';
 		}
+
+		$sql .= ' GROUP BY lc.length_class_id';
 
 		if (isset($data['offset']) || isset($data['limit'])) {
 			if ($data['offset'] < 0) {
@@ -75,7 +77,25 @@ class ModelLocalisationLengthClass extends Model {
 		return $query->rows;
 	}
 
-	public function getTotalLengthClasses() {
+	public function getLengthClassDescriptions(int $length_class_id) {
+		$length_class_data = array();
+
+		$query = $this->db->query('
+			SELECT lcd.*, l.code AS language_code
+			FROM `' . DB_PREFIX . 'length_class_description` lcd
+			LEFT JOIN `' . DB_PREFIX . 'language` l ON (l.language_id = lcd.language_id)
+			WHERE lcd.`length_class_id` = "' . (int)$length_class_id . '"
+		');
+
+		foreach ($query->rows as $result) {
+			$language_code = $result['language_code'];
+
+			$length_class_data['title'][$language_code] = $result['title'];
+			$length_class_data['unit'][$language_code] = $result['unit'];
+		}
+
+		return $length_class_data;
+	}
 		$sql = '
 			SELECT COUNT(*) AS total FROM `' . DB_PREFIX . 'length_class` lc
 		';
