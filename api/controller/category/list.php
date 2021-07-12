@@ -107,7 +107,7 @@ class ControllerCategoryList extends Controller {
 				'page' => $page,
 				'per_page' => $per_page,
 				'page_count' => count($result_items),
-				'total_count' => $categories_total_count,
+				'total_count' => intval($categories_total_count),
 				'links' => array(
 					'self' => sprintf($links, $page, $per_page),
 					'first' => sprintf($links, 1, $per_page),
