@@ -27,27 +27,27 @@ class ModelCatalogCategory extends Model {
 			WHERE c.category_id > 0
 		';
 
-		if (isset($data['parent_id'])) {
-			$sql .= ' AND c.parent_id = ' . (int)$data['parent_id'] . '';
+		if ($data['filter_parent_id'] !== null) {
+			$sql .= ' AND c.parent_id = ' . (int)$data['filter_parent_id'] . '';
 		}
 
-		if (isset($data['total_products_eq'])) {
-			$sql .= ' HAVING(total_products = ' . (int)$data['total_products_eq'] . ')';
-		} elseif (isset($data['total_products_lt']) || isset($data['total_products_gt'])) {
+		if ($data['filter_total_products_eq'] !== null) {
+			$sql .= ' HAVING(total_products = ' . (int)$data['filter_total_products_eq'] . ')';
+		} elseif (isset($data['filter_total_products_lt']) || isset($data['filter_total_products_gt'])) {
 
-			if (isset($data['total_products_lt'])) {
-				$total_products_lt = intval($data['total_products_lt']);
+			if (isset($data['filter_total_products_lt'])) {
+				$filter_total_products_lt = intval($data['filter_total_products_lt']);
 			} else {
-				$total_products_lt = 4294967295;
+				$filter_total_products_lt = 4294967295;
 			}
 
-			if (isset($data['total_products_gt'])) {
-				$total_products_gt = intval($data['total_products_gt']);
+			if (isset($data['filter_total_products_gt'])) {
+				$filter_total_products_gt = intval($data['filter_total_products_gt']);
 			} else {
-				$total_products_gt = 0;
+				$filter_total_products_gt = 0;
 			}
 
-			$sql .= ' HAVING(total_products < ' . $total_products_lt . ' AND total_products > ' . $total_products_gt . ')';
+			$sql .= ' HAVING(total_products < ' . $filter_total_products_lt . ' AND total_products > ' . $filter_total_products_gt . ')';
 		}
 
 		if (isset($data['offset']) || isset($data['limit'])) {
@@ -83,39 +83,43 @@ class ModelCatalogCategory extends Model {
 
 		$query = $this->db->query($sql);
 
-		$result = array();
-
-		foreach ($query->rows as $key => $row) {
-			$language_code = $row['language_code'];
-
-			$result['name'][$language_code] = $row['name'];
-			$result['description'][$language_code] = $row['description'];
-			$result['meta_title'][$language_code] = $row['meta_title'];
-			$result['meta_description'][$language_code] = $row['meta_description'];
-			$result['meta_keyword'][$language_code] = $row['meta_keyword'];
-		}
-
-		return $result;
+		return $query->rows;
 	}
 
 	public function getTotalCategories(array $data = array()) {
 		$sql = '
 			SELECT
-				COUNT(c.*) AS total
+				c.category_id,
+				(SELECT COUNT(*) FROM `' . DB_PREFIX . 'product_to_category` ptc WHERE ptc.`category_id` = c.`category_id`) AS total_products
 			FROM `' . DB_PREFIX . 'category` c
 			WHERE c.category_id > 0
 		';
 
-		if (isset($data['filter_total_products_eq'])) {
-			$sql .= ' AND total_products = ' . (int)$data['filter_total_products_eq'] . '';
-		} elseif (isset($data['filter_total_products_lt'])) {
-			$sql .= ' AND total_products < ' . (int)$data['filter_total_products_lt'] . '';
-		} elseif (isset($data['filter_total_products_gt'])) {
-			$sql .= ' AND total_products < ' . (int)$data['filter_total_products_gt'] . '';
+		if ($data['filter_parent_id'] !== null) {
+			$sql .= ' AND c.parent_id = ' . (int)$data['filter_parent_id'] . '';
+		}
+
+		if ($data['filter_total_products_eq'] !== null) {
+			$sql .= ' HAVING(total_products = ' . (int)$data['filter_total_products_eq'] . ')';
+		} elseif (isset($data['filter_total_products_lt']) || isset($data['filter_total_products_gt'])) {
+
+			if (isset($data['filter_total_products_lt'])) {
+				$filter_total_products_lt = intval($data['filter_total_products_lt']);
+			} else {
+				$filter_total_products_lt = 4294967295;
+			}
+
+			if (isset($data['filter_total_products_gt'])) {
+				$filter_total_products_gt = intval($data['filter_total_products_gt']);
+			} else {
+				$filter_total_products_gt = 0;
+			}
+
+			$sql .= ' HAVING(total_products < ' . $filter_total_products_lt . ' AND total_products > ' . $filter_total_products_gt . ')';
 		}
 
 		$query = $this->db->query($sql);
 
-		return $query->num_rows ? $query->row['total'] : 0;
+		return $query->num_rows ? $query->num_rows : 0;
 	}
 }
