@@ -37,33 +37,28 @@ class ControllerLengthList extends Controller {
 		}
 
 		$filter_data = array(
-			'unit' => $filter_unit,
+			'filter_unit' => $filter_unit,
 			'offset' => ($page - 1) * $per_page,
 			'limit' => $per_page
 		);
 
 		$lengths = $this->model_localisation_length_class->getLengthClasses($filter_data);
 
-		$length_total_count = $this->model_localisation_length_class->getTotalLengthClasses();
+		$length_total_count = $this->model_localisation_length_class->getTotalLengthClasses($filter_data);
 
 		$result_items = array();
 
 		foreach ($lengths as $key => $length_info) {
 			$length_class_id = intval($length_info['length_class_id']);
 
-			if (!isset($result_items[$length_class_id]['descriptions'])) {
-				$result_items[$length_class_id]['descriptions'] = array();
-			}
+			$titles = $this->model_localisation_length_class->getLengthClassDescriptions($length_class_id);
 
-			$result_items[$length_class_id] = array(
+			$length = array(
 				'length_class_id' => $length_class_id,
 				'value' => floatval($length_info['value']),
-				'unit' => $length_info['unit'],
-				'descriptions' => array_merge(
-					$result_items[$length_class_id]['descriptions'],
-					array($length_info['language_code'] => $length_info['title'])
-				)
 			);
+
+			$result_items[] = array_merge($length, $titles);
 		}
 
 		$prev_page = max(1, $page - 1);
