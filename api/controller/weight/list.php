@@ -77,7 +77,7 @@ class ControllerweightList extends Controller {
 				'page' => $page,
 				'per_page' => $per_page,
 				'page_count' => count($result_items),
-				'total_count' => $weight_total_count,
+				'total_count' => intval($weight_total_count),
 				'links' => array(
 					'self' => sprintf($links, $page, $per_page),
 					'first' => sprintf($links, 1, $per_page),

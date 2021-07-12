@@ -62,7 +62,7 @@ class ControllerFilterGroupList extends Controller {
 				'page' => $page,
 				'per_page' => $per_page,
 				'page_count' => count($result_items),
-				'total_count' => $filter_total_count,
+				'total_count' => intval($filter_total_count),
 				'links' => array(
 					'self' => sprintf($links, $page, $per_page),
 					'first' => sprintf($links, 1, $per_page),
