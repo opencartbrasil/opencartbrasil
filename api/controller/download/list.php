@@ -7,13 +7,13 @@ class ControllerDownloadList extends Controller {
 	public function index() {
 		$this->load->model('catalog/download');
 
-		$filter_data = array();
-
 		/**
 		 * Filter Name
 		 */
 		if (isset($this->request->get['filter_name'])) {
-			$filter_data['filter_name'] = $this->request->get['filter_name'];
+			$filter_name = $this->request->get['filter_name'];
+		} else {
+			$filter_name = null;
 		}
 
 		/**
@@ -29,14 +29,16 @@ class ControllerDownloadList extends Controller {
 		 * Items per page
 		 */
 		if (isset($this->request->get['per_page'])) {
-			$per_page = intval($this->request->get['per_page']);
-			$per_page = min($this->config->get('db_list_per_page'), $per_page);
+			$per_page = min($this->config->get('db_list_per_page'), $this->request->get['per_page']);
 		} else {
 			$per_page = $this->config->get('db_list_per_page');
 		}
 
-		$filter_data['offset'] = ($page - 1) * $per_page;
-		$filter_data['limit'] = $per_page;
+		$filter_data = array(
+			'filter_name' => $filter_name,
+			'offset' => ($page - 1) * $per_page,
+			'limit' => $per_page
+		);
 
 		$downloads = $this->model_catalog_download->getDownloads($filter_data);
 

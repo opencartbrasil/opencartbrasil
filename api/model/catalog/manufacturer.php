@@ -57,7 +57,7 @@ class ModelCatalogManufacturer extends Model {
 		return $query->rows;
 	}
 
-	public function getTotalManufacturers($data = array()) {
+	public function getTotalManufacturers(array $data = array()) {
 		$sql = "SELECT COUNT(*) AS total FROM " . DB_PREFIX . "manufacturer";
 
 		if (!empty($data['filter_name'])) {
