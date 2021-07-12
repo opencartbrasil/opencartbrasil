@@ -43,8 +43,8 @@ class ControllerTaxClassList extends Controller {
 				'tax_class_id' => intval($tax_class_info['tax_class_id']),
 				'title' => $tax_class_info['title'],
 				'description' => $tax_class_info['description'],
-				'date_added' => $tax_class_info['date_added'],
-				'date_modified' => $tax_class_info['date_modified'],
+				'date_added' => date('Y-m-d\TH:i:s\+00:00', strtotime($tax_class_info['date_added'])),
+				'date_modified' => date('Y-m-d\TH:i:s\+00:00', strtotime($tax_class_info['date_modified'])),
 			);
 		}
 
