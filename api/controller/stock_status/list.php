@@ -5,7 +5,7 @@ class ControllerStockStatusList extends Controller {
 	private const HTTP_STATUS_400 = 400;
 
 	public function index() {
-		$this->load->model('catalog/category');
+		$this->load->model('localisation/stock_status');
 
 		/**
 		 * Page
@@ -32,20 +32,24 @@ class ControllerStockStatusList extends Controller {
 			'limit' => $per_page
 		);
 
-		$categories = $this->model_catalog_category->getCategories($filter_data);
+		$stock_status = $this->model_localisation_stock_status->getStockStatuses($filter_data);
 
-		$category_total_count = $this->model_catalog_category->getTotalgetCategories();
+		$stock_status_total_count = $this->model_localisation_stock_status->getTotalStockStatuses();
 
 		$result_items = array();
 
-		foreach ($categories as $key => $category_info) {
+		foreach ($stock_status as $key => $status) {
+			$stock_status_id = $status['stock_status_id'];
+			$language_code = $status['language_code'];
 
+			$result_items[$stock_status_id]['stock_status_id'] = $stock_status_id;
+			$result_items[$stock_status_id]['name'][$language_code] = $status['name'];
 		}
 
 		$prev_page = max(1, $page - 1);
-		$last_page = ceil($category_total_count / $per_page);
+		$last_page = ceil($stock_status_total_count / $per_page);
 		$next_page = intval(min($page + 1, $last_page));
-		$links = '/stock_status?page=%d&per_page=%d';
+		$links = '/category?page=%d&per_page=%d';
 
 		$result = array(
 			'items' => array_values($result_items),
@@ -53,7 +57,7 @@ class ControllerStockStatusList extends Controller {
 				'page' => $page,
 				'per_page' => $per_page,
 				'page_count' => count($result_items),
-				'total_count' => $category_total_count,
+				'total_count' => $stock_status_total_count,
 				'links' => array(
 					'self' => sprintf($links, $page, $per_page),
 					'first' => sprintf($links, 1, $per_page),
@@ -64,7 +68,7 @@ class ControllerStockStatusList extends Controller {
 			)
 		);
 
-		$this->response->addHeader("X-Total-Count: $category_total_count");
+		$this->response->addHeader("X-Total-Count: $stock_status_total_count");
 		$this->response($result);
 	}
 
