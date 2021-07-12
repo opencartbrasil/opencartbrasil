@@ -79,11 +79,11 @@ class ModelCatalogFilter extends Model {
 		return $result;
 	}
 
-	public function getTotalFilters() {
-		$sql = 'SELECT COUNT(*) AS total FROM `' . DB_PREFIX . 'filter`';
+	public function getTotalFilterGroups() {
+		$sql = 'SELECT COUNT(*) AS total FROM `' . DB_PREFIX . 'filter_group`';
 
 		$query = $this->db->query($sql);
 
-		return $query->row['total'];
+		return intval($query->row['total']);
 	}
 }
