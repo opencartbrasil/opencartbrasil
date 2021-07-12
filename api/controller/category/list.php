@@ -13,40 +13,43 @@ class ControllerCategoryList extends Controller {
 		 * Filter Parent ID
 		 */
 		if (isset($this->request->get['filter_parent_id'])) {
-			$filter_parent_id = intval($this->request->get['filter_parent_id']);
-			$filter_data['parent_id'] = max($filter_parent_id, 0);
+			$filter_parent_id = max($this->request->get['filter_parent_id'], 0);
+		} else {
+			$filter_parent_id = null;
 		}
 
 		/**
 		 * Filter Total Product is equals than ...
 		 */
 		if (isset($this->request->get['filter_total_products_eq'])) {
-			$total_products_eq = intval($this->request->get['filter_total_products_eq']);
-			$filter_data['total_products_eq'] = max($total_products_eq, 0);
+			$filter_total_products_eq = max($this->request->get['filter_total_products_eq'], 0);
+		} else {
+			$filter_total_products_eq = null;
 		}
 
 		/**
 		 * Filter Total Product is less than ...
 		 */
 		if (isset($this->request->get['filter_total_products_lt'])) {
-			$filter_total_products_lt = intval($this->request->get['filter_total_products_lt']);
-			$filter_data['total_products_lt'] = max($filter_total_products_lt, 1);
+			$filter_total_products_lt = max($this->request->get['filter_total_products_lt'], 1);
+		} else {
+			$filter_total_products_lt = null;
 		}
 
 		/**
 		 * Filter Total Product is greater than ...
 		 */
 		if (isset($this->request->get['filter_total_products_gt'])) {
-			$filter_total_products_gt = intval($this->request->get['filter_total_products_gt']);
-			$filter_data['total_products_gt'] = max($filter_total_products_gt, 1);
+			$filter_total_products_gt = max($this->request->get['filter_total_products_gt'], 1);
+		} else {
+			$filter_total_products_gt = null;
 		}
 
 		/**
 		 * Page
 		 */
 		if (isset($this->request->get['page'])) {
-			$page = intval($this->request->get['page']);
-			$page = max($page, 1);
+			$page = max($this->request->get['page'], 1);
 		} else {
 			$page = 1;
 		}
@@ -55,8 +58,7 @@ class ControllerCategoryList extends Controller {
 		 * Items per page
 		 */
 		if (isset($this->request->get['per_page'])) {
-			$per_page = intval($this->request->get['per_page']);
-			$per_page = min($this->config->get('db_list_per_page'), $per_page);
+			$per_page = min($this->config->get('db_list_per_page'), $this->request->get['per_page']);
 		} else {
 			$per_page = $this->config->get('db_list_per_page');
 		}
