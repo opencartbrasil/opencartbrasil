@@ -96,9 +96,17 @@ class ModelLocalisationLengthClass extends Model {
 
 		return $length_class_data;
 	}
+
+	public function getTotalLengthClasses(array $data = array()) {
 		$sql = '
-			SELECT COUNT(*) AS total FROM `' . DB_PREFIX . 'length_class` lc
+			SELECT COUNT(DISTINCT lc.length_class_id) AS total FROM `' . DB_PREFIX . 'length_class` lc
+			LEFT JOIN `' . DB_PREFIX . 'length_class_description` lcd ON (lc.`length_class_id` = lcd.`length_class_id`)
+			WHERE lc.length_class_id > 0
 		';
+
+		if (isset($data['filter_unit'])) {
+			$sql .= ' AND lcd.`unit` = "' . $this->db->escape($data['filter_unit']) . '"';
+		}
 
 		$query = $this->db->query($sql);
 
