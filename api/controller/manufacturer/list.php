@@ -34,8 +34,11 @@ class ControllerManufacturerList extends Controller {
 			$per_page = $this->config->get('db_list_per_page');
 		}
 
-		$filter_data['offset'] = ($page - 1) * $per_page;
-		$filter_data['limit'] = $per_page;
+		$filter_data = [
+			'filter_name' => $filter_name,
+			'offset' => ($page - 1) * $per_page,
+			'limit' => $per_page
+		];
 
 		$manufacturers = $this->model_catalog_manufacturer->getManufacturers($filter_data);
 

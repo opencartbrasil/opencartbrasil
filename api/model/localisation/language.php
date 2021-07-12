@@ -10,31 +10,31 @@ class ModelLocalisationLanguage extends Model {
 		return $query->row;
 	}
 
-	public function getLanguages(array $filter_data = array()) {
+	public function getLanguages(array $data = array()) {
 		$sql = '
 			SELECT DISTINCT *
 			FROM `' . DB_PREFIX . 'language`
 			WHERE `language_id` > 0
 		';
 
-		if (!empty($filter_data['code'])) {
-			$sql .= ' AND `code` = "' . $this->db->escape($filter_data['code']) . '"';
+		if (!empty($data['filter_code'])) {
+			$sql .= ' AND `code` = "' . $this->db->escape($data['filter_code']) . '"';
 		}
 
-		if (isset($filter_data['status'])) {
-			$sql .= ' AND `status` = "' . $this->db->escape($filter_data['status']) . '"';
+		if (!empty($data['filter_status'])) {
+			$sql .= ' AND `status` = "' . $this->db->escape($data['filter_status']) . '"';
 		}
 
-		if (!empty($filter_data['per_page'])) {
-			$sql .= ' LIMIT ' . intval($filter_data['per_page']);
-		} else {
-			$sql .= ' LIMIT ' . intval($this->config->get('db_list_per_page'));
-		}
+		if (isset($data['offset']) || isset($data['limit'])) {
+			if ($data['offset'] < 0) {
+				$data['offset'] = 0;
+			}
 
-		if (!empty($filter_data['per_page']) && !empty($filter_data['offset'])) {
-			$sql .= ' OFFSET ' . intval($filter_data['offset']) . '';
-		} else {
-			$sql .= ' OFFSET 0';
+			if ($data['limit'] < 1) {
+				$data['limit'] = 20;
+			}
+
+			$sql .= " LIMIT " . (int)$data['offset'] . "," . (int)$data['limit'];
 		}
 
 		$query = $this->db->query($sql);

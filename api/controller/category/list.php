@@ -63,12 +63,13 @@ class ControllerCategoryList extends Controller {
 			$per_page = $this->config->get('db_list_per_page');
 		}
 
-		$filter_data = array_merge(
-			$filter_data,
-			array(
-				'offset' => ($page - 1) * $per_page,
-				'limit' => $per_page
-			)
+		$filter_data = array(
+			'filter_parent_id' => $filter_parent_id,
+			'filter_total_products_eq' => $filter_total_products_eq,
+			'filter_total_products_lt' => $filter_total_products_lt,
+			'filter_total_products_gt' => $filter_total_products_gt,
+			'offset' => ($page - 1) * $per_page,
+			'limit' => $per_page
 		);
 
 		$categories = $this->model_catalog_category->getCategories($filter_data);

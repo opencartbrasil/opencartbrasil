@@ -44,10 +44,10 @@ class ControllerLanguageList extends Controller {
 		}
 
 		$filter_data = array(
-			'code' => $filter_code,
-			'status' => $filter_status,
+			'filter_code' => $filter_code,
+			'filter_status' => $filter_status,
 			'offset' => ($page - 1) * $per_page,
-			'per_page' => $per_page
+			'limit' => $per_page
 		);
 
 		$languages = $this->model_localisation_language->getLanguages($filter_data);
