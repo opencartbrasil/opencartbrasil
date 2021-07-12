@@ -42,7 +42,7 @@ class ControllerweightList extends Controller {
 
 		$weights = $this->model_localisation_weight_class->getWeightClasses($filter_data);
 
-		$weight_total_count = $this->model_localisation_weight_class->getTotalWeightClasses();
+		$weight_total_count = $this->model_localisation_weight_class->getTotalWeightClasses($filter_data);
 
 		$result_items = array();
 
