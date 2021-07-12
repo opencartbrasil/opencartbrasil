@@ -18,7 +18,12 @@ class ModelLocalisationTaxClass extends Model {
 	}
 
 	public function getTaxClasses($data = array()) {
-		$sql = 'SELECT * FROM `' . DB_PREFIX . 'tax_class`';
+		$sql = '
+			SELECT *,
+				CONVERT_TZ(`date_added`, @@time_zone, "+00:00") AS date_added,
+				CONVERT_TZ(`date_modified`, @@time_zone, "+00:00") AS date_modified
+			FROM `' . DB_PREFIX . 'tax_class`
+		';
 
 		if (isset($data['offset']) || isset($data['limit'])) {
 			if ($data['offset'] < 0) {
