@@ -66,6 +66,6 @@ class ModelCatalogManufacturer extends Model {
 
 		$query = $this->db->query($sql);
 
-		return $query->row['total'];
+		return intval($query->row['total']);
 	}
 }
