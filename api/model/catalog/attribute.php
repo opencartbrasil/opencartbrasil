@@ -88,9 +88,9 @@ class ModelCatalogAttribute extends Model {
 	public function getTotalAttributes($data = array()) {
 		$sql = '
 			SELECT COUNT(DISTINCT a.attribute_id) AS total
-			FROM ocbr_attribute a
-			LEFT JOIN ocbr_attribute_description ad ON (a.attribute_id = ad.attribute_id)
-			LEFT JOIN ocbr_language l ON (l.language_id = ad.language_id)
+			FROM ' . DB_PREFIX . 'attribute a
+			LEFT JOIN ' . DB_PREFIX . 'attribute_description ad ON (a.attribute_id = ad.attribute_id)
+			LEFT JOIN ' . DB_PREFIX . 'language l ON (l.language_id = ad.language_id)
 			WHERE a.attribute_id > 0
 		';
 
