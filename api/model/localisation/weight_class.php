@@ -46,16 +46,15 @@ class ModelLocalisationWeightClass extends Model {
 		return $result;
 	}
 
-	public function getWeightClasses($data = array()) {
+	public function getWeightClasses(array $data = array()) {
 		$sql = '
-			SELECT wc.*, wcd.`title`, wcd.`unit`, l.`code` AS `language_code` FROM `' . DB_PREFIX . 'weight_class` wc
+			SELECT DISTINCT wc.weight_class_id, wc.* FROM `' . DB_PREFIX . 'weight_class` wc
 			LEFT JOIN `' . DB_PREFIX . 'weight_class_description` wcd ON (wc.`weight_class_id` = wcd.`weight_class_id`)
-			LEFT JOIN `' . DB_PREFIX . 'language` l ON (l.`language_id` = wcd.`language_id`)
 			WHERE wc.weight_class_id > 0
 		';
 
-		if (isset($data['unit'])) {
-			$sql .= ' AND wcd.`unit` = "' . $this->db->escape($data['unit']) . '"';
+		if (isset($data['filter_unit'])) {
+			$sql .= ' AND wcd.`unit` = "' . $this->db->escape($data['filter_unit']) . '"';
 		}
 
 		if (isset($data['offset']) || isset($data['limit'])) {
@@ -73,6 +72,26 @@ class ModelLocalisationWeightClass extends Model {
 		$query = $this->db->query($sql);
 
 		return $query->rows;
+	}
+
+	public function getWeightClassDescriptions(int $weight_class_id) {
+		$weight_class_data = array();
+
+		$query = $this->db->query('
+			SELECT lcd.*, l.code AS language_code
+			FROM `' . DB_PREFIX . 'weight_class_description` lcd
+			LEFT JOIN `' . DB_PREFIX . 'language` l ON (l.language_id = lcd.language_id)
+			WHERE lcd.`weight_class_id` = "' . (int)$weight_class_id . '"
+		');
+
+		foreach ($query->rows as $result) {
+			$language_code = $result['language_code'];
+
+			$weight_class_data['title'][$language_code] = $result['title'];
+			$weight_class_data['unit'][$language_code] = $result['unit'];
+		}
+
+		return $weight_class_data;
 	}
 
 	public function getTotalWeightClasses() {

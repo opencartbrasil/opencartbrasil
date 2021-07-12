@@ -37,7 +37,7 @@ class ControllerweightList extends Controller {
 		}
 
 		$filter_data = array(
-			'unit' => $filter_unit,
+			'filter_unit' => $filter_unit,
 			'offset' => ($page - 1) * $per_page,
 			'limit' => $per_page
 		);
@@ -51,19 +51,14 @@ class ControllerweightList extends Controller {
 		foreach ($weights as $key => $weight_info) {
 			$weight_class_id = intval($weight_info['weight_class_id']);
 
-			if (!isset($result_items[$weight_class_id]['descriptions'])) {
-				$result_items[$weight_class_id]['descriptions'] = array();
-			}
+			$titles = $this->model_localisation_weight_class->getWeightClassDescriptions($weight_class_id);
 
-			$result_items[$weight_class_id] = array(
+			$weight = array(
 				'weight_class_id' => $weight_class_id,
 				'value' => floatval($weight_info['value']),
-				'unit' => $weight_info['unit'],
-				'descriptions' => array_merge(
-					$result_items[$weight_class_id]['descriptions'],
-					array($weight_info['language_code'] => $weight_info['title'])
-				)
 			);
+
+			$result_items[] = array_merge($weight, $titles);
 		}
 
 		$prev_page = max(1, $page - 1);
