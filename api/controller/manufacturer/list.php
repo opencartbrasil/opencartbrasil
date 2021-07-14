@@ -79,7 +79,7 @@ class ControllerManufacturerList extends Controller {
 					'self' => sprintf($links, $page, $per_page),
 					'first' => sprintf($links, 1, $per_page),
 					'previous' => ($page > 1) ? sprintf($links, $prev_page, $per_page) : null,
-					'next' => ($next_page !== $page) ? sprintf($links, $next_page, $per_page) : null,
+					'next' => ($next_page != $page) ? sprintf($links, $next_page, $per_page) : null,
 					'last' => sprintf($links, $last_page, $per_page)
 				)
 			)
