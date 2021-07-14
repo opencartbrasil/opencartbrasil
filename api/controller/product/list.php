@@ -7,6 +7,15 @@ class ControllerProductList extends Controller {
 		$this->load->model('catalog/product');
 
 		/**
+		 * Filter Name
+		 */
+		if (isset($this->request->get['filter_name'])) {
+			$filter_name = $this->request->get['filter_name'];
+		} else {
+			$filter_name = null;
+		}
+
+		/**
 		 * Filter Quantity
 		 */
 		if (isset($this->request->get['filter_quantity'])) {
@@ -64,27 +73,26 @@ class ControllerProductList extends Controller {
 		}
 
 		if (isset($this->request->get['page'])) {
-			$page = intval($this->request->get['page']);
-			$page = max($page, 1);
+			$page = max($this->request->get['page'], 1);
 		} else {
 			$page = 1;
 		}
 
 		if (isset($this->request->get['per_page'])) {
-			$per_page = intval($this->request->get['per_page']);
-			$per_page = min($this->config->get('db_list_per_page'), $per_page);
+			$per_page = min($this->config->get('db_list_per_page'), $this->request->get['per_page']);
 		} else {
 			$per_page = $this->config->get('db_list_per_page');
 		}
 
 		$filter_data = array(
-			'quantity' => $filter_quantity,
-			'status' => $filter_status,
-			'date_added' => $filter_date_added,
-			'date_modified' => $filter_date_modified,
-			'manufacturer_id' => $filter_manufacturer_id,
+			'filter_name' => $filter_name,
+			'filte_quantity' => $filter_quantity,
+			'filte_status' => $filter_status,
+			'filte_date_added' => $filter_date_added,
+			'filte_date_modified' => $filter_date_modified,
+			'filte_manufacturer_id' => $filter_manufacturer_id,
 			'offset' => ($page - 1) * $per_page,
-			'per_page' => $per_page
+			'limit' => $per_page
 		);
 
 		$products = $this->model_catalog_product->getProducts($filter_data);
@@ -341,6 +349,10 @@ class ControllerProductList extends Controller {
 		/** URL Page */
 		$links = '/languages?page=%d&per_page=%d';
 
+		if ($filter_name !== null) {
+			$links .= '&filter_name=' . $filter_name;
+		}
+
 		if ($filter_quantity !== null) {
 			$links .= '&filter_quantity=' . $filter_quantity;
 		}
@@ -364,8 +376,8 @@ class ControllerProductList extends Controller {
 		$result = array(
 			'items' => $result_items,
 			'_metadata' => array(
-				'page' => $page,
-				'per_page' => $per_page,
+				'page' => intval($page),
+				'per_page' => intval($per_page),
 				'page_count' => count($result_items),
 				'total_count' => intval($product_total_count),
 				'links' => array(

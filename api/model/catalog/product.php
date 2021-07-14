@@ -129,46 +129,50 @@ class ModelCatalogProduct extends Model {
 		return $query->row;
 	}
 
-	public function getProducts(array $filter_data = array()) {
+	public function getProducts(array $data = array()) {
 		$sql = '
-			SELECT
-				DISTINCT *,
-				CONVERT_TZ(`date_added`, @@time_zone, "+00:00") AS `date_added`,
-				CONVERT_TZ(`date_modified`, @@time_zone, "+00:00") AS `date_modified`
-			FROM `' . DB_PREFIX . 'product`
-			WHERE `product_id` > 0
+			SELECT DISTINCT p.*,
+				CONVERT_TZ(p.`date_added`, @@time_zone, "+00:00") AS `date_added`,
+				CONVERT_TZ(p.`date_modified`, @@time_zone, "+00:00") AS `date_modified`
+			FROM `' . DB_PREFIX . 'product` p
+			LEFT JOIN `' . DB_PREFIX . 'product_description` pd ON (pd.product_id = p.product_id)
+			WHERE p.product_id > 0
 		';
 
-		if (!empty($filter_data['quantity'])) {
-			$sql .= ' AND `quantity` <= "' . intval($filter_data['quantity']) . '"';
+		if (!empty($data['filter_name'])) {
+			$sql .= ' AND pd.`name` LIKE "%' . $this->db->escape($data['filter_name']) . '%"';
 		}
 
-		if (!empty($filter_data['status'])) {
-			$sql .= ' AND `status` = "' . !!$filter_data['status'] . '"';
+		if (!empty($data['filter_quantity'])) {
+			$sql .= ' AND p.`quantity` <= "' . intval($data['filter_quantity']) . '"';
 		}
 
-		if (!empty($filter_data['date_added'])) {
-			$sql .= ' AND `date_added` <= DATE("' . $this->db->escape($filter_data['date_added']) . '")';
+		if (!empty($data['filter_status'])) {
+			$sql .= ' AND p.`status` = "' . !!$data['filter_status'] . '"';
 		}
 
-		if (!empty($filter_data['date_modified'])) {
-			$sql .= ' AND `date_modified` <= DATE("' . $this->db->escape($filter_data['date_modified']) . '")';
+		if (!empty($data['filter_date_added'])) {
+			$sql .= ' AND p.`date_added` <= DATE("' . $this->db->escape($data['filter_date_added']) . '")';
 		}
 
-		if (!empty($filter_data['manufacturer_id'])) {
-			$sql .= ' AND `manufacturer_id` = "' . intval($filter_data['manufacturer_id']) . '"';
+		if (!empty($data['filter_date_modified'])) {
+			$sql .= ' AND p.`date_modified` <= DATE("' . $this->db->escape($data['filter_date_modified']) . '")';
 		}
 
-		if (!empty($filter_data['per_page'])) {
-			$sql .= ' LIMIT ' . intval($filter_data['per_page']);
-		} else {
-			$sql .= ' LIMIT ' . intval($this->config->get('db_list_per_page'));
+		if (!empty($data['filter_manufacturer_id'])) {
+			$sql .= ' AND p.`manufacturer_id` = "' . intval($data['filter_manufacturer_id']) . '"';
 		}
 
-		if (!empty($filter_data['per_page']) && !empty($filter_data['offset'])) {
-			$sql .= ' OFFSET ' . intval($filter_data['offset']) . '';
-		} else {
-			$sql .= ' OFFSET 0';
+		if (isset($data['offset']) || isset($data['limit'])) {
+			if ($data['offset'] < 0) {
+				$data['offset'] = 0;
+			}
+
+			if ($data['limit'] < 1) {
+				$data['limit'] = 20;
+			}
+
+			$sql .= " LIMIT " . (int)$data['offset'] . "," . (int)$data['limit'];
 		}
 
 		$query = $this->db->query($sql);
@@ -176,31 +180,36 @@ class ModelCatalogProduct extends Model {
 		return $query->rows;
 	}
 
-	public function getTotalProducts(array $filter_data = array()) {
+	public function getTotalProducts(array $data = array()) {
 		$sql = '
-			SELECT COUNT(DISTINCT `product_id`) AS total
-			FROM `' . DB_PREFIX . 'product`
-			WHERE `product_id` > 0
+			SELECT COUNT(DISTINCT p.`product_id`) AS total
+			FROM `' . DB_PREFIX . 'product` p
+			LEFT JOIN `' . DB_PREFIX . 'product_description` pd ON (pd.product_id = p.product_id)
+			WHERE p.`product_id` > 0
 		';
 
-		if (!empty($filter_data['quantity'])) {
-			$sql .= ' AND `quantity` <= "' . intval($filter_data['quantity']) . '"';
+		if (!empty($data['filter_name'])) {
+			$sql .= ' AND pd.`name` LIKE "%' . $this->db->escape($data['filter_name']) . '%"';
 		}
 
-		if (!empty($filter_data['status'])) {
-			$sql .= ' AND `status` = "' . !!$filter_data['status'] . '"';
+		if (!empty($data['filter_quantity'])) {
+			$sql .= ' AND p.`quantity` <= "' . intval($data['filter_quantity']) . '"';
 		}
 
-		if (!empty($filter_data['date_added'])) {
-			$sql .= ' AND `date_added` <= DATE("' . $this->db->escape($filter_data['date_added']) . '")';
+		if (!empty($data['filter_status'])) {
+			$sql .= ' AND p.`status` = "' . !!$data['filter_status'] . '"';
 		}
 
-		if (!empty($filter_data['date_modified'])) {
-			$sql .= ' AND `date_modified` <= DATE("' . $this->db->escape($filter_data['date_modified']) . '")';
+		if (!empty($data['filter_date_added'])) {
+			$sql .= ' AND p.`date_added` <= DATE("' . $this->db->escape($data['filter_date_added']) . '")';
 		}
 
-		if (!empty($filter_data['manufacturer_id'])) {
-			$sql .= ' AND `manufacturer_id` = "' . intval($filter_data['manufacturer_id']) . '"';
+		if (!empty($data['filter_date_modified'])) {
+			$sql .= ' AND p.`date_modified` <= DATE("' . $this->db->escape($data['filter_date_modified']) . '")';
+		}
+
+		if (!empty($data['filter_manufacturer_id'])) {
+			$sql .= ' AND p.`manufacturer_id` = "' . intval($data['filter_manufacturer_id']) . '"';
 		}
 
 		$query = $this->db->query($sql);
