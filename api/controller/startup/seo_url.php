@@ -103,6 +103,12 @@ class ControllerStartupSeoUrl extends Controller {
 			'methods' => ['GET']
 		];
 
+		$this->routers[] = [
+			'path' => '/api/option',
+			'action' => 'option/list',
+			'methods' => ['GET']
+		];
+
 		return $this->start();
 	}
 
