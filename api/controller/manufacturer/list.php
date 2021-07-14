@@ -60,7 +60,13 @@ class ControllerManufacturerList extends Controller {
 		$prev_page = max(1, $page - 1);
 		$last_page = ceil($manufacturers_total_count / $per_page);
 		$next_page = intval(min($page + 1, $last_page));
+
+		/** URL Page */
 		$links = '/manufacturer?page=%d&per_page=%d';
+
+		if ($filter_name !== null) {
+			$links .= '&filter_name=' . urlencode($filter_name);
+		}
 
 		$result = array(
 			'items' => array_values($result_items),
