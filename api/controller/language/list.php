@@ -70,7 +70,17 @@ class ControllerLanguageList extends Controller {
 		$prev_page = max(1, $page - 1);
 		$last_page = ceil($language_total_count / $per_page);
 		$next_page = intval(min($page + 1, $last_page));
+
+		/** URL Page */
 		$links = '/languages?page=%d&per_page=%d';
+
+		if ($filter_code !== null) {
+			$links .= '&filter_code=' . urlencode($filter_code);
+		}
+
+		if ($filter_status !== null) {
+			$links .= '&filter_status=' . $filter_status;
+		}
 
 		$result = array(
 			'items' => $result_items,

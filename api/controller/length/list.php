@@ -62,7 +62,13 @@ class ControllerLengthList extends Controller {
 		$prev_page = max(1, $page - 1);
 		$last_page = ceil($length_total_count / $per_page);
 		$next_page = intval(min($page + 1, $last_page));
+
+		/** URL Page */
 		$links = '/length?page=%d&per_page=%d';
+
+		if ($filter_unit !== null) {
+			$links .= '&filter_unit=' . urlencode($filter_unit);
+		}
 
 		$result = array(
 			'items' => array_values($result_items),

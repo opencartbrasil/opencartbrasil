@@ -63,7 +63,17 @@ class ControllerAttributeAttributeList extends Controller {
 		$prev_page = max(1, $page - 1);
 		$last_page = ceil($attributes_total_count / $per_page);
 		$next_page = intval(min($page + 1, $last_page));
+
+		/** URL Page */
 		$links = '/attribute?page=%d&per_page=%d';
+
+		if (isset($this->request->get['filter_name'])) {
+			$links .= '&filter_name=' . urlencode($this->request->get['filter_name']);
+		}
+
+		if (isset($this->request->get['filter_attribute_group_id'])) {
+			$links .= '&filter_attribute_group_id=' . urlencode($this->request->get['filter_attribute_group_id']);
+		}
 
 		$result = array(
 			'items' => array_values($result_items),

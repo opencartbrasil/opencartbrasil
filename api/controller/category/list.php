@@ -102,7 +102,25 @@ class ControllerCategoryList extends Controller {
 		$prev_page = max(1, $page - 1);
 		$last_page = ceil($categories_total_count / $per_page);
 		$next_page = intval(min($page + 1, $last_page));
+
+		/** URL Page */
 		$links = '/category?page=%d&per_page=%d';
+
+		if ($filter_parent_id !== null) {
+			$links .= '&filter_parent_id=' . $filter_parent_id;
+		}
+
+		if ($filter_total_products_eq !== null) {
+			$links .= '&filter_total_products_eq=' . $filter_total_products_eq;
+		}
+
+		if ($filter_total_products_lt !== null) {
+			$links .= '&filter_total_products_lt=' . $filter_total_products_lt;
+		}
+
+		if ($filter_total_products_gt !== null) {
+			$links .= '&filter_total_products_gt=' . $filter_total_products_gt;
+		}
 
 		$result = array(
 			'items' => array_values($result_items),

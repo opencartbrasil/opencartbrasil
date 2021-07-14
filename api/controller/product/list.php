@@ -337,7 +337,29 @@ class ControllerProductList extends Controller {
 		$prev_page = max(1, $page - 1);
 		$last_page = ceil($product_total_count / $per_page);
 		$next_page = intval(min($page + 1, $last_page));
+
+		/** URL Page */
 		$links = '/languages?page=%d&per_page=%d';
+
+		if ($filter_quantity !== null) {
+			$links .= '&filter_quantity=' . $filter_quantity;
+		}
+
+		if ($filter_status !== null) {
+			$links .= '&filter_status=' . $filter_status;
+		}
+
+		if ($filter_date_added !== null) {
+			$links .= '&filter_date_added=' . $filter_date_added;
+		}
+
+		if ($filter_date_modified !== null) {
+			$links .= '&filter_date_modified=' . $filter_date_modified;
+		}
+
+		if ($filter_manufacturer_id !== null) {
+			$links .= '&filter_manufacturer_id=' . $filter_manufacturer_id;
+		}
 
 		$result = array(
 			'items' => $result_items,
