@@ -2,18 +2,20 @@
 
 use Firebase\JWT\JWT;
 
-class ControllerCredentialsToken extends Controller {
+class ControllerCredentialsRefreshToken extends Controller {
 
 	private const EXPIRE = 3600;
-	private const EXPIRE_REFRESH_TOKEN = 86400;
 
 	/**
-	 * Cria token de acesso
+	 * Gera novo token de acesso
 	 */
 	public function index() {
 		$this->load->model('credentials/token');
 
 		$json = [];
+
+		$isValidToken = false;
+		$jwt_decoded = null;
 
 		$validate = $this->validate();
 
@@ -23,35 +25,41 @@ class ControllerCredentialsToken extends Controller {
 
 		$authorization = $this->request->headers['authorization'];
 
-		@list($token_type, $credentials) = explode(' ', $authorization);
+		try {
+			@list($type, $refresh_token) = explode(' ', $authorization);
+			$tks = \explode('.', $authorization);
 
-		$credentials_decoded = base64_decode($credentials);
+			@list($head, $body) = $tks;
 
-		list($client_id, $client_secret) = explode(':', $credentials_decoded);
+			$body_decoded = JWT::urlsafeB64Decode($body);
+			$body_decoded = JWT::jsonDecode($body_decoded);
 
-		$user_id = $this->model_credentials_token->login($client_id, $client_secret);
+			$isValidToken = $this->model_credentials_token->refreshTokenIsValid($refresh_token, self::EXPIRE);
+		} catch (ExpiredException $ignored) {
+			$isValidToken = true;
+		} catch (Exception $ignored) {
+			$isValidToken = false;
+		}
 
-		if ($user_id === false) {
+		if ($isValidToken === false) {
 			$this->response->setOutput(json_encode(array(
 				'success' => false,
 				'errors' => array(
 					array(
-						'code' => 'invalid_credential',
-						'message' => 'Credentials are invalid.'
+						'code' => 'refresh_token_failed',
+						'message' => 'Failed to update token.'
 					)
 				)
 			)));
-			return new Action('status_code/unauthorized');
+			return new Action('status_code/bad_request');
 		}
 
-		$access_token = $this->model_credentials_token->generateToken($user_id, self::EXPIRE);
-		$refresh_token = $this->model_credentials_token->generateToken($user_id, self::EXPIRE_REFRESH_TOKEN);
+		$this->model_credentials_token->disableRefreshToken($refresh_token);
 
-		$this->model_credentials_token->addToken($access_token, $refresh_token);
+		$jwt = $this->model_credentials_token->generateToken(1_000);
 
 		$json = [
-			'access_token' 	=> (string)$access_token,
-			'refresh_token' => (string)$refresh_token,
+			'access_token' 	=> (string)$jwt,
 			'token_type' 	=> 'Bearer',
 			'expires_in' 	=> self::EXPIRE - 1,
 		];
@@ -82,28 +90,13 @@ class ControllerCredentialsToken extends Controller {
 
 		@list($token_type, $credentials) = explode(' ', $authorization);
 
-		$credentials_decoded = base64_decode($credentials);
-
-		if (!preg_match('/^[a-z0-9]+:[a-z0-9]+$/i', $credentials_decoded)) {
-			$this->response->setOutput(json_encode(array(
-				'success' => false,
-				'errors' => array(
-					array(
-						'code' => 'invalid_credential_format',
-						'message' => 'The credential must be "client_id:client_secret" encoded with base64.'
-					)
-				)
-			)));
-			return new Action('status_code/bad_request');
-		}
-
-		if (strtolower($token_type) !== 'basic') {
+		if (strtolower($token_type) !== 'bearer') {
 			$this->response->setOutput(json_encode(array(
 				'success' => false,
 				'errors' => array(
 					array(
 						'code' => 'invalid_authorization_type',
-						'message' => 'It is necessary to inform the type "Basic" in the authentication header.'
+						'message' => 'It is necessary to inform the type "Bearer" in the authentication header.'
 					)
 				)
 			)));

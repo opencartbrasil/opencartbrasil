@@ -11,7 +11,7 @@ class ControllerStartupSeoUrl extends Controller {
 
 		$this->routers[] = [
 			'path' => '/api/credentials/refresh_token',
-			'action' => 'credentials/token/refresh',
+			'action' => 'credentials/refresh_token',
 			'methods' => ['POST']
 		];
 
