@@ -2,8 +2,6 @@
 
 class ControllerManufacturerList extends Controller {
 
-	private const HTTP_STATUS_400 = 400;
-
 	public function index() {
 		$this->load->model('catalog/manufacturer');
 
