@@ -345,7 +345,7 @@ class ControllerProductList extends Controller {
 		$next_page = intval(min($page + 1, $last_page));
 
 		/** URL Page */
-		$links = '/languages?page=%d&per_page=%d';
+		$links = '/product?page=%d&per_page=%d';
 
 		if ($filter_name !== null) {
 			$links .= '&filter_name=' . $filter_name;
