@@ -62,6 +62,52 @@ CREATE TABLE `oc_api_ip` (
 -----------------------------------------------------------
 
 --
+-- Table structure for table `oc_api_keys`
+--
+
+DROP TABLE IF EXISTS `oc_api_keys`;
+CREATE TABLE IF NOT EXISTS `oc_api_keys` (
+  `api_key_id` INT(11) PRIMARY KEY AUTO_INCREMENT,
+  `user_id` INT(11) NOT NULL,
+  `description` TEXT NULL,
+  `permissions` VARCHAR(255) NOT NULL,
+  `consumer_key` VARCHAR(67) NOT NULL,
+  `consumer_secret` VARCHAR(67) NOT NULL,
+  `status` TINYINT(1) DEFAULT 0
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+
+-----------------------------------------------------------
+
+--
+-- Table structure for table `oc_api_history`
+--
+
+DROP TABLE IF EXISTS `oc_api_history`;
+CREATE TABLE IF NOT EXISTS `oc_api_history` (
+  `api_history_id` INT(11) PRIMARY KEY AUTO_INCREMENT,
+  `user_id` INT(11) NOT NULL,
+  `date_added` DATETIME DEFAULT CURRENT_TIMESTAMP,
+  `ip_address` VARCHAR(45) NOT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+
+-----------------------------------------------------------
+
+--
+-- Table structure for table `oc_api_tokens`
+--
+
+DROP TABLE IF EXISTS `oc_api_tokens`;
+CREATE TABLE IF NOT EXISTS `oc_api_tokens` (
+  `user_id` INT(11) NOT NULL PRIMARY KEY,
+  `access_token` TEXT NOT NULL,
+  `refresh_token` TEXT NOT NULL,
+  `refresh_expire` INT(11) UNSIGNED NOT NULL,
+  `status` TINYINT(1) DEFAULT 0
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+
+-----------------------------------------------------------
+
+--
 -- Table structure for table `oc_api_session`
 --
 

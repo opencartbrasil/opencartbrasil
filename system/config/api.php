@@ -57,7 +57,6 @@ $_['action_pre_action']  = array(
 	'startup/event',
 	'startup/seo_url',
 	'startup/login',
-	'startup/permission',
 );
 
 // Actions
