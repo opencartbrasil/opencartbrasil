@@ -42,29 +42,43 @@ class ControllerCredentialsRefreshToken extends Controller {
 		}
 
 		if ($isValidToken === false) {
-			$this->response->setOutput(json_encode(array(
-				'success' => false,
-				'errors' => array(
-					array(
-						'code' => 'refresh_token_failed',
-						'message' => 'Failed to update token.'
-					)
-				)
-			)));
-			return new Action('status_code/bad_request');
+			return $this->responseRefreshTokenFailed();
 		}
 
-		$this->model_credentials_token->disableRefreshToken($refresh_token);
+		try {
+			$token = $this->model_credentials_token->generateToken($body_decoded->sub);
 
-		$jwt = $this->model_credentials_token->generateToken(1_000);
+			$json = [
+				'access_token' 	=> (string)$token['jwt'],
+				'token_type' 	=> 'Bearer',
+				'expires_in' 	=> self::EXPIRE - 1,
+			];
 
-		$json = [
-			'access_token' 	=> (string)$jwt,
-			'token_type' 	=> 'Bearer',
-			'expires_in' 	=> self::EXPIRE - 1,
-		];
+			$this->model_credentials_token->addToken($body_decoded->sub, $token['jwt'], $refresh_token);
 
-		$this->response->setOutput(json_encode($json));
+			$this->response->setOutput(json_encode($json));
+		} catch (UnexpectedValueException $ignored) {
+			return $this->responseRefreshTokenFailed();
+		}
+	}
+
+	/**
+	 * Escreve o response de falha e retorna o controller que corresponde
+	 * ao erro
+	 *
+	 * @return Action
+	 */
+	private function responseRefreshTokenFailed() {
+		$this->response->setOutput(json_encode(array(
+			'success' => false,
+			'errors' => array(
+				array(
+					'code' => 'refresh_token_failed',
+					'message' => 'Failed to update token.'
+				)
+			)
+		)));
+		return new Action('status_code/bad_request');
 	}
 
 	/**

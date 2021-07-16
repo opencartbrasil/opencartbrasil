@@ -8,53 +8,67 @@ class ModelCredentialsToken extends Model {
 	 * Armazena o access_token e refresh_token em tabela para consulta
 	 * de validação.
 	 *
-	 * @todo integrar ao banco de dados, cuja tabela deverá possuir os campos
-	 * 	access_token e refresh_token do tipo TEXT, e status do tipo tinyint
+	 * @param int $user_id User ID da tabela "oc_api"
+	 * @param string $access_token
+	 * @param string $refresh_token
+	 * @param int $refresh_token Tempo de expiração do refresh token
 	 *
 	 * @return void
 	 */
-	public function addToken($access_token, $refresh_token) {
-		$data = array(
-			'access_token' => $access_token,
-			'refresh_token' => $refresh_token,
-			'status' => 1
-		);
+	public function addToken(int $user_id, $access_token, $refresh_token, int $refresh_expire = 0) {
+		$this->db->query('DELETE FROM `' . DB_PREFIX . 'api_tokens` WHERE `user_id` = "' . $user_id . '"');
 
-		$this->cache->set(sha1($access_token), $data);
-		$this->cache->set(sha1($refresh_token), $data);
+		$this->db->query('
+			INSERT INTO `' . DB_PREFIX . 'api_tokens`
+			SET `user_id` = "' . $user_id . '",
+				`access_token` = "' . $this->db->escape($access_token) . '",
+				`refresh_token` = "' . $this->db->escape($refresh_token) . '",
+				`refresh_expire` = "' . $refresh_expire . '",
+				`status` = 1
+		');
 	}
 
 	/**
 	 * Realiza login no sistema de API
 	 *
-	 * @param string $client_id
-	 * @param string $client_secret
-	 *
-	 * @todo Integrar ao banco de dados
+	 * @param string $consumer_key
+	 * @param string $consumer_secret
 	 *
 	 * @return bool|array
 	 */
-	public function login($client_id, $client_secret) {
-		$user_id = 1;
-		return $client_id === "opencartbrasil" && $client_secret === "v5market" ? $user_id : false;
+	public function login($consumer_key, $consumer_secret) {
+		$user_info = $this->db->query('
+			SELECT `user_id`
+			FROM `' . DB_PREFIX . 'api_keys`
+			WHERE `consumer_key` = "' . $this->db->escape($consumer_key) . '"
+			  AND `consumer_secret` = "' . $this->db->escape($consumer_secret) . '"
+			  AND `status` = 1
+		');
+
+		return ($user_info->num_rows) ? intval($user_info->row['user_id']) : false;
 	}
 
 	/**
 	 * Valida se o token existe no banco de dados
 	 *
-	 * @todo Integrar ao banco de dados
-	 *
 	 * @param string $refresh_token
+	 * @param int $expire_at
 	 *
 	 * @return bool
 	 */
-	public function refreshTokenIsValid($refresh_token) {
-		$data = $this->cache->get(sha1($refresh_token));
+	public function refreshTokenIsValid($refresh_token, int $expire_at = 0) {
+		$query = $this->db->query('
+			SELECT *
+			FROM `' . DB_PREFIX . 'api_tokens`
+			WHERE `refresh_token` = "' . $this->db->escape($refresh_token) . '"
+			  AND `refresh_expire` >= "' . (time() + $expire_at) . '"
+			  AND `status` = 1
+		');
 
 		try {
-			if ($data && $data['status']) {
+			if ($query->num_rows) {
 				JWT::decode(
-					$data['refresh_token'],
+					$query->row['refresh_token'],
 					$this->config->get('secret_key'),
 					array('HS256')
 				);
@@ -69,55 +83,62 @@ class ModelCredentialsToken extends Model {
 	}
 
 	/**
-	 * Gera um novo token de acesso com base no dados do usuário
+	 * Verifica se o token de acesso está ativo
 	 *
-	 * @todo Integrar ao banco de dados
+	 * @param string $access_token
+	 *
+	 * @return bool
+	 */
+	public function accessTokenIsValid($access_token) {
+		$query = $this->db->query('
+			SELECT * FROM `' . DB_PREFIX . 'api_tokens`
+			WHERE `access_token` = "' . $this->db->escape($access_token) . '"
+			  AND `status` = 1');
+
+		return !!$query->num_rows;
+	}
+
+	/**
+	 * Gera um novo token de acesso com base no dados do usuário
 	 *
 	 * @param int $user_id Identificador o usuário no banco de dados
 	 * @param int $expire_at Tempo para expiração do token
 	 *
 	 * @return string
 	 */
-	public function generateToken($user_id, $expire_at = 3600) {
+	public function generateToken(int $user_id, int $expire_at = 3600) {
 		$time = time();
 
-		$client_id = 'opencartbrasil';
-		$client_secret = 'v5market';
-		$username = 'username';
-		$application_name = 'Desktop-MS-1307';
+		$user_info = $this->db->query('
+			SELECT ak.user_id, ak.consumer_key, ak.consumer_secret, ak.permissions, a.username
+			FROM `' . DB_PREFIX . 'api_keys` ak
+			LEFT JOIN `' . DB_PREFIX . 'api` a ON (a.api_id = ak.user_id)
+			WHERE a.status = 1
+			  AND ak.status = 1
+			  AND ak.user_id = "' . $user_id . '"
+			LIMIT 1
+		');
 
-		$jti_hash = sprintf('%s:%s:%s', $client_id, microtime(true), uniqid());
-		$jti = hash_hmac('sha256', $jti_hash, $client_secret);
+		if (!$user_info->num_rows) {
+			throw new \UnexpectedValueException('User not found');
+		}
+
+		$jti_hash = sprintf('%s:%s:%s', $user_info->row['consumer_key'], microtime(true), uniqid());
+		$jti = hash_hmac('sha256', $jti_hash, $user_info->row['consumer_secret']);
 
 		$payload = array(
 			'iss' => $this->config->get('config_url'),
 			'iat' => $time,
-			'sub' => $username,
+			'sub' => $user_info->row['user_id'],
 			'exp' => $time + $expire_at,
 			'jti' => $jti,
-			'application_name' 	=> $application_name,
+			'client_id' => $user_info->row['username'],
+			'scope' => $user_info->row['permissions']
 		);
 
-		return JWT::encode($payload, $this->config->get('secret_key'));
-	}
-
-	/**
-	 * Desabilita access_token e refresh_token após geração de um token
-	 * de acesso
-	 *
-	 * @todo Realizar busca no banco de dados e alterar o valor do campo
-	 * 	*status* para false. Ver o método "addToken"
-	 *
-	 * @param string $refresh_token
-	 *
-	 * @return void
-	 */
-	public function disableRefreshToken($refresh_token) {
-		$data = array(
-			'refresh_token' => $refresh_token,
-			'status' => 0
-		);
-
-		$this->cache->set(sha1($refresh_token), $data);
+		return [
+			'jwt' => JWT::encode($payload, $this->config->get('secret_key')),
+			'exp' => $time + $expire_at,
+		];
 	}
 }
