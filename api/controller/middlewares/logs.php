@@ -15,10 +15,10 @@ class ControllerMiddlewaresLogs extends Controller {
 		if ($this->jwt) {
 			$logs = array_merge($logs, array(
 				'iss' => $this->jwt->iss,
-				'application_name' => $this->jwt->application_name,
+				'sub' => $this->jwt->sub,
 			));
 
-			self::$request_id = hash('sha256', $this->jwt->application_name . hrtime(true) . uniqid());
+			self::$request_id = hash('sha256', $this->jwt->sub . hrtime(true) . uniqid());
 		} else {
 			self::$request_id = hash('sha256', hrtime(true) . uniqid());
 		}
@@ -46,7 +46,7 @@ class ControllerMiddlewaresLogs extends Controller {
 		if ($this->jwt) {
 			$logs = array_merge($logs, array(
 				'iss' => $this->jwt->iss,
-				'application_name' => $this->jwt->application_name,
+				'sub' => $this->jwt->sub,
 			));
 		}
 

@@ -47,11 +47,11 @@ class ControllerCredentialsToken extends Controller {
 		$access_token = $this->model_credentials_token->generateToken($user_id, self::EXPIRE);
 		$refresh_token = $this->model_credentials_token->generateToken($user_id, self::EXPIRE_REFRESH_TOKEN);
 
-		$this->model_credentials_token->addToken($access_token, $refresh_token);
+		$this->model_credentials_token->addToken($user_id, $access_token['jwt'], $refresh_token['jwt'], $refresh_token['exp']);
 
 		$json = [
-			'access_token' 	=> (string)$access_token,
-			'refresh_token' => (string)$refresh_token,
+			'access_token' 	=> (string)$access_token['jwt'],
+			'refresh_token' => (string)$refresh_token['jwt'],
 			'token_type' 	=> 'Bearer',
 			'expires_in' 	=> self::EXPIRE - 1,
 		];
@@ -84,13 +84,13 @@ class ControllerCredentialsToken extends Controller {
 
 		$credentials_decoded = base64_decode($credentials);
 
-		if (!preg_match('/^[a-z0-9]+:[a-z0-9]+$/i', $credentials_decoded)) {
+		if (!preg_match('/^ck_[a-z0-9]+:cs_[a-z0-9]+$/i', $credentials_decoded)) {
 			$this->response->setOutput(json_encode(array(
 				'success' => false,
 				'errors' => array(
 					array(
 						'code' => 'invalid_credential_format',
-						'message' => 'The credential must be "client_id:client_secret" encoded with base64.'
+						'message' => 'The credential must be "cs_consumer_key:ck_consumer_secret" encoded with base64.'
 					)
 				)
 			)));
