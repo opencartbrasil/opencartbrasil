@@ -1075,3 +1075,20 @@ input[type="checkbox"]:checked::after, .checkbox input[type="checkbox"]:checked:
 .extension-page-info #extension-description {
   margin-top: 18px;
 }
+
+/** Advanced API **/
+#form-api .btn-group .dropdown-menu {
+  left: -94px;
+}
+#form-api .btn-group ~ .btn {
+  display: none;
+}
+
+@media (max-width: 935px) {
+  #form-api .btn-group {
+    display: none;
+  }
+  #form-api .btn-group ~ .btn {
+    display: block;
+  }
+}
