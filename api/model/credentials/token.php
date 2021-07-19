@@ -110,11 +110,9 @@ class ModelCredentialsToken extends Model {
 		$time = time();
 
 		$user_info = $this->db->query('
-			SELECT ak.user_id, ak.consumer_key, ak.consumer_secret, ak.permissions, a.username
+			SELECT ak.user_id, ak.consumer_key, ak.consumer_secret, ak.permissions
 			FROM `' . DB_PREFIX . 'api_keys` ak
-			LEFT JOIN `' . DB_PREFIX . 'api` a ON (a.api_id = ak.user_id)
-			WHERE a.status = 1
-			  AND ak.status = 1
+			WHERE ak.status = 1
 			  AND ak.user_id = "' . $user_id . '"
 			LIMIT 1
 		');
@@ -132,7 +130,6 @@ class ModelCredentialsToken extends Model {
 			'sub' => $user_info->row['user_id'],
 			'exp' => $time + $expire_at,
 			'jti' => $jti,
-			'client_id' => $user_info->row['username'],
 			'scope' => $user_info->row['permissions']
 		);
 
