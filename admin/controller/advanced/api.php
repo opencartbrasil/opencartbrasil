@@ -74,19 +74,25 @@ class ControllerAdvancedApi extends Controller {
 			'limit' => $this->config->get('config_limit_admin')
 		);
 
-		$data['api_keys'] = array(
-			array(
-				'api_key_id' => 1,
-				'description' => 'Descrição da API Rest',
-				'status' => true,
-				'date_added' => '17/07/2021',
-				'date_modified' => '18/07/2021',
-				'last_access' => '19/07/2021',
-				'edit' => $this->url->link('advanced/api/edit', $url . '&api_key_id=' . 1, true),
-				'logs' => $this->url->link('advanced/api/edit', $url . '&api_key_id=' . 1 . '#access', true),
-				'disable' => $this->url->link('advanced/api/disable', $url . '&api_key_id=' . 1, true),
-			)
-		);
+		$this->load->model('advanced/api');
+
+		$api_keys = $this->model_advanced_api->getApis($filter_data);
+
+		$data['api_keys'] = array();
+
+		foreach ($api_keys as $api_key) {
+			$data['api_keys'][] = array(
+				'api_key_id' => $api_key['api_key_id'],
+				'description' => $api_key['description'],
+				'status' => !!$api_key['status'],
+				'date_added' => date($this->language->get('date_format_short'), strtotime($api_key['date_added'])),
+				'date_modified' => date($this->language->get('date_format_short'), strtotime($api_key['date_modified'])),
+				'last_access' => $api_key['last_access'] ? date($this->language->get('date_format_short'), strtotime($api_key['last_access'])) : '-',
+				'edit' => $this->url->link('advanced/api/edit', $url . '&api_key_id=' . $api_key['api_key_id'], true),
+				'logs' => $this->url->link('advanced/api/edit', $url . '&api_key_id=' . $api_key['api_key_id'] . '#access', true),
+				'disable' => $this->url->link('advanced/api/disable', $url . '&api_key_id=' . $api_key['api_key_id'], true),
+			);
+		}
 
 		$data['sort'] = $sort;
 		$data['order'] = $order;
