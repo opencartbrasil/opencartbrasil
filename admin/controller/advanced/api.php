@@ -162,10 +162,10 @@ class ControllerAdvancedApi extends Controller {
 
 		$this->document->setTitle($this->language->get('heading_title'));
 
-		//$this->load->model('advanced/api');
+		$this->load->model('advanced/api');
 
 		if (($this->request->server['REQUEST_METHOD'] == 'POST') && $this->validateForm()) {
-			//$this->model_advanced_api->editApi($this->request->get['api_key_id'], $this->request->post);
+			$this->model_advanced_api->editApi($this->request->get['api_key_id'], $this->request->post);
 
 			$this->session->data['success'] = $this->language->get('text_success');
 
@@ -194,11 +194,11 @@ class ControllerAdvancedApi extends Controller {
 
 		$this->document->setTitle($this->language->get('heading_title'));
 
-		//$this->load->model('advanced/api');
+		$this->load->model('advanced/api');
 
 		if (isset($this->request->post['selected']) && $this->validateModify()) {
 			foreach ($this->request->post['selected'] as $api_id) {
-				//$this->model_advanced_api->deleteApi($api_id);
+				$this->model_advanced_api->deleteApi($api_id);
 			}
 
 			$this->session->data['success'] = $this->language->get('text_success');

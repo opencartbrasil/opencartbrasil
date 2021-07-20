@@ -8,6 +8,7 @@ $_['column_status'] 	   = 'Situação';
 $_['column_date_added']    = 'Cadastro';
 $_['column_date_modified'] = 'Modificação';
 $_['column_last_access']   = 'Último acesso';
+$_['column_type']   = 'Descrição';
 $_['column_action']        = 'Ação';
 
 $_['button_logs'] = 'Ver logs';
