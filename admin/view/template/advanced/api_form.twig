@@ -93,7 +93,6 @@
                 <tr>
                   <td class="text-left">{{ column_ip_address }}</td>
                   <td class="text-left">{{ column_date_added }}</td>
-                  <td class="text-right">{{ column_action }}</td>
                 </tr>
               </thead>
               <tbody>
@@ -102,9 +101,6 @@
                 <tr>
                   <td class="text-left">{{ access.ip_address }}</td>
                   <td class="text-left">{{ access.date_added }}</td>
-                  <td class="text-right">
-                    <button class="btn btn-danger" onclick="removeHistory('{{ access.api_history_id }}')"><i class="fa fa-trash"></i></button>
-                  </td>
                 </tr>
                 {% endfor %}
                 {% else %}
