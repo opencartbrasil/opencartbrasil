@@ -56,6 +56,8 @@ class ControllerCredentialsRefreshToken extends Controller {
 
 			$this->model_credentials_token->addToken($body_decoded->sub, $token['jwt'], $refresh_token);
 
+			$this->model_credentials_token->addHistory($body_decoded->sub, 'refresh_token');
+
 			$this->response->setOutput(json_encode($json));
 		} catch (UnexpectedValueException $ignored) {
 			return $this->responseRefreshTokenFailed();
