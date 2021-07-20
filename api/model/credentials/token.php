@@ -59,7 +59,7 @@ class ModelCredentialsToken extends Model {
 	public function refreshTokenIsValid($refresh_token, int $expire_at = 0) {
 		$query = $this->db->query('
 			SELECT *
-			FROM `' . DB_PREFIX . 'api_tokens`
+			FROM `' . DB_PREFIX . 'api_token`
 			WHERE `refresh_token` = "' . $this->db->escape($refresh_token) . '"
 			  AND `refresh_expire` >= "' . (time() + $expire_at) . '"
 			  AND `status` = 1
@@ -91,7 +91,7 @@ class ModelCredentialsToken extends Model {
 	 */
 	public function accessTokenIsValid($access_token) {
 		$query = $this->db->query('
-			SELECT * FROM `' . DB_PREFIX . 'api_tokens`
+			SELECT * FROM `' . DB_PREFIX . 'api_token`
 			WHERE `access_token` = "' . $this->db->escape($access_token) . '"
 			  AND `status` = 1');
 
