@@ -100,8 +100,13 @@
                 <label class="col-sm-2 control-label" for="input-status">{{ entry_status }}</label>
                 <div class="col-sm-10">
                   <select name="status" id="input-status" class="form-control">
-                    <option value="1">{{ text_enabled }}</option>
+                    {% if status %}
+                    <option value="1" selected>{{ text_enabled }}</option>
                     <option value="0">{{ text_disabled }}</option>
+                    {% else %}
+                    <option value="1">{{ text_enabled }}</option>
+                    <option value="0" selected>{{ text_disabled }}</option>
+                    {% endif %}
                   </select>
                 </div>
               </div>
@@ -112,6 +117,7 @@
             <table class="table table-bordered table-hover">
               <thead>
                 <tr>
+                  <td class="text-left">{{ column_type }}</td>
                   <td class="text-left">{{ column_ip_address }}</td>
                   <td class="text-left">{{ column_date_added }}</td>
                 </tr>
@@ -120,6 +126,7 @@
                 {% if history %}
                 {% for access in history %}
                 <tr>
+                  <td class="text-left">{{ access.type }}</td>
                   <td class="text-left">{{ access.ip_address }}</td>
                   <td class="text-left">{{ access.date_added }}</td>
                 </tr>

@@ -130,10 +130,10 @@ class ControllerAdvancedApi extends Controller {
 
 		$this->document->setTitle($this->language->get('heading_title'));
 
-		//$this->load->model('advanced/api');
+		$this->load->model('advanced/api');
 
 		if (($this->request->server['REQUEST_METHOD'] == 'POST') && $this->validateForm()) {
-			//$this->model_advanced_api->addApi($this->request->post);
+			$this->model_advanced_api->addApi($this->request->post);
 
 			$this->session->data['success'] = $this->language->get('text_success');
 
@@ -254,23 +254,84 @@ class ControllerAdvancedApi extends Controller {
 			$data['error_description'] = '';
 		}
 
-		$data['history'] = array(
-			array(
-				'api_key_id' => 1,
-				'ip_address' => '127.0.0.1',
-				'date_added' => '19/07/2021 15:02:00'
-			),
-			array(
-				'api_key_id' => 2,
-				'ip_address' => '0.0.0.0',
-				'date_added' => '19/07/2021 16:02:00'
-			),
-			array(
-				'api_key_id' => 3,
-				'ip_address' => '192.168.1.100',
-				'date_added' => '19/07/2021 17:02:00'
-			),
-		);
+		if (isset($this->error['consumer_key'])) {
+			$data['error_consumer_key'] = $this->error['consumer_key'];
+		} else {
+			$data['error_consumer_key'] = '';
+		}
+
+		if (isset($this->error['consumer_secret'])) {
+			$data['error_consumer_secret'] = $this->error['consumer_secret'];
+		} else {
+			$data['error_consumer_secret'] = '';
+		}
+
+		$this->load->model('advanced/api');
+
+		if (isset($this->request->get['api_key_id']) && ($this->request->server['REQUEST_METHOD'] != 'POST')) {
+			$api_info = $this->model_advanced_api->getApi($this->request->get['api_key_id']);
+		} else {
+			$api_info = array();
+		}
+
+		if (isset($api_info['description'])) {
+			$data['description'] = $api_info['description'];
+		} elseif (isset($this->request->post['description'])) {
+			$data['description'] = $this->request->post['description'];
+		} else {
+			$data['description'] = '';
+		}
+
+		if (isset($api_info['consumer_key'])) {
+			$data['consumer_key'] = $api_info['consumer_key'];
+		} elseif (isset($this->request->post['consumer_key'])) {
+			$data['consumer_key'] = $this->request->post['consumer_key'];
+		} else {
+			$data['consumer_key'] = 'ck_' . bin2hex(random_bytes(32));
+		}
+
+		if (isset($api_info['consumer_secret'])) {
+			$data['consumer_secret'] = $api_info['consumer_secret'];
+		} elseif (isset($this->request->post['consumer_secret'])) {
+			$data['consumer_secret'] = $this->request->post['consumer_secret'];
+		} else {
+			$data['consumer_secret'] = 'cs_' . bin2hex(random_bytes(32));
+		}
+
+		if (isset($api_info['permissions'])) {
+			$data['permissions'] = explode(',', $api_info['permissions']);
+		} elseif (isset($this->request->post['permissions'])) {
+			$data['permissions'] = $this->request->post['permissions'];
+		} else {
+			$data['permissions'] = '';
+		}
+
+		if (isset($api_info['status'])) {
+			$data['status'] = $api_info['status'];
+		} elseif (isset($this->request->post['status'])) {
+			$data['status'] = $this->request->post['status'];
+		} else {
+			$data['status'] = '';
+		}
+
+		if (isset($this->request->get['api_key_id'])) {
+			$data['api_key_id'] = (int)$this->request->get['api_key_id'];
+			$histories = $this->model_advanced_api->getApiHistories($this->request->get['api_key_id']);
+		} else {
+			$data['api_key_id'] = false;
+			$histories = array();
+		}
+
+		$data['history'] = [];
+
+		foreach ($histories as $history) {
+			$data['history'][] = array(
+				'api_history_id' => $history['api_history_id'],
+				'type' => $this->language->get('text_type_' . $history['type']),
+				'ip_address' => $history['ip_address'],
+				'date_added' => date($this->language->get('datetime_format'), strtotime($history['date_added']))
+			);
+		}
 
 		$url = 'user_token=' . $this->session->data['user_token'];
 
@@ -308,6 +369,22 @@ class ControllerAdvancedApi extends Controller {
 
 		if ((utf8_strlen(trim($this->request->post['description'])) < 3) || (utf8_strlen(trim($this->request->post['description'])) > 255)) {
 			$this->error['description'] = $this->language->get('error_description');
+		}
+
+		if (!isset($this->request->get['api_key_id'])) {
+			if ((utf8_strlen(trim($this->request->post['consumer_key'])) < 7) || (utf8_strlen(trim($this->request->post['consumer_key'])) > 67) || strpos($this->request->post['consumer_key'], 'ck_') !== 0) {
+				$this->error['consumer_key'] = $this->language->get('error_consumer_key');
+			}
+
+			if ((utf8_strlen(trim($this->request->post['consumer_secret'])) < 7) || (utf8_strlen(trim($this->request->post['consumer_secret'])) > 67) || strpos($this->request->post['consumer_secret'], 'cs_') !== 0) {
+				$this->error['consumer_secret'] = $this->language->get('error_consumer_secret');
+			}
+
+			$consumer_key_exists = $this->model_advanced_api->consumerKeysExists($this->request->post);
+
+			if ($consumer_key_exists && !isset($this->error['warning'])) {
+				$this->error['warning'] = $this->language->get('error_consumer_exist');
+			}
 		}
 
 		return !$this->error;
