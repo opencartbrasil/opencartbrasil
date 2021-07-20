@@ -55,7 +55,7 @@ class ControllerAdvancedApi extends Controller {
 
 		$url = 'user_token=' . $this->session->data['user_token'];
 
-		if ($order == 'ASC') {
+		if ($order == 'DESC') {
 			$url .= '&order=DESC';
 		}
 
@@ -285,6 +285,8 @@ class ControllerAdvancedApi extends Controller {
 		} else {
 			$data['action'] = $this->url->link('advanced/api/add', $url, true);
 		}
+
+		$data['cancel'] = $this->url->link('advanced/api', $url, true);
 
 		$data['header'] = $this->load->controller('common/header');
 		$data['column_left'] = $this->load->controller('common/column_left');
