@@ -138,4 +138,22 @@ class ModelCredentialsToken extends Model {
 			'exp' => $time + $expire_at,
 		];
 	}
+
+	/**
+	 * Grava um histórico de geração de token do usuário
+	 *
+	 * @param int $api_key_id
+	 * @param string $type
+	 *
+	 * @return void
+	 */
+	public function addHistory(int $api_key_id, string $type) {
+		$this->db->query('
+			INSERT INTO `' . DB_PREFIX .'api_history`
+			SET `api_key_id` = "' . $api_key_id . '",
+				`type` = "' . $this->db->escape($type) . '",
+				`date_added` = NOW(),
+				`ip_address` = "' . $this->db->escape($this->request->server['REMOTE_ADDR']) . '"
+		');
+	}
 }
