@@ -29,9 +29,9 @@ class ControllerCredentialsToken extends Controller {
 
 		list($client_id, $client_secret) = explode(':', $credentials_decoded);
 
-		$user_id = $this->model_credentials_token->login($client_id, $client_secret);
+		$api_key_id = $this->model_credentials_token->login($client_id, $client_secret);
 
-		if ($user_id === false) {
+		if ($api_key_id === false) {
 			$this->response->setOutput(json_encode(array(
 				'success' => false,
 				'errors' => array(
@@ -44,10 +44,12 @@ class ControllerCredentialsToken extends Controller {
 			return new Action('status_code/unauthorized');
 		}
 
-		$access_token = $this->model_credentials_token->generateToken($user_id, self::EXPIRE);
-		$refresh_token = $this->model_credentials_token->generateToken($user_id, self::EXPIRE_REFRESH_TOKEN);
+		$access_token = $this->model_credentials_token->generateToken($api_key_id, self::EXPIRE);
+		$refresh_token = $this->model_credentials_token->generateToken($api_key_id, self::EXPIRE_REFRESH_TOKEN);
 
-		$this->model_credentials_token->addToken($user_id, $access_token['jwt'], $refresh_token['jwt'], $refresh_token['exp']);
+		$this->model_credentials_token->addToken($api_key_id, $access_token['jwt'], $refresh_token['jwt'], $refresh_token['exp']);
+
+		$this->model_credentials_token->addHistory($api_key_id, 'login');
 
 		$json = [
 			'access_token' 	=> (string)$access_token['jwt'],

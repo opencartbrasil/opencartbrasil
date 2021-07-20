@@ -84,10 +84,11 @@ CREATE TABLE IF NOT EXISTS `oc_api_keys` (
 
 DROP TABLE IF EXISTS `oc_api_history`;
 CREATE TABLE IF NOT EXISTS `oc_api_history` (
-  `api_history_id` INT(11) PRIMARY KEY AUTO_INCREMENT,
-  `user_id` INT(11) NOT NULL,
+  `api_history_id` INT(11) AUTO_INCREMENT,
+  `api_key_id` INT(11) NOT NULL,
   `date_added` DATETIME DEFAULT CURRENT_TIMESTAMP,
-  `ip_address` VARCHAR(45) NOT NULL
+  `ip_address` VARCHAR(45) NOT NULL,
+  PRIMARY KEY (`api_history_id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 -----------------------------------------------------------
@@ -98,7 +99,7 @@ CREATE TABLE IF NOT EXISTS `oc_api_history` (
 
 DROP TABLE IF EXISTS `oc_api_tokens`;
 CREATE TABLE IF NOT EXISTS `oc_api_tokens` (
-  `user_id` INT(11) NOT NULL PRIMARY KEY,
+  `api_key_id` INT(11) NOT NULL,
   `access_token` TEXT NOT NULL,
   `refresh_token` TEXT NOT NULL,
   `refresh_expire` INT(11) UNSIGNED NOT NULL,

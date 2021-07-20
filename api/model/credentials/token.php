@@ -8,19 +8,19 @@ class ModelCredentialsToken extends Model {
 	 * Armazena o access_token e refresh_token em tabela para consulta
 	 * de validação.
 	 *
-	 * @param int $user_id User ID da tabela "oc_api"
+	 * @param int $api_key_id User ID da tabela "oc_api"
 	 * @param string $access_token
 	 * @param string $refresh_token
 	 * @param int $refresh_token Tempo de expiração do refresh token
 	 *
 	 * @return void
 	 */
-	public function addToken(int $user_id, $access_token, $refresh_token, int $refresh_expire = 0) {
-		$this->db->query('DELETE FROM `' . DB_PREFIX . 'api_tokens` WHERE `user_id` = "' . $user_id . '"');
+	public function addToken(int $api_key_id, $access_token, $refresh_token, int $refresh_expire = 0) {
+		$this->db->query('DELETE FROM `' . DB_PREFIX . 'api_token` WHERE `api_key_id` = "' . $api_key_id . '"');
 
 		$this->db->query('
-			INSERT INTO `' . DB_PREFIX . 'api_tokens`
-			SET `user_id` = "' . $user_id . '",
+			INSERT INTO `' . DB_PREFIX . 'api_token`
+			SET `api_key_id` = "' . $api_key_id . '",
 				`access_token` = "' . $this->db->escape($access_token) . '",
 				`refresh_token` = "' . $this->db->escape($refresh_token) . '",
 				`refresh_expire` = "' . $refresh_expire . '",
@@ -38,14 +38,14 @@ class ModelCredentialsToken extends Model {
 	 */
 	public function login($consumer_key, $consumer_secret) {
 		$user_info = $this->db->query('
-			SELECT `user_id`
-			FROM `' . DB_PREFIX . 'api_keys`
+			SELECT `api_key_id`
+			FROM `' . DB_PREFIX . 'api_key`
 			WHERE `consumer_key` = "' . $this->db->escape($consumer_key) . '"
 			  AND `consumer_secret` = "' . $this->db->escape($consumer_secret) . '"
 			  AND `status` = 1
 		');
 
-		return ($user_info->num_rows) ? intval($user_info->row['user_id']) : false;
+		return ($user_info->num_rows) ? intval($user_info->row['api_key_id']) : false;
 	}
 
 	/**
@@ -106,14 +106,14 @@ class ModelCredentialsToken extends Model {
 	 *
 	 * @return string
 	 */
-	public function generateToken(int $user_id, int $expire_at = 3600) {
+	public function generateToken(int $api_key_id, int $expire_at = 3600) {
 		$time = time();
 
 		$user_info = $this->db->query('
-			SELECT ak.user_id, ak.consumer_key, ak.consumer_secret, ak.permissions
-			FROM `' . DB_PREFIX . 'api_keys` ak
+			SELECT ak.api_key_id, ak.consumer_key, ak.consumer_secret, ak.permissions
+			FROM `' . DB_PREFIX . 'api_key` ak
 			WHERE ak.status = 1
-			  AND ak.user_id = "' . $user_id . '"
+			  AND ak.api_key_id = "' . $api_key_id . '"
 			LIMIT 1
 		');
 
@@ -127,7 +127,7 @@ class ModelCredentialsToken extends Model {
 		$payload = array(
 			'iss' => $this->config->get('config_url'),
 			'iat' => $time,
-			'sub' => $user_info->row['user_id'],
+			'sub' => $user_info->row['api_key_id'],
 			'exp' => $time + $expire_at,
 			'jti' => $jti,
 			'scope' => $user_info->row['permissions']
