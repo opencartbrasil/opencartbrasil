@@ -18,7 +18,7 @@ $_['ignored_routers']		= array(
 );
 
 // Log
-$_['error_filename']     = sprintf('api-%d-%s-%d.log', date('Y'), date('m'), date('d'));
+$_['error_filename']     = sprintf('api-%d-%s-%s.log', date('Y'), date('m'), date('d'));
 
 // Database
 $_['db_autostart']       = true;

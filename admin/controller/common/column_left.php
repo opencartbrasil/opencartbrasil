@@ -606,6 +606,14 @@ class ControllerCommonColumnLeft extends Controller {
 				);
 			}
 
+			if ($this->user->hasPermission('access', 'advanced/log')) {
+				$advanced[] = array(
+					'name'	   => $this->language->get('text_advanced_log'),
+					'href'     => $this->url->link('advanced/log', 'user_token=' . $this->session->data['user_token'], true),
+					'children' => array()
+				);
+			}
+
 			if ($advanced) {
 				$system[] = array(
 					'name'	   => $this->language->get('text_advanced'),

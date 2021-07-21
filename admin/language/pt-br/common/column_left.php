@@ -68,6 +68,7 @@ $_['text_user']                 = 'Usuários';
 $_['text_users']                = 'Gerenciar usuários';
 $_['text_api_rest']             = 'API Rest';
 $_['text_advanced']             = 'Avançado';
+$_['text_advanced_log']         = 'Log API Rest';
 $_['text_user_group']           = 'Grupos de usuários';
 $_['text_voucher']              = 'Vale presentes';
 $_['text_voucher_theme']        = 'Temas';
