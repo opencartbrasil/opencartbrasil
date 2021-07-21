@@ -69,6 +69,7 @@ $_['text_users']                = 'Users';
 $_['text_webhook']              = 'Web Hooks';
 $_['text_api_rest']             = 'API Rest';
 $_['text_advanced']             = 'Advanced';
+$_['text_advanced_log']         = 'Log API Rest';
 $_['text_user_group']           = 'User Groups';
 $_['text_voucher']              = 'Gift Vouchers';
 $_['text_voucher_theme']        = 'Voucher Themes';
