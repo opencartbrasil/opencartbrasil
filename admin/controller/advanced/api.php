@@ -87,10 +87,10 @@ class ControllerAdvancedApi extends Controller {
 				'status' => !!$api_key['status'],
 				'date_added' => date($this->language->get('date_format_short'), strtotime($api_key['date_added'])),
 				'date_modified' => date($this->language->get('date_format_short'), strtotime($api_key['date_modified'])),
-				'last_access' => $api_key['last_access'] ? date($this->language->get('date_format_short'), strtotime($api_key['last_access'])) : '-',
+				'last_access' => $api_key['last_access'] ? date($this->language->get('datetime_format'), strtotime($api_key['last_access'])) : '-',
 				'edit' => $this->url->link('advanced/api/edit', $url . '&api_key_id=' . $api_key['api_key_id'], true),
 				'logs' => $this->url->link('advanced/api/edit', $url . '&api_key_id=' . $api_key['api_key_id'] . '#access', true),
-				'disable' => $this->url->link('advanced/api/disable', $url . '&api_key_id=' . $api_key['api_key_id'], true),
+				'toggleStatus' => $this->url->link('advanced/api/toggleStatus', $url . '&api_key_id=' . $api_key['api_key_id'], true),
 			);
 		}
 
@@ -204,23 +204,49 @@ class ControllerAdvancedApi extends Controller {
 			$this->session->data['success'] = $this->language->get('text_success');
 		}
 
-		$this->index();
+		$url = '';
+
+		if (isset($this->request->get['sort'])) {
+			$url .= '&sort=' . $this->request->get['sort'];
+		}
+
+		if (isset($this->request->get['order'])) {
+			$url .= '&order=' . $this->request->get['order'];
+		}
+
+		if (isset($this->request->get['page'])) {
+			$url .= '&page=' . $this->request->get['page'];
+		}
+
+		$this->response->redirect($this->url->link('advanced/api', 'user_token=' . $this->session->data['user_token'] . $url, true));
 	}
 
-	public function disable() {
+	public function toggleStatus() {
 		$this->load->language('advanced/api');
 
-		$this->document->setTitle($this->language->get('heading_title'));
-
-		//$this->load->model('advanced/api');
-
 		if (isset($this->request->get['api_key_id']) && $this->validateModify()) {
-			//$this->model_advanced_api->disableApi($this->request->post['api_key_id']);
+			$this->load->model('advanced/api');
+
+			$this->model_advanced_api->toggleStatusApi($this->request->get['api_key_id']);
 
 			$this->session->data['success'] = $this->language->get('text_success');
 		}
 
-		$this->index();
+		$url = '';
+
+		if (isset($this->request->get['sort'])) {
+			$url .= '&sort=' . $this->request->get['sort'];
+		}
+
+		if (isset($this->request->get['order'])) {
+			$url .= '&order=' . $this->request->get['order'];
+		}
+
+		if (isset($this->request->get['page'])) {
+			$url .= '&page=' . $this->request->get['page'];
+		}
+
+		$this->response->redirect($this->url->link('advanced/api', 'user_token=' . $this->session->data['user_token'] . $url, true));
 	}
 
 	public function getForm() {
