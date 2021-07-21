@@ -22,7 +22,7 @@ class ModelAdvancedApi extends Model {
 	}
 
 	public function getApis($data = array()) {
-		$sql = "SELECT a.*, ah.date_added AS last_access FROM `" . DB_PREFIX . "api_key` a LEFT JOIN `" . DB_PREFIX . "api_history` ah ON (ah.api_key_id = a.api_key_id)";
+		$sql = "SELECT a.*, (SELECT ahi.date_added FROM `" . DB_PREFIX . "api_history` ahi WHERE ahi.api_key_id = ah.api_key_id ORDER BY ahi.date_added DESC LIMIT 1) AS last_access FROM `" . DB_PREFIX . "api_key` a LEFT JOIN `" . DB_PREFIX . "api_history` ah ON (ah.api_key_id = a.api_key_id) GROUP BY ah.api_key_id";
 
 		$sort_data = array(
 			'a.description',
@@ -67,8 +67,16 @@ class ModelAdvancedApi extends Model {
 		return $query->row;
 	}
 
+	public function getApisTotal() {
+		$sql = "SELECT api_key_id FROM `" . DB_PREFIX . "api_key`";
+
+		$query = $this->db->query($sql);
+
+		return $query->num_rows;
+	}
+
 	public function getApiHistories($api_key_id) {
-		$query = $this->db->query("SELECT * FROM `" . DB_PREFIX . "api_history` WHERE `api_key_id` = '" . (int)$api_key_id . "'");
+		$query = $this->db->query("SELECT * FROM `" . DB_PREFIX . "api_history` WHERE `api_key_id` = '" . (int)$api_key_id . "' ORDER BY `date_added` DESC");
 
 		return $query->rows;
 	}
