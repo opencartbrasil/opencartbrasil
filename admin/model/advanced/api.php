@@ -17,6 +17,10 @@ class ModelAdvancedApi extends Model {
 		$this->db->query("DELETE FROM `" . DB_PREFIX . "api_key` WHERE `api_key_id` = '" . (int)$api_key_id . "'");
 	}
 
+	public function toggleStatusApi($api_key_id) {
+		$this->db->query("UPDATE `" . DB_PREFIX . "api_key` SET `status` = IF(`status` = 1, 0, 1) WHERE `api_key_id` = '" . (int)$api_key_id . "'");
+	}
+
 	public function getApis($data = array()) {
 		$sql = "SELECT a.*, ah.date_added AS last_access FROM `" . DB_PREFIX . "api_key` a LEFT JOIN `" . DB_PREFIX . "api_history` ah ON (ah.api_key_id = a.api_key_id)";
 
