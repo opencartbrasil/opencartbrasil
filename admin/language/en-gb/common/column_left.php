@@ -67,6 +67,7 @@ $_['text_upload']               = 'Uploads';
 $_['text_user']                 = 'Users';
 $_['text_users']                = 'Users';
 $_['text_webhook']              = 'Web Hooks';
+$_['text_api_rest']             = 'API Rest';
 $_['text_advanced']             = 'Advanced';
 $_['text_user_group']           = 'User Groups';
 $_['text_voucher']              = 'Gift Vouchers';
