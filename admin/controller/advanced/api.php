@@ -78,6 +78,8 @@ class ControllerAdvancedApi extends Controller {
 
 		$api_keys = $this->model_advanced_api->getApis($filter_data);
 
+		$api_keys_total = $this->model_advanced_api->getApisTotal();
+
 		$data['api_keys'] = array();
 
 		foreach ($api_keys as $api_key) {
@@ -96,6 +98,33 @@ class ControllerAdvancedApi extends Controller {
 
 		$data['sort'] = $sort;
 		$data['order'] = $order;
+
+		$url = '';
+
+		if ($order == 'DESC') {
+			$url .= '&order=DESC';
+		}
+
+		if ($sort) {
+			$url .= '&sort=' . $sort;
+		}
+
+		$pagination = new Pagination();
+		$pagination->total = $api_keys_total;
+		$pagination->page = $page;
+		$pagination->limit = $this->config->get('config_limit_admin');
+		$pagination->url = $this->url->link('advanced/api', 'user_token=' . $this->session->data['user_token'] . $url . '&page={page}', true);
+
+		$data['pagination'] = $pagination->render();
+
+		$data['results'] = sprintf(
+			$this->language->get('text_pagination'),
+			($api_keys_total) ? (($page - 1) * $this->config->get('config_limit_admin')) + 1 : 0,
+			((($page - 1) * $this->config->get('config_limit_admin')) > ($api_keys_total - $this->config->get('config_limit_admin')))
+				? $api_keys_total
+				: ((($page - 1) * $this->config->get('config_limit_admin')) + $this->config->get('config_limit_admin')),
+			$api_keys_total, ceil($api_keys_total / $this->config->get('config_limit_admin'))
+		);
 
 		$url = 'user_token=' . $this->session->data['user_token'];
 
