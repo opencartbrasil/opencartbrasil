@@ -101,6 +101,8 @@ class ControllerAdvancedLog extends Controller {
 			} else {
 				$data['log'] = file_get_contents($file, FILE_USE_INCLUDE_PATH, null);
 			}
+		} else {
+			$data['error_warning'] = $this->language->get('text_file_not_found');
 		}
 
 		$data['filter_date'] = $filter_date;
