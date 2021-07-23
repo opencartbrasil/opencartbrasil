@@ -6,7 +6,11 @@ class ControllerMiddlewaresAccessTokenExpired extends Controller {
 			return;
 		}
 
-		$authorization = $this->request->headers['authorization'];
+		if (isset($this->request->headers['authorization'])) {
+			$authorization = $this->request->headers['authorization'];
+		} else {
+			$authorization = '';
+		}
 
 		@list($token_type, $access_token) = explode(' ', $authorization);
 
