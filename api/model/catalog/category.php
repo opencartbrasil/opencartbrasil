@@ -83,7 +83,19 @@ class ModelCatalogCategory extends Model {
 
 		$query = $this->db->query($sql);
 
-		return $query->rows;
+		$result = [];
+
+		foreach ($query->rows as $row) {
+			$language_code = $row['language_code'];
+
+			$result['name'][$language_code] = $row['name'];
+			$result['description'][$language_code] = $row['description'];
+			$result['meta_title'][$language_code] = $row['meta_title'];
+			$result['meta_description'][$language_code] = $row['meta_description'];
+			$result['meta_keyword'][$language_code] = $row['meta_keyword'];
+		}
+
+		return $result;
 	}
 
 	public function getTotalCategories(array $data = array()) {
