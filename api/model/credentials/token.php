@@ -90,6 +90,10 @@ class ModelCredentialsToken extends Model {
 	 * @return bool
 	 */
 	public function accessTokenIsValid($access_token) {
+		if (empty($access_token)) {
+			return false;
+		}
+
 		$query = $this->db->query('
 			SELECT * FROM `' . DB_PREFIX . 'api_token`
 			WHERE `access_token` = "' . $this->db->escape($access_token) . '"
