@@ -4,107 +4,112 @@ class ControllerStartupSeoUrl extends Controller {
 
 	public function index() {
 		$this->routers[] = [
-			'path' => '/api/credentials/access_token',
+			'path' => 'documentation',
+			'action' => 'common/documentation'
+		];
+
+		$this->routers[] = [
+			'path' => 'credentials/access_token',
 			'action' => 'credentials/token',
 			'methods' => ['POST']
 		];
 
 		$this->routers[] = [
-			'path' => '/api/credentials/refresh_token',
+			'path' => 'credentials/refresh_token',
 			'action' => 'credentials/refresh_token',
 			'methods' => ['POST']
 		];
 
 		$this->routers[] = [
-			'path' => '/api/product(?:/(?P<product_id>\d+))?',
+			'path' => 'product(?:/(?P<product_id>\d+))?',
 			'action' => 'product/form',
 			'methods' => ['POST', 'PUT']
 		];
 
 		$this->routers[] = [
-			'path' => '/api/product/(?P<product_id>\d+)',
+			'path' => 'product/(?P<product_id>\d+)',
 			'action' => 'product/info',
 		];
 
 		$this->routers[] = [
-			'path' => '/api/product',
+			'path' => 'product',
 			'action' => 'product/list',
 		];
 
 		$this->routers[] = [
-			'path' => '/api/product/(?P<product_id>\d+)',
+			'path' => 'product/(?P<product_id>\d+)',
 			'action' => 'product/delete',
 			'methods' => ['DELETE']
 		];
 
 		$this->routers[] = [
-			'path' => '/api/language',
+			'path' => 'language',
 			'action' => 'language/list',
 			'methods' => ['GET']
 		];
 
 		$this->routers[] = [
-			'path' => '/api/tax_class',
+			'path' => 'tax_class',
 			'action' => 'tax_class/list',
 			'methods' => ['GET']
 		];
 
 		$this->routers[] = [
-			'path' => '/api/stock_status',
+			'path' => 'stock_status',
 			'action' => 'stock_status/list',
 			'methods' => ['GET']
 		];
 
 		$this->routers[] = [
-			'path' => '/api/length',
+			'path' => 'length',
 			'action' => 'length/list',
 			'methods' => ['GET']
 		];
 
 		$this->routers[] = [
-			'path' => '/api/weight',
+			'path' => 'weight',
 			'action' => 'weight/list',
 			'methods' => ['GET']
 		];
 
 		$this->routers[] = [
-			'path' => '/api/category',
+			'path' => 'category',
 			'action' => 'category/list',
 			'methods' => ['GET']
 		];
 
 		$this->routers[] = [
-			'path' => '/api/filter_group',
+			'path' => 'filter_group',
 			'action' => 'filter/group_list',
 			'methods' => ['GET']
 		];
 
 		$this->routers[] = [
-			'path' => '/api/attribute_group',
+			'path' => 'attribute_group',
 			'action' => 'attribute/attribute_group_list',
 			'methods' => ['GET']
 		];
 
 		$this->routers[] = [
-			'path' => '/api/attribute',
+			'path' => 'attribute',
 			'action' => 'attribute/attribute_list',
 			'methods' => ['GET']
 		];
 
 		$this->routers[] = [
-			'path' => '/api/manufacturer',
+			'path' => 'manufacturer',
 			'action' => 'manufacturer/list',
 			'methods' => ['GET']
 		];
 
 		$this->routers[] = [
-			'path' => '/api/download',
+			'path' => 'download',
 			'action' => 'download/list',
 			'methods' => ['GET']
 		];
 
 		$this->routers[] = [
-			'path' => '/api/option',
+			'path' => 'option',
 			'action' => 'option/list',
 			'methods' => ['GET']
 		];
@@ -113,7 +118,11 @@ class ControllerStartupSeoUrl extends Controller {
 	}
 
 	private function start() {
-		$parsed_url = parse_url($_SERVER['REQUEST_URI']);
+		if (isset($this->request->get['_route_'])) {
+			$parsed_url = $this->request->get['_route_'];
+		} else {
+			$parsed_url = $this->request->get['route'];
+		}
 
 		$requestMethod = $_SERVER['REQUEST_METHOD'];
 		$path_default = '/';
@@ -142,8 +151,8 @@ class ControllerStartupSeoUrl extends Controller {
 				$route['action'] = $this->config->get('action_default');
 			}
 
-			if (isset($parsed_url['path']) && !empty($parsed_url['path'])) {
-				$path = $parsed_url['path'];
+			if (!empty($parsed_url)) {
+				$path = $parsed_url;
 			}
 
 			$regex  = '~^' . $route['path'] . '$~i';
@@ -212,7 +221,7 @@ class ControllerStartupSeoUrl extends Controller {
 	 */
 	public function filterRoutersByPath($parsed_url, array $routers = []) {
 		return array_filter($routers, function($route) use ($parsed_url) {
-			return preg_match('~^' . $route['path'] . '$~i', $parsed_url['path']);
+			return preg_match('~^' . $route['path'] . '$~i', $parsed_url);
 		});
 	}
 }
