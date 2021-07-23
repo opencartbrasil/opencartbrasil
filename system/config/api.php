@@ -9,7 +9,8 @@ $_['url_autostart']      = false;
 // Security
 $_['secret_key']			= 'opencartbrasil';
 $_['api_cache_expire']		= 60;
-$_['max_request_per_time']  = 5;
+$_['config_api_rest_request_per_minute']  = 30;
+$_['max_request_per_time']  = 10;
 
 // Ignore middlewares in
 $_['ignored_routers']		= array(
