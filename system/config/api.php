@@ -15,7 +15,8 @@ $_['max_request_per_time']  = 10;
 // Ignore middlewares in
 $_['ignored_routers']		= array(
 	'credentials/token',
-	'credentials/refresh_token'
+	'credentials/refresh_token',
+	'common/documentation',
 );
 
 // Log
