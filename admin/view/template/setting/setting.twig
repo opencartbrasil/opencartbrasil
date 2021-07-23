@@ -1183,6 +1183,45 @@
                   </div>
                 </div>
               </fieldset>
+
+              <fieldset>
+                <legend>{{ text_api_rest }}</legend>
+
+                <div class="form-group">
+                  <label class="col-sm-2 control-label"><span data-toggle="tooltip" title="{{ help_api_rest_status }}">{{ entry_api_rest_status }}</span></label>
+                  <div class="col-sm-10">
+                    <label class="radio-inline">
+                      {% if config_api_rest_status %}
+                      <input type="radio" name="config_api_rest_status" value="1" checked="checked" />
+                      {{ text_yes }}
+                      {% else %}
+                      <input type="radio" name="config_api_rest_status" value="1" />
+                      {{ text_yes }}
+                      {% endif %}
+                    </label>
+                    <label class="radio-inline">
+                      {% if not config_api_rest_status %}
+                      <input type="radio" name="config_api_rest_status" value="0" checked="checked" />
+                      {{ text_no }}
+                      {% else %}
+                      <input type="radio" name="config_api_rest_status" value="0" />
+                      {{ text_no }}
+                      {% endif %}
+                    </label>
+                  </div>
+                </div>
+
+                <div class="form-group required">
+                  <label class="col-sm-2 control-label"><span data-toggle="tooltip" title="{{ help_api_rest_request_per_minute }}">{{ entry_api_rest_request_per_minute }}</span></label>
+                  <div class="col-sm-10">
+                    <input type="text" class="form-control" name="config_api_rest_request_per_minute" value="{{ config_api_rest_request_per_minute }}" />
+                    {% if error_api_rest_request_per_minute %}
+                    <div class="text-danger">{{ error_api_rest_request_per_minute }}</div>
+                    {% endif %}
+                  </div>
+                </div>
+              </fieldset>
+
               <fieldset>
                 <legend>{{ text_security }}</legend>
                 <div class="form-group">
@@ -1378,7 +1417,7 @@ $('select[name=\'config_theme\']').on('change', function() {
 });
 
 $('select[name=\'config_theme\']').trigger('change');
-//--></script> 
+//--></script>
 <script type="text/javascript"><!--
 $('select[name=\'config_country_id\']').on('change', function() {
     $.ajax({
@@ -1408,7 +1447,7 @@ $('select[name=\'config_country_id\']').on('change', function() {
             }
 
             $('select[name=\'config_zone_id\']').html(html);
-            
+
             $('#button-save').prop('disabled', false);
         },
         error: function(xhr, ajaxOptions, thrownError) {
