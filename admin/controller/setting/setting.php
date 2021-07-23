@@ -107,6 +107,12 @@ class ControllerSettingSetting extends Controller {
 			$data['error_complete_status'] = '';
 		}
 
+		if (isset($this->error['api_rest_request_per_minute'])) {
+			$data['error_api_rest_request_per_minute'] = $this->error['api_rest_request_per_minute'];
+		} else {
+			$data['error_api_rest_request_per_minute'] = '';
+		}
+
 		if (isset($this->error['log'])) {
 			$data['error_log'] = $this->error['log'];
 		} else {
@@ -812,7 +818,7 @@ class ControllerSettingSetting extends Controller {
 		} else {
 			$data['config_mail_alert_email'] = $this->config->get('config_mail_alert_email');
 		}
-		
+
 		if (isset($this->request->post['config_secure'])) {
 			$data['config_secure'] = $this->request->post['config_secure'];
 		} else {
@@ -887,6 +893,18 @@ class ControllerSettingSetting extends Controller {
 			$data['config_compression'] = $this->request->post['config_compression'];
 		} else {
 			$data['config_compression'] = $this->config->get('config_compression');
+		}
+
+		if (isset($this->request->post['config_api_rest_status'])) {
+			$data['config_api_rest_status'] = $this->request->post['config_api_rest_status'];
+		} else {
+			$data['config_api_rest_status'] = $this->config->get('config_api_rest_status');
+		}
+
+		if (isset($this->request->post['config_api_rest_request_per_minute'])) {
+			$data['config_api_rest_request_per_minute'] = $this->request->post['config_api_rest_request_per_minute'];
+		} else {
+			$data['config_api_rest_request_per_minute'] = $this->config->get('config_api_rest_request_per_minute');
 		}
 
 		if (isset($this->request->post['config_error_display'])) {
@@ -969,6 +987,10 @@ class ControllerSettingSetting extends Controller {
 
 		if (!isset($this->request->post['config_complete_status'])) {
 			$this->error['complete_status'] = $this->language->get('error_complete_status');
+		}
+
+		if (empty(trim($this->request->post['config_api_rest_request_per_minute']))) {
+			$this->error['api_rest_request_per_minute'] = $this->language->get('error_api_rest_request_per_minute');
 		}
 
 		if (!$this->request->post['config_error_filename']) {
