@@ -49,12 +49,12 @@ class ModelLocalisationLanguage extends Model {
 			WHERE `language_id` > 0
 		';
 
-		if (!empty($filter_data['code'])) {
-			$sql .= ' AND `code` = "' . $this->db->escape($filter_data['code']) . '"';
+		if (!empty($filter_data['filter_code'])) {
+			$sql .= ' AND `code` = "' . $this->db->escape($filter_data['filter_code']) . '"';
 		}
 
-		if (!empty($filter_data['status'])) {
-			$sql .= ' AND `status` = "' . !!$filter_data['status'] . '"';
+		if (!empty($filter_data['filter_status'])) {
+			$sql .= ' AND `status` = "' . !!$filter_data['filter_status'] . '"';
 		}
 
 		$query = $this->db->query($sql);
