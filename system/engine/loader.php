@@ -233,6 +233,8 @@ final class Loader {
 			// Trigger the pre events
 			$result = $this->registry->get('event')->trigger('model/' . $trigger . '/before', array(&$route, &$args));
 
+			$this->registry->get('webhook')->trigger('model/' . $trigger . '/before', array(&$route, &$args));
+
 			if ($result && !$result instanceof Exception) {
 				$output = $result;
 			} else {
@@ -259,6 +261,8 @@ final class Loader {
 
 			// Trigger the post events
 			$result = $this->registry->get('event')->trigger('model/' . $trigger . '/after', array(&$route, &$args, &$output));
+
+			$this->registry->get('webhook')->trigger('model/' . $trigger . '/after', array(&$route, &$args, &$output));
 
 			if ($result && !$result instanceof Exception) {
 				$output = $result;
