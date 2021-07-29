@@ -62,7 +62,7 @@ class ActionHook {
 		}
 
 		$file = DIR_WEBHOOK . 'controller/' . $this->route . '.php';
-		$class = 'Controller' . preg_replace('/[^a-zA-Z0-9]/', '', $this->route);
+		$class = 'ControllerWebHook' . preg_replace('/[^a-zA-Z0-9]/', '', $this->route);
 
 		// Initialize the class
 		if (is_file($file)) {
