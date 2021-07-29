@@ -79,3 +79,16 @@ $_['action_event']       = array(
 		'middlewares/logs/after',
 	)
 );
+
+// Webhook Events
+$_['action_webhook']       = array(
+	'model/catalog/product/add/after' => array(
+		'catalog/product/add'
+	),
+	'model/catalog/product/update/after' => array(
+		'catalog/product/edit'
+	),
+	'model/catalog/product/deleteProduct/after' => array(
+		'catalog/product/delete'
+	),
+);
