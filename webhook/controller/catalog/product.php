@@ -4,16 +4,18 @@ class ControllerWebHookCatalogProduct extends Controller {
 	public function add($router, $args) {
 		$product_id = $args[0];
 
+		if ($product_id)
+
 		$this->load->modelWebHook('advanced/webhook');
 
-		$hooks = $this->model_webhook_advanced_webhook->getHooks('product');
+		$hooks = $this->model_webhook_advanced_webhook->getHooks('product_add');
 
 		$data = array(
 			'product_id' => $product_id,
 			'action' => 'product_add',
 		);
 
-		$this->dispatchRequests($hooks, $data);
+		$this->dispatchRequests('product_add', $hooks, $data);
 	}
 
 	public function copy($router, $args, $output) {
@@ -21,14 +23,14 @@ class ControllerWebHookCatalogProduct extends Controller {
 
 		$this->load->modelWebHook('advanced/webhook');
 
-		$hooks = $this->model_webhook_advanced_webhook->getHooks('product');
+		$hooks = $this->model_webhook_advanced_webhook->getHooks('product_add');
 
 		$data = array(
 			'product_id' => $output,
 			'action' => 'product_add',
 		);
 
-		$this->dispatchRequests($hooks, $data);
+		$this->dispatchRequests('product_add', $hooks, $data);
 	}
 
 	public function edit($router, $args) {
@@ -36,14 +38,14 @@ class ControllerWebHookCatalogProduct extends Controller {
 
 		$this->load->modelWebHook('advanced/webhook');
 
-		$hooks = $this->model_webhook_advanced_webhook->getHooks('product');
+		$hooks = $this->model_webhook_advanced_webhook->getHooks('product_edit');
 
 		$data = array(
 			'product_id' => $product_id,
 			'action' => 'product_edit',
 		);
 
-		$this->dispatchRequests($hooks, $data);
+		$this->dispatchRequests('product_add', $hooks, $data);
 	}
 
 	public function delete($router, $args) {
@@ -51,17 +53,18 @@ class ControllerWebHookCatalogProduct extends Controller {
 
 		$this->load->modelWebHook('advanced/webhook');
 
-		$hooks = $this->model_webhook_advanced_webhook->getHooks('product');
+		$hooks = $this->model_webhook_advanced_webhook->getHooks('product_delete');
 
 		$data = array(
 			'product_id' => $product_id,
 			'action' => 'product_delete',
 		);
 
-		$this->dispatchRequests($hooks, $data);
+		$this->dispatchRequests('product_add', $hooks, $data);
+	}
 	}
 
-	private function dispatchRequests($hooks, $data) {
+	private function dispatchRequests($action, $hooks, $data) {
 		ob_start();
 
 		$multiCurl = array();
