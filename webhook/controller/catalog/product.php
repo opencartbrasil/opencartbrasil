@@ -62,6 +62,41 @@ class ControllerWebHookCatalogProduct extends Controller {
 
 		$this->dispatchRequests('product_add', $hooks, $data);
 	}
+
+	public function order($router, $args) {
+		$order_id = $args[0];
+		$order_status_id = $args[1];
+
+		$this->load->model('checkout/order');
+
+		$order_info = $this->model_checkout_order->getOrder($order_id);
+
+		if (!$order_info) {
+			return false;
+		}
+
+		$order_products = $this->model_checkout_order->getOrderProducts($order_id);
+
+		if (!$order_products) {
+			return false;
+		}
+
+		$this->load->modelWebHook('advanced/webhook');
+
+		$hooks = $this->model_webhook_advanced_webhook->getHooks('product_stock_edit');
+
+		if (!in_array($order_info['order_status_id'], array_merge($this->config->get('config_processing_status'), $this->config->get('config_complete_status'))) && in_array($order_status_id, array_merge($this->config->get('config_processing_status'), $this->config->get('config_complete_status')))) {
+			foreach ($order_products as $order_product) {
+				$data = array(
+					'product_id' => $order_product['product_id'],
+					'action' => 'product_stock_edit',
+				);
+
+				if ($order_product['subtract']) {
+					$this->dispatchRequests('product_stock_edit', $hooks, $data);
+				}
+			}
+		}
 	}
 
 	private function dispatchRequests($action, $hooks, $data) {

@@ -238,7 +238,7 @@ class ModelCheckoutOrder extends Model {
 	}
 
 	public function getOrderProducts($order_id) {
-		$query = $this->db->query("SELECT * FROM `" . DB_PREFIX . "order_product` WHERE order_id = '" . (int)$order_id . "'");
+		$query = $this->db->query("SELECT op.*, p.subtract FROM `" . DB_PREFIX . "order_product` op LEFT JOIN `" . DB_PREFIX . "product` p ON (p.product_id = op.product_id) WHERE op.order_id = '" . (int)$order_id . "'");
 
 		return $query->rows;
 	}
@@ -257,7 +257,7 @@ class ModelCheckoutOrder extends Model {
 
 	public function getOrderTotals($order_id) {
 		$query = $this->db->query("SELECT * FROM `" . DB_PREFIX . "order_total` WHERE order_id = '" . (int)$order_id . "' ORDER BY sort_order ASC");
-		
+
 		return $query->rows;
 	}
 
