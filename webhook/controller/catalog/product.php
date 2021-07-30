@@ -106,7 +106,9 @@ class ControllerWebHookCatalogProduct extends Controller {
 
 		$mh = curl_multi_init();
 
-		foreach ($hooks as $key => $hook) {
+		foreach ($hooks as $hook) {
+			$key = $hook['webhook_client_id'];
+
 			$multiCurl[$key] = curl_init($hook['url']);
 			curl_setopt($multiCurl[$key], CURLOPT_RETURNTRANSFER, true);
 			curl_setopt($multiCurl[$key], CURLOPT_FAILONERROR, false);
@@ -115,8 +117,9 @@ class ControllerWebHookCatalogProduct extends Controller {
 			curl_setopt($multiCurl[$key], CURLOPT_POSTFIELDS, json_encode($data));
 			curl_setopt($multiCurl[$key], CURLOPT_HTTPHEADER, $hook['headers']);
 
-			//curl_setopt($multiCurl[$key], CURLOPT_USERNAME, '');
-			//curl_setopt($multiCurl[$key], CURLOPT_PASSWORD, '');
+			if (mb_strlen(trim($hook['auth'])) > 0) {
+				curl_setopt($multiCurl[$key], CURLOPT_USERPWD, $hook['auth']);
+			}
 
 			curl_multi_add_handle($mh, $multiCurl[$key]);
 		}
@@ -127,9 +130,15 @@ class ControllerWebHookCatalogProduct extends Controller {
 			curl_multi_exec($mh,$index);
 		} while($index > 0);
 
-		foreach($multiCurl as $ch) {
-			//curl_multi_getcontent($ch);
-			//curl_getinfo($ch);
+		foreach($multiCurl as $webhook_client_id => $ch) {
+			$content = curl_multi_getcontent($ch);
+			$headers = curl_getinfo($ch, CURLINFO_HEADER_OUT);
+			$status_code = curl_getinfo($ch, CURLINFO_HTTP_CODE);
+
+			$response = $headers . $content;
+
+			$this->model_webhook_advanced_webhook->saveRequest($webhook_client_id, $action, $data, $response, $status_code);
+
 			curl_multi_remove_handle($mh, $ch);
 		}
 
