@@ -955,3 +955,20 @@ input[type="checkbox"]:checked::after, .checkbox input[type="checkbox"]:checked:
 .opencart-icon-cart-mini:before {
     content: "\e91c";
 }
+
+/** Webhooks **/
+#form-webhook .btn-group .dropdown-menu {
+  left: -94px;
+}
+#form-webhook .btn-group ~ .btn {
+  display: none;
+}
+
+@media (max-width: 935px) {
+  #form-webhook .btn-group {
+    display: none;
+  }
+  #form-webhook .btn-group ~ .btn {
+    display: block;
+  }
+}
