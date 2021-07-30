@@ -4086,6 +4086,45 @@ INSERT INTO `oc_voucher_theme_description` (`voucher_theme_id`, `language_id`, `
 -----------------------------------------------------------
 
 --
+-- Table structure for table `oc_webhook_client`
+--
+
+DROP TABLE IF EXISTS `oc_webhook_client`;
+CREATE TABLE `oc_webhook_client` (
+  `webhook_client_id` int(11) NOT NULL AUTO_INCREMENT,
+  `description` VARCHAR(255) NOT NULL,
+  `url` VARCHAR(255),
+  `auth_user` VARCHAR(255),
+  `auth_password` VARCHAR(255),
+  `headers` TEXT,
+  `actions` TEXT,
+  `status` TINYINT DEFAULT 0,
+  `date_added` DATETIME DEFAULT CURRENT_TIMESTAMP,
+  `date_modified` DATETIME DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (`webhook_client_id`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+
+-----------------------------------------------------------
+
+--
+-- Table structure for table `oc_webhook_request_history`
+--
+
+DROP TABLE IF EXISTS `oc_webhook_request_history`;
+CREATE TABLE `oc_webhook_request_history` (
+  `webhook_request_history_id` int(11) NOT NULL AUTO_INCREMENT,
+  `webhook_client_id` int(11) NOT NULL,
+  `action` VARCHAR(255),
+  `request` TEXT,
+  `response` TEXT,
+  `status_code` TINYINT UNSIGNED,
+  `date_added` DATETIME DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (`webhook_request_history_id`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+
+-----------------------------------------------------------
+
+--
 -- Table structure for table `oc_weight_class`
 --
 
