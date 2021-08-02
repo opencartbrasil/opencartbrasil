@@ -67,10 +67,10 @@
                 {% if hooks %}
                 {% for hook in hooks %}
                 <tr>
-                  <td class="text-center">{% if hook.api_key_id in selected %}
-                    <input type="checkbox" name="selected[]" value="{{ hook.api_key_id }}" checked="checked" />
+                  <td class="text-center">{% if hook.webhook_client_id in selected %}
+                    <input type="checkbox" name="selected[]" value="{{ hook.webhook_client_id }}" checked="checked" />
                     {% else %}
-                    <input type="checkbox" name="selected[]" value="{{ hook.api_key_id }}" />
+                    <input type="checkbox" name="selected[]" value="{{ hook.webhook_client_id }}" />
                     {% endif %}</td>
                   <td class="text-left">{{ hook.description }}</td>
                   <td class="text-left">{{ hook.status ? text_enabled : text_disabled }}</td>

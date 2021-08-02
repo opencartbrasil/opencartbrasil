@@ -80,7 +80,7 @@ class ControllerAdvancedWebHook extends Controller {
 				'webhook_client_id' => $hook['webhook_client_id'],
 				'description' => $hook['description'],
 				'status' => !!$hook['status'],
-				'actions_hook' => explode(',', $hook['actions']),
+				'actions_hook' => $hook['actions'],
 				'date_added' => date($this->language->get('date_format_short'), strtotime($hook['date_added'])),
 				'date_modified' => date($this->language->get('date_format_short'), strtotime($hook['date_modified'])),
 				'edit' => $this->url->link('advanced/webhook/edit', $url . '&webhook_client_id=' . $hook['webhook_client_id'], true),
@@ -154,6 +154,28 @@ class ControllerAdvancedWebHook extends Controller {
 
 		$this->load->model('advanced/webhook');
 
+		if (($this->request->server['REQUEST_METHOD'] == 'POST') && $this->validateForm()) {
+			$this->model_advanced_webhook->addHook($this->request->post);
+
+			$this->session->data['success'] = $this->language->get('text_success');
+
+			$url = '';
+
+			if (isset($this->request->get['sort'])) {
+				$url .= '&sort=' . $this->request->get['sort'];
+			}
+
+			if (isset($this->request->get['order'])) {
+				$url .= '&order=' . $this->request->get['order'];
+			}
+
+			if (isset($this->request->get['page'])) {
+				$url .= '&page=' . $this->request->get['page'];
+			}
+
+			$this->response->redirect($this->url->link('advanced/webhook', 'user_token=' . $this->session->data['user_token'] . $url, true));
+		}
+
 		$this->getForm();
 	}
 
@@ -164,7 +186,63 @@ class ControllerAdvancedWebHook extends Controller {
 
 		$this->load->model('advanced/webhook');
 
+		if (($this->request->server['REQUEST_METHOD'] == 'POST') && $this->validateForm()) {
+			$this->model_advanced_webhook->editHook($this->request->get['webhook_client_id'], $this->request->post);
+
+			$this->session->data['success'] = $this->language->get('text_success');
+
+			$url = '';
+
+			if (isset($this->request->get['sort'])) {
+				$url .= '&sort=' . $this->request->get['sort'];
+			}
+
+			if (isset($this->request->get['order'])) {
+				$url .= '&order=' . $this->request->get['order'];
+			}
+
+			if (isset($this->request->get['page'])) {
+				$url .= '&page=' . $this->request->get['page'];
+			}
+
+			$this->response->redirect($this->url->link('advanced/webhook', 'user_token=' . $this->session->data['user_token'] . $url, true));
+		}
+
 		$this->getForm();
+	}
+
+	public function delete() {
+		$this->load->language('advanced/webhook');
+
+		$this->document->setTitle($this->language->get('heading_title'));
+
+		$this->load->model('advanced/webhook');
+
+		if (($this->request->server['REQUEST_METHOD'] == 'POST') && $this->validateModify()) {
+			foreach ($this->request->post['selected'] as $selected) {
+				$this->model_advanced_webhook->deleteHook($selected);
+			}
+
+			$this->session->data['success'] = $this->language->get('text_deleted');
+
+			$url = '';
+
+			if (isset($this->request->get['sort'])) {
+				$url .= '&sort=' . $this->request->get['sort'];
+			}
+
+			if (isset($this->request->get['order'])) {
+				$url .= '&order=' . $this->request->get['order'];
+			}
+
+			if (isset($this->request->get['page'])) {
+				$url .= '&page=' . $this->request->get['page'];
+			}
+
+			$this->response->redirect($this->url->link('advanced/webhook', 'user_token=' . $this->session->data['user_token'] . $url, true));
+		}
+
+		$this->index();
 	}
 
 	public function getForm() {
@@ -192,6 +270,88 @@ class ControllerAdvancedWebHook extends Controller {
 			$data['error_warning'] = false;
 		}
 
+		if (isset($this->error['url'])) {
+			$data['error_url'] = $this->error['url'];
+		} else {
+			$data['error_url'] = false;
+		}
+
+		if (isset($this->error['description'])) {
+			$data['error_description'] = $this->error['description'];
+		} else {
+			$data['error_description'] = false;
+		}
+
+		$webhook_client_info = array();
+
+		if (isset($this->request->get['webhook_client_id'])) {
+			$webhook_client_info = $this->model_advanced_webhook->getHook($this->request->get['webhook_client_id']);
+		} else {
+			$webhook_client_info = array();
+		}
+
+		if (isset($this->request->post['status'])) {
+			$data['status'] = $this->request->post['status'];
+		} elseif (isset($webhook_client_info['status'])) {
+			$data['status'] = $webhook_client_info['status'];
+		} else {
+			$data['status'] = '';
+		}
+
+		if (isset($this->request->post['description'])) {
+			$data['description'] = $this->request->post['description'];
+		} elseif (isset($webhook_client_info['description'])) {
+			$data['description'] = $webhook_client_info['description'];
+		} else {
+			$data['description'] = '';
+		}
+
+		if (isset($this->request->post['url'])) {
+			$data['url'] = $this->request->post['url'];
+		} elseif (isset($webhook_client_info['url'])) {
+			$data['url'] = $webhook_client_info['url'];
+		} else {
+			$data['url'] = '';
+		}
+
+		if (isset($this->request->post['auth_user'])) {
+			$data['auth_user'] = $this->request->post['auth_user'];
+		} elseif (isset($webhook_client_info['auth_user'])) {
+			$data['auth_user'] = $webhook_client_info['auth_user'];
+		} else {
+			$data['auth_user'] = '';
+		}
+
+		if (isset($this->request->post['auth_password'])) {
+			$data['auth_password'] = $this->request->post['auth_password'];
+		} elseif (isset($webhook_client_info['auth_password'])) {
+			$data['auth_password'] = $webhook_client_info['auth_password'];
+		} else {
+			$data['auth_password'] = '';
+		}
+
+		if (isset($this->request->post['headers'])) {
+			$data['headers'] = $this->request->post['headers'];
+		} elseif (isset($webhook_client_info['headers'])) {
+			$data['headers'] = $webhook_client_info['headers'];
+		} else {
+			$data['headers'] = [];
+		}
+
+		if (isset($this->request->post['actions'])) {
+			$data['actions'] = $this->request->post['actions'];
+		} elseif (isset($webhook_client_info['actions'])) {
+			$data['actions'] = $webhook_client_info['actions'];
+		} else {
+			$data['actions'] = [];
+		}
+
+		if (isset($this->request->get['webhook_client_id'])) {
+			$data['action'] = $this->url->link('advanced/webhook/edit', 'user_token=' . $this->session->data['user_token'] . '&webhook_client_id=' . $this->request->get['webhook_client_id'], true);
+		} else {
+			$data['action'] = $this->url->link('advanced/webhook/add', 'user_token=' . $this->session->data['user_token'], true);
+		}
+
 		$data['header'] = $this->load->controller('common/header');
 		$data['column_left'] = $this->load->controller('common/column_left');
 		$data['footer'] = $this->load->controller('common/footer');
@@ -202,6 +362,14 @@ class ControllerAdvancedWebHook extends Controller {
 	protected function validateForm() {
 		if (!$this->user->hasPermission('modify', 'advanced/webhook')) {
 			$this->error['warning'] = $this->language->get('error_permission');
+		}
+
+		if (!filter_var($this->request->post['url'], FILTER_VALIDATE_URL)) {
+			$this->error['url'] = $this->language->get('error_url');
+		}
+
+		if (mb_strlen(trim($this->request->post['description'])) < 3 || mb_strlen(trim($this->request->post['description'])) > 255) {
+			$this->error['description'] = $this->language->get('error_description');
 		}
 
 		return !$this->error;

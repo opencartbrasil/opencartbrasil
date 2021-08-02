@@ -83,7 +83,7 @@ class ControllerWebHookCatalogProduct extends Controller {
 
 		$this->load->modelWebHook('advanced/webhook');
 
-		$hooks = $this->model_webhook_advanced_webhook->getHooks('product_stock_edit');
+		$hooks = $this->model_webhook_advanced_webhook->getHooks('product_edit');
 
 		if (!in_array($order_info['order_status_id'], array_merge($this->config->get('config_processing_status'), $this->config->get('config_complete_status'))) && in_array($order_status_id, array_merge($this->config->get('config_processing_status'), $this->config->get('config_complete_status')))) {
 			foreach ($order_products as $order_product) {

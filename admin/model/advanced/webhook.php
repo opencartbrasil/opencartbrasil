@@ -1,6 +1,43 @@
 <?php
 
 class ModelAdvancedWebHook extends Model {
+	public function addHook(array $data = array()) {
+		$headers = isset($data['headers']) ? $data['headers'] : array();
+		$actions = isset($data['actions']) ? $data['actions'] : array();
+
+		$this->db->query("INSERT INTO `" . DB_PREFIX . "webhook_client` SET `description` = '" . $this->db->escape($data['description']) . "', `url` = '" . $this->db->escape($data['url']) . "', `auth_user` = '" . $this->db->escape($data['auth_user']) . "', `auth_password` = '" . $this->db->escape($data['auth_password']) . "', `headers` = '" . $this->db->escape(json_encode($headers)) . "', `actions` = '" . $this->db->escape(json_encode($actions)) . "', `status` = '" . $this->db->escape($data['status']) . "'");
+	}
+
+	public function editHook($webhook_client_id, array $data = array()) {
+		$headers = isset($data['headers']) ? $data['headers'] : array();
+		$actions = isset($data['actions']) ? $data['actions'] : array();
+
+		$this->db->query("UPDATE `" . DB_PREFIX . "webhook_client` SET `description` = '" . $this->db->escape($data['description']) . "', `url` = '" . $this->db->escape($data['url']) . "', `auth_user` = '" . $this->db->escape($data['auth_user']) . "', `auth_password` = '" . $this->db->escape($data['auth_password']) . "', `headers` = '" . $this->db->escape(json_encode($headers)) . "', `actions` = '" . $this->db->escape(json_encode($actions)) . "', `status` = '" . $this->db->escape($data['status']) . "', `date_modified` = NOW() WHERE `webhook_client_id` = '" . (int)$webhook_client_id . "'");
+	}
+
+	public function deleteHook($webhook_client_id) {
+		$this->db->query("DELETE FROM `" . DB_PREFIX . "webhook_client` WHERE `webhook_client_id` = '" . (int)$webhook_client_id . "'");
+	}
+
+	public function getHook($webhook_client_id) {
+		$sql = "SELECT * FROM `" . DB_PREFIX . "webhook_client` wc WHERE `webhook_client_id` = '" . (int)$webhook_client_id . "'";
+
+		$query = $this->db->query($sql);
+
+		return array(
+			'webhook_client_id' => $query->row['webhook_client_id'],
+			'description' => $query->row['description'],
+			'url' => $query->row['url'],
+			'auth_user' => $query->row['auth_user'],
+			'auth_password' => $query->row['auth_password'],
+			'headers' => json_decode($query->row['headers'], true),
+			'actions' => json_decode($query->row['actions'], true),
+			'status' => $query->row['status'],
+			'date_added' => $query->row['date_added'],
+			'date_modified' => $query->row['date_modified'],
+		);
+	}
+
 	public function getHooks(array $data = array()) {
 		$sql = "SELECT * FROM `" . DB_PREFIX . "webhook_client` wc";
 
@@ -38,7 +75,24 @@ class ModelAdvancedWebHook extends Model {
 
 		$query = $this->db->query($sql);
 
-		return $query->rows;
+		$result = array();
+
+		foreach ($query->rows as $row) {
+			$result[] = array(
+				'webhook_client_id' => $row['webhook_client_id'],
+				'description' => $row['description'],
+				'url' => $row['url'],
+				'auth_user' => $row['auth_user'],
+				'auth_password' => $row['auth_password'],
+				'headers' => json_decode($row['headers'], true),
+				'actions' => json_decode($row['actions'], true),
+				'status' => $row['status'],
+				'date_added' => $row['date_added'],
+				'date_modified' => $row['date_modified'],
+			);
+		}
+
+		return $result;
 	}
 
 	public function getHooksTotal() {
