@@ -245,7 +245,46 @@ class ControllerAdvancedWebHook extends Controller {
 		$this->index();
 	}
 
-	public function getForm() {
+	public function request_info() {
+		$webhook_request_history_id = $this->request->get['webhook_request_history_id'];
+
+		$this->load->model('advanced/webhook');
+
+		$data = $this->model_advanced_webhook->getRequestHistoryInfo($webhook_request_history_id);
+
+		$this->response->addHeader('Content-Type: application/json');
+		$this->response->setOutput(json_encode($data));
+	}
+
+	public function toggleStatus() {
+		$this->load->language('advanced/webhook');
+
+		if (isset($this->request->get['webhook_client_id']) && $this->validateModify()) {
+			$this->load->model('advanced/webhook');
+
+			$this->model_advanced_webhook->toggleHook($this->request->get['webhook_client_id']);
+
+			$this->session->data['success'] = $this->language->get('text_success');
+		}
+
+		$url = '';
+
+		if (isset($this->request->get['sort'])) {
+			$url .= '&sort=' . $this->request->get['sort'];
+		}
+
+		if (isset($this->request->get['order'])) {
+			$url .= '&order=' . $this->request->get['order'];
+		}
+
+		if (isset($this->request->get['page'])) {
+			$url .= '&page=' . $this->request->get['page'];
+		}
+
+		$this->response->redirect($this->url->link('advanced/webhook', 'user_token=' . $this->session->data['user_token'] . $url, true));
+	}
+
+	protected function getForm() {
 		$this->load->language('advanced/webhook');
 
 		$this->document->setTitle($this->language->get('heading_title'));
@@ -354,6 +393,8 @@ class ControllerAdvancedWebHook extends Controller {
 			$url = 'user_token=' . $this->session->data['user_token'];
 		}
 
+		$data['cancel'] = $this->url->link('advanced/webhook', 'user_token=' . $this->session->data['user_token'], true);
+
 		if (isset($this->request->get['page'])) {
 			$page = (int)$this->request->get['page'];
 		} else {
@@ -410,17 +451,6 @@ class ControllerAdvancedWebHook extends Controller {
 		$data['footer'] = $this->load->controller('common/footer');
 
 		$this->response->setOutput($this->load->view('advanced/webhook_form', $data));
-	}
-
-	public function request_info() {
-		$webhook_request_history_id = $this->request->get['webhook_request_history_id'];
-
-		$this->load->model('advanced/webhook');
-
-		$data = $this->model_advanced_webhook->getRequestHistoryInfo($webhook_request_history_id);
-
-		$this->response->addHeader('Content-Type: application/json');
-		$this->response->setOutput(json_encode($data));
 	}
 
 	protected function validateForm() {

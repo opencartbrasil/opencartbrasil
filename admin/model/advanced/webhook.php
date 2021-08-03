@@ -132,4 +132,8 @@ class ModelAdvancedWebHook extends Model {
 
 		return $query->row;
 	}
+
+	public function toggleHook($webhook_client_id) {
+		$this->db->query("UPDATE `" . DB_PREFIX . "webhook_client` SET `status` = IF(`status` = 1, 0, 1) WHERE `webhook_client_id` = '" . (int)$webhook_client_id . "'");
+	}
 }
