@@ -22,6 +22,13 @@ class ControllerAdvancedWebHook extends Controller {
 			'href' => $this->url->link('advanced/webhook', 'user_token=' . $this->session->data['user_token'], true)
 		);
 
+		if (isset($this->session->data['success'])) {
+			$data['success'] = $this->session->data['success'];
+			unset($this->session->data['success']);
+		} else {
+			$data['success'] = false;
+		}
+
 		if (isset($this->error['warning'])) {
 			$data['error_warning'] = $this->error['warning'];
 		} else {
