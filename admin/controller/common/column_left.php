@@ -595,6 +595,25 @@ class ControllerCommonColumnLeft extends Controller {
 				);
 			}
 
+			// Advanced
+			$advanced = array();
+
+			if ($this->user->hasPermission('access', 'advanced/webhook')) {
+				$advanced[] = array(
+					'name'	   => $this->language->get('text_webhook'),
+					'href'     => $this->url->link('advanced/webhook', 'user_token=' . $this->session->data['user_token'], true),
+					'children' => array()
+				);
+			}
+
+			if ($advanced) {
+				$system[] = array(
+					'name'	   => $this->language->get('text_advanced'),
+					'href'     => '',
+					'children' => $advanced
+				);
+			}
+
 			// Tools
 			$maintenance = array();
 

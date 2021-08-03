@@ -22,6 +22,7 @@ $_['text_product'] = 'Produto';
 $_['text_request_id'] = 'Requisição #';
 $_['text_request'] = 'Requisição';
 $_['text_response'] = 'Resposta';
+$_['text_success'] = 'Web Hook alterado com sucesso';
 
 $_['button_edit'] = 'Editar';
 $_['button_logs'] = 'Logs';
