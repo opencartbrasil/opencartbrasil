@@ -94,7 +94,7 @@
                     </div>
                     <a href="{{ hook.edit }}" data-toggle="tooltip" title="{{ button_edit }}" class="btn btn-primary"><i class="fa fa-pencil"></i></a>
                     <a href="{{ hook.logs }}" data-toggle="tooltip" title="{{ button_logs }}" class="btn btn-success"><i class="fa fa-eye"></i></a>
-                    <a href="{{ hook.toggleStatus }}" data-toggle="tooltip" title="{{ button_disable }}" class="btn btn-danger"><i class="fa fa-ban"></i></a>
+                    <a href="{{ hook.toggleStatus }}" data-toggle="tooltip" title="{{ hook.status ? button_disable : button_enable }}" class="btn btn-danger"><i class="fa fa-ban"></i></a>
                   </td>
                 </tr>
                 {% endfor %}
