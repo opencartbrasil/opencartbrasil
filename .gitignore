@@ -1,7 +1,10 @@
-/config.php
-/admin/config.php
+.vscode
+config.php
+*.log
+/api/config.php
 /system/storage
 /image/cache
+/image/catalog/api
 /composer.lock
 /system/storage/vendor
 

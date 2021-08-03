@@ -897,6 +897,18 @@ class ControllerSettingSetting extends Controller {
 			$data['config_compression'] = $this->config->get('config_compression');
 		}
 
+		if (isset($this->request->post['config_api_rest_status'])) {
+			$data['config_api_rest_status'] = $this->request->post['config_api_rest_status'];
+		} else {
+			$data['config_api_rest_status'] = $this->config->get('config_api_rest_status');
+		}
+
+		if (isset($this->request->post['config_api_rest_request_per_minute'])) {
+			$data['config_api_rest_request_per_minute'] = $this->request->post['config_api_rest_request_per_minute'];
+		} else {
+			$data['config_api_rest_request_per_minute'] = $this->config->get('config_api_rest_request_per_minute');
+		}
+
 		if (isset($this->request->post['config_error_display'])) {
 			$data['config_error_display'] = $this->request->post['config_error_display'];
 		} else {

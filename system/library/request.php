@@ -16,6 +16,8 @@ class Request {
 	public $cookie = array();
 	public $files = array();
 	public $server = array();
+	public $headers = array(); //API
+	public $json = array(); //API
 
 	/**
 	 * Constructor
@@ -27,6 +29,22 @@ class Request {
 		$this->cookie = $this->clean($_COOKIE);
 		$this->files = $this->clean($_FILES);
 		$this->server = $this->getServer();
+
+		$json = json_decode(file_get_contents('php://input'), true);
+
+		if (json_last_error() == JSON_ERROR_NONE) {
+			$json = array_map([$this, 'clean'], $json);
+			$json = json_encode($json);
+			$this->json = json_decode($json);
+		}
+
+		if (function_exists('apache_request_headers')) {
+			$headers = apache_request_headers();
+			$headers_keys = array_map('strtolower', array_keys($headers));
+			$headers_values = array_map([$this, 'clean'], array_values($headers));
+
+			$this->headers = array_combine($headers_keys, array_map('trim', $headers_values));
+		}
 	}
 
 	/**
@@ -42,7 +60,7 @@ class Request {
 
 				$data[$this->clean($key)] = $this->clean($value);
 			}
-		} else {
+		} elseif (!is_double($data) && !is_int($data) && !is_float($data) && !is_bool($data)) {
 			$data = htmlspecialchars($data, ENT_COMPAT, 'UTF-8');
 		}
 

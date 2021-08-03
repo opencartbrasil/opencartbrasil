@@ -158,6 +158,13 @@ if ($config->has('action_pre_action')) {
 	}
 }
 
+// Post Actions
+if ($config->has('action_post_action')) {
+	foreach ($config->get('action_post_action') as $value) {
+		$route->addPostAction(new Action($value));
+	}
+}
+
 // Dispatch
 $route->dispatch(new Action($config->get('action_router')), new Action($config->get('action_error')));
 
