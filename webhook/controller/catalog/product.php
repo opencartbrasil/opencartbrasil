@@ -2,7 +2,11 @@
 
 class ControllerWebHookCatalogProduct extends Controller {
 	public function add($router, $args) {
-		$product_id = $args[0];
+		if (is_numeric($args[0])) {
+			$product_id = $args[0];
+		} else {
+			$product_id = $args[0]->id;
+		}
 
 		if ($product_id)
 
