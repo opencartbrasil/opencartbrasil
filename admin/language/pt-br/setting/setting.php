@@ -1,7 +1,6 @@
 <?php
 // Heading
-$_['heading_title']                = 'Loja';
-
+$_['heading_title']                       = 'Loja';
 // Text
 $_['text_stores']                  = 'Lojas';
 $_['text_success']                 = 'Loja modificada com sucesso!';

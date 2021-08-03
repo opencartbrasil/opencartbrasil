@@ -62,6 +62,57 @@ CREATE TABLE `oc_api_ip` (
 -----------------------------------------------------------
 
 --
+-- Table structure for table `oc_api_key`
+--
+
+DROP TABLE IF EXISTS `oc_api_key`;
+CREATE TABLE IF NOT EXISTS `oc_api_key` (
+  `api_key_id` INT(11) AUTO_INCREMENT,
+  `description` TEXT NULL,
+  `permissions` VARCHAR(255) NOT NULL,
+  `consumer_key` VARCHAR(67) NOT NULL,
+  `consumer_secret` VARCHAR(67) NOT NULL,
+  `status` TINYINT(1) DEFAULT 0,
+  `date_added` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `date_modified` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (`api_key_id`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+
+-----------------------------------------------------------
+
+--
+-- Table structure for table `oc_api_history`
+--
+
+DROP TABLE IF EXISTS `oc_api_history`;
+CREATE TABLE IF NOT EXISTS `oc_api_history` (
+  `api_history_id` INT(11) AUTO_INCREMENT,
+  `api_key_id` INT(11) NOT NULL,
+  `type` VARCHAR(64) NULL,
+  `date_added` DATETIME DEFAULT CURRENT_TIMESTAMP,
+  `ip_address` VARCHAR(45) NOT NULL,
+  PRIMARY KEY (`api_history_id`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+
+-----------------------------------------------------------
+
+--
+-- Table structure for table `oc_api_token`
+--
+
+DROP TABLE IF EXISTS `oc_api_token`;
+CREATE TABLE IF NOT EXISTS `oc_api_token` (
+  `api_key_id` INT(11) NOT NULL,
+  `access_token` TEXT NOT NULL,
+  `refresh_token` TEXT NOT NULL,
+  `refresh_expire` INT(11) UNSIGNED NOT NULL,
+  `status` TINYINT(1) DEFAULT 0,
+  PRIMARY KEY (`api_key_id`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+
+-----------------------------------------------------------
+
+--
 -- Table structure for table `oc_api_session`
 --
 
@@ -4083,6 +4134,45 @@ INSERT INTO `oc_voucher_theme_description` (`voucher_theme_id`, `language_id`, `
 (1, 2, 'Geral'),
 (2, 2, 'Aniversário'),
 (3, 2, 'Natal');
+
+-----------------------------------------------------------
+
+--
+-- Table structure for table `oc_webhook_client`
+--
+
+DROP TABLE IF EXISTS `oc_webhook_client`;
+CREATE TABLE `oc_webhook_client` (
+  `webhook_client_id` int(11) NOT NULL AUTO_INCREMENT,
+  `description` VARCHAR(255) NOT NULL,
+  `url` VARCHAR(255),
+  `auth_user` VARCHAR(255),
+  `auth_password` VARCHAR(255),
+  `headers` TEXT,
+  `actions` TEXT,
+  `status` TINYINT DEFAULT 0,
+  `date_added` DATETIME DEFAULT CURRENT_TIMESTAMP,
+  `date_modified` DATETIME DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (`webhook_client_id`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+
+-----------------------------------------------------------
+
+--
+-- Table structure for table `oc_webhook_request_history`
+--
+
+DROP TABLE IF EXISTS `oc_webhook_request_history`;
+CREATE TABLE `oc_webhook_request_history` (
+  `webhook_request_history_id` int(11) NOT NULL AUTO_INCREMENT,
+  `webhook_client_id` int(11) NOT NULL,
+  `action` VARCHAR(255),
+  `request` TEXT,
+  `response` TEXT,
+  `status_code` TINYINT UNSIGNED,
+  `date_added` DATETIME DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (`webhook_request_history_id`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 -----------------------------------------------------------
 

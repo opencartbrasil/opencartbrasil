@@ -329,7 +329,7 @@ class ModelCatalogProduct extends Model {
 			$data['product_store'] = $this->getProductStores($product_id);
 			$data['product_recurrings'] = $this->getRecurrings($product_id);
 
-			$this->addProduct($data);
+			return $this->addProduct($data);
 		}
 	}
 
