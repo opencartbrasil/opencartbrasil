@@ -100,4 +100,36 @@ class ModelAdvancedWebHook extends Model {
 
 		return $query->row['total'];
 	}
+
+	public function getRequestHistory($webhook_client_id, array $data = array()) {
+		$sql = "SELECT * FROM `" . DB_PREFIX . "webhook_request_history` WHERE `webhook_client_id` = '" . (int)$webhook_client_id . "' ORDER BY webhook_request_history_id DESC";
+
+		if (isset($data['start']) || isset($data['limit'])) {
+			if ($data['start'] < 0) {
+				$data['start'] = 0;
+			}
+
+			if ($data['limit'] < 1) {
+				$data['limit'] = 20;
+			}
+
+			$sql .= " LIMIT " . (int)$data['start'] . "," . (int)$data['limit'];
+		}
+
+		$query = $this->db->query($sql);
+
+		return $query->rows;
+	}
+
+	public function getRequestHistoryTotal($webhook_client_id) {
+		$query = $this->db->query("SELECT COUNT(*) AS total FROM `" . DB_PREFIX . "webhook_request_history` WHERE `webhook_client_id` = '" . (int)$webhook_client_id . "'");
+
+		return $query->row['total'];
+	}
+
+	public function getRequestHistoryInfo($webhook_request_history_id) {
+		$query = $this->db->query("SELECT * FROM `" . DB_PREFIX . "webhook_request_history` WHERE `webhook_request_history_id` = '" . (int)$webhook_request_history_id . "'");
+
+		return $query->row;
+	}
 }

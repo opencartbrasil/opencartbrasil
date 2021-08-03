@@ -348,15 +348,79 @@ class ControllerAdvancedWebHook extends Controller {
 
 		if (isset($this->request->get['webhook_client_id'])) {
 			$data['action'] = $this->url->link('advanced/webhook/edit', 'user_token=' . $this->session->data['user_token'] . '&webhook_client_id=' . $this->request->get['webhook_client_id'], true);
+			$url = 'user_token=' . $this->session->data['user_token'] . '&webhook_client_id=' . $this->request->get['webhook_client_id'];
 		} else {
 			$data['action'] = $this->url->link('advanced/webhook/add', 'user_token=' . $this->session->data['user_token'], true);
+			$url = 'user_token=' . $this->session->data['user_token'];
 		}
+
+		if (isset($this->request->get['page'])) {
+			$page = (int)$this->request->get['page'];
+		} else {
+			$page = 1;
+		}
+
+		$filter_data = array(
+			'start' => ($page - 1) * $this->config->get('config_limit_admin'),
+			'limit' => $this->config->get('config_limit_admin')
+		);
+
+		$history = array();
+		$history_total = 0;
+
+		if (isset($this->request->get['webhook_client_id'])) {
+			$history = $this->model_advanced_webhook->getRequestHistory($this->request->get['webhook_client_id'], $filter_data);
+
+			$history_total = $this->model_advanced_webhook->getRequestHistoryTotal($this->request->get['webhook_client_id']);
+		}
+
+		$data['history'] = array();
+
+		foreach ($history as $value) {
+			$data['history'][] = array(
+				'webhook_request_history_id' => $value['webhook_request_history_id'],
+				'action' => $value['action'],
+				'status_code' => $value['status_code'],
+				'status_ok' => ($value['status_code'] >= 200 && $value['status_code'] < 300),
+				'date_added' => date($this->language->get('datetime_format'), strtotime($value['date_added'])),
+			);
+		}
+
+		$pagination = new Pagination();
+		$pagination->total = $history_total;
+		$pagination->page = $page;
+		$pagination->limit = $this->config->get('config_limit_admin');
+		$pagination->url = $this->url->link('advanced/webhook/edit', $url . '&page={page}#access', true);
+
+		$data['pagination'] = $pagination->render();
+
+		$data['results'] = sprintf(
+			$this->language->get('text_pagination'),
+			($history_total) ? (($page - 1) * $this->config->get('config_limit_admin')) + 1 : 0,
+			((($page - 1) * $this->config->get('config_limit_admin')) > ($history_total - $this->config->get('config_limit_admin')))
+				? $history_total
+				: ((($page - 1) * $this->config->get('config_limit_admin')) + $this->config->get('config_limit_admin')),
+			$history_total, ceil($history_total / $this->config->get('config_limit_admin'))
+		);
+
+		$data['webhook_request_history_info'] = $this->url->link('advanced/webhook/request_info', 'user_token=' . $this->request->get['user_token'], true);
 
 		$data['header'] = $this->load->controller('common/header');
 		$data['column_left'] = $this->load->controller('common/column_left');
 		$data['footer'] = $this->load->controller('common/footer');
 
 		$this->response->setOutput($this->load->view('advanced/webhook_form', $data));
+	}
+
+	public function request_info() {
+		$webhook_request_history_id = $this->request->get['webhook_request_history_id'];
+
+		$this->load->model('advanced/webhook');
+
+		$data = $this->model_advanced_webhook->getRequestHistoryInfo($webhook_request_history_id);
+
+		$this->response->addHeader('Content-Type: application/json');
+		$this->response->setOutput(json_encode($data));
 	}
 
 	protected function validateForm() {

@@ -11,6 +11,7 @@ $_['column_header'] = 'Cabeçalho';
 $_['column_create'] = 'Criar';
 $_['column_edit'] = 'Editar';
 $_['column_delete'] = 'Remover';
+$_['column_status_code'] = 'HTTP Status Code';
 $_['column_action'] = 'Ação';
 
 $_['text_list'] = 'Clientes';
@@ -18,6 +19,9 @@ $_['text_form'] = 'Formulário';
 $_['text_data'] = 'Dados';
 $_['text_history'] = 'Histórico';
 $_['text_product'] = 'Produto';
+$_['text_request_id'] = 'Requisição #';
+$_['text_request'] = 'Requisição';
+$_['text_response'] = 'Resposta';
 
 $_['button_edit'] = 'Editar';
 $_['button_logs'] = 'Logs';

@@ -139,24 +139,35 @@
             <table class="table table-bordered table-hover">
               <thead>
                 <tr>
-                  <td class="text-left">column_type</td>
-                  <td class="text-left">column_ip_address</td>
-                  <td class="text-left">column_date_added</td>
-                  <td class="text-right">column_action</td>
+                  <td class="text-left">{{ column_actions_hook }}</td>
+                  <td class="text-left">{{ column_status_code }}</td>
+                  <td class="text-left">{{ column_date_added }}</td>
+                  <td class="text-right">{{ column_action }}</td>
                 </tr>
               </thead>
               <tbody>
-                <tr>
-                  <td class="text-left">access.action</td>
-                  <td class="text-left">access.status_code</td>
-                  <td class="text-left">access.date_added</td>
+                {% if history %}
+                {% for access in history %}
+                <tr id="webhook-request-{{ access.webhook_request_history_id }}">
+                  <td class="text-left">{{ access.action }}</td>
+                  <td class="text-left">
+                    {% if access.status_ok %}
+                    <span class="badge alert-success" title="{{ text_success }}">{{ access.status_code }}</span>
+                    {% else %}
+                    <span class="badge alert-danger" title="{{ access.status_code }}">{{ access.status_code }}</span>
+                    {% endif %}
+                  </td>
+                  <td class="text-left">{{ access.date_added }}</td>
                   <td class="text-right">
-                    <button class="btn btn-primary" title="{{ button_logs }}" data-toggle="tooltip"><i class="fa fa-eye"></i></button>
+                    <button type="button" class="btn btn-primary" title="{{ button_logs }}" data-toggle="tooltip" onclick="webHookRequestInfo('{{ access.webhook_request_history_id }}')" data-loading-text="{{ text_loading }}"><i class="fa fa-eye"></i></a>
                   </td>
                 </tr>
+                {% endfor %}
+                {% else %}
                 <tr>
                   <td class="text-center" colspan="4">{{ text_no_results }}</td>
                 </tr>
+                {% endif %}
               </tbody>
             </table>
           </div>
@@ -169,13 +180,35 @@
     </div>
   </div>
 </div>
+
+<div class="modal fade" tabindex="-1" role="dialog" id="modal-webhook-request-info">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title"></h4>
+      </div>
+      <div class="modal-body">
+        <section id="sec-request">
+          <h4>{{ text_request }}</h4>
+          <pre><code></code></pre>
+        </section>
+
+        <section id="sec-response">
+          <h4>{{ text_response }}</h4>
+          <pre><code></code></pre>
+        </section>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">{{ button_close }}</button>
+      </div>
+    </div>
+  </div>
+</div>
+
 <script>
 if (location.hash) {
   $(`[href="${document.location.hash}"]`).tab('show')
-}
-
-function removeHistory(api_history_id) {
-  alert(api_history_id)
 }
 
 function addHeader() {
@@ -185,6 +218,24 @@ function addHeader() {
       <button type="button" class="btn btn-danger" onclick="$(this).parents('tr').remove()"><i class="fa fa-trash"></i> {{ button_remove }}</button>
     </td>
   </tr>`);
+}
+
+function webHookRequestInfo(webhook_request_history_id, el) {
+  $(el).button('loading')
+
+  $.ajax({
+    url: `{{ webhook_request_history_info }}&webhook_request_history_id=${webhook_request_history_id}`.replace(/&amp;/g, '&'),
+    method: 'GET',
+    success: function(result) {
+      $('#modal-webhook-request-info .modal-header h4').text(`{{ text_request_id }}${webhook_request_history_id}`)
+      $('#modal-webhook-request-info #sec-request code').text(result.request)
+      $('#modal-webhook-request-info #sec-response code').text(result.response)
+      $('#modal-webhook-request-info').modal('show')
+    },
+    complete: function() {
+      $(el).button('reset')
+    }
+  })
 }
 </script>
 {{ footer }}
