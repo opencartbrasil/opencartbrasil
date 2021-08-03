@@ -954,8 +954,6 @@ input[type="checkbox"]:checked::after, .checkbox input[type="checkbox"]:checked:
 
 .opencart-icon-cart-mini:before {
     content: "\e91c";
-<<<<<<< HEAD
-=======
 }
 
 .marketplace-brasil #extensions-list {
@@ -1083,6 +1081,13 @@ input[type="checkbox"]:checked::after, .checkbox input[type="checkbox"]:checked:
   left: -94px;
 }
 #form-api .btn-group ~ .btn {
+}
+
+/** Webhooks **/
+#form-webhook .btn-group .dropdown-menu {
+  left: -94px;
+}
+#form-webhook .btn-group ~ .btn {
   display: none;
 }
 
@@ -1093,5 +1098,10 @@ input[type="checkbox"]:checked::after, .checkbox input[type="checkbox"]:checked:
   #form-api .btn-group ~ .btn {
     display: block;
   }
->>>>>>> feature/api
+  #form-webhook .btn-group {
+    display: none;
+  }
+  #form-webhook .btn-group ~ .btn {
+    display: block;
+  }
 }
