@@ -45,7 +45,7 @@ class ControllerWebHookCatalogProduct extends Controller {
 			'action' => 'product_edit',
 		);
 
-		$this->dispatchRequests('product_add', $hooks, $data);
+		$this->dispatchRequests('product_edit', $hooks, $data);
 	}
 
 	public function delete($router, $args) {
@@ -60,7 +60,7 @@ class ControllerWebHookCatalogProduct extends Controller {
 			'action' => 'product_delete',
 		);
 
-		$this->dispatchRequests('product_add', $hooks, $data);
+		$this->dispatchRequests('product_delete', $hooks, $data);
 	}
 
 	public function order($router, $args) {
