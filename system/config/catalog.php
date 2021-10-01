@@ -64,4 +64,10 @@ $_['action_webhook']       = array(
 	'model/checkout/order/addOrderHistory/before' => array(
 		'catalog/product/order'
 	),
+	'model/checkout/order/editOrder/before' => array(
+		'sale/order/edit'
+	),
+	'model/checkout/order/addOrderHistory/before' => array(
+		'sale/order/addOrderHistory'
+	),
 );
