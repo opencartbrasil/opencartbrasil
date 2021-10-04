@@ -114,6 +114,16 @@ class ControllerStartupSeoUrl extends Controller {
 			'methods' => ['GET']
 		];
 
+		$this->routers[] = [
+			'path' => 'orders',
+			'action' => 'order/list',
+		];
+
+		$this->routers[] = [
+			'path' => 'order/(?P<order_id>\d+)',
+			'action' => 'order/info',
+		];
+
 		return $this->start();
 	}
 
