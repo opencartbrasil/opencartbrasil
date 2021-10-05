@@ -171,7 +171,7 @@ class ControllerOrderList extends Controller {
 			// Statuses
 			$statuses = $this->model_sale_order->getOrderHistories($order_id, 0, $this->config->get('db_list_per_page'));
 
-			$result_items[$order_id] = array(
+			$result_items[] = array(
 				'order_id' => (int)$order_info['order_id'],
 				'invoice_no' => $order_info['invoice_no'],
 				'invoice_prefix' => $order_info['invoice_prefix'],
@@ -233,8 +233,44 @@ class ControllerOrderList extends Controller {
 			);
 		}
 
+		$prev_page = max(1, $page - 1);
+		$last_page = ceil($order_total_count / $per_page);
+		$next_page = intval(min($page + 1, $last_page));
+
+		/** URL Page */
+		$links = '/orders?page=%d&per_page=%d';
+
+		if ($filter_status !== null) {
+			$links .= '&filter_status=' . $filter_status;
+		}
+
+		if ($filter_date_added !== null) {
+			$links .= '&filter_date_added=' . $filter_date_added;
+		}
+
+		if ($filter_date_modified !== null) {
+			$links .= '&filter_date_modified=' . $filter_date_modified;
+		}
+
+		$result = array(
+			'items' => $result_items,
+			'_metadata' => array(
+				'page' => intval($page),
+				'per_page' => intval($per_page),
+				'page_count' => count($result_items),
+				'total_count' => intval($order_total_count),
+				'links' => array(
+					'self' => sprintf($links, $page, $per_page),
+					'first' => sprintf($links, 1, $per_page),
+					'previous' => ($page > 1) ? sprintf($links, $prev_page, $per_page) : null,
+					'next' => ($next_page != $page) ? sprintf($links, $next_page, $per_page) : null,
+					'last' => sprintf($links, $last_page, $per_page)
+				)
+			)
+		);
+
 		$this->response->addHeader("X-Total-Count: $order_total_count");
-		$this->response($result_items);
+		$this->response($result);
 	}
 
 	/**
