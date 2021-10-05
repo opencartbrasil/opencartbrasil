@@ -131,7 +131,7 @@
                       </tr>
                       <tr>
                         <td>{{ text_order }}</td>
-                        <td class="text-center"></td>
+                        <td class="text-center"><input type="checkbox" name="actions[]" value="order_add" {{ "order_add" in actions ? 'checked' : '' }} /></td>
                         <td class="text-center"><input type="checkbox" name="actions[]" value="order_edit" {{ "order_edit" in actions ? 'checked' : '' }} /></td>
                         <td class="text-center"></td>
                       </tr>
