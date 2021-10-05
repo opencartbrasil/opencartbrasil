@@ -121,7 +121,7 @@ class ControllerCategoryList extends Controller {
 		}
 
 		$result = array(
-			'items' => array_values($result_items),
+			'records' => array_values($result_items),
 			'_metadata' => array(
 				'page' => intval($page),
 				'per_page' => intval($per_page),

@@ -372,7 +372,7 @@ class ControllerProductList extends Controller {
 		}
 
 		$result = array(
-			'items' => $result_items,
+			'records' => $result_items,
 			'_metadata' => array(
 				'page' => intval($page),
 				'per_page' => intval($per_page),
