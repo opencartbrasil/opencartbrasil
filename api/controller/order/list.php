@@ -219,7 +219,7 @@ class ControllerOrderList extends Controller {
 				'marketing_id' => (int)$order_info['marketing_id'],
 				'tracking' => $order_info['tracking'],
 				'currency_code' => $order_info['currency_code'],
-				'currency_value' => $order_info['currency_value'],
+				'currency_value' => (float)$order_info['currency_value'],
 				'ip' => $order_info['ip'],
 				'forwarded_ip' => $order_info['forwarded_ip'],
 				'user_agent' => $order_info['user_agent'],
