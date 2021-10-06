@@ -2,8 +2,6 @@
 
 class ControllerWebHookSaleOrder extends Controller {
 	public function add($router, $args, $order_id) {
-		$order_id = $args[0];
-
 		$this->load->modelWebHook('advanced/webhook');
 
 		$hooks = $this->model_webhook_advanced_webhook->getHooks('order_add');
