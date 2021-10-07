@@ -1,11 +1,7 @@
 <?php
 
 class ControllerWebHookCatalogProduct extends Controller {
-	public function add($router, $args) {
-		$product_id = $args[0];
-
-		if ($product_id)
-
+	public function add($router, $args, $product_id) {
 		$this->load->modelWebHook('advanced/webhook');
 
 		$hooks = $this->model_webhook_advanced_webhook->getHooks('product_add');
