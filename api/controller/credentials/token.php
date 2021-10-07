@@ -92,7 +92,7 @@ class ControllerCredentialsToken extends Controller {
 				'errors' => array(
 					array(
 						'code' => 'invalid_credential_format',
-						'message' => 'The credential must be "cs_consumer_key:ck_consumer_secret" encoded with base64.'
+						'message' => 'The credential must be "ck_consumer_key:cs_consumer_secret" encoded with base64.'
 					)
 				)
 			)));
