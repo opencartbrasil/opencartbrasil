@@ -66,7 +66,7 @@ CREATE TABLE `oc_api_ip` (
 --
 
 DROP TABLE IF EXISTS `oc_api_key`;
-CREATE TABLE IF NOT EXISTS `oc_api_key` (
+CREATE TABLE `oc_api_key` (
   `api_key_id` INT(11) AUTO_INCREMENT,
   `description` TEXT NULL,
   `permissions` VARCHAR(255) NOT NULL,
@@ -85,7 +85,7 @@ CREATE TABLE IF NOT EXISTS `oc_api_key` (
 --
 
 DROP TABLE IF EXISTS `oc_api_history`;
-CREATE TABLE IF NOT EXISTS `oc_api_history` (
+CREATE TABLE `oc_api_history` (
   `api_history_id` INT(11) AUTO_INCREMENT,
   `api_key_id` INT(11) NOT NULL,
   `type` VARCHAR(64) NULL,
@@ -101,7 +101,7 @@ CREATE TABLE IF NOT EXISTS `oc_api_history` (
 --
 
 DROP TABLE IF EXISTS `oc_api_token`;
-CREATE TABLE IF NOT EXISTS `oc_api_token` (
+CREATE TABLE `oc_api_token` (
   `api_key_id` INT(11) NOT NULL,
   `access_token` TEXT NOT NULL,
   `refresh_token` TEXT NOT NULL,
