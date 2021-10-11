@@ -957,151 +957,229 @@ input[type="checkbox"]:checked::after, .checkbox input[type="checkbox"]:checked:
 }
 
 .marketplace-brasil #extensions-list {
-  margin-top: 30px;
+    margin-top: 30px;
 }
+
 .marketplace-brasil .extension {
-  border: 1px solid #CCC;
-  display: flex;
-  flex-wrap: wrap;
-  margin-bottom: 30px;
-  position: relative;
-  height: 320px;
+    border: 1px solid #CCC;
+    display: flex;
+    flex-wrap: wrap;
+    margin-bottom: 30px;
+    position: relative;
+    height: 320px;
 }
 
 .marketplace-brasil .extension .details,
 .marketplace-brasil .extension .image img {
-  width: 100%;
+    width: 100%;
 }
+
 .marketplace-brasil .extension h4 {
-  border-top: 1px solid #CCC;
-  padding: 10px;
+    border-top: 1px solid #CCC;
+    padding: 10px;
 }
+
 .marketplace-brasil .extension h4 > a,
 .marketplace-brasil .extension .image > a {
-  color: #000;
-  display: block;
-  font-weight: 500;
+    color: #000;
+    display: block;
+    font-weight: 500;
 }
+
 .marketplace-brasil .extension .price {
-  padding: 0 10px;
+    padding: 0 10px;
 }
+
 .marketplace-brasil .extension:hover .overlay {
-  cursor: pointer;
-  opacity: 1;
+    cursor: pointer;
+    opacity: 1;
 }
+
 .marketplace-brasil .extension .overlay {
-  align-items: center;
-  background: #28282870;
-  display: flex;
-  gap: 20px;
-  height: 100%;
-  justify-content: center;
-  opacity: 0;
-  position: absolute;
-  transition: all 250ms linear;
-  top: 0;
-  width: 100%;
+    align-items: center;
+    background: #28282870;
+    display: flex;
+    gap: 20px;
+    height: 100%;
+    justify-content: center;
+    opacity: 0;
+    position: absolute;
+    transition: all 250ms linear;
+    top: 0;
+    width: 100%;
 }
+
 .marketplace-brasil .extension .buttons {
-  align-self: end;
-  flex: 1 1 100%;
-  height: 0;
-  overflow: hidden;
-  opacity: 0;
-  transition: all 180ms ease-in-out;
+    align-self: end;
+    flex: 1 1 100%;
+    height: 0;
+    overflow: hidden;
+    opacity: 0;
+    transition: all 180ms ease-in-out;
 }
+
 .marketplace-brasil .extension .buttons a {
-  background: orange;
-  color: #FFF;
-  display: block;
-  line-height: 36px;
-  height: 36px;
-  text-align: center;
+    background: orange;
+    color: #FFF;
+    display: block;
+    line-height: 36px;
+    height: 36px;
+    text-align: center;
 }
+
 .marketplace-brasil .extension .buttons button {
-  border-bottom: none;
-  border-radius: 0;
-  border-right: none;
-  height: 36px;
+    border-bottom: none;
+    border-radius: 0;
+    border-right: none;
+    height: 36px;
 }
+
 .marketplace-brasil .extension:hover .buttons {
-  height: 36px;
-  opacity: 1;
+    height: 36px;
+    opacity: 1;
 }
 
 .extension-page-info .carousel-indicators li {
-  background-color: rgb(0, 0, 0);
-  border: 1px solid #020202;
+    background-color: rgb(0, 0, 0);
+    border: 1px solid #020202;
 }
+
 .extension-page-info .carousel-inner .item img {
-  margin: 0 auto;
+    margin: 0 auto;
 }
+
 .extension-page-info .carousel-control {
-  align-items: center !important;
-  color: #000 !important;
-  display: flex !important;
-  justify-content: center !important;
+    align-items: center !important;
+    color: #000 !important;
+    display: flex !important;
+    justify-content: center !important;
 }
+
 .extension-page-info .carousel-control:hover {
-  color: #000 !important;
+    color: #000 !important;
 }
+
 .extension-page-info .thumbnails {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 10px;
-  margin-top: 12px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-top: 12px;
 }
+
 .extension-page-info .thumbnails a {
-  cursor: zoom-in;
+    cursor: zoom-in;
 }
+
 .extension-page-info #modal-full-image img {
-  width: 100%;
+    width: 100%;
 }
+
 .extension-page-info #install .progress {
-  overflow: hidden;
-  height: 0;
-  opacity: 0;
-  margin-bottom: 0;
-  transition: all 250ms ease-in-out;
+    overflow: hidden;
+    height: 0;
+    opacity: 0;
+    margin-bottom: 0;
+    transition: all 250ms ease-in-out;
 }
+
 .extension-page-info #install .progress.active {
-  height: 10px;
-  margin-bottom: 18px;
-  opacity: 1;
+    height: 10px;
+    margin-bottom: 18px;
+    opacity: 1;
 }
+
 .extension-page-info #install button {
-  width: 100%;
+    width: 100%;
 }
 .extension-page-info #extension-description {
-  margin-top: 18px;
+    margin-top: 18px;
 }
 
 /** Advanced API **/
 #form-api .btn-group .dropdown-menu {
-  left: -94px;
-}
-#form-api .btn-group ~ .btn {
+    left: -94px;
 }
 
 /** Webhooks **/
 #form-webhook .btn-group .dropdown-menu {
-  left: -94px;
+    left: -94px;
 }
+
 #form-webhook .btn-group ~ .btn {
-  display: none;
+    display: none;
 }
 
 @media (max-width: 935px) {
   #form-api .btn-group {
-    display: none;
+      display: none;
   }
+
   #form-api .btn-group ~ .btn {
-    display: block;
+      display: block;
   }
+
   #form-webhook .btn-group {
-    display: none;
+      display: none;
   }
+
   #form-webhook .btn-group ~ .btn {
-    display: block;
+      display: block;
+  }
+}
+
+/** RTL **/
+html[dir="rtl"] .form-group ul.dropdown-menu {
+    text-align: right;
+    left: 0px !important;
+    right: 31px !important;
+}
+
+html[dir="rtl"] #filter-product {
+    overflow: hidden;
+}
+
+html[dir="rtl"] .pull-right {
+    float: left !important;
+}
+
+html[dir="rtl"] .pull-left, html[dir="rtl"] .navbar-nav > li, html[dir="rtl"] .nav-tabs > li {
+    float: right !important;
+}
+
+html[dir="rtl"] .text-left {
+    text-align: right !important;
+}
+
+html[dir="rtl"] .text-right {
+    text-align: left !important;
+}
+
+@media (min-width: 992px) {
+  html[dir="rtl"] .col-md-push-9 {
+      left: 0% !important;
+  }
+
+  html[dir="rtl"] .col-md-pull-3 {
+      right: 0% !important;
+  }
+}
+
+@media (min-width: 768px) {
+  html[dir="rtl"] #column-left {
+      right: 0px !important;
+  }
+
+  html[dir="rtl"] #column-left + #content, html[dir="rtl"] #column-left + #content + #footer {
+      left: 0px !important;
+      margin-right: 235px !important;
+      margin-left: 0px !important;
+  }
+
+  html[dir="rtl"] .navbar-header {
+      float: right !important;
+  }
+
+  html[dir="rtl"] .navbar-right {
+      float: left !important;
   }
 }
