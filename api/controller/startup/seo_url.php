@@ -43,6 +43,12 @@ class ControllerStartupSeoUrl extends Controller {
 		];
 
 		$this->routers[] = [
+			'path' => 'product/stocks',
+			'action' => 'product/form_stock',
+			'methods' => ['PUT']
+		];
+
+		$this->routers[] = [
 			'path' => 'language',
 			'action' => 'language/list',
 			'methods' => ['GET']

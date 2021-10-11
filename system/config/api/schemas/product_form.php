@@ -631,3 +631,84 @@ $_['api_schema_product_form'] = json_decode(<<<'JSON'
   ]
 }
 JSON);
+
+$_['api_schema_product_form_stock'] = json_decode(<<<'JSON'
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.com/product.schema.json",
+  "title": "Product",
+  "description": "Atualização de estoque",
+  "type": "array",
+  "items": {
+    "type": "object",
+    "properties": {
+      "product_id": {
+        "type": "integer",
+        "minimum": 0,
+        "default": 0
+      },
+      "minimum": {
+        "type": "integer",
+        "minimum": 0,
+        "default": 0
+      },
+      "quantity": {
+        "type": "integer",
+        "minimum": 0,
+        "default": 0
+      },
+      "weight": {
+        "type": "number",
+        "minimum": 0,
+        "default": 0
+      },
+      "length": {
+        "type": "number",
+        "minimum": 0,
+        "default": 0
+      },
+      "weight": {
+        "type": "number",
+        "minimum": 0,
+        "default": 0
+      },
+      "width": {
+        "type": "number",
+        "minimum": 0,
+        "default": 0
+      },
+      "height": {
+        "type": "number",
+        "minimum": 0,
+        "default": 0
+      },
+      "price": {
+        "type": "number",
+        "minimum": 0,
+        "default": 0
+      },
+      "weight_class_id": {
+        "type": "integer",
+        "minimum": 0,
+        "default": 0
+      },
+      "length_class_id": {
+        "type": "integer",
+        "minimum": 0,
+        "default": 0
+      }
+    },
+    "required": [
+      "product_id",
+      "location",
+      "minimum",
+      "quantity",
+      "weight",
+      "length",
+      "width",
+      "height",
+      "price"
+    ]
+  }
+}
+JSON);
