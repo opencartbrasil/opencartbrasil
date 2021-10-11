@@ -1535,6 +1535,7 @@ class ControllerSaleOrder extends Controller {
 		}
 
 		$data['direction'] = $this->language->get('direction');
+
 		$data['lang'] = $this->language->get('code');
 
 		$this->load->model('sale/order');
@@ -1746,6 +1747,7 @@ class ControllerSaleOrder extends Controller {
 		}
 
 		$data['direction'] = $this->language->get('direction');
+
 		$data['lang'] = $this->language->get('code');
 
 		$this->load->model('sale/order');
