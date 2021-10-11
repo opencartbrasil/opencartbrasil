@@ -95,9 +95,17 @@ class ModelCredentialsToken extends Model {
 		}
 
 		$query = $this->db->query('
-			SELECT * FROM `' . DB_PREFIX . 'api_token`
+			SELECT
+				at.api_key_id,
+				at.access_token,
+				at.refresh_token,
+				at.refresh_expire,
+				ak.status
+			FROM `' . DB_PREFIX . 'api_token` at
+			LEFT JOIN `' . DB_PREFIX . 'api_key` ak ON (ak.api_key_id = at.api_key_id)
 			WHERE `access_token` = "' . $this->db->escape($access_token) . '"
-			  AND `status` = 1');
+				AND ak.`status` = 1
+		');
 
 		return !!$query->num_rows;
 	}
