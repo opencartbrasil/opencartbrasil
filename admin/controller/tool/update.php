@@ -216,8 +216,10 @@ class ControllerToolUpdate extends Controller {
                     $path = DIR_IMAGE . substr($destination, 6);
                 }
 
-                if (substr($destination, 0, 6) == 'webhook') {
-                    $path = DIR_WEBHOOK . substr($destination, 8);
+                if (defined('DIR_WEBHOOK')) {
+                    if (substr($destination, 0, 6) == 'webhook') {
+                        $path = DIR_WEBHOOK . substr($destination, 8);
+                    }
                 }
 
                 if (substr($destination, 0, 6) == 'system') {
