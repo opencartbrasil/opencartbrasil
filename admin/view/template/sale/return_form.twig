@@ -200,7 +200,7 @@
                 <legend>{{ text_history }}</legend>
                 <div id="history"></div>
               </fieldset>
-              <br />
+              <br/>
               <fieldset>
                 <legend>{{ text_history_add }}</legend>
                 <div class="form-group">
@@ -270,7 +270,7 @@ $('input[name=\'customer\']').autocomplete({
 		$('input[name=\'telephone\']').val(item['telephone']);
 	}
 });
-//--></script> 
+//--></script>
 <script type="text/javascript"><!--
 $('input[name=\'product\']').autocomplete({
 	'source': function(request, response) {
@@ -299,7 +299,7 @@ $('#history').delegate('.pagination a', 'click', function(e) {
 	e.preventDefault();
 
 	$('#history').load(this.href);
-});	
+});
 
 $('#history').load('index.php?route=sale/return/history&user_token={{ user_token }}&return_id={{ return_id }}');
 
@@ -334,7 +334,7 @@ $('#button-history').on('click', function(e) {
 		}
 	});
 });
-//--></script> 
+//--></script>
 <script type="text/javascript"><!--
 $('.date').datetimepicker({
 	language: '{{ datepicker }}',

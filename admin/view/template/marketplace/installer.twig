@@ -26,7 +26,7 @@
             </div>
           </div>
         </fieldset>
-        <br />
+        <br/>
         <fieldset>
           <legend>{{ text_progress }}</legend>
           <div class="form-group">
@@ -39,7 +39,7 @@
             </div>
           </div>
         </fieldset>
-        <br />
+        <br/>
         <fieldset>
           <legend>{{ text_history }}</legend>
           <div id="history"></div>
@@ -131,7 +131,7 @@ function next(url, i) {
             if (json['success']) {
                 $('#progress-bar').addClass('progress-bar-success');
                 $('#progress-text').html('<span class="text-success">' + json['success'] + '</span>');
-                
+
                 $('#history').load('index.php?route=marketplace/installer/history&user_token={{ user_token }}');
             }
 

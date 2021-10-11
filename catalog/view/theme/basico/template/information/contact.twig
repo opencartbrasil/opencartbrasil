@@ -22,7 +22,7 @@
             {% if image %}
             <div class="col-sm-3"><img src="{{ image }}" loading="lazy" alt="{{ store }}" title="{{ store }}" class="img-thumbnail" /></div>
             {% endif %}
-            <div class="col-sm-3"><strong>{{ store }}</strong><br />
+            <div class="col-sm-3"><strong>{{ store }}</strong><br/>
               <address>
               {{ address }}
               </address>
@@ -31,8 +31,8 @@
               {% endif %}
             </div>
             <div class="col-sm-3"><strong>{{ text_telephone }}</strong><br>
-              {{ telephone }}<br />
-              <br />
+              {{ telephone }}<br/>
+              <br/>
               {% if fax %}
               <strong>{{ text_fax }}</strong><br>
               {{ fax }}
@@ -40,12 +40,12 @@
             </div>
             <div class="col-sm-3">
               {% if open %}
-              <strong>{{ text_open }}</strong><br />
-              {{ open }}<br />
-              <br />
+              <strong>{{ text_open }}</strong><br/>
+              {{ open }}<br/>
+              <br/>
               {% endif %}
               {% if comment %}
-              <strong>{{ text_comment }}</strong><br />
+              <strong>{{ text_comment }}</strong><br/>
               {{ comment }}
               {% endif %}
             </div>
@@ -66,7 +66,7 @@
                 {% if location.image %}
                 <div class="col-sm-3"><img src="{{ location.image }}" loading="lazy" alt="{{ location.name }}" title="{{ location.name }}" class="img-thumbnail" /></div>
                 {% endif %}
-                <div class="col-sm-3"><strong>{{ location.name }}</strong><br />
+                <div class="col-sm-3"><strong>{{ location.name }}</strong><br/>
                   <address>
                   {{ location.address }}
                   </address>
@@ -75,8 +75,8 @@
                   {% endif %}
                 </div>
                 <div class="col-sm-3"> <strong>{{ text_telephone }}</strong><br>
-                  {{ location.telephone }}<br />
-                  <br />
+                  {{ location.telephone }}<br/>
+                  <br/>
                   {% if location.fax %}
                   <strong>{{ text_fax }}</strong><br>
                   {{ location.fax }}
@@ -84,12 +84,12 @@
                 </div>
                 <div class="col-sm-3">
                   {% if location.open %}
-                  <strong>{{ text_open }}</strong><br />
-                  {{ location.open }}<br />
-                  <br />
+                  <strong>{{ text_open }}</strong><br/>
+                  {{ location.open }}<br/>
+                  <br/>
                   {% endif %}
                   {% if location.comment %}
-                  <strong>{{ text_comment }}</strong><br />
+                  <strong>{{ text_comment }}</strong><br/>
                   {{ location.comment }}
                   {% endif %}
                 </div>
