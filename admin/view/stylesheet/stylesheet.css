@@ -1080,28 +1080,26 @@ input[type="checkbox"]:checked::after, .checkbox input[type="checkbox"]:checked:
 #form-api .btn-group .dropdown-menu {
   left: -94px;
 }
-#form-api .btn-group ~ .btn {
+#form-api .btn-group {
+  display: none;
 }
 
 /** Webhooks **/
 #form-webhook .btn-group .dropdown-menu {
   left: -94px;
 }
-#form-webhook .btn-group ~ .btn {
+#form-webhook .btn-group {
   display: none;
 }
 
 @media (max-width: 935px) {
-  #form-api .btn-group {
-    display: none;
-  }
-  #form-api .btn-group ~ .btn {
-    display: block;
-  }
+  #form-api .btn-group,
   #form-webhook .btn-group {
-    display: none;
-  }
-  #form-webhook .btn-group ~ .btn {
     display: block;
+    min-width: 70px;
+  }
+  #form-api .btn-group ~ .btn,
+  #form-webhook .btn-group ~ .btn {
+    display: none;
   }
 }
