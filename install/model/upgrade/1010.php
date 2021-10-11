@@ -22,7 +22,7 @@ class ModelUpgrade1010 extends Model {
 			$this->db->query($sql);
 		}
 
-		// Table api_key
+		// Table api_history
 		$query = $this->db->query("SELECT * FROM information_schema.TABLES WHERE TABLE_SCHEMA = '" . DB_DATABASE . "' AND TABLE_NAME = '" . DB_PREFIX . "api_history'");
 
 		if ($query->num_rows == 0) {
@@ -40,7 +40,7 @@ class ModelUpgrade1010 extends Model {
 			$this->db->query($sql);
 		}
 
-		// Table api_key
+		// Table api_token
 		$query = $this->db->query("SELECT * FROM information_schema.TABLES WHERE TABLE_SCHEMA = '" . DB_DATABASE . "' AND TABLE_NAME = '" . DB_PREFIX . "api_token'");
 
 		if ($query->num_rows == 0) {

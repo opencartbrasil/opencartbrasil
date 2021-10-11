@@ -32,5 +32,20 @@ class ModelUpdate05 extends Model {
 			$this->model_user_user_group->addPermission($this->user->getGroupId(), 'access', 'extension/currency/fix');
 			$this->model_user_user_group->addPermission($this->user->getGroupId(), 'modify', 'extension/currency/fix');
 		}
+
+		if (!$this->user->hasPermission('modify', 'advanced/api')) {
+			$this->model_user_user_group->addPermission($this->user->getGroupId(), 'access', 'advanced/api');
+			$this->model_user_user_group->addPermission($this->user->getGroupId(), 'modify', 'advanced/api');
+		}
+
+		if (!$this->user->hasPermission('modify', 'advanced/log')) {
+			$this->model_user_user_group->addPermission($this->user->getGroupId(), 'access', 'advanced/log');
+			$this->model_user_user_group->addPermission($this->user->getGroupId(), 'modify', 'advanced/log');
+		}
+
+		if (!$this->user->hasPermission('modify', 'advanced/webhook')) {
+			$this->model_user_user_group->addPermission($this->user->getGroupId(), 'access', 'advanced/webhook');
+			$this->model_user_user_group->addPermission($this->user->getGroupId(), 'modify', 'advanced/webhook');
+		}
 	}
 }

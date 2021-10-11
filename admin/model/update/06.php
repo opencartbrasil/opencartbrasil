@@ -1,21 +1,27 @@
 <?php
 class ModelUpdate06 extends Model {
 	public function update() {
-		$this->load->model('user/user_group');
+		$dir_opencart = str_replace("admin/", "", DIR_APPLICATION);
 
-		if (!$this->user->hasPermission('modify', 'advanced/api')) {
-			$this->model_user_user_group->addPermission($this->user->getGroupId(), 'access', 'advanced/api');
-			$this->model_user_user_group->addPermission($this->user->getGroupId(), 'modify', 'advanced/api');
-		}
+		// Files config.php
+		$files = glob($dir_opencart . '{config.php,admin/config.php}', GLOB_BRACE);
 
-		if (!$this->user->hasPermission('modify', 'advanced/log')) {
-			$this->model_user_user_group->addPermission($this->user->getGroupId(), 'access', 'advanced/log');
-			$this->model_user_user_group->addPermission($this->user->getGroupId(), 'modify', 'advanced/log');
-		}
+		foreach ($files as $file) {
+			$lines = file($file);
 
-		if (!$this->user->hasPermission('modify', 'advanced/webhook')) {
-			$this->model_user_user_group->addPermission($this->user->getGroupId(), 'access', 'advanced/webhook');
-			$this->model_user_user_group->addPermission($this->user->getGroupId(), 'modify', 'advanced/webhook');
+			for ($i = 0; $i < count($lines); $i++) {
+				if ((strpos($lines[$i], 'DIR_IMAGE') !== false) && (strpos($lines[$i + 1], 'DIR_WEBHOOK') === false)) {
+					array_splice($lines, $i + 1, 0, array("define('DIR_WEBHOOK', '" . addslashes($dir_opencart) . "webhook/');\n"));
+				}
+			}
+
+			$output = implode('', $lines);
+
+			$handle = fopen($file, 'w');
+
+			fwrite($handle, $output);
+
+			fclose($handle);
 		}
 	}
 }
