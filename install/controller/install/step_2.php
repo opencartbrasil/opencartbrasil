@@ -37,6 +37,12 @@ class ControllerInstallStep2 extends Controller {
 			$data['error_admin_config'] = '';
 		}
 
+		if (!is_writable(DIR_OPENCART . 'api/')) {
+			$data['error_api'] = $this->language->get('error_unwritable');
+		} else {
+			$data['error_api'] = '';
+		}
+
 		if (!is_writable(DIR_OPENCART . 'image/')) {
 			$data['error_image'] = $this->language->get('error_unwritable');
 		} else {
@@ -113,6 +119,7 @@ class ControllerInstallStep2 extends Controller {
 
 		$data['catalog_config'] = DIR_OPENCART . 'config.php';
 		$data['admin_config'] = DIR_OPENCART . 'admin/config.php';
+		$data['api'] = DIR_OPENCART . 'api';
 		$data['image'] = DIR_OPENCART . 'image';
 		$data['image_cache'] = DIR_OPENCART . 'image/cache';
 		$data['image_catalog'] = DIR_OPENCART . 'image/catalog';

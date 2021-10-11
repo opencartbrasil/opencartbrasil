@@ -306,6 +306,16 @@
             </thead>
             <tbody>
               <tr>
+                <td>{{ api }}/</td>
+                <td>
+                  {% if not error_api %}
+                  <span class="text-success">{{ text_writable }}</span>
+                  {% else %}
+                  <span class="text-danger">{{ error_api }}</span>
+                  {% endif %}
+                </td>
+              </tr>
+              <tr>
                 <td>{{ image }}/</td>
                 <td>
                   {% if not error_image %}
