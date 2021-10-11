@@ -7,9 +7,7 @@ use Swaggest\JsonSchema\InvalidValue;
 
 class ControllerProductFormStock extends Controller {
 
-	private const HTTP_STATUS_201 = 201;
 	private const HTTP_STATUS_400 = 400;
-	private const HTTP_STATUS_500 = 500;
 
 	public function index() {
 		$this->load->model('catalog/product');
