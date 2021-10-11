@@ -101,7 +101,7 @@ class ModelUpdate01 extends Model {
 		");
 
 		$this->db->query("
-			CREATE TABLE `" . DB_PREFIX . "webhook_client` (
+			CREATE TABLE IF NOT EXISTS `" . DB_PREFIX . "webhook_client` (
 				`webhook_client_id` int(11) NOT NULL AUTO_INCREMENT,
 				`description` VARCHAR(255) NOT NULL,
 				`url` VARCHAR(255),
@@ -117,7 +117,7 @@ class ModelUpdate01 extends Model {
 		");
 
 		$this->db->query("
-			CREATE TABLE `" . DB_PREFIX . "webhook_request_history` (
+			CREATE TABLE IF NOT EXISTS `" . DB_PREFIX . "webhook_request_history` (
 				`webhook_request_history_id` int(11) NOT NULL AUTO_INCREMENT,
 				`webhook_client_id` int(11) NOT NULL,
 				`action` VARCHAR(255),
