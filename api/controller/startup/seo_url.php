@@ -130,6 +130,12 @@ class ControllerStartupSeoUrl extends Controller {
 			'action' => 'order/info',
 		];
 
+		$this->routers[] = [
+			'path' => 'orders/history',
+			'action' => 'order/form_history',
+			'methods' => ['PUT']
+		];
+
 		return $this->start();
 	}
 
