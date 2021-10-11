@@ -39,17 +39,20 @@
                     <a href="{{ sort_username }}" class="{{ order|lower }}">{{ column_username }}</a>
                     {% else %}
                     <a href="{{ sort_username }}">{{ column_username }}</a>
-                    {% endif %}</td>
+                    {% endif %}
+                  </td>
                   <td class="text-left">{% if sort == 'status' %}
                     <a href="{{ sort_status }}" class="{{ order|lower }}">{{ column_status }}</a>
                     {% else %}
                     <a href="{{ sort_status }}">{{ column_status }}</a>
-                    {% endif %}</td>
+                    {% endif %}
+                  </td>
                   <td class="text-left">{% if sort == 'date_added' %}
                     <a href="{{ sort_date_added }}" class="{{ order|lower }}">{{ column_date_added }}</a>
                     {% else %}
                     <a href="{{ sort_date_added }}">{{ column_date_added }}</a>
-                    {% endif %}</td>
+                    {% endif %}
+                  </td>
                   <td class="text-right">{{ column_action }}</td>
                 </tr>
               </thead>
@@ -61,7 +64,8 @@
                     <input type="checkbox" name="selected[]" value="{{ user.user_id }}" checked="checked" />
                     {% else %}
                     <input type="checkbox" name="selected[]" value="{{ user.user_id }}" />
-                    {% endif %}</td>
+                    {% endif %}
+                  </td>
                   <td class="text-left">{{ user.username }}</td>
                   <td class="text-left">{{ user.status }}</td>
                   <td class="text-left">{{ user.date_added }}</td>

@@ -95,6 +95,32 @@ final class Loader {
 		}
 	}
 
+	public function modelWebHook($route) {
+		// Sanitize the call
+		$route = preg_replace('/[^a-zA-Z0-9_\/]/', '', (string)$route);
+
+		if (!$this->registry->has('model_webhook_' . str_replace('/', '_', $route))) {
+			$file = DIR_WEBHOOK . 'model/' . $route . '.php';
+			$class = 'ModelWebHook' . preg_replace('/[^a-zA-Z0-9]/', '', $route);
+
+			if (is_file($file)) {
+				include_once($file);
+
+				$proxy = new Proxy();
+
+				// Overriding models is a little harder so we have to use PHP's magic methods
+				// In future version we can use runkit
+				foreach (get_class_methods($class) as $method) {
+					$proxy->{$method} = $this->callback($route . '/' . $method, true);
+				}
+
+				$this->registry->set('model_webhook_' . str_replace('/', '_', (string)$route), $proxy);
+			} else {
+				throw new \Exception('Erro: Não foi possível encontrar o model ' . $route . '!');
+			}
+		}
+	}
+
     /**
      *
      *
@@ -220,18 +246,24 @@ final class Loader {
 		return $output;
 	}
 
-	protected function callback($route) {
-		return function () use ($route) {
+	protected function callback($route, $isWebHook = false) {
+		return function () use ($route, $isWebHook) {
 			// Grab args using function because we don't know the number of args being passed.
 			$args = func_get_args();
 
 			$route = preg_replace('/[^a-zA-Z0-9_\/]/', '', (string)$route);
 
 			// Keep the original trigger
+			if ($isWebHook === true) {
+				$route = 'WebHook/' . $route;
+			}
+
 			$trigger = $route;
 
 			// Trigger the pre events
 			$result = $this->registry->get('event')->trigger('model/' . $trigger . '/before', array(&$route, &$args));
+
+			$this->registry->get('webhook')->trigger('model/' . $trigger . '/before', array(&$route, &$args));
 
 			if ($result && !$result instanceof Exception) {
 				$output = $result;
@@ -259,6 +291,8 @@ final class Loader {
 
 			// Trigger the post events
 			$result = $this->registry->get('event')->trigger('model/' . $trigger . '/after', array(&$route, &$args, &$output));
+
+			$this->registry->get('webhook')->trigger('model/' . $trigger . '/after', array(&$route, &$args, &$output));
 
 			if ($result && !$result instanceof Exception) {
 				$output = $result;

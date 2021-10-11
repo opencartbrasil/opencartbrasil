@@ -77,6 +77,12 @@ class ControllerSettingSetting extends Controller {
 			$data['error_limit_admin'] = '';
 		}
 
+		if (isset($this->error['login_attempts'])) {
+			$data['error_login_attempts'] = $this->error['login_attempts'];
+		} else {
+			$data['error_login_attempts'] = '';
+		}
+
 		if (isset($this->error['customer_group_display'])) {
 			$data['error_customer_group_display'] = $this->error['customer_group_display'];
 		} else {
@@ -895,6 +901,18 @@ class ControllerSettingSetting extends Controller {
 			$data['config_compression'] = $this->request->post['config_compression'];
 		} else {
 			$data['config_compression'] = $this->config->get('config_compression');
+		}
+
+		if (isset($this->request->post['config_api_rest_status'])) {
+			$data['config_api_rest_status'] = $this->request->post['config_api_rest_status'];
+		} else {
+			$data['config_api_rest_status'] = $this->config->get('config_api_rest_status');
+		}
+
+		if (isset($this->request->post['config_api_rest_request_per_minute'])) {
+			$data['config_api_rest_request_per_minute'] = $this->request->post['config_api_rest_request_per_minute'];
+		} else {
+			$data['config_api_rest_request_per_minute'] = $this->config->get('config_api_rest_request_per_minute');
 		}
 
 		if (isset($this->request->post['config_error_display'])) {

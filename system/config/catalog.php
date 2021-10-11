@@ -58,3 +58,19 @@ $_['action_event']       = array(
 		'event/translation'
 	)
 );
+
+// Webhook Events
+$_['action_webhook']       = array(
+	'model/checkout/order/addOrderHistory/before' => array(
+		'catalog/product/order'
+	),
+	'model/checkout/order/editOrder/before' => array(
+		'sale/order/edit'
+	),
+	'model/checkout/order/addOrderHistory/before' => array(
+		'sale/order/addOrderHistory'
+	),
+	'model/checkout/order/addOrder/after' => array(
+		'sale/order/add'
+	),
+);

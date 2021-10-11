@@ -45,3 +45,19 @@ $_['action_event']       = array(
 		1000 => 'event/theme'
 	)
 );
+
+// Webhook Events
+$_['action_webhook']       = array(
+	'model/catalog/product/addProduct/after' => array(
+		'catalog/product/add'
+	),
+	'model/catalog/product/editProduct/after' => array(
+		'catalog/product/edit'
+	),
+	'model/catalog/product/deleteProduct/after' => array(
+		'catalog/product/delete'
+	),
+	'model/catalog/product/copyProduct/after' => array(
+		'catalog/product/copy'
+	),
+);

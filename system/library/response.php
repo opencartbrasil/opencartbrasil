@@ -16,8 +16,6 @@ class Response {
 	private $output;
 
 	/**
-	 * Constructor
-	 *
 	 * @param	string	$header
 	 *
 	*/
@@ -26,8 +24,13 @@ class Response {
 	}
 
 	/**
-	 *
-	 *
+	 * @return string[]
+	 */
+	public function getHeaders() {
+		return $this->headers;
+	}
+
+	/**
 	 * @param	string	$url
 	 * @param	int		$status
 	 *
@@ -38,8 +41,6 @@ class Response {
 	}
 
 	/**
-	 *
-	 *
 	 * @param	int		$level
 	*/
 	public function setCompression($level) {
@@ -47,8 +48,6 @@ class Response {
 	}
 
 	/**
-	 *
-	 *
 	 * @return	array
 	*/
 	public function getOutput() {
@@ -56,8 +55,6 @@ class Response {
 	}
 
 	/**
-	 *
-	 *
 	 * @param	string	$output
 	*/
 	public function setOutput($output) {
@@ -65,11 +62,9 @@ class Response {
 	}
 
 	/**
-	 *
-	 *
 	 * @param	string	$data
 	 * @param	int		$level
-	 * 
+	 *
 	 * @return	string
 	*/
 	private function compress($data, $level = 0) {
@@ -103,8 +98,8 @@ class Response {
 	}
 
 	/**
-	 *
-	*/
+	 * @return void
+	 */
 	public function output() {
 		if ($this->output) {
 			$output = $this->level ? $this->compress($this->output, $this->level) : $this->output;

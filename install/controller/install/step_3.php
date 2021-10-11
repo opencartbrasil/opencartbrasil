@@ -22,6 +22,7 @@ class ControllerInstallStep3 extends Controller {
 			$output .= 'define(\'DIR_APPLICATION\', \'' . addslashes(DIR_OPENCART) . 'catalog/\');' . "\n";
 			$output .= 'define(\'DIR_SYSTEM\', \'' . addslashes(DIR_OPENCART) . 'system/\');' . "\n";
 			$output .= 'define(\'DIR_IMAGE\', \'' . addslashes(DIR_OPENCART) . 'image/\');' . "\n";
+			$output .= 'define(\'DIR_WEBHOOK\', \'' . addslashes(DIR_OPENCART) . 'webhook/\');' . "\n";
 			$output .= 'define(\'DIR_STORAGE\', DIR_SYSTEM . \'storage/\');' . "\n";
 			$output .= 'define(\'DIR_LANGUAGE\', DIR_APPLICATION . \'language/\');' . "\n";
 			$output .= 'define(\'DIR_TEMPLATE\', DIR_APPLICATION . \'view/theme/\');' . "\n";
@@ -62,6 +63,7 @@ class ControllerInstallStep3 extends Controller {
 			$output .= 'define(\'DIR_APPLICATION\', \'' . addslashes(DIR_OPENCART) . 'admin/\');' . "\n";
 			$output .= 'define(\'DIR_SYSTEM\', \'' . addslashes(DIR_OPENCART) . 'system/\');' . "\n";
 			$output .= 'define(\'DIR_IMAGE\', \'' . addslashes(DIR_OPENCART) . 'image/\');' . "\n";
+			$output .= 'define(\'DIR_WEBHOOK\', \'' . addslashes(DIR_OPENCART) . 'webhook/\');' . "\n";
 			$output .= 'define(\'DIR_STORAGE\', DIR_SYSTEM . \'storage/\');' . "\n";
 			$output .= 'define(\'DIR_CATALOG\', \'' . addslashes(DIR_OPENCART) . 'catalog/\');' . "\n";
 			$output .= 'define(\'DIR_LANGUAGE\', DIR_APPLICATION . \'language/\');' . "\n";
@@ -87,6 +89,45 @@ class ControllerInstallStep3 extends Controller {
 			$output .= 'define(\'OPENCART_SERVER\', \'https://www.opencart.com/\');' . "\n";
 
 			$file = fopen(DIR_OPENCART . 'admin/config.php', 'w');
+
+			fwrite($file, $output);
+
+			fclose($file);
+
+			// API config.php
+			$output  = '<?php' . "\n";
+			$output .= '// HTTP' . "\n";
+			$output .= 'define(\'HTTP_SERVER\', \'' . HTTP_OPENCART . 'api/\');' . "\n";
+			$output .= 'define(\'HTTP_CATALOG\', \'' . HTTP_OPENCART . '\');' . "\n\n";
+
+			$output .= '// HTTPS' . "\n";
+			$output .= 'define(\'HTTPS_SERVER\', \'' . HTTP_OPENCART . 'api/\');' . "\n";
+			$output .= 'define(\'HTTPS_CATALOG\', \'' . HTTP_OPENCART . '\');' . "\n\n";
+
+			$output .= '// DIR' . "\n";
+			$output .= 'define(\'DIR_APPLICATION\', \'' . addslashes(DIR_OPENCART) . 'api/\');' . "\n";
+			$output .= 'define(\'DIR_SYSTEM\', \'' . addslashes(DIR_OPENCART) . 'system/\');' . "\n";
+			$output .= 'define(\'DIR_IMAGE\', \'' . addslashes(DIR_OPENCART) . 'image/\');' . "\n";
+			$output .= 'define(\'DIR_WEBHOOK\', \'' . addslashes(DIR_OPENCART) . 'webhook/\');' . "\n";
+			$output .= 'define(\'DIR_STORAGE\', DIR_SYSTEM . \'storage/\');' . "\n";
+			$output .= 'define(\'DIR_LANGUAGE\', DIR_APPLICATION . \'language/\');' . "\n";
+			$output .= 'define(\'DIR_TEMPLATE\', DIR_APPLICATION . \'view/template/\');' . "\n";
+			$output .= 'define(\'DIR_CONFIG\', DIR_SYSTEM . \'config/\');' . "\n";
+			$output .= 'define(\'DIR_CACHE\', DIR_STORAGE . \'cache/\');' . "\n";
+			$output .= 'define(\'DIR_LOGS\', DIR_STORAGE . \'logs/\');' . "\n";
+			$output .= 'define(\'DIR_MODIFICATION\', DIR_STORAGE . \'modification/\');' . "\n";
+			$output .= 'define(\'DIR_UPLOAD\', DIR_STORAGE . \'upload/\');' . "\n\n";
+
+			$output .= '// DB' . "\n";
+			$output .= 'define(\'DB_DRIVER\', \'' . addslashes($this->request->post['db_driver']) . '\');' . "\n";
+			$output .= 'define(\'DB_HOSTNAME\', \'' . addslashes($this->request->post['db_hostname']) . '\');' . "\n";
+			$output .= 'define(\'DB_USERNAME\', \'' . addslashes($this->request->post['db_username']) . '\');' . "\n";
+			$output .= 'define(\'DB_PASSWORD\', \'' . addslashes(html_entity_decode($this->request->post['db_password'], ENT_QUOTES, 'UTF-8')) . '\');' . "\n";
+			$output .= 'define(\'DB_DATABASE\', \'' . addslashes($this->request->post['db_database']) . '\');' . "\n";
+			$output .= 'define(\'DB_PORT\', \'' . addslashes($this->request->post['db_port']) . '\');' . "\n";
+			$output .= 'define(\'DB_PREFIX\', \'' . addslashes($this->request->post['db_prefix']) . '\');' . "\n\n";
+
+			$file = fopen(DIR_OPENCART . 'api/config.php', 'w');
 
 			fwrite($file, $output);
 
@@ -301,7 +342,7 @@ class ControllerInstallStep3 extends Controller {
 		} else {
 			try {
 				$db = new \DB($this->request->post['db_driver'], html_entity_decode($this->request->post['db_hostname'], ENT_QUOTES, 'UTF-8'), html_entity_decode($this->request->post['db_username'], ENT_QUOTES, 'UTF-8'), html_entity_decode($this->request->post['db_password'], ENT_QUOTES, 'UTF-8'), html_entity_decode($this->request->post['db_database'], ENT_QUOTES, 'UTF-8'), $this->request->post['db_port']);
-			} catch(Exception $e) {
+			} catch (Exception $e) {
 				$this->error['warning'] = $e->getMessage();
 			}
 		}

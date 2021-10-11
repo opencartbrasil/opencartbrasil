@@ -34,6 +34,7 @@ $_['column_action']        = 'Action';
 
 // Entry
 $_['entry_name']           = 'Custom Field Name';
+$_['entry_code']           = 'Code';
 $_['entry_location']       = 'Location';
 $_['entry_type']           = 'Type';
 $_['entry_value']          = 'Value';
@@ -45,6 +46,7 @@ $_['entry_status']         = 'Status';
 $_['entry_sort_order']     = 'Sort Order';
 
 // Help
+$_['help_code']            = 'Field used for identification in the API';
 $_['help_regex']           = 'Use regex. E.g: /[a-zA-Z0-9_-]/';
 $_['help_sort_order']      = 'Use minus to count backwards from the last field in the set.';
 
@@ -52,4 +54,5 @@ $_['help_sort_order']      = 'Use minus to count backwards from the last field i
 $_['error_permission']     = 'Warning: You do not have permission to modify custom fields!';
 $_['error_name']           = 'Custom Field Name must be between 1 and 128 characters!';
 $_['error_type']           = 'Warning: Custom Field Values required!';
+$_['error_code']           = 'Required field!';
 $_['error_custom_value']   = 'Custom Value Name must be between 1 and 128 characters!';

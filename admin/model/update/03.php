@@ -30,6 +30,11 @@ class ModelUpdate03 extends Model {
 			$this->db->query("ALTER TABLE `" . DB_PREFIX . "customer_ip` ADD `country` VARCHAR(2) NOT NULL AFTER `ip`;");
 		}
 
+		$table_query = $this->db->query("SELECT * FROM information_schema.COLUMNS WHERE TABLE_SCHEMA = '" . DB_DATABASE . "' AND TABLE_NAME = '" . DB_PREFIX . "custom_field' AND COLUMN_NAME = 'code'");
+		if ($table_query->num_rows == 0) {
+			$this->db->query("ALTER TABLE `" . DB_PREFIX . "custom_field` ADD COLUMN `code` VARCHAR(255) AFTER `type`");
+		}
+
 		$table_query = $this->db->query("SELECT * FROM `" . DB_PREFIX . "setting` WHERE `key` = 'sub_total_sort_order'");
 		if (!$table_query->num_rows) {
 			$this->db->query("UPDATE `" . DB_PREFIX . "setting` SET `key` = 'total_sub_total_sort_order' WHERE `key` = 'sub_total_sort_order';");

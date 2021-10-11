@@ -74,6 +74,19 @@ if ($config->has('action_event')) {
 	}
 }
 
+// WebHook
+$webhook = new Webhook($registry);
+$registry->set('webhook', $webhook);
+
+// Webhook Register
+if ($config->has('action_webhook')) {
+	foreach ($config->get('action_webhook') as $key => $value) {
+		foreach ($value as $priority => $action) {
+			$webhook->register($key, new ActionHook($action), $priority);
+		}
+	}
+}
+
 // Loader
 $loader = new Loader($registry);
 $registry->set('load', $loader);
@@ -155,6 +168,13 @@ $route = new Router($registry);
 if ($config->has('action_pre_action')) {
 	foreach ($config->get('action_pre_action') as $value) {
 		$route->addPreAction(new Action($value));
+	}
+}
+
+// Post Actions
+if ($config->has('action_post_action')) {
+	foreach ($config->get('action_post_action') as $value) {
+		$route->addPostAction(new Action($value));
 	}
 }
 

@@ -25,7 +25,6 @@ $_['entry_date_start']  = 'Data inicial';
 $_['entry_date_end']    = 'Data final';
 $_['entry_group']       = 'Agrupar por';
 $_['entry_status']      = 'Situação do pedido';
-$_['entry_status']      = 'Situação';
 $_['entry_sort_order']  = 'Posição';
 
 // Error

@@ -4,7 +4,8 @@
     <div class="container-fluid">
       <div class="pull-right">
         <button type="submit" form="form-api" data-toggle="tooltip" title="{{ button_save }}" class="btn btn-primary"><i class="fa fa-save"></i></button>
-        <a href="{{ cancel }}" data-toggle="tooltip" title="{{ button_cancel }}" class="btn btn-default"><i class="fa fa-reply"></i></a></div>
+        <a href="{{ cancel }}" data-toggle="tooltip" title="{{ button_cancel }}" class="btn btn-default"><i class="fa fa-reply"></i></a>
+      </div>
       <h1>{{ heading_title }}</h1>
       <ul class="breadcrumb">
         {% for breadcrumb in breadcrumbs %}
@@ -37,7 +38,8 @@
                   <input type="text" name="username" value="{{ username }}" placeholder="{{ entry_username }}" id="input-username" class="form-control" />
                   {% if error_username %}
                   <div class="text-danger">{{ error_username }}</div>
-                  {% endif %} </div>
+                  {% endif %}
+                </div>
               </div>
               <div class="form-group required">
                 <label class="col-sm-2 control-label" for="input-key">{{ entry_key }}</label>
@@ -47,25 +49,20 @@
                   <button type="button" id="button-generate" class="btn btn-primary"><i class="fa fa-refresh"></i> {{ button_generate }}</button>
                   {% if error_key %}
                   <div class="text-danger">{{ error_key }}</div>
-                  {% endif %} </div>
+                  {% endif %}
+                </div>
               </div>
               <div class="form-group">
                 <label class="col-sm-2 control-label" for="input-status">{{ entry_status }}</label>
                 <div class="col-sm-10">
                   <select name="status" id="input-status" class="form-control">
-                    
                     {% if status %}
-                    
                     <option value="0">{{ text_disabled }}</option>
                     <option value="1" selected="selected">{{ text_enabled }}</option>
-                    
                     {% else %}
-                    
                     <option value="0" selected="selected">{{ text_disabled }}</option>
                     <option value="1">{{ text_enabled }}</option>
-                    
                     {% endif %}
-                  
                   </select>
                 </div>
               </div>
@@ -81,17 +78,15 @@
                     </tr>
                   </thead>
                   <tbody>
-                  
-                  {% set ip_row = 0 %}
-                  {% for api_ip in api_ips %}
-                  <tr id="ip-row{{ ip_row }}">
-                    <td class="text-left"><input type="text" name="api_ip[]" value="{{ api_ip.ip }}" placeholder="{{ entry_ip }}" class="form-control" /></td>
-                    <td class="text-left"><button type="button" onclick="$('#ip-row{{ ip_row }}').remove()" data-toggle="tooltip" title="{{ button_remove }}" class="btn btn-danger"><i class="fa fa-minus-circle"></i></button></td>
-                  </tr>
-                  {% set ip_row = ip_row + 1 %}
-                  {% endfor %}
-                    </tbody>
-                  
+                    {% set ip_row = 0 %}
+                    {% for api_ip in api_ips %}
+                    <tr id="ip-row{{ ip_row }}">
+                      <td class="text-left"><input type="text" name="api_ip[]" value="{{ api_ip.ip }}" placeholder="{{ entry_ip }}" class="form-control" /></td>
+                      <td class="text-left"><button type="button" onclick="$('#ip-row{{ ip_row }}').remove()" data-toggle="tooltip" title="{{ button_remove }}" class="btn btn-danger"><i class="fa fa-minus-circle"></i></button></td>
+                    </tr>
+                    {% set ip_row = ip_row + 1 %}
+                    {% endfor %}
+                  </tbody>
                   <tfoot>
                     <tr>
                       <td></td>
@@ -114,24 +109,22 @@
                     </tr>
                   </thead>
                   <tbody>
-                  
-                  {% if api_sessions %}
-                  {% for api_session in api_sessions %}
-                  <tr>
-                    <td class="text-left">{{ api_session.session_id }}</td>
-                    <td class="text-left">{{ api_session.ip }}</td>
-                    <td class="text-left">{{ api_session.date_added }}</td>
-                    <td class="text-left">{{ api_session.date_modified }}</td>
-                    <td class="text-right"><button type="button" value="{{ api_session.api_session_id }}" data-toggle="tooltip" title="{{ button_remove }}" class="btn btn-danger"><i class="fa fa-minus-circle"></i></button></td>
-                  </tr>
-                  {% endfor %}
-                  {% else %}
-                  <tr>
-                    <td class="text-center" colspan="5">{{ text_no_results }}</td>
-                  </tr>
-                  {% endif %}
-                    </tbody>
-                  
+                    {% if api_sessions %}
+                    {% for api_session in api_sessions %}
+                    <tr>
+                      <td class="text-left">{{ api_session.session_id }}</td>
+                      <td class="text-left">{{ api_session.ip }}</td>
+                      <td class="text-left">{{ api_session.date_added }}</td>
+                      <td class="text-left">{{ api_session.date_modified }}</td>
+                      <td class="text-right"><button type="button" value="{{ api_session.api_session_id }}" data-toggle="tooltip" title="{{ button_remove }}" class="btn btn-danger"><i class="fa fa-minus-circle"></i></button></td>
+                    </tr>
+                    {% endfor %}
+                    {% else %}
+                    <tr>
+                      <td class="text-center" colspan="5">{{ text_no_results }}</td>
+                    </tr>
+                    {% endif %}
+                  </tbody>
                 </table>
               </div>
             </div>
@@ -152,7 +145,7 @@ $('#button-generate').on('click', function() {
 
 	$('#input-key').val(rand);
 });
-//--></script> 
+//--></script>
   <script type="text/javascript"><!--
 var ip_row = {{ ip_row }};
 
@@ -166,7 +159,7 @@ function addIp() {
 
 	ip_row++;
 }
-//--></script> 
+//--></script>
   <script type="text/javascript"><!--
 $('#session button').on('click', function(e) {
 	e.preventDefault();
