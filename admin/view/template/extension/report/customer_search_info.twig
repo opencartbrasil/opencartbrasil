@@ -11,7 +11,8 @@
             <input type="text" name="filter_date_start" value="{{ filter_date_start }}" placeholder="{{ entry_date_start }}" data-date-format="YYYY-MM-DD" id="input-date-start" class="form-control" />
             <span class="input-group-btn">
             <button type="button" class="btn btn-default"><i class="fa fa-calendar"></i></button>
-            </span></div>
+            </span>
+          </div>
         </div>
         <div class="form-group">
           <label class="control-label" for="input-customer">{{ entry_customer }}</label>
@@ -58,25 +59,23 @@
               </tr>
             </thead>
             <tbody>
-            
-            {% if searches %}
-            {% for search in searches %}
-            <tr>
-              <td class="text-left">{{ search.keyword }}</td>
-              <td class="text-left">{{ search.products }}</td>
-              <td class="text-left">{{ search.category }}</td>
-              <td class="text-left">{{ search.customer }}</td>
-              <td class="text-left">{{ search.ip }}</td>
-              <td class="text-left">{{ search.date_added }}</td>
-            </tr>
-            {% endfor %}
-            {% else %}
-            <tr>
-              <td class="text-center" colspan="6">{{ text_no_results }}</td>
-            </tr>
-            {% endif %}
+              {% if searches %}
+              {% for search in searches %}
+              <tr>
+                <td class="text-left">{{ search.keyword }}</td>
+                <td class="text-left">{{ search.products }}</td>
+                <td class="text-left">{{ search.category }}</td>
+                <td class="text-left">{{ search.customer }}</td>
+                <td class="text-left">{{ search.ip }}</td>
+                <td class="text-left">{{ search.date_added }}</td>
+              </tr>
+              {% endfor %}
+              {% else %}
+              <tr>
+                <td class="text-center" colspan="6">{{ text_no_results }}</td>
+              </tr>
+              {% endif %}
             </tbody>
-            
           </table>
         </div>
         <div class="row">
@@ -90,46 +89,46 @@
 <script type="text/javascript"><!--
 $('#button-filter').on('click', function() {
 	var url = '';
-	
+
 	var filter_date_start = $('input[name=\'filter_date_start\']').val();
-	
+
 	if (filter_date_start) {
 		url += '&filter_date_start=' + encodeURIComponent(filter_date_start);
 	}
-	
+
 	var filter_date_end = $('input[name=\'filter_date_end\']').val();
-	
+
 	if (filter_date_end) {
 		url += '&filter_date_end=' + encodeURIComponent(filter_date_end);
 	}
-	
+
 	var filter_keyword = $('input[name=\'filter_keyword\']').val();
-	
+
 	if (filter_keyword) {
 		url += '&filter_keyword=' + encodeURIComponent(filter_keyword);
 	}
-	
+
 	var filter_customer = $('input[name=\'filter_customer\']').val();
-	
+
 	if (filter_customer) {
 		url += '&filter_customer=' + encodeURIComponent(filter_customer);
 	}
-	
+
 	var filter_ip = $('input[name=\'filter_ip\']').val();
-	
+
 	if (filter_ip) {
 		url += '&filter_ip=' + encodeURIComponent(filter_ip);
 	}
-	
+
 	location = 'index.php?route=report/report&code=customer_search&user_token={{ user_token }}' + url;
 });
-//--></script> 
+//--></script>
 <script type="text/javascript"><!--
 $('.date').datetimepicker({
 	language: '{{ datepicker }}',
 	pickTime: false
 });
-//--></script> 
+//--></script>
 <script type="text/javascript"><!--
 $('input[name=\'filter_customer\']').autocomplete({
 	'source': function(request, response) {
