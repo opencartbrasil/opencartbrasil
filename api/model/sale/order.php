@@ -1,6 +1,55 @@
 <?php
 
 class ModelSaleOrder extends Model {
+	public function addOrderHistory($order_id, $order_status_id, $comment = '') {
+		$order_info = $this->getOrder($order_id);
+
+		if ($order_info) {
+			if (!in_array($order_info['order_status_id'], array_merge($this->config->get('config_processing_status'), $this->config->get('config_complete_status'))) && in_array($order_status_id, array_merge($this->config->get('config_processing_status'), $this->config->get('config_complete_status')))) {
+				// Stock subtraction
+				$order_products = $this->getOrderProducts($order_id);
+
+				foreach ($order_products as $order_product) {
+					$this->db->query("UPDATE `" . DB_PREFIX . "product` SET quantity = (quantity - " . (int)$order_product['quantity'] . ") WHERE product_id = '" . (int)$order_product['product_id'] . "' AND subtract = '1'");
+
+					$order_options = $this->getOrderOptions($order_id, $order_product['order_product_id']);
+
+					foreach ($order_options as $order_option) {
+						$this->db->query("UPDATE `" . DB_PREFIX . "product_option_value` SET quantity = (quantity - " . (int)$order_product['quantity'] . ") WHERE product_option_value_id = '" . (int)$order_option['product_option_value_id'] . "' AND subtract = '1'");
+					}
+				}
+			}
+
+			// Update the DB with the new statuses
+			$this->db->query("UPDATE `" . DB_PREFIX . "order` SET order_status_id = '" . (int)$order_status_id . "', date_modified = NOW() WHERE order_id = '" . (int)$order_id . "'");
+
+			$this->db->query("INSERT INTO `" . DB_PREFIX . "order_history` SET order_id = '" . (int)$order_id . "', order_status_id = '" . (int)$order_status_id . "', notify = '0', comment = '" . $this->db->escape($comment) . "', date_added = NOW()");
+
+			// If old order status is the processing or complete status but new status is not then commence restock, and remove coupon, voucher and reward history
+			if (in_array($order_info['order_status_id'], array_merge($this->config->get('config_processing_status'), $this->config->get('config_complete_status'))) && !in_array($order_status_id, array_merge($this->config->get('config_processing_status'), $this->config->get('config_complete_status')))) {
+				// Restock
+				$order_products = $this->getOrderProducts($order_id);
+
+				foreach($order_products as $order_product) {
+					$this->db->query("UPDATE `" . DB_PREFIX . "product` SET quantity = (quantity + " . (int)$order_product['quantity'] . ") WHERE product_id = '" . (int)$order_product['product_id'] . "' AND subtract = '1'");
+
+					$order_options = $this->getOrderOptions($order_id, $order_product['order_product_id']);
+
+					foreach ($order_options as $order_option) {
+						$this->db->query("UPDATE `" . DB_PREFIX . "product_option_value` SET quantity = (quantity + " . (int)$order_product['quantity'] . ") WHERE product_option_value_id = '" . (int)$order_option['product_option_value_id'] . "' AND subtract = '1'");
+					}
+				}
+
+				// Remove coupon, vouchers and reward points history
+				$order_totals = $this->getOrderTotals($order_id);
+			}
+
+			$this->cache->delete('product');
+
+			return $order_info['order_status_id'];
+		}
+	}
+
 	public function getOrder($order_id) {
 		$order_query = $this->db->query("SELECT *, (SELECT CONCAT(c.firstname, ' ', c.lastname) FROM " . DB_PREFIX . "customer c WHERE c.customer_id = o.customer_id) AS customer, (SELECT os.name FROM " . DB_PREFIX . "order_status os WHERE os.order_status_id = o.order_status_id AND os.language_id = '" . (int)$this->config->get('config_language_id') . "') AS order_status FROM `" . DB_PREFIX . "order` o WHERE o.order_id = '" . (int)$order_id . "'");
 
@@ -347,5 +396,11 @@ class ModelSaleOrder extends Model {
 		}
 
 		return $recurrings;
+	}
+
+	public function getOrderOptions($order_id, $order_product_id) {
+		$query = $this->db->query("SELECT * FROM `" . DB_PREFIX . "order_option` WHERE order_id = '" . (int)$order_id . "' AND order_product_id = '" . (int)$order_product_id . "'");
+
+		return $query->rows;
 	}
 }

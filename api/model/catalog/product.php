@@ -9,7 +9,8 @@ class ModelCatalogProduct extends Model {
 			$product->dimensions->weight_class_id = $this->config->get('config_weight_class_id');
 			$product->dimensions->length = 0;
 			$product->dimensions->width = 0;
-			$product->dimensions->height = 0;
+			$product->dimensions->price = 0;
+			$product->dimensions->price = 0;
 			$product->dimensions->length_class_id = $this->config->get('config_length_class_id');
 		}
 
@@ -114,6 +115,23 @@ class ModelCatalogProduct extends Model {
 		$product->id = $product_id;
 
 		return $product;
+	}
+
+	public function updateStock(int $product_id, $product) {
+		$this->db->query('
+			UPDATE `' . DB_PREFIX . 'product`
+			SET `location` = "' . $this->db->escape(isset($product->location) ? $product->location : '') . '",
+				`minimum` = "' . (int)$product->minimum . '",
+				`quantity` = "' . (int)$product->quantity . '",
+				`weight` = "' . (float)$product->weight . '",
+				`length` = "' . (float)$product->length . '",
+				`width` = "' . (float)$product->width . '",
+				`height` = "' . (float)$product->height . '",
+				`price` = "' . (float)$product->price . '",
+				`weight_class_id` = "' . intval(isset($product->weight_class_id) ? $product->weight_class_id : $this->config->get('config_weight_class_id')) . '",
+				`length_class_id` = "' . intval(isset($product->length_class_id) ? $product->length_class_id : $this->config->get('config_length_class_id')) . '"
+			WHERE `product_id` = "' . $product_id . '"
+		');
 	}
 
 	public function getProduct(int $product_id) {
