@@ -77,6 +77,12 @@ class ControllerSettingSetting extends Controller {
 			$data['error_limit_admin'] = '';
 		}
 
+		if (isset($this->error['login_attempts'])) {
+			$data['error_login_attempts'] = $this->error['login_attempts'];
+		} else {
+			$data['error_login_attempts'] = '';
+		}
+
 		if (isset($this->error['customer_group_display'])) {
 			$data['error_customer_group_display'] = $this->error['customer_group_display'];
 		} else {
