@@ -1,9 +1,8 @@
 <?php
-
 class ModelMiddlewaresIp extends Model {
 
 	/**
-	 * Verifica, no banco de dados, de um determinado IP está bloqueado
+	 * Checks in database if IP is blocked
 	 *
 	 * @param string $ip
 	 *

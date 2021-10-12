@@ -1,25 +1,19 @@
 <?php
 class ControllerOrderList extends Controller {
-
 	private const HTTP_NOT_FOUND = 404;
 
 	public function index() {
-
 		$this->load->model('customer/custom_field');
 		$this->load->model('sale/order');
 
-		/**
-		 * Filter Status
-		 */
+		// Filter Status
 		if (isset($this->request->get['filter_status'])) {
 			$filter_status = !!$this->request->get['filter_status'];
 		} else {
 			$filter_status = null;
 		}
 
-		/**
-		 * Filter Date Added
-		 */
+		// Filter Date Added
 		if (isset($this->request->get['filter_date_added'])) {
 			$filter_date_added = $this->request->get['filter_date_added'];
 		} else {
@@ -32,9 +26,7 @@ class ControllerOrderList extends Controller {
 			$filter_date_added = null;
 		}
 
-		/**
-		 * Filter Date Modified
-		 */
+		// Filter Date Modified
 		if (isset($this->request->get['filter_date_modified'])) {
 			$filter_date_modified = $this->request->get['filter_date_modified'];
 		} else {
@@ -47,15 +39,14 @@ class ControllerOrderList extends Controller {
 			$filter_date_modified = null;
 		}
 
-		/**
-		 * Pagination
-		 */
+		// Page
 		if (isset($this->request->get['page'])) {
 			$page = max($this->request->get['page'], 1);
 		} else {
 			$page = 1;
 		}
 
+		// Items per page
 		if (isset($this->request->get['per_page'])) {
 			$per_page = min($this->config->get('db_list_per_page'), $this->request->get['per_page']);
 		} else {
@@ -237,7 +228,7 @@ class ControllerOrderList extends Controller {
 		$last_page = ceil($order_total_count / $per_page);
 		$next_page = intval(min($page + 1, $last_page));
 
-		/** URL Page */
+		// URL Page
 		$links = '/orders?page=%d&per_page=%d';
 
 		if ($filter_status !== null) {
@@ -274,7 +265,7 @@ class ControllerOrderList extends Controller {
 	}
 
 	/**
-	 * Exibe resposta para o cliente
+	 * Display response
 	 *
 	 * @param int $status
 	 *

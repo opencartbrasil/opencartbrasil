@@ -1,14 +1,12 @@
 <?php
-
 use Firebase\JWT\JWT;
 
 class ControllerCredentialsRefreshToken extends Controller {
-
 	private const EXPIRE = 3600;
 	private const REFRESH_EXPIRE = 86400;
 
 	/**
-	 * Gera novo token de acesso
+	 * Generate new access token
 	 */
 	public function index() {
 		$this->load->model('credentials/token');
@@ -66,8 +64,7 @@ class ControllerCredentialsRefreshToken extends Controller {
 	}
 
 	/**
-	 * Escreve o response de falha e retorna o controller que corresponde
-	 * ao erro
+	 * Write the fault response and return the controller that corresponds to the error
 	 *
 	 * @return Action
 	 */
@@ -81,13 +78,14 @@ class ControllerCredentialsRefreshToken extends Controller {
 				)
 			)
 		)));
+
 		return new Action('status_code/bad_request');
 	}
 
 	/**
-	 * Valida requisição
+	 * Validate request
 	 *
-	 * @return Action|string Retorna Action quando houver um erro de validação
+	 * @return Action|string Return Action when there is a validation error
 	 */
 	protected function validate() {
 		if (!isset($this->request->headers['authorization'])) {
@@ -100,6 +98,7 @@ class ControllerCredentialsRefreshToken extends Controller {
 					)
 				)
 			)));
+
 			return new Action('status_code/unauthorized');
 		}
 
@@ -117,6 +116,7 @@ class ControllerCredentialsRefreshToken extends Controller {
 					)
 				)
 			)));
+
 			return new Action('status_code/bad_request');
 		}
 
@@ -130,6 +130,7 @@ class ControllerCredentialsRefreshToken extends Controller {
 					)
 				)
 			)));
+
 			return new Action('status_code/bad_request');
 		}
 

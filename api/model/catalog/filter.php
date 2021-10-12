@@ -39,7 +39,7 @@ class ModelCatalogFilter extends Model {
 	public function getFilterGroupDescriptionById(int $filter_group_id) {
 		$sql = '
 			SELECT fd.*, l.code AS language_code
-			FROM ' . DB_PREFIX . 'filter_group_description fd
+			FROM `' . DB_PREFIX . 'filter_group_description` fd
 			LEFT JOIN `' . DB_PREFIX . 'language` l ON (l.`language_id` = fd.language_id)
 			WHERE fd.`filter_group_id` = ' . $filter_group_id . '
 		';

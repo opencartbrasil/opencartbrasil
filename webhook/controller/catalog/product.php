@@ -1,5 +1,4 @@
 <?php
-
 class ControllerWebHookCatalogProduct extends Controller {
 	public function add($router, $args, $product_id) {
 		$this->load->modelWebHook('advanced/webhook');
@@ -109,7 +108,7 @@ class ControllerWebHookCatalogProduct extends Controller {
 			curl_setopt($multiCurl[$key], CURLOPT_RETURNTRANSFER, true);
 			curl_setopt($multiCurl[$key], CURLOPT_FAILONERROR, false);
 			curl_setopt($multiCurl[$key], CURLINFO_HEADER_OUT, true);
-			curl_setopt($multiCurl[$key], CURLOPT_SSL_VERIFYPEER, false); // $config
+			curl_setopt($multiCurl[$key], CURLOPT_SSL_VERIFYPEER, false);
 			curl_setopt($multiCurl[$key], CURLOPT_POSTFIELDS, json_encode($data));
 			curl_setopt($multiCurl[$key], CURLOPT_HTTPHEADER, $hook['headers']);
 

@@ -2,8 +2,8 @@
 class ModelCatalogAttributeGroup extends Model {
 	public function getAttributeGroups($data = array()) {
 		$sql = '
-			SELECT * FROM ' . DB_PREFIX . 'attribute_group ag
-			LEFT JOIN ' . DB_PREFIX . 'attribute_group_description agd ON (ag.attribute_group_id = agd.attribute_group_id)
+			SELECT * FROM `' . DB_PREFIX . 'attribute_group` ag
+			LEFT JOIN `' . DB_PREFIX . 'attribute_group_description` agd ON (ag.attribute_group_id = agd.attribute_group_id)
 			GROUP BY ag.attribute_group_id
 		';
 
@@ -46,7 +46,7 @@ class ModelCatalogAttributeGroup extends Model {
 
 		$query = $this->db->query('
 			SELECT agd.*, l.code AS language_code
-			FROM ' . DB_PREFIX . 'attribute_group_description agd
+			FROM `' . DB_PREFIX . 'attribute_group_description` agd
 			LEFT JOIN `' . DB_PREFIX . 'language` l ON (l.language_id = agd.language_id)
 			WHERE agd.attribute_group_id = "' . (int)$attribute_group_id . '"
 		');
@@ -59,7 +59,7 @@ class ModelCatalogAttributeGroup extends Model {
 	}
 
 	public function getTotalAttributeGroups() {
-		$query = $this->db->query('SELECT COUNT(*) AS total FROM ' . DB_PREFIX . 'attribute_group');
+		$query = $this->db->query('SELECT COUNT(*) AS total FROM `' . DB_PREFIX . 'attribute_group`');
 
 		return $query->row['total'];
 	}

@@ -1,39 +1,30 @@
 <?php
 class ControllerProductList extends Controller {
-
 	public function index() {
 		$this->load->model('catalog/product');
 
-		/**
-		 * Filter Name
-		 */
+		// Filter Name
 		if (isset($this->request->get['filter_name'])) {
 			$filter_name = $this->request->get['filter_name'];
 		} else {
 			$filter_name = null;
 		}
 
-		/**
-		 * Filter Quantity
-		 */
+		// Filter Quantity
 		if (isset($this->request->get['filter_quantity'])) {
 			$filter_quantity = intval($this->request->get['filter_quantity']);
 		} else {
 			$filter_quantity = null;
 		}
 
-		/**
-		 * Filter Status
-		 */
+		// Filter Status
 		if (isset($this->request->get['filter_status'])) {
 			$filter_status = !!$this->request->get['filter_status'];
 		} else {
 			$filter_status = null;
 		}
 
-		/**
-		 * Filter Date Added
-		 */
+		// Filter Date Added
 		if (isset($this->request->get['filter_date_added'])) {
 			$filter_date_added = $this->request->get['filter_date_added'];
 		} else {
@@ -46,9 +37,7 @@ class ControllerProductList extends Controller {
 			$filter_date_added = null;
 		}
 
-		/**
-		 * Filter Date Modified
-		 */
+		// Filter Date Modified
 		if (isset($this->request->get['filter_date_modified'])) {
 			$filter_date_modified = $this->request->get['filter_date_modified'];
 		} else {
@@ -61,21 +50,21 @@ class ControllerProductList extends Controller {
 			$filter_date_modified = null;
 		}
 
-		/**
-		 * Filter Manufacturer Id
-		 */
+		/// Filter Manufacturer Id
 		if (isset($this->request->get['filter_manufacturer_id'])) {
 			$filter_manufacturer_id = intval($this->request->get['filter_manufacturer_id']);
 		} else {
 			$filter_manufacturer_id = null;
 		}
 
+		// Page
 		if (isset($this->request->get['page'])) {
 			$page = max($this->request->get['page'], 1);
 		} else {
 			$page = 1;
 		}
 
+		// Items per page
 		if (isset($this->request->get['per_page'])) {
 			$per_page = min($this->config->get('db_list_per_page'), $this->request->get['per_page']);
 		} else {
@@ -140,7 +129,7 @@ class ControllerProductList extends Controller {
 				'date_modified' => date('Y-m-d\TH:i:s\+00:00', strtotime($product_info['date_modified'])),
 			);
 
-			/** Attributes */
+			// Attributes
 			$product_attributes = $this->model_catalog_product->getProductAttributes($product_id);
 
 			if ($product_attributes) {
@@ -154,14 +143,14 @@ class ControllerProductList extends Controller {
 				$result_items[$key]['attributes'] = array_values($attributes);
 			}
 
-			/** Descriptions */
+			// Descriptions
 			$product_descriptions = $this->model_catalog_product->getProductDescriptions($product_id);
 
 			if ($product_descriptions) {
 				$result_items[$key] = array_merge($result_items[$key], array_filter($product_descriptions));
 			}
 
-			/** Discounts */
+			// Discounts
 			$product_discounts = $this->model_catalog_product->getProductDiscounts($product_id);
 
 			if ($product_discounts) {
@@ -177,14 +166,14 @@ class ControllerProductList extends Controller {
 				}
 			}
 
-			/** Filters */
+			// Filters
 			$product_filters = $this->model_catalog_product->getProductFilters($product_id);
 
 			if ($product_filters) {
 				$result_items[$key]['filters'] = array_map('intval', $product_filters);
 			}
 
-			/** Additional Images */
+			// Additional Images
 			$product_images = $this->model_catalog_product->getProductImages($product_id);
 
 			if ($product_images) {
@@ -193,7 +182,7 @@ class ControllerProductList extends Controller {
 				}
 			}
 
-			/** Options */
+			// Options
 			$options = $this->model_catalog_product->getProductOptions($product_id);
 
 			foreach ($options as $option) {
@@ -231,7 +220,7 @@ class ControllerProductList extends Controller {
 				));
 			}
 
-			/** Recurring */
+			// Recurring
 			$product_recurrings = $this->model_catalog_product->getProductRecurrings($product_id);
 
 			if ($product_recurrings) {
@@ -243,7 +232,7 @@ class ControllerProductList extends Controller {
 				}
 			}
 
-			/** Products Related */
+			// Products Related
 			$products_related = $this->model_catalog_product->getProductsRelated($product_id);
 
 			if ($products_related) {
@@ -252,7 +241,7 @@ class ControllerProductList extends Controller {
 				}
 			}
 
-			/** Products Reward */
+			// Products Reward
 			$products_reward = $this->model_catalog_product->getProductsReward($product_id);
 
 			if ($products_reward) {
@@ -264,7 +253,7 @@ class ControllerProductList extends Controller {
 				}
 			}
 
-			/** Price Special */
+			// Price Special
 			$special = $this->model_catalog_product->getProductSpecial($product_id);
 
 			if ($special) {
@@ -279,7 +268,7 @@ class ControllerProductList extends Controller {
 				}
 			}
 
-			/** Discounts */
+			// Discounts
 			$discounts = $this->model_catalog_product->getProductDiscounts($product_id);
 
 			if ($discounts) {
@@ -295,7 +284,7 @@ class ControllerProductList extends Controller {
 				}
 			}
 
-			/** Categories */
+			// Categories
 			$categories = $this->model_catalog_product->getProductCategories($product_id);
 
 			if ($categories) {
@@ -304,7 +293,7 @@ class ControllerProductList extends Controller {
 				}
 			}
 
-			/** Downloads */
+			// Downloads
 			$downloads = $this->model_catalog_product->getProductDownloads($product_id);
 
 			if ($downloads) {
@@ -313,7 +302,7 @@ class ControllerProductList extends Controller {
 				}
 			}
 
-			/** Stores */
+			// Stores
 			$stores = $this->model_catalog_product->getProductStores($product_id);
 
 			if ($stores) {
@@ -322,7 +311,7 @@ class ControllerProductList extends Controller {
 				}
 			}
 
-			/** Seo URL */
+			// Seo URL
 			$product_links = array();
 
 			if ($this->config->get('config_seo_url')) {
@@ -344,7 +333,7 @@ class ControllerProductList extends Controller {
 		$last_page = ceil($product_total_count / $per_page);
 		$next_page = intval(min($page + 1, $last_page));
 
-		/** URL Page */
+		// URL Page
 		$links = '/product?page=%d&per_page=%d';
 
 		if ($filter_name !== null) {
@@ -393,7 +382,7 @@ class ControllerProductList extends Controller {
 	}
 
 	/**
-	 * Exibe resposta para o cliente
+	 * Display response
 	 *
 	 * @param int $status
 	 *

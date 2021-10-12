@@ -1,8 +1,6 @@
 <?php
-
 class ControllerMiddlewaresLogs extends Controller {
-
-	/** @var string Identificador da requisição */
+	/** @var string Request identifier */
 	private static $request_id;
 
 	public function getRequestId() {

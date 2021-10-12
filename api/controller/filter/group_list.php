@@ -1,22 +1,16 @@
 <?php
-
 class ControllerFilterGroupList extends Controller {
-
 	public function index() {
 		$this->load->model('catalog/filter');
 
-		/**
-		 * Page
-		 */
+		// Page
 		if (isset($this->request->get['page'])) {
 			$page = max($this->request->get['page'], 1);
 		} else {
 			$page = 1;
 		}
 
-		/**
-		 * Items per page
-		 */
+		// Items per page
 		if (isset($this->request->get['per_page'])) {
 			$per_page = min($this->config->get('db_list_per_page'), $this->request->get['per_page']);
 		} else {
@@ -74,7 +68,7 @@ class ControllerFilterGroupList extends Controller {
 	}
 
 	/**
-	 * Exibe resposta para o cliente
+	 * Display response
 	 *
 	 * @param int $status
 	 *
