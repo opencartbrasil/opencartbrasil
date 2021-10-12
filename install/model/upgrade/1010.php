@@ -108,7 +108,7 @@ class ModelUpgrade1010 extends Model {
 			$this->db->query("ALTER TABLE `" . DB_PREFIX . "custom_field` ADD COLUMN `code` VARCHAR(255) AFTER `type`");
 		}
 
-		// File config api
+		// Create API config.php
 		$file_api_config = DIR_OPENCART . "api/config.php";
 
 		if (!file_exists($file_api_config)) {
@@ -150,7 +150,7 @@ class ModelUpgrade1010 extends Model {
 			fclose($handler);
 		}
 
-		// Files config.php
+		// Update config.php
 		$files = glob(DIR_OPENCART . '{config.php,admin/config.php}', GLOB_BRACE);
 
 		foreach ($files as $file) {
