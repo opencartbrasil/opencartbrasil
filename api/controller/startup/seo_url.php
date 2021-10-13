@@ -32,7 +32,7 @@ class ControllerStartupSeoUrl extends Controller {
 		];
 
 		$this->routers[] = [
-			'path' => 'product',
+			'path' => 'products',
 			'action' => 'product/list',
 		];
 
@@ -43,7 +43,7 @@ class ControllerStartupSeoUrl extends Controller {
 		];
 
 		$this->routers[] = [
-			'path' => 'product/stocks',
+			'path' => 'products/stocks',
 			'action' => 'product/form_stock',
 			'methods' => ['PUT']
 		];
