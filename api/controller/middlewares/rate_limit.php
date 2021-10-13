@@ -1,5 +1,4 @@
 <?php
-
 class ControllerMiddlewaresRateLimit extends Controller {
 	public function before() {
 		if (in_array($this->request->get['route'], $this->config->get('ignored_routers'))) {
@@ -70,7 +69,7 @@ class ControllerMiddlewaresRateLimit extends Controller {
 	}
 
 	/**
-	 * Gera um novo dado com a contagem e a data de expiração
+	 * Generates new data with the count and expiration date
 	 *
 	 * @return void
 	 */

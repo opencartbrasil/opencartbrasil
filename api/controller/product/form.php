@@ -1,12 +1,10 @@
 <?php
-
 use Swaggest\JsonSchema\Schema;
 use Swaggest\JsonSchema\Context;
 use Swaggest\JsonSchema\Exception\LogicException;
 use Swaggest\JsonSchema\InvalidValue;
 
 class ControllerProductForm extends Controller {
-
 	private const HTTP_STATUS_201 = 201;
 	private const HTTP_STATUS_400 = 400;
 	private const HTTP_STATUS_500 = 500;
@@ -14,15 +12,13 @@ class ControllerProductForm extends Controller {
 	public function index() {
 		$this->load->model('catalog/product');
 
-		$errors = [];
-
 		if (isset($this->request->get['product_id'])) {
 			$product_id = intval($this->request->get['product_id']);
 		} else {
 			$product_id = null;
 		}
 
-		/** Validate Schema */
+		// Validate Schema
 		$result = $this->validateJsonSchema($this->request->json);
 
 		if (!$result->success) {
@@ -31,14 +27,14 @@ class ControllerProductForm extends Controller {
 
 		$data = $result->data;
 
-		/** Validate Request */
+		// Validate Request
 		$isValid = $this->validateRequest($this->request->json);
 
 		if ($isValid !== true) {
 			return $this->response($isValid, self::HTTP_STATUS_400);
 		}
 
-		/** Download main image and additional images */
+		// Download main image and additional images
 		$this->downloadImages($data);
 
 		if ($product_id === null) {
@@ -57,7 +53,7 @@ class ControllerProductForm extends Controller {
 	}
 
 	/**
-	 * Realiza o download da imagem principal e das imagens adicionais
+	 * Download main image and additional images
 	 *
 	 * @param Object $data
 	 *
@@ -76,7 +72,7 @@ class ControllerProductForm extends Controller {
 			return $this->response(
 				[
 					'result' => false,
-					'details' => 'Erro ao baixar arquivos de imagem',
+					'details' => 'Error downloading image files',
 					'errors' => [
 						$e->getMessage()
 					]
@@ -89,7 +85,7 @@ class ControllerProductForm extends Controller {
 	}
 
 	/**
-	 * Valida o schema do JSON de entrada
+	 * Validate input JSON schema
 	 *
 	 * @param Object $data
 	 *
@@ -128,6 +124,8 @@ class ControllerProductForm extends Controller {
 					'details' => implode(' OR ', $types) . ' expected, just one type'
 				];
 			} else {
+				$error = $e->inspect();
+
 				$errors[] = [
 					'node' => $error->dataPointer,
 					'details' => $error->error
@@ -147,7 +145,7 @@ class ControllerProductForm extends Controller {
 			$result->success = false;
 			$result->errors = [
 				'result' => false,
-				'details' => 'Erro no preenchimento dos dados enviados',
+				'details' => 'Error filling in data sent',
 				'errors' => $errors
 			];
 		}
@@ -156,7 +154,7 @@ class ControllerProductForm extends Controller {
 	}
 
 	/**
-	 * Valida os dados de entrada
+	 * Validate input data
 	 *
 	 * @param stdClass $data
 	 *
@@ -172,7 +170,7 @@ class ControllerProductForm extends Controller {
 			if ($tax_class === false) {
 				$errors[] = [
 					'code' => 1,
-					'message' => 'O grupo de imposto é inválido',
+					'message' => 'Tax group is invalid',
 				];
 			}
 		}
@@ -186,7 +184,7 @@ class ControllerProductForm extends Controller {
 			if ($stock_status === false) {
 				$errors[] = [
 					'code' => 2,
-					'message' => 'Situação de estoque inexistente',
+					'message' => 'Non-existent stock situation',
 				];
 			}
 		}
@@ -206,7 +204,7 @@ class ControllerProductForm extends Controller {
 			if ($stock_status === false) {
 				$errors[] = [
 					'code' => 3,
-					'message' => 'Tipo de medida inexistente',
+					'message' => 'Non-existent dimension unit',
 				];
 			}
 
@@ -222,7 +220,7 @@ class ControllerProductForm extends Controller {
 			if ($manufacturer === false) {
 				$errors[] = [
 					'code' => 4,
-					'message' => 'Fabricante não cadastrada',
+					'message' => 'Manufacturer not registered',
 				];
 			}
 		}
@@ -236,7 +234,7 @@ class ControllerProductForm extends Controller {
 			if ($categories !== true) {
 				$errors[] = [
 					'code' => 5,
-					'message' => 'A(s) categoria(s) "' . implode(',', $categories) . '" não existe(m)'
+					'message' => 'Categories "' . implode(',', $categories) . '" do not exist'
 				];
 			}
 		}
@@ -250,7 +248,7 @@ class ControllerProductForm extends Controller {
 			if ($filters !== true) {
 				$errors[] = [
 					'code' => 6,
-					'message' => 'O(s) filtro(s) "' . implode(',', $filters) . '" não existe(m)'
+					'message' => 'Filters "' . implode(',', $filters) . '" do not exist'
 				];
 			}
 		}
@@ -264,7 +262,7 @@ class ControllerProductForm extends Controller {
 			if ($stores !== true) {
 				$errors[] = [
 					'code' => 7,
-					'message' => 'A(s) loja(s) "' . implode(',', $stores) . '" não existe(m)'
+					'message' => 'Stores "' . implode(',', $stores) . '" do not exist'
 				];
 			}
 		}
@@ -281,7 +279,7 @@ class ControllerProductForm extends Controller {
 				if ($downloads !== true) {
 					$errors[] = [
 						'code' => 8,
-						'message' => 'O(s) arquivo(s) "' . implode(',', $downloads) . '" não existe(m)'
+						'message' => 'Downloads "' . implode(',', $downloads) . '" do not exist'
 					];
 				}
 
@@ -305,7 +303,7 @@ class ControllerProductForm extends Controller {
 			if ($products_related !== true) {
 				$errors[] = [
 					'code' => 10,
-					'message' => 'O(s) produto(s) "' . implode(',', $products_related) . '" não existe(m)'
+					'message' => 'Products "' . implode(',', $products_related) . '" do not exist'
 				];
 			}
 
@@ -325,7 +323,7 @@ class ControllerProductForm extends Controller {
 			if ($attributes !== true) {
 				$errors[] = [
 					'code' => 11,
-					'message' => 'O(s) atributo(s) "' . implode(',', $attributes) . '" não existe(m)'
+					'message' => 'Attributes "' . implode(',', $attributes) . '" do not exist'
 				];
 			}
 
@@ -333,7 +331,7 @@ class ControllerProductForm extends Controller {
 				if (!isset($attribute->default)) {
 					$errors[] = [
 						'code' => 12,
-						'message' => 'O campo "default" é obrigatório para os atributos'
+						'message' => 'The "default" field is mandatory for attributes'
 					];
 				}
 			}
@@ -360,14 +358,14 @@ class ControllerProductForm extends Controller {
 							if (!$option_value_exist) {
 								$errors[] = [
 									'code' => 14,
-									'message' => 'O valor da opção "' . $option_value_id. '" não existe na opção "' . $option_id . '"'
+									'message' => 'The option value "' . $option_value_id. '" does not exist in the option "' . $option_id . '"'
 								];
 							}
 						}
 					} else {
 						$errors[] = [
 							'code' => 13,
-							'message' => 'A opção "' . $option_id . '" não existe'
+							'message' => 'Option "' . $option_id . '" do not exist'
 						];
 					}
 				}
@@ -393,7 +391,7 @@ class ControllerProductForm extends Controller {
 				if ($recurring_exist === false) {
 					$errors[] = [
 						'code' => 15,
-						'message' => 'O tipo de assinatura "' . $recurring->recurring_id . '" não existe'
+						'message' => 'Recurring "' . $recurring->recurring_id . '" do not exist'
 					];
 				}
 
@@ -452,7 +450,7 @@ class ControllerProductForm extends Controller {
 		if (!empty($errors)) {
 			return [
 				'result' => false,
-				'details' => 'Erro no preenchimento dos dados enviados',
+				'details' => 'Error filling in data sent',
 				'errors' => $errors
 			];
 		}
@@ -461,8 +459,7 @@ class ControllerProductForm extends Controller {
 	}
 
 	/**
-	 * Valida as URL. Elas devem seguir o padrão definido na RFC2396
-	 * e inciar com "http" ou "https"
+	 * Validate URL. They must follow the pattern defined in and start with "http" or "https"
 	 *
 	 * @param array $errors
 	 * @param array $urls
@@ -477,15 +474,14 @@ class ControllerProductForm extends Controller {
 			) {
 				$errors[] = [
 					'code' => 9,
-					'message' => 'A URL "' . $value . '" é inválida'
+					'message' => 'URL "' . $value . '" is invalid'
 				];
 			}
 		}
 	}
 
 	/**
-	 * Valida as URL. Elas devem seguir o padrão definido na RFC2396
-	 * e inciar com "http" ou "https"
+	 * Validate URL. They must follow the pattern defined in and start with "http" or "https"
 	 *
 	 * @param array $errors
 	 * @param array $urls
@@ -502,13 +498,13 @@ class ControllerProductForm extends Controller {
 		if ($customer_group_exist === false) {
 			$errors[] = [
 				'code' => 16,
-				'message' => 'O grupo de usuário "' . $customer_group_id . '" não existe'
+				'message' => 'User Group "' . $customer_group_id . '" do not exist'
 			];
 		}
 	}
 
 	/**
-	 * Exibe resposta para o cliente
+	 * Display response
 	 *
 	 * @param int $status
 	 *

@@ -8,11 +8,11 @@ class ModelLocalisationLengthClass extends Model {
 		if (!$result) {
 			$query = $this->db->query("
 				SELECT *
-				FROM " . DB_PREFIX . "length_class lc
-				LEFT JOIN " . DB_PREFIX . "length_class_description lcd
+				FROM `" . DB_PREFIX . "length_class` lc
+				LEFT JOIN `" . DB_PREFIX . "length_class_description` lcd
 				ON (lc.length_class_id = lcd.length_class_id)
 				WHERE lc.length_class_id = '" . (int)$length_class_id . "'
-					AND lcd.language_id = '" . (int)$this->config->get('config_language_id') . "'
+				  AND lcd.language_id = '" . (int)$this->config->get('config_language_id') . "'
 			");
 
 			$result = $query->row;
@@ -31,11 +31,11 @@ class ModelLocalisationLengthClass extends Model {
 		if (!$result) {
 			$query = $this->db->query("
 				SELECT lc.length_class_id
-				FROM " . DB_PREFIX . "length_class_description lcd
-				LEFT JOIN " . DB_PREFIX . "length_class lc
+				FROM `" . DB_PREFIX . "length_class_description` lcd
+				LEFT JOIN `" . DB_PREFIX . "length_class` lc
 				ON (lcd.length_class_id = lc.length_class_id)
 				WHERE lcd.unit = '" . $length_class_unit . "'
-					AND lcd.language_id = '" . (int)$this->config->get('config_language_id') . "'
+				  AND lcd.language_id = '" . (int)$this->config->get('config_language_id') . "'
 			");
 
 			$result = $query->row;

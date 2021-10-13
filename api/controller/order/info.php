@@ -1,10 +1,8 @@
 <?php
 class ControllerOrderInfo extends Controller {
-
 	private const HTTP_STATUS_404 = 404;
 
 	public function index(int $order_id = 0) {
-
 		$this->load->model('customer/custom_field');
 		$this->load->model('sale/order');
 
@@ -171,7 +169,7 @@ class ControllerOrderInfo extends Controller {
 	}
 
 	/**
-	 * Exibe resposta para o cliente
+	 * Display response
 	 *
 	 * @param int $status
 	 *

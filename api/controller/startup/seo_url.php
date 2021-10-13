@@ -224,7 +224,7 @@ class ControllerStartupSeoUrl extends Controller {
 	}
 
 	/**
-	 * Filtra as rotas com base no método
+	 * Filters routes based on method
 	 *
 	 * @param array $routers
 	 *
@@ -241,7 +241,7 @@ class ControllerStartupSeoUrl extends Controller {
 	}
 
 	/**
-	 * Filtra as rotas com base no caminho da URL
+	 * Filters routes based on URL path
 	 *
 	 * @param array $routers
 	 *

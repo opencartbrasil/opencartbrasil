@@ -1,6 +1,5 @@
 <?php
 class ControllerProductInfo extends Controller {
-
 	private const HTTP_STATUS_404 = 404;
 
 	public function index(int $product_id = 0) {
@@ -54,7 +53,7 @@ class ControllerProductInfo extends Controller {
 			'date_modified' => date('Y-m-d\TH:i:s\+00:00', strtotime($product_info['date_modified'])),
 		);
 
-		/** Attributes */
+		// Attributes
 		$product_attributes = $this->model_catalog_product->getProductAttributes($product_id);
 
 		if ($product_attributes) {
@@ -68,14 +67,14 @@ class ControllerProductInfo extends Controller {
 			$product_info['attributes'] = array_values($attributes);
 		}
 
-		/** Descriptions */
+		// Descriptions
 		$product_descriptions = $this->model_catalog_product->getProductDescriptions($product_id);
 
 		if ($product_descriptions) {
 			$product_info = array_merge($product_info, array_filter($product_descriptions));
 		}
 
-		/** Discounts */
+		// Discounts
 		$product_discounts = $this->model_catalog_product->getProductDiscounts($product_id);
 
 		if ($product_discounts) {
@@ -91,14 +90,14 @@ class ControllerProductInfo extends Controller {
 			}
 		}
 
-		/** Filters */
+		// Filters
 		$product_filters = $this->model_catalog_product->getProductFilters($product_id);
 
 		if ($product_filters) {
 			$product_info['filters'] = array_map('intval', $product_filters);
 		}
 
-		/** Additional Images */
+		// Additional Images
 		$product_images = $this->model_catalog_product->getProductImages($product_id);
 
 		if ($product_images) {
@@ -107,7 +106,7 @@ class ControllerProductInfo extends Controller {
 			}
 		}
 
-		/** Options */
+		// Options
 		$options = $this->model_catalog_product->getProductOptions($product_id);
 
 		foreach ($options as $option) {
@@ -145,7 +144,7 @@ class ControllerProductInfo extends Controller {
 			));
 		}
 
-		/** Recurring */
+		// Recurring
 		$product_recurrings = $this->model_catalog_product->getProductRecurrings($product_id);
 
 		if ($product_recurrings) {
@@ -157,7 +156,7 @@ class ControllerProductInfo extends Controller {
 			}
 		}
 
-		/** Products Related */
+		// Products Related
 		$products_related = $this->model_catalog_product->getProductsRelated($product_id);
 
 		if ($products_related) {
@@ -166,7 +165,7 @@ class ControllerProductInfo extends Controller {
 			}
 		}
 
-		/** Products Reward */
+		// Products Reward
 		$products_reward = $this->model_catalog_product->getProductsReward($product_id);
 
 		if ($products_reward) {
@@ -178,7 +177,7 @@ class ControllerProductInfo extends Controller {
 			}
 		}
 
-		/** Price Special */
+		// Price Special
 		$special = $this->model_catalog_product->getProductSpecial($product_id);
 
 		if ($special) {
@@ -193,7 +192,7 @@ class ControllerProductInfo extends Controller {
 			}
 		}
 
-		/** Discounts */
+		// Discounts
 		$discounts = $this->model_catalog_product->getProductDiscounts($product_id);
 
 		if ($discounts) {
@@ -209,7 +208,7 @@ class ControllerProductInfo extends Controller {
 			}
 		}
 
-		/** Categories */
+		// Categories
 		$categories = $this->model_catalog_product->getProductCategories($product_id);
 
 		if ($categories) {
@@ -218,7 +217,7 @@ class ControllerProductInfo extends Controller {
 			}
 		}
 
-		/** Downloads */
+		// Downloads
 		$downloads = $this->model_catalog_product->getProductDownloads($product_id);
 
 		if ($downloads) {
@@ -227,7 +226,7 @@ class ControllerProductInfo extends Controller {
 			}
 		}
 
-		/** Stores */
+		// Stores
 		$stores = $this->model_catalog_product->getProductStores($product_id);
 
 		if ($stores) {
@@ -236,7 +235,7 @@ class ControllerProductInfo extends Controller {
 			}
 		}
 
-		/** Seo URL */
+		// Seo URL
 		$product_links = array();
 
 		if ($this->config->get('config_seo_url')) {
@@ -260,7 +259,7 @@ class ControllerProductInfo extends Controller {
 	}
 
 	/**
-	 * Exibe resposta para o cliente
+	 * Display response
 	 *
 	 * @param int $status
 	 *

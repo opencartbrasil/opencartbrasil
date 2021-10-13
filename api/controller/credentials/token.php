@@ -1,14 +1,12 @@
 <?php
-
 use Firebase\JWT\JWT;
 
 class ControllerCredentialsToken extends Controller {
-
 	private const EXPIRE = 3600;
 	private const EXPIRE_REFRESH_TOKEN = 86400;
 
 	/**
-	 * Cria token de acesso
+	 * Create access token
 	 */
 	public function index() {
 		$this->load->model('credentials/token');
@@ -41,6 +39,7 @@ class ControllerCredentialsToken extends Controller {
 					)
 				)
 			)));
+
 			return new Action('status_code/unauthorized');
 		}
 
@@ -62,9 +61,9 @@ class ControllerCredentialsToken extends Controller {
 	}
 
 	/**
-	 * Valida requisição
+	 * Validate request
 	 *
-	 * @return Action|string Retorna Action quando houver um erro de validação
+	 * @return Action|string Return Action when there is a validation error
 	 */
 	protected function validate() {
 		if (!isset($this->request->headers['authorization'])) {
@@ -77,6 +76,7 @@ class ControllerCredentialsToken extends Controller {
 					)
 				)
 			)));
+
 			return new Action('status_code/unauthorized');
 		}
 
@@ -96,6 +96,7 @@ class ControllerCredentialsToken extends Controller {
 					)
 				)
 			)));
+
 			return new Action('status_code/bad_request');
 		}
 
@@ -109,6 +110,7 @@ class ControllerCredentialsToken extends Controller {
 					)
 				)
 			)));
+
 			return new Action('status_code/bad_request');
 		}
 
@@ -122,6 +124,7 @@ class ControllerCredentialsToken extends Controller {
 					)
 				)
 			)));
+
 			return new Action('status_code/bad_request');
 		}
 

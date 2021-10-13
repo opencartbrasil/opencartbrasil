@@ -1,31 +1,23 @@
 <?php
-
 class ControllerLengthList extends Controller {
-
 	public function index() {
 		$this->load->model('localisation/length_class');
 
-		/**
-		 * Filter Unit
-		 */
+		// Filter Unit
 		if (isset($this->request->get['filter_unit'])) {
 			$filter_unit = $this->request->get['filter_unit'];
 		} else {
 			$filter_unit = null;
 		}
 
-		/**
-		 * Page
-		 */
+		// Page
 		if (isset($this->request->get['page'])) {
 			$page = max($this->request->get['page'], 1);
 		} else {
 			$page = 1;
 		}
 
-		/**
-		 * Items per page
-		 */
+		// Items per page
 		if (isset($this->request->get['per_page'])) {
 			$per_page = min($this->config->get('db_list_per_page'), $this->request->get['per_page']);
 		} else {
@@ -61,7 +53,7 @@ class ControllerLengthList extends Controller {
 		$last_page = ceil($length_total_count / $per_page);
 		$next_page = intval(min($page + 1, $last_page));
 
-		/** URL Page */
+		// URL Page
 		$links = '/length?page=%d&per_page=%d';
 
 		if ($filter_unit !== null) {
@@ -90,7 +82,7 @@ class ControllerLengthList extends Controller {
 	}
 
 	/**
-	 * Exibe resposta para o cliente
+	 * Display response
 	 *
 	 * @param int $status
 	 *

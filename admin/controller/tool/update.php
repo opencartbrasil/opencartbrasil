@@ -41,12 +41,15 @@ class ControllerToolUpdate extends Controller {
             $release = $releases[0];
 
             $version = $release['tag_name'];
+
             $current_release = str_replace("v", "", OPENCART_BRASIL);
+
             $new_release = str_replace("v", "", $version);
 
             $this->session->data['version'] = $version;
 
             $data['version'] = $version;
+
             $data['log'] = $release['body'];
 
             $data['text_change'] = sprintf($this->language->get('text_change'), $new_release);
@@ -134,6 +137,7 @@ class ControllerToolUpdate extends Controller {
         }
 
         $file = DIR_DOWNLOAD . 'opencartbrasil.zip';
+
         if (!is_file($file)) {
             $this->maintenance_off();
 
@@ -212,6 +216,12 @@ class ControllerToolUpdate extends Controller {
                     $path = DIR_IMAGE . substr($destination, 6);
                 }
 
+                if (defined('DIR_WEBHOOK')) {
+                    if (substr($destination, 0, 6) == 'webhook') {
+                        $path = DIR_WEBHOOK . substr($destination, 8);
+                    }
+                }
+
                 if (substr($destination, 0, 6) == 'system') {
                     $path = DIR_SYSTEM . substr($destination, 7);
                 }
@@ -234,17 +244,23 @@ class ControllerToolUpdate extends Controller {
             }
 
             $files = array();
+
             $path = array(DIR_MODIFICATION . '*');
+
             while (count($path) != 0) {
                 $next = array_shift($path);
+
                 foreach (glob($next) as $file) {
                     if (is_dir($file)) {
                         $path[] = $file . '/*';
                     }
+
                     $files[] = $file;
                 }
             }
+
             rsort($files);
+
             foreach ($files as $file) {
                 if ($file != DIR_MODIFICATION . 'index.html') {
                     if (is_file($file)) {
@@ -427,6 +443,7 @@ class ControllerToolUpdate extends Controller {
         }
 
         $file = DIR_DOWNLOAD . 'opencartbrasil.zip';
+
         if (is_file($file)) {
             @unlink($file);
         }
@@ -434,17 +451,23 @@ class ControllerToolUpdate extends Controller {
 
     private function cache_ocmod() {
         $files = array();
+
         $path = array(DIR_MODIFICATION . '*');
+
         while (count($path) != 0) {
             $next = array_shift($path);
+
             foreach (glob($next) as $file) {
                 if (is_dir($file)) {
                     $path[] = $file . '/*';
                 }
+
                 $files[] = $file;
             }
         }
+
         rsort($files);
+
         foreach ($files as $file) {
             if ($file != DIR_MODIFICATION . 'index.html') {
                 if (is_file($file)) {
@@ -471,6 +494,7 @@ class ControllerToolUpdate extends Controller {
 
         $this->load->model('setting/modification');
         $results = $this->model_setting_modification->getModifications();
+
         foreach ($results as $result) {
             if ($result['status']) {
                 $xml[] = $result['xml'];

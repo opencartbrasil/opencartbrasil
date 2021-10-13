@@ -1,14 +1,11 @@
 <?php
-
 use Firebase\JWT\JWT;
 
 class ModelCredentialsToken extends Model {
-
 	/**
-	 * Armazena o access_token e refresh_token em tabela para consulta
-	 * de validação.
+	 * Add token
 	 *
-	 * @param int $api_key_id User ID da tabela "oc_api"
+	 * @param int $api_key_id
 	 * @param string $access_token
 	 * @param string $refresh_token
 	 * @param int $refresh_token Tempo de expiração do refresh token
@@ -29,7 +26,7 @@ class ModelCredentialsToken extends Model {
 	}
 
 	/**
-	 * Realiza login no sistema de API
+	 * Login to API
 	 *
 	 * @param string $consumer_key
 	 * @param string $consumer_secret
@@ -49,7 +46,7 @@ class ModelCredentialsToken extends Model {
 	}
 
 	/**
-	 * Valida se o token existe no banco de dados
+	 * Validates if token exists in database
 	 *
 	 * @param string $refresh_token
 	 * @param int $expire_at
@@ -83,7 +80,7 @@ class ModelCredentialsToken extends Model {
 	}
 
 	/**
-	 * Verifica se o token de acesso está ativo
+	 * Check if the access token is active
 	 *
 	 * @param string $access_token
 	 *
@@ -111,10 +108,10 @@ class ModelCredentialsToken extends Model {
 	}
 
 	/**
-	 * Gera um novo token de acesso com base no dados do usuário
+	 * Generate a new access token based on user data
 	 *
-	 * @param int $user_id Identificador o usuário no banco de dados
-	 * @param int $expire_at Tempo para expiração do token
+	 * @param int $user_id
+	 * @param int $expire_at
 	 *
 	 * @return string
 	 */
@@ -152,7 +149,7 @@ class ModelCredentialsToken extends Model {
 	}
 
 	/**
-	 * Grava um histórico de geração de token do usuário
+	 * Writes a user's token generation history
 	 *
 	 * @param int $api_key_id
 	 * @param string $type

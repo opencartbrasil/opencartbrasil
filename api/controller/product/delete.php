@@ -1,6 +1,5 @@
 <?php
 class ControllerProductDelete extends Controller {
-
 	private const HTTP_STATUS_404 = 404;
 
 	public function index(int $product_id = 0) {
@@ -32,7 +31,7 @@ class ControllerProductDelete extends Controller {
 	}
 
 	/**
-	 * Exibe resposta para o cliente
+	 * Display response
 	 *
 	 * @param int $status
 	 *

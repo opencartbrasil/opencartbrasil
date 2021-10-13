@@ -6,7 +6,7 @@ class ModelCatalogManufacturer extends Model {
 		$result = $this->cache->get($cache_key);
 
 		if (!$result) {
-			$query = $this->db->query("SELECT DISTINCT * FROM " . DB_PREFIX . "manufacturer WHERE manufacturer_id = '" . $manufacturer_id . "'");
+			$query = $this->db->query("SELECT DISTINCT * FROM `" . DB_PREFIX . "manufacturer` WHERE manufacturer_id = '" . $manufacturer_id . "'");
 
 			$result = $query->row;
 
@@ -17,7 +17,7 @@ class ModelCatalogManufacturer extends Model {
 	}
 
 	public function getManufacturers($data = array()) {
-		$sql = "SELECT * FROM " . DB_PREFIX . "manufacturer";
+		$sql = "SELECT * FROM `" . DB_PREFIX . "manufacturer`";
 
 		if (!empty($data['filter_name'])) {
 			$sql .= " WHERE name LIKE '%" . $this->db->escape($data['filter_name']) . "%'";
@@ -58,7 +58,7 @@ class ModelCatalogManufacturer extends Model {
 	}
 
 	public function getTotalManufacturers(array $data = array()) {
-		$sql = "SELECT COUNT(*) AS total FROM " . DB_PREFIX . "manufacturer";
+		$sql = "SELECT COUNT(*) AS total FROM `" . DB_PREFIX . "manufacturer`";
 
 		if (!empty($data['filter_name'])) {
 			$sql .= " WHERE name LIKE '%" . $this->db->escape($data['filter_name']) . "%'";

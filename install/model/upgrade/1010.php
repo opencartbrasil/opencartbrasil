@@ -22,7 +22,7 @@ class ModelUpgrade1010 extends Model {
 			$this->db->query($sql);
 		}
 
-		// Table api_key
+		// Table api_history
 		$query = $this->db->query("SELECT * FROM information_schema.TABLES WHERE TABLE_SCHEMA = '" . DB_DATABASE . "' AND TABLE_NAME = '" . DB_PREFIX . "api_history'");
 
 		if ($query->num_rows == 0) {
@@ -40,7 +40,7 @@ class ModelUpgrade1010 extends Model {
 			$this->db->query($sql);
 		}
 
-		// Table api_key
+		// Table api_token
 		$query = $this->db->query("SELECT * FROM information_schema.TABLES WHERE TABLE_SCHEMA = '" . DB_DATABASE . "' AND TABLE_NAME = '" . DB_PREFIX . "api_token'");
 
 		if ($query->num_rows == 0) {
@@ -63,7 +63,7 @@ class ModelUpgrade1010 extends Model {
 
 		if ($query->num_rows == 0) {
 			$sql = "
-				CREATE TABLE `" . DB_PREFIX . "webhook_client` (
+				CREATE TABLE IF NOT EXISTS `" . DB_PREFIX . "webhook_client` (
 					`webhook_client_id` int(11) NOT NULL AUTO_INCREMENT,
 					`description` VARCHAR(255) NOT NULL,
 					`url` VARCHAR(255),
@@ -86,7 +86,7 @@ class ModelUpgrade1010 extends Model {
 
 		if ($query->num_rows == 0) {
 			$sql = "
-				CREATE TABLE `" . DB_PREFIX . "webhook_request_history` (
+				CREATE TABLE IF NOT EXISTS `" . DB_PREFIX . "webhook_request_history` (
 					`webhook_request_history_id` int(11) NOT NULL AUTO_INCREMENT,
 					`webhook_client_id` int(11) NOT NULL,
 					`action` VARCHAR(255),
@@ -108,7 +108,7 @@ class ModelUpgrade1010 extends Model {
 			$this->db->query("ALTER TABLE `" . DB_PREFIX . "custom_field` ADD COLUMN `code` VARCHAR(255) AFTER `type`");
 		}
 
-		// File config api
+		// Create API config.php
 		$file_api_config = DIR_OPENCART . "api/config.php";
 
 		if (!file_exists($file_api_config)) {
@@ -150,7 +150,7 @@ class ModelUpgrade1010 extends Model {
 			fclose($handler);
 		}
 
-		// Files config.php
+		// Update config.php
 		$files = glob(DIR_OPENCART . '{config.php,admin/config.php}', GLOB_BRACE);
 
 		foreach ($files as $file) {

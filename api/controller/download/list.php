@@ -1,31 +1,23 @@
 <?php
-
 class ControllerDownloadList extends Controller {
-
 	public function index() {
 		$this->load->model('catalog/download');
 
-		/**
-		 * Filter Name
-		 */
+		/// Filter Name
 		if (isset($this->request->get['filter_name'])) {
 			$filter_name = $this->request->get['filter_name'];
 		} else {
 			$filter_name = null;
 		}
 
-		/**
-		 * Page
-		 */
+		// Page
 		if (isset($this->request->get['page'])) {
 			$page = max($this->request->get['page'], 1);
 		} else {
 			$page = 1;
 		}
 
-		/**
-		 * Items per page
-		 */
+		// Items per page
 		if (isset($this->request->get['per_page'])) {
 			$per_page = min($this->config->get('db_list_per_page'), $this->request->get['per_page']);
 		} else {
@@ -62,7 +54,7 @@ class ControllerDownloadList extends Controller {
 		$last_page = ceil($downloads_total_count / $per_page);
 		$next_page = intval(min($page + 1, $last_page));
 
-		/** URL Page */
+		// URL Page
 		$links = '/download?page=%d&per_page=%d';
 
 		if ($filter_name !== null) {
@@ -91,7 +83,7 @@ class ControllerDownloadList extends Controller {
 	}
 
 	/**
-	 * Exibe resposta para o cliente
+	 * Display response
 	 *
 	 * @param int $status
 	 *

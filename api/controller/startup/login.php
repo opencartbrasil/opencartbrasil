@@ -1,11 +1,9 @@
 <?php
-
 use Firebase\JWT\JWT;
 use Firebase\JWT\ExpiredException;
 use Firebase\JWT\SignatureInvalidException;
 
 class ControllerStartupLogin extends Controller {
-
 	public function index() {
 		if (in_array($this->request->get['route'], $this->config->get('ignored_routers'))) {
 			return;
@@ -21,6 +19,7 @@ class ControllerStartupLogin extends Controller {
 					)
 				)
 			)));
+
 			return new Action('status_code/unauthorized');
 		}
 
@@ -38,6 +37,7 @@ class ControllerStartupLogin extends Controller {
 					)
 				)
 			)));
+
 			return new Action('status_code/bad_request');
 		}
 
@@ -51,6 +51,7 @@ class ControllerStartupLogin extends Controller {
 					)
 				)
 			)));
+
 			return new Action('status_code/bad_request');
 		}
 
@@ -72,6 +73,7 @@ class ControllerStartupLogin extends Controller {
 					)
 				)
 			)));
+
 			return new Action('status_code/unauthorized');
 		} catch (SignatureInvalidException $ignored) {
 			$this->response->setOutput(json_encode(array(
@@ -83,6 +85,7 @@ class ControllerStartupLogin extends Controller {
 					)
 				)
 			)));
+
 			return new Action('status_code/unauthorized');
 		} catch (UnexpectedValueException $ignored) {
 			$this->response->setOutput(json_encode(array(
@@ -94,6 +97,7 @@ class ControllerStartupLogin extends Controller {
 					)
 				)
 			)));
+
 			return new Action('status_code/bad_request');
 		}
 	}
