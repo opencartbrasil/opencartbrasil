@@ -142,8 +142,10 @@ class ControllerStartupSeoUrl extends Controller {
 	private function start() {
 		if (isset($this->request->get['_route_'])) {
 			$parsed_url = $this->request->get['_route_'];
-		} else {
+		} elseif (isset($this->request->get['route'])) {
 			$parsed_url = $this->request->get['route'];
+		} else {
+			$parsed_url = null;
 		}
 
 		$requestMethod = $_SERVER['REQUEST_METHOD'];
@@ -177,7 +179,7 @@ class ControllerStartupSeoUrl extends Controller {
 				$path = $parsed_url;
 			}
 
-			$regex  = '~^' . $route['path'] . '$~i';
+			$regex  = '~^(' . $route['path'] . '|' . $route['action'] . ')$~i';
 
 			$matches = [];
 
@@ -243,7 +245,7 @@ class ControllerStartupSeoUrl extends Controller {
 	 */
 	public function filterRoutersByPath($parsed_url, array $routers = []) {
 		return array_filter($routers, function($route) use ($parsed_url) {
-			return preg_match('~^' . $route['path'] . '$~i', $parsed_url);
+			return preg_match('~^' . $route['path'] . '$~i', $parsed_url) || preg_match('~^' . $route['action'] . '$~i', $parsed_url);
 		});
 	}
 }
