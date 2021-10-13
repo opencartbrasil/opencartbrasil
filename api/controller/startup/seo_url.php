@@ -148,6 +148,10 @@ class ControllerStartupSeoUrl extends Controller {
 			$parsed_url = null;
 		}
 
+		if ($parsed_url == '/' || empty($parsed_url)) {
+			return new Action('status_code/unauthorized');
+		}
+
 		$requestMethod = $_SERVER['REQUEST_METHOD'];
 		$path_default = '/';
 		$pathMatchFound = false;
