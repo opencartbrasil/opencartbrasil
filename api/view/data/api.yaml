@@ -978,6 +978,132 @@ paths:
       servers:
         - url: 'http://example.com/api'
           variables: {}
+  /products/stocks:
+    put:
+      tags:
+        - 02 - Produtos
+      summary: Update Stocks
+      operationId: UpdateStocks
+      parameters: []
+      requestBody:
+        description: ''
+        content:
+          application/json:
+            schema:
+              type: array
+              items:
+                $ref: '#/components/schemas/UpdateStocksRequest'
+              description: ''
+              example:
+              - product_id: 50
+                location: string
+                minimum: 1
+                quantity: 12
+                weight: 12
+                length: 12
+                width: 12
+                height: 12
+                price: 12.99
+                length_class_id: 2
+                weight_class_id: 2
+            example:
+            - product_id: 50
+              location: string
+              minimum: 1
+              quantity: 12
+              weight: 12
+              length: 12
+              width: 12
+              height: 12
+              price: 12.99
+              length_class_id: 2
+              weight_class_id: 2
+        required: true
+      responses:
+        '400':
+          description: Bad Request
+          headers:
+            X-Request-Time-Start:
+              content:
+                text/plain:
+                  schema:
+                    type: float
+                    example: '1634149183.3457'
+                  example: '1634149183.3457'
+            X-Request-Time-End:
+              content:
+                text/plain:
+                  schema:
+                    type: float
+                    example: '1634149183.3832'
+                  example: '1634149183.3832'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error10'
+              example:
+                success: false
+                errors:
+                - code: invalid_access_token
+                  message: Invalid access_token.
+        '200':
+          description: OK
+          headers:
+            X-RateLimit-Limit:
+              content:
+                text/plain:
+                  schema:
+                    type: string
+                    example: '30'
+                  example: '30'
+            X-RateLimit-Reset:
+              content:
+                text/plain:
+                  schema:
+                    type: string
+                    example: '60'
+                  example: '60'
+            X-RateLimit-Remaining:
+              content:
+                text/plain:
+                  schema:
+                    type: string
+                    example: '29'
+                  example: '29'
+            X-Request-Time-Start:
+              content:
+                text/plain:
+                  schema:
+                    type: string
+                    example: '1634149470.1189'
+                  example: '1634149470.1189'
+            X-Request-Time-End:
+              content:
+                text/plain:
+                  schema:
+                    type: string
+                    example: '1634149470.1356'
+                  example: '1634149470.1356'
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Success'
+                description: ''
+                example:
+                - product_id: 50
+                  updated: true
+              example:
+                - product_id: 50
+                  updated: true
+      deprecated: false
+      servers:
+        - url: 'http://example.com/api'
+          variables: {}
+      security:
+        - httpBearer: []
+
   /language:
     get:
       tags:
@@ -4227,6 +4353,99 @@ components:
         previous: ''
         next: ''
         last: /product?page=1&per_page=50&filter_name=iPhone
+    UpdateStocksRequest:
+      title: UpdateStocksRequest
+      required:
+      - product_id
+      - location
+      - minimum
+      - quantity
+      - weight
+      - length
+      - width
+      - height
+      - price
+      - length_class_id
+      - weight_class_id
+      type: object
+      properties:
+        product_id:
+          type: integer
+          format: int32
+        location:
+          type: string
+        minimum:
+          type: integer
+          format: int32
+        quantity:
+          type: integer
+          format: int32
+        weight:
+          type: integer
+          format: int32
+        length:
+          type: integer
+          format: int32
+        width:
+          type: integer
+          format: int32
+        height:
+          type: integer
+          format: int32
+        price:
+          type: number
+        length_class_id:
+          type: integer
+          format: int32
+        weight_class_id:
+          type: integer
+          format: int32
+      example:
+        product_id: 50
+        location: string
+        minimum: 1
+        quantity: 12
+        weight: 12
+        length: 12
+        width: 12
+        height: 12
+        price: 12.99
+        length_class_id: 2
+        weight_class_id: 2
+    Error10:
+      title: Error10
+      required:
+      - success
+      - errors
+      type: object
+      properties:
+        success:
+          type: boolean
+        errors:
+          type: array
+          items:
+            $ref: '#/components/schemas/Error'
+          description: ''
+      example:
+        success: false
+        errors:
+        - code: invalid_access_token
+          message: Invalid access_token.
+    Success:
+      title: Success
+      required:
+      - product_id
+      - updated
+      type: object
+      properties:
+        product_id:
+          type: integer
+          format: int32
+        updated:
+          type: boolean
+      example:
+        product_id: 50
+        updated: true
     Sucesso5:
       title: Sucesso5
       required:
@@ -5387,6 +5606,7 @@ components:
     httpBearer:
       type: http
       scheme: bearer
+      bearerFormat: JWT
     httpBasic:
       type: http
       scheme: basic
