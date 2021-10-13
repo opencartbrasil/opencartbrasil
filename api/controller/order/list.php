@@ -162,6 +162,15 @@ class ControllerOrderList extends Controller {
 			// Statuses
 			$statuses = $this->model_sale_order->getOrderHistories($order_id, 0, $this->config->get('db_list_per_page'));
 
+			$statuses = array_map(function($item) {
+				return array(
+					'order_status_id' => (int)$item['order_status_id'],
+					'date_added' => date('Y-m-d\TH:i:s\+00:00', strtotime($item['date_added'])),
+					'comment' => $item['comment'],
+					'notify' => !!$item['notify'],
+				);
+			}, $statuses);
+
 			$result_items[] = array(
 				'order_id' => (int)$order_info['order_id'],
 				'invoice_no' => $order_info['invoice_no'],
