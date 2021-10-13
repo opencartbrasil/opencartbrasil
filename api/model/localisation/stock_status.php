@@ -1,6 +1,5 @@
 <?php
 class ModelLocalisationStockStatus extends Model {
-
 	public function getStockStatus(int $stock_status_id) {
 		$cache_key = 'api_stock_status_id_' . $stock_status_id;
 

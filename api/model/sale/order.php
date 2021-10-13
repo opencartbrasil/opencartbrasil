@@ -1,5 +1,4 @@
 <?php
-
 class ModelSaleOrder extends Model {
 	public function addOrderHistory($order_id, $order_status_id, $comment = '') {
 		$order_info = $this->getOrder($order_id);
@@ -92,7 +91,7 @@ class ModelSaleOrder extends Model {
 
 			$reward = 0;
 
-			$order_product_query = $this->db->query("SELECT * FROM " . DB_PREFIX . "order_product WHERE order_id = '" . (int)$order_id . "'");
+			$order_product_query = $this->db->query("SELECT * FROM `" . DB_PREFIX . "order_product` WHERE order_id = '" . (int)$order_id . "'");
 
 			foreach ($order_product_query->rows as $product) {
 				$reward += $product['reward'];
@@ -313,7 +312,7 @@ class ModelSaleOrder extends Model {
 	}
 
 	public function getOrderTotals($order_id) {
-		$query = $this->db->query("SELECT * FROM " . DB_PREFIX . "order_total WHERE order_id = '" . (int)$order_id . "' ORDER BY sort_order");
+		$query = $this->db->query("SELECT * FROM `" . DB_PREFIX . "order_total` WHERE order_id = '" . (int)$order_id . "' ORDER BY sort_order");
 
 		return $query->rows;
 	}

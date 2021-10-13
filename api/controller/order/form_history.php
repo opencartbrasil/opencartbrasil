@@ -1,20 +1,16 @@
 <?php
-
 use Swaggest\JsonSchema\Schema;
 use Swaggest\JsonSchema\Context;
 use Swaggest\JsonSchema\Exception\LogicException;
 use Swaggest\JsonSchema\InvalidValue;
 
 class ControllerOrderFormHistory extends Controller {
-
 	private const HTTP_STATUS_400 = 400;
 
 	public function index() {
 		$this->load->model('sale/order');
 
-		$errors = [];
-
-		/** Validate Schema */
+		// Validate Schema
 		$result = $this->validateJsonSchema($this->request->json);
 
 		if (!$result->success) {
@@ -42,7 +38,7 @@ class ControllerOrderFormHistory extends Controller {
 	}
 
 	/**
-	 * Valida o schema do JSON de entrada
+	 * Validate input JSON schema
 	 *
 	 * @param Object $data
 	 *
@@ -81,12 +77,13 @@ class ControllerOrderFormHistory extends Controller {
 					'details' => implode(' OR ', $types) . ' expected, just one type'
 				];
 			} else {
+				$error = $e->inspect();
+
 				$errors[] = [
 					'node' => $error->dataPointer,
 					'details' => $error->error
 				];
 			}
-
 		} catch (InvalidValue $e) {
 			$error = $e->inspect();
 
@@ -100,7 +97,7 @@ class ControllerOrderFormHistory extends Controller {
 			$result->success = false;
 			$result->errors = [
 				'result' => false,
-				'details' => 'Erro no preenchimento dos dados enviados',
+				'details' => 'Error filling in data sent',
 				'errors' => $errors
 			];
 		}
@@ -109,7 +106,7 @@ class ControllerOrderFormHistory extends Controller {
 	}
 
 	/**
-	 * Exibe resposta para o cliente
+	 * Display response
 	 *
 	 * @param int $status
 	 *

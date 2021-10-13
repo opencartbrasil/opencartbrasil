@@ -7,8 +7,8 @@ class ModelCustomerCustomerGroup extends Model {
 
 		if (!$result) {
 			$query = $this->db->query("
-				SELECT DISTINCT * FROM " . DB_PREFIX . "customer_group cg
-				LEFT JOIN " . DB_PREFIX . "customer_group_description cgd ON (cg.customer_group_id = cgd.customer_group_id)
+				SELECT DISTINCT * FROM `" . DB_PREFIX . "customer_group` cg
+				LEFT JOIN `" . DB_PREFIX . "customer_group_description` cgd ON (cg.customer_group_id = cgd.customer_group_id)
 				WHERE cg.customer_group_id = '" . (int)$customer_group_id . "'");
 
 			$result = $query->row;

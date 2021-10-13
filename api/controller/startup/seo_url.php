@@ -32,7 +32,7 @@ class ControllerStartupSeoUrl extends Controller {
 		];
 
 		$this->routers[] = [
-			'path' => 'product',
+			'path' => 'products',
 			'action' => 'product/list',
 		];
 
@@ -43,7 +43,7 @@ class ControllerStartupSeoUrl extends Controller {
 		];
 
 		$this->routers[] = [
-			'path' => 'product/stocks',
+			'path' => 'products/stocks',
 			'action' => 'product/form_stock',
 			'methods' => ['PUT']
 		];
@@ -142,8 +142,14 @@ class ControllerStartupSeoUrl extends Controller {
 	private function start() {
 		if (isset($this->request->get['_route_'])) {
 			$parsed_url = $this->request->get['_route_'];
-		} else {
+		} elseif (isset($this->request->get['route'])) {
 			$parsed_url = $this->request->get['route'];
+		} else {
+			$parsed_url = null;
+		}
+
+		if ($parsed_url == '/' || empty($parsed_url)) {
+			return new Action('status_code/unauthorized');
 		}
 
 		$requestMethod = $_SERVER['REQUEST_METHOD'];
@@ -177,7 +183,7 @@ class ControllerStartupSeoUrl extends Controller {
 				$path = $parsed_url;
 			}
 
-			$regex  = '~^' . $route['path'] . '$~i';
+			$regex  = '~^(' . $route['path'] . '|' . $route['action'] . ')$~i';
 
 			$matches = [];
 
@@ -218,7 +224,7 @@ class ControllerStartupSeoUrl extends Controller {
 	}
 
 	/**
-	 * Filtra as rotas com base no método
+	 * Filters routes based on method
 	 *
 	 * @param array $routers
 	 *
@@ -235,7 +241,7 @@ class ControllerStartupSeoUrl extends Controller {
 	}
 
 	/**
-	 * Filtra as rotas com base no caminho da URL
+	 * Filters routes based on URL path
 	 *
 	 * @param array $routers
 	 *
@@ -243,7 +249,7 @@ class ControllerStartupSeoUrl extends Controller {
 	 */
 	public function filterRoutersByPath($parsed_url, array $routers = []) {
 		return array_filter($routers, function($route) use ($parsed_url) {
-			return preg_match('~^' . $route['path'] . '$~i', $parsed_url);
+			return preg_match('~^' . $route['path'] . '$~i', $parsed_url) || preg_match('~^' . $route['action'] . '$~i', $parsed_url);
 		});
 	}
 }

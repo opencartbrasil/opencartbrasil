@@ -1,6 +1,5 @@
 <?php
 class ModelToolImage extends Model {
-
 	public const ERROR_MIMETYPE = 1000;
 	public const ERROR_SIZE = 2000;
 	public const ERROR_UNKNOWN = 3000;
@@ -64,6 +63,7 @@ class ModelToolImage extends Model {
 
 		$string = iconv('UTF-8', 'ASCII//TRANSLIT', $string);
 		$string = preg_replace("/[^a-zA-Z0-9-.]/", '', $string);
+
 		return strtolower(trim($string, '-'));
 	}
 }

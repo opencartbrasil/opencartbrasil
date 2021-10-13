@@ -21,7 +21,7 @@ class ModelCatalogDownload extends Model {
 			SELECT
 				d.*,
 				CONVERT_TZ(d.`date_added`, @@time_zone, "+00:00") AS `date_added`
-			FROM ' . DB_PREFIX . 'download d
+			FROM `' . DB_PREFIX . 'download` d
 			LEFT JOIN `' . DB_PREFIX . 'download_description` dd ON (dd.download_id = d.download_id)
 			WHERE d.download_id > 0
 		';
@@ -69,7 +69,7 @@ class ModelCatalogDownload extends Model {
 	public function getTotalDownloads(array $data = array()) {
 		$sql = '
 			SELECT COUNT(DISTINCT d.download_id) AS total
-			FROM ' . DB_PREFIX . 'download d
+			FROM `' . DB_PREFIX . 'download` d
 			LEFT JOIN `' . DB_PREFIX . 'download_description` dd ON (dd.download_id = d.download_id)
 			WHERE d.download_id > 0
 		';

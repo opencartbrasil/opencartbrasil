@@ -1,60 +1,46 @@
 <?php
-
 class ControllerCategoryList extends Controller {
-
 	public function index() {
 		$this->load->model('catalog/category');
 
 		$filter_data = array();
 
-		/**
-		 * Filter Parent ID
-		 */
+		// Filter Parent ID
 		if (isset($this->request->get['filter_parent_id'])) {
 			$filter_parent_id = max($this->request->get['filter_parent_id'], 0);
 		} else {
 			$filter_parent_id = null;
 		}
 
-		/**
-		 * Filter Total Product is equals than ...
-		 */
+		// Filter Total Product is equals than ...
 		if (isset($this->request->get['filter_total_products_eq'])) {
 			$filter_total_products_eq = max($this->request->get['filter_total_products_eq'], 0);
 		} else {
 			$filter_total_products_eq = null;
 		}
 
-		/**
-		 * Filter Total Product is less than ...
-		 */
+		// Filter Total Product is less than ...
 		if (isset($this->request->get['filter_total_products_lt'])) {
 			$filter_total_products_lt = max($this->request->get['filter_total_products_lt'], 1);
 		} else {
 			$filter_total_products_lt = null;
 		}
 
-		/**
-		 * Filter Total Product is greater than ...
-		 */
+		// Filter Total Product is greater than ...
 		if (isset($this->request->get['filter_total_products_gt'])) {
 			$filter_total_products_gt = max($this->request->get['filter_total_products_gt'], 1);
 		} else {
 			$filter_total_products_gt = null;
 		}
 
-		/**
-		 * Page
-		 */
+		// Page
 		if (isset($this->request->get['page'])) {
 			$page = max($this->request->get['page'], 1);
 		} else {
 			$page = 1;
 		}
 
-		/**
-		 * Items per page
-		 */
+		// Items per page
 		if (isset($this->request->get['per_page'])) {
 			$per_page = min($this->config->get('db_list_per_page'), $this->request->get['per_page']);
 		} else {
@@ -101,7 +87,7 @@ class ControllerCategoryList extends Controller {
 		$last_page = ceil($categories_total_count / $per_page);
 		$next_page = intval(min($page + 1, $last_page));
 
-		/** URL Page */
+		// URL Page
 		$links = '/category?page=%d&per_page=%d';
 
 		if ($filter_parent_id !== null) {
@@ -142,7 +128,7 @@ class ControllerCategoryList extends Controller {
 	}
 
 	/**
-	 * Exibe resposta para o cliente
+	 * Display response
 	 *
 	 * @param int $status
 	 *

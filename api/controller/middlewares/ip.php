@@ -1,5 +1,4 @@
 <?php
-
 class ControllerMiddlewaresIp extends Controller {
 	public function before() {
 		if (in_array($this->request->get['route'], $this->config->get('ignored_routers'))) {

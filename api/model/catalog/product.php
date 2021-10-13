@@ -1,5 +1,4 @@
 <?php
-
 class ModelCatalogProduct extends Model {
 	public function add($product) {
 		// Reset values
@@ -14,7 +13,7 @@ class ModelCatalogProduct extends Model {
 			$product->dimensions->length_class_id = $this->config->get('config_length_class_id');
 		}
 
-		/** Register Product */
+		// Register Product
 		$this->db->query('
 			INSERT INTO `' . DB_PREFIX . 'product`
 			SET `model` = "' . $this->db->escape($product->model) . '",
@@ -72,7 +71,7 @@ class ModelCatalogProduct extends Model {
 			$product->dimensions->length_class_id = $this->config->get('config_length_class_id');
 		}
 
-		/** Register Product */
+		// Register Product
 		$this->db->query('
 			UPDATE `' . DB_PREFIX . 'product`
 			SET `model` = "' . $this->db->escape($product->model) . '",
@@ -384,7 +383,7 @@ class ModelCatalogProduct extends Model {
 				pov.points,
 				pov.weight_prefix,
 				pov.weight
-			FROM ' . DB_PREFIX . 'product_option_value pov
+			FROM `' . DB_PREFIX . 'product_option_value` pov
 			WHERE pov.product_option_id = "' . $product_option_id . '";
 		');
 
@@ -437,11 +436,11 @@ class ModelCatalogProduct extends Model {
 	}
 
 	/**
-	 * Verifica se um ou mais produto existe, através do ID
+	 * Checks if one or more products exists, through the ID
 	 *
 	 * @param int[] $data
 	 *
-	 * @return bool|array Retorna true/false ou um array com as diferenças de IDs
+	 * @return bool|array Returns true/false or an array with ID differences
 	 */
 	public function getHasProductById(array $data = array()) {
 		$products_id = array_map('intval', $data);
@@ -460,7 +459,7 @@ class ModelCatalogProduct extends Model {
 	}
 
 	/**
-	 * Salva os detalhes de atributos, descrição, descontos, promoções, opções etc.
+	 * Saves the details of attributes, description, discounts, promotions, options etc.
 	 *
 	 * @param int $product_id
 	 * @param \stdClass $product
@@ -468,7 +467,7 @@ class ModelCatalogProduct extends Model {
 	 * @return void
 	 */
 	private function saveData(int $product_id, $product) {
-		/** Register Product Description */
+		// Register Product Description
 		$this->db->query('DELETE FROM `' . DB_PREFIX . 'product_description` WHERE product_id = "' . $product_id . '"');
 
 		foreach ($this->config->get('languages') as $language_code => $language) {
@@ -529,7 +528,7 @@ class ModelCatalogProduct extends Model {
 			');
 		}
 
-		/** Register in Stores */
+		// Register in Stores
 		$this->db->query('DELETE FROM `' . DB_PREFIX . 'product_to_store` WHERE product_id = "' . $product_id . '"');
 
 		foreach ($product->stores as $store_id) {
@@ -540,7 +539,7 @@ class ModelCatalogProduct extends Model {
 			');
 		}
 
-		/** Register Attributes */
+		// Register Attributes
 		$this->db->query('DELETE FROM `' . DB_PREFIX . 'product_attribute` WHERE product_id = "' . $product_id . '"');
 
 		if (isset($product->attributes)) {
@@ -565,7 +564,7 @@ class ModelCatalogProduct extends Model {
 			}
 		}
 
-		/** Register Discounts */
+		// Register Discounts
 		$this->db->query('DELETE FROM `' . DB_PREFIX . 'product_discount` WHERE product_id = "' . $product_id . '"');
 
 		if (isset($product->discounts)) {
@@ -583,7 +582,7 @@ class ModelCatalogProduct extends Model {
 			}
 		}
 
-		/** Register Filters */
+		// Register Filters
 		$this->db->query('DELETE FROM `' . DB_PREFIX . 'product_filter` WHERE product_id = "' . $product_id . '"');
 
 		if (isset($product->filters)) {
@@ -596,7 +595,7 @@ class ModelCatalogProduct extends Model {
 			}
 		}
 
-		/** Register Additional Images */
+		// Register Additional Images
 		$this->db->query('DELETE FROM `' . DB_PREFIX . 'product_image` WHERE product_id = "' . $product_id . '"');
 
 		if (isset($product->additional_images)) {
@@ -610,7 +609,7 @@ class ModelCatalogProduct extends Model {
 			}
 		}
 
-		/** Register Options */
+		// Register Options
 		$this->db->query('DELETE FROM `' . DB_PREFIX . 'product_option` WHERE product_id = "' . $product_id . '"');
 		$this->db->query('DELETE FROM `' . DB_PREFIX . 'product_option_value` WHERE product_id = "' . $product_id . '"');
 
@@ -685,7 +684,7 @@ class ModelCatalogProduct extends Model {
 			}
 		}
 
-		/** Register Recurrings */
+		// Register Recurrings
 		$this->db->query('DELETE FROM `' . DB_PREFIX . 'product_recurring` WHERE product_id = "' . $product_id . '"');
 
 		if (isset($product->recurring)) {
@@ -699,7 +698,7 @@ class ModelCatalogProduct extends Model {
 			}
 		}
 
-		/** Register Related */
+		// Register Related
 		$this->db->query('DELETE FROM `' . DB_PREFIX . 'product_related` WHERE product_id = "' . $product_id . '"');
 
 		if (isset($product->product_related)) {
@@ -712,7 +711,7 @@ class ModelCatalogProduct extends Model {
 			}
 		}
 
-		/** Register Points */
+		// Register Points
 		$this->db->query('DELETE FROM `' . DB_PREFIX . 'product_reward` WHERE product_id = "' . $product_id . '"');
 
 		if (isset($product->points_reward)) {
@@ -726,7 +725,7 @@ class ModelCatalogProduct extends Model {
 			}
 		}
 
-		/** Register Special */
+		// Register Special
 		$this->db->query('DELETE FROM `' . DB_PREFIX . 'product_special` WHERE product_id = "' . $product_id . '"');
 
 		if (isset($product->special)) {
@@ -743,7 +742,7 @@ class ModelCatalogProduct extends Model {
 			}
 		}
 
-		/** Register Categories */
+		// Register Categories
 		$this->db->query('DELETE FROM `' . DB_PREFIX . 'product_to_category` WHERE product_id = "' . $product_id . '"');
 
 		if (isset($product->categories)) {
@@ -756,7 +755,7 @@ class ModelCatalogProduct extends Model {
 			}
 		}
 
-		/** Register Downloads */
+		// Register Downloads
 		$this->db->query('DELETE FROM `' . DB_PREFIX . 'product_to_download` WHERE product_id = "' . $product_id . '"');
 
 		if (isset($product->downloads)) {
@@ -769,7 +768,7 @@ class ModelCatalogProduct extends Model {
 			}
 		}
 
-		/** Register SEO URL */
+		// Register SEO URL
 		$this->db->query('DELETE FROM `' . DB_PREFIX . 'seo_url` WHERE product_id = "' . $product_id . '"');
 
 		if (isset($product->seo_url_generate)) {
