@@ -1,6 +1,7 @@
 .vscode
 config.php
 *.log
+.htaccess
 /api/config.php
 /system/storage
 /image/cache
