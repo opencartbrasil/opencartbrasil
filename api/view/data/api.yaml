@@ -88,7 +88,7 @@ paths:
       security:
         - httpBasic: []
       servers:
-        - url: http://localhost:8080/api
+        - url: http://example.com/api
           variables: {}
   /product:
     post:
@@ -151,7 +151,7 @@ paths:
                   quantity: 1000
                   stock_status_id: 5
                   image: >-
-                    http://localhost:8080/image/catalog/api/60f9b4df2b7e2-517695.jpg
+                    http://example.com/image/catalog/api/60f9b4df2b7e2-517695.jpg
                   manufacturer_id: 8
                   shipping: true
                   price: 199.98
@@ -220,11 +220,11 @@ paths:
                     - 1
                   additional_images:
                     - >-
-                      http://localhost:8080/image/catalog/api/60f9b4df57ef3-517695.jpg
+                      http://example.com/image/catalog/api/60f9b4df57ef3-517695.jpg
                     - >-
-                      http://localhost:8080/image/catalog/api/60f9b4df49afc-517695.jpg
+                      http://example.com/image/catalog/api/60f9b4df49afc-517695.jpg
                     - >-
-                      http://localhost:8080/image/catalog/api/60f9b4df3cf76-517695.jpg
+                      http://example.com/image/catalog/api/60f9b4df3cf76-517695.jpg
                   options:
                     - type: date
                       option_id: 8
@@ -317,7 +317,7 @@ paths:
                     - 0
                   links:
                     default: >-
-                      http://localhost:8080/index.php?route=product/product&product_id=222
+                      http://example.com/index.php?route=product/product&product_id=222
         '400':
           description: Bad Request
           content:
@@ -365,7 +365,7 @@ paths:
                     location: ''
                     quantity: 970
                     stock_status_id: 5
-                    image: http://localhost:8080/image/catalog/demo/iphone_1.jpg
+                    image: http://example.com/image/catalog/demo/iphone_1.jpg
                     manufacturer_id: 8
                     shipping: true
                     price: 101
@@ -413,11 +413,11 @@ paths:
                       en-gb: ''
                       pt-br: ''
                     additional_images:
-                      - http://localhost:8080/image/catalog/demo/iphone_6.jpg
-                      - http://localhost:8080/image/catalog/demo/iphone_2.jpg
-                      - http://localhost:8080/image/catalog/demo/iphone_5.jpg
-                      - http://localhost:8080/image/catalog/demo/iphone_3.jpg
-                      - http://localhost:8080/image/catalog/demo/iphone_4.jpg
+                      - http://example.com/image/catalog/demo/iphone_6.jpg
+                      - http://example.com/image/catalog/demo/iphone_2.jpg
+                      - http://example.com/image/catalog/demo/iphone_5.jpg
+                      - http://example.com/image/catalog/demo/iphone_3.jpg
+                      - http://example.com/image/catalog/demo/iphone_4.jpg
                     product_related:
                       - 42
                     points_reward:
@@ -430,7 +430,7 @@ paths:
                       - 0
                     links:
                       default: >-
-                        http://localhost:8080/index.php?route=product/product&product_id=40
+                        http://example.com/index.php?route=product/product&product_id=40
                 _metadata:
                   page: 1
                   per_page: 50
@@ -488,7 +488,7 @@ paths:
                   quantity: 1000
                   stock_status_id: 5
                   image: >-
-                    http://localhost:8080/image/catalog/api/60f9b4df2b7e2-517695.jpg
+                    http://example.com/image/catalog/api/60f9b4df2b7e2-517695.jpg
                   manufacturer_id: 8
                   shipping: true
                   price: 199.98
@@ -557,11 +557,11 @@ paths:
                     - 1
                   additional_images:
                     - >-
-                      http://localhost:8080/image/catalog/api/60f9b4df57ef3-517695.jpg
+                      http://example.com/image/catalog/api/60f9b4df57ef3-517695.jpg
                     - >-
-                      http://localhost:8080/image/catalog/api/60f9b4df49afc-517695.jpg
+                      http://example.com/image/catalog/api/60f9b4df49afc-517695.jpg
                     - >-
-                      http://localhost:8080/image/catalog/api/60f9b4df3cf76-517695.jpg
+                      http://example.com/image/catalog/api/60f9b4df3cf76-517695.jpg
                   options:
                     - type: date
                       option_id: 8
@@ -654,7 +654,7 @@ paths:
                     - 0
                   links:
                     default: >-
-                      http://localhost:8080/index.php?route=product/product&product_id=222
+                      http://example.com/index.php?route=product/product&product_id=222
         '404':
           description: Not Found
           content:
@@ -670,7 +670,7 @@ paths:
       security:
         - httpBearer: []
       servers:
-        - url: http://localhost:8080/api
+        - url: http://example.com/api
           variables: {}
     delete:
       tags:
@@ -799,7 +799,7 @@ paths:
                   quantity: 1000
                   stock_status_id: 5
                   image: >-
-                    http://localhost:8080/image/catalog/api/60f9b8ed79993-517695.jpg
+                    http://example.com/image/catalog/api/60f9b8ed79993-517695.jpg
                   manufacturer_id: 8
                   shipping: true
                   price: 199.98
@@ -849,11 +849,11 @@ paths:
                     - 1
                   additional_images:
                     - >-
-                      http://localhost:8080/image/catalog/api/60f9b8eda87d6-517695.jpg
+                      http://example.com/image/catalog/api/60f9b8eda87d6-517695.jpg
                     - >-
-                      http://localhost:8080/image/catalog/api/60f9b8ed955be-517695.jpg
+                      http://example.com/image/catalog/api/60f9b8ed955be-517695.jpg
                     - >-
-                      http://localhost:8080/image/catalog/api/60f9b8ed85827-517695.jpg
+                      http://example.com/image/catalog/api/60f9b8ed85827-517695.jpg
                   options:
                     - type: date
                       option_id: 8
@@ -937,7 +937,7 @@ paths:
                     - 0
                   links:
                     default: >-
-                      http://localhost:8080/index.php?route=product/product&product_id=222
+                      http://example.com/index.php?route=product/product&product_id=222
         '400':
           description: Bad Request
           content:
@@ -1424,7 +1424,7 @@ paths:
                       pt-br: ''
                   - category_id: 20
                     image: >-
-                      http://localhost:8080/image/catalog/demo/compaq_presario.jpg
+                      http://example.com/image/catalog/demo/compaq_presario.jpg
                     parent_id: 0
                     top: 1
                     column: 1
@@ -1677,27 +1677,27 @@ paths:
                 items:
                   - manufacturer_id: 8
                     name: Apple
-                    image: http://localhost:8080/image/catalog/demo/apple_logo.jpg
+                    image: http://example.com/image/catalog/demo/apple_logo.jpg
                     sort_order: 0
                   - manufacturer_id: 9
                     name: Canon
-                    image: http://localhost:8080/image/catalog/demo/canon_logo.jpg
+                    image: http://example.com/image/catalog/demo/canon_logo.jpg
                     sort_order: 0
                   - manufacturer_id: 7
                     name: HP
-                    image: http://localhost:8080/image/catalog/demo/hp_logo.jpg
+                    image: http://example.com/image/catalog/demo/hp_logo.jpg
                     sort_order: 0
                   - manufacturer_id: 5
                     name: HTC
-                    image: http://localhost:8080/image/catalog/demo/htc_logo.jpg
+                    image: http://example.com/image/catalog/demo/htc_logo.jpg
                     sort_order: 0
                   - manufacturer_id: 6
                     name: Palm
-                    image: http://localhost:8080/image/catalog/demo/palm_logo.jpg
+                    image: http://example.com/image/catalog/demo/palm_logo.jpg
                     sort_order: 0
                   - manufacturer_id: 10
                     name: Sony
-                    image: http://localhost:8080/image/catalog/demo/sony_logo.jpg
+                    image: http://example.com/image/catalog/demo/sony_logo.jpg
                     sort_order: 0
                 _metadata:
                   page: 1
@@ -1805,25 +1805,25 @@ paths:
                       pt-br: Caixa de Texto
                     values:
                       - option_value_id: 23
-                        image: http://localhost:8080/catalog/Daniel.jpg
+                        image: http://example.com/catalog/Daniel.jpg
                         sort_order: 1
                         name:
                           en-gb: Checkbox 1
                           pt-br: Caixa de Texto 1
                       - option_value_id: 24
-                        image: http://localhost:8080/catalog/Daniel_and_Leclerc.jpg
+                        image: http://example.com/catalog/Daniel_and_Leclerc.jpg
                         sort_order: 2
                         name:
                           en-gb: Checkbox 2
                           pt-br: Caixa de Texto 2
                       - option_value_id: 44
-                        image: http://localhost:8080/catalog/George.jpg
+                        image: http://example.com/catalog/George.jpg
                         sort_order: 3
                         name:
                           en-gb: Checkbox 3
                           pt-br: Caixa de Texto 3
                       - option_value_id: 45
-                        image: http://localhost:8080/catalog/Tsunoda.jpg
+                        image: http://example.com/catalog/Tsunoda.jpg
                         sort_order: 4
                         name:
                           en-gb: Checkbox 4
@@ -1957,6 +1957,8 @@ paths:
       summary: Atualizar Histórico de Pedidos
       description: ''
       operationId: AtualizarHistoricoPedido
+      security:
+        - httpBearer: []
       requestBody:
         description: ''
         content:
@@ -1980,25 +1982,31 @@ paths:
           description: Pedidos atualizados
           content:
             application/json:
-              examples:
-                Sucesso:
-                  value: |-
-                    [
-                        {
-                            "order_id": 19,
-                            "updated": true
-                        },
-                        {
-                            "order_id": 18,
-                            "updated": true
-                        }
-                    ]
+              example:
+                order_id: 19
+                updated: true
+              schema:
+                required:
+                - order_id
+                - updated
+                type: object
+                properties:
+                  order_id:
+                    type: integer
+                    format: int32
+                  updated:
+                    type: boolean
+                example:
+                  order_id: 19
+                  updated: true
   /order/{order_id}:
     summary: Captura as informações de um pedido
     get:
-      summary: ''
+      summary: 'Captura as informações de um pedido'
       description: ''
       operationId: GetOrderInfo
+      security:
+        - httpBearer: []
       parameters:
         - name: order_id
           in: path
@@ -2013,121 +2021,401 @@ paths:
           description: Informações capturadas com sucesso
           content:
             application/json:
-              examples:
-                Informações do Pedido:
-                  value: |-
-                    {
-                        "result": true,
-                        "data": {
-                            "order_id": 19,
-                            "invoice_no": "0",
-                            "invoice_prefix": "FAT-2021-00",
-                            "store_name": "Sua loja",
-                            "store_url": "http://localhost:8080/",
-                            "customer_id": 1,
-                            "customer_group_id": 1,
-                            "firstname": "Valdeir",
-                            "lastname": "Psr",
-                            "email": "teste@teste.com",
-                            "telephone": "71912345678",
-                            "fax": "",
-                            "custom_fields": {
-                                "cpf": "123.456.789-09"
-                            },
-                            "payment": {
-                                "firstname": "Valdeir",
-                                "lastname": "Psr",
-                                "company": "",
-                                "address_1": "Avenida Brasil",
-                                "address_2": "Campo Grande",
-                                "city": "Rio de Janeiro",
-                                "postcode": "23078001",
-                                "country": "Brasil",
-                                "zone": "Rio de Janeiro",
-                                "custom_field": [],
-                                "method": "Cash On Delivery"
-                            },
-                            "shipping": {
-                                "firstname": "Valdeir",
-                                "lastname": "Psr",
-                                "company": "",
-                                "address_1": "Avenida Brasil",
-                                "address_2": "Campo Grande",
-                                "city": "Rio de Janeiro",
-                                "postcode": "23078001",
-                                "country": "Brasil",
-                                "zone": "Rio de Janeiro",
-                                "custom_field": [],
-                                "method": "Flat Shipping Rate"
-                            },
-                            "comment": "",
-                            "total": 106,
-                            "order_status_id": 3,
-                            "affiliate_id": 0,
-                            "commission": 0,
-                            "marketing_id": 0,
-                            "tracking": "",
-                            "currency_code": "BRL",
-                            "currency_value": 1,
-                            "ip": "172.18.0.1",
-                            "forwarded_ip": "",
-                            "user_agent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/94.0.4606.71 Safari/537.36",
-                            "accept_language": "en-US,en;q=0.9,pt;q=0.8",
-                            "date_added": "2021-10-06T17:03:45+00:00",
-                            "date_modified": "2021-10-13T18:51:39+00:00",
-                            "products": [
-                                {
-                                    "product_id": 40,
-                                    "name": "iPhone",
-                                    "model": "Produto 11",
-                                    "quantity": 1,
-                                    "price": 101,
-                                    "total": 101,
-                                    "tax": 0,
-                                    "reward": "0",
-                                    "sku": "",
-                                    "ncm": "",
-                                    "cest": "",
-                                    "options": [],
-                                    "recurring": []
-                                }
-                            ],
-                            "totals": [
-                                {
-                                    "code": "sub_total",
-                                    "title": "Sub-Total",
-                                    "value": 101,
-                                    "sort_order": 1
-                                },
-                                {
-                                    "code": "shipping",
-                                    "title": "Flat Shipping Rate",
-                                    "value": 5,
-                                    "sort_order": 3
-                                },
-                                {
-                                    "code": "total",
-                                    "title": "Total",
-                                    "value": 106,
-                                    "sort_order": 9
-                                }
-                            ],
-                            "statuses": [
-                                {
-                                    "order_status_id": "3",
-                                    "date_added": "2021-10-13 18:51:39",
-                                    "comment": "",
-                                    "notify": "0"
-                                },
-                                {
-                                    "order_status_id": "3",
-                                    "date_added": "2021-10-11 20:30:55",
-                                    "comment": "",
-                                    "notify": "0"
-                                }
-                            ]
-                        }
-                    }
+              schema:
+                title: NewRequestRequest
+                required:
+                - result
+                - data
+                type: object
+                properties:
+                  result:
+                    type: boolean
+                  data:
+                    type: object
+                    properties:
+                      order_id:
+                        type: integer
+                        format: int32
+                      invoice_no:
+                        type: string
+                      invoice_prefix:
+                        type: string
+                      store_name:
+                        type: string
+                      store_url:
+                        type: string
+                      customer_id:
+                        type: integer
+                        format: int32
+                      customer_group_id:
+                        type: integer
+                        format: int32
+                      firstname:
+                        type: string
+                      lastname:
+                        type: string
+                      email:
+                        type: string
+                      telephone:
+                        type: string
+                      fax:
+                        type: string
+                      custom_fields:
+                        type: object
+                        properties:
+                          key:
+                            type: string
+                        example:
+                          cpf: 123.456.789-09
+                      payment:
+                        type: object
+                        properties:
+                          firstname:
+                            type: string
+                          lastname:
+                            type: string
+                          company:
+                            type: string
+                          address_1:
+                            type: string
+                          address_2:
+                            type: string
+                          city:
+                            type: string
+                          postcode:
+                            type: string
+                          country:
+                            type: string
+                          zone:
+                            type: string
+                          custom_field:
+                            type: object
+                            properties:
+                              key:
+                                type: string
+                          method:
+                            type: string
+                      shipping:
+                        type: object
+                        properties:
+                          firstname:
+                            type: string
+                          lastname:
+                            type: string
+                          company:
+                            type: string
+                          address_1:
+                            type: string
+                          address_2:
+                            type: string
+                          city:
+                            type: string
+                          postcode:
+                            type: string
+                          country:
+                            type: string
+                          zone:
+                            type: string
+                          custom_field:
+                            type: object
+                            properties:
+                              key:
+                                type: string
+                          method:
+                            type: string
+                      comment:
+                        type: string
+                      total:
+                        type: integer
+                        format: int32
+                      order_status_id:
+                        type: integer
+                        format: int32
+                      affiliate_id:
+                        type: integer
+                        format: int32
+                      commission:
+                        type: integer
+                        format: int32
+                      marketing_id:
+                        type: integer
+                        format: int32
+                      tracking:
+                        type: string
+                      currency_code:
+                        type: string
+                      currency_value:
+                        type: integer
+                        format: int32
+                      ip:
+                        type: string
+                      forwarded_ip:
+                        type: string
+                      user_agent:
+                        type: string
+                      accept_language:
+                        type: string
+                      date_added:
+                        type: string
+                      date_modified:
+                        type: string
+                      products:
+                        type: array
+                        items:
+                          type: object
+                          properties:
+                            product_id:
+                              type: integer
+                              format: int32
+                            name:
+                              type: string
+                            model:
+                              type: string
+                            quantity:
+                              type: integer
+                              format: int32
+                            price:
+                              type: integer
+                              format: int32
+                            total:
+                              type: integer
+                              format: int32
+                            tax:
+                              type: integer
+                              format: int32
+                            reward:
+                              type: string
+                            sku:
+                              type: string
+                            ncm:
+                              type: string
+                            cest:
+                              type: string
+                        description: ''
+                      totals:
+                        type: array
+                        items:
+                          type: object
+                          properties:
+                            code:
+                              type: string
+                            title:
+                              type: string
+                            value:
+                              type: integer
+                              format: int32
+                            sort_order:
+                              type: integer
+                              format: int32
+                          example:
+                          code: sub_total
+                          title: Sub-Total
+                          value: 101
+                          sort_order: 1
+                        description: ''
+                      statuses:
+                        type: array
+                        items:
+                          type: object
+                          properties:
+                            order_status_id:
+                              type: integer
+                            date_added:
+                              type: string
+                            comment:
+                              type: string
+                            notify:
+                              type: boolean
+                          example:
+                            order_status_id: 3
+                            date_added: 2021-10-01T19:57:40+00:00
+                            comment: ''
+                            notify: false
+                        description: ''
+                example:
+                  result: true
+                  data:
+                    order_id: 19
+                    invoice_no: '0'
+                    invoice_prefix: FAT-2021-00
+                    store_name: Sua loja
+                    store_url: http://example.com/
+                    customer_id: 1
+                    customer_group_id: 1
+                    firstname: Valdeir
+                    lastname: Psr
+                    email: teste@teste.com
+                    telephone: '71912345678'
+                    fax: ''
+                    custom_fields:
+                      cpf: 123.456.789-09
+                    payment:
+                      firstname: Valdeir
+                      lastname: Psr
+                      company: ''
+                      address_1: Avenida Brasil
+                      address_2: Campo Grande
+                      city: Rio de Janeiro
+                      postcode: '23078001'
+                      country: Brasil
+                      zone: Rio de Janeiro
+                      custom_field: []
+                      method: Cash On Delivery
+                    shipping:
+                      firstname: Valdeir
+                      lastname: Psr
+                      company: ''
+                      address_1: Avenida Brasil
+                      address_2: Campo Grande
+                      city: Rio de Janeiro
+                      postcode: '23078001'
+                      country: Brasil
+                      zone: Rio de Janeiro
+                      custom_field: []
+                      method: Flat Shipping Rate
+                    comment: ''
+                    total: 106
+                    order_status_id: 3
+                    affiliate_id: 0
+                    commission: 0
+                    marketing_id: 0
+                    tracking: ''
+                    currency_code: BRL
+                    currency_value: 1
+                    ip: 172.18.0.1
+                    forwarded_ip: ''
+                    user_agent: Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/94.0.4606.71 Safari/537.36
+                    accept_language: en-US,en;q=0.9,pt;q=0.8
+                    date_added: 2021-10-06T17:03:45+00:00
+                    date_modified: 2021-10-13T18:51:39+00:00
+                    products:
+                    - product_id: 40
+                      name: iPhone
+                      model: Produto 11
+                      quantity: 1
+                      price: 101
+                      total: 101
+                      tax: 0
+                      reward: '0'
+                      sku: ''
+                      ncm: ''
+                      cest: ''
+                      options: []
+                      recurring: []
+                    totals:
+                    - code: sub_total
+                      title: Sub-Total
+                      value: 101
+                      sort_order: 1
+                    - code: shipping
+                      title: Flat Shipping Rate
+                      value: 5
+                      sort_order: 3
+                    - code: total
+                      title: Total
+                      value: 106
+                      sort_order: 9
+                    statuses:
+                    - order_status_id: '3'
+                      date_added: 2021-10-13 18:51:39
+                      comment: ''
+                      notify: '0'
+                    - order_status_id: '3'
+                      date_added: 2021-10-11 20:30:55
+                      comment: ''
+                      notify: '0'
+              example:
+                result: true
+                order_id: 19
+                invoice_no: '0'
+                invoice_prefix: FAT-2021-00
+                store_name: Sua loja
+                store_url: http://example.com/
+                customer_id: 1
+                customer_group_id: 1
+                firstname: Valdeir
+                lastname: Psr
+                email: teste@teste.com
+                telephone: '71912345678'
+                fax: ''
+                custom_fields:
+                  cpf: 123.456.789-09
+                payment:
+                  firstname: Valdeir
+                  lastname: Psr
+                  company: ''
+                  address_1: Avenida Brasil
+                  address_2: Campo Grande
+                  city: Rio de Janeiro
+                  postcode: '23078001'
+                  country: Brasil
+                  zone: Rio de Janeiro
+                  custom_field: []
+                  method: Cash On Delivery
+                shipping:
+                  firstname: Valdeir
+                  lastname: Psr
+                  company: ''
+                  address_1: Avenida Brasil
+                  address_2: Campo Grande
+                  city: Rio de Janeiro
+                  postcode: '23078001'
+                  country: Brasil
+                  zone: Rio de Janeiro
+                  custom_field: []
+                  method: Flat Shipping Rate
+                comment: ''
+                total: 106
+                order_status_id: 3
+                affiliate_id: 0
+                commission: 0
+                marketing_id: 0
+                tracking: ''
+                currency_code: BRL
+                currency_value: 1
+                ip: 172.18.0.1
+                forwarded_ip: ''
+                user_agent: Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/94.0.4606.71 Safari/537.36
+                accept_language: en-US,en;q=0.9,pt;q=0.8
+                date_added: 2021-10-06T17:03:45+00:00
+                date_modified: 2021-10-13T18:51:39+00:00
+                products:
+                - product_id: 40
+                  name: iPhone
+                  model: Produto 11
+                  quantity: 1
+                  price: 101
+                  total: 101
+                  tax: 0
+                  reward: '0'
+                  sku: ''
+                  ncm: ''
+                  cest: ''
+                  options: []
+                  recurring: []
+                totals:
+                - code: sub_total
+                  title: Sub-Total
+                  value: 101
+                  sort_order: 1
+                - code: shipping
+                  title: Flat Shipping Rate
+                  value: 5
+                  sort_order: 3
+                - code: total
+                  title: Total
+                  value: 106
+                  sort_order: 9
+                statuses:
+                - order_status_id: '3'
+                  date_added: 2021-10-13 18:51:39
+                  comment: ''
+                  notify: '0'
+                - order_status_id: '3'
+                  date_added: 2021-10-11 20:30:55
+                  comment: ''
+                  notify: '0'
+
         '404':
           description: Pedido não encontrado
           content:
@@ -2143,140 +2431,263 @@ paths:
       summary: Lista pedidos da loja
       description: ''
       operationId: GetOrders
+      security:
+        - httpBearer: []
       responses:
         '200':
           description: Sucesso
           content:
             application/json:
-              examples:
-                Lista de Pedidos:
-                  value: |-
-                    {
-                        "records": [
-                            {
-                                "order_id": 19,
-                                "invoice_no": "0",
-                                "invoice_prefix": "FAT-2021-00",
-                                "store_name": "Sua loja",
-                                "store_url": "http://localhost:8080/",
-                                "customer_id": 1,
-                                "customer_group_id": 1,
-                                "firstname": "Valdeir",
-                                "lastname": "Psr",
-                                "email": "teste@teste.com",
-                                "telephone": "71912345678",
-                                "fax": "",
-                                "custom_fields": {
-                                    "cpf": "123.456.789-09"
-                                },
-                                "payment": {
-                                    "firstname": "Valdeir",
-                                    "lastname": "Psr",
-                                    "company": "",
-                                    "address_1": "Avenida Brasil",
-                                    "address_2": "Campo Grande",
-                                    "city": "Rio de Janeiro",
-                                    "postcode": "23078001",
-                                    "country": "Brasil",
-                                    "zone": "Rio de Janeiro",
-                                    "custom_field": [],
-                                    "method": "Cash On Delivery"
-                                },
-                                "shipping": {
-                                    "firstname": "Valdeir",
-                                    "lastname": "Psr",
-                                    "company": "",
-                                    "address_1": "Avenida Brasil",
-                                    "address_2": "Campo Grande",
-                                    "city": "Rio de Janeiro",
-                                    "postcode": "23078001",
-                                    "country": "Brasil",
-                                    "zone": "Rio de Janeiro",
-                                    "custom_field": [],
-                                    "method": "Flat Shipping Rate"
-                                },
-                                "comment": "",
-                                "total": 106,
-                                "order_status_id": 3,
-                                "affiliate_id": 0,
-                                "commission": 0,
-                                "marketing_id": 0,
-                                "tracking": "",
-                                "currency_code": "BRL",
-                                "currency_value": 1,
-                                "ip": "172.18.0.1",
-                                "forwarded_ip": "",
-                                "user_agent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/94.0.4606.71 Safari/537.36",
-                                "accept_language": "en-US,en;q=0.9,pt;q=0.8",
-                                "date_added": "2021-10-06T17:03:45+00:00",
-                                "date_modified": "2021-10-13T18:51:39+00:00",
-                                "products": [
-                                    {
-                                        "order_product_id": "21",
-                                        "order_id": "19",
-                                        "product_id": "40",
-                                        "name": "iPhone",
-                                        "model": "Produto 11",
-                                        "quantity": "1",
-                                        "price": "101.0000",
-                                        "total": "101.0000",
-                                        "tax": "0.0000",
-                                        "reward": "0",
-                                        "sku": "",
-                                        "ncm": "",
-                                        "cest": ""
-                                    }
-                                ],
-                                "totals": [
-                                    {
-                                        "code": "sub_total",
-                                        "title": "Sub-Total",
-                                        "value": 101,
-                                        "sort_order": 1
-                                    },
-                                    {
-                                        "code": "shipping",
-                                        "title": "Flat Shipping Rate",
-                                        "value": 5,
-                                        "sort_order": 3
-                                    },
-                                    {
-                                        "code": "total",
-                                        "title": "Total",
-                                        "value": 106,
-                                        "sort_order": 9
-                                    }
-                                ],
-                                "statuses": [
-                                    {
-                                        "order_status_id": 3,
-                                        "date_added": "2021-10-01T19:57:40+00:00",
-                                        "comment": "",
-                                        "notify": false
-                                    },
-                                    {
-                                        "order_status_id": 3,
-                                        "date_added": "2021-07-13T15:00:00+00:00",
-                                        "comment": "",
-                                        "notify": true
-                                    }
-                                ]
-                            }
-                        ],
-                        "_metadata": {
-                            "page": 1,
-                            "per_page": 50,
-                            "page_count": 1,
-                            "total_count": 1,
-                            "links": {
-                                "self": "/orders?page=1&per_page=50",
-                                "first": "/orders?page=1&per_page=50",
-                                "previous": null,
-                                "next": null,
-                                "last": "/orders?page=1&per_page=50"
-                            }
-                        }
-                    }
+              schema:
+                type: object
+                properties:
+                  records:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        order_id:
+                          type: integer
+                          format: int32
+                        invoice_no:
+                          type: string
+                        invoice_prefix:
+                          type: string
+                        store_name:
+                          type: string
+                        store_url:
+                          type: string
+                        customer_id:
+                          type: integer
+                          format: int32
+                        customer_group_id:
+                          type: integer
+                          format: int32
+                        firstname:
+                          type: string
+                        lastname:
+                          type: string
+                        email:
+                          type: string
+                        telephone:
+                          type: string
+                        fax:
+                          type: string
+                        custom_fields:
+                          title: CustomFields
+                          type: object
+                          properties:
+                            key:
+                              type: string
+                          example:
+                            cpf: 123.456.789-09
+                        payment:
+                          type: object
+                          properties:
+                            firstname:
+                              type: string
+                            lastname:
+                              type: string
+                            company:
+                              type: string
+                            address_1:
+                              type: string
+                            address_2:
+                              type: string
+                            city:
+                              type: string
+                            postcode:
+                              type: string
+                            country:
+                              type: string
+                            zone:
+                              type: string
+                            custom_field:
+                              type: object
+                              properties:
+                                key:
+                                  type: string
+                              example:
+                                cpf: 123.456.789-09
+                              description: ''
+                            method:
+                              type: string
+                        shipping:
+                          type: object
+                          properties:
+                            firstname:
+                              type: string
+                            lastname:
+                              type: string
+                            company:
+                              type: string
+                            address_1:
+                              type: string
+                            address_2:
+                              type: string
+                            city:
+                              type: string
+                            postcode:
+                              type: string
+                            country:
+                              type: string
+                            zone:
+                              type: string
+                            custom_field:
+                              type: object
+                              properties:
+                                key:
+                                  type: string
+                              example:
+                                cpf: 123.456.789-09
+                              description: ''
+                            method:
+                              type: string
+                        comment:
+                          type: string
+                        total:
+                          type: integer
+                          format: int32
+                        order_status_id:
+                          type: integer
+                          format: int32
+                        affiliate_id:
+                          type: integer
+                          format: int32
+                        commission:
+                          type: integer
+                          format: int32
+                        marketing_id:
+                          type: integer
+                          format: int32
+                        tracking:
+                          type: string
+                        currency_code:
+                          type: string
+                        currency_value:
+                          type: integer
+                          format: int32
+                        ip:
+                          type: string
+                        forwarded_ip:
+                          type: string
+                        user_agent:
+                          type: string
+                        accept_language:
+                          type: string
+                        date_added:
+                          type: string
+                        date_modified:
+                          type: string
+                        products:
+                          type: array
+                          items:
+                            type: object
+                            properties:
+                              order_product_id:
+                                type: string
+                              order_id:
+                                type: string
+                              product_id:
+                                type: string
+                              name:
+                                type: string
+                              model:
+                                type: string
+                              quantity:
+                                type: string
+                              price:
+                                type: string
+                              total:
+                                type: string
+                              tax:
+                                type: string
+                              reward:
+                                type: string
+                              sku:
+                                type: string
+                              ncm:
+                                type: string
+                              cest:
+                                type: string
+
+                          description: ''
+                        totals:
+                          type: array
+                          items:
+                            type: object
+                            properties:
+                              code:
+                                type: string
+                              title:
+                                type: string
+                              value:
+                                type: integer
+                                format: int32
+                              sort_order:
+                                type: integer
+                                format: int32
+                            example:
+                              code: sub_total
+                              title: Sub-Total
+                              value: 101
+                              sort_order: 1
+                          description: ''
+                        statuses:
+                          type: array
+                          items:
+                            type: object
+                            properties:
+                              order_status_id:
+                                type: integer
+                                format: int32
+                              date_added:
+                                type: string
+                              comment:
+                                type: string
+                              notify:
+                                type: boolean
+                            example:
+                              order_status_id: 3
+                              date_added: 2021-10-01T19:57:40+00:00
+                              comment: ''
+                              notify: false
+                          description: ''
+                    description: ''
+                  _metadata:
+                    required:
+                    - page
+                    - per_page
+                    - page_count
+                    - total_count
+                    - links
+                    type: object
+                    properties:
+                      page:
+                        type: integer
+                        format: int32
+                      per_page:
+                        type: integer
+                        format: int32
+                      page_count:
+                        type: integer
+                        format: int32
+                      total_count:
+                        type: integer
+                        format: int32
+                      links:
+                        $ref: '#/components/schemas/Links'
+                    example:
+                      page: 1
+                      per_page: 50
+                      page_count: 1
+                      total_count: 1
+                      links:
+                        self: /orders?page=1&per_page=50
+                        first: /orders?page=1&per_page=50
+                        previous: ''
+                        next: ''
+                        last: /orders?page=1&per_page=50
       tags:
         - 16 - Pedidos
 components:
@@ -2889,7 +3300,7 @@ components:
           location: ''
           quantity: 1000
           stock_status_id: 5
-          image: http://localhost:8080/image/catalog/api/60f9b4df2b7e2-517695.jpg
+          image: http://example.com/image/catalog/api/60f9b4df2b7e2-517695.jpg
           manufacturer_id: 8
           shipping: true
           price: 199.98
@@ -2957,9 +3368,9 @@ components:
           filters:
             - 1
           additional_images:
-            - http://localhost:8080/image/catalog/api/60f9b4df57ef3-517695.jpg
-            - http://localhost:8080/image/catalog/api/60f9b4df49afc-517695.jpg
-            - http://localhost:8080/image/catalog/api/60f9b4df3cf76-517695.jpg
+            - http://example.com/image/catalog/api/60f9b4df57ef3-517695.jpg
+            - http://example.com/image/catalog/api/60f9b4df49afc-517695.jpg
+            - http://example.com/image/catalog/api/60f9b4df3cf76-517695.jpg
           options:
             - type: date
               option_id: 8
@@ -3052,7 +3463,7 @@ components:
             - 0
           links:
             default: >-
-              http://localhost:8080/index.php?route=product/product&product_id=222
+              http://example.com/index.php?route=product/product&product_id=222
     Data:
       title: Data
       required:
@@ -3263,7 +3674,7 @@ components:
         location: ''
         quantity: 1000
         stock_status_id: 5
-        image: http://localhost:8080/image/catalog/api/60f9b4df2b7e2-517695.jpg
+        image: http://example.com/image/catalog/api/60f9b4df2b7e2-517695.jpg
         manufacturer_id: 8
         shipping: true
         price: 199.98
@@ -3331,9 +3742,9 @@ components:
         filters:
           - 1
         additional_images:
-          - http://localhost:8080/image/catalog/api/60f9b4df57ef3-517695.jpg
-          - http://localhost:8080/image/catalog/api/60f9b4df49afc-517695.jpg
-          - http://localhost:8080/image/catalog/api/60f9b4df3cf76-517695.jpg
+          - http://example.com/image/catalog/api/60f9b4df57ef3-517695.jpg
+          - http://example.com/image/catalog/api/60f9b4df49afc-517695.jpg
+          - http://example.com/image/catalog/api/60f9b4df3cf76-517695.jpg
         options:
           - type: date
             option_id: 8
@@ -3425,7 +3836,7 @@ components:
         stores:
           - 0
         links:
-          default: http://localhost:8080/index.php?route=product/product&product_id=222
+          default: http://example.com/index.php?route=product/product&product_id=222
     Attribute1:
       title: Attribute1
       required:
@@ -3662,7 +4073,7 @@ components:
         default:
           type: string
       example:
-        default: http://localhost:8080/index.php?route=product/product&product_id=222
+        default: http://example.com/index.php?route=product/product&product_id=222
     Error4:
       title: Error4
       required:
@@ -3824,7 +4235,7 @@ components:
           location: ''
           quantity: 1000
           stock_status_id: 5
-          image: http://localhost:8080/image/catalog/api/60f9b8ed79993-517695.jpg
+          image: http://example.com/image/catalog/api/60f9b8ed79993-517695.jpg
           manufacturer_id: 8
           shipping: true
           price: 199.98
@@ -3873,9 +4284,9 @@ components:
           filters:
             - 1
           additional_images:
-            - http://localhost:8080/image/catalog/api/60f9b8eda87d6-517695.jpg
-            - http://localhost:8080/image/catalog/api/60f9b8ed955be-517695.jpg
-            - http://localhost:8080/image/catalog/api/60f9b8ed85827-517695.jpg
+            - http://example.com/image/catalog/api/60f9b8eda87d6-517695.jpg
+            - http://example.com/image/catalog/api/60f9b8ed955be-517695.jpg
+            - http://example.com/image/catalog/api/60f9b8ed85827-517695.jpg
           options:
             - type: date
               option_id: 8
@@ -3959,7 +4370,7 @@ components:
             - 0
           links:
             default: >-
-              http://localhost:8080/index.php?route=product/product&product_id=222
+              http://example.com/index.php?route=product/product&product_id=222
     Data2:
       title: Data2
       required:
@@ -4152,7 +4563,7 @@ components:
         location: ''
         quantity: 1000
         stock_status_id: 5
-        image: http://localhost:8080/image/catalog/api/60f9b8ed79993-517695.jpg
+        image: http://example.com/image/catalog/api/60f9b8ed79993-517695.jpg
         manufacturer_id: 8
         shipping: true
         price: 199.98
@@ -4201,9 +4612,9 @@ components:
         filters:
           - 1
         additional_images:
-          - http://localhost:8080/image/catalog/api/60f9b8eda87d6-517695.jpg
-          - http://localhost:8080/image/catalog/api/60f9b8ed955be-517695.jpg
-          - http://localhost:8080/image/catalog/api/60f9b8ed85827-517695.jpg
+          - http://example.com/image/catalog/api/60f9b8eda87d6-517695.jpg
+          - http://example.com/image/catalog/api/60f9b8ed955be-517695.jpg
+          - http://example.com/image/catalog/api/60f9b8ed85827-517695.jpg
         options:
           - type: date
             option_id: 8
@@ -4286,7 +4697,7 @@ components:
         stores:
           - 0
         links:
-          default: http://localhost:8080/index.php?route=product/product&product_id=222
+          default: http://example.com/index.php?route=product/product&product_id=222
     Sucesso4:
       title: Sucesso4
       required:
@@ -4316,7 +4727,7 @@ components:
             location: ''
             quantity: 970
             stock_status_id: 5
-            image: http://localhost:8080/image/catalog/demo/iphone_1.jpg
+            image: http://example.com/image/catalog/demo/iphone_1.jpg
             manufacturer_id: 8
             shipping: true
             price: 101
@@ -4364,11 +4775,11 @@ components:
               en-gb: ''
               pt-br: ''
             additional_images:
-              - http://localhost:8080/image/catalog/demo/iphone_6.jpg
-              - http://localhost:8080/image/catalog/demo/iphone_2.jpg
-              - http://localhost:8080/image/catalog/demo/iphone_5.jpg
-              - http://localhost:8080/image/catalog/demo/iphone_3.jpg
-              - http://localhost:8080/image/catalog/demo/iphone_4.jpg
+              - http://example.com/image/catalog/demo/iphone_6.jpg
+              - http://example.com/image/catalog/demo/iphone_2.jpg
+              - http://example.com/image/catalog/demo/iphone_5.jpg
+              - http://example.com/image/catalog/demo/iphone_3.jpg
+              - http://example.com/image/catalog/demo/iphone_4.jpg
             product_related:
               - 42
             points_reward:
@@ -4381,7 +4792,7 @@ components:
               - 0
             links:
               default: >-
-                http://localhost:8080/index.php?route=product/product&product_id=40
+                http://example.com/index.php?route=product/product&product_id=40
         _metadata:
           page: 1
           per_page: 50
@@ -4560,7 +4971,7 @@ components:
         location: ''
         quantity: 970
         stock_status_id: 5
-        image: http://localhost:8080/image/catalog/demo/iphone_1.jpg
+        image: http://example.com/image/catalog/demo/iphone_1.jpg
         manufacturer_id: 8
         shipping: true
         price: 101
@@ -4608,11 +5019,11 @@ components:
           en-gb: ''
           pt-br: ''
         additional_images:
-          - http://localhost:8080/image/catalog/demo/iphone_6.jpg
-          - http://localhost:8080/image/catalog/demo/iphone_2.jpg
-          - http://localhost:8080/image/catalog/demo/iphone_5.jpg
-          - http://localhost:8080/image/catalog/demo/iphone_3.jpg
-          - http://localhost:8080/image/catalog/demo/iphone_4.jpg
+          - http://example.com/image/catalog/demo/iphone_6.jpg
+          - http://example.com/image/catalog/demo/iphone_2.jpg
+          - http://example.com/image/catalog/demo/iphone_5.jpg
+          - http://example.com/image/catalog/demo/iphone_3.jpg
+          - http://example.com/image/catalog/demo/iphone_4.jpg
         product_related:
           - 42
         points_reward:
@@ -4624,7 +5035,7 @@ components:
         stores:
           - 0
         links:
-          default: http://localhost:8080/index.php?route=product/product&product_id=40
+          default: http://example.com/index.php?route=product/product&product_id=40
     Metadata:
       title: Metadata
       required:
@@ -4702,7 +5113,7 @@ components:
         order_status_id:
           type: integer
           format: int32
-        price:
+        comment:
           type: string
       example:
         order_id: 130793
@@ -5163,7 +5574,7 @@ components:
               en-gb: ''
               pt-br: ''
           - category_id: 20
-            image: http://localhost:8080/image/catalog/demo/compaq_presario.jpg
+            image: http://example.com/image/catalog/demo/compaq_presario.jpg
             parent_id: 0
             top: 1
             column: 1
@@ -5576,27 +5987,27 @@ components:
         items:
           - manufacturer_id: 8
             name: Apple
-            image: http://localhost:8080/image/catalog/demo/apple_logo.jpg
+            image: http://example.com/image/catalog/demo/apple_logo.jpg
             sort_order: 0
           - manufacturer_id: 9
             name: Canon
-            image: http://localhost:8080/image/catalog/demo/canon_logo.jpg
+            image: http://example.com/image/catalog/demo/canon_logo.jpg
             sort_order: 0
           - manufacturer_id: 7
             name: HP
-            image: http://localhost:8080/image/catalog/demo/hp_logo.jpg
+            image: http://example.com/image/catalog/demo/hp_logo.jpg
             sort_order: 0
           - manufacturer_id: 5
             name: HTC
-            image: http://localhost:8080/image/catalog/demo/htc_logo.jpg
+            image: http://example.com/image/catalog/demo/htc_logo.jpg
             sort_order: 0
           - manufacturer_id: 6
             name: Palm
-            image: http://localhost:8080/image/catalog/demo/palm_logo.jpg
+            image: http://example.com/image/catalog/demo/palm_logo.jpg
             sort_order: 0
           - manufacturer_id: 10
             name: Sony
-            image: http://localhost:8080/image/catalog/demo/sony_logo.jpg
+            image: http://example.com/image/catalog/demo/sony_logo.jpg
             sort_order: 0
         _metadata:
           page: 1
@@ -5631,7 +6042,7 @@ components:
       example:
         manufacturer_id: 8
         name: Apple
-        image: http://localhost:8080/image/catalog/demo/apple_logo.jpg
+        image: http://example.com/image/catalog/demo/apple_logo.jpg
         sort_order: 0
     Sucesso15:
       title: Sucesso15
@@ -5745,25 +6156,25 @@ components:
               pt-br: Caixa de Texto
             values:
               - option_value_id: 23
-                image: http://localhost:8080/catalog/Daniel.jpg
+                image: http://example.com/catalog/Daniel.jpg
                 sort_order: 1
                 name:
                   en-gb: Checkbox 1
                   pt-br: Caixa de Texto 1
               - option_value_id: 24
-                image: http://localhost:8080/catalog/Daniel_and_Leclerc.jpg
+                image: http://example.com/catalog/Daniel_and_Leclerc.jpg
                 sort_order: 2
                 name:
                   en-gb: Checkbox 2
                   pt-br: Caixa de Texto 2
               - option_value_id: 44
-                image: http://localhost:8080/catalog/George.jpg
+                image: http://example.com/catalog/George.jpg
                 sort_order: 3
                 name:
                   en-gb: Checkbox 3
                   pt-br: Caixa de Texto 3
               - option_value_id: 45
-                image: http://localhost:8080/catalog/Tsunoda.jpg
+                image: http://example.com/catalog/Tsunoda.jpg
                 sort_order: 4
                 name:
                   en-gb: Checkbox 4
