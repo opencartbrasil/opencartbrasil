@@ -1,23 +1,20 @@
 openapi: 3.0.0
 info:
-  title: OpenCartBrasilAPI DOC
-  contact: {}
-  version: '1.0'
-servers:
-  - url: http://example.com/api
-    variables: {}
-  - url: http://dev.example.com/api
-    variables: {}
+  title: API OpenCart Brasil
+  description: API OpenCart Brasil, está baseada no padrão REST.
+  license:
+    name: Licença GNU General Public License v3.0
+    url: https://raw.githubusercontent.com/opencartbrasil/opencartbrasil/main/LICENSE
+  version: '1.0.0'
 paths:
   /credentials/access_token:
     post:
       tags:
         - 01 - Credenciais
-      summary: Gerar token
+      summary: Gerar access_token
       description: >-
-        Cria um token de acesso (*access_token* com base nas credenciais do
-        usuário (*consumer_key* e *consumer_secret*).
-      operationId: Gerartoken
+        Gera o **access_token** com base no **consumer_key** e **consumer_secret**.
+      operationId: GerarAccessToken
       parameters: []
       responses:
         '200':
@@ -25,7 +22,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Sucesso'
+                $ref: '#/components/schemas/GerarAccessTokenSucesso'
               example:
                 access_token: JWT
                 refresh_token: JWT
@@ -36,7 +33,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Credenciaisinvalidas1'
+                $ref: '#/components/schemas/GerarAccessTokenErro'
               example:
                 success: false
                 errors:
@@ -45,22 +42,18 @@ paths:
       deprecated: false
       security:
         - httpBasic: []
-      servers:
-        - url: http://example.com/api
-          variables: {}
   /credentials/refresh_token:
     post:
       tags:
         - 01 - Credenciais
-      summary: Atualizar token
+      summary: Atualizar access_token
       description: >-
-        Após expiração do *access_token* (1 hora, por padrão), é possível gerar
-        um novo token de acesso com duração de 24 horas (padrão).
+        Após a expiração do **access_token**, é possível gerar
+        um novo **access_token** a partir do **refresh_token**.
 
-
-        No entanto, o *refresh_token* só poderá ser utilizado uma vez. Após
-        isso, ele e o token de acesso gerado serão invalidados.
-      operationId: Atualizartoken
+        O **refresh_token** só poderá ser utilizado uma vez, sendo
+        invalidado posteriormente junto com o primeiro **access_token**.
+      operationId: AtualizarAccessToken
       parameters: []
       responses:
         '200':
@@ -68,7 +61,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Sucesso1'
+                $ref: '#/components/schemas/AtualizarAccessTokenSucesso'
               example:
                 access_token: JWT
                 token_type: Bearer
@@ -78,7 +71,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/RefreshTokeninvalido1'
+                $ref: '#/components/schemas/AtualizarAccessTokenErro'
               example:
                 success: false
                 errors:
@@ -87,23 +80,16 @@ paths:
       deprecated: false
       security:
         - httpBasic: []
-      servers:
-        - url: http://example.com/api
-          variables: {}
   /product:
     post:
       tags:
         - 02 - Produtos
-      summary: Registrar Produto
+      summary: Cadastrar produto
       description: >
-        Registra um produto na loja.
+        Cadastra o produto, sendo possível definir os códigos de idioma em nós compatíveis.
 
 
-        Você pode definir o código de idiomas (pt-br, por exemplo para Português
-        do Brasil) para cadastrar o produto em diversos idiomas.
-
-
-        Os nós que aceitam os códigos de idiomas são;
+        Os nós compatíveis com idiomas são:
 
          - name
          - description
@@ -113,19 +99,19 @@ paths:
          - tags
          - attributes
 
-        O nó "default" continua obrigatório nos nós supras.
+        O nó "default" continua obrigatório nos demais nós.
 
 
         Caso a loja possua mais de um idioma cadastrado, o sistema utilizará o
-        valor do nó "default" para definir o valor no idioma faltante.
-      operationId: RegistrarProduto
+        valor do nó "default" para preencher os campos que necessitam de idioma.
+      operationId: CadastrarProduto
       parameters: []
       requestBody:
         description: ''
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/RegistrarProdutoRequest'
+              $ref: '#/components/schemas/CadastrarProdutoRequest'
         required: true
       responses:
         '201':
@@ -133,12 +119,12 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Sucesso2'
+                $ref: '#/components/schemas/CadastrarProdutoSucesso'
               example:
                 result: true
                 data:
                   product_id: 222
-                  model: Modelo do Produto
+                  model: Modelo
                   sku: ''
                   ncm: ''
                   cest: ''
@@ -151,10 +137,10 @@ paths:
                   quantity: 1000
                   stock_status_id: 5
                   image: >-
-                    http://example.com/image/catalog/api/60f9b4df2b7e2-517695.jpg
+                    https://sualoja.com.br/image/catalog/api/60f9b4df2b7e2-517695.jpg
                   manufacturer_id: 8
                   shipping: true
-                  price: 199.98
+                  price: 199.99
                   points: 500
                   tax_class_id: 1
                   date_available: {}
@@ -180,8 +166,8 @@ paths:
                       en-gb: 4GB
                       pt-br: 4GB
                   name:
-                    en-gb: Nome do Produto
-                    pt-br: Nome do Produto
+                    en-gb: Título
+                    pt-br: Título
                   description:
                     en-gb: Descrição
                     pt-br: Descrição
@@ -195,14 +181,14 @@ paths:
                       - tag2
                       - tag3
                   meta_title:
-                    en-gb: Descrição do Produto
-                    pt-br: Descrição do Produto
+                    en-gb: Meta título
+                    pt-br: Meta título
                   meta_description:
-                    en-gb: Property required
-                    pt-br: Property required
+                    en-gb: Meta descrição
+                    pt-br: Meta descrição
                   meta_keyword:
-                    en-gb: Meta keyword default
-                    pt-br: Meta keyword default
+                    en-gb: Meta palavras-chave
+                    pt-br: Meta palavras-chave
                   discounts:
                     - customer_group_id: 1
                       priority: 1
@@ -220,11 +206,11 @@ paths:
                     - 1
                   additional_images:
                     - >-
-                      http://example.com/image/catalog/api/60f9b4df57ef3-517695.jpg
+                      https://sualoja.com.br/image/catalog/api/60f9b4df57ef3-517695.jpg
                     - >-
-                      http://example.com/image/catalog/api/60f9b4df49afc-517695.jpg
+                      https://sualoja.com.br/image/catalog/api/60f9b4df49afc-517695.jpg
                     - >-
-                      http://example.com/image/catalog/api/60f9b4df3cf76-517695.jpg
+                      https://sualoja.com.br/image/catalog/api/60f9b4df3cf76-517695.jpg
                   options:
                     - type: date
                       option_id: 8
@@ -283,7 +269,7 @@ paths:
                       required: true
                       values:
                         - option_value_id: 31
-                          sku: Identificação SKU da Opção
+                          sku: SKU da opção
                           quantity: 100
                           subtract: true
                           price:
@@ -317,30 +303,27 @@ paths:
                     - 0
                   links:
                     default: >-
-                      http://example.com/index.php?route=product/product&product_id=222
+                      https://sualoja.com.br/index.php?route=product/product&product_id=222
         '400':
           description: Bad Request
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Dadoinvalido1'
+                $ref: '#/components/schemas/CadastrarProdutoErro'
               example:
                 result: false
-                details: Erro no preenchimento dos dados enviados
+                details: Error filling in data sent
                 errors:
                   - node: /price
-                    details: Number expected, "199.98" received
+                    details: Number expected, "199.99" received
       deprecated: false
       security:
         - httpBearer: []
-      servers:
-        - url: http://example.com/api
-          variables: {}
     get:
       tags:
         - 02 - Produtos
-      summary: Listar Produtos
-      description: Lista os produtos cadastrado
+      summary: Listar produtos
+      description: Lista os produtos cadastrados.
       operationId: ListarProdutos
       parameters: []
       responses:
@@ -349,9 +332,9 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Sucesso4'
+                $ref: '#/components/schemas/ListarProdutosSucesso'
               example:
-                items:
+                records:
                   - product_id: 40
                     model: Produto 11
                     sku: ''
@@ -365,7 +348,7 @@ paths:
                     location: ''
                     quantity: 970
                     stock_status_id: 5
-                    image: http://example.com/image/catalog/demo/iphone_1.jpg
+                    image: https://sualoja.com.br/image/catalog/demo/iphone_1.jpg
                     manufacturer_id: 8
                     shipping: true
                     price: 101
@@ -413,11 +396,11 @@ paths:
                       en-gb: ''
                       pt-br: ''
                     additional_images:
-                      - http://example.com/image/catalog/demo/iphone_6.jpg
-                      - http://example.com/image/catalog/demo/iphone_2.jpg
-                      - http://example.com/image/catalog/demo/iphone_5.jpg
-                      - http://example.com/image/catalog/demo/iphone_3.jpg
-                      - http://example.com/image/catalog/demo/iphone_4.jpg
+                      - https://sualoja.com.br/image/catalog/demo/iphone_6.jpg
+                      - https://sualoja.com.br/image/catalog/demo/iphone_2.jpg
+                      - https://sualoja.com.br/image/catalog/demo/iphone_5.jpg
+                      - https://sualoja.com.br/image/catalog/demo/iphone_3.jpg
+                      - https://sualoja.com.br/image/catalog/demo/iphone_4.jpg
                     product_related:
                       - 42
                     points_reward:
@@ -430,7 +413,7 @@ paths:
                       - 0
                     links:
                       default: >-
-                        http://example.com/index.php?route=product/product&product_id=40
+                        https://sualoja.com.br/index.php?route=product/product&product_id=40
                 _metadata:
                   page: 1
                   per_page: 50
@@ -445,20 +428,17 @@ paths:
       deprecated: false
       security:
         - httpBearer: []
-      servers:
-        - url: http://example.com/api
-          variables: {}
   /product/{product_id}:
     get:
       tags:
         - 02 - Produtos
-      summary: Capturar informações de um pedido
-      description: Realida registro do produto com todos os dados válidos
-      operationId: Capturarinformaçõesdeumpedido
+      summary: Informações do produto cadastrado
+      description: Exibe as informações do produto cadastrado.
+      operationId: InformacoesProduto
       parameters:
         - name: product_id
           in: path
-          description: ID do Produto
+          description: ID do produto
           required: true
           style: simple
           schema:
@@ -470,12 +450,12 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Sucesso2'
+                $ref: '#/components/schemas/CadastrarProdutoSucesso'
               example:
                 result: true
                 data:
                   product_id: 222
-                  model: Modelo do Produto
+                  model: Modelo
                   sku: ''
                   ncm: ''
                   cest: ''
@@ -488,10 +468,10 @@ paths:
                   quantity: 1000
                   stock_status_id: 5
                   image: >-
-                    http://example.com/image/catalog/api/60f9b4df2b7e2-517695.jpg
+                    https://sualoja.com.br/image/catalog/api/60f9b4df2b7e2-517695.jpg
                   manufacturer_id: 8
                   shipping: true
-                  price: 199.98
+                  price: 199.99
                   points: 500
                   tax_class_id: 1
                   date_available: {}
@@ -517,8 +497,8 @@ paths:
                       en-gb: 4GB
                       pt-br: 4GB
                   name:
-                    en-gb: Nome do Produto
-                    pt-br: Nome do Produto
+                    en-gb: Título
+                    pt-br: Título
                   description:
                     en-gb: Descrição
                     pt-br: Descrição
@@ -532,14 +512,14 @@ paths:
                       - tag2
                       - tag3
                   meta_title:
-                    en-gb: Descrição do Produto
-                    pt-br: Descrição do Produto
+                    en-gb: Meta título
+                    pt-br: Meta título
                   meta_description:
-                    en-gb: Property required
-                    pt-br: Property required
+                    en-gb: Meta descrição
+                    pt-br: Meta descrição
                   meta_keyword:
-                    en-gb: Meta keyword default
-                    pt-br: Meta keyword default
+                    en-gb: Meta palavras-chave
+                    pt-br: Meta palavras-chave
                   discounts:
                     - customer_group_id: 1
                       priority: 1
@@ -557,11 +537,11 @@ paths:
                     - 1
                   additional_images:
                     - >-
-                      http://example.com/image/catalog/api/60f9b4df57ef3-517695.jpg
+                      https://sualoja.com.br/image/catalog/api/60f9b4df57ef3-517695.jpg
                     - >-
-                      http://example.com/image/catalog/api/60f9b4df49afc-517695.jpg
+                      https://sualoja.com.br/image/catalog/api/60f9b4df49afc-517695.jpg
                     - >-
-                      http://example.com/image/catalog/api/60f9b4df3cf76-517695.jpg
+                      https://sualoja.com.br/image/catalog/api/60f9b4df3cf76-517695.jpg
                   options:
                     - type: date
                       option_id: 8
@@ -620,7 +600,7 @@ paths:
                       required: true
                       values:
                         - option_value_id: 31
-                          sku: Identificação SKU da Opção
+                          sku: SKU da opção
                           quantity: 100
                           subtract: true
                           price:
@@ -654,7 +634,7 @@ paths:
                     - 0
                   links:
                     default: >-
-                      http://example.com/index.php?route=product/product&product_id=222
+                      https://sualoja.com.br/index.php?route=product/product&product_id=222
         '404':
           description: Not Found
           content:
@@ -669,20 +649,16 @@ paths:
       deprecated: false
       security:
         - httpBearer: []
-      servers:
-        - url: http://example.com/api
-          variables: {}
     delete:
       tags:
         - 02 - Produtos
-      summary: Remover Produto
+      summary: Excluir produto
       description: >-
-        Deleta um determinado produto.
+        Exclui os dados do produto cadastrado.
 
 
-        Ao realizar este procedimento, as imagens do produto também serão
-        removidas da loja.
-      operationId: RemoverProduto
+        **Atenção:** As imagens do produto também serão excluídas.
+      operationId: ExcluirProduto
       parameters:
         - name: product_id
           in: path
@@ -710,21 +686,19 @@ paths:
       deprecated: false
       security:
         - httpBearer: []
-      servers:
-        - url: http://example.com/api
-          variables: {}
     put:
       tags:
         - 02 - Produtos
-      summary: Atualizar Produtos
+      summary: Atualizar produto
       description: >-
-        Atualiza um determinado produto. A estrutura dos dados segue o mesmo
-        padrão da rota de criação do produto.
+        Atualiza os dados do produto cadastrado.
 
 
-        Para remover algum dado como desconto, por exemplo, basta enviar o nó
-        vazio.
-      operationId: AtualizarProdutos
+        A estrutura dos dados segue o padrão do cadastro.
+
+
+        Para remover as promoções ou descontos, basta enviar o nó correspondente vazio.
+      operationId: AtualizarProduto
       parameters:
         - name: product_id
           in: path
@@ -739,22 +713,22 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/AtualizarProdutosRequest'
+              $ref: '#/components/schemas/AtualizarProdutoRequest'
             example:
               name:
-                default: Nome do Produto
-                en-gb: Product name
+                default: Título
+                en-gb: Título
               description:
                 default: Descrição
               meta_title:
-                default: Descrição do Produto
+                default: Meta título
               meta_description:
                 pt-br: Meta descrição
-                en-gb: Meta description
-                default: Property required
+                en-gb: Meta descrição
+                default: Meta descrição
               shipping: false
-              model: Modelo do Produto
-              price: 199.98
+              model: Modelo
+              price: 199.99
               tax_class_id: 1
               stock_status_id: 5
               quantity: 1000
@@ -781,12 +755,12 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Atualizadados'
+                $ref: '#/components/schemas/AtualizarProdutoSucesso'
               example:
                 result: true
                 data:
                   product_id: 222
-                  model: Modelo do Produto
+                  model: Modelo
                   sku: ''
                   ncm: ''
                   cest: ''
@@ -799,10 +773,10 @@ paths:
                   quantity: 1000
                   stock_status_id: 5
                   image: >-
-                    http://example.com/image/catalog/api/60f9b8ed79993-517695.jpg
+                    https://sualoja.com.br/image/catalog/api/60f9b8ed79993-517695.jpg
                   manufacturer_id: 8
                   shipping: true
-                  price: 199.98
+                  price: 199.99
                   points: 500
                   tax_class_id: 1
                   date_available: {}
@@ -828,8 +802,8 @@ paths:
                       en-gb: 4GB
                       pt-br: 4GB
                   name:
-                    en-gb: Nome do Produto
-                    pt-br: Nome do Produto
+                    en-gb: Título
+                    pt-br: Título
                   description:
                     en-gb: Descrição
                     pt-br: Descrição
@@ -837,23 +811,23 @@ paths:
                     en-gb: []
                     pt-br: []
                   meta_title:
-                    en-gb: Descrição do Produto
-                    pt-br: Descrição do Produto
+                    en-gb: Meta título
+                    pt-br: Meta título
                   meta_description:
-                    en-gb: Meta descrição do produto
-                    pt-br: Meta descrição do produto
+                    en-gb: Meta descrição
+                    pt-br: Meta descrição
                   meta_keyword:
-                    en-gb: Meta keyword default
-                    pt-br: Meta keyword default
+                    en-gb: Meta palavras-chave
+                    pt-br: Meta palavras-chave
                   filters:
                     - 1
                   additional_images:
                     - >-
-                      http://example.com/image/catalog/api/60f9b8eda87d6-517695.jpg
+                      https://sualoja.com.br/image/catalog/api/60f9b8eda87d6-517695.jpg
                     - >-
-                      http://example.com/image/catalog/api/60f9b8ed955be-517695.jpg
+                      https://sualoja.com.br/image/catalog/api/60f9b8ed955be-517695.jpg
                     - >-
-                      http://example.com/image/catalog/api/60f9b8ed85827-517695.jpg
+                      https://sualoja.com.br/image/catalog/api/60f9b8ed85827-517695.jpg
                   options:
                     - type: date
                       option_id: 8
@@ -912,7 +886,7 @@ paths:
                       required: true
                       values:
                         - option_value_id: 31
-                          sku: Identificação SKU da Opção
+                          sku: SKU da opção
                           quantity: 100
                           subtract: true
                           price:
@@ -937,16 +911,16 @@ paths:
                     - 0
                   links:
                     default: >-
-                      http://example.com/index.php?route=product/product&product_id=222
+                      https://sualoja.com.br/index.php?route=product/product&product_id=222
         '400':
           description: Bad Request
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Dadoinvalido1'
+                $ref: '#/components/schemas/CadastrarProdutoErro'
               example:
                 result: false
-                details: Erro no preenchimento dos dados enviados
+                details: Error filling in data sent
                 errors:
                   - node: /
                     details: >-
@@ -956,7 +930,7 @@ paths:
                       do Produto"},"meta_description":{"default":"Meta
                       descri\u00e7\u00e3o do
                       produto"},"meta_keyword":{"default":"Meta keyword
-                      default"},"shipping":true,"sku":"","ncm":"","cest":"","upc":"","ean":"","jan":"","isbn":"","mpn":"","location":"","price":199.98,"tax_class_id":1,"stock_status_id":5,"quantity":1000,"minimum":1,"subtract":true,"date_available":"2021-06-12","dimensions":{"length":10,"width":10,"height":10,"weight":900,"length_class_id":1,"weight_class_id":2},"status":true,"manufacturer_id":8,"categories":[27],"filters":[1],"stores":[0],"downloads":[1],"product_related":[42],"points_to_buy":500,"points_reward":[{"customer_group_id":1,"points":100}],"attributes":[{"id":3,"default":"4GB","pt-br":"4
+                      default"},"shipping":true,"sku":"","ncm":"","cest":"","upc":"","ean":"","jan":"","isbn":"","mpn":"","location":"","price":199.99,"tax_class_id":1,"stock_status_id":5,"quantity":1000,"minimum":1,"subtract":true,"date_available":"2021-06-12","dimensions":{"length":10,"width":10,"height":10,"weight":900,"length_class_id":1,"weight_class_id":2},"status":true,"manufacturer_id":8,"categories":[27],"filters":[1],"stores":[0],"downloads":[1],"product_related":[42],"points_to_buy":500,"points_reward":[{"customer_group_id":1,"points":100}],"attributes":[{"id":3,"default":"4GB","pt-br":"4
                       gigabytes"},{"id":1,"default":"Four","pt-br":"Quatro"}],"options":[{"type":"radio","option_id":1,"values":[{"option_value_id":31,"sku":"Identifica\u00e7\u00e3o
                       SKU da
                       Op\u00e7\u00e3o","quantity":100,"subtract":true,"price":{"prefix":"-","value":5},"points":{"value":100}}],"required":true},{"type":"checkbox","option_id":2,"values":[{"option_value_id":23,"sku":"","quantity":100,"subtract":true,"price":{"prefix":"-","value":5}},{"option_value_id":24,"sku":"","quantity":50,"subtract":false,"points":{"value":100}},{"option_value_id":44,"sku":"","quantity":150,"subtract":true,"weight":{"prefix":"+","value":5}}],"required":true},{"type":"text","value":"Preencha
@@ -975,15 +949,12 @@ paths:
       deprecated: false
       security:
         - httpBearer: []
-      servers:
-        - url: http://example.com/api
-          variables: {}
   /products/stocks:
     put:
       tags:
         - 02 - Produtos
-      summary: Update Stocks
-      operationId: UpdateStocks
+      summary: Atualizar estoque
+      operationId: AtualizarEstoque
       parameters: []
       requestBody:
         description: ''
@@ -992,7 +963,7 @@ paths:
             schema:
               type: array
               items:
-                $ref: '#/components/schemas/UpdateStocksRequest'
+                $ref: '#/components/schemas/AtualizarEstoqueRequest'
               description: ''
               example:
                 - product_id: 50
@@ -1063,7 +1034,7 @@ paths:
               schema:
                 type: array
                 items:
-                  $ref: '#/components/schemas/Success'
+                  $ref: '#/components/schemas/AtualizarEstoqueSucesso'
                 description: ''
                 example:
                   - product_id: 50
@@ -1098,21 +1069,18 @@ paths:
                   - code: invalid_access_token
                     message: Invalid access_token.
       deprecated: false
-      servers:
-        - url: http://example.com/api
-          variables: {}
       security:
         - httpBearer: []
   /language:
     get:
       tags:
-        - 03 - Idiomas da loja
-      summary: Lista Idiomas
-      operationId: ListaIdiomas
+        - 03 - Idiomas
+      summary: Listar idiomas
+      operationId: ListarIdiomas
       parameters:
         - name: filter_code
           in: query
-          description: Código do idioma
+          description: Código
           required: false
           style: form
           explode: true
@@ -1121,7 +1089,7 @@ paths:
             example: pt-br
         - name: filter_status
           in: query
-          description: Para listar idiomas habilitados, utilize 1; caso contrário, 0
+          description: Para listar idiomas habilitados utilize 1; caso contrário 0
           required: false
           style: form
           explode: true
@@ -1155,7 +1123,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Sucesso5'
+                $ref: '#/components/schemas/ListarIdiomasSucesso'
               example:
                 items:
                   - language_id: 2
@@ -1181,15 +1149,12 @@ paths:
       deprecated: false
       security:
         - httpBearer: []
-      servers:
-        - url: http://example.com/api
-          variables: {}
   /tax_class:
     get:
       tags:
         - 04 - Impostos
-      summary: Lista de Grupos de Impostos
-      operationId: ListadeGruposdeImpostos
+      summary: Listar grupos de impostos
+      operationId: ListarGruposImpostos
       parameters: []
       responses:
         '200':
@@ -1197,12 +1162,12 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Sucesso6'
+                $ref: '#/components/schemas/ListarGruposImpostosSucesso'
               example:
                 items:
                   - tax_class_id: 1
                     title: Estadual
-                    description: Bahia
+                    description: Amapá
                     date_added: {}
                     date_modified: {}
                 _metadata:
@@ -1219,15 +1184,12 @@ paths:
       deprecated: false
       security:
         - httpBearer: []
-      servers:
-        - url: http://example.com/api
-          variables: {}
   /stock_status:
     get:
       tags:
-        - 05 - Situações de Estoque
-      summary: Lista situações de estoque
-      operationId: Listasituaçõesdeestoque
+        - 05 - Situações de estoque
+      summary: Listar situações de estoque
+      operationId: ListarSituacoesEstoque
       parameters:
         - name: page
           in: query
@@ -1245,7 +1207,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Sucesso7'
+                $ref: '#/components/schemas/ListarSituacoesEstoqueSucesso'
               example:
                 items:
                   - stock_status_id: '5'
@@ -1278,15 +1240,12 @@ paths:
       deprecated: false
       security:
         - httpBearer: []
-      servers:
-        - url: http://example.com/api
-          variables: {}
   /length:
     get:
       tags:
-        - 06 - Medidas de Comprimento
-      summary: Lista comprimentos cadastrados
-      operationId: Listacomprimentoscadastrados
+        - 06 - Unidades de medida
+      summary: Listar unidades de medida
+      operationId: ListarUnidadesMedida
       parameters: []
       responses:
         '200':
@@ -1294,19 +1253,16 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Sucesso8'
+                $ref: '#/components/schemas/ListarUnidadesMedidaSucesso'
       deprecated: false
       security:
         - httpBearer: []
-      servers:
-        - url: http://example.com/api
-          variables: {}
   /weight:
     get:
       tags:
-        - 07 - Medidas de Peso
-      summary: Lista medidas de peso
-      operationId: Listamedidasdepeso
+        - 07 - Unidades de peso
+      summary: Listae unidades de peso
+      operationId: ListarUnidadePeso
       parameters: []
       responses:
         '200':
@@ -1318,15 +1274,12 @@ paths:
       deprecated: false
       security:
         - httpBearer: []
-      servers:
-        - url: http://example.com/api
-          variables: {}
   /category:
     get:
       tags:
-        - 08 - Categorias de Produtos
-      summary: Lista as categorias cadastradas
-      operationId: Listaascategoriascadastradas
+        - 08 - Departamentos
+      summary: Listar departamentos
+      operationId: ListarDepartamentos
       parameters:
         - name: filter_parent_id
           in: query
@@ -1369,7 +1322,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Sucesso10'
+                $ref: '#/components/schemas/ListarDepartamentosSucesso'
               example:
                 items:
                   - category_id: 25
@@ -1424,7 +1377,7 @@ paths:
                       pt-br: ''
                   - category_id: 20
                     image: >-
-                      http://example.com/image/catalog/demo/compaq_presario.jpg
+                      https://sualoja.com.br/image/catalog/demo/compaq_presario.jpg
                     parent_id: 0
                     top: 1
                     column: 1
@@ -1495,15 +1448,12 @@ paths:
       deprecated: false
       security:
         - httpBearer: []
-      servers:
-        - url: http://example.com/api
-          variables: {}
   /filter_group:
     get:
       tags:
-        - 09 - Filtros de Produtos
-      summary: Lista grupos
-      operationId: Listagrupos
+        - 09 - Filtros
+      summary: Listar filtros
+      operationId: ListarFiltros
       parameters: []
       responses:
         '200':
@@ -1511,7 +1461,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Sucesso11'
+                $ref: '#/components/schemas/ListarFiltrosSucesso'
               example:
                 items:
                   - filter_group_id: 1
@@ -1521,12 +1471,12 @@ paths:
                         sort_order: 3
                         name:
                           en-gb: Option One
-                          pt-br: Opção Um
+                          pt-br: Opção um
                       - filter_id: 2
                         sort_order: 2
                         name:
-                          pt-br: Opção Dois
                           en-gb: Option Two
+                          pt-br: Opção dois
                     name:
                       en-gb: 'Filter #1'
                       pt-br: 'Filtro #1'
@@ -1537,17 +1487,17 @@ paths:
                         sort_order: 0
                         name:
                           en-gb: Option Two - One
-                          pt-br: Opcao Dois - Um
+                          pt-br: Opção dois - Um
                       - filter_id: 4
                         sort_order: 0
                         name:
                           en-gb: Option Two - Two
-                          pt-br: Opcao Dois - Dois
+                          pt-br: Opção dois - Dois
                       - filter_id: 5
                         sort_order: 0
                         name:
                           en-gb: Option Two - Two
-                          pt-br: Opcao Dois - Três
+                          pt-br: Opção dois - Três
                     name:
                       en-gb: 'Filter #2'
                       pt-br: Filtro 2
@@ -1565,15 +1515,12 @@ paths:
       deprecated: false
       security:
         - httpBearer: []
-      servers:
-        - url: http://example.com/api
-          variables: {}
   /attribute_group:
     get:
       tags:
-        - 10 - Grupos de Atributos de Produtos
-      summary: Listar Grupos
-      operationId: ListarGrupos
+        - 10 - Grupos de atributos
+      summary: Listar grupos de atributos
+      operationId: ListarGruposAtributos
       parameters: []
       responses:
         '200':
@@ -1581,13 +1528,13 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Sucesso12'
+                $ref: '#/components/schemas/ListarGruposAtributos'
               example:
                 items:
                   - attribute_group_id: '2'
                     sort_order: '0'
                     name:
-                      en-gb: Informações
+                      en-gb: Information
                       pt-br: Informações
                   - attribute_group_id: '1'
                     sort_order: '1'
@@ -1608,14 +1555,11 @@ paths:
       deprecated: false
       security:
         - httpBearer: []
-      servers:
-        - url: http://example.com/api
-          variables: {}
   /attribute:
     get:
       tags:
-        - 11 - Atributos de Produtos
-      summary: Listar Atributos
+        - 11 - Atributos
+      summary: Listar atributos
       operationId: ListarAtributos
       parameters: []
       responses:
@@ -1624,7 +1568,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Sucesso13'
+                $ref: '#/components/schemas/ListarAtributosSucesso'
               example:
                 items:
                   - attribute_id: '2'
@@ -1656,15 +1600,12 @@ paths:
       deprecated: false
       security:
         - httpBearer: []
-      servers:
-        - url: http://example.com/api
-          variables: {}
   /manufacturer:
     get:
       tags:
-        - 12 - Fabricantes
-      summary: Listar fabricantes
-      operationId: Listarfabricantes
+        - 12 - Marcas
+      summary: Listar marcas
+      operationId: ListarMarcas
       parameters: []
       responses:
         '200':
@@ -1672,32 +1613,32 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Sucesso14'
+                $ref: '#/components/schemas/ListarMarcasSucesso'
               example:
                 items:
                   - manufacturer_id: 8
                     name: Apple
-                    image: http://example.com/image/catalog/demo/apple_logo.jpg
+                    image: https://sualoja.com.br/image/catalog/demo/apple_logo.jpg
                     sort_order: 0
                   - manufacturer_id: 9
                     name: Canon
-                    image: http://example.com/image/catalog/demo/canon_logo.jpg
+                    image: https://sualoja.com.br/image/catalog/demo/canon_logo.jpg
                     sort_order: 0
                   - manufacturer_id: 7
                     name: HP
-                    image: http://example.com/image/catalog/demo/hp_logo.jpg
+                    image: https://sualoja.com.br/image/catalog/demo/hp_logo.jpg
                     sort_order: 0
                   - manufacturer_id: 5
                     name: HTC
-                    image: http://example.com/image/catalog/demo/htc_logo.jpg
+                    image: https://sualoja.com.br/image/catalog/demo/htc_logo.jpg
                     sort_order: 0
                   - manufacturer_id: 6
                     name: Palm
-                    image: http://example.com/image/catalog/demo/palm_logo.jpg
+                    image: https://sualoja.com.br/image/catalog/demo/palm_logo.jpg
                     sort_order: 0
                   - manufacturer_id: 10
                     name: Sony
-                    image: http://example.com/image/catalog/demo/sony_logo.jpg
+                    image: https://sualoja.com.br/image/catalog/demo/sony_logo.jpg
                     sort_order: 0
                 _metadata:
                   page: 1
@@ -1713,14 +1654,11 @@ paths:
       deprecated: false
       security:
         - httpBearer: []
-      servers:
-        - url: http://example.com/api
-          variables: {}
   /download:
     get:
       tags:
         - 13 - Downloads
-      summary: Listar Downloads
+      summary: Listar downloads
       operationId: ListarDownloads
       parameters: []
       responses:
@@ -1729,16 +1667,16 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Sucesso15'
+                $ref: '#/components/schemas/ListarDownloadsSucesso'
               example:
                 items:
                   - download_id: 1
-                    filename: wp4269839.jpg.269c429c2b006b8fdb2987bf69462f5e
-                    mask: seb-ferrari.jpg
+                    filename: oc4269839.jpg.269c429c2b006b8fdb2987bf69462f5e
+                    mask: ebook.jpg
                     date_added: {}
                     name:
-                      en-gb: Sebastian Vettel
-                      pt-br: Sebasatião Vettel
+                      en-gb: eBook
+                      pt-br: Livro Digital
                 _metadata:
                   page: 1
                   per_page: 50
@@ -1753,15 +1691,12 @@ paths:
       deprecated: false
       security:
         - httpBearer: []
-      servers:
-        - url: http://example.com/api
-          variables: {}
   /option:
     get:
       tags:
         - 14 - Opções
-      summary: Listar Opções
-      operationId: ListarOpções
+      summary: Listar opções
+      operationId: ListarOpcoes
       parameters: []
       responses:
         '200':
@@ -1769,7 +1704,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Sucesso16'
+                $ref: '#/components/schemas/ListarOpcoesSucesso'
               example:
                 items:
                   - option_id: 1
@@ -1805,25 +1740,25 @@ paths:
                       pt-br: Caixa de Texto
                     values:
                       - option_value_id: 23
-                        image: http://example.com/catalog/Daniel.jpg
+                        image: https://sualoja.com.br/catalog/Daniel.jpg
                         sort_order: 1
                         name:
                           en-gb: Checkbox 1
                           pt-br: Caixa de Texto 1
                       - option_value_id: 24
-                        image: http://example.com/catalog/Daniel_and_Leclerc.jpg
+                        image: https://sualoja.com.br/catalog/Daniel_and_Leclerc.jpg
                         sort_order: 2
                         name:
                           en-gb: Checkbox 2
                           pt-br: Caixa de Texto 2
                       - option_value_id: 44
-                        image: http://example.com/catalog/George.jpg
+                        image: https://sualoja.com.br/catalog/George.jpg
                         sort_order: 3
                         name:
                           en-gb: Checkbox 3
                           pt-br: Caixa de Texto 3
                       - option_value_id: 45
-                        image: http://example.com/catalog/Tsunoda.jpg
+                        image: https://sualoja.com.br/catalog/Tsunoda.jpg
                         sort_order: 4
                         name:
                           en-gb: Checkbox 4
@@ -1947,15 +1882,12 @@ paths:
       deprecated: false
       security:
         - httpBearer: []
-      servers:
-        - url: http://example.com/api
-          variables: {}
   /orders/history:
     put:
       tags:
         - 16 - Pedidos
-      summary: Atualizar Histórico de Pedidos
-      description: ''
+      summary: Atualizar histórico
+      description: 'Atualiza o histórico e situação do pedido.'
       operationId: AtualizarHistoricoPedido
       security:
         - httpBearer: []
@@ -1966,7 +1898,7 @@ paths:
             schema:
               type: array
               items:
-                $ref: '#/components/schemas/UpdateOrderHistory'
+                $ref: '#/components/schemas/AtualizarHistoricoPedidoSucesso'
               description: ''
               example:
                 - order_id: 130793
@@ -2000,17 +1932,17 @@ paths:
                   order_id: 19
                   updated: true
   /order/{order_id}:
-    summary: Captura as informações de um pedido
+    summary: Captura as informações do pedido
     get:
-      summary: 'Captura as informações de um pedido'
+      summary: 'Captura as informações do pedido'
       description: ''
-      operationId: GetOrderInfo
+      operationId: CapturaPedido
       security:
         - httpBearer: []
       parameters:
         - name: order_id
           in: path
-          description: ID do Pedido
+          description: ID do pedido
           required: true
           style: simple
           schema:
@@ -2208,10 +2140,10 @@ paths:
                               type: integer
                               format: int32
                           example:
-                          code: sub_total
-                          title: Sub-Total
-                          value: 101
-                          sort_order: 1
+                            code: sub_total
+                            title: Sub-Total
+                            value: 101
+                            sort_order: 1
                         description: ''
                       statuses:
                         type: array
@@ -2237,64 +2169,64 @@ paths:
                   data:
                     order_id: 19
                     invoice_no: '0'
-                    invoice_prefix: FAT-2021-00
+                    invoice_prefix: FAT
                     store_name: Sua loja
-                    store_url: http://example.com/
+                    store_url: https://sualoja.com.br/
                     customer_id: 1
                     customer_group_id: 1
-                    firstname: Valdeir
-                    lastname: Psr
-                    email: teste@teste.com
-                    telephone: '71912345678'
+                    firstname: Fulano
+                    lastname: de Tal
+                    email: fulano@email.com
+                    telephone: '96 3222-3266'
                     fax: ''
                     custom_fields:
-                      cpf: 123.456.789-09
+                      cpf: 123.456.789-00
                     payment:
-                      firstname: Valdeir
-                      lastname: Psr
+                      firstname: Fulano
+                      lastname: de Tal
                       company: ''
-                      address_1: Avenida Brasil
-                      address_2: Campo Grande
-                      city: Rio de Janeiro
-                      postcode: '23078001'
+                      address_1: Rua Principal
+                      address_2: Centro
+                      city: Macapá
+                      postcode: '68900000'
                       country: Brasil
-                      zone: Rio de Janeiro
+                      zone: Amapá
                       custom_field: []
                       method: Cash On Delivery
                     shipping:
-                      firstname: Valdeir
-                      lastname: Psr
+                      firstname: Fulano
+                      lastname: de Tal
                       company: ''
-                      address_1: Avenida Brasil
-                      address_2: Campo Grande
-                      city: Rio de Janeiro
-                      postcode: '23078001'
+                      address_1: Rua Principal
+                      address_2: Centro
+                      city: Macapá
+                      postcode: '68900000'
                       country: Brasil
-                      zone: Rio de Janeiro
+                      zone: Amapá
                       custom_field: []
                       method: Flat Shipping Rate
                     comment: ''
-                    total: 106
+                    total: 106.00
                     order_status_id: 3
                     affiliate_id: 0
                     commission: 0
                     marketing_id: 0
                     tracking: ''
                     currency_code: BRL
-                    currency_value: 1
-                    ip: 172.18.0.1
+                    currency_value: 1.00
+                    ip: 192.168.0.1
                     forwarded_ip: ''
                     user_agent: Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/94.0.4606.71 Safari/537.36
                     accept_language: en-US,en;q=0.9,pt;q=0.8
-                    date_added: 2021-10-06T17:03:45+00:00
+                    date_added: 2021-10-10T17:03:45+00:00
                     date_modified: 2021-10-13T18:51:39+00:00
                     products:
                     - product_id: 40
                       name: iPhone
                       model: Produto 11
                       quantity: 1
-                      price: 101
-                      total: 101
+                      price: 101.00
+                      total: 101.00
                       tax: 0
                       reward: '0'
                       sku: ''
@@ -2305,15 +2237,15 @@ paths:
                     totals:
                     - code: sub_total
                       title: Sub-Total
-                      value: 101
+                      value: 101.00
                       sort_order: 1
                     - code: shipping
                       title: Flat Shipping Rate
-                      value: 5
+                      value: 5.00
                       sort_order: 3
                     - code: total
                       title: Total
-                      value: 106
+                      value: 106.00
                       sort_order: 9
                     statuses:
                     - order_status_id: '3'
@@ -2328,64 +2260,64 @@ paths:
                 result: true
                 order_id: 19
                 invoice_no: '0'
-                invoice_prefix: FAT-2021-00
+                invoice_prefix: FAT
                 store_name: Sua loja
-                store_url: http://example.com/
+                store_url: https://sualoja.com.br/
                 customer_id: 1
                 customer_group_id: 1
-                firstname: Valdeir
-                lastname: Psr
-                email: teste@teste.com
-                telephone: '71912345678'
+                firstname: Fulano
+                lastname: de Tal
+                email: fulano@email.com
+                telephone: '96 3222-3266'
                 fax: ''
                 custom_fields:
-                  cpf: 123.456.789-09
+                  cpf: 123.456.789-00
                 payment:
-                  firstname: Valdeir
-                  lastname: Psr
+                  firstname: Fulano
+                  lastname: de Tal
                   company: ''
-                  address_1: Avenida Brasil
-                  address_2: Campo Grande
-                  city: Rio de Janeiro
-                  postcode: '23078001'
+                  address_1: Rua Principal
+                  address_2: Centro
+                  city: Macapá
+                  postcode: '68900000'
                   country: Brasil
-                  zone: Rio de Janeiro
+                  zone: Amapá
                   custom_field: []
                   method: Cash On Delivery
                 shipping:
-                  firstname: Valdeir
-                  lastname: Psr
+                  firstname: Fulano
+                  lastname: de Tal
                   company: ''
-                  address_1: Avenida Brasil
-                  address_2: Campo Grande
-                  city: Rio de Janeiro
-                  postcode: '23078001'
+                  address_1: Rua Principal
+                  address_2: Centro
+                  city: Macapá
+                  postcode: '68900000'
                   country: Brasil
-                  zone: Rio de Janeiro
+                  zone: Amapá
                   custom_field: []
                   method: Flat Shipping Rate
                 comment: ''
-                total: 106
+                total: 106.00
                 order_status_id: 3
                 affiliate_id: 0
                 commission: 0
                 marketing_id: 0
                 tracking: ''
                 currency_code: BRL
-                currency_value: 1
-                ip: 172.18.0.1
+                currency_value: 1.00
+                ip: 192.168.0.2
                 forwarded_ip: ''
                 user_agent: Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/94.0.4606.71 Safari/537.36
                 accept_language: en-US,en;q=0.9,pt;q=0.8
-                date_added: 2021-10-06T17:03:45+00:00
+                date_added: 2021-10-10T17:03:45+00:00
                 date_modified: 2021-10-13T18:51:39+00:00
                 products:
                 - product_id: 40
                   name: iPhone
                   model: Produto 11
                   quantity: 1
-                  price: 101
-                  total: 101
+                  price: 101.00
+                  total: 101.00
                   tax: 0
                   reward: '0'
                   sku: ''
@@ -2396,15 +2328,15 @@ paths:
                 totals:
                 - code: sub_total
                   title: Sub-Total
-                  value: 101
+                  value: 101.00
                   sort_order: 1
                 - code: shipping
                   title: Flat Shipping Rate
-                  value: 5
+                  value: 5.00
                   sort_order: 3
                 - code: total
                   title: Total
-                  value: 106
+                  value: 106.00
                   sort_order: 9
                 statuses:
                 - order_status_id: '3'
@@ -2426,9 +2358,9 @@ paths:
       tags:
         - 16 - Pedidos
   /orders:
-    summary: Lista os pedidos da loja
+    summary: Listar pedidos
     get:
-      summary: Lista pedidos da loja
+      summary: Lista os pedidos
       description: ''
       operationId: GetOrders
       security:
@@ -2480,7 +2412,7 @@ paths:
                             key:
                               type: string
                           example:
-                            cpf: 123.456.789-09
+                            cpf: 123.456.789-00
                         payment:
                           type: object
                           properties:
@@ -2508,7 +2440,7 @@ paths:
                                 key:
                                   type: string
                               example:
-                                cpf: 123.456.789-09
+                                cpf: 123.456.789-00
                               description: ''
                             method:
                               type: string
@@ -2539,7 +2471,7 @@ paths:
                                 key:
                                   type: string
                               example:
-                                cpf: 123.456.789-09
+                                cpf: 123.456.789-00
                               description: ''
                             method:
                               type: string
@@ -2630,7 +2562,7 @@ paths:
                             example:
                               code: sub_total
                               title: Sub-Total
-                              value: 101
+                              value: 101.00
                               sort_order: 1
                           description: ''
                         statuses:
@@ -2692,8 +2624,8 @@ paths:
         - 16 - Pedidos
 components:
   schemas:
-    Sucesso:
-      title: Sucesso
+    GerarAccessTokenSucesso:
+      title: GerarAccessTokenSucesso
       required:
         - access_token
         - refresh_token
@@ -2716,7 +2648,7 @@ components:
         token_type: Bearer
         expires_in: 3599
     Error:
-      title: Error
+      title: Resposta
       required:
         - code
         - message
@@ -2729,8 +2661,8 @@ components:
       example:
         code: invalid_credential
         message: Credentials are invalid.
-    Credenciaisinvalidas1:
-      title: Credenciaisinvalidas1
+    GerarAccessTokenErro:
+      title: GerarAccessTokenErro
       required:
         - success
         - errors
@@ -2741,15 +2673,15 @@ components:
         errors:
           type: array
           items:
-            $ref: '#/components/schemas/Error'
+            $ref: '#/components/schemas/GerarAccessTokenErro'
           description: ''
       example:
         success: false
         errors:
           - code: invalid_credential
             message: Credentials are invalid.
-    Sucesso1:
-      title: Sucesso1
+    AtualizarAccessTokenSucesso:
+      title: AtualizarAccessTokenSucesso
       required:
         - access_token
         - token_type
@@ -2767,8 +2699,8 @@ components:
         access_token: JWT
         token_type: Bearer
         expires_in: 3599
-    RefreshTokeninvalido1:
-      title: RefreshTokeninvalido1
+    AtualizarAccessTokenErro:
+      title: AtualizarAccessTokenErro
       required:
         - success
         - errors
@@ -2786,8 +2718,8 @@ components:
         errors:
           - code: refresh_token_failed
             message: Failed to update token.
-    RegistrarProdutoRequest:
-      title: RegistrarProdutoRequest
+    CadastrarProdutoRequest:
+      title: CadastrarProdutoRequest
       required:
         - name
         - meta_title
@@ -2934,10 +2866,9 @@ components:
         default:
           type: string
       example:
-        default: Nome do Produto
-        pt-br: Nome do Produto
-        en-us: Product Name
-        es-mx: Nombre del Producto
+        default: Título
+        pt-br: Título
+        en-us: Title
     Description:
       title: Description
       required:
@@ -2957,7 +2888,7 @@ components:
         default:
           type: string
       example:
-        default: Descrição do Produto
+        default: Descrição
     MetaDescription:
       title: MetaDescription
       required:
@@ -3093,7 +3024,7 @@ components:
         option_id: 1
         values:
           - option_value_id: 31
-            sku: Identificação SKU da Opção
+            sku: SKU da opção
             quantity: 100
             subtract: true
             price:
@@ -3131,7 +3062,7 @@ components:
           $ref: '#/components/schemas/Weight'
       example:
         option_value_id: 31
-        sku: Identificação SKU da Opção
+        sku: SKU da opção
         quantity: 100
         subtract: true
         price:
@@ -3273,8 +3204,8 @@ components:
         auto: true
         suffix: ''
         prefix: ''
-    Sucesso2:
-      title: Sucesso2
+    CadastrarProdutoSucesso:
+      title: Sucesso
       required:
         - result
         - data
@@ -3288,7 +3219,7 @@ components:
         result: true
         data:
           product_id: 222
-          model: Modelo do Produto
+          model: Modelo
           sku: ''
           ncm: ''
           cest: ''
@@ -3300,10 +3231,10 @@ components:
           location: ''
           quantity: 1000
           stock_status_id: 5
-          image: http://example.com/image/catalog/api/60f9b4df2b7e2-517695.jpg
+          image: https://sualoja.com.br/image/catalog/api/60f9b4df2b7e2-517695.jpg
           manufacturer_id: 8
           shipping: true
-          price: 199.98
+          price: 199.99
           points: 500
           tax_class_id: 1
           date_available: {}
@@ -3329,10 +3260,10 @@ components:
               en-gb: 4GB
               pt-br: 4GB
           name:
-            en-gb: Nome do Produto
-            pt-br: Nome do Produto
+            en-gb: Title
+            pt-br: Título
           description:
-            en-gb: Descrição
+            en-gb: Description
             pt-br: Descrição
           tag:
             en-gb:
@@ -3344,14 +3275,14 @@ components:
               - tag2
               - tag3
           meta_title:
-            en-gb: Descrição do Produto
-            pt-br: Descrição do Produto
+            en-gb: Meta título
+            pt-br: Meta título
           meta_description:
-            en-gb: Property required
-            pt-br: Property required
+            en-gb: Meta descrição
+            pt-br: Meta descrição
           meta_keyword:
-            en-gb: Meta keyword default
-            pt-br: Meta keyword default
+            en-gb: Meta palavras-chave
+            pt-br: Meta palavras-chave
           discounts:
             - customer_group_id: 1
               priority: 1
@@ -3368,9 +3299,9 @@ components:
           filters:
             - 1
           additional_images:
-            - http://example.com/image/catalog/api/60f9b4df57ef3-517695.jpg
-            - http://example.com/image/catalog/api/60f9b4df49afc-517695.jpg
-            - http://example.com/image/catalog/api/60f9b4df3cf76-517695.jpg
+            - https://sualoja.com.br/image/catalog/api/60f9b4df57ef3-517695.jpg
+            - https://sualoja.com.br/image/catalog/api/60f9b4df49afc-517695.jpg
+            - https://sualoja.com.br/image/catalog/api/60f9b4df3cf76-517695.jpg
           options:
             - type: date
               option_id: 8
@@ -3429,7 +3360,7 @@ components:
               required: true
               values:
                 - option_value_id: 31
-                  sku: Identificação SKU da Opção
+                  sku: SKU da opção
                   quantity: 100
                   subtract: true
                   price:
@@ -3463,7 +3394,7 @@ components:
             - 0
           links:
             default: >-
-              http://example.com/index.php?route=product/product&product_id=222
+              https://sualoja.com.br/index.php?route=product/product&product_id=222
     Data:
       title: Data
       required:
@@ -3662,7 +3593,7 @@ components:
           $ref: '#/components/schemas/Links'
       example:
         product_id: 222
-        model: Modelo do Produto
+        model: Modelo
         sku: ''
         ncm: ''
         cest: ''
@@ -3674,10 +3605,10 @@ components:
         location: ''
         quantity: 1000
         stock_status_id: 5
-        image: http://example.com/image/catalog/api/60f9b4df2b7e2-517695.jpg
+        image: https://sualoja.com.br/image/catalog/api/60f9b4df2b7e2-517695.jpg
         manufacturer_id: 8
         shipping: true
-        price: 199.98
+        price: 199.99
         points: 500
         tax_class_id: 1
         date_available: {}
@@ -3703,10 +3634,10 @@ components:
             en-gb: 4GB
             pt-br: 4GB
         name:
-          en-gb: Nome do Produto
-          pt-br: Nome do Produto
+          en-gb: Title
+          pt-br: Titulo
         description:
-          en-gb: Descrição
+          en-gb: Description
           pt-br: Descrição
         tag:
           en-gb:
@@ -3718,14 +3649,14 @@ components:
             - tag2
             - tag3
         meta_title:
-          en-gb: Descrição do Produto
-          pt-br: Descrição do Produto
+          en-gb: Meta título
+          pt-br: Meta título
         meta_description:
           en-gb: Property required
           pt-br: Property required
         meta_keyword:
-          en-gb: Meta keyword default
-          pt-br: Meta keyword default
+          en-gb: Meta palavras-chave
+          pt-br: Meta palavras-chave
         discounts:
           - customer_group_id: 1
             priority: 1
@@ -3742,9 +3673,9 @@ components:
         filters:
           - 1
         additional_images:
-          - http://example.com/image/catalog/api/60f9b4df57ef3-517695.jpg
-          - http://example.com/image/catalog/api/60f9b4df49afc-517695.jpg
-          - http://example.com/image/catalog/api/60f9b4df3cf76-517695.jpg
+          - https://sualoja.com.br/image/catalog/api/60f9b4df57ef3-517695.jpg
+          - https://sualoja.com.br/image/catalog/api/60f9b4df49afc-517695.jpg
+          - https://sualoja.com.br/image/catalog/api/60f9b4df3cf76-517695.jpg
         options:
           - type: date
             option_id: 8
@@ -3836,7 +3767,7 @@ components:
         stores:
           - 0
         links:
-          default: http://example.com/index.php?route=product/product&product_id=222
+          default: https://sualoja.com.br/index.php?route=product/product&product_id=222
     Attribute1:
       title: Attribute1
       required:
@@ -3922,8 +3853,8 @@ components:
         pt-br:
           type: string
       example:
-        en-gb: Descrição do Produto
-        pt-br: Descrição do Produto
+        en-gb: Meta título
+        pt-br: Meta título
     MetaDescription1:
       title: MetaDescription1
       required:
@@ -4073,7 +4004,7 @@ components:
         default:
           type: string
       example:
-        default: http://example.com/index.php?route=product/product&product_id=222
+        default: https://sualoja.com.br/index.php?route=product/product&product_id=222
     Error4:
       title: Error4
       required:
@@ -4087,9 +4018,9 @@ components:
           type: string
       example:
         node: /price
-        details: Number expected, "199.98" received
-    Dadoinvalido1:
-      title: Dadoinvalido1
+        details: Number expected, "199.99" received
+    CadastrarProdutoErro:
+      title: Erro
       required:
         - result
         - details
@@ -4107,12 +4038,12 @@ components:
           description: ''
       example:
         result: false
-        details: Erro no preenchimento dos dados enviados
+        details: Error filling in data sent
         errors:
           - node: /price
-            details: Number expected, "199.98" received
-    AtualizarProdutosRequest:
-      title: AtualizarProdutosRequest
+            details: Number expected, "199.99" received
+    AtualizarProdutoRequest:
+      title: AtualizarProdutoRequest
       required:
         - name
         - description
@@ -4176,19 +4107,19 @@ components:
           description: ''
       example:
         name:
-          default: Nome do Produto
-          en-gb: Product name
+          default: Título
+          en-gb: Title
         description:
           default: Descrição
         meta_title:
-          default: Descrição do Produto
+          default: Meta título
         meta_description:
           pt-br: Meta descrição
           en-gb: Meta description
           default: Property required
         shipping: false
-        model: Modelo do Produto
-        price: 199.98
+        model: Modelo
+        price: 199.99
         tax_class_id: 1
         stock_status_id: 5
         quantity: 1000
@@ -4208,8 +4139,8 @@ components:
           - https://images.alphacoders.com/517/517695.jpg
           - https://images.alphacoders.com/517/517695.jpg
           - https://images.alphacoders.com/517/517695.jpg
-    Atualizadados:
-      title: Atualizadados
+    AtualizarProdutoSucesso:
+      title: AtualizarProdutoSucesso
       required:
         - result
         - data
@@ -4235,10 +4166,10 @@ components:
           location: ''
           quantity: 1000
           stock_status_id: 5
-          image: http://example.com/image/catalog/api/60f9b8ed79993-517695.jpg
+          image: https://sualoja.com.br/image/catalog/api/60f9b8ed79993-517695.jpg
           manufacturer_id: 8
           shipping: true
-          price: 199.98
+          price: 199.99
           points: 500
           tax_class_id: 1
           date_available: {}
@@ -4264,8 +4195,8 @@ components:
               en-gb: 4GB
               pt-br: 4GB
           name:
-            en-gb: Nome do Produto
-            pt-br: Nome do Produto
+            en-gb: Título
+            pt-br: Título
           description:
             en-gb: Descrição
             pt-br: Descrição
@@ -4273,20 +4204,20 @@ components:
             en-gb: []
             pt-br: []
           meta_title:
-            en-gb: Descrição do Produto
-            pt-br: Descrição do Produto
+            en-gb: Meta título
+            pt-br: Meta título
           meta_description:
-            en-gb: Meta descrição do produto
-            pt-br: Meta descrição do produto
+            en-gb: Meta Descrição
+            pt-br: Meta descrição
           meta_keyword:
-            en-gb: Meta keyword default
-            pt-br: Meta keyword default
+            en-gb: Meta palavras-chave
+            pt-br: Meta palavras-chave
           filters:
             - 1
           additional_images:
-            - http://example.com/image/catalog/api/60f9b8eda87d6-517695.jpg
-            - http://example.com/image/catalog/api/60f9b8ed955be-517695.jpg
-            - http://example.com/image/catalog/api/60f9b8ed85827-517695.jpg
+            - https://sualoja.com.br/image/catalog/api/60f9b8eda87d6-517695.jpg
+            - https://sualoja.com.br/image/catalog/api/60f9b8ed955be-517695.jpg
+            - https://sualoja.com.br/image/catalog/api/60f9b8ed85827-517695.jpg
           options:
             - type: date
               option_id: 8
@@ -4345,7 +4276,7 @@ components:
               required: true
               values:
                 - option_value_id: 31
-                  sku: Identificação SKU da Opção
+                  sku: SKU da opção
                   quantity: 100
                   subtract: true
                   price:
@@ -4370,7 +4301,7 @@ components:
             - 0
           links:
             default: >-
-              http://example.com/index.php?route=product/product&product_id=222
+              https://sualoja.com.br/index.php?route=product/product&product_id=222
     Data2:
       title: Data2
       required:
@@ -4563,10 +4494,10 @@ components:
         location: ''
         quantity: 1000
         stock_status_id: 5
-        image: http://example.com/image/catalog/api/60f9b8ed79993-517695.jpg
+        image: https://sualoja.com.br/image/catalog/api/60f9b8ed79993-517695.jpg
         manufacturer_id: 8
         shipping: true
-        price: 199.98
+        price: 199.99
         points: 500
         tax_class_id: 1
         date_available: {}
@@ -4592,29 +4523,29 @@ components:
             en-gb: 4GB
             pt-br: 4GB
         name:
-          en-gb: Nome do Produto
-          pt-br: Nome do Produto
+          en-gb: Title
+          pt-br: Título
         description:
-          en-gb: Descrição
+          en-gb: Description
           pt-br: Descrição
         tag:
           en-gb: []
           pt-br: []
         meta_title:
-          en-gb: Descrição do Produto
-          pt-br: Descrição do Produto
+          en-gb: Meta título
+          pt-br: Meta título
         meta_description:
-          en-gb: Meta descrição do produto
-          pt-br: Meta descrição do produto
+          en-gb: Meta descrição
+          pt-br: Meta descrição
         meta_keyword:
-          en-gb: Meta keyword default
-          pt-br: Meta keyword default
+          en-gb: Meta palavras-chave
+          pt-br: Meta palavras-chave
         filters:
           - 1
         additional_images:
-          - http://example.com/image/catalog/api/60f9b8eda87d6-517695.jpg
-          - http://example.com/image/catalog/api/60f9b8ed955be-517695.jpg
-          - http://example.com/image/catalog/api/60f9b8ed85827-517695.jpg
+          - https://sualoja.com.br/image/catalog/api/60f9b8eda87d6-517695.jpg
+          - https://sualoja.com.br/image/catalog/api/60f9b8ed955be-517695.jpg
+          - https://sualoja.com.br/image/catalog/api/60f9b8ed85827-517695.jpg
         options:
           - type: date
             option_id: 8
@@ -4697,23 +4628,23 @@ components:
         stores:
           - 0
         links:
-          default: http://example.com/index.php?route=product/product&product_id=222
-    Sucesso4:
-      title: Sucesso4
+          default: https://sualoja.com.br/index.php?route=product/product&product_id=222
+    ListarProdutosSucesso:
+      title: ListarProdutosSucesso
       required:
         - items
         - _metadata
       type: object
       properties:
-        items:
+        records:
           type: array
           items:
-            $ref: '#/components/schemas/Item'
+            $ref: '#/components/schemas/Record'
           description: ''
         _metadata:
           $ref: '#/components/schemas/Metadata'
       example:
-        items:
+        records:
           - product_id: 40
             model: Produto 11
             sku: ''
@@ -4727,7 +4658,7 @@ components:
             location: ''
             quantity: 970
             stock_status_id: 5
-            image: http://example.com/image/catalog/demo/iphone_1.jpg
+            image: https://sualoja.com.br/image/catalog/demo/iphone_1.jpg
             manufacturer_id: 8
             shipping: true
             price: 101
@@ -4775,11 +4706,11 @@ components:
               en-gb: ''
               pt-br: ''
             additional_images:
-              - http://example.com/image/catalog/demo/iphone_6.jpg
-              - http://example.com/image/catalog/demo/iphone_2.jpg
-              - http://example.com/image/catalog/demo/iphone_5.jpg
-              - http://example.com/image/catalog/demo/iphone_3.jpg
-              - http://example.com/image/catalog/demo/iphone_4.jpg
+              - https://sualoja.com.br/image/catalog/demo/iphone_6.jpg
+              - https://sualoja.com.br/image/catalog/demo/iphone_2.jpg
+              - https://sualoja.com.br/image/catalog/demo/iphone_5.jpg
+              - https://sualoja.com.br/image/catalog/demo/iphone_3.jpg
+              - https://sualoja.com.br/image/catalog/demo/iphone_4.jpg
             product_related:
               - 42
             points_reward:
@@ -4792,7 +4723,7 @@ components:
               - 0
             links:
               default: >-
-                http://example.com/index.php?route=product/product&product_id=40
+                https://sualoja.com.br/index.php?route=product/product&product_id=40
         _metadata:
           page: 1
           per_page: 50
@@ -4804,8 +4735,8 @@ components:
             previous: ''
             next: ''
             last: /product?page=1&per_page=50&filter_name=iPhone
-    Item:
-      title: Item
+    Record:
+      title: Record
       required:
         - product_id
         - model
@@ -4971,7 +4902,7 @@ components:
         location: ''
         quantity: 970
         stock_status_id: 5
-        image: http://example.com/image/catalog/demo/iphone_1.jpg
+        image: https://sualoja.com.br/image/catalog/demo/iphone_1.jpg
         manufacturer_id: 8
         shipping: true
         price: 101
@@ -5019,11 +4950,11 @@ components:
           en-gb: ''
           pt-br: ''
         additional_images:
-          - http://example.com/image/catalog/demo/iphone_6.jpg
-          - http://example.com/image/catalog/demo/iphone_2.jpg
-          - http://example.com/image/catalog/demo/iphone_5.jpg
-          - http://example.com/image/catalog/demo/iphone_3.jpg
-          - http://example.com/image/catalog/demo/iphone_4.jpg
+          - https://sualoja.com.br/image/catalog/demo/iphone_6.jpg
+          - https://sualoja.com.br/image/catalog/demo/iphone_2.jpg
+          - https://sualoja.com.br/image/catalog/demo/iphone_5.jpg
+          - https://sualoja.com.br/image/catalog/demo/iphone_3.jpg
+          - https://sualoja.com.br/image/catalog/demo/iphone_4.jpg
         product_related:
           - 42
         points_reward:
@@ -5035,7 +4966,7 @@ components:
         stores:
           - 0
         links:
-          default: http://example.com/index.php?route=product/product&product_id=40
+          default: https://sualoja.com.br/index.php?route=product/product&product_id=40
     Metadata:
       title: Metadata
       required:
@@ -5099,8 +5030,8 @@ components:
         previous: ''
         next: ''
         last: /product?page=1&per_page=50&filter_name=iPhone
-    UpdateOrderHistory:
-      title: UpdateOrderHistory
+    AtualizarHistoricoPedidoSucesso:
+      title: AtualizarHistoricoPedidoSucesso
       required:
         - order_id
         - order_status_id
@@ -5118,9 +5049,9 @@ components:
       example:
         order_id: 130793
         order_status_id: 3
-        comment: Pedido atualizado
-    UpdateStocksRequest:
-      title: UpdateStocksRequest
+        comment: Estoque atualizado
+    AtualizarEstoqueRequest:
+      title: AtualizarEstoqueRequest
       required:
         - product_id
         - location
@@ -5197,8 +5128,8 @@ components:
         errors:
           - code: invalid_access_token
             message: Invalid access_token.
-    Success:
-      title: Success
+    AtualizarEstoqueSucesso:
+      title: AtualizarEstoqueSucesso
       required:
         - product_id
         - updated
@@ -5212,8 +5143,8 @@ components:
       example:
         product_id: 50
         updated: true
-    Sucesso5:
-      title: Sucesso5
+    ListarIdiomasSucesso:
+      title: ListarIdiomasSucesso
       required:
         - items
         - _metadata
@@ -5277,8 +5208,8 @@ components:
         locale: pt-BR,pt_BR.UTF-8,pt_BR,pt-br,portuguese
         sort_order: 1
         status: true
-    Sucesso6:
-      title: Sucesso6
+    ListarGruposImpostosSucesso:
+      title: ListarGruposImpostosSucesso
       required:
         - items
         - _metadata
@@ -5333,11 +5264,11 @@ components:
       example:
         tax_class_id: 1
         title: Estadual
-        description: Bahia
+        description: Amapá
         date_added: {}
         date_modified: {}
-    Sucesso7:
-      title: Sucesso7
+    ListarSituacoesEstoqueSucesso:
+      title: ListarSituacoesEstoqueSucesso
       required:
         - items
         - _metadata
@@ -5395,8 +5326,8 @@ components:
         name:
           en-gb: Out Of Stock
           pt-br: Esgotado
-    Sucesso8:
-      title: Sucesso8
+    ListarUnidadesMedidaSucesso:
+      title: ListarUnidadesMedidaSucesso
       required:
         - items
         - _metadata
@@ -5507,8 +5438,8 @@ components:
         unit:
           en-gb: kg
           pt-br: kg
-    Sucesso10:
-      title: Sucesso10
+    ListarDepartamentosSucesso:
+      title: ListarDepartamentosSucesso
       required:
         - items
         - _metadata
@@ -5574,7 +5505,7 @@ components:
               en-gb: ''
               pt-br: ''
           - category_id: 20
-            image: http://example.com/image/catalog/demo/compaq_presario.jpg
+            image: https://sualoja.com.br/image/catalog/demo/compaq_presario.jpg
             parent_id: 0
             top: 1
             column: 1
@@ -5725,8 +5656,8 @@ components:
         meta_keyword:
           en-gb: ''
           pt-br: ''
-    Sucesso11:
-      title: Sucesso11
+    ListarFiltrosSucesso:
+      title: ListarFiltrosSucesso
       required:
         - items
         - _metadata
@@ -5850,8 +5781,8 @@ components:
         name:
           en-gb: Option One
           pt-br: Opção Um
-    Sucesso12:
-      title: Sucesso12
+    ListarGruposAtributos:
+      title: ListarGruposAtributos
       required:
         - items
         - _metadata
@@ -5907,8 +5838,8 @@ components:
         name:
           en-gb: Informações
           pt-br: Informações
-    Sucesso13:
-      title: Sucesso13
+    ListarAtributosSucesso:
+      title: ListarAtributosSucesso
       required:
         - items
         - _metadata
@@ -5969,8 +5900,8 @@ components:
         name:
           en-gb: Clockspeed
           pt-br: Velocidade de clock
-    Sucesso14:
-      title: Sucesso14
+    ListarMarcasSucesso:
+      title: Marcas
       required:
         - items
         - _metadata
@@ -5987,27 +5918,27 @@ components:
         items:
           - manufacturer_id: 8
             name: Apple
-            image: http://example.com/image/catalog/demo/apple_logo.jpg
+            image: https://sualoja.com.br/image/catalog/demo/apple_logo.jpg
             sort_order: 0
           - manufacturer_id: 9
             name: Canon
-            image: http://example.com/image/catalog/demo/canon_logo.jpg
+            image: https://sualoja.com.br/image/catalog/demo/canon_logo.jpg
             sort_order: 0
           - manufacturer_id: 7
             name: HP
-            image: http://example.com/image/catalog/demo/hp_logo.jpg
+            image: https://sualoja.com.br/image/catalog/demo/hp_logo.jpg
             sort_order: 0
           - manufacturer_id: 5
             name: HTC
-            image: http://example.com/image/catalog/demo/htc_logo.jpg
+            image: https://sualoja.com.br/image/catalog/demo/htc_logo.jpg
             sort_order: 0
           - manufacturer_id: 6
             name: Palm
-            image: http://example.com/image/catalog/demo/palm_logo.jpg
+            image: https://sualoja.com.br/image/catalog/demo/palm_logo.jpg
             sort_order: 0
           - manufacturer_id: 10
             name: Sony
-            image: http://example.com/image/catalog/demo/sony_logo.jpg
+            image: https://sualoja.com.br/image/catalog/demo/sony_logo.jpg
             sort_order: 0
         _metadata:
           page: 1
@@ -6042,10 +5973,10 @@ components:
       example:
         manufacturer_id: 8
         name: Apple
-        image: http://example.com/image/catalog/demo/apple_logo.jpg
+        image: https://sualoja.com.br/image/catalog/demo/apple_logo.jpg
         sort_order: 0
-    Sucesso15:
-      title: Sucesso15
+    ListarDownloadsSucesso:
+      title: ListarDownloadsSucesso
       required:
         - items
         - _metadata
@@ -6101,14 +6032,14 @@ components:
           $ref: '#/components/schemas/Name1'
       example:
         download_id: 1
-        filename: wp4269839.jpg.269c429c2b006b8fdb2987bf69462f5e
-        mask: seb-ferrari.jpg
+        filename: oc4269839.jpg.269c429c2b006b8fdb2987bf69462f5e
+        mask: ebook.jpg
         date_added: {}
         name:
-          en-gb: Sebastian Vettel
-          pt-br: Sebasatião Vettel
-    Sucesso16:
-      title: Sucesso16
+          en-gb: eBook
+          pt-br: Livro Digital
+    ListarOpcoesSucesso:
+      title: ListarOpcoesSucesso
       required:
         - items
         - _metadata
@@ -6128,7 +6059,7 @@ components:
             sort_order: 1
             name:
               en-gb: Radio
-              pt-br: Seleção Única
+              pt-br: Seleção única
             values:
               - option_value_id: 32
                 image: ''
@@ -6153,32 +6084,32 @@ components:
             sort_order: 2
             name:
               en-gb: Checkbox
-              pt-br: Caixa de Texto
+              pt-br: Caixa de texto
             values:
               - option_value_id: 23
-                image: http://example.com/catalog/Daniel.jpg
+                image: https://sualoja.com.br/catalog/Daniel.jpg
                 sort_order: 1
                 name:
                   en-gb: Checkbox 1
-                  pt-br: Caixa de Texto 1
+                  pt-br: Caixa de texto 1
               - option_value_id: 24
-                image: http://example.com/catalog/Daniel_and_Leclerc.jpg
+                image: https://sualoja.com.br/catalog/Daniel_and_Leclerc.jpg
                 sort_order: 2
                 name:
                   en-gb: Checkbox 2
-                  pt-br: Caixa de Texto 2
+                  pt-br: Caixa de texto 2
               - option_value_id: 44
-                image: http://example.com/catalog/George.jpg
+                image: https://sualoja.com.br/catalog/George.jpg
                 sort_order: 3
                 name:
                   en-gb: Checkbox 3
-                  pt-br: Caixa de Texto 3
+                  pt-br: Caixa de texto 3
               - option_value_id: 45
-                image: http://example.com/catalog/Tsunoda.jpg
+                image: https://sualoja.com.br/catalog/Tsunoda.jpg
                 sort_order: 4
                 name:
                   en-gb: Checkbox 4
-                  pt-br: Caixa de Texto 4
+                  pt-br: Caixa de texto 4
           - option_id: 4
             type: text
             sort_order: 3
@@ -6326,7 +6257,7 @@ components:
         sort_order: 1
         name:
           en-gb: Radio
-          pt-br: Seleção Única
+          pt-br: Seleção única
         values:
           - option_value_id: 32
             image: ''
@@ -6381,19 +6312,17 @@ security:
   - httpBasic: []
 tags:
   - name: 01 - Credenciais
-    description: Cria ou atualiza um token de acesso
   - name: 02 - Produtos
-    description: Gerencia os produtos da loja
-  - name: 03 - Idiomas da loja
+  - name: 03 - Idiomas
   - name: 04 - Impostos
-  - name: 05 - Situações de Estoque
-  - name: 06 - Medidas de Comprimento
-  - name: 07 - Medidas de Peso
-  - name: 08 - Categorias de Produtos
-  - name: 09 - Filtros de Produtos
-  - name: 10 - Grupos de Atributos de Produtos
-  - name: 11 - Atributos de Produtos
-  - name: 12 - Fabricantes
+  - name: 05 - Situações de estoque
+  - name: 06 - Unidades de medida
+  - name: 07 - Unidades de peso
+  - name: 08 - Departamentos
+  - name: 09 - Filtros
+  - name: 10 - Grupos de atributos
+  - name: 11 - Atributos
+  - name: 12 - Marcas
   - name: 13 - Downloads
   - name: 14 - Opções
   - name: 16 - Pedidos
