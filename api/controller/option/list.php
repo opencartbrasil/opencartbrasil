@@ -56,7 +56,7 @@ class ControllerOptionList extends Controller {
 
 				$value = array(
 					'option_value_id' => intval($value['option_value_id']),
-					'image' => !empty($value['image']) ? HTTPS_SERVER . $value['image'] : null,
+					'image' => !empty($value['image']) ? HTTPS_CATALOG . $value['image'] : null,
 					'sort_order' => intval($value['sort_order']),
 					'name' => $value_descriptions
 				);

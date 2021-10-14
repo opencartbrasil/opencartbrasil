@@ -105,7 +105,7 @@ class ControllerProductList extends Controller {
 				'location' => $product_info['location'],
 				'quantity' => intval($product_info['quantity']),
 				'stock_status_id' => intval($product_info['stock_status_id']),
-				'image' => HTTPS_SERVER . 'image/' . $product_info['image'],
+				'image' => HTTPS_CATALOG . 'image/' . $product_info['image'],
 				'manufacturer_id' => intval($product_info['manufacturer_id']),
 				'shipping' => !!$product_info['shipping'],
 				'price' => floatval($product_info['price']),
@@ -178,7 +178,7 @@ class ControllerProductList extends Controller {
 
 			if ($product_images) {
 				foreach ($product_images as $image) {
-					$result_items[$key]['additional_images'][] = HTTPS_SERVER . 'image/' . $image['image'];
+					$result_items[$key]['additional_images'][] = HTTPS_CATALOG . 'image/' . $image['image'];
 				}
 			}
 
@@ -319,12 +319,12 @@ class ControllerProductList extends Controller {
 
 				if ($seo_url) {
 					foreach ($seo_url as $url) {
-						$product_links[$url['language_code']] = HTTPS_SERVER . $url['keyword'];
+						$product_links[$url['language_code']] = HTTPS_CATALOG . $url['keyword'];
 					}
 				}
 			}
 
-			$product_links['default'] = HTTPS_SERVER . 'index.php?route=product/product&product_id=' . intval($product_id);
+			$product_links['default'] = HTTPS_CATALOG . 'index.php?route=product/product&product_id=' . intval($product_id);
 
 			$result_items[$key]['links'] = $product_links;
 		}

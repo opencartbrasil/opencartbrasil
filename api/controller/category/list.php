@@ -69,7 +69,7 @@ class ControllerCategoryList extends Controller {
 
 			$item = array(
 				'category_id' => $category_id,
-				'image' => empty($category_info['image']) ? null : HTTPS_SERVER . 'image/' . $category_info['image'],
+				'image' => empty($category_info['image']) ? null : HTTPS_CATALOG . 'image/' . $category_info['image'],
 				'parent_id' => intval($category_info['parent_id']),
 				'top' => intval($category_info['top']),
 				'column' => intval($category_info['column']),

@@ -42,7 +42,7 @@ class ControllerManufacturerList extends Controller {
 			$result_items[] = array(
 				'manufacturer_id' => intval($manufacturer_id),
 				'name' => $manufacturer_info['name'],
-				'image' => !empty($manufacturer_info['image']) ? HTTPS_SERVER . 'image/' . $manufacturer_info['image'] : null,
+				'image' => !empty($manufacturer_info['image']) ? HTTPS_CATALOG . 'image/' . $manufacturer_info['image'] : null,
 				'sort_order' => intval($manufacturer_info['sort_order']),
 			);
 		}
