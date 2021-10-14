@@ -243,12 +243,12 @@ class ControllerProductInfo extends Controller {
 
 			if ($seo_url) {
 				foreach ($seo_url as $url) {
-					$product_links[$url['language_code']] = HTTPS_SERVER . $url['keyword'];
+					$product_links[$url['language_code']] = HTTPS_CATALOG . $url['keyword'];
 				}
 			}
 		}
 
-		$product_links['default'] = HTTPS_SERVER . 'index.php?route=product/product&product_id=' . intval($product_id);
+		$product_links['default'] = HTTPS_CATALOG . 'index.php?route=product/product&product_id=' . intval($product_id);
 
 		$product_info['links'] = $product_links;
 
