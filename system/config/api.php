@@ -70,6 +70,7 @@ $_['action_post_action']  = array(
 $_['action_event']       = array(
 	'controller/*/before' => array(
 		'middlewares/logs/before',
+		'middlewares/status/before',
 		'middlewares/access_token_expired/before',
 		'middlewares/check_request_method/before',
 		'middlewares/ip/before',

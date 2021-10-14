@@ -44,5 +44,10 @@ class ModelUpdate03 extends Model {
 		if (!$table_query->num_rows) {
 			$this->db->query("INSERT INTO `" . DB_PREFIX . "setting` (`store_id`, `code`, `key`, `value`, `serialized`) VALUES (0, 'config', 'config_admin_login_attempts', '5', 0);");
 		}
+
+		$table_query = $this->db->query("SELECT * FROM `" . DB_PREFIX . "setting` WHERE `key` = 'config_api_rest'");
+		if (!$table_query->num_rows) {
+			$this->db->query("INSERT INTO `" . DB_PREFIX . "setting` (`store_id`, `code`, `key`, `value`, `serialized`) VALUES (0, 'config', 'config_api_rest', '0', 0);");
+		}
 	}
 }
