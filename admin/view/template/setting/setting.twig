@@ -1149,6 +1149,29 @@
                   </div>
                 </div>
                 <div class="form-group">
+                  <label class="col-sm-2 control-label"><span data-toggle="tooltip" title="{{ help_api_rest }}">{{ entry_api_rest }}</span></label>
+                  <div class="col-sm-10">
+                    <label class="radio-inline">
+                      {% if config_api_rest %}
+                      <input type="radio" name="config_api_rest" value="1" checked="checked" />
+                      {{ text_yes }}
+                      {% else %}
+                      <input type="radio" name="config_api_rest" value="1" />
+                      {{ text_yes }}
+                      {% endif %}
+                    </label>
+                    <label class="radio-inline">
+                      {% if not config_api_rest %}
+                      <input type="radio" name="config_api_rest" value="0" checked="checked" />
+                      {{ text_no }}
+                      {% else %}
+                      <input type="radio" name="config_api_rest" value="0" />
+                      {{ text_no }}
+                      {% endif %}
+                    </label>
+                  </div>
+                </div>
+                <div class="form-group">
                   <label class="col-sm-2 control-label"><span data-toggle="tooltip" title="{{ help_seo_url }}">{{ entry_seo_url }}</span></label>
                   <div class="col-sm-10">
                     <label class="radio-inline">

@@ -22,6 +22,13 @@ class ModelUpgrade1002 extends Model {
 			$this->db->query("INSERT INTO `" . DB_PREFIX . "setting` SET `key` = 'config_voucher_max', `value` = '1000', `code` = 'config', `store_id` = 0");
 		}
 
+		// setting
+		$query = $this->db->query("SELECT setting_id FROM `" . DB_PREFIX . "setting` WHERE `store_id` = '0' AND `key` = 'config_api_rest'");
+
+		if (!$query->num_rows) {
+			$this->db->query("INSERT INTO `" . DB_PREFIX . "setting` SET `key` = 'config_api_rest', `value` = '1', `code` = 'config', `store_id` = 0");
+		}
+
 		// customer
 		$query = $this->db->query("SELECT * FROM information_schema.COLUMNS WHERE TABLE_SCHEMA = '" . DB_DATABASE . "' AND TABLE_NAME = '" . DB_PREFIX . "customer' AND COLUMN_NAME = 'safe'");
 

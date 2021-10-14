@@ -869,6 +869,12 @@ class ControllerSettingSetting extends Controller {
 			$data['config_maintenance'] = $this->config->get('config_maintenance');
 		}
 
+		if (isset($this->request->post['config_api_rest'])) {
+			$data['config_api_rest'] = $this->request->post['config_api_rest'];
+		} else {
+			$data['config_api_rest'] = $this->config->get('config_api_rest');
+		}
+
 		if (isset($this->request->post['config_admin_login_attempts'])) {
 			$data['config_admin_login_attempts'] = $this->request->post['config_admin_login_attempts'];
 		} elseif ($this->config->has('config_admin_login_attempts')) {

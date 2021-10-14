@@ -778,7 +778,9 @@ class ModelCatalogProduct extends Model {
 				$seo_url_suffix = isset($product->seo_url_generate->suffix) ? !!$product->seo_url_generate->suffix : false;
 				$seo_url_prefix = isset($product->seo_url_generate->prefix) ? !!$product->seo_url_generate->prefix : false;
 
-				foreach ($this->config->get('languages') as $language_code => $language) {
+				foreach ($this->config->get('languages') as $key => $language) {
+					$language_code = $language['code'];
+
 					if (isset($product->name[$language_code])) {
 						$product_name = $product->name[$language_code];
 					} else {

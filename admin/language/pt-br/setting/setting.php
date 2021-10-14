@@ -1,6 +1,7 @@
 <?php
 // Heading
-$_['heading_title']                       = 'Loja';
+$_['heading_title']                = 'Loja';
+
 // Text
 $_['text_stores']                  = 'Lojas';
 $_['text_success']                 = 'Loja modificada com sucesso!';
@@ -116,6 +117,7 @@ $_['entry_file_max_size']          = 'Tamanho máximo';
 $_['entry_file_ext_allowed']       = 'Extensão permitida';
 $_['entry_file_mime_allowed']      = 'MIME permitido';
 $_['entry_maintenance']            = 'Modo de manutenção?';
+$_['entry_api_rest']               = 'Ativar API REST';
 $_['entry_admin_login_attempts']   = 'Máximo de tentativas de login';
 $_['entry_password']               = 'Recuperar senha?';
 $_['entry_encryption']             = 'Chave de criptografia';
@@ -182,6 +184,7 @@ $_['help_file_max_size']           = 'Tamanho máximo que um arquivo poderá pos
 $_['help_file_ext_allowed']        = 'Lista de extensões de arquivos que serão permitidas nos uploads na loja. Coloque uma por linha.';
 $_['help_file_mime_allowed']       = 'Lista de tipos de arquivos que serão permitidos nos uploads na loja. Coloque um por linha.';
 $_['help_maintenance']             = 'Se sim, fecha o acesso à loja para realização de manutenção. A loja continuará visível ao usuário logado como administrador.';
+$_['help_api_rest']                = 'Se \'não\', fecha o acesso à API REST e impossibilita que terceiros tenham acessos aos dados através dela. Versão mínima do PHP: 7.3 ou superior.';
 $_['help_admin_login_attempts']    = 'Máximo de tentativas de login na administração que serão permitidas antes que a conta seja bloqueada por 1 hora. A conta poderá ser desbloqueada através da redefinição da senha.';
 $_['help_password']                = 'Se sim, habilita a recuperação de senha na administração da loja. Este recurso será desativado automaticamente se o sistema identificar uma tentativa de invasão.';
 $_['help_encryption']              = 'Chave secreta utilizada para encriptação dos dados durante as transações dos pedidos.';

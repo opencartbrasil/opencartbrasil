@@ -86,10 +86,11 @@ paths:
         - 02 - Produtos
       summary: Cadastrar produto
       description: >
-        Cadastra o produto, sendo possível definir os códigos de idioma em nós compatíveis.
+        Cadastra o produto, sendo possível definir os códigos de idioma
+        em nós compatíveis.
 
 
-        Os nós compatíveis com idiomas são:
+        Os nós compatíveis com códigos de idioma são:
 
          - name
          - description
@@ -99,11 +100,10 @@ paths:
          - tags
          - attributes
 
-        O nó "default" continua obrigatório nos demais nós.
 
-
-        Caso a loja possua mais de um idioma cadastrado, o sistema utilizará o
-        valor do nó "default" para preencher os campos que necessitam de idioma.
+        Caso a loja possua mais de um idioma cadastrado, poderá ser informado
+        o código de idioma "default", assim a informação será replicada em
+        todos os idiomas cadastrados.
       operationId: CadastrarProduto
       parameters: []
       requestBody:
@@ -137,7 +137,7 @@ paths:
                   quantity: 1000
                   stock_status_id: 5
                   image: >-
-                    https://sualoja.com.br/image/catalog/api/60f9b4df2b7e2-517695.jpg
+                    https://seudmonio/imagem/foto.jpg
                   manufacturer_id: 8
                   shipping: true
                   price: 199.99
@@ -206,11 +206,11 @@ paths:
                     - 1
                   additional_images:
                     - >-
-                      https://sualoja.com.br/image/catalog/api/60f9b4df57ef3-517695.jpg
+                      https://seudmonio/imagem/foto_1.jpg
                     - >-
-                      https://sualoja.com.br/image/catalog/api/60f9b4df49afc-517695.jpg
+                      https://seudmonio/imagem/foto_2.jpg
                     - >-
-                      https://sualoja.com.br/image/catalog/api/60f9b4df3cf76-517695.jpg
+                      https://seudmonio/imagem/foto_3.jpg
                   options:
                     - type: date
                       option_id: 8
@@ -336,7 +336,7 @@ paths:
               example:
                 records:
                   - product_id: 40
-                    model: Produto 11
+                    model: Modelo
                     sku: ''
                     ncm: ''
                     cest: ''
@@ -348,7 +348,7 @@ paths:
                     location: ''
                     quantity: 970
                     stock_status_id: 5
-                    image: https://sualoja.com.br/image/catalog/demo/iphone_1.jpg
+                    image: https://seudmonio/imagem/foto.jpg
                     manufacturer_id: 8
                     shipping: true
                     price: 101
@@ -396,11 +396,11 @@ paths:
                       en-gb: ''
                       pt-br: ''
                     additional_images:
-                      - https://sualoja.com.br/image/catalog/demo/iphone_6.jpg
-                      - https://sualoja.com.br/image/catalog/demo/iphone_2.jpg
-                      - https://sualoja.com.br/image/catalog/demo/iphone_5.jpg
-                      - https://sualoja.com.br/image/catalog/demo/iphone_3.jpg
-                      - https://sualoja.com.br/image/catalog/demo/iphone_4.jpg
+                      - https://seudmonio/imagem/foto_1.jpg
+                      - https://seudmonio/imagem/foto_2.jpg
+                      - https://seudmonio/imagem/foto_3.jpg
+                      - https://seudmonio/imagem/foto_4.jpg
+                      - https://seudmonio/imagem/foto_5.jpg
                     product_related:
                       - 42
                     points_reward:
@@ -432,18 +432,17 @@ paths:
     get:
       tags:
         - 02 - Produtos
-      summary: Informações do produto cadastrado
+      summary: Informações do produto
       description: Exibe as informações do produto cadastrado.
       operationId: InformacoesProduto
       parameters:
         - name: product_id
           in: path
-          description: ID do produto
           required: true
           style: simple
           schema:
             type: integer
-            example: 1307
+            example: 1000
       responses:
         '200':
           description: OK
@@ -468,7 +467,7 @@ paths:
                   quantity: 1000
                   stock_status_id: 5
                   image: >-
-                    https://sualoja.com.br/image/catalog/api/60f9b4df2b7e2-517695.jpg
+                    https://seudmonio/imagem/foto.jpg
                   manufacturer_id: 8
                   shipping: true
                   price: 199.99
@@ -537,11 +536,11 @@ paths:
                     - 1
                   additional_images:
                     - >-
-                      https://sualoja.com.br/image/catalog/api/60f9b4df57ef3-517695.jpg
+                      https://seudmonio/imagem/foto_1.jpg
                     - >-
-                      https://sualoja.com.br/image/catalog/api/60f9b4df49afc-517695.jpg
+                      https://seudmonio/imagem/foto_2.jpg
                     - >-
-                      https://sualoja.com.br/image/catalog/api/60f9b4df3cf76-517695.jpg
+                      https://seudmonio/imagem/foto_3.jpg
                   options:
                     - type: date
                       option_id: 8
@@ -667,7 +666,7 @@ paths:
           style: simple
           schema:
             type: integer
-            example: 1993
+            example: 1000
       responses:
         '204':
           description: No Content
@@ -694,10 +693,11 @@ paths:
         Atualiza os dados do produto cadastrado.
 
 
-        A estrutura dos dados segue o padrão do cadastro.
+        A estrutura dos dados segue o padrão de cadastro.
 
 
-        Para remover as promoções ou descontos, basta enviar o nó correspondente vazio.
+        Para remover as promoções ou descontos, basta enviar o nó
+        correspondente vazio.
       operationId: AtualizarProduto
       parameters:
         - name: product_id
@@ -707,7 +707,7 @@ paths:
           style: simple
           schema:
             type: integer
-            example: 1393
+            example: 1000
       requestBody:
         description: ''
         content:
@@ -743,11 +743,11 @@ paths:
                 length_class_id: 1
                 weight_class_id: 2
               status: false
-              image: https://images.alphacoders.com/517/517695.jpg
+              image: https://seudmonio/imagem/foto.jpg
               additional_images:
-                - https://images.alphacoders.com/517/517695.jpg
-                - https://images.alphacoders.com/517/517695.jpg
-                - https://images.alphacoders.com/517/517695.jpg
+                - https://seudmonio/imagem/foto_1.jpg
+                - https://seudmonio/imagem/foto_2.jpg
+                - https://seudmonio/imagem/foto_3.jpg
         required: true
       responses:
         '200':
@@ -773,7 +773,7 @@ paths:
                   quantity: 1000
                   stock_status_id: 5
                   image: >-
-                    https://sualoja.com.br/image/catalog/api/60f9b8ed79993-517695.jpg
+                    https://seudmonio/imagem/foto.jpg
                   manufacturer_id: 8
                   shipping: true
                   price: 199.99
@@ -823,11 +823,11 @@ paths:
                     - 1
                   additional_images:
                     - >-
-                      https://sualoja.com.br/image/catalog/api/60f9b8eda87d6-517695.jpg
+                      https://seudmonio/imagem/foto_1.jpg
                     - >-
-                      https://sualoja.com.br/image/catalog/api/60f9b8ed955be-517695.jpg
+                      https://seudmonio/imagem/foto_2.jpg
                     - >-
-                      https://sualoja.com.br/image/catalog/api/60f9b8ed85827-517695.jpg
+                      https://seudmonio/imagem/foto_3.jpg
                   options:
                     - type: date
                       option_id: 8
@@ -934,7 +934,7 @@ paths:
                       gigabytes"},{"id":1,"default":"Four","pt-br":"Quatro"}],"options":[{"type":"radio","option_id":1,"values":[{"option_value_id":31,"sku":"Identifica\u00e7\u00e3o
                       SKU da
                       Op\u00e7\u00e3o","quantity":100,"subtract":true,"price":{"prefix":"-","value":5},"points":{"value":100}}],"required":true},{"type":"checkbox","option_id":2,"values":[{"option_value_id":23,"sku":"","quantity":100,"subtract":true,"price":{"prefix":"-","value":5}},{"option_value_id":24,"sku":"","quantity":50,"subtract":false,"points":{"value":100}},{"option_value_id":44,"sku":"","quantity":150,"subtract":true,"weight":{"prefix":"+","value":5}}],"required":true},{"type":"text","value":"Preencha
-                      aqui","option_id":"4"},{"type":"file","option_id":7,"required":true},{"type":"date","option_id":8,"value":"2021-07-13"}],"recurring":[],"special":[],"discounts":[],"image":"https://images.alphacoders.com/517/517695.jpg","additional_images":["https://images.alphacoders.com/517/517695.jpg","https://images.alphacoders.com/517/517695.jpg","https://images.alphacoders.com/517/517695.jpg"]}
+                      aqui","option_id":"4"},{"type":"file","option_id":7,"required":true},{"type":"date","option_id":8,"value":"2021-07-13"}],"recurring":[],"special":[],"discounts":[],"image":"https://seudmonio/imagem/foto.jpg","additional_images":["https://seudmonio/imagem/foto_1.jpg","https://seudmonio/imagem/foto_2.jpg","https://seudmonio/imagem/foto_3.jpg"]}
         '404':
           description: Not Found
           content:
@@ -954,6 +954,8 @@ paths:
       tags:
         - 02 - Produtos
       summary: Atualizar estoque
+      description: >-
+        Atualiza o estoque de produtos cadastrados.
       operationId: AtualizarEstoque
       parameters: []
       requestBody:
@@ -1062,12 +1064,13 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Error10'
+                $ref: '#/components/schemas/AtualizarEstoqueErro'
               example:
-                success: false
+                result: false
+                details: "Error filling in data sent"
                 errors:
-                  - code: invalid_access_token
-                    message: Invalid access_token.
+                  - node: 0
+                    details: "Required property missing: product_id, data: {\"location\":\"string\",\"minimum\":1,\"quantity\":12,\"weight\":12,\"length\":12,\"width\":12,\"height\":12,\"price\":12.99,\"length_class_id\":2}"
       deprecated: false
       security:
         - httpBearer: []
@@ -1076,6 +1079,8 @@ paths:
       tags:
         - 03 - Idiomas
       summary: Listar idiomas
+      description: >-
+        Lista os impostos cadastrados.
       operationId: ListarIdiomas
       parameters:
         - name: filter_code
@@ -1125,7 +1130,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/ListarIdiomasSucesso'
               example:
-                items:
+                records:
                   - language_id: 2
                     name: Português
                     code: pt-br
@@ -1154,6 +1159,8 @@ paths:
       tags:
         - 04 - Impostos
       summary: Listar grupos de impostos
+      description: >-
+        Lista os grupos de impostos cadastrados.
       operationId: ListarGruposImpostos
       parameters: []
       responses:
@@ -1164,7 +1171,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/ListarGruposImpostosSucesso'
               example:
-                items:
+                records:
                   - tax_class_id: 1
                     title: Estadual
                     description: Amapá
@@ -1189,6 +1196,8 @@ paths:
       tags:
         - 05 - Situações de estoque
       summary: Listar situações de estoque
+      description: >-
+        Lista as situações de estoque cadastradas.
       operationId: ListarSituacoesEstoque
       parameters:
         - name: page
@@ -1209,7 +1218,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/ListarSituacoesEstoqueSucesso'
               example:
-                items:
+                records:
                   - stock_status_id: '5'
                     name:
                       en-gb: Out Of Stock
@@ -1243,8 +1252,10 @@ paths:
   /length:
     get:
       tags:
-        - 06 - Unidades de medida
-      summary: Listar unidades de medida
+        - 06 - Unidades de medidas
+      summary: Listar unidades de medidas
+      description: >-
+        Lista as unidades de medidas cadastradas.
       operationId: ListarUnidadesMedida
       parameters: []
       responses:
@@ -1260,8 +1271,10 @@ paths:
   /weight:
     get:
       tags:
-        - 07 - Unidades de peso
-      summary: Listae unidades de peso
+        - 07 - Unidades de pesos
+      summary: Listar unidades de pesos
+      description: >-
+        Lista as unidades de pesos cadastradas.
       operationId: ListarUnidadePeso
       parameters: []
       responses:
@@ -1270,7 +1283,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Sucesso9'
+                $ref: '#/components/schemas/ListarUnidadePesoSucesso'
       deprecated: false
       security:
         - httpBearer: []
@@ -1279,6 +1292,8 @@ paths:
       tags:
         - 08 - Departamentos
       summary: Listar departamentos
+      description: >-
+        Lista os departamentos cadastrados.
       operationId: ListarDepartamentos
       parameters:
         - name: filter_parent_id
@@ -1288,9 +1303,9 @@ paths:
             para lsitar apenas as categorias "filhas" de uma determinada
             categoria "pai"
           required: false
-          style: simple
           schema:
             type: integer
+          style: simple
         - name: filter_total_products_eq
           in: query
           description: Lista categorias que possuam um número exato de produto
@@ -1298,6 +1313,9 @@ paths:
           style: simple
           schema:
             type: integer
+            items:
+              type: integer
+              format: int64
         - name: filter_total_products_lt
           in: query
           description: >-
@@ -1324,7 +1342,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/ListarDepartamentosSucesso'
               example:
-                items:
+                records:
                   - category_id: 25
                     image: ''
                     parent_id: 0
@@ -1377,7 +1395,7 @@ paths:
                       pt-br: ''
                   - category_id: 20
                     image: >-
-                      https://sualoja.com.br/image/catalog/demo/compaq_presario.jpg
+                      https://seudmonio/imagem/foto.jpg
                     parent_id: 0
                     top: 1
                     column: 1
@@ -1453,6 +1471,8 @@ paths:
       tags:
         - 09 - Filtros
       summary: Listar filtros
+      description: >-
+        Lista os filtros cadastrados.
       operationId: ListarFiltros
       parameters: []
       responses:
@@ -1463,7 +1483,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/ListarFiltrosSucesso'
               example:
-                items:
+                records:
                   - filter_group_id: 1
                     sort_order: 1
                     filters:
@@ -1520,6 +1540,8 @@ paths:
       tags:
         - 10 - Grupos de atributos
       summary: Listar grupos de atributos
+      description: >-
+        Lista os grupos de atributos cadastrados.
       operationId: ListarGruposAtributos
       parameters: []
       responses:
@@ -1530,7 +1552,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/ListarGruposAtributos'
               example:
-                items:
+                records:
                   - attribute_group_id: '2'
                     sort_order: '0'
                     name:
@@ -1560,6 +1582,8 @@ paths:
       tags:
         - 11 - Atributos
       summary: Listar atributos
+      description: >-
+        Lista os atributos cadastrados.
       operationId: ListarAtributos
       parameters: []
       responses:
@@ -1570,7 +1594,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/ListarAtributosSucesso'
               example:
-                items:
+                records:
                   - attribute_id: '2'
                     attribute_group_id: '1'
                     name:
@@ -1605,6 +1629,8 @@ paths:
       tags:
         - 12 - Marcas
       summary: Listar marcas
+      description: >-
+        Lista as marcas cadastradas.
       operationId: ListarMarcas
       parameters: []
       responses:
@@ -1615,30 +1641,30 @@ paths:
               schema:
                 $ref: '#/components/schemas/ListarMarcasSucesso'
               example:
-                items:
+                records:
                   - manufacturer_id: 8
                     name: Apple
-                    image: https://sualoja.com.br/image/catalog/demo/apple_logo.jpg
+                    image: https://seudmonio/imagem/apple_logo.jpg
                     sort_order: 0
                   - manufacturer_id: 9
                     name: Canon
-                    image: https://sualoja.com.br/image/catalog/demo/canon_logo.jpg
+                    image: https://seudmonio/imagem/canon_logo.jpg
                     sort_order: 0
                   - manufacturer_id: 7
                     name: HP
-                    image: https://sualoja.com.br/image/catalog/demo/hp_logo.jpg
+                    image: https://seudmonio/imagem/hp_logo.jpg
                     sort_order: 0
                   - manufacturer_id: 5
                     name: HTC
-                    image: https://sualoja.com.br/image/catalog/demo/htc_logo.jpg
+                    image: https://seudmonio/imagem/htc_logo.jpg
                     sort_order: 0
                   - manufacturer_id: 6
                     name: Palm
-                    image: https://sualoja.com.br/image/catalog/demo/palm_logo.jpg
+                    image: https://seudmonio/imagem/palm_logo.jpg
                     sort_order: 0
                   - manufacturer_id: 10
                     name: Sony
-                    image: https://sualoja.com.br/image/catalog/demo/sony_logo.jpg
+                    image: https://seudmonio/imagem/sony_logo.jpg
                     sort_order: 0
                 _metadata:
                   page: 1
@@ -1659,6 +1685,8 @@ paths:
       tags:
         - 13 - Downloads
       summary: Listar downloads
+      description: >-
+        Lista os downloads cadastrados.
       operationId: ListarDownloads
       parameters: []
       responses:
@@ -1669,7 +1697,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/ListarDownloadsSucesso'
               example:
-                items:
+                records:
                   - download_id: 1
                     filename: oc4269839.jpg.269c429c2b006b8fdb2987bf69462f5e
                     mask: ebook.jpg
@@ -1696,6 +1724,8 @@ paths:
       tags:
         - 14 - Opções
       summary: Listar opções
+      description: >-
+        Lista as opções cadastradas.
       operationId: ListarOpcoes
       parameters: []
       responses:
@@ -1706,7 +1736,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/ListarOpcoesSucesso'
               example:
-                items:
+                records:
                   - option_id: 1
                     type: radio
                     sort_order: 1
@@ -1740,25 +1770,25 @@ paths:
                       pt-br: Caixa de Texto
                     values:
                       - option_value_id: 23
-                        image: https://sualoja.com.br/catalog/Daniel.jpg
+                        image: https://sualoja.com.br/imagem/foto_1.jpg
                         sort_order: 1
                         name:
                           en-gb: Checkbox 1
                           pt-br: Caixa de Texto 1
                       - option_value_id: 24
-                        image: https://sualoja.com.br/catalog/Daniel_and_Leclerc.jpg
+                        image: https://sualoja.com.br/imagem/foto_2.jpg
                         sort_order: 2
                         name:
                           en-gb: Checkbox 2
                           pt-br: Caixa de Texto 2
                       - option_value_id: 44
-                        image: https://sualoja.com.br/catalog/George.jpg
+                        image: https://sualoja.com.br/imagem/foto_3.jpg
                         sort_order: 3
                         name:
                           en-gb: Checkbox 3
                           pt-br: Caixa de Texto 3
                       - option_value_id: 45
-                        image: https://sualoja.com.br/catalog/Tsunoda.jpg
+                        image: https://sualoja.com.br/imagem/foto_4.jpg
                         sort_order: 4
                         name:
                           en-gb: Checkbox 4
@@ -1887,7 +1917,8 @@ paths:
       tags:
         - 16 - Pedidos
       summary: Atualizar histórico
-      description: 'Atualiza o histórico e situação do pedido.'
+      description: >-
+        Atualiza o histórico e a situação do pedido.
       operationId: AtualizarHistoricoPedido
       security:
         - httpBearer: []
@@ -1932,17 +1963,18 @@ paths:
                   order_id: 19
                   updated: true
   /order/{order_id}:
-    summary: Captura as informações do pedido
     get:
-      summary: 'Captura as informações do pedido'
-      description: ''
-      operationId: CapturaPedido
+      tags:
+        - 16 - Pedidos
+      summary: Informações do pedido
+      description: >-
+        Exibe as informações do pedido cadastrado.
+      operationId: InformacoesPedido
       security:
         - httpBearer: []
       parameters:
         - name: order_id
           in: path
-          description: ID do pedido
           required: true
           style: simple
           schema:
@@ -2171,7 +2203,7 @@ paths:
                     invoice_no: '0'
                     invoice_prefix: FAT
                     store_name: Sua loja
-                    store_url: https://sualoja.com.br/
+                    store_url: https://sualoja/
                     customer_id: 1
                     customer_group_id: 1
                     firstname: Fulano
@@ -2223,7 +2255,7 @@ paths:
                     products:
                     - product_id: 40
                       name: iPhone
-                      model: Produto 11
+                      model: Modelo
                       quantity: 1
                       price: 101.00
                       total: 101.00
@@ -2262,7 +2294,7 @@ paths:
                 invoice_no: '0'
                 invoice_prefix: FAT
                 store_name: Sua loja
-                store_url: https://sualoja.com.br/
+                store_url: https://sualoja/
                 customer_id: 1
                 customer_group_id: 1
                 firstname: Fulano
@@ -2314,7 +2346,7 @@ paths:
                 products:
                 - product_id: 40
                   name: iPhone
-                  model: Produto 11
+                  model: Modelo
                   quantity: 1
                   price: 101.00
                   total: 101.00
@@ -2355,14 +2387,14 @@ paths:
               examples:
                 NotFound:
                   value: '[]'
+  /orders:
+    get:
       tags:
         - 16 - Pedidos
-  /orders:
-    summary: Listar pedidos
-    get:
-      summary: Lista os pedidos
-      description: ''
-      operationId: GetOrders
+      summary: Listar pedidos
+      description: >-
+        Exibe os pedidos cadastrados.
+      operationId: ListarPedidos
       security:
         - httpBearer: []
       responses:
@@ -2542,7 +2574,6 @@ paths:
                                 type: string
                               cest:
                                 type: string
-
                           description: ''
                         totals:
                           type: array
@@ -2620,8 +2651,6 @@ paths:
                         previous: ''
                         next: ''
                         last: /orders?page=1&per_page=50
-      tags:
-        - 16 - Pedidos
 components:
   schemas:
     GerarAccessTokenSucesso:
@@ -2647,8 +2676,8 @@ components:
         refresh_token: JWT
         token_type: Bearer
         expires_in: 3599
-    Error:
-      title: Resposta
+    CredentialErro:
+      title: CredentialErro
       required:
         - code
         - message
@@ -2673,7 +2702,7 @@ components:
         errors:
           type: array
           items:
-            $ref: '#/components/schemas/GerarAccessTokenErro'
+            $ref: '#/components/schemas/CredentialErro'
           description: ''
       example:
         success: false
@@ -2711,7 +2740,7 @@ components:
         errors:
           type: array
           items:
-            $ref: '#/components/schemas/Error'
+            $ref: '#/components/schemas/CredentialErro'
           description: ''
       example:
         success: false
@@ -3205,7 +3234,7 @@ components:
         suffix: ''
         prefix: ''
     CadastrarProdutoSucesso:
-      title: Sucesso
+      title: CadastrarProdutoSucesso
       required:
         - result
         - data
@@ -3231,7 +3260,7 @@ components:
           location: ''
           quantity: 1000
           stock_status_id: 5
-          image: https://sualoja.com.br/image/catalog/api/60f9b4df2b7e2-517695.jpg
+          image: https://seudmonio/imagem/foto.jpg
           manufacturer_id: 8
           shipping: true
           price: 199.99
@@ -3299,9 +3328,9 @@ components:
           filters:
             - 1
           additional_images:
-            - https://sualoja.com.br/image/catalog/api/60f9b4df57ef3-517695.jpg
-            - https://sualoja.com.br/image/catalog/api/60f9b4df49afc-517695.jpg
-            - https://sualoja.com.br/image/catalog/api/60f9b4df3cf76-517695.jpg
+            - https://seudmonio/imagem/foto_1.jpg
+            - https://seudmonio/imagem/foto_2.jpg
+            - https://seudmonio/imagem/foto_3.jpg
           options:
             - type: date
               option_id: 8
@@ -3605,7 +3634,7 @@ components:
         location: ''
         quantity: 1000
         stock_status_id: 5
-        image: https://sualoja.com.br/image/catalog/api/60f9b4df2b7e2-517695.jpg
+        image: https://seudmonio/imagem/foto.jpg
         manufacturer_id: 8
         shipping: true
         price: 199.99
@@ -3673,9 +3702,9 @@ components:
         filters:
           - 1
         additional_images:
-          - https://sualoja.com.br/image/catalog/api/60f9b4df57ef3-517695.jpg
-          - https://sualoja.com.br/image/catalog/api/60f9b4df49afc-517695.jpg
-          - https://sualoja.com.br/image/catalog/api/60f9b4df3cf76-517695.jpg
+          - https://seudmonio/imagem/foto_1.jpg
+          - https://seudmonio/imagem/foto_2.jpg
+          - https://seudmonio/imagem/foto_3.jpg
         options:
           - type: date
             option_id: 8
@@ -4134,11 +4163,11 @@ components:
           length_class_id: 1
           weight_class_id: 2
         status: false
-        image: https://images.alphacoders.com/517/517695.jpg
+        image: https://seudmonio/imagem/foto.jpg
         additional_images:
-          - https://images.alphacoders.com/517/517695.jpg
-          - https://images.alphacoders.com/517/517695.jpg
-          - https://images.alphacoders.com/517/517695.jpg
+          - https://seudmonio/imagem/foto_1.jpg
+          - https://seudmonio/imagem/foto_2.jpg
+          - https://seudmonio/imagem/foto_3.jpg
     AtualizarProdutoSucesso:
       title: AtualizarProdutoSucesso
       required:
@@ -4154,7 +4183,7 @@ components:
         result: true
         data:
           product_id: 222
-          model: Modelo do Produto
+          model: Modelo
           sku: ''
           ncm: ''
           cest: ''
@@ -4166,7 +4195,7 @@ components:
           location: ''
           quantity: 1000
           stock_status_id: 5
-          image: https://sualoja.com.br/image/catalog/api/60f9b8ed79993-517695.jpg
+          image: https://seudmonio/imagem/foto.jpg
           manufacturer_id: 8
           shipping: true
           price: 199.99
@@ -4215,9 +4244,9 @@ components:
           filters:
             - 1
           additional_images:
-            - https://sualoja.com.br/image/catalog/api/60f9b8eda87d6-517695.jpg
-            - https://sualoja.com.br/image/catalog/api/60f9b8ed955be-517695.jpg
-            - https://sualoja.com.br/image/catalog/api/60f9b8ed85827-517695.jpg
+            - https://seudmonio/imagem/foto_1.jpg
+            - https://seudmonio/imagem/foto_2.jpg
+            - https://seudmonio/imagem/foto_3.jpg
           options:
             - type: date
               option_id: 8
@@ -4482,7 +4511,7 @@ components:
           $ref: '#/components/schemas/Links'
       example:
         product_id: 222
-        model: Modelo do Produto
+        model: Modelo
         sku: ''
         ncm: ''
         cest: ''
@@ -4494,7 +4523,7 @@ components:
         location: ''
         quantity: 1000
         stock_status_id: 5
-        image: https://sualoja.com.br/image/catalog/api/60f9b8ed79993-517695.jpg
+        image: https://seudmonio/imagem/foto.jpg
         manufacturer_id: 8
         shipping: true
         price: 199.99
@@ -4543,9 +4572,9 @@ components:
         filters:
           - 1
         additional_images:
-          - https://sualoja.com.br/image/catalog/api/60f9b8eda87d6-517695.jpg
-          - https://sualoja.com.br/image/catalog/api/60f9b8ed955be-517695.jpg
-          - https://sualoja.com.br/image/catalog/api/60f9b8ed85827-517695.jpg
+          - https://seudmonio/imagem/foto_1.jpg
+          - https://seudmonio/imagem/foto_2.jpg
+          - https://seudmonio/imagem/foto_3.jpg
         options:
           - type: date
             option_id: 8
@@ -4604,7 +4633,7 @@ components:
             required: true
             values:
               - option_value_id: 31
-                sku: Identificação SKU da Opção
+                sku: SKU da opção
                 quantity: 100
                 subtract: true
                 price:
@@ -4632,7 +4661,7 @@ components:
     ListarProdutosSucesso:
       title: ListarProdutosSucesso
       required:
-        - items
+        - records
         - _metadata
       type: object
       properties:
@@ -4646,7 +4675,7 @@ components:
       example:
         records:
           - product_id: 40
-            model: Produto 11
+            model: Modelo
             sku: ''
             ncm: ''
             cest: ''
@@ -4658,7 +4687,7 @@ components:
             location: ''
             quantity: 970
             stock_status_id: 5
-            image: https://sualoja.com.br/image/catalog/demo/iphone_1.jpg
+            image: https://seudmonio/imagem/foto.jpg
             manufacturer_id: 8
             shipping: true
             price: 101
@@ -4706,11 +4735,11 @@ components:
               en-gb: ''
               pt-br: ''
             additional_images:
-              - https://sualoja.com.br/image/catalog/demo/iphone_6.jpg
-              - https://sualoja.com.br/image/catalog/demo/iphone_2.jpg
-              - https://sualoja.com.br/image/catalog/demo/iphone_5.jpg
-              - https://sualoja.com.br/image/catalog/demo/iphone_3.jpg
-              - https://sualoja.com.br/image/catalog/demo/iphone_4.jpg
+              - https://seudmonio/imagem/iphone_1.jpg
+              - https://seudmonio/imagem/iphone_2.jpg
+              - https://seudmonio/imagem/iphone_3.jpg
+              - https://seudmonio/imagem/iphone_4.jpg
+              - https://seudmonio/imagem/iphone_5.jpg
             product_related:
               - 42
             points_reward:
@@ -4890,7 +4919,7 @@ components:
           $ref: '#/components/schemas/Links'
       example:
         product_id: 40
-        model: Produto 11
+        model: iPhone
         sku: ''
         ncm: ''
         cest: ''
@@ -4902,7 +4931,7 @@ components:
         location: ''
         quantity: 970
         stock_status_id: 5
-        image: https://sualoja.com.br/image/catalog/demo/iphone_1.jpg
+        image: https://seudmonio/imagem/foto.jpg
         manufacturer_id: 8
         shipping: true
         price: 101
@@ -4950,11 +4979,11 @@ components:
           en-gb: ''
           pt-br: ''
         additional_images:
-          - https://sualoja.com.br/image/catalog/demo/iphone_6.jpg
-          - https://sualoja.com.br/image/catalog/demo/iphone_2.jpg
-          - https://sualoja.com.br/image/catalog/demo/iphone_5.jpg
-          - https://sualoja.com.br/image/catalog/demo/iphone_3.jpg
-          - https://sualoja.com.br/image/catalog/demo/iphone_4.jpg
+          - https://seudmonio/imagem/iphone_1.jpg
+          - https://seudmonio/imagem/iphone_2.jpg
+          - https://seudmonio/imagem/iphone_3.jpg
+          - https://seudmonio/imagem/iphone_4.jpg
+          - https://seudmonio/imagem/iphone_5.jpg
         product_related:
           - 42
         points_reward:
@@ -5109,25 +5138,26 @@ components:
         price: 12.99
         length_class_id: 2
         weight_class_id: 2
-    Error10:
-      title: Error10
+    AtualizarEstoqueErro:
+      title: AtualizarEstoqueErro
       required:
-        - success
+        - result
+        - details
         - errors
       type: object
       properties:
-        success:
+        result:
           type: boolean
+        details:
+          type: string
         errors:
           type: array
-          items:
-            $ref: '#/components/schemas/Error'
-          description: ''
       example:
-        success: false
+        result: false
+        details: "Error filling in data sent"
         errors:
-          - code: invalid_access_token
-            message: Invalid access_token.
+          - node: 0
+            details: "Required property missing: product_id, data: {\"location\":\"string\",\"minimum\":1,\"quantity\":12,\"weight\":12,\"length\":12,\"width\":12,\"height\":12,\"price\":12.99,\"length_class_id\":2}"
     AtualizarEstoqueSucesso:
       title: AtualizarEstoqueSucesso
       required:
@@ -5146,11 +5176,11 @@ components:
     ListarIdiomasSucesso:
       title: ListarIdiomasSucesso
       required:
-        - items
+        - records
         - _metadata
       type: object
       properties:
-        items:
+        records:
           type: array
           items:
             $ref: '#/components/schemas/Item1'
@@ -5158,7 +5188,7 @@ components:
         _metadata:
           $ref: '#/components/schemas/Metadata'
       example:
-        items:
+        records:
           - language_id: 2
             name: Português
             code: pt-br
@@ -5211,11 +5241,11 @@ components:
     ListarGruposImpostosSucesso:
       title: ListarGruposImpostosSucesso
       required:
-        - items
+        - records
         - _metadata
       type: object
       properties:
-        items:
+        records:
           type: array
           items:
             $ref: '#/components/schemas/Item2'
@@ -5223,7 +5253,7 @@ components:
         _metadata:
           $ref: '#/components/schemas/Metadata'
       example:
-        items:
+        records:
           - tax_class_id: 1
             title: Estadual
             description: Bahia
@@ -5270,11 +5300,11 @@ components:
     ListarSituacoesEstoqueSucesso:
       title: ListarSituacoesEstoqueSucesso
       required:
-        - items
+        - records
         - _metadata
       type: object
       properties:
-        items:
+        records:
           type: array
           items:
             $ref: '#/components/schemas/Item3'
@@ -5282,7 +5312,7 @@ components:
         _metadata:
           $ref: '#/components/schemas/Metadata'
       example:
-        items:
+        records:
           - stock_status_id: '5'
             name:
               en-gb: Out Of Stock
@@ -5329,11 +5359,11 @@ components:
     ListarUnidadesMedidaSucesso:
       title: ListarUnidadesMedidaSucesso
       required:
-        - items
+        - records
         - _metadata
       type: object
       properties:
-        items:
+        records:
           type: array
           items:
             $ref: '#/components/schemas/Item4'
@@ -5396,14 +5426,14 @@ components:
       example:
         en-gb: cm
         pt-br: cm
-    Sucesso9:
-      title: Sucesso9
+    ListarUnidadePesoSucesso:
+      title: ListarUnidadePesoSucesso
       required:
-        - items
+        - records
         - _metadata
       type: object
       properties:
-        items:
+        records:
           type: array
           items:
             $ref: '#/components/schemas/Item5'
@@ -5441,11 +5471,11 @@ components:
     ListarDepartamentosSucesso:
       title: ListarDepartamentosSucesso
       required:
-        - items
+        - records
         - _metadata
       type: object
       properties:
-        items:
+        records:
           type: array
           items:
             $ref: '#/components/schemas/Item6'
@@ -5453,7 +5483,7 @@ components:
         _metadata:
           $ref: '#/components/schemas/Metadata'
       example:
-        items:
+        records:
           - category_id: 25
             image: ''
             parent_id: 0
@@ -5505,7 +5535,7 @@ components:
               en-gb: ''
               pt-br: ''
           - category_id: 20
-            image: https://sualoja.com.br/image/catalog/demo/compaq_presario.jpg
+            image: https://seudmonio/imagem/desktops.jpg
             parent_id: 0
             top: 1
             column: 1
@@ -5659,11 +5689,11 @@ components:
     ListarFiltrosSucesso:
       title: ListarFiltrosSucesso
       required:
-        - items
+        - records
         - _metadata
       type: object
       properties:
-        items:
+        records:
           type: array
           items:
             $ref: '#/components/schemas/Item7'
@@ -5671,7 +5701,7 @@ components:
         _metadata:
           $ref: '#/components/schemas/Metadata'
       example:
-        items:
+        records:
           - filter_group_id: 1
             sort_order: 1
             filters:
@@ -5784,11 +5814,11 @@ components:
     ListarGruposAtributos:
       title: ListarGruposAtributos
       required:
-        - items
+        - records
         - _metadata
       type: object
       properties:
-        items:
+        records:
           type: array
           items:
             $ref: '#/components/schemas/Item8'
@@ -5796,7 +5826,7 @@ components:
         _metadata:
           $ref: '#/components/schemas/Metadata'
       example:
-        items:
+        records:
           - attribute_group_id: '2'
             sort_order: '0'
             name:
@@ -5841,11 +5871,11 @@ components:
     ListarAtributosSucesso:
       title: ListarAtributosSucesso
       required:
-        - items
+        - records
         - _metadata
       type: object
       properties:
-        items:
+        records:
           type: array
           items:
             $ref: '#/components/schemas/Item9'
@@ -5853,7 +5883,7 @@ components:
         _metadata:
           $ref: '#/components/schemas/Metadata'
       example:
-        items:
+        records:
           - attribute_id: '2'
             attribute_group_id: '1'
             name:
@@ -5903,11 +5933,11 @@ components:
     ListarMarcasSucesso:
       title: Marcas
       required:
-        - items
+        - records
         - _metadata
       type: object
       properties:
-        items:
+        records:
           type: array
           items:
             $ref: '#/components/schemas/Item10'
@@ -5915,30 +5945,30 @@ components:
         _metadata:
           $ref: '#/components/schemas/Metadata'
       example:
-        items:
+        records:
           - manufacturer_id: 8
             name: Apple
-            image: https://sualoja.com.br/image/catalog/demo/apple_logo.jpg
+            image: https://seudmonio/imagem/apple_logo.jpg
             sort_order: 0
           - manufacturer_id: 9
             name: Canon
-            image: https://sualoja.com.br/image/catalog/demo/canon_logo.jpg
+            image: https://seudmonio/imagem/canon_logo.jpg
             sort_order: 0
           - manufacturer_id: 7
             name: HP
-            image: https://sualoja.com.br/image/catalog/demo/hp_logo.jpg
+            image: https://seudmonio/imagem/hp_logo.jpg
             sort_order: 0
           - manufacturer_id: 5
             name: HTC
-            image: https://sualoja.com.br/image/catalog/demo/htc_logo.jpg
+            image: https://seudmonio/imagem/htc_logo.jpg
             sort_order: 0
           - manufacturer_id: 6
             name: Palm
-            image: https://sualoja.com.br/image/catalog/demo/palm_logo.jpg
+            image: https://seudmonio/imagem/palm_logo.jpg
             sort_order: 0
           - manufacturer_id: 10
             name: Sony
-            image: https://sualoja.com.br/image/catalog/demo/sony_logo.jpg
+            image: https://seudmonio/imagem/sony_logo.jpg
             sort_order: 0
         _metadata:
           page: 1
@@ -5973,16 +6003,16 @@ components:
       example:
         manufacturer_id: 8
         name: Apple
-        image: https://sualoja.com.br/image/catalog/demo/apple_logo.jpg
+        image: https://seudmonio/imagem/apple_logo.jpg
         sort_order: 0
     ListarDownloadsSucesso:
       title: ListarDownloadsSucesso
       required:
-        - items
+        - records
         - _metadata
       type: object
       properties:
-        items:
+        records:
           type: array
           items:
             $ref: '#/components/schemas/Item11'
@@ -5990,14 +6020,14 @@ components:
         _metadata:
           $ref: '#/components/schemas/Metadata'
       example:
-        items:
+        records:
           - download_id: 1
-            filename: wp4269839.jpg.269c429c2b006b8fdb2987bf69462f5e
-            mask: seb-ferrari.jpg
+            filename: oc4269839.jpg.269c429c2b006b8fdb2987bf69462f5e
+            mask: ebook.jpg
             date_added: {}
             name:
-              en-gb: Sebastian Vettel
-              pt-br: Sebasatião Vettel
+              en-gb: eBook
+              pt-br: Livro Digital
         _metadata:
           page: 1
           per_page: 50
@@ -6041,11 +6071,11 @@ components:
     ListarOpcoesSucesso:
       title: ListarOpcoesSucesso
       required:
-        - items
+        - records
         - _metadata
       type: object
       properties:
-        items:
+        records:
           type: array
           items:
             $ref: '#/components/schemas/Item12'
@@ -6053,7 +6083,7 @@ components:
         _metadata:
           $ref: '#/components/schemas/Metadata'
       example:
-        items:
+        records:
           - option_id: 1
             type: radio
             sort_order: 1
@@ -6087,25 +6117,25 @@ components:
               pt-br: Caixa de texto
             values:
               - option_value_id: 23
-                image: https://sualoja.com.br/catalog/Daniel.jpg
+                image: https://sualoja.com.br/imagem/foto_1.jpg
                 sort_order: 1
                 name:
                   en-gb: Checkbox 1
                   pt-br: Caixa de texto 1
               - option_value_id: 24
-                image: https://sualoja.com.br/catalog/Daniel_and_Leclerc.jpg
+                image: https://sualoja.com.br/imagem/foto_2.jpg
                 sort_order: 2
                 name:
                   en-gb: Checkbox 2
                   pt-br: Caixa de texto 2
               - option_value_id: 44
-                image: https://sualoja.com.br/catalog/George.jpg
+                image: https://sualoja.com.br/imagem/foto_3.jpg
                 sort_order: 3
                 name:
                   en-gb: Checkbox 3
                   pt-br: Caixa de texto 3
               - option_value_id: 45
-                image: https://sualoja.com.br/catalog/Tsunoda.jpg
+                image: https://sualoja.com.br/imagem/foto_4.jpg
                 sort_order: 4
                 name:
                   en-gb: Checkbox 4
@@ -6316,8 +6346,8 @@ tags:
   - name: 03 - Idiomas
   - name: 04 - Impostos
   - name: 05 - Situações de estoque
-  - name: 06 - Unidades de medida
-  - name: 07 - Unidades de peso
+  - name: 06 - Unidades de medidas
+  - name: 07 - Unidades de pesos
   - name: 08 - Departamentos
   - name: 09 - Filtros
   - name: 10 - Grupos de atributos
