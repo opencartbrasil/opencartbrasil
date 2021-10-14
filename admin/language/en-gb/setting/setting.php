@@ -1,6 +1,7 @@
 <?php
 // Heading
-$_['heading_title']                       = 'Settings';
+$_['heading_title']                  = 'Settings';
+
 // Text
 $_['text_stores']                    = 'Stores';
 $_['text_success']                   = 'Success: You have modified settings!';
@@ -183,7 +184,7 @@ $_['help_file_max_size']             = 'The maximum image file size you can uplo
 $_['help_file_ext_allowed']          = 'Add which file extensions are allowed to be uploaded. Use a new line for each value.';
 $_['help_file_mime_allowed']         = 'Add which file mime types are allowed to be uploaded. Use a new line for each value.';
 $_['help_maintenance']               = 'Prevents customers from browsing your store. They will instead see a maintenance message. If logged in as admin, you will see the store as normal.';
-$_['help_api_rest']                  = 'If \'no\', it closes access to the REST API and makes it impossible for third parties to access data through it.';
+$_['help_api_rest']                  = 'If \'no\', it closes access to the REST API and makes it impossible for third parties to access data through it. Minimum PHP Version: 7.3 ou superior.';
 $_['help_admin_login_attempts']      = 'Maximum admin login attempts allowed before the account is locked for 1 hour. Admin account can be unlocked on reset password.';
 $_['help_password']                  = 'Allow forgotten password to be used for the admin. This will be disabled automatically if the system detects a hack attempt.';
 $_['help_encryption']                = 'Please provide a secret key that will be used to encrypt private information when processing orders.';
