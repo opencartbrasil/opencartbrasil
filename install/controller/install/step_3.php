@@ -286,7 +286,7 @@ class ControllerInstallStep3 extends Controller {
 		if (isset($this->request->post['username'])) {
 			$data['username'] = $this->request->post['username'];
 		} else {
-			$data['username'] = 'admin';
+			$data['username'] = '';
 		}
 
 		if (isset($this->request->post['password'])) {

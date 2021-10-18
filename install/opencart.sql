@@ -3531,7 +3531,7 @@ INSERT INTO `oc_setting` (`store_id`, `code`, `key`, `value`, `serialized`) VALU
 (0, 'config', 'config_image', '', 0),
 (0, 'config', 'config_fax', '', 0),
 (0, 'config', 'config_telephone', '123456789', 0),
-(0, 'config', 'config_email', 'usuario@dominio.com.br', 0),
+(0, 'config', 'config_email', 'usuario@dominio', 0),
 (0, 'config', 'config_geocode', '', 0),
 (0, 'config', 'config_owner', 'Seu nome', 0),
 (0, 'config', 'config_address', 'Seu endereço', 0),

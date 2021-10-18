@@ -12,9 +12,9 @@
  *                             --db_database opencartbrasil
  *                             --db_port 3306
  *                             --db_prefix ocbr_
- *                             --username admin
- *                             --password admin
- *                             --email usuario@dominio.com.br
+ *                             --username usuario
+ *                             --password senha
+ *                             --email usuario@dominio
  *                             --http_server http://localhost/opencartbrasil
  */
 
@@ -64,9 +64,9 @@ function usage() {
 		'--db_database', '"opencartbrasil" \\' . PHP_EOL,
 		'--db_port', '"3306" \\' . PHP_EOL,
 		'--db_prefix', '"ocbr_" \\' . PHP_EOL,
-		'--username', '"admin" \\' . PHP_EOL,
-		'--password', '"admin" \\' . PHP_EOL,
-		'--email', '"usuario@dominio.com.br" \\' . PHP_EOL,
+		'--username', '"usuario" \\' . PHP_EOL,
+		'--password', '"senha" \\' . PHP_EOL,
+		'--email', '"usuario@dominio" \\' . PHP_EOL,
 		'--http_server', '"http://localhost/opencartbrasil/"'
 	));
 	echo 'php cli_install.php install ' . $options . "\n\n";
@@ -79,7 +79,7 @@ function get_options($argv) {
 		'db_password' => '',
 		'db_port'     => '3306',
 		'db_prefix'   => 'ocbr_',
-		'username'    => 'admin'
+		'username'    => 'usuario'
 	);
 
 	$options = array();
