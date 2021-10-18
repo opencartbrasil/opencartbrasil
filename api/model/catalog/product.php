@@ -239,7 +239,8 @@ class ModelCatalogProduct extends Model {
 			SELECT pa.*, l.code
 			FROM `' . DB_PREFIX . 'product_attribute` pa
 			LEFT JOIN `' . DB_PREFIX . 'language` l ON (l.language_id = pa.language_id)
-			WHERE pa.`product_id` = "' . $product_id . '"');
+			WHERE pa.`product_id` = "' . $product_id . '"
+		');
 
 		return $query->rows;
 	}
@@ -249,7 +250,8 @@ class ModelCatalogProduct extends Model {
 			SELECT pd.*, l.code AS language_code
 			FROM `' . DB_PREFIX . 'product_description` pd
 			LEFT JOIN `' . DB_PREFIX . 'language` l ON (l.language_id = pd.language_id)
-			WHERE pd.`product_id` = "' . $product_id . '"');
+			WHERE pd.`product_id` = "' . $product_id . '"
+		');
 
 		if (!$query->num_rows) {
 			return array();

@@ -83,7 +83,7 @@ class ModelCatalogCategory extends Model {
 
 		$query = $this->db->query($sql);
 
-		$result = [];
+		$result = array();
 
 		foreach ($query->rows as $row) {
 			$language_code = $row['language_code'];
@@ -114,7 +114,6 @@ class ModelCatalogCategory extends Model {
 		if ($data['filter_total_products_eq'] !== null) {
 			$sql .= ' HAVING(total_products = ' . (int)$data['filter_total_products_eq'] . ')';
 		} elseif (isset($data['filter_total_products_lt']) || isset($data['filter_total_products_gt'])) {
-
 			if (isset($data['filter_total_products_lt'])) {
 				$filter_total_products_lt = intval($data['filter_total_products_lt']);
 			} else {

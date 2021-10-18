@@ -118,7 +118,7 @@ class ControllerProductList extends Controller {
 					'height' => floatval($product_info['height']),
 					'weight' => floatval($product_info['weight']),
 					'length_class_id' => intval($product_info['length_class_id']),
-					'weight_class_id' => intval($product_info['weight_class_id']),
+					'weight_class_id' => intval($product_info['weight_class_id'])
 				),
 				'subtract' => !!$product_info['subtract'],
 				'minimum' => intval($product_info['minimum']),
@@ -126,7 +126,7 @@ class ControllerProductList extends Controller {
 				'status' => !!$product_info['status'],
 				'viewed' => intval($product_info['viewed']),
 				'date_added' => date('Y-m-d\TH:i:s\+00:00', strtotime($product_info['date_added'])),
-				'date_modified' => date('Y-m-d\TH:i:s\+00:00', strtotime($product_info['date_modified'])),
+				'date_modified' => date('Y-m-d\TH:i:s\+00:00', strtotime($product_info['date_modified']))
 			);
 
 			// Attributes
@@ -161,7 +161,7 @@ class ControllerProductList extends Controller {
 						'price' => floatval($discount['price']),
 						'quantity' => intval($discount['quantity']),
 						'date_start' => $discount['date_start'],
-						'date_end' => $discount['date_end'],
+						'date_end' => $discount['date_end']
 					);
 				}
 			}
@@ -198,15 +198,15 @@ class ControllerProductList extends Controller {
 						'subtract' => !!$value['subtract'],
 						'price' => array(
 							'prefix' => $value['price_prefix'],
-							'value' => floatval($value['price']),
+							'value' => floatval($value['price'])
 						),
 						'points' => array(
 							'prefix' => $value['points_prefix'],
-							'value' => floatval($value['points']),
+							'value' => floatval($value['points'])
 						),
 						'weight' => array(
 							'prefix' => $value['weight_prefix'],
-							'value' => floatval($value['weight']),
+							'value' => floatval($value['weight'])
 						),
 					);
 				}
@@ -225,10 +225,10 @@ class ControllerProductList extends Controller {
 
 			if ($product_recurrings) {
 				foreach ($product_recurrings as $recurring) {
-					$result_items[$key]['recurring'][] = [
+					$result_items[$key]['recurring'][] = array(
 						'recurring_id' => intval($recurring['recurring_id']),
-						'customer_group_id' => intval($recurring['customer_group_id']),
-					];
+						'customer_group_id' => intval($recurring['customer_group_id'])
+					);
 				}
 			}
 
@@ -263,7 +263,7 @@ class ControllerProductList extends Controller {
 						'price' => floatval($value['price']),
 						'priority' => intval($value['priority']),
 						'date_start' => $value['date_start'],
-						'date_end' => $value['date_end'],
+						'date_end' => $value['date_end']
 					);
 				}
 			}
@@ -279,7 +279,7 @@ class ControllerProductList extends Controller {
 						'priority' => intval($discount['priority']),
 						'quantity' => intval($discount['quantity']),
 						'date_start' => $discount['date_start'],
-						'date_end' => $discount['date_end'],
+						'date_end' => $discount['date_end']
 					);
 				}
 			}

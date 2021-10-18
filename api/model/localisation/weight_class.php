@@ -48,7 +48,8 @@ class ModelLocalisationWeightClass extends Model {
 
 	public function getWeightClasses(array $data = array()) {
 		$sql = '
-			SELECT DISTINCT wc.weight_class_id, wc.* FROM `' . DB_PREFIX . 'weight_class` wc
+			SELECT DISTINCT wc.weight_class_id, wc.*
+			FROM `' . DB_PREFIX . 'weight_class` wc
 			LEFT JOIN `' . DB_PREFIX . 'weight_class_description` wcd ON (wc.`weight_class_id` = wcd.`weight_class_id`)
 			WHERE wc.weight_class_id > 0
 		';

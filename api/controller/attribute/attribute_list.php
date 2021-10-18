@@ -48,7 +48,7 @@ class ControllerAttributeAttributeList extends Controller {
 			$result_items[] = array(
 				'attribute_id' => $attribute['attribute_id'],
 				'attribute_group_id' => $attribute['attribute_group_id'],
-				'name' => $attribute_descriptions,
+				'name' => $attribute_descriptions
 			);
 		}
 

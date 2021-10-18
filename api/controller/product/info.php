@@ -12,7 +12,7 @@ class ControllerProductInfo extends Controller {
 		$product_info = $this->model_catalog_product->getProduct($product_id);
 
 		if (empty($product_info)) {
-			return $this->response([], self::HTTP_STATUS_404);
+			return $this->response(array(), self::HTTP_STATUS_404);
 		}
 
 		$product_info = array(
@@ -50,7 +50,7 @@ class ControllerProductInfo extends Controller {
 			'status' => !!$product_info['status'],
 			'viewed' => intval($product_info['viewed']),
 			'date_added' => date('Y-m-d\TH:i:s\+00:00', strtotime($product_info['date_added'])),
-			'date_modified' => date('Y-m-d\TH:i:s\+00:00', strtotime($product_info['date_modified'])),
+			'date_modified' => date('Y-m-d\TH:i:s\+00:00', strtotime($product_info['date_modified']))
 		);
 
 		// Attributes
@@ -85,7 +85,7 @@ class ControllerProductInfo extends Controller {
 					'price' => floatval($discount['price']),
 					'quantity' => intval($discount['quantity']),
 					'date_start' => $discount['date_start'],
-					'date_end' => $discount['date_end'],
+					'date_end' => $discount['date_end']
 				);
 			}
 		}
@@ -122,15 +122,15 @@ class ControllerProductInfo extends Controller {
 					'subtract' => !!$value['subtract'],
 					'price' => array(
 						'prefix' => $value['price_prefix'],
-						'value' => floatval($value['price']),
+						'value' => floatval($value['price'])
 					),
 					'points' => array(
 						'prefix' => $value['points_prefix'],
-						'value' => floatval($value['points']),
+						'value' => floatval($value['points'])
 					),
 					'weight' => array(
 						'prefix' => $value['weight_prefix'],
-						'value' => floatval($value['weight']),
+						'value' => floatval($value['weight'])
 					),
 				);
 			}
@@ -151,7 +151,7 @@ class ControllerProductInfo extends Controller {
 			foreach ($product_recurrings as $recurring) {
 				$product_info['recurring'][] = [
 					'recurring_id' => intval($recurring['recurring_id']),
-					'customer_group_id' => intval($recurring['customer_group_id']),
+					'customer_group_id' => intval($recurring['customer_group_id'])
 				];
 			}
 		}
@@ -187,7 +187,7 @@ class ControllerProductInfo extends Controller {
 					'price' => floatval($value['price']),
 					'priority' => intval($value['priority']),
 					'date_start' => $value['date_start'],
-					'date_end' => $value['date_end'],
+					'date_end' => $value['date_end']
 				);
 			}
 		}
@@ -203,7 +203,7 @@ class ControllerProductInfo extends Controller {
 					'priority' => intval($discount['priority']),
 					'quantity' => intval($discount['quantity']),
 					'date_start' => $discount['date_start'],
-					'date_end' => $discount['date_end'],
+					'date_end' => $discount['date_end']
 				);
 			}
 		}

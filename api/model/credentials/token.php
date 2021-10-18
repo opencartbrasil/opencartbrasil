@@ -142,10 +142,10 @@ class ModelCredentialsToken extends Model {
 			'scope' => $user_info->row['permissions']
 		);
 
-		return [
+		return array(
 			'jwt' => JWT::encode($payload, $this->config->get('secret_key')),
 			'exp' => $time + $expire_at,
-		];
+		);
 	}
 
 	/**

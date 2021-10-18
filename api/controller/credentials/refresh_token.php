@@ -11,10 +11,9 @@ class ControllerCredentialsRefreshToken extends Controller {
 	public function index() {
 		$this->load->model('credentials/token');
 
-		$json = [];
+		$json = array();
 
 		$isValidToken = false;
-		$jwt_decoded = null;
 
 		$validate = $this->validate();
 
@@ -48,9 +47,9 @@ class ControllerCredentialsRefreshToken extends Controller {
 			$token = $this->model_credentials_token->generateToken($body_decoded->sub, self::REFRESH_EXPIRE);
 
 			$json = [
-				'access_token' 	=> (string)$token['jwt'],
-				'token_type' 	=> 'Bearer',
-				'expires_in' 	=> self::REFRESH_EXPIRE - 1,
+				'access_token' => (string)$token['jwt'],
+				'token_type' => 'Bearer',
+				'expires_in' => self::REFRESH_EXPIRE - 1
 			];
 
 			$this->model_credentials_token->addToken($body_decoded->sub, $token['jwt'], $refresh_token);

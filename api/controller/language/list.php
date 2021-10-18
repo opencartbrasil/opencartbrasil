@@ -51,7 +51,7 @@ class ControllerLanguageList extends Controller {
 				'code' => $language_info['code'],
 				'locale' => $language_info['locale'],
 				'sort_order' => intval($language_info['sort_order']),
-				'status' => !!$language_info['status'],
+				'status' => !!$language_info['status']
 			);
 		}
 

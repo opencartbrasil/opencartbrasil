@@ -375,22 +375,22 @@ class ModelSaleOrder extends Model {
 				'reference' => $row['reference'],
 				'status' => !!$row['status'],
 				'date_added' => date('Y-m-d\TH:i:s\+00:00', strtotime($row['date_added'])),
-				'recurring' => [
+				'recurring' => array(
 					'id' => (int)$row['recurring_id'],
 					'name' => $row['recurring_name'],
 					'description' => $row['recurring_description'],
 					'frequency' => $row['recurring_frequency'],
 					'cycle' => (int)$row['recurring_cycle'],
 					'duration' => (int)$row['recurring_duration'],
-					'price' => (float)$row['recurring_price'],
-				],
-				'trial' => [
+					'price' => (float)$row['recurring_price']
+				),
+				'trial' => array(
 					'status' => !!$row['trial'],
 					'frequency' => $row['trial_frequency'],
 					'cycle' => (int)$row['trial_cycle'],
 					'duration' => (int)$row['trial_duration'],
 					'price' => (float)$row['trial_price'],
-				]
+				)
 			);
 		}
 
