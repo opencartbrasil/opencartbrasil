@@ -16,8 +16,8 @@ class Request {
 	public $cookie = array();
 	public $files = array();
 	public $server = array();
-	public $headers = array(); //API
-	public $json = array(); //API
+	public $headers = array();
+	public $json = array();
 
 	/**
 	 * Constructor
@@ -33,15 +33,16 @@ class Request {
 		$json = json_decode(file_get_contents('php://input'), true);
 
 		if (json_last_error() == JSON_ERROR_NONE) {
-			$json = array_map([$this, 'clean'], $json);
+			$json = array_map(array($this, 'clean'), $json);
 			$json = json_encode($json);
+
 			$this->json = json_decode($json);
 		}
 
 		if (function_exists('apache_request_headers')) {
 			$headers = apache_request_headers();
 			$headers_keys = array_map('strtolower', array_keys($headers));
-			$headers_values = array_map([$this, 'clean'], array_values($headers));
+			$headers_values = array_map(array($this, 'clean'), array_values($headers));
 
 			$this->headers = array_combine($headers_keys, array_map('trim', $headers_values));
 		}

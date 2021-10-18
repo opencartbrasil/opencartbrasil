@@ -10,11 +10,26 @@ paths:
   /api/credentials/access_token:
     post:
       tags:
-        - Credenciais
+        - Token
       summary: Gerar access_token
       description: >-
         Gera o **access_token** utilizando o **consumer_key** e o
         **consumer_secret**.
+
+
+        Utilize a Autenticação Basic, enviando um cabeçalho de
+        solicitação da seguinte maneira:
+
+
+        **Key** = 'Authorization'
+
+
+        **Value** = 'Basic ' + codificação base 64 do
+        consumer_key:consumer_secret
+
+
+        **Importante:** Após obter o access_token, utilize-o
+        para consumir os recursos da API.
       operationId: GerarAccessToken
       parameters: []
       x-codeSamples:
@@ -22,7 +37,7 @@ paths:
           label: 'cURL'
           source: |
             curl --request POST \
-            --url 'https://seudmonio/api/credentials/access_token' \
+            --url 'https://seudominio/api/credentials/access_token' \
             --header 'Authorization: Basic Y2tfMzMyMjRiZTQ1ODU2YTRlY==' \
             --data '{}'
       responses:
@@ -54,14 +69,25 @@ paths:
   /api/credentials/refresh_token:
     post:
       tags:
-        - Credenciais
+        - Token
       summary: Atualizar access_token
       description: >-
         Após a expiração do **access_token**, é possível gerar
         um novo **access_token** a partir do **refresh_token**.
 
-        O **refresh_token** só poderá ser utilizado uma vez, sendo
-        invalidado posteriormente junto com o primeiro **access_token**.
+
+        O **refresh_token** só poderá ser utilizado para gerar um
+        novo **access_token**.
+
+
+        Utilize a Autenticação Bearer, enviando um cabeçalho de
+        solicitação da seguinte maneira:
+
+
+        **Key** = 'Authorization'
+
+
+        **Value** = 'Bearer ' + refresh_token
       operationId: AtualizarAccessToken
       parameters: []
       x-codeSamples:
@@ -69,8 +95,8 @@ paths:
           label: 'cURL'
           source: |
             curl --request POST \
-            --url 'https://seudmonio/api/credentials/refresh_token' \
-            --header 'Authorization: Bearer <refresh-token>' \
+            --url 'https://seudominio/api/credentials/refresh_token' \
+            --header 'Authorization: Bearer <token>' \
             --data '{}'
       responses:
         '200':
@@ -154,7 +180,7 @@ paths:
                   quantity: 1000
                   stock_status_id: 5
                   image: >-
-                    https://seudmonio/imagem/foto.jpg
+                    https://seudominio/imagem/foto.jpg
                   manufacturer_id: 8
                   shipping: true
                   price: 199.99
@@ -223,11 +249,11 @@ paths:
                     - 1
                   additional_images:
                     - >-
-                      https://seudmonio/imagem/foto_1.jpg
+                      https://seudominio/imagem/foto_1.jpg
                     - >-
-                      https://seudmonio/imagem/foto_2.jpg
+                      https://seudominio/imagem/foto_2.jpg
                     - >-
-                      https://seudmonio/imagem/foto_3.jpg
+                      https://seudominio/imagem/foto_3.jpg
                   options:
                     - type: date
                       option_id: 8
@@ -365,7 +391,7 @@ paths:
                     location: ''
                     quantity: 970
                     stock_status_id: 5
-                    image: https://seudmonio/imagem/foto.jpg
+                    image: https://seudominio/imagem/foto.jpg
                     manufacturer_id: 8
                     shipping: true
                     price: 101
@@ -413,11 +439,11 @@ paths:
                       en-gb: ''
                       pt-br: ''
                     additional_images:
-                      - https://seudmonio/imagem/foto_1.jpg
-                      - https://seudmonio/imagem/foto_2.jpg
-                      - https://seudmonio/imagem/foto_3.jpg
-                      - https://seudmonio/imagem/foto_4.jpg
-                      - https://seudmonio/imagem/foto_5.jpg
+                      - https://seudominio/imagem/foto_1.jpg
+                      - https://seudominio/imagem/foto_2.jpg
+                      - https://seudominio/imagem/foto_3.jpg
+                      - https://seudominio/imagem/foto_4.jpg
+                      - https://seudominio/imagem/foto_5.jpg
                     product_related:
                       - 42
                     points_reward:
@@ -484,7 +510,7 @@ paths:
                   quantity: 1000
                   stock_status_id: 5
                   image: >-
-                    https://seudmonio/imagem/foto.jpg
+                    https://seudominio/imagem/foto.jpg
                   manufacturer_id: 8
                   shipping: true
                   price: 199.99
@@ -553,11 +579,11 @@ paths:
                     - 1
                   additional_images:
                     - >-
-                      https://seudmonio/imagem/foto_1.jpg
+                      https://seudominio/imagem/foto_1.jpg
                     - >-
-                      https://seudmonio/imagem/foto_2.jpg
+                      https://seudominio/imagem/foto_2.jpg
                     - >-
-                      https://seudmonio/imagem/foto_3.jpg
+                      https://seudominio/imagem/foto_3.jpg
                   options:
                     - type: date
                       option_id: 8
@@ -760,11 +786,11 @@ paths:
                 length_class_id: 1
                 weight_class_id: 2
               status: false
-              image: https://seudmonio/imagem/foto.jpg
+              image: https://seudominio/imagem/foto.jpg
               additional_images:
-                - https://seudmonio/imagem/foto_1.jpg
-                - https://seudmonio/imagem/foto_2.jpg
-                - https://seudmonio/imagem/foto_3.jpg
+                - https://seudominio/imagem/foto_1.jpg
+                - https://seudominio/imagem/foto_2.jpg
+                - https://seudominio/imagem/foto_3.jpg
         required: true
       responses:
         '200':
@@ -790,7 +816,7 @@ paths:
                   quantity: 1000
                   stock_status_id: 5
                   image: >-
-                    https://seudmonio/imagem/foto.jpg
+                    https://seudominio/imagem/foto.jpg
                   manufacturer_id: 8
                   shipping: true
                   price: 199.99
@@ -840,11 +866,11 @@ paths:
                     - 1
                   additional_images:
                     - >-
-                      https://seudmonio/imagem/foto_1.jpg
+                      https://seudominio/imagem/foto_1.jpg
                     - >-
-                      https://seudmonio/imagem/foto_2.jpg
+                      https://seudominio/imagem/foto_2.jpg
                     - >-
-                      https://seudmonio/imagem/foto_3.jpg
+                      https://seudominio/imagem/foto_3.jpg
                   options:
                     - type: date
                       option_id: 8
@@ -951,7 +977,7 @@ paths:
                       gigabytes"},{"id":1,"default":"Four","pt-br":"Quatro"}],"options":[{"type":"radio","option_id":1,"values":[{"option_value_id":31,"sku":"Identifica\u00e7\u00e3o
                       SKU da
                       Op\u00e7\u00e3o","quantity":100,"subtract":true,"price":{"prefix":"-","value":5},"points":{"value":100}}],"required":true},{"type":"checkbox","option_id":2,"values":[{"option_value_id":23,"sku":"","quantity":100,"subtract":true,"price":{"prefix":"-","value":5}},{"option_value_id":24,"sku":"","quantity":50,"subtract":false,"points":{"value":100}},{"option_value_id":44,"sku":"","quantity":150,"subtract":true,"weight":{"prefix":"+","value":5}}],"required":true},{"type":"text","value":"Preencha
-                      aqui","option_id":"4"},{"type":"file","option_id":7,"required":true},{"type":"date","option_id":8,"value":"2021-07-13"}],"recurring":[],"special":[],"discounts":[],"image":"https://seudmonio/imagem/foto.jpg","additional_images":["https://seudmonio/imagem/foto_1.jpg","https://seudmonio/imagem/foto_2.jpg","https://seudmonio/imagem/foto_3.jpg"]}
+                      aqui","option_id":"4"},{"type":"file","option_id":7,"required":true},{"type":"date","option_id":8,"value":"2021-07-13"}],"recurring":[],"special":[],"discounts":[],"image":"https://seudominio/imagem/foto.jpg","additional_images":["https://seudominio/imagem/foto_1.jpg","https://seudominio/imagem/foto_2.jpg","https://seudominio/imagem/foto_3.jpg"]}
         '404':
           description: Not Found
           content:
@@ -1097,7 +1123,7 @@ paths:
         - Idiomas
       summary: Listar idiomas
       description: >-
-        Lista os impostos cadastrados.
+        Lista os idiomas cadastrados.
       operationId: ListarIdiomas
       parameters:
         - name: filter_code
@@ -1412,7 +1438,7 @@ paths:
                       pt-br: ''
                   - category_id: 20
                     image: >-
-                      https://seudmonio/imagem/foto.jpg
+                      https://seudominio/imagem/foto.jpg
                     parent_id: 0
                     top: 1
                     column: 1
@@ -1661,27 +1687,27 @@ paths:
                 records:
                   - manufacturer_id: 8
                     name: Apple
-                    image: https://seudmonio/imagem/apple_logo.jpg
+                    image: https://seudominio/imagem/apple_logo.jpg
                     sort_order: 0
                   - manufacturer_id: 9
                     name: Canon
-                    image: https://seudmonio/imagem/canon_logo.jpg
+                    image: https://seudominio/imagem/canon_logo.jpg
                     sort_order: 0
                   - manufacturer_id: 7
                     name: HP
-                    image: https://seudmonio/imagem/hp_logo.jpg
+                    image: https://seudominio/imagem/hp_logo.jpg
                     sort_order: 0
                   - manufacturer_id: 5
                     name: HTC
-                    image: https://seudmonio/imagem/htc_logo.jpg
+                    image: https://seudominio/imagem/htc_logo.jpg
                     sort_order: 0
                   - manufacturer_id: 6
                     name: Palm
-                    image: https://seudmonio/imagem/palm_logo.jpg
+                    image: https://seudominio/imagem/palm_logo.jpg
                     sort_order: 0
                   - manufacturer_id: 10
                     name: Sony
-                    image: https://seudmonio/imagem/sony_logo.jpg
+                    image: https://seudominio/imagem/sony_logo.jpg
                     sort_order: 0
                 _metadata:
                   page: 1
@@ -4677,7 +4703,7 @@ security:
   - httpBearer: []
   - httpBasic: []
 tags:
-  - name: Credenciais
+  - name: Token
   - name: Produtos
   - name: Idiomas
   - name: Impostos
@@ -4696,7 +4722,7 @@ tags:
 x-tagGroups:
   - name: Credenciais
     tags:
-      - Credenciais
+      - Token
   - name: Produtos
     tags:
       - Produtos
