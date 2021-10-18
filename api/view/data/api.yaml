@@ -13,7 +13,8 @@ paths:
         - 01 - Credenciais
       summary: Gerar access_token
       description: >-
-        Gera o **access_token** através de autorização base no **consumer_key** e **consumer_secret**.
+        Gera o **access_token** utilizando o **consumer_key** e o
+        **consumer_secret**.
       operationId: GerarAccessToken
       parameters: []
       x-codeSamples:
@@ -63,6 +64,14 @@ paths:
         invalidado posteriormente junto com o primeiro **access_token**.
       operationId: AtualizarAccessToken
       parameters: []
+      x-codeSamples:
+        - lang: 'cURL'
+          label: 'cURL'
+          source: |
+            curl --request POST \
+            --url 'https://seudmonio/api/credentials/refresh_token' \
+            --header 'Authorization: Bearer asiydaiuydasjkJKH123b12m3n1b2' \
+            --data '{}'
       responses:
         '200':
           description: OK
