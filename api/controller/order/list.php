@@ -64,7 +64,7 @@ class ControllerOrderList extends Controller {
 		$orders = $this->model_sale_order->getOrders($filter_data);
 
 		if (empty($orders)) {
-			return $this->response([], self::HTTP_NOT_FOUND);
+			return $this->response(array(), self::HTTP_NOT_FOUND);
 		}
 
 		$order_total_count = $this->model_sale_order->getTotalOrders($filter_data);
@@ -141,7 +141,7 @@ class ControllerOrderList extends Controller {
 					'sku' => $product['sku'],
 					'ncm' => $product['ncm'],
 					'cest' => $product['cest'],
-					'options' => $options,
+					'options' => $options
 				);
 			}
 
@@ -155,7 +155,7 @@ class ControllerOrderList extends Controller {
 					'code' => $total['code'],
 					'title' => $total['title'],
 					'value' => (float)$total['value'],
-					'sort_order' => (int)$total['sort_order'],
+					'sort_order' => (int)$total['sort_order']
 				);
 			}
 
@@ -167,7 +167,7 @@ class ControllerOrderList extends Controller {
 					'order_status_id' => (int)$item['order_status_id'],
 					'date_added' => date('Y-m-d\TH:i:s\+00:00', strtotime($item['date_added'])),
 					'comment' => $item['comment'],
-					'notify' => !!$item['notify'],
+					'notify' => !!$item['notify']
 				);
 			}, $statuses);
 
@@ -185,7 +185,7 @@ class ControllerOrderList extends Controller {
 				'telephone' => $order_info['telephone'],
 				'fax' => $order_info['fax'],
 				'custom_fields' => $custom_fields,
-				'payment' => [
+				'payment' => array(
 					'firstname' => $order_info['payment_firstname'],
 					'lastname' => $order_info['payment_lastname'],
 					'company' => $order_info['payment_company'],
@@ -196,9 +196,9 @@ class ControllerOrderList extends Controller {
 					'country' => $order_info['payment_country'],
 					'zone' => $order_info['payment_zone'],
 					'custom_field' => $payment_custom_fields,
-					'method' => $order_info['payment_method'],
-				],
-				'shipping' => [
+					'method' => $order_info['payment_method']
+				),
+				'shipping' => array(
 					'firstname' => $order_info['shipping_firstname'],
 					'lastname' => $order_info['shipping_lastname'],
 					'company' => $order_info['shipping_company'],
@@ -209,8 +209,8 @@ class ControllerOrderList extends Controller {
 					'country' => $order_info['shipping_country'],
 					'zone' => $order_info['shipping_zone'],
 					'custom_field' => $shipping_custom_fields,
-					'method' => $order_info['shipping_method'],
-				],
+					'method' => $order_info['shipping_method']
+				),
 				'comment' => $order_info['comment'],
 				'total' => (float)$order_info['total'],
 				'order_status_id' => (int)$order_info['order_status_id'],
@@ -226,10 +226,9 @@ class ControllerOrderList extends Controller {
 				'accept_language' => $order_info['accept_language'],
 				'date_added' => date('Y-m-d\TH:i:s\+00:00', strtotime($order_info['date_added'])),
 				'date_modified' => date('Y-m-d\TH:i:s\+00:00', strtotime($order_info['date_modified'])),
-
 				'products' => $order_products,
 				'totals' => $totals,
-				'statuses' => $statuses,
+				'statuses' => $statuses
 			);
 		}
 

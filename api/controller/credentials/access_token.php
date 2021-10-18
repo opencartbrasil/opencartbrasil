@@ -1,7 +1,7 @@
 <?php
 use Firebase\JWT\JWT;
 
-class ControllerCredentialsToken extends Controller {
+class ControllerCredentialsAccessToken extends Controller {
 	private const EXPIRE = 3600;
 	private const EXPIRE_REFRESH_TOKEN = 86400;
 
@@ -11,7 +11,7 @@ class ControllerCredentialsToken extends Controller {
 	public function index() {
 		$this->load->model('credentials/token');
 
-		$json = [];
+		$json = array();
 
 		$validate = $this->validate();
 
@@ -50,12 +50,12 @@ class ControllerCredentialsToken extends Controller {
 
 		$this->model_credentials_token->addHistory($api_key_id, 'login');
 
-		$json = [
-			'access_token' 	=> (string)$access_token['jwt'],
+		$json = array(
+			'access_token' => (string)$access_token['jwt'],
 			'refresh_token' => (string)$refresh_token['jwt'],
-			'token_type' 	=> 'Bearer',
-			'expires_in' 	=> self::EXPIRE - 1,
-		];
+			'token_type' => 'Bearer',
+			'expires_in' => self::EXPIRE - 1
+		);
 
 		$this->response->setOutput(json_encode($json));
 	}

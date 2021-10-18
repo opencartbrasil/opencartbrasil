@@ -7,15 +7,23 @@ info:
     url: https://raw.githubusercontent.com/opencartbrasil/opencartbrasil/main/LICENSE
   version: '1.0.0'
 paths:
-  /credentials/access_token:
+  /api/credentials/access_token:
     post:
       tags:
         - 01 - Credenciais
       summary: Gerar access_token
       description: >-
-        Gera o **access_token** com base no **consumer_key** e **consumer_secret**.
+        Gera o **access_token** através de autorização base no **consumer_key** e **consumer_secret**.
       operationId: GerarAccessToken
       parameters: []
+      x-codeSamples:
+        - lang: 'cURL'
+          label: 'cURL'
+          source: |
+            curl --request POST \
+            --url 'https://seudmonio/api/credentials/access_token' \
+            --header 'Authorization: Basic Y2tfMzMyMjRiZTQ1ODU2YTRlY==' \
+            --data '{}'
       responses:
         '200':
           description: OK
@@ -42,7 +50,7 @@ paths:
       deprecated: false
       security:
         - httpBasic: []
-  /credentials/refresh_token:
+  /api/credentials/refresh_token:
     post:
       tags:
         - 01 - Credenciais
@@ -80,7 +88,7 @@ paths:
       deprecated: false
       security:
         - httpBasic: []
-  /product:
+  /api/product:
     post:
       tags:
         - 02 - Produtos
@@ -303,7 +311,7 @@ paths:
                     - 0
                   links:
                     default: >-
-                      https://sualoja.com.br/index.php?route=product/product&product_id=222
+                      https://dominio/index.php?route=product/product&product_id=222
         '400':
           description: Bad Request
           content:
@@ -413,22 +421,22 @@ paths:
                       - 0
                     links:
                       default: >-
-                        https://sualoja.com.br/index.php?route=product/product&product_id=40
+                        https://dominio/index.php?route=product/product&product_id=40
                 _metadata:
                   page: 1
                   per_page: 50
                   page_count: 1
                   total_count: 1
                   links:
-                    self: /product?page=1&per_page=50&filter_name=iPhone
-                    first: /product?page=1&per_page=50&filter_name=iPhone
+                    self: /api/product?page=1&per_page=50&filter_name=iPhone
+                    first: /api/product?page=1&per_page=50&filter_name=iPhone
                     previous: ''
                     next: ''
-                    last: /product?page=1&per_page=50&filter_name=iPhone
+                    last: /api/product?page=1&per_page=50&filter_name=iPhone
       deprecated: false
       security:
         - httpBearer: []
-  /product/{product_id}:
+  /api/product/{product_id}:
     get:
       tags:
         - 02 - Produtos
@@ -633,7 +641,7 @@ paths:
                     - 0
                   links:
                     default: >-
-                      https://sualoja.com.br/index.php?route=product/product&product_id=222
+                      https://dominio/index.php?route=product/product&product_id=222
         '404':
           description: Not Found
           content:
@@ -911,7 +919,7 @@ paths:
                     - 0
                   links:
                     default: >-
-                      https://sualoja.com.br/index.php?route=product/product&product_id=222
+                      https://dominio/index.php?route=product/product&product_id=222
         '400':
           description: Bad Request
           content:
@@ -949,7 +957,7 @@ paths:
       deprecated: false
       security:
         - httpBearer: []
-  /products/stocks:
+  /api/products/stocks:
     put:
       tags:
         - 02 - Produtos
@@ -1074,7 +1082,7 @@ paths:
       deprecated: false
       security:
         - httpBearer: []
-  /language:
+  /api/language:
     get:
       tags:
         - 03 - Idiomas
@@ -1144,17 +1152,17 @@ paths:
                   total_count: 1
                   links:
                     self: >-
-                      /languages?page=1&per_page=13&filter_code=pt-br&filter_status=1
+                      /api/languages?page=1&per_page=13&filter_code=pt-br&filter_status=1
                     first: >-
-                      /languages?page=1&per_page=13&filter_code=pt-br&filter_status=1
+                      /api/languages?page=1&per_page=13&filter_code=pt-br&filter_status=1
                     previous: ''
                     next: ''
                     last: >-
-                      /languages?page=1&per_page=13&filter_code=pt-br&filter_status=1
+                      /api/languages?page=1&per_page=13&filter_code=pt-br&filter_status=1
       deprecated: false
       security:
         - httpBearer: []
-  /tax_class:
+  /api/tax_class:
     get:
       tags:
         - 04 - Impostos
@@ -1183,15 +1191,15 @@ paths:
                   page_count: 1
                   total_count: 1
                   links:
-                    self: /tax_class?page=1&per_page=50
-                    first: /tax_class?page=1&per_page=50
+                    self: /api/tax_class?page=1&per_page=50
+                    first: /api/tax_class?page=1&per_page=50
                     previous: ''
                     next: ''
-                    last: /tax_class?page=1&per_page=50
+                    last: /api/tax_class?page=1&per_page=50
       deprecated: false
       security:
         - httpBearer: []
-  /stock_status:
+  /api/stock_status:
     get:
       tags:
         - 05 - Situações de estoque
@@ -1241,15 +1249,15 @@ paths:
                   page_count: 4
                   total_count: 4
                   links:
-                    self: /stock_status?page=1&per_page=50
-                    first: /stock_status?page=1&per_page=50
+                    self: /api/stock_status?page=1&per_page=50
+                    first: /api/stock_status?page=1&per_page=50
                     previous: ''
                     next: ''
-                    last: /stock_status?page=1&per_page=50
+                    last: /api/stock_status?page=1&per_page=50
       deprecated: false
       security:
         - httpBearer: []
-  /length:
+  /api/length:
     get:
       tags:
         - 06 - Unidades de medidas
@@ -1268,7 +1276,7 @@ paths:
       deprecated: false
       security:
         - httpBearer: []
-  /weight:
+  /api/weight:
     get:
       tags:
         - 07 - Unidades de pesos
@@ -1287,7 +1295,7 @@ paths:
       deprecated: false
       security:
         - httpBearer: []
-  /category:
+  /api/category:
     get:
       tags:
         - 08 - Departamentos
@@ -1458,15 +1466,15 @@ paths:
                   page_count: 4
                   total_count: 38
                   links:
-                    self: /category?page=1&per_page=50
-                    first: /category?page=1&per_page=50
+                    self: /api/category?page=1&per_page=50
+                    first: /api/category?page=1&per_page=50
                     previous: ''
                     next: ''
-                    last: /category?page=1&per_page=50
+                    last: /api/category?page=1&per_page=50
       deprecated: false
       security:
         - httpBearer: []
-  /filter_group:
+  /api/filter_group:
     get:
       tags:
         - 09 - Filtros
@@ -1527,15 +1535,15 @@ paths:
                   page_count: 2
                   total_count: 2
                   links:
-                    self: /filter_group?page=1&per_page=50
-                    first: /filter_group?page=1&per_page=50
+                    self: /api/filter_group?page=1&per_page=50
+                    first: /api/filter_group?page=1&per_page=50
                     previous: ''
                     next: ''
-                    last: /filter_group?page=1&per_page=50
+                    last: /api/filter_group?page=1&per_page=50
       deprecated: false
       security:
         - httpBearer: []
-  /attribute_group:
+  /api/attribute_group:
     get:
       tags:
         - 10 - Grupos de atributos
@@ -1569,15 +1577,15 @@ paths:
                   page_count: 2
                   total_count: 2
                   links:
-                    self: /attribute_group?page=1&per_page=50
-                    first: /attribute_group?page=1&per_page=50
+                    self: /api/attribute_group?page=1&per_page=50
+                    first: /api/attribute_group?page=1&per_page=50
                     previous: ''
                     next: ''
-                    last: /attribute_group?page=1&per_page=50
+                    last: /api/attribute_group?page=1&per_page=50
       deprecated: false
       security:
         - httpBearer: []
-  /attribute:
+  /api/attribute:
     get:
       tags:
         - 11 - Atributos
@@ -1616,15 +1624,15 @@ paths:
                   page_count: 3
                   total_count: 3
                   links:
-                    self: /attribute?page=1&per_page=50
-                    first: /attribute?page=1&per_page=50
+                    self: /api/attribute?page=1&per_page=50
+                    first: /api/attribute?page=1&per_page=50
                     previous: ''
                     next: ''
-                    last: /attribute?page=1&per_page=50
+                    last: /api/attribute?page=1&per_page=50
       deprecated: false
       security:
         - httpBearer: []
-  /manufacturer:
+  /api/manufacturer:
     get:
       tags:
         - 12 - Marcas
@@ -1672,15 +1680,15 @@ paths:
                   page_count: 6
                   total_count: 6
                   links:
-                    self: /manufacturer?page=1&per_page=50
-                    first: /manufacturer?page=1&per_page=50
+                    self: /api/manufacturer?page=1&per_page=50
+                    first: /api/manufacturer?page=1&per_page=50
                     previous: ''
                     next: ''
-                    last: /manufacturer?page=1&per_page=50
+                    last: /api/manufacturer?page=1&per_page=50
       deprecated: false
       security:
         - httpBearer: []
-  /download:
+  /api/download:
     get:
       tags:
         - 13 - Downloads
@@ -1711,15 +1719,15 @@ paths:
                   page_count: 1
                   total_count: 1
                   links:
-                    self: /download?page=1&per_page=50
-                    first: /download?page=1&per_page=50
+                    self: /api/download?page=1&per_page=50
+                    first: /api/download?page=1&per_page=50
                     previous: ''
                     next: ''
-                    last: /download?page=1&per_page=50
+                    last: /api/download?page=1&per_page=50
       deprecated: false
       security:
         - httpBearer: []
-  /option:
+  /api/option:
     get:
       tags:
         - 14 - Opções
@@ -1770,25 +1778,25 @@ paths:
                       pt-br: Caixa de Texto
                     values:
                       - option_value_id: 23
-                        image: https://sualoja.com.br/imagem/foto_1.jpg
+                        image: https://dominio/imagem/foto_1.jpg
                         sort_order: 1
                         name:
                           en-gb: Checkbox 1
                           pt-br: Caixa de Texto 1
                       - option_value_id: 24
-                        image: https://sualoja.com.br/imagem/foto_2.jpg
+                        image: https://dominio/imagem/foto_2.jpg
                         sort_order: 2
                         name:
                           en-gb: Checkbox 2
                           pt-br: Caixa de Texto 2
                       - option_value_id: 44
-                        image: https://sualoja.com.br/imagem/foto_3.jpg
+                        image: https://dominio/imagem/foto_3.jpg
                         sort_order: 3
                         name:
                           en-gb: Checkbox 3
                           pt-br: Caixa de Texto 3
                       - option_value_id: 45
-                        image: https://sualoja.com.br/imagem/foto_4.jpg
+                        image: https://dominio/imagem/foto_4.jpg
                         sort_order: 4
                         name:
                           en-gb: Checkbox 4
@@ -1904,18 +1912,18 @@ paths:
                   page_count: 11
                   total_count: 11
                   links:
-                    self: /option?page=1&per_page=50
-                    first: /option?page=1&per_page=50
+                    self: /api/option?page=1&per_page=50
+                    first: /api/option?page=1&per_page=50
                     previous: ''
                     next: ''
-                    last: /option?page=1&per_page=50
+                    last: /api/option?page=1&per_page=50
       deprecated: false
       security:
         - httpBearer: []
-  /orders/history:
+  /api/orders/history:
     put:
       tags:
-        - 16 - Pedidos
+        - 15 - Pedidos
       summary: Atualizar histórico
       description: >-
         Atualiza o histórico e a situação do pedido.
@@ -1962,7 +1970,7 @@ paths:
                 example:
                   order_id: 19
                   updated: true
-  /order/{order_id}:
+  /api/order/{order_id}:
     get:
       tags:
         - 16 - Pedidos
@@ -2387,7 +2395,7 @@ paths:
               examples:
                 NotFound:
                   value: '[]'
-  /orders:
+  /api/orders:
     get:
       tags:
         - 16 - Pedidos
@@ -2646,11 +2654,11 @@ paths:
                       page_count: 1
                       total_count: 1
                       links:
-                        self: /orders?page=1&per_page=50
-                        first: /orders?page=1&per_page=50
+                        self: /api/orders?page=1&per_page=50
+                        first: /api/orders?page=1&per_page=50
                         previous: ''
                         next: ''
-                        last: /orders?page=1&per_page=50
+                        last: /api/orders?page=1&per_page=50
 components:
   schemas:
     GerarAccessTokenSucesso:
@@ -3423,7 +3431,7 @@ components:
             - 0
           links:
             default: >-
-              https://sualoja.com.br/index.php?route=product/product&product_id=222
+              https://dominio/index.php?route=product/product&product_id=222
     Data:
       title: Data
       required:
@@ -3796,7 +3804,7 @@ components:
         stores:
           - 0
         links:
-          default: https://sualoja.com.br/index.php?route=product/product&product_id=222
+          default: https://dominio/index.php?route=product/product&product_id=222
     Attribute1:
       title: Attribute1
       required:
@@ -4033,7 +4041,7 @@ components:
         default:
           type: string
       example:
-        default: https://sualoja.com.br/index.php?route=product/product&product_id=222
+        default: https://dominio/index.php?route=product/product&product_id=222
     Error4:
       title: Error4
       required:
@@ -4330,7 +4338,7 @@ components:
             - 0
           links:
             default: >-
-              https://sualoja.com.br/index.php?route=product/product&product_id=222
+              https://dominio/index.php?route=product/product&product_id=222
     Data2:
       title: Data2
       required:
@@ -4657,7 +4665,7 @@ components:
         stores:
           - 0
         links:
-          default: https://sualoja.com.br/index.php?route=product/product&product_id=222
+          default: https://dominio/index.php?route=product/product&product_id=222
     ListarProdutosSucesso:
       title: ListarProdutosSucesso
       required:
@@ -4752,18 +4760,18 @@ components:
               - 0
             links:
               default: >-
-                https://sualoja.com.br/index.php?route=product/product&product_id=40
+                https://dominio/index.php?route=product/product&product_id=40
         _metadata:
           page: 1
           per_page: 50
           page_count: 1
           total_count: 1
           links:
-            self: /product?page=1&per_page=50&filter_name=iPhone
-            first: /product?page=1&per_page=50&filter_name=iPhone
+            self: /api/product?page=1&per_page=50&filter_name=iPhone
+            first: /api/product?page=1&per_page=50&filter_name=iPhone
             previous: ''
             next: ''
-            last: /product?page=1&per_page=50&filter_name=iPhone
+            last: /api/product?page=1&per_page=50&filter_name=iPhone
     Record:
       title: Record
       required:
@@ -4995,7 +5003,7 @@ components:
         stores:
           - 0
         links:
-          default: https://sualoja.com.br/index.php?route=product/product&product_id=40
+          default: https://dominio/index.php?route=product/product&product_id=40
     Metadata:
       title: Metadata
       required:
@@ -5026,11 +5034,11 @@ components:
         page_count: 1
         total_count: 1
         links:
-          self: /product?page=1&per_page=50&filter_name=iPhone
-          first: /product?page=1&per_page=50&filter_name=iPhone
+          self: /api/product?page=1&per_page=50&filter_name=iPhone
+          first: /api/product?page=1&per_page=50&filter_name=iPhone
           previous: ''
           next: ''
-          last: /product?page=1&per_page=50&filter_name=iPhone
+          last: /api/product?page=1&per_page=50&filter_name=iPhone
     Links4:
       title: Links4
       required:
@@ -5201,11 +5209,11 @@ components:
           page_count: 1
           total_count: 1
           links:
-            self: /languages?page=1&per_page=13&filter_code=pt-br&filter_status=1
-            first: /languages?page=1&per_page=13&filter_code=pt-br&filter_status=1
+            self: /api/languages?page=1&per_page=13&filter_code=pt-br&filter_status=1
+            first: /api/languages?page=1&per_page=13&filter_code=pt-br&filter_status=1
             previous: ''
             next: ''
-            last: /languages?page=1&per_page=13&filter_code=pt-br&filter_status=1
+            last: /api/languages?page=1&per_page=13&filter_code=pt-br&filter_status=1
     Item1:
       title: Item1
       required:
@@ -5265,11 +5273,11 @@ components:
           page_count: 1
           total_count: 1
           links:
-            self: /tax_class?page=1&per_page=50
-            first: /tax_class?page=1&per_page=50
+            self: /api/tax_class?page=1&per_page=50
+            first: /api/tax_class?page=1&per_page=50
             previous: ''
             next: ''
-            last: /tax_class?page=1&per_page=50
+            last: /api/tax_class?page=1&per_page=50
     Item2:
       title: Item2
       required:
@@ -5335,11 +5343,11 @@ components:
           page_count: 4
           total_count: 4
           links:
-            self: /stock_status?page=1&per_page=50
-            first: /stock_status?page=1&per_page=50
+            self: /api/stock_status?page=1&per_page=50
+            first: /api/stock_status?page=1&per_page=50
             previous: ''
             next: ''
-            last: /stock_status?page=1&per_page=50
+            last: /api/stock_status?page=1&per_page=50
     Item3:
       title: Item3
       required:
@@ -5598,11 +5606,11 @@ components:
           page_count: 4
           total_count: 38
           links:
-            self: /category?page=1&per_page=50
-            first: /category?page=1&per_page=50
+            self: /api/category?page=1&per_page=50
+            first: /api/category?page=1&per_page=50
             previous: ''
             next: ''
-            last: /category?page=1&per_page=50
+            last: /api/category?page=1&per_page=50
     Item6:
       title: Item6
       required:
@@ -5745,11 +5753,11 @@ components:
           page_count: 2
           total_count: 2
           links:
-            self: /filter_group?page=1&per_page=50
-            first: /filter_group?page=1&per_page=50
+            self: /api/filter_group?page=1&per_page=50
+            first: /api/filter_group?page=1&per_page=50
             previous: ''
             next: ''
-            last: /filter_group?page=1&per_page=50
+            last: /api/filter_group?page=1&per_page=50
     Item7:
       title: Item7
       required:
@@ -5843,11 +5851,11 @@ components:
           page_count: 2
           total_count: 2
           links:
-            self: /attribute_group?page=1&per_page=50
-            first: /attribute_group?page=1&per_page=50
+            self: /api/attribute_group?page=1&per_page=50
+            first: /api/attribute_group?page=1&per_page=50
             previous: ''
             next: ''
-            last: /attribute_group?page=1&per_page=50
+            last: /api/attribute_group?page=1&per_page=50
     Item8:
       title: Item8
       required:
@@ -5905,11 +5913,11 @@ components:
           page_count: 3
           total_count: 3
           links:
-            self: /attribute?page=1&per_page=50
-            first: /attribute?page=1&per_page=50
+            self: /api/attribute?page=1&per_page=50
+            first: /api/attribute?page=1&per_page=50
             previous: ''
             next: ''
-            last: /attribute?page=1&per_page=50
+            last: /api/attribute?page=1&per_page=50
     Item9:
       title: Item9
       required:
@@ -5976,11 +5984,11 @@ components:
           page_count: 6
           total_count: 6
           links:
-            self: /manufacturer?page=1&per_page=50
-            first: /manufacturer?page=1&per_page=50
+            self: /api/manufacturer?page=1&per_page=50
+            first: /api/manufacturer?page=1&per_page=50
             previous: ''
             next: ''
-            last: /manufacturer?page=1&per_page=50
+            last: /api/manufacturer?page=1&per_page=50
     Item10:
       title: Item10
       required:
@@ -6034,11 +6042,11 @@ components:
           page_count: 1
           total_count: 1
           links:
-            self: /download?page=1&per_page=50
-            first: /download?page=1&per_page=50
+            self: /api/download?page=1&per_page=50
+            first: /api/download?page=1&per_page=50
             previous: ''
             next: ''
-            last: /download?page=1&per_page=50
+            last: /api/download?page=1&per_page=50
     Item11:
       title: Item11
       required:
@@ -6117,25 +6125,25 @@ components:
               pt-br: Caixa de texto
             values:
               - option_value_id: 23
-                image: https://sualoja.com.br/imagem/foto_1.jpg
+                image: https://dominio/imagem/foto_1.jpg
                 sort_order: 1
                 name:
                   en-gb: Checkbox 1
                   pt-br: Caixa de texto 1
               - option_value_id: 24
-                image: https://sualoja.com.br/imagem/foto_2.jpg
+                image: https://dominio/imagem/foto_2.jpg
                 sort_order: 2
                 name:
                   en-gb: Checkbox 2
                   pt-br: Caixa de texto 2
               - option_value_id: 44
-                image: https://sualoja.com.br/imagem/foto_3.jpg
+                image: https://dominio/imagem/foto_3.jpg
                 sort_order: 3
                 name:
                   en-gb: Checkbox 3
                   pt-br: Caixa de texto 3
               - option_value_id: 45
-                image: https://sualoja.com.br/imagem/foto_4.jpg
+                image: https://dominio/imagem/foto_4.jpg
                 sort_order: 4
                 name:
                   en-gb: Checkbox 4
@@ -6251,11 +6259,11 @@ components:
           page_count: 11
           total_count: 11
           links:
-            self: /option?page=1&per_page=50
-            first: /option?page=1&per_page=50
+            self: /api/option?page=1&per_page=50
+            first: /api/option?page=1&per_page=50
             previous: ''
             next: ''
-            last: /option?page=1&per_page=50
+            last: /api/option?page=1&per_page=50
     Item12:
       title: Item12
       required:
@@ -6355,4 +6363,26 @@ tags:
   - name: 12 - Marcas
   - name: 13 - Downloads
   - name: 14 - Opções
-  - name: 16 - Pedidos
+  - name: 15 - Pedidos
+x-tagGroups:
+  - name: Credenciais
+    tags:
+      - 01 - Credenciais
+  - name: Produtos
+    tags:
+      - 02 - Produtos
+      - 03 - Idiomas
+      - 04 - Impostos
+      - 05 - Situações de estoque
+      - 06 - Unidades de medidas
+      - 07 - Unidades de pesos
+      - 08 - Departamentos
+      - 09 - Filtros
+      - 10 - Grupos de atributos
+      - 11 - Atributos
+      - 12 - Marcas
+      - 13 - Downloads
+      - 14 - Opções
+  - name: Pedidos
+    tags:
+      - 15 - Pedidos

@@ -12,7 +12,7 @@ class ControllerProductDelete extends Controller {
 		$product_info = $this->model_catalog_product->getProduct($product_id);
 
 		if (empty($product_info)) {
-			return $this->response([], self::HTTP_STATUS_404);
+			return $this->response(array(), self::HTTP_STATUS_404);
 		}
 
 		if (!preg_match('/no_image\.png$/', $product_info['image']) && file_exists(DIR_IMAGE . $product_info['image'])) {

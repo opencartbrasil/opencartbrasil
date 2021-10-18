@@ -13,7 +13,7 @@ class ControllerMiddlewaresLogs extends Controller {
 		if ($this->jwt) {
 			$logs = array_merge($logs, array(
 				'iss' => $this->jwt->iss,
-				'sub' => $this->jwt->sub,
+				'sub' => $this->jwt->sub
 			));
 
 			self::$request_id = hash('sha256', $this->jwt->sub . hrtime(true) . uniqid());
@@ -23,14 +23,14 @@ class ControllerMiddlewaresLogs extends Controller {
 
 		$logs = array_merge($logs, array(
 			'request_id' => self::$request_id,
-			'user_agent' => $this->request->server['HTTP_USER_AGENT'],
+			'user_agent' => $this->request->server['HTTP_USER_AGENT'] ?? '',
 			'timestamp' => microtime(true),
 			'route' => $this->request->get['route'],
 			'URL' => $this->request->server['REQUEST_URI'],
 			'query_strings' => $this->request->get,
 			'request_headers' => $this->request->headers,
 			'request_body' => $this->request->json,
-			'ip_address' => $this->request->server['REMOTE_ADDR'],
+			'ip_address' => $this->request->server['REMOTE_ADDR']
 		));
 
 		$this->log->write($logs);
@@ -38,13 +38,13 @@ class ControllerMiddlewaresLogs extends Controller {
 
 	public function after() {
 		$logs = array(
-			'request_id' => self::$request_id,
+			'request_id' => self::$request_id
 		);
 
 		if ($this->jwt) {
 			$logs = array_merge($logs, array(
 				'iss' => $this->jwt->iss,
-				'sub' => $this->jwt->sub,
+				'sub' => $this->jwt->sub
 			));
 		}
 
@@ -54,7 +54,7 @@ class ControllerMiddlewaresLogs extends Controller {
 			'timestamp' => microtime(true),
 			'route' => $this->request->get['route'],
 			'response_headers' => $this->response->getHeaders(),
-			'response_body' => $this->response->getOutput(),
+			'response_body' => $this->response->getOutput()
 		));
 
 		$this->log->write($logs);

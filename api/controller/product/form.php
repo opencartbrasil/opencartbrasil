@@ -70,17 +70,17 @@ class ControllerProductForm extends Controller {
 			}
 		} catch (InvalidArgumentException $e) {
 			return $this->response(
-				[
+				array(
 					'result' => false,
 					'details' => 'Error downloading image files',
-					'errors' => [
+					'errors' => array(
 						$e->getMessage()
-					]
-				],
+					)
+				),
 				self::HTTP_STATUS_400
 			);
 		} catch (RuntimeException $e) {
-			return $this->response([], self::HTTP_STATUS_500);
+			return $this->response(array(), self::HTTP_STATUS_500);
 		}
 	}
 
@@ -113,41 +113,40 @@ class ControllerProductForm extends Controller {
 			}
 
 			if ($items) {
-				$types = [];
+				$types = array();
 
 				foreach ($items as $value) {
 					$types[] = $value->items->type;
 				}
 
-				$errors[] = [
+				$errors[] = array(
 					'node' => $e->getDataPointer(),
 					'details' => implode(' OR ', $types) . ' expected, just one type'
-				];
+				);
 			} else {
 				$error = $e->inspect();
 
-				$errors[] = [
+				$errors[] = array(
 					'node' => $error->dataPointer,
 					'details' => $error->error
-				];
+				);
 			}
-
 		} catch (InvalidValue $e) {
 			$error = $e->inspect();
 
-			$errors[] = [
+			$errors[] = array(
 				'node' => $error->dataPointer,
 				'details' => $error->error
-			];
+			);
 		}
 
 		if (!empty($errors) || empty($data)) {
 			$result->success = false;
-			$result->errors = [
+			$result->errors = array(
 				'result' => false,
 				'details' => 'Error filling in data sent',
 				'errors' => $errors
-			];
+			);
 		}
 
 		return $result;
@@ -168,10 +167,10 @@ class ControllerProductForm extends Controller {
 			$tax_class = !!$this->model_localisation_tax_class->getTaxClass($data->tax_class_id);
 
 			if ($tax_class === false) {
-				$errors[] = [
+				$errors[] = array(
 					'code' => 1,
 					'message' => 'Tax group is invalid',
-				];
+				);
 			}
 		}
 
@@ -182,10 +181,10 @@ class ControllerProductForm extends Controller {
 			$stock_status = !!$this->model_localisation_stock_status->getStockStatus($data->stock_status_id);
 
 			if ($stock_status === false) {
-				$errors[] = [
+				$errors[] = array(
 					'code' => 2,
 					'message' => 'Non-existent stock situation',
-				];
+				);
 			}
 		}
 
@@ -202,10 +201,10 @@ class ControllerProductForm extends Controller {
 			}
 
 			if ($stock_status === false) {
-				$errors[] = [
+				$errors[] = array(
 					'code' => 3,
 					'message' => 'Non-existent dimension unit',
-				];
+				);
 			}
 
 			unset($dimensions);
@@ -218,10 +217,10 @@ class ControllerProductForm extends Controller {
 			$manufacturer = !!$this->model_catalog_manufacturer->getManufacturer($data->manufacturer_id);
 
 			if ($manufacturer === false) {
-				$errors[] = [
+				$errors[] = array(
 					'code' => 4,
 					'message' => 'Manufacturer not registered',
-				];
+				);
 			}
 		}
 
@@ -232,10 +231,10 @@ class ControllerProductForm extends Controller {
 			$categories = $this->model_catalog_category->getHasCategoryById($data->categories);
 
 			if ($categories !== true) {
-				$errors[] = [
+				$errors[] = array(
 					'code' => 5,
 					'message' => 'Categories "' . implode(',', $categories) . '" do not exist'
-				];
+				);
 			}
 		}
 
@@ -246,10 +245,10 @@ class ControllerProductForm extends Controller {
 			$filters = $this->model_catalog_filter->getHasFilterById($data->filters);
 
 			if ($filters !== true) {
-				$errors[] = [
+				$errors[] = array(
 					'code' => 6,
 					'message' => 'Filters "' . implode(',', $filters) . '" do not exist'
-				];
+				);
 			}
 		}
 
@@ -260,10 +259,10 @@ class ControllerProductForm extends Controller {
 			$stores = $this->model_setting_store->getHasStoreById($data->stores);
 
 			if ($stores !== true) {
-				$errors[] = [
+				$errors[] = array(
 					'code' => 7,
 					'message' => 'Stores "' . implode(',', $stores) . '" do not exist'
-				];
+				);
 			}
 		}
 
@@ -277,10 +276,10 @@ class ControllerProductForm extends Controller {
 				$downloads = $this->model_catalog_download->getHasDownloadById($downloads_id);
 
 				if ($downloads !== true) {
-					$errors[] = [
+					$errors[] = array(
 						'code' => 8,
 						'message' => 'Downloads "' . implode(',', $downloads) . '" do not exist'
-					];
+					);
 				}
 
 				unset($downloads);
@@ -301,10 +300,10 @@ class ControllerProductForm extends Controller {
 			$products_related = $this->model_catalog_product->getHasProductById($data->product_related);
 
 			if ($products_related !== true) {
-				$errors[] = [
+				$errors[] = array(
 					'code' => 10,
 					'message' => 'Products "' . implode(',', $products_related) . '" do not exist'
-				];
+				);
 			}
 
 			unset($products_related);
@@ -321,18 +320,18 @@ class ControllerProductForm extends Controller {
 			$attributes = $this->model_catalog_attribute->getHasAttributeById($attributes_id);
 
 			if ($attributes !== true) {
-				$errors[] = [
+				$errors[] = array(
 					'code' => 11,
 					'message' => 'Attributes "' . implode(',', $attributes) . '" do not exist'
-				];
+				);
 			}
 
 			foreach ($data->attributes as $attribute) {
 				if (!isset($attribute->default)) {
-					$errors[] = [
+					$errors[] = array(
 						'code' => 12,
 						'message' => 'The "default" field is mandatory for attributes'
-					];
+					);
 				}
 			}
 
@@ -344,7 +343,7 @@ class ControllerProductForm extends Controller {
 			$this->load->model('catalog/option');
 
 			foreach ($data->options as $option) {
-				if (in_array($option->type, ['radio', 'checkbox', 'select'])) {
+				if (in_array($option->type, array('radio', 'checkbox', 'select'))) {
 					$option_id = $option->option_id;
 
 					$option_exist = !!$this->model_catalog_option->getOption($option_id);
@@ -356,17 +355,17 @@ class ControllerProductForm extends Controller {
 							$option_value_exist = !!$this->model_catalog_option->getOptionValueIsRelatedToOptionId($option_id, $option_value_id);
 
 							if (!$option_value_exist) {
-								$errors[] = [
+								$errors[] = array(
 									'code' => 14,
 									'message' => 'The option value "' . $option_value_id. '" does not exist in the option "' . $option_id . '"'
-								];
+								);
 							}
 						}
 					} else {
-						$errors[] = [
+						$errors[] = array(
 							'code' => 13,
 							'message' => 'Option "' . $option_id . '" do not exist'
-						];
+						);
 					}
 				}
 			}
@@ -389,10 +388,10 @@ class ControllerProductForm extends Controller {
 				$recurring_exist = !!$this->model_catalog_recurring->getRecurring($recurring->recurring_id);
 
 				if ($recurring_exist === false) {
-					$errors[] = [
+					$errors[] = array(
 						'code' => 15,
 						'message' => 'Recurring "' . $recurring->recurring_id . '" do not exist'
-					];
+					);
 				}
 
 				$this->validateCustomerGroupById($errors, (int)$recurring->customer_group_id);
@@ -448,11 +447,11 @@ class ControllerProductForm extends Controller {
 		}
 
 		if (!empty($errors)) {
-			return [
+			return array(
 				'result' => false,
 				'details' => 'Error filling in data sent',
 				'errors' => $errors
-			];
+			);
 		}
 
 		return true;
@@ -472,10 +471,10 @@ class ControllerProductForm extends Controller {
 				!filter_var($value, FILTER_VALIDATE_URL)
 				|| !preg_match('/^https?:\/\//', $value)
 			) {
-				$errors[] = [
+				$errors[] = array(
 					'code' => 9,
 					'message' => 'URL "' . $value . '" is invalid'
-				];
+				);
 			}
 		}
 	}
@@ -496,10 +495,10 @@ class ControllerProductForm extends Controller {
 		}
 
 		if ($customer_group_exist === false) {
-			$errors[] = [
+			$errors[] = array(
 				'code' => 16,
 				'message' => 'User Group "' . $customer_group_id . '" do not exist'
-			];
+			);
 		}
 	}
 

@@ -66,40 +66,40 @@ class ControllerOrderFormHistory extends Controller {
 			}
 
 			if ($items) {
-				$types = [];
+				$types = array();
 
 				foreach ($items as $value) {
 					$types[] = $value->items->type;
 				}
 
-				$errors[] = [
+				$errors[] = array(
 					'node' => $e->getDataPointer(),
 					'details' => implode(' OR ', $types) . ' expected, just one type'
-				];
+				);
 			} else {
 				$error = $e->inspect();
 
-				$errors[] = [
+				$errors[] = array(
 					'node' => $error->dataPointer,
 					'details' => $error->error
-				];
+				);
 			}
 		} catch (InvalidValue $e) {
 			$error = $e->inspect();
 
-			$errors[] = [
+			$errors[] = array(
 				'node' => $error->dataPointer,
 				'details' => $error->error
-			];
+			);
 		}
 
 		if (!empty($errors) || empty($data)) {
 			$result->success = false;
-			$result->errors = [
+			$result->errors = array(
 				'result' => false,
 				'details' => 'Error filling in data sent',
 				'errors' => $errors
-			];
+			);
 		}
 
 		return $result;

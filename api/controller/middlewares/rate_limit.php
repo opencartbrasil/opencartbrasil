@@ -74,9 +74,9 @@ class ControllerMiddlewaresRateLimit extends Controller {
 	 * @return void
 	 */
 	private function generate_data() {
-		return [
+		return array(
 			'count' => 1,
 			'expire_at' => time() + $this->config->get('api_cache_expire')
-		];
+		);
 	}
 }

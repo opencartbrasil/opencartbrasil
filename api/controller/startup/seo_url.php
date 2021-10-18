@@ -1,140 +1,140 @@
 <?php
 class ControllerStartupSeoUrl extends Controller {
-	private $routers = [];
+	private $routers = array();
 
 	public function index() {
-		$this->routers[] = [
+		$this->routers[] = array(
 			'path' => 'documentation',
 			'action' => 'common/documentation'
-		];
+		);
 
-		$this->routers[] = [
+		$this->routers[] = array(
 			'path' => 'credentials/access_token',
-			'action' => 'credentials/token',
-			'methods' => ['POST']
-		];
+			'action' => 'credentials/access_token',
+			'methods' => array('POST')
+		);
 
-		$this->routers[] = [
+		$this->routers[] = array(
 			'path' => 'credentials/refresh_token',
 			'action' => 'credentials/refresh_token',
-			'methods' => ['POST']
-		];
+			'methods' => array('POST')
+		);
 
-		$this->routers[] = [
+		$this->routers[] = array(
 			'path' => 'product(?:/(?P<product_id>\d+))?',
 			'action' => 'product/form',
-			'methods' => ['POST', 'PUT']
-		];
+			'methods' => array('POST', 'PUT')
+		);
 
-		$this->routers[] = [
+		$this->routers[] = array(
 			'path' => 'product/(?P<product_id>\d+)',
 			'action' => 'product/info',
-		];
+		);
 
-		$this->routers[] = [
+		$this->routers[] = array(
 			'path' => 'products',
 			'action' => 'product/list',
-		];
+		);
 
-		$this->routers[] = [
+		$this->routers[] = array(
 			'path' => 'product/(?P<product_id>\d+)',
 			'action' => 'product/delete',
-			'methods' => ['DELETE']
-		];
+			'methods' => array('DELETE')
+		);
 
-		$this->routers[] = [
+		$this->routers[] = array(
 			'path' => 'products/stocks',
 			'action' => 'product/form_stock',
-			'methods' => ['PUT']
-		];
+			'methods' => array('PUT')
+		);
 
-		$this->routers[] = [
+		$this->routers[] = array(
 			'path' => 'language',
 			'action' => 'language/list',
-			'methods' => ['GET']
-		];
+			'methods' => array('GET')
+		);
 
-		$this->routers[] = [
+		$this->routers[] = array(
 			'path' => 'tax_class',
 			'action' => 'tax_class/list',
-			'methods' => ['GET']
-		];
+			'methods' => array('GET')
+		);
 
-		$this->routers[] = [
+		$this->routers[] = array(
 			'path' => 'stock_status',
 			'action' => 'stock_status/list',
-			'methods' => ['GET']
-		];
+			'methods' => array('GET')
+		);
 
-		$this->routers[] = [
+		$this->routers[] = array(
 			'path' => 'length',
 			'action' => 'length/list',
-			'methods' => ['GET']
-		];
+			'methods' => array('GET')
+		);
 
-		$this->routers[] = [
+		$this->routers[] = array(
 			'path' => 'weight',
 			'action' => 'weight/list',
-			'methods' => ['GET']
-		];
+			'methods' => array('GET')
+		);
 
-		$this->routers[] = [
+		$this->routers[] = array(
 			'path' => 'category',
 			'action' => 'category/list',
-			'methods' => ['GET']
-		];
+			'methods' => array('GET')
+		);
 
-		$this->routers[] = [
+		$this->routers[] = array(
 			'path' => 'filter_group',
 			'action' => 'filter/group_list',
-			'methods' => ['GET']
-		];
+			'methods' => array('GET')
+		);
 
-		$this->routers[] = [
+		$this->routers[] = array(
 			'path' => 'attribute_group',
 			'action' => 'attribute/attribute_group_list',
-			'methods' => ['GET']
-		];
+			'methods' => array('GET')
+		);
 
-		$this->routers[] = [
+		$this->routers[] = array(
 			'path' => 'attribute',
 			'action' => 'attribute/attribute_list',
-			'methods' => ['GET']
-		];
+			'methods' => array('GET')
+		);
 
-		$this->routers[] = [
+		$this->routers[] = array(
 			'path' => 'manufacturer',
 			'action' => 'manufacturer/list',
-			'methods' => ['GET']
-		];
+			'methods' => array('GET')
+		);
 
-		$this->routers[] = [
+		$this->routers[] = array(
 			'path' => 'download',
 			'action' => 'download/list',
-			'methods' => ['GET']
-		];
+			'methods' => array('GET')
+		);
 
-		$this->routers[] = [
+		$this->routers[] = array(
 			'path' => 'option',
 			'action' => 'option/list',
-			'methods' => ['GET']
-		];
+			'methods' => array('GET')
+		);
 
-		$this->routers[] = [
+		$this->routers[] = array(
 			'path' => 'orders',
 			'action' => 'order/list',
-		];
+		);
 
-		$this->routers[] = [
+		$this->routers[] = array(
 			'path' => 'order/(?P<order_id>\d+)',
 			'action' => 'order/info',
-		];
+		);
 
-		$this->routers[] = [
+		$this->routers[] = array(
 			'path' => 'orders/history',
 			'action' => 'order/form_history',
-			'methods' => ['PUT']
-		];
+			'methods' => array('PUT')
+		);
 
 		return $this->start();
 	}
@@ -185,7 +185,7 @@ class ControllerStartupSeoUrl extends Controller {
 
 			$regex  = '~^(' . $route['path'] . '|' . $route['action'] . ')$~i';
 
-			$matches = [];
+			$matches = array();
 
 			$isValid = preg_match($regex, $path, $matches);
 
@@ -196,7 +196,7 @@ class ControllerStartupSeoUrl extends Controller {
 			array_shift($matches);
 
 			if (!isset($route['methods'])) {
-				$route['methods'] = ['GET'];
+				$route['methods'] = array('GET');
 			}
 
 			$allowedMethod = array_map('strtoupper', $route['methods']);
@@ -230,10 +230,10 @@ class ControllerStartupSeoUrl extends Controller {
 	 *
 	 * @return array
 	 */
-	public function filterRoutersByMethod(string $requestMethod, array $routers = []) {
+	public function filterRoutersByMethod(string $requestMethod, array $routers = array()) {
 		return array_filter($routers, function($route) use ($requestMethod) {
 			if (!isset($route['methods'])) {
-				$route['methods'] = ['GET'];
+				$route['methods'] = array('GET');
 			}
 
 			return in_array($requestMethod, $route['methods']);

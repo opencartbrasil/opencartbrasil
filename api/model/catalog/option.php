@@ -134,8 +134,8 @@ class ModelCatalogOption extends Model {
 		foreach ($option_value_query->rows as $option_value) {
 			$option_value_data[] = array(
 				'option_value_id' => intval($option_value['option_value_id']),
-				'image'           => $option_value['image'],
-				'sort_order'      => intval($option_value['sort_order'])
+				'image' => $option_value['image'],
+				'sort_order' => intval($option_value['sort_order'])
 			);
 		}
 

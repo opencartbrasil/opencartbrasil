@@ -94,7 +94,7 @@ class ControllerOrderInfo extends Controller {
 				'code' => $total['code'],
 				'title' => $total['title'],
 				'value' => (float)$total['value'],
-				'sort_order' => (int)$total['sort_order'],
+				'sort_order' => (int)$total['sort_order']
 			);
 		}
 
@@ -115,7 +115,7 @@ class ControllerOrderInfo extends Controller {
 			'telephone' => $order_info['telephone'],
 			'fax' => $order_info['fax'],
 			'custom_fields' => $custom_fields,
-			'payment' => [
+			'payment' => array(
 				'firstname' => $order_info['payment_firstname'],
 				'lastname' => $order_info['payment_lastname'],
 				'company' => $order_info['payment_company'],
@@ -126,9 +126,9 @@ class ControllerOrderInfo extends Controller {
 				'country' => $order_info['payment_country'],
 				'zone' => $order_info['payment_zone'],
 				'custom_field' => $payment_custom_fields,
-				'method' => $order_info['payment_method'],
-			],
-			'shipping' => [
+				'method' => $order_info['payment_method']
+			),
+			'shipping' => array(
 				'firstname' => $order_info['shipping_firstname'],
 				'lastname' => $order_info['shipping_lastname'],
 				'company' => $order_info['shipping_company'],
@@ -139,8 +139,8 @@ class ControllerOrderInfo extends Controller {
 				'country' => $order_info['shipping_country'],
 				'zone' => $order_info['shipping_zone'],
 				'custom_field' => $shipping_custom_fields,
-				'method' => $order_info['shipping_method'],
-			],
+				'method' => $order_info['shipping_method']
+			),
 			'comment' => $order_info['comment'],
 			'total' => (float)$order_info['total'],
 			'order_status_id' => (int)$order_info['order_status_id'],
@@ -156,10 +156,9 @@ class ControllerOrderInfo extends Controller {
 			'accept_language' => $order_info['accept_language'],
 			'date_added' => date('Y-m-d\TH:i:s\+00:00', strtotime($order_info['date_added'])),
 			'date_modified' => date('Y-m-d\TH:i:s\+00:00', strtotime($order_info['date_modified'])),
-
 			'products' => $products,
 			'totals' => $totals,
-			'statuses' => $statuses,
+			'statuses' => $statuses
 		);
 
 		return $this->response(array(

@@ -1,5 +1,5 @@
 <?php
-class ControllerweightList extends Controller {
+class ControllerWeightList extends Controller {
 	public function index() {
 		$this->load->model('localisation/weight_class');
 
@@ -43,7 +43,7 @@ class ControllerweightList extends Controller {
 
 			$weight = array(
 				'weight_class_id' => $weight_class_id,
-				'value' => floatval($weight_info['value']),
+				'value' => floatval($weight_info['value'])
 			);
 
 			$result_items[] = array_merge($weight, $titles);

@@ -12,21 +12,21 @@ class ControllerCategoryList extends Controller {
 			$filter_parent_id = null;
 		}
 
-		// Filter Total Product is equals than ...
+		// Filter Total Product is equals than...
 		if (isset($this->request->get['filter_total_products_eq'])) {
 			$filter_total_products_eq = max($this->request->get['filter_total_products_eq'], 0);
 		} else {
 			$filter_total_products_eq = null;
 		}
 
-		// Filter Total Product is less than ...
+		// Filter Total Product is less than...
 		if (isset($this->request->get['filter_total_products_lt'])) {
 			$filter_total_products_lt = max($this->request->get['filter_total_products_lt'], 1);
 		} else {
 			$filter_total_products_lt = null;
 		}
 
-		// Filter Total Product is greater than ...
+		// Filter Total Product is greater than...
 		if (isset($this->request->get['filter_total_products_gt'])) {
 			$filter_total_products_gt = max($this->request->get['filter_total_products_gt'], 1);
 		} else {
@@ -77,7 +77,7 @@ class ControllerCategoryList extends Controller {
 				'status' => !!$category_info['status'],
 				'date_added' => date('Y-m-d\TH:i:s\+00:00', strtotime($category_info['date_added'])),
 				'date_modified' => date('Y-m-d\TH:i:s\+00:00', strtotime($category_info['date_modified'])),
-				'total_products' => intval($category_info['total_products']),
+				'total_products' => intval($category_info['total_products'])
 			);
 
 			$result_items[] = array_merge($item, $category_descriptions);
