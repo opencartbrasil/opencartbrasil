@@ -136,6 +136,11 @@ class ControllerStartupSeoUrl extends Controller {
 			'methods' => array('PUT')
 		);
 
+		$this->routers[] = array(
+			'path' => 'order_status',
+			'action' => 'order_status/list',
+		);
+
 		return $this->start();
 	}
 
