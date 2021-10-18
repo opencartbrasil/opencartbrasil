@@ -9,13 +9,13 @@ class ControllerStartupSeoUrl extends Controller {
 		);
 
 		$this->routers[] = array(
-			'path' => 'credentials/access_token',
+			'path' => 'access_token',
 			'action' => 'credentials/access_token',
 			'methods' => array('POST')
 		);
 
 		$this->routers[] = array(
-			'path' => 'credentials/refresh_token',
+			'path' => 'refresh_token',
 			'action' => 'credentials/refresh_token',
 			'methods' => array('POST')
 		);
@@ -32,7 +32,7 @@ class ControllerStartupSeoUrl extends Controller {
 		);
 
 		$this->routers[] = array(
-			'path' => 'products',
+			'path' => 'product',
 			'action' => 'product/list',
 		);
 
@@ -43,7 +43,7 @@ class ControllerStartupSeoUrl extends Controller {
 		);
 
 		$this->routers[] = array(
-			'path' => 'products/stocks',
+			'path' => 'product/stock',
 			'action' => 'product/form_stock',
 			'methods' => array('PUT')
 		);
@@ -121,7 +121,7 @@ class ControllerStartupSeoUrl extends Controller {
 		);
 
 		$this->routers[] = array(
-			'path' => 'orders',
+			'path' => 'order',
 			'action' => 'order/list',
 		);
 
@@ -131,7 +131,7 @@ class ControllerStartupSeoUrl extends Controller {
 		);
 
 		$this->routers[] = array(
-			'path' => 'orders/history',
+			'path' => 'order/history',
 			'action' => 'order/form_history',
 			'methods' => array('PUT')
 		);

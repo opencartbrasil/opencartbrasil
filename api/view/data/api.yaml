@@ -7,7 +7,7 @@ info:
     url: https://raw.githubusercontent.com/opencartbrasil/opencartbrasil/main/LICENSE
   version: '1.0.0'
 paths:
-  /api/credentials/access_token:
+  /api/access_token:
     post:
       tags:
         - Token
@@ -37,7 +37,7 @@ paths:
           label: 'cURL'
           source: |
             curl --request POST \
-            --url 'https://seudominio/api/credentials/access_token' \
+            --url 'https://seudominio/api/access_token' \
             --header 'Authorization: Basic Y2tfMzMyMjRiZTQ1ODU2YTRlY==' \
             --data '{}'
       responses:
@@ -66,7 +66,7 @@ paths:
       deprecated: false
       security:
         - httpBasic: []
-  /api/credentials/refresh_token:
+  /api/refresh_token:
     post:
       tags:
         - Token
@@ -95,7 +95,7 @@ paths:
           label: 'cURL'
           source: |
             curl --request POST \
-            --url 'https://seudominio/api/credentials/refresh_token' \
+            --url 'https://seudominio/api/refresh_token' \
             --header 'Authorization: Bearer <token>' \
             --data '{}'
       responses:
@@ -992,7 +992,7 @@ paths:
       deprecated: false
       security:
         - httpBearer: []
-  /api/products/stocks:
+  /api/product/stock:
     put:
       tags:
         - Produtos
@@ -1955,7 +1955,7 @@ paths:
       deprecated: false
       security:
         - httpBearer: []
-  /api/orders/history:
+  /api/order/history:
     put:
       tags:
         - Pedidos
@@ -2246,7 +2246,7 @@ paths:
                     invoice_no: '0'
                     invoice_prefix: FAT
                     store_name: Sua loja
-                    store_url: https://sualoja/
+                    store_url: https://seudominio/
                     customer_id: 1
                     customer_group_id: 1
                     firstname: Fulano
@@ -2337,7 +2337,7 @@ paths:
                 invoice_no: '0'
                 invoice_prefix: FAT
                 store_name: Sua loja
-                store_url: https://sualoja/
+                store_url: https://seudominio/
                 customer_id: 1
                 customer_group_id: 1
                 firstname: Fulano
@@ -2430,7 +2430,7 @@ paths:
               examples:
                 NotFound:
                   value: '[]'
-  /api/orders:
+  /api/order:
     get:
       tags:
         - Pedidos
@@ -2689,11 +2689,11 @@ paths:
                       page_count: 1
                       total_count: 1
                       links:
-                        self: /api/orders?page=1&per_page=50
-                        first: /api/orders?page=1&per_page=50
+                        self: /api/order?page=1&per_page=50
+                        first: /api/order?page=1&per_page=50
                         previous: ''
                         next: ''
-                        last: /api/orders?page=1&per_page=50
+                        last: /api/order?page=1&per_page=50
   /api/order_status:
     get:
       tags:
