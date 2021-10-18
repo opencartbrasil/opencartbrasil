@@ -30,7 +30,7 @@ $_['action_pre_action'] = array(
 );
 
 // Actions
-$_['action_default']     = 'common/dashboard';
+$_['action_default']    = 'common/dashboard';
 
 // Action Events
 $_['action_event']       = array(
@@ -47,7 +47,7 @@ $_['action_event']       = array(
 );
 
 // Webhook Events
-$_['action_webhook']       = array(
+$_['action_webhook']    = array(
 	'model/catalog/product/addProduct/after' => array(
 		'catalog/product/add'
 	),
