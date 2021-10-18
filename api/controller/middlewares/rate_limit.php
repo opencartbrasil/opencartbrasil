@@ -19,7 +19,7 @@ class ControllerMiddlewaresRateLimit extends Controller {
 			return new Action('status_code/bad_request');
 		}
 
-		$config_api_rest_request_per_minute = $this->config->get('config_api_rest_request_per_minute');
+		$request_per_minute = $this->config->get('api_request_per_minute');
 
 		$cache = new Cache($this->config->get('cache_engine'), $this->config->get('api_cache_expire'));
 
@@ -35,14 +35,14 @@ class ControllerMiddlewaresRateLimit extends Controller {
 
 		if ($expired === true) {
 			$details = $this->generate_data();
-			$rate_remaining = $config_api_rest_request_per_minute - $details['count'];
+			$rate_remaining = $request_per_minute - $details['count'];
 		}
 
-		$rate_remaining = $config_api_rest_request_per_minute - $details['count'];
+		$rate_remaining = $request_per_minute - $details['count'];
 		$rate_reset = $details['expire_at'] - time();
 
 		if ($rate_remaining < 0 && $expired === false) {
-			header('X-RateLimit-Limit: ' . $config_api_rest_request_per_minute);
+			header('X-RateLimit-Limit: ' . $request_per_minute);
 			header('X-RateLimit-Reset: ' . $rate_reset);
 			header('X-RateLimit-Remaining: 0');
 
@@ -61,7 +61,7 @@ class ControllerMiddlewaresRateLimit extends Controller {
 
 		$details['count']++;
 
-		header('X-RateLimit-Limit: ' . $config_api_rest_request_per_minute);
+		header('X-RateLimit-Limit: ' . $request_per_minute);
 		header('X-RateLimit-Reset: ' . $rate_reset);
 		header('X-RateLimit-Remaining: ' . $rate_remaining);
 

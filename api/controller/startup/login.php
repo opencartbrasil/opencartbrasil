@@ -58,7 +58,7 @@ class ControllerStartupLogin extends Controller {
 		try {
 			$jwt_decoded = JWT::decode(
 				$access_token,
-				$this->config->get('secret_key'),
+				$this->config->get('api_secret_key'),
 				array('HS256')
 			);
 

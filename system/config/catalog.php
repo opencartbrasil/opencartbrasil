@@ -60,7 +60,7 @@ $_['action_event']       = array(
 );
 
 // Webhook Events
-$_['action_webhook']       = array(
+$_['action_webhook']     = array(
 	'model/checkout/order/addOrderHistory/before' => array(
 		'catalog/product/order'
 	),

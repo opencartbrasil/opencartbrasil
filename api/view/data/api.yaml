@@ -10,10 +10,11 @@ paths:
   /api/credentials/access_token:
     post:
       tags:
-        - 01 - Credenciais
+        - Credenciais
       summary: Gerar access_token
       description: >-
-        Gera o **access_token** através de autorização base no **consumer_key** e **consumer_secret**.
+        Gera o **access_token** utilizando o **consumer_key** e o
+        **consumer_secret**.
       operationId: GerarAccessToken
       parameters: []
       x-codeSamples:
@@ -53,7 +54,7 @@ paths:
   /api/credentials/refresh_token:
     post:
       tags:
-        - 01 - Credenciais
+        - Credenciais
       summary: Atualizar access_token
       description: >-
         Após a expiração do **access_token**, é possível gerar
@@ -63,6 +64,14 @@ paths:
         invalidado posteriormente junto com o primeiro **access_token**.
       operationId: AtualizarAccessToken
       parameters: []
+      x-codeSamples:
+        - lang: 'cURL'
+          label: 'cURL'
+          source: |
+            curl --request POST \
+            --url 'https://seudmonio/api/credentials/refresh_token' \
+            --header 'Authorization: Bearer <refresh-token>' \
+            --data '{}'
       responses:
         '200':
           description: OK
@@ -87,11 +96,11 @@ paths:
                     message: Failed to update token.
       deprecated: false
       security:
-        - httpBasic: []
+        - httpBearer: []
   /api/product:
     post:
       tags:
-        - 02 - Produtos
+        - Produtos
       summary: Cadastrar produto
       description: >
         Cadastra o produto, sendo possível definir os códigos de idioma
@@ -329,7 +338,7 @@ paths:
         - httpBearer: []
     get:
       tags:
-        - 02 - Produtos
+        - Produtos
       summary: Listar produtos
       description: Lista os produtos cadastrados.
       operationId: ListarProdutos
@@ -439,7 +448,7 @@ paths:
   /api/product/{product_id}:
     get:
       tags:
-        - 02 - Produtos
+        - Produtos
       summary: Informações do produto
       description: Exibe as informações do produto cadastrado.
       operationId: InformacoesProduto
@@ -658,7 +667,7 @@ paths:
         - httpBearer: []
     delete:
       tags:
-        - 02 - Produtos
+        - Produtos
       summary: Excluir produto
       description: >-
         Exclui os dados do produto cadastrado.
@@ -695,7 +704,7 @@ paths:
         - httpBearer: []
     put:
       tags:
-        - 02 - Produtos
+        - Produtos
       summary: Atualizar produto
       description: >-
         Atualiza os dados do produto cadastrado.
@@ -960,7 +969,7 @@ paths:
   /api/products/stocks:
     put:
       tags:
-        - 02 - Produtos
+        - Produtos
       summary: Atualizar estoque
       description: >-
         Atualiza o estoque de produtos cadastrados.
@@ -1085,7 +1094,7 @@ paths:
   /api/language:
     get:
       tags:
-        - 03 - Idiomas
+        - Idiomas
       summary: Listar idiomas
       description: >-
         Lista os impostos cadastrados.
@@ -1165,7 +1174,7 @@ paths:
   /api/tax_class:
     get:
       tags:
-        - 04 - Impostos
+        - Impostos
       summary: Listar grupos de impostos
       description: >-
         Lista os grupos de impostos cadastrados.
@@ -1202,7 +1211,7 @@ paths:
   /api/stock_status:
     get:
       tags:
-        - 05 - Situações de estoque
+        - Situações de estoque
       summary: Listar situações de estoque
       description: >-
         Lista as situações de estoque cadastradas.
@@ -1260,10 +1269,10 @@ paths:
   /api/length:
     get:
       tags:
-        - 06 - Unidades de medidas
-      summary: Listar unidades de medidas
+        - Unidades de medida
+      summary: Listar Unidades de medida
       description: >-
-        Lista as unidades de medidas cadastradas.
+        Lista as unidades de medida cadastradas.
       operationId: ListarUnidadesMedida
       parameters: []
       responses:
@@ -1279,10 +1288,10 @@ paths:
   /api/weight:
     get:
       tags:
-        - 07 - Unidades de pesos
-      summary: Listar unidades de pesos
+        - Unidades de peso
+      summary: Listar Unidades de peso
       description: >-
-        Lista as unidades de pesos cadastradas.
+        Lista as Unidades de peso cadastradas.
       operationId: ListarUnidadePeso
       parameters: []
       responses:
@@ -1298,7 +1307,7 @@ paths:
   /api/category:
     get:
       tags:
-        - 08 - Departamentos
+        - Departamentos
       summary: Listar departamentos
       description: >-
         Lista os departamentos cadastrados.
@@ -1477,7 +1486,7 @@ paths:
   /api/filter_group:
     get:
       tags:
-        - 09 - Filtros
+        - Filtros
       summary: Listar filtros
       description: >-
         Lista os filtros cadastrados.
@@ -1546,7 +1555,7 @@ paths:
   /api/attribute_group:
     get:
       tags:
-        - 10 - Grupos de atributos
+        - Grupos de atributos
       summary: Listar grupos de atributos
       description: >-
         Lista os grupos de atributos cadastrados.
@@ -1588,7 +1597,7 @@ paths:
   /api/attribute:
     get:
       tags:
-        - 11 - Atributos
+        - Atributos
       summary: Listar atributos
       description: >-
         Lista os atributos cadastrados.
@@ -1635,7 +1644,7 @@ paths:
   /api/manufacturer:
     get:
       tags:
-        - 12 - Marcas
+        - Marcas
       summary: Listar marcas
       description: >-
         Lista as marcas cadastradas.
@@ -1691,7 +1700,7 @@ paths:
   /api/download:
     get:
       tags:
-        - 13 - Downloads
+        - Downloads
       summary: Listar downloads
       description: >-
         Lista os downloads cadastrados.
@@ -1730,7 +1739,7 @@ paths:
   /api/option:
     get:
       tags:
-        - 14 - Opções
+        - Opções
       summary: Listar opções
       description: >-
         Lista as opções cadastradas.
@@ -1923,7 +1932,7 @@ paths:
   /api/orders/history:
     put:
       tags:
-        - 15 - Pedidos
+        - Pedidos
       summary: Atualizar histórico
       description: >-
         Atualiza o histórico e a situação do pedido.
@@ -1973,7 +1982,7 @@ paths:
   /api/order/{order_id}:
     get:
       tags:
-        - 16 - Pedidos
+        - Pedidos
       summary: Informações do pedido
       description: >-
         Exibe as informações do pedido cadastrado.
@@ -2398,7 +2407,7 @@ paths:
   /api/orders:
     get:
       tags:
-        - 16 - Pedidos
+        - Pedidos
       summary: Listar pedidos
       description: >-
         Exibe os pedidos cadastrados.
@@ -2659,6 +2668,46 @@ paths:
                         previous: ''
                         next: ''
                         last: /api/orders?page=1&per_page=50
+  /api/order_status:
+    get:
+      tags:
+        - Situações de pedidos
+      summary: Listar situações de pedidos
+      description: >-
+        Lista as situações de pedidos cadastradas.
+      operationId: ListarSituacoesPedidos
+      parameters: []
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListarSituacoesPedidosSucesso'
+              example:
+                records:
+                  - order_status_id: 1
+                    name:
+                      en-gb: Pending
+                      pt-br: Aguardando pagamento
+                  - order_status_id: 2
+                    name:
+                      en-gb: Canceled
+                      pt-br: Cancelado
+                _metadata:
+                  page: 1
+                  per_page: 50
+                  page_count: 2
+                  total_count: 2
+                  links:
+                    self: /api/order_status?page=1&per_page=50
+                    first: /api/order_status?page=1&per_page=50
+                    previous: ''
+                    next: ''
+                    last: /api/order_status?page=1&per_page=50
+      deprecated: false
+      security:
+        - httpBearer: []
 components:
   schemas:
     GerarAccessTokenSucesso:
@@ -2679,11 +2728,6 @@ components:
         expires_in:
           type: integer
           format: int32
-      example:
-        access_token: JWT
-        refresh_token: JWT
-        token_type: Bearer
-        expires_in: 3599
     CredentialErro:
       title: CredentialErro
       required:
@@ -2695,9 +2739,6 @@ components:
           type: string
         message:
           type: string
-      example:
-        code: invalid_credential
-        message: Credentials are invalid.
     GerarAccessTokenErro:
       title: GerarAccessTokenErro
       required:
@@ -2712,11 +2753,6 @@ components:
           items:
             $ref: '#/components/schemas/CredentialErro'
           description: ''
-      example:
-        success: false
-        errors:
-          - code: invalid_credential
-            message: Credentials are invalid.
     AtualizarAccessTokenSucesso:
       title: AtualizarAccessTokenSucesso
       required:
@@ -2732,10 +2768,6 @@ components:
         expires_in:
           type: integer
           format: int32
-      example:
-        access_token: JWT
-        token_type: Bearer
-        expires_in: 3599
     AtualizarAccessTokenErro:
       title: AtualizarAccessTokenErro
       required:
@@ -2750,11 +2782,6 @@ components:
           items:
             $ref: '#/components/schemas/CredentialErro'
           description: ''
-      example:
-        success: false
-        errors:
-          - code: refresh_token_failed
-            message: Failed to update token.
     CadastrarProdutoRequest:
       title: CadastrarProdutoRequest
       required:
@@ -2902,10 +2929,6 @@ components:
       properties:
         default:
           type: string
-      example:
-        default: Título
-        pt-br: Título
-        en-us: Title
     Description:
       title: Description
       required:
@@ -2914,8 +2937,6 @@ components:
       properties:
         default:
           type: string
-      example:
-        default: Descrição
     MetaTitle:
       title: MetaTitle
       required:
@@ -2924,8 +2945,6 @@ components:
       properties:
         default:
           type: string
-      example:
-        default: Descrição
     MetaDescription:
       title: MetaDescription
       required:
@@ -2934,8 +2953,6 @@ components:
       properties:
         default:
           type: string
-      example:
-        default: Property required
     MetaKeyword:
       title: MetaKeyword
       required:
@@ -2944,8 +2961,6 @@ components:
       properties:
         default:
           type: string
-      example:
-        default: Meta keyword default
     Tags:
       title: Tags
       required:
@@ -2957,13 +2972,6 @@ components:
           items:
             type: string
           description: ''
-      example:
-        default:
-          - tag1
-          - tag2
-          - tag3
-        en-gb:
-          - only-one
     Dimensions:
       title: Dimensions
       required:
@@ -2993,13 +3001,6 @@ components:
         weight_class_id:
           type: integer
           format: int32
-      example:
-        length: 10
-        width: 10
-        height: 10
-        weight: 900
-        length_class_id: 1
-        weight_class_id: 2
     PointsReward:
       title: PointsReward
       required:
@@ -3013,9 +3014,6 @@ components:
         points:
           type: integer
           format: int32
-      example:
-        customer_group_id: 1
-        points: 100
     Attribute:
       title: Attribute
       required:
@@ -3031,10 +3029,6 @@ components:
           type: string
         pt-br:
           type: string
-      example:
-        id: 3
-        default: 4GB
-        pt-br: 4 gigabytes
     Option:
       title: Option
       required:
@@ -3056,20 +3050,6 @@ components:
           type: boolean
         value:
           type: string
-      example:
-        type: radio
-        option_id: 1
-        values:
-          - option_value_id: 31
-            sku: SKU da opção
-            quantity: 100
-            subtract: true
-            price:
-              prefix: '-'
-              value: 5
-            points:
-              value: 100
-        required: true
     Value:
       title: Value
       required:
@@ -3097,16 +3077,6 @@ components:
           $ref: '#/components/schemas/Points'
         weight:
           $ref: '#/components/schemas/Weight'
-      example:
-        option_value_id: 31
-        sku: SKU da opção
-        quantity: 100
-        subtract: true
-        price:
-          prefix: '-'
-          value: 5
-        points:
-          value: 100
     Price:
       title: Price
       required:
@@ -3118,9 +3088,6 @@ components:
           type: string
         value:
           type: number
-      example:
-        prefix: '-'
-        value: 5
     Points:
       title: Points
       required:
@@ -3130,8 +3097,6 @@ components:
         value:
           type: integer
           format: int32
-      example:
-        value: 100
     Weight:
       title: Weight
       required:
@@ -3143,9 +3108,6 @@ components:
           type: string
         value:
           type: number
-      example:
-        prefix: +
-        value: 5
     Recurring:
       title: Recurring
       required:
@@ -3159,9 +3121,6 @@ components:
         customer_group_id:
           type: integer
           format: int32
-      example:
-        recurring_id: 1
-        customer_group_id: 1
     Special:
       title: Special
       required:
@@ -3184,12 +3143,6 @@ components:
           type: string
         date_end:
           type: string
-      example:
-        customer_group_id: 1
-        price: 19.65
-        priority: 1
-        date_start: {}
-        date_end: {}
     Discount:
       title: Discount
       required:
@@ -3216,13 +3169,6 @@ components:
         quantity:
           type: integer
           format: int32
-      example:
-        customer_group_id: 1
-        price: 19.65
-        priority: 1
-        date_start: {}
-        date_end: {}
-        quantity: 12
     SeoUrlGenerate:
       title: SeoUrlGenerate
       required:
@@ -3237,10 +3183,6 @@ components:
           type: string
         prefix:
           type: string
-      example:
-        auto: true
-        suffix: ''
-        prefix: ''
     CadastrarProdutoSucesso:
       title: CadastrarProdutoSucesso
       required:
@@ -3252,186 +3194,6 @@ components:
           type: boolean
         data:
           $ref: '#/components/schemas/Data'
-      example:
-        result: true
-        data:
-          product_id: 222
-          model: Modelo
-          sku: ''
-          ncm: ''
-          cest: ''
-          upc: ''
-          ean: ''
-          jan: ''
-          isbn: ''
-          mpn: ''
-          location: ''
-          quantity: 1000
-          stock_status_id: 5
-          image: https://seudmonio/imagem/foto.jpg
-          manufacturer_id: 8
-          shipping: true
-          price: 199.99
-          points: 500
-          tax_class_id: 1
-          date_available: {}
-          dimensions:
-            length: 10
-            width: 10
-            height: 10
-            weight: 900
-            length_class_id: 1
-            weight_class_id: 2
-          subtract: true
-          minimum: 1
-          sort_order: 0
-          status: true
-          viewed: 0
-          date_added: {}
-          date_modified: {}
-          attributes:
-            - id: 1
-              en-gb: Four
-              pt-br: Four
-            - id: 3
-              en-gb: 4GB
-              pt-br: 4GB
-          name:
-            en-gb: Title
-            pt-br: Título
-          description:
-            en-gb: Description
-            pt-br: Descrição
-          tag:
-            en-gb:
-              - tag1
-              - tag2
-              - tag3
-            pt-br:
-              - tag1
-              - tag2
-              - tag3
-          meta_title:
-            en-gb: Meta título
-            pt-br: Meta título
-          meta_description:
-            en-gb: Meta descrição
-            pt-br: Meta descrição
-          meta_keyword:
-            en-gb: Meta palavras-chave
-            pt-br: Meta palavras-chave
-          discounts:
-            - customer_group_id: 1
-              priority: 1
-              price: 19.65
-              quantity: 12
-              date_start: {}
-              date_end: {}
-            - customer_group_id: 1
-              price: 19.65
-              priority: 1
-              quantity: 12
-              date_start: {}
-              date_end: {}
-          filters:
-            - 1
-          additional_images:
-            - https://seudmonio/imagem/foto_1.jpg
-            - https://seudmonio/imagem/foto_2.jpg
-            - https://seudmonio/imagem/foto_3.jpg
-          options:
-            - type: date
-              option_id: 8
-              value: {}
-            - type: file
-              option_id: 7
-              required: true
-            - type: text
-              option_id: 4
-              value: Preencha aqui
-            - type: checkbox
-              option_id: 2
-              required: true
-              values:
-                - option_value_id: 44
-                  sku: ''
-                  quantity: 150
-                  subtract: true
-                  price:
-                    prefix: +
-                    value: 0
-                  points:
-                    prefix: +
-                    value: 0
-                  weight:
-                    prefix: +
-                    value: 5
-                - option_value_id: 24
-                  sku: ''
-                  quantity: 50
-                  subtract: false
-                  price:
-                    prefix: +
-                    value: 0
-                  points:
-                    prefix: +
-                    value: 100
-                  weight:
-                    prefix: +
-                    value: 0
-                - option_value_id: 23
-                  sku: ''
-                  quantity: 100
-                  subtract: true
-                  price:
-                    prefix: '-'
-                    value: 5
-                  points:
-                    prefix: +
-                    value: 0
-                  weight:
-                    prefix: +
-                    value: 0
-            - type: radio
-              option_id: 1
-              required: true
-              values:
-                - option_value_id: 31
-                  sku: SKU da opção
-                  quantity: 100
-                  subtract: true
-                  price:
-                    prefix: '-'
-                    value: 5
-                  points:
-                    prefix: +
-                    value: 100
-                  weight:
-                    prefix: +
-                    value: 0
-          recurring:
-            - recurring_id: 1
-              customer_group_id: 1
-          product_related:
-            - 42
-          points_reward:
-            - customer_group_id: 1
-              points: 100
-          special:
-            - customer_group_id: 1
-              price: 19.65
-              priority: 1
-              date_start: {}
-              date_end: {}
-          categories:
-            - 27
-          downloads:
-            - 1
-          stores:
-            - 0
-          links:
-            default: >-
-              https://dominio/index.php?route=product/product&product_id=222
     Data:
       title: Data
       required:
@@ -3628,183 +3390,6 @@ components:
           description: ''
         links:
           $ref: '#/components/schemas/Links'
-      example:
-        product_id: 222
-        model: Modelo
-        sku: ''
-        ncm: ''
-        cest: ''
-        upc: ''
-        ean: ''
-        jan: ''
-        isbn: ''
-        mpn: ''
-        location: ''
-        quantity: 1000
-        stock_status_id: 5
-        image: https://seudmonio/imagem/foto.jpg
-        manufacturer_id: 8
-        shipping: true
-        price: 199.99
-        points: 500
-        tax_class_id: 1
-        date_available: {}
-        dimensions:
-          length: 10
-          width: 10
-          height: 10
-          weight: 900
-          length_class_id: 1
-          weight_class_id: 2
-        subtract: true
-        minimum: 1
-        sort_order: 0
-        status: true
-        viewed: 0
-        date_added: {}
-        date_modified: {}
-        attributes:
-          - id: 1
-            en-gb: Four
-            pt-br: Four
-          - id: 3
-            en-gb: 4GB
-            pt-br: 4GB
-        name:
-          en-gb: Title
-          pt-br: Titulo
-        description:
-          en-gb: Description
-          pt-br: Descrição
-        tag:
-          en-gb:
-            - tag1
-            - tag2
-            - tag3
-          pt-br:
-            - tag1
-            - tag2
-            - tag3
-        meta_title:
-          en-gb: Meta título
-          pt-br: Meta título
-        meta_description:
-          en-gb: Property required
-          pt-br: Property required
-        meta_keyword:
-          en-gb: Meta palavras-chave
-          pt-br: Meta palavras-chave
-        discounts:
-          - customer_group_id: 1
-            priority: 1
-            price: 19.65
-            quantity: 12
-            date_start: {}
-            date_end: {}
-          - customer_group_id: 1
-            price: 19.65
-            priority: 1
-            quantity: 12
-            date_start: {}
-            date_end: {}
-        filters:
-          - 1
-        additional_images:
-          - https://seudmonio/imagem/foto_1.jpg
-          - https://seudmonio/imagem/foto_2.jpg
-          - https://seudmonio/imagem/foto_3.jpg
-        options:
-          - type: date
-            option_id: 8
-            value: {}
-          - type: file
-            option_id: 7
-            required: true
-          - type: text
-            option_id: 4
-            value: Preencha aqui
-          - type: checkbox
-            option_id: 2
-            required: true
-            values:
-              - option_value_id: 44
-                sku: ''
-                quantity: 150
-                subtract: true
-                price:
-                  prefix: +
-                  value: 0
-                points:
-                  prefix: +
-                  value: 0
-                weight:
-                  prefix: +
-                  value: 5
-              - option_value_id: 24
-                sku: ''
-                quantity: 50
-                subtract: false
-                price:
-                  prefix: +
-                  value: 0
-                points:
-                  prefix: +
-                  value: 100
-                weight:
-                  prefix: +
-                  value: 0
-              - option_value_id: 23
-                sku: ''
-                quantity: 100
-                subtract: true
-                price:
-                  prefix: '-'
-                  value: 5
-                points:
-                  prefix: +
-                  value: 0
-                weight:
-                  prefix: +
-                  value: 0
-          - type: radio
-            option_id: 1
-            required: true
-            values:
-              - option_value_id: 31
-                sku: Identificação SKU da Opção
-                quantity: 100
-                subtract: true
-                price:
-                  prefix: '-'
-                  value: 5
-                points:
-                  prefix: +
-                  value: 100
-                weight:
-                  prefix: +
-                  value: 0
-        recurring:
-          - recurring_id: 1
-            customer_group_id: 1
-        product_related:
-          - 42
-        points_reward:
-          - customer_group_id: 1
-            points: 100
-        special:
-          - customer_group_id: 1
-            price: 19.65
-            priority: 1
-            date_start: {}
-            date_end: {}
-        categories:
-          - 27
-        downloads:
-          - 1
-        stores:
-          - 0
-        links:
-          default: https://dominio/index.php?route=product/product&product_id=222
     Attribute1:
       title: Attribute1
       required:
@@ -3820,10 +3405,6 @@ components:
           type: string
         pt-br:
           type: string
-      example:
-        id: 1
-        en-gb: Four
-        pt-br: Four
     Name1:
       title: Name1
       required:
@@ -3835,9 +3416,6 @@ components:
           type: string
         pt-br:
           type: string
-      example:
-        en-gb: Nome do Produto
-        pt-br: Nome do Produto
     Description1:
       title: Description1
       required:
@@ -3849,9 +3427,6 @@ components:
           type: string
         pt-br:
           type: string
-      example:
-        en-gb: Descrição
-        pt-br: Descrição
     Tag:
       title: Tag
       required:
@@ -3869,15 +3444,6 @@ components:
           items:
             type: string
           description: ''
-      example:
-        en-gb:
-          - tag1
-          - tag2
-          - tag3
-        pt-br:
-          - tag1
-          - tag2
-          - tag3
     MetaTitle1:
       title: MetaTitle1
       required:
@@ -3889,9 +3455,6 @@ components:
           type: string
         pt-br:
           type: string
-      example:
-        en-gb: Meta título
-        pt-br: Meta título
     MetaDescription1:
       title: MetaDescription1
       required:
@@ -3903,9 +3466,6 @@ components:
           type: string
         pt-br:
           type: string
-      example:
-        en-gb: Property required
-        pt-br: Property required
     MetaKeyword1:
       title: MetaKeyword1
       required:
@@ -3917,9 +3477,6 @@ components:
           type: string
         pt-br:
           type: string
-      example:
-        en-gb: Meta keyword default
-        pt-br: Meta keyword default
     Option1:
       title: Option1
       required:
@@ -3941,10 +3498,6 @@ components:
           items:
             $ref: '#/components/schemas/Value1'
           description: ''
-      example:
-        type: date
-        option_id: 8
-        value: {}
     Value1:
       title: Value1
       required:
@@ -3973,20 +3526,6 @@ components:
           $ref: '#/components/schemas/Points1'
         weight:
           $ref: '#/components/schemas/Weight1'
-      example:
-        option_value_id: 44
-        sku: ''
-        quantity: 150
-        subtract: true
-        price:
-          prefix: +
-          value: 0
-        points:
-          prefix: +
-          value: 0
-        weight:
-          prefix: +
-          value: 5
     Price1:
       title: Price1
       required:
@@ -3999,9 +3538,6 @@ components:
         value:
           type: integer
           format: int32
-      example:
-        prefix: +
-        value: 0
     Points1:
       title: Points1
       required:
@@ -4014,9 +3550,6 @@ components:
         value:
           type: integer
           format: int32
-      example:
-        prefix: +
-        value: 0
     Weight1:
       title: Weight1
       required:
@@ -4029,9 +3562,6 @@ components:
         value:
           type: integer
           format: int32
-      example:
-        prefix: +
-        value: 5
     Links:
       title: Links
       required:
@@ -4040,8 +3570,6 @@ components:
       properties:
         default:
           type: string
-      example:
-        default: https://dominio/index.php?route=product/product&product_id=222
     Error4:
       title: Error4
       required:
@@ -4053,9 +3581,6 @@ components:
           type: string
         details:
           type: string
-      example:
-        node: /price
-        details: Number expected, "199.99" received
     CadastrarProdutoErro:
       title: Erro
       required:
@@ -4073,12 +3598,6 @@ components:
           items:
             $ref: '#/components/schemas/Error4'
           description: ''
-      example:
-        result: false
-        details: Error filling in data sent
-        errors:
-          - node: /price
-            details: Number expected, "199.99" received
     AtualizarProdutoRequest:
       title: AtualizarProdutoRequest
       required:
@@ -4142,40 +3661,6 @@ components:
           items:
             type: string
           description: ''
-      example:
-        name:
-          default: Título
-          en-gb: Title
-        description:
-          default: Descrição
-        meta_title:
-          default: Meta título
-        meta_description:
-          pt-br: Meta descrição
-          en-gb: Meta description
-          default: Property required
-        shipping: false
-        model: Modelo
-        price: 199.99
-        tax_class_id: 1
-        stock_status_id: 5
-        quantity: 1000
-        minimum: 1
-        subtract: true
-        date_available: {}
-        dimensions:
-          length: 10
-          width: 10
-          height: 10
-          weight: 900
-          length_class_id: 1
-          weight_class_id: 2
-        status: false
-        image: https://seudmonio/imagem/foto.jpg
-        additional_images:
-          - https://seudmonio/imagem/foto_1.jpg
-          - https://seudmonio/imagem/foto_2.jpg
-          - https://seudmonio/imagem/foto_3.jpg
     AtualizarProdutoSucesso:
       title: AtualizarProdutoSucesso
       required:
@@ -4187,158 +3672,6 @@ components:
           type: boolean
         data:
           $ref: '#/components/schemas/Data2'
-      example:
-        result: true
-        data:
-          product_id: 222
-          model: Modelo
-          sku: ''
-          ncm: ''
-          cest: ''
-          upc: ''
-          ean: ''
-          jan: ''
-          isbn: ''
-          mpn: ''
-          location: ''
-          quantity: 1000
-          stock_status_id: 5
-          image: https://seudmonio/imagem/foto.jpg
-          manufacturer_id: 8
-          shipping: true
-          price: 199.99
-          points: 500
-          tax_class_id: 1
-          date_available: {}
-          dimensions:
-            length: 10
-            width: 10
-            height: 10
-            weight: 900
-            length_class_id: 1
-            weight_class_id: 2
-          subtract: true
-          minimum: 1
-          sort_order: 0
-          status: true
-          viewed: 0
-          date_added: {}
-          date_modified: {}
-          attributes:
-            - id: 1
-              en-gb: Four
-              pt-br: Four
-            - id: 3
-              en-gb: 4GB
-              pt-br: 4GB
-          name:
-            en-gb: Título
-            pt-br: Título
-          description:
-            en-gb: Descrição
-            pt-br: Descrição
-          tag:
-            en-gb: []
-            pt-br: []
-          meta_title:
-            en-gb: Meta título
-            pt-br: Meta título
-          meta_description:
-            en-gb: Meta Descrição
-            pt-br: Meta descrição
-          meta_keyword:
-            en-gb: Meta palavras-chave
-            pt-br: Meta palavras-chave
-          filters:
-            - 1
-          additional_images:
-            - https://seudmonio/imagem/foto_1.jpg
-            - https://seudmonio/imagem/foto_2.jpg
-            - https://seudmonio/imagem/foto_3.jpg
-          options:
-            - type: date
-              option_id: 8
-              value: {}
-            - type: file
-              option_id: 7
-              required: true
-            - type: text
-              option_id: 4
-              value: Preencha aqui
-            - type: checkbox
-              option_id: 2
-              required: true
-              values:
-                - option_value_id: 44
-                  sku: ''
-                  quantity: 150
-                  subtract: true
-                  price:
-                    prefix: +
-                    value: 0
-                  points:
-                    prefix: +
-                    value: 0
-                  weight:
-                    prefix: +
-                    value: 5
-                - option_value_id: 24
-                  sku: ''
-                  quantity: 50
-                  subtract: false
-                  price:
-                    prefix: +
-                    value: 0
-                  points:
-                    prefix: +
-                    value: 100
-                  weight:
-                    prefix: +
-                    value: 0
-                - option_value_id: 23
-                  sku: ''
-                  quantity: 100
-                  subtract: true
-                  price:
-                    prefix: '-'
-                    value: 5
-                  points:
-                    prefix: +
-                    value: 0
-                  weight:
-                    prefix: +
-                    value: 0
-            - type: radio
-              option_id: 1
-              required: true
-              values:
-                - option_value_id: 31
-                  sku: SKU da opção
-                  quantity: 100
-                  subtract: true
-                  price:
-                    prefix: '-'
-                    value: 5
-                  points:
-                    prefix: +
-                    value: 100
-                  weight:
-                    prefix: +
-                    value: 0
-          product_related:
-            - 42
-          points_reward:
-            - customer_group_id: 1
-              points: 100
-          categories:
-            - 27
-          downloads:
-            - 1
-          stores:
-            - 0
-          links:
-            default: >-
-              https://dominio/index.php?route=product/product&product_id=222
     Data2:
       title: Data2
       required:
@@ -4517,155 +3850,6 @@ components:
           description: ''
         links:
           $ref: '#/components/schemas/Links'
-      example:
-        product_id: 222
-        model: Modelo
-        sku: ''
-        ncm: ''
-        cest: ''
-        upc: ''
-        ean: ''
-        jan: ''
-        isbn: ''
-        mpn: ''
-        location: ''
-        quantity: 1000
-        stock_status_id: 5
-        image: https://seudmonio/imagem/foto.jpg
-        manufacturer_id: 8
-        shipping: true
-        price: 199.99
-        points: 500
-        tax_class_id: 1
-        date_available: {}
-        dimensions:
-          length: 10
-          width: 10
-          height: 10
-          weight: 900
-          length_class_id: 1
-          weight_class_id: 2
-        subtract: true
-        minimum: 1
-        sort_order: 0
-        status: true
-        viewed: 0
-        date_added: {}
-        date_modified: {}
-        attributes:
-          - id: 1
-            en-gb: Four
-            pt-br: Four
-          - id: 3
-            en-gb: 4GB
-            pt-br: 4GB
-        name:
-          en-gb: Title
-          pt-br: Título
-        description:
-          en-gb: Description
-          pt-br: Descrição
-        tag:
-          en-gb: []
-          pt-br: []
-        meta_title:
-          en-gb: Meta título
-          pt-br: Meta título
-        meta_description:
-          en-gb: Meta descrição
-          pt-br: Meta descrição
-        meta_keyword:
-          en-gb: Meta palavras-chave
-          pt-br: Meta palavras-chave
-        filters:
-          - 1
-        additional_images:
-          - https://seudmonio/imagem/foto_1.jpg
-          - https://seudmonio/imagem/foto_2.jpg
-          - https://seudmonio/imagem/foto_3.jpg
-        options:
-          - type: date
-            option_id: 8
-            value: {}
-          - type: file
-            option_id: 7
-            required: true
-          - type: text
-            option_id: 4
-            value: Preencha aqui
-          - type: checkbox
-            option_id: 2
-            required: true
-            values:
-              - option_value_id: 44
-                sku: ''
-                quantity: 150
-                subtract: true
-                price:
-                  prefix: +
-                  value: 0
-                points:
-                  prefix: +
-                  value: 0
-                weight:
-                  prefix: +
-                  value: 5
-              - option_value_id: 24
-                sku: ''
-                quantity: 50
-                subtract: false
-                price:
-                  prefix: +
-                  value: 0
-                points:
-                  prefix: +
-                  value: 100
-                weight:
-                  prefix: +
-                  value: 0
-              - option_value_id: 23
-                sku: ''
-                quantity: 100
-                subtract: true
-                price:
-                  prefix: '-'
-                  value: 5
-                points:
-                  prefix: +
-                  value: 0
-                weight:
-                  prefix: +
-                  value: 0
-          - type: radio
-            option_id: 1
-            required: true
-            values:
-              - option_value_id: 31
-                sku: SKU da opção
-                quantity: 100
-                subtract: true
-                price:
-                  prefix: '-'
-                  value: 5
-                points:
-                  prefix: +
-                  value: 100
-                weight:
-                  prefix: +
-                  value: 0
-        product_related:
-          - 42
-        points_reward:
-          - customer_group_id: 1
-            points: 100
-        categories:
-          - 27
-        downloads:
-          - 1
-        stores:
-          - 0
-        links:
-          default: https://dominio/index.php?route=product/product&product_id=222
     ListarProdutosSucesso:
       title: ListarProdutosSucesso
       required:
@@ -4680,98 +3864,6 @@ components:
           description: ''
         _metadata:
           $ref: '#/components/schemas/Metadata'
-      example:
-        records:
-          - product_id: 40
-            model: Modelo
-            sku: ''
-            ncm: ''
-            cest: ''
-            upc: ''
-            ean: ''
-            jan: ''
-            isbn: ''
-            mpn: ''
-            location: ''
-            quantity: 970
-            stock_status_id: 5
-            image: https://seudmonio/imagem/foto.jpg
-            manufacturer_id: 8
-            shipping: true
-            price: 101
-            points: 0
-            tax_class_id: 0
-            date_available: {}
-            dimensions:
-              length: 0
-              width: 0
-              height: 0
-              weight: 10
-              length_class_id: 1
-              weight_class_id: 1
-            subtract: true
-            minimum: 1
-            sort_order: 0
-            status: true
-            viewed: 5
-            date_added: {}
-            date_modified: {}
-            name:
-              en-gb: iPhone
-              pt-br: iPhone
-            description:
-              en-gb: |+
-                &lt;p class=&quot;intro&quot;&gt;
-
-                  iPhone is a revolutionary new mobile phone that allows you to make a call by simply tapping a name or number in your address book, a favorites list, or a call log. It also automatically syncs all your contacts from a PC, Mac, or Internet service. And it lets you select and listen to voicemail messages in whatever order you want just like email.&lt;/p&gt;
-
-              pt-br: |+
-                &lt;p class=&quot;intro&quot;&gt;
-
-                  iPhone is a revolutionary new mobile phone that allows you to make a call by simply tapping a name or number in your address book, a favorites list, or a call log. It also automatically syncs all your contacts from a PC, Mac, or Internet service. And it lets you select and listen to voicemail messages in whatever order you want just like email.&lt;/p&gt;
-
-            tag:
-              en-gb: []
-              pt-br: []
-            meta_title:
-              en-gb: iPhone
-              pt-br: iPhone
-            meta_description:
-              en-gb: ''
-              pt-br: ''
-            meta_keyword:
-              en-gb: ''
-              pt-br: ''
-            additional_images:
-              - https://seudmonio/imagem/iphone_1.jpg
-              - https://seudmonio/imagem/iphone_2.jpg
-              - https://seudmonio/imagem/iphone_3.jpg
-              - https://seudmonio/imagem/iphone_4.jpg
-              - https://seudmonio/imagem/iphone_5.jpg
-            product_related:
-              - 42
-            points_reward:
-              - customer_group_id: 1
-                points: 0
-            categories:
-              - 20
-              - 24
-            stores:
-              - 0
-            links:
-              default: >-
-                https://dominio/index.php?route=product/product&product_id=40
-        _metadata:
-          page: 1
-          per_page: 50
-          page_count: 1
-          total_count: 1
-          links:
-            self: /api/product?page=1&per_page=50&filter_name=iPhone
-            first: /api/product?page=1&per_page=50&filter_name=iPhone
-            previous: ''
-            next: ''
-            last: /api/product?page=1&per_page=50&filter_name=iPhone
     Record:
       title: Record
       required:
@@ -4925,85 +4017,6 @@ components:
           description: ''
         links:
           $ref: '#/components/schemas/Links'
-      example:
-        product_id: 40
-        model: iPhone
-        sku: ''
-        ncm: ''
-        cest: ''
-        upc: ''
-        ean: ''
-        jan: ''
-        isbn: ''
-        mpn: ''
-        location: ''
-        quantity: 970
-        stock_status_id: 5
-        image: https://seudmonio/imagem/foto.jpg
-        manufacturer_id: 8
-        shipping: true
-        price: 101
-        points: 0
-        tax_class_id: 0
-        date_available: {}
-        dimensions:
-          length: 0
-          width: 0
-          height: 0
-          weight: 10
-          length_class_id: 1
-          weight_class_id: 1
-        subtract: true
-        minimum: 1
-        sort_order: 0
-        status: true
-        viewed: 5
-        date_added: {}
-        date_modified: {}
-        name:
-          en-gb: iPhone
-          pt-br: iPhone
-        description:
-          en-gb: |+
-            &lt;p class=&quot;intro&quot;&gt;
-
-              iPhone is a revolutionary new mobile phone that allows you to make a call by simply tapping a name or number in your address book, a favorites list, or a call log. It also automatically syncs all your contacts from a PC, Mac, or Internet service. And it lets you select and listen to voicemail messages in whatever order you want just like email.&lt;/p&gt;
-
-          pt-br: |+
-            &lt;p class=&quot;intro&quot;&gt;
-
-              iPhone is a revolutionary new mobile phone that allows you to make a call by simply tapping a name or number in your address book, a favorites list, or a call log. It also automatically syncs all your contacts from a PC, Mac, or Internet service. And it lets you select and listen to voicemail messages in whatever order you want just like email.&lt;/p&gt;
-
-        tag:
-          en-gb: []
-          pt-br: []
-        meta_title:
-          en-gb: iPhone
-          pt-br: iPhone
-        meta_description:
-          en-gb: ''
-          pt-br: ''
-        meta_keyword:
-          en-gb: ''
-          pt-br: ''
-        additional_images:
-          - https://seudmonio/imagem/iphone_1.jpg
-          - https://seudmonio/imagem/iphone_2.jpg
-          - https://seudmonio/imagem/iphone_3.jpg
-          - https://seudmonio/imagem/iphone_4.jpg
-          - https://seudmonio/imagem/iphone_5.jpg
-        product_related:
-          - 42
-        points_reward:
-          - customer_group_id: 1
-            points: 0
-        categories:
-          - 20
-          - 24
-        stores:
-          - 0
-        links:
-          default: https://dominio/index.php?route=product/product&product_id=40
     Metadata:
       title: Metadata
       required:
@@ -5028,17 +4041,6 @@ components:
           format: int32
         links:
           $ref: '#/components/schemas/Links4'
-      example:
-        page: 1
-        per_page: 50
-        page_count: 1
-        total_count: 1
-        links:
-          self: /api/product?page=1&per_page=50&filter_name=iPhone
-          first: /api/product?page=1&per_page=50&filter_name=iPhone
-          previous: ''
-          next: ''
-          last: /api/product?page=1&per_page=50&filter_name=iPhone
     Links4:
       title: Links4
       required:
@@ -5061,12 +4063,6 @@ components:
           nullable: true
         last:
           type: string
-      example:
-        self: /product?page=1&per_page=50&filter_name=iPhone
-        first: /product?page=1&per_page=50&filter_name=iPhone
-        previous: ''
-        next: ''
-        last: /product?page=1&per_page=50&filter_name=iPhone
     AtualizarHistoricoPedidoSucesso:
       title: AtualizarHistoricoPedidoSucesso
       required:
@@ -5083,10 +4079,6 @@ components:
           format: int32
         comment:
           type: string
-      example:
-        order_id: 130793
-        order_status_id: 3
-        comment: Estoque atualizado
     AtualizarEstoqueRequest:
       title: AtualizarEstoqueRequest
       required:
@@ -5134,18 +4126,6 @@ components:
         weight_class_id:
           type: integer
           format: int32
-      example:
-        product_id: 50
-        location: string
-        minimum: 1
-        quantity: 12
-        weight: 12
-        length: 12
-        width: 12
-        height: 12
-        price: 12.99
-        length_class_id: 2
-        weight_class_id: 2
     AtualizarEstoqueErro:
       title: AtualizarEstoqueErro
       required:
@@ -5160,12 +4140,6 @@ components:
           type: string
         errors:
           type: array
-      example:
-        result: false
-        details: "Error filling in data sent"
-        errors:
-          - node: 0
-            details: "Required property missing: product_id, data: {\"location\":\"string\",\"minimum\":1,\"quantity\":12,\"weight\":12,\"length\":12,\"width\":12,\"height\":12,\"price\":12.99,\"length_class_id\":2}"
     AtualizarEstoqueSucesso:
       title: AtualizarEstoqueSucesso
       required:
@@ -5178,9 +4152,6 @@ components:
           format: int32
         updated:
           type: boolean
-      example:
-        product_id: 50
-        updated: true
     ListarIdiomasSucesso:
       title: ListarIdiomasSucesso
       required:
@@ -5195,25 +4166,6 @@ components:
           description: ''
         _metadata:
           $ref: '#/components/schemas/Metadata'
-      example:
-        records:
-          - language_id: 2
-            name: Português
-            code: pt-br
-            locale: pt-BR,pt_BR.UTF-8,pt_BR,pt-br,portuguese
-            sort_order: 1
-            status: true
-        _metadata:
-          page: 1
-          per_page: 13
-          page_count: 1
-          total_count: 1
-          links:
-            self: /api/languages?page=1&per_page=13&filter_code=pt-br&filter_status=1
-            first: /api/languages?page=1&per_page=13&filter_code=pt-br&filter_status=1
-            previous: ''
-            next: ''
-            last: /api/languages?page=1&per_page=13&filter_code=pt-br&filter_status=1
     Item1:
       title: Item1
       required:
@@ -5239,13 +4191,6 @@ components:
           format: int32
         status:
           type: boolean
-      example:
-        language_id: 2
-        name: Português
-        code: pt-br
-        locale: pt-BR,pt_BR.UTF-8,pt_BR,pt-br,portuguese
-        sort_order: 1
-        status: true
     ListarGruposImpostosSucesso:
       title: ListarGruposImpostosSucesso
       required:
@@ -5260,24 +4205,6 @@ components:
           description: ''
         _metadata:
           $ref: '#/components/schemas/Metadata'
-      example:
-        records:
-          - tax_class_id: 1
-            title: Estadual
-            description: Bahia
-            date_added: {}
-            date_modified: {}
-        _metadata:
-          page: 1
-          per_page: 50
-          page_count: 1
-          total_count: 1
-          links:
-            self: /api/tax_class?page=1&per_page=50
-            first: /api/tax_class?page=1&per_page=50
-            previous: ''
-            next: ''
-            last: /api/tax_class?page=1&per_page=50
     Item2:
       title: Item2
       required:
@@ -5299,12 +4226,6 @@ components:
           type: string
         date_modified:
           type: string
-      example:
-        tax_class_id: 1
-        title: Estadual
-        description: Amapá
-        date_added: {}
-        date_modified: {}
     ListarSituacoesEstoqueSucesso:
       title: ListarSituacoesEstoqueSucesso
       required:
@@ -5319,35 +4240,6 @@ components:
           description: ''
         _metadata:
           $ref: '#/components/schemas/Metadata'
-      example:
-        records:
-          - stock_status_id: '5'
-            name:
-              en-gb: Out Of Stock
-              pt-br: Esgotado
-          - stock_status_id: '6'
-            name:
-              en-gb: 2-3 Days
-              pt-br: 2 a 3 dias
-          - stock_status_id: '7'
-            name:
-              en-gb: In Stock
-              pt-br: Em estoque
-          - stock_status_id: '8'
-            name:
-              en-gb: Pre-Order
-              pt-br: Sob orçamento
-        _metadata:
-          page: 1
-          per_page: 50
-          page_count: 4
-          total_count: 4
-          links:
-            self: /api/stock_status?page=1&per_page=50
-            first: /api/stock_status?page=1&per_page=50
-            previous: ''
-            next: ''
-            last: /api/stock_status?page=1&per_page=50
     Item3:
       title: Item3
       required:
@@ -5359,11 +4251,6 @@ components:
           type: string
         name:
           $ref: '#/components/schemas/Name1'
-      example:
-        stock_status_id: '5'
-        name:
-          en-gb: Out Of Stock
-          pt-br: Esgotado
     ListarUnidadesMedidaSucesso:
       title: ListarUnidadesMedidaSucesso
       required:
@@ -5397,15 +4284,6 @@ components:
           $ref: '#/components/schemas/Title'
         unit:
           $ref: '#/components/schemas/Unit'
-      example:
-        length_class_id: 1
-        value: 1
-        title:
-          en-gb: Centimeter
-          pt-br: Centímetro
-        unit:
-          en-gb: cm
-          pt-br: cm
     Title:
       title: Title
       required:
@@ -5417,9 +4295,6 @@ components:
           type: string
         pt-br:
           type: string
-      example:
-        en-gb: Centimeter
-        pt-br: Centímetro
     Unit:
       title: Unit
       required:
@@ -5431,9 +4306,6 @@ components:
           type: string
         pt-br:
           type: string
-      example:
-        en-gb: cm
-        pt-br: cm
     ListarUnidadePesoSucesso:
       title: ListarUnidadePesoSucesso
       required:
@@ -5467,15 +4339,6 @@ components:
           $ref: '#/components/schemas/Title'
         unit:
           $ref: '#/components/schemas/Unit'
-      example:
-        weight_class_id: 1
-        value: 1
-        title:
-          en-gb: Kilogram
-          pt-br: Quilograma
-        unit:
-          en-gb: kg
-          pt-br: kg
     ListarDepartamentosSucesso:
       title: ListarDepartamentosSucesso
       required:
@@ -5490,127 +4353,6 @@ components:
           description: ''
         _metadata:
           $ref: '#/components/schemas/Metadata'
-      example:
-        records:
-          - category_id: 25
-            image: ''
-            parent_id: 0
-            top: 1
-            column: 1
-            sort_order: 3
-            status: true
-            date_added: {}
-            date_modified: {}
-            total_products: 0
-            name:
-              en-gb: Components
-              pt-br: Componentes
-            description:
-              en-gb: ''
-              pt-br: ''
-            meta_title:
-              en-gb: Components
-              pt-br: Componentes
-            meta_description:
-              en-gb: ''
-              pt-br: ''
-            meta_keyword:
-              en-gb: ''
-              pt-br: ''
-          - category_id: 27
-            image: ''
-            parent_id: 20
-            top: 0
-            column: 0
-            sort_order: 2
-            status: true
-            date_added: {}
-            date_modified: {}
-            total_products: 79
-            name:
-              en-gb: Mac
-              pt-br: Mac
-            description:
-              en-gb: ''
-              pt-br: ''
-            meta_title:
-              en-gb: Mac
-              pt-br: Mac
-            meta_description:
-              en-gb: ''
-              pt-br: ''
-            meta_keyword:
-              en-gb: ''
-              pt-br: ''
-          - category_id: 20
-            image: https://seudmonio/imagem/desktops.jpg
-            parent_id: 0
-            top: 1
-            column: 1
-            sort_order: 1
-            status: true
-            date_added: {}
-            date_modified: {}
-            total_products: 12
-            name:
-              en-gb: Desktops
-              pt-br: Desktops
-            description:
-              en-gb: |+
-                &lt;p&gt;
-
-                 Example of category description &lt;/p&gt;
-
-              pt-br: |+
-                &lt;p&gt;
-
-                 Exemplo de descrição na categoria &lt;/p&gt;
-
-            meta_title:
-              en-gb: Desktops
-              pt-br: Desktops
-            meta_description:
-              en-gb: Example of category meta description
-              pt-br: Exemplo de meta descrição na categoria
-            meta_keyword:
-              en-gb: ''
-              pt-br: ''
-          - category_id: 24
-            image: ''
-            parent_id: 52
-            top: 0
-            column: 0
-            sort_order: 0
-            status: true
-            date_added: {}
-            date_modified: {}
-            total_products: 0
-            name:
-              en-gb: Subcategory 25
-              pt-br: Subcategoria 25
-            description:
-              en-gb: ''
-              pt-br: ''
-            meta_title:
-              en-gb: Subcategory 25
-              pt-br: Subcategoria 25
-            meta_description:
-              en-gb: ''
-              pt-br: ''
-            meta_keyword:
-              en-gb: ''
-              pt-br: ''
-        _metadata:
-          page: 1
-          per_page: 50
-          page_count: 4
-          total_count: 38
-          links:
-            self: /api/category?page=1&per_page=50
-            first: /api/category?page=1&per_page=50
-            previous: ''
-            next: ''
-            last: /api/category?page=1&per_page=50
     Item6:
       title: Item6
       required:
@@ -5668,32 +4410,6 @@ components:
           $ref: '#/components/schemas/MetaDescription1'
         meta_keyword:
           $ref: '#/components/schemas/MetaKeyword1'
-      example:
-        category_id: 25
-        image: ''
-        parent_id: 0
-        top: 1
-        column: 1
-        sort_order: 3
-        status: true
-        date_added: {}
-        date_modified: {}
-        total_products: 0
-        name:
-          en-gb: Components
-          pt-br: Componentes
-        description:
-          en-gb: ''
-          pt-br: ''
-        meta_title:
-          en-gb: Components
-          pt-br: Componentes
-        meta_description:
-          en-gb: ''
-          pt-br: ''
-        meta_keyword:
-          en-gb: ''
-          pt-br: ''
     ListarFiltrosSucesso:
       title: ListarFiltrosSucesso
       required:
@@ -5708,56 +4424,6 @@ components:
           description: ''
         _metadata:
           $ref: '#/components/schemas/Metadata'
-      example:
-        records:
-          - filter_group_id: 1
-            sort_order: 1
-            filters:
-              - filter_id: 1
-                sort_order: 3
-                name:
-                  en-gb: Option One
-                  pt-br: Opção Um
-              - filter_id: 2
-                sort_order: 2
-                name:
-                  pt-br: Opção Dois
-                  en-gb: Option Two
-            name:
-              en-gb: 'Filter #1'
-              pt-br: 'Filtro #1'
-          - filter_group_id: 2
-            sort_order: 10
-            filters:
-              - filter_id: 3
-                sort_order: 0
-                name:
-                  en-gb: Option Two - One
-                  pt-br: Opcao Dois - Um
-              - filter_id: 4
-                sort_order: 0
-                name:
-                  en-gb: Option Two - Two
-                  pt-br: Opcao Dois - Dois
-              - filter_id: 5
-                sort_order: 0
-                name:
-                  en-gb: Option Two - Two
-                  pt-br: Opcao Dois - Três
-            name:
-              en-gb: 'Filter #2'
-              pt-br: Filtro 2
-        _metadata:
-          page: 1
-          per_page: 50
-          page_count: 2
-          total_count: 2
-          links:
-            self: /api/filter_group?page=1&per_page=50
-            first: /api/filter_group?page=1&per_page=50
-            previous: ''
-            next: ''
-            last: /api/filter_group?page=1&per_page=50
     Item7:
       title: Item7
       required:
@@ -5780,23 +4446,6 @@ components:
           description: ''
         name:
           $ref: '#/components/schemas/Name1'
-      example:
-        filter_group_id: 1
-        sort_order: 1
-        filters:
-          - filter_id: 1
-            sort_order: 3
-            name:
-              en-gb: Option One
-              pt-br: Opção Um
-          - filter_id: 2
-            sort_order: 2
-            name:
-              pt-br: Opção Dois
-              en-gb: Option Two
-        name:
-          en-gb: 'Filter #1'
-          pt-br: 'Filtro #1'
     Filter:
       title: Filter
       required:
@@ -5813,12 +4462,6 @@ components:
           format: int32
         name:
           $ref: '#/components/schemas/Name1'
-      example:
-        filter_id: 1
-        sort_order: 3
-        name:
-          en-gb: Option One
-          pt-br: Opção Um
     ListarGruposAtributos:
       title: ListarGruposAtributos
       required:
@@ -5833,29 +4476,6 @@ components:
           description: ''
         _metadata:
           $ref: '#/components/schemas/Metadata'
-      example:
-        records:
-          - attribute_group_id: '2'
-            sort_order: '0'
-            name:
-              en-gb: Informações
-              pt-br: Informações
-          - attribute_group_id: '1'
-            sort_order: '1'
-            name:
-              en-gb: Technical
-              pt-br: Informações técnicas
-        _metadata:
-          page: 1
-          per_page: 50
-          page_count: 2
-          total_count: 2
-          links:
-            self: /api/attribute_group?page=1&per_page=50
-            first: /api/attribute_group?page=1&per_page=50
-            previous: ''
-            next: ''
-            last: /api/attribute_group?page=1&per_page=50
     Item8:
       title: Item8
       required:
@@ -5870,12 +4490,6 @@ components:
           type: string
         name:
           $ref: '#/components/schemas/Name1'
-      example:
-        attribute_group_id: '2'
-        sort_order: '0'
-        name:
-          en-gb: Informações
-          pt-br: Informações
     ListarAtributosSucesso:
       title: ListarAtributosSucesso
       required:
@@ -5890,34 +4504,6 @@ components:
           description: ''
         _metadata:
           $ref: '#/components/schemas/Metadata'
-      example:
-        records:
-          - attribute_id: '2'
-            attribute_group_id: '1'
-            name:
-              en-gb: Clockspeed
-              pt-br: Velocidade de clock
-          - attribute_id: '3'
-            attribute_group_id: '1'
-            name:
-              en-gb: Memory
-              pt-br: Memória
-          - attribute_id: '1'
-            attribute_group_id: '1'
-            name:
-              en-gb: No. of Cores
-              pt-br: Nº de núcleos
-        _metadata:
-          page: 1
-          per_page: 50
-          page_count: 3
-          total_count: 3
-          links:
-            self: /api/attribute?page=1&per_page=50
-            first: /api/attribute?page=1&per_page=50
-            previous: ''
-            next: ''
-            last: /api/attribute?page=1&per_page=50
     Item9:
       title: Item9
       required:
@@ -5932,12 +4518,6 @@ components:
           type: string
         name:
           $ref: '#/components/schemas/Name1'
-      example:
-        attribute_id: '2'
-        attribute_group_id: '1'
-        name:
-          en-gb: Clockspeed
-          pt-br: Velocidade de clock
     ListarMarcasSucesso:
       title: Marcas
       required:
@@ -5952,43 +4532,6 @@ components:
           description: ''
         _metadata:
           $ref: '#/components/schemas/Metadata'
-      example:
-        records:
-          - manufacturer_id: 8
-            name: Apple
-            image: https://seudmonio/imagem/apple_logo.jpg
-            sort_order: 0
-          - manufacturer_id: 9
-            name: Canon
-            image: https://seudmonio/imagem/canon_logo.jpg
-            sort_order: 0
-          - manufacturer_id: 7
-            name: HP
-            image: https://seudmonio/imagem/hp_logo.jpg
-            sort_order: 0
-          - manufacturer_id: 5
-            name: HTC
-            image: https://seudmonio/imagem/htc_logo.jpg
-            sort_order: 0
-          - manufacturer_id: 6
-            name: Palm
-            image: https://seudmonio/imagem/palm_logo.jpg
-            sort_order: 0
-          - manufacturer_id: 10
-            name: Sony
-            image: https://seudmonio/imagem/sony_logo.jpg
-            sort_order: 0
-        _metadata:
-          page: 1
-          per_page: 50
-          page_count: 6
-          total_count: 6
-          links:
-            self: /api/manufacturer?page=1&per_page=50
-            first: /api/manufacturer?page=1&per_page=50
-            previous: ''
-            next: ''
-            last: /api/manufacturer?page=1&per_page=50
     Item10:
       title: Item10
       required:
@@ -6008,11 +4551,6 @@ components:
         sort_order:
           type: integer
           format: int32
-      example:
-        manufacturer_id: 8
-        name: Apple
-        image: https://seudmonio/imagem/apple_logo.jpg
-        sort_order: 0
     ListarDownloadsSucesso:
       title: ListarDownloadsSucesso
       required:
@@ -6027,26 +4565,6 @@ components:
           description: ''
         _metadata:
           $ref: '#/components/schemas/Metadata'
-      example:
-        records:
-          - download_id: 1
-            filename: oc4269839.jpg.269c429c2b006b8fdb2987bf69462f5e
-            mask: ebook.jpg
-            date_added: {}
-            name:
-              en-gb: eBook
-              pt-br: Livro Digital
-        _metadata:
-          page: 1
-          per_page: 50
-          page_count: 1
-          total_count: 1
-          links:
-            self: /api/download?page=1&per_page=50
-            first: /api/download?page=1&per_page=50
-            previous: ''
-            next: ''
-            last: /api/download?page=1&per_page=50
     Item11:
       title: Item11
       required:
@@ -6068,14 +4586,6 @@ components:
           type: string
         name:
           $ref: '#/components/schemas/Name1'
-      example:
-        download_id: 1
-        filename: oc4269839.jpg.269c429c2b006b8fdb2987bf69462f5e
-        mask: ebook.jpg
-        date_added: {}
-        name:
-          en-gb: eBook
-          pt-br: Livro Digital
     ListarOpcoesSucesso:
       title: ListarOpcoesSucesso
       required:
@@ -6090,180 +4600,6 @@ components:
           description: ''
         _metadata:
           $ref: '#/components/schemas/Metadata'
-      example:
-        records:
-          - option_id: 1
-            type: radio
-            sort_order: 1
-            name:
-              en-gb: Radio
-              pt-br: Seleção única
-            values:
-              - option_value_id: 32
-                image: ''
-                sort_order: 1
-                name:
-                  en-gb: Small
-                  pt-br: Pequeno
-              - option_value_id: 31
-                image: ''
-                sort_order: 2
-                name:
-                  en-gb: Medium
-                  pt-br: Médio
-              - option_value_id: 43
-                image: ''
-                sort_order: 3
-                name:
-                  en-gb: Large
-                  pt-br: Grande
-          - option_id: 2
-            type: checkbox
-            sort_order: 2
-            name:
-              en-gb: Checkbox
-              pt-br: Caixa de texto
-            values:
-              - option_value_id: 23
-                image: https://dominio/imagem/foto_1.jpg
-                sort_order: 1
-                name:
-                  en-gb: Checkbox 1
-                  pt-br: Caixa de texto 1
-              - option_value_id: 24
-                image: https://dominio/imagem/foto_2.jpg
-                sort_order: 2
-                name:
-                  en-gb: Checkbox 2
-                  pt-br: Caixa de texto 2
-              - option_value_id: 44
-                image: https://dominio/imagem/foto_3.jpg
-                sort_order: 3
-                name:
-                  en-gb: Checkbox 3
-                  pt-br: Caixa de texto 3
-              - option_value_id: 45
-                image: https://dominio/imagem/foto_4.jpg
-                sort_order: 4
-                name:
-                  en-gb: Checkbox 4
-                  pt-br: Caixa de texto 4
-          - option_id: 4
-            type: text
-            sort_order: 3
-            name:
-              en-gb: Text
-              pt-br: Texto
-            values: []
-          - option_id: 5
-            type: select
-            sort_order: 4
-            name:
-              en-gb: Select
-              pt-br: Menu de seleção
-            values:
-              - option_value_id: 39
-                image: ''
-                sort_order: 1
-                name:
-                  en-gb: Red
-                  pt-br: Vermelho
-              - option_value_id: 40
-                image: ''
-                sort_order: 2
-                name:
-                  en-gb: Blue
-                  pt-br: Azul
-              - option_value_id: 41
-                image: ''
-                sort_order: 3
-                name:
-                  en-gb: Green
-                  pt-br: Verde
-              - option_value_id: 42
-                image: ''
-                sort_order: 4
-                name:
-                  en-gb: Yellow
-                  pt-br: Amarelo
-          - option_id: 6
-            type: textarea
-            sort_order: 5
-            name:
-              en-gb: Textarea
-              pt-br: Área de texto
-            values: []
-          - option_id: 7
-            type: file
-            sort_order: 6
-            name:
-              en-gb: File
-              pt-br: Arquivo
-            values: []
-          - option_id: 8
-            type: date
-            sort_order: 7
-            name:
-              en-gb: Date
-              pt-br: Data
-            values: []
-          - option_id: 9
-            type: time
-            sort_order: 8
-            name:
-              en-gb: Time
-              pt-br: Hora
-            values: []
-          - option_id: 10
-            type: datetime
-            sort_order: 9
-            name:
-              en-gb: Date &amp; Time
-              pt-br: Data e hora
-            values: []
-          - option_id: 11
-            type: select
-            sort_order: 10
-            name:
-              en-gb: Size
-              pt-br: Tamanho
-            values:
-              - option_value_id: 46
-                image: ''
-                sort_order: 1
-                name:
-                  en-gb: Small
-                  pt-br: Pequeno
-              - option_value_id: 47
-                image: ''
-                sort_order: 2
-                name:
-                  en-gb: Medium
-                  pt-br: Médio
-              - option_value_id: 48
-                image: ''
-                sort_order: 3
-                name:
-                  en-gb: Large
-                  pt-br: Grande
-          - option_id: 12
-            type: date
-            sort_order: 11
-            name:
-              en-gb: Delivery Date
-              pt-br: Data de entrega
-            values: []
-        _metadata:
-          page: 1
-          per_page: 50
-          page_count: 11
-          total_count: 11
-          links:
-            self: /api/option?page=1&per_page=50
-            first: /api/option?page=1&per_page=50
-            previous: ''
-            next: ''
-            last: /api/option?page=1&per_page=50
     Item12:
       title: Item12
       required:
@@ -6289,32 +4625,6 @@ components:
           items:
             $ref: '#/components/schemas/Value4'
           description: ''
-      example:
-        option_id: 1
-        type: radio
-        sort_order: 1
-        name:
-          en-gb: Radio
-          pt-br: Seleção única
-        values:
-          - option_value_id: 32
-            image: ''
-            sort_order: 1
-            name:
-              en-gb: Small
-              pt-br: Pequeno
-          - option_value_id: 31
-            image: ''
-            sort_order: 2
-            name:
-              en-gb: Medium
-              pt-br: Médio
-          - option_value_id: 43
-            image: ''
-            sort_order: 3
-            name:
-              en-gb: Large
-              pt-br: Grande
     Value4:
       title: Value4
       type: object
@@ -6330,13 +4640,31 @@ components:
           format: int32
         name:
           $ref: '#/components/schemas/Name1'
-      example:
-        option_value_id: 32
-        image: ''
-        sort_order: 1
+    ListarSituacoesPedidosSucesso:
+      title: ListarSituacoesPedidosSucesso
+      required:
+        - records
+        - _metadata
+      type: object
+      properties:
+        records:
+          type: array
+          items:
+            $ref: '#/components/schemas/Item13'
+          description: ''
+        _metadata:
+          $ref: '#/components/schemas/Metadata'
+    Item13:
+      title: Item13
+      required:
+        - order_status_id
+        - name
+      type: object
+      properties:
+        order_status_id:
+          type: string
         name:
-          en-gb: Small
-          pt-br: Pequeno
+          $ref: '#/components/schemas/Name1'
   securitySchemes:
     httpBearer:
       type: http
@@ -6349,40 +4677,42 @@ security:
   - httpBearer: []
   - httpBasic: []
 tags:
-  - name: 01 - Credenciais
-  - name: 02 - Produtos
-  - name: 03 - Idiomas
-  - name: 04 - Impostos
-  - name: 05 - Situações de estoque
-  - name: 06 - Unidades de medidas
-  - name: 07 - Unidades de pesos
-  - name: 08 - Departamentos
-  - name: 09 - Filtros
-  - name: 10 - Grupos de atributos
-  - name: 11 - Atributos
-  - name: 12 - Marcas
-  - name: 13 - Downloads
-  - name: 14 - Opções
-  - name: 15 - Pedidos
+  - name: Credenciais
+  - name: Produtos
+  - name: Idiomas
+  - name: Impostos
+  - name: Situações de estoque
+  - name: Unidades de medida
+  - name: Unidades de peso
+  - name: Departamentos
+  - name: Filtros
+  - name: Grupos de atributos
+  - name: Atributos
+  - name: Marcas
+  - name: Downloads
+  - name: Opções
+  - name: Pedidos
+  - name: Situações de pedidos
 x-tagGroups:
   - name: Credenciais
     tags:
-      - 01 - Credenciais
+      - Credenciais
   - name: Produtos
     tags:
-      - 02 - Produtos
-      - 03 - Idiomas
-      - 04 - Impostos
-      - 05 - Situações de estoque
-      - 06 - Unidades de medidas
-      - 07 - Unidades de pesos
-      - 08 - Departamentos
-      - 09 - Filtros
-      - 10 - Grupos de atributos
-      - 11 - Atributos
-      - 12 - Marcas
-      - 13 - Downloads
-      - 14 - Opções
+      - Produtos
+      - Idiomas
+      - Impostos
+      - Situações de estoque
+      - Unidades de medida
+      - Unidades de peso
+      - Departamentos
+      - Filtros
+      - Grupos de atributos
+      - Atributos
+      - Marcas
+      - Downloads
+      - Opções
   - name: Pedidos
     tags:
-      - 15 - Pedidos
+      - Pedidos
+      - Situações de pedidos
