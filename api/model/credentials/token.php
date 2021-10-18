@@ -66,7 +66,7 @@ class ModelCredentialsToken extends Model {
 			if ($query->num_rows) {
 				JWT::decode(
 					$query->row['refresh_token'],
-					$this->config->get('secret_key'),
+					$this->config->get('api_secret_key'),
 					array('HS256')
 				);
 
@@ -143,7 +143,7 @@ class ModelCredentialsToken extends Model {
 		);
 
 		return array(
-			'jwt' => JWT::encode($payload, $this->config->get('secret_key')),
+			'jwt' => JWT::encode($payload, $this->config->get('api_secret_key')),
 			'exp' => $time + $expire_at,
 		);
 	}

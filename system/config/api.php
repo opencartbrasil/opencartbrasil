@@ -7,9 +7,9 @@ $_['site_ssl']                 = HTTPS_SERVER;
 $_['url_autostart']            = false;
 
 // Security
-$_['secret_key']               = 'opencartbrasil';
-$_['cache_expire']             = 60;
-$_['request_per_minute']       = 30;
+$_['api_secret_key']           = 'opencartbrasil';
+$_['api_cache_expire']         = 60;
+$_['api_request_per_minute']   = 30;
 
 // Ignore middlewares in
 $_['ignored_routers']          = array(

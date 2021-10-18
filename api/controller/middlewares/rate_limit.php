@@ -19,9 +19,9 @@ class ControllerMiddlewaresRateLimit extends Controller {
 			return new Action('status_code/bad_request');
 		}
 
-		$request_per_minute = $this->config->get('request_per_minute');
+		$request_per_minute = $this->config->get('api_request_per_minute');
 
-		$cache = new Cache($this->config->get('cache_engine'), $this->config->get('cache_expire'));
+		$cache = new Cache($this->config->get('cache_engine'), $this->config->get('api_cache_expire'));
 
 		$token_hash = $this->jwt->jti;
 
@@ -76,7 +76,7 @@ class ControllerMiddlewaresRateLimit extends Controller {
 	private function generate_data() {
 		return array(
 			'count' => 1,
-			'expire_at' => time() + $this->config->get('cache_expire')
+			'expire_at' => time() + $this->config->get('api_cache_expire')
 		);
 	}
 }
