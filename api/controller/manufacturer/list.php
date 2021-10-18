@@ -52,7 +52,7 @@ class ControllerManufacturerList extends Controller {
 		$next_page = intval(min($page + 1, $last_page));
 
 		// URL Page
-		$links = '/manufacturer?page=%d&per_page=%d';
+		$links = '/api/manufacturer?page=%d&per_page=%d';
 
 		if ($filter_name !== null) {
 			$links .= '&filter_name=' . urlencode($filter_name);

@@ -41,7 +41,7 @@ class ControllerTaxClassList extends Controller {
 		$prev_page = max(1, $page - 1);
 		$last_page = ceil($tax_class_total_count / $per_page);
 		$next_page = intval(min($page + 1, $last_page));
-		$links = '/tax_class?page=%d&per_page=%d';
+		$links = '/api/tax_class?page=%d&per_page=%d';
 
 		$result = array(
 			'records' => $result_items,

@@ -39,7 +39,7 @@ class ControllerOrderStatusList extends Controller {
 		$prev_page = max(1, $page - 1);
 		$last_page = ceil($order_status_total_count / $per_page);
 		$next_page = intval(min($page + 1, $last_page));
-		$links = '/order_status?page=%d&per_page=%d';
+		$links = '/api/order_status?page=%d&per_page=%d';
 
 		$result = array(
 			'records' => array_values($result_items),

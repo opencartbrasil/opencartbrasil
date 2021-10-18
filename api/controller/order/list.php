@@ -237,7 +237,7 @@ class ControllerOrderList extends Controller {
 		$next_page = intval(min($page + 1, $last_page));
 
 		// URL Page
-		$links = '/orders?page=%d&per_page=%d';
+		$links = '/api/orders?page=%d&per_page=%d';
 
 		if ($filter_status !== null) {
 			$links .= '&filter_status=' . $filter_status;

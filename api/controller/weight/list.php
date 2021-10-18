@@ -54,7 +54,7 @@ class ControllerWeightList extends Controller {
 		$next_page = intval(min($page + 1, $last_page));
 
 		// URL Page
-		$links = '/weight?page=%d&per_page=%d';
+		$links = '/api/weight?page=%d&per_page=%d';
 
 		if ($filter_unit !== null) {
 			$links .= '&filter_unit=' . urlencode($filter_unit);

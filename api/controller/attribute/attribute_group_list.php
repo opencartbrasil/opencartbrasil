@@ -41,7 +41,7 @@ class ControllerAttributeAttributeGroupList extends Controller {
 		$prev_page = max(1, $page - 1);
 		$last_page = ceil($attribute_group_total_count / $per_page);
 		$next_page = intval(min($page + 1, $last_page));
-		$links = '/attribute_group?page=%d&per_page=%d';
+		$links = '/api/attribute_group?page=%d&per_page=%d';
 
 		$result = array(
 			'records' => array_values($result_items),
