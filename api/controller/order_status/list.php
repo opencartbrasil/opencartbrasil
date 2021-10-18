@@ -1,7 +1,7 @@
 <?php
-class ControllerAttributeAttributeGroupList extends Controller {
+class ControllerOrderStatusList extends Controller {
 	public function index() {
-		$this->load->model('catalog/attribute_group');
+		$this->load->model('localisation/order_status');
 
 		// Page
 		if (isset($this->request->get['page'])) {
@@ -22,26 +22,24 @@ class ControllerAttributeAttributeGroupList extends Controller {
 			'limit' => $per_page
 		);
 
-		$attribute_groups = $this->model_catalog_attribute_group->getAttributeGroups($filter_data);
+		$order_status = $this->model_localisation_order_status->getOrderStatuses($filter_data);
 
-		$attribute_group_total_count = $this->model_catalog_attribute_group->getTotalAttributeGroups();
+		$order_status_total_count = $this->model_localisation_order_status->getTotalOrderStatuses();
 
 		$result_items = array();
 
-		foreach ($attribute_groups as $key => $attribute_group) {
-			$attribute_group_description = $this->model_catalog_attribute_group->getAttributeGroupDescriptions($attribute_group['attribute_group_id']);
+		foreach ($order_status as $key => $status) {
+			$order_status_id = $status['order_status_id'];
+			$language_code = $status['language_code'];
 
-			$result_items[] = array(
-				'attribute_group_id' => $attribute_group['attribute_group_id'],
-				'sort_order' => $attribute_group['sort_order'],
-				'name' => $attribute_group_description
-			);
+			$result_items[$order_status_id]['order_status_id'] = $order_status_id;
+			$result_items[$order_status_id]['name'][$language_code] = $status['name'];
 		}
 
 		$prev_page = max(1, $page - 1);
-		$last_page = ceil($attribute_group_total_count / $per_page);
+		$last_page = ceil($order_status_total_count / $per_page);
 		$next_page = intval(min($page + 1, $last_page));
-		$links = '/api/attribute_group?page=%d&per_page=%d';
+		$links = '/api/order_status?page=%d&per_page=%d';
 
 		$result = array(
 			'records' => array_values($result_items),
@@ -49,7 +47,7 @@ class ControllerAttributeAttributeGroupList extends Controller {
 				'page' => intval($page),
 				'per_page' => intval($per_page),
 				'page_count' => count($result_items),
-				'total_count' => intval($attribute_group_total_count),
+				'total_count' => intval($order_status_total_count),
 				'links' => array(
 					'self' => sprintf($links, $page, $per_page),
 					'first' => sprintf($links, 1, $per_page),
@@ -60,7 +58,7 @@ class ControllerAttributeAttributeGroupList extends Controller {
 			)
 		);
 
-		$this->response->addHeader("X-Total-Count: $attribute_group_total_count");
+		$this->response->addHeader("X-Total-Count: $order_status_total_count");
 		$this->response($result);
 	}
 

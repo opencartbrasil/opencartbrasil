@@ -60,7 +60,7 @@ class ControllerLanguageList extends Controller {
 		$next_page = intval(min($page + 1, $last_page));
 
 		// URL Page
-		$links = '/languages?page=%d&per_page=%d';
+		$links = '/api/languages?page=%d&per_page=%d';
 
 		if ($filter_code !== null) {
 			$links .= '&filter_code=' . urlencode($filter_code);

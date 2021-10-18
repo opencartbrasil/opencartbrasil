@@ -57,7 +57,7 @@ class ControllerAttributeAttributeList extends Controller {
 		$next_page = intval(min($page + 1, $last_page));
 
 		// URL Page
-		$links = '/attribute?page=%d&per_page=%d';
+		$links = '/api/attribute?page=%d&per_page=%d';
 
 		if (isset($this->request->get['filter_name'])) {
 			$links .= '&filter_name=' . urlencode($this->request->get['filter_name']);

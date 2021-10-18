@@ -6,7 +6,7 @@ class ModelLocalisationStockStatus extends Model {
 		$result = $this->cache->get($cache_key);
 
 		if (!$result) {
-			$query = $this->db->query("SELECT * FROM " . DB_PREFIX . "stock_status WHERE stock_status_id = '" . $stock_status_id . "'");
+			$query = $this->db->query("SELECT * FROM `" . DB_PREFIX . "stock_status` WHERE stock_status_id = '" . $stock_status_id . "'");
 
 			$result = $query->row;
 
@@ -18,7 +18,7 @@ class ModelLocalisationStockStatus extends Model {
 
 	public function getStockStatuses($data = array()) {
 		$sql = '
-			SELECT ss.*, l.code AS language_code FROM ' . DB_PREFIX . 'stock_status ss
+			SELECT ss.*, l.code AS language_code FROM `' . DB_PREFIX . 'stock_status` ss
 			LEFT JOIN `' . DB_PREFIX . 'language` l ON (l.language_id = ss.language_id)
 		';
 
@@ -40,7 +40,7 @@ class ModelLocalisationStockStatus extends Model {
 	}
 
 	public function getTotalStockStatuses() {
-		$query = $this->db->query('SELECT COUNT(DISTINCT stock_status_id) AS total FROM ' . DB_PREFIX . 'stock_status');
+		$query = $this->db->query('SELECT COUNT(DISTINCT stock_status_id) AS total FROM `' . DB_PREFIX . 'stock_status`');
 
 		return $query->row['total'];
 	}

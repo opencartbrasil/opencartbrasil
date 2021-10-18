@@ -88,7 +88,7 @@ class ControllerCategoryList extends Controller {
 		$next_page = intval(min($page + 1, $last_page));
 
 		// URL Page
-		$links = '/category?page=%d&per_page=%d';
+		$links = '/api/category?page=%d&per_page=%d';
 
 		if ($filter_parent_id !== null) {
 			$links .= '&filter_parent_id=' . $filter_parent_id;

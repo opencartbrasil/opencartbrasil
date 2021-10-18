@@ -46,11 +46,11 @@ class ControllerCredentialsRefreshToken extends Controller {
 		try {
 			$token = $this->model_credentials_token->generateToken($body_decoded->sub, self::REFRESH_EXPIRE);
 
-			$json = [
+			$json = array(
 				'access_token' => (string)$token['jwt'],
 				'token_type' => 'Bearer',
 				'expires_in' => self::REFRESH_EXPIRE - 1
-			];
+			);
 
 			$this->model_credentials_token->addToken($body_decoded->sub, $token['jwt'], $refresh_token);
 
