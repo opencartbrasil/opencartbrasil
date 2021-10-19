@@ -75,7 +75,7 @@ class ControllerStartupLogin extends Controller {
 			)));
 
 			return new Action('status_code/unauthorized');
-		} catch (SignatureInvalidException $ignored) {
+		} catch (SignatureInvalidException | UnexpectedValueException $ignored) {
 			$this->response->setOutput(json_encode(array(
 				'success' => false,
 				'errors' => array(
@@ -86,14 +86,18 @@ class ControllerStartupLogin extends Controller {
 				)
 			)));
 
+			if ($ignored instanceof UnexpectedValueException) {
+				return new Action('status_code/bad_request');
+			}
+
 			return new Action('status_code/unauthorized');
-		} catch (UnexpectedValueException $ignored) {
+		} catch (DomainException $ignored) {
 			$this->response->setOutput(json_encode(array(
 				'success' => false,
 				'errors' => array(
 					array(
-						'code' => 'invalid_access_token',
-						'message' => 'Invalid access_token.'
+						'code' => 'invalid_jwt',
+						'message' => 'The token must be in the JWT pattern.'
 					)
 				)
 			)));
