@@ -29,7 +29,7 @@ paths:
 
 
         **Importante:** Após obter o access_token, utilize-o
-        para consumir os recursos da API.
+        para consumir os recursos da API por meio de Autenticação Bearer.
       operationId: GerarAccessToken
       parameters: []
       x-codeSamples:
@@ -1961,7 +1961,7 @@ paths:
         - Pedidos
       summary: Atualizar histórico
       description: >-
-        Atualiza o histórico e a situação do pedido.
+        Atualiza o histórico e a situação de pedidos cadastrados.
       operationId: AtualizarHistoricoPedido
       security:
         - httpBearer: []
@@ -2345,7 +2345,7 @@ paths:
         - Pedidos
       summary: Listar pedidos
       description: >-
-        Exibe os pedidos cadastrados.
+        Lista os pedidos cadastrados.
       operationId: ListarPedidos
       security:
         - httpBearer: []
