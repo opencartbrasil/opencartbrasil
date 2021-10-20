@@ -35,39 +35,8 @@ class ControllerProductForm extends Controller {
 		}
 
 		// Download main image and additional images
-		$this->downloadImages($data);
-
-		if ($product_id === null) {
-			$result = $this->model_catalog_product->add($data);
-			$product_info = $this->load->controller('product/info/index', $result->id);
-
-			$this->load->controller('product/info/index', $result->id);
-			$this->response->addHeader('HTTP/1.1 ' . self::HTTP_STATUS_201);
-			return;
-		}
-
-		$result = $this->model_catalog_product->update($product_id, $data);
-		$product_info = $this->load->controller('product/info/index', $result->id);
-
-		return $this->load->controller('product/info/index', $result->id);
-	}
-
-	/**
-	 * Download main image and additional images
-	 *
-	 * @param Object $data
-	 *
-	 * @return void
-	 */
-	protected function downloadImages(&$data) {
-		$this->load->model('tool/image');
-
 		try {
-			$data->image = $this->model_tool_image->download($data->image);
-
-			foreach ($data->additional_images as $key => $url) {
-				$data->additional_images[$key] = $this->model_tool_image->download($url);
-			}
+			$this->downloadImages($data);
 		} catch (InvalidArgumentException $e) {
 			return $this->response(
 				array(
@@ -81,6 +50,37 @@ class ControllerProductForm extends Controller {
 			);
 		} catch (RuntimeException $e) {
 			return $this->response(array(), self::HTTP_STATUS_500);
+		}
+
+		if ($product_id === null) {
+			$result = $this->model_catalog_product->add($data);
+			$product_info = $this->load->controller('product/info/index', $result);
+
+			$this->load->controller('product/info/index', $result);
+			$this->response->addHeader('HTTP/1.1 ' . self::HTTP_STATUS_201);
+			return;
+		}
+
+		$result = $this->model_catalog_product->update($product_id, $data);
+		$product_info = $this->load->controller('product/info/index', $result);
+
+		return $this->load->controller('product/info/index', $result);
+	}
+
+	/**
+	 * Download main image and additional images
+	 *
+	 * @param Object $data
+	 *
+	 * @return void
+	 */
+	protected function downloadImages(&$data) {
+		$this->load->model('tool/image');
+
+		$data->image = $this->model_tool_image->download($data->image);
+
+		foreach ($data->additional_images as $key => $url) {
+			$data->additional_images[$key] = $this->model_tool_image->download($url);
 		}
 	}
 

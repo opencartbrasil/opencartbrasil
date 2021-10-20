@@ -56,7 +56,7 @@ class ModelCatalogProduct extends Model {
 
 		$product->id = $product_id;
 
-		return $product;
+		return $product->id;
 	}
 
 	public function update(int $product_id, $product) {
@@ -111,9 +111,7 @@ class ModelCatalogProduct extends Model {
 
 		$this->saveData($product_id, $product);
 
-		$product->id = $product_id;
-
-		return $product;
+		return $product_id;
 	}
 
 	public function updateStock(int $product_id, $product) {

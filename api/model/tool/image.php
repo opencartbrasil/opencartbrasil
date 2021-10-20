@@ -19,7 +19,7 @@ class ModelToolImage extends Model {
 		curl_close($ch);
 		fclose($file_temporary);
 
-		$image_info = getimagesize($filename_temporary);
+		$image_info = @getimagesize($filename_temporary);
 
 		if ($image_info === false) {
 			throw new \InvalidArgumentException('Invalid image', self::ERROR_MIMETYPE);

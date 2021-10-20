@@ -29,7 +29,7 @@ paths:
 
 
         **Importante:** Após obter o access_token, utilize-o
-        para consumir os recursos da API.
+        para consumir os recursos da API por meio de Autenticação Bearer.
       operationId: GerarAccessToken
       parameters: []
       x-codeSamples:
@@ -1317,7 +1317,7 @@ paths:
         - Unidades de peso
       summary: Listar Unidades de peso
       description: >-
-        Lista as Unidades de peso cadastradas.
+        Lista as unidades de peso cadastradas.
       operationId: ListarUnidadePeso
       parameters: []
       responses:
@@ -1342,16 +1342,16 @@ paths:
         - name: filter_parent_id
           in: query
           description: >-
-            Informe 0 para listar as categorias "pai" ou um valor maior que 0
-            para lsitar apenas as categorias "filhas" de uma determinada
-            categoria "pai"
+            Informe 0 para listar os departamentos "pai" ou um valor maior que 0
+            para listar apenas os departamentos "filhos" de um determinado
+            departamento "pai"
           required: false
           schema:
             type: integer
           style: simple
         - name: filter_total_products_eq
           in: query
-          description: Lista categorias que possuam um número exato de produto
+          description: Lista departamentos que possuam um número exato de produtos
           required: false
           style: simple
           schema:
@@ -1362,7 +1362,7 @@ paths:
         - name: filter_total_products_lt
           in: query
           description: >-
-            Lista categorias que possuam um número de produto menor que o
+            Lista departamentos que possuam um número de produtos menor que o
             informado
           required: false
           style: simple
@@ -1371,7 +1371,7 @@ paths:
         - name: filter_total_products_gt
           in: query
           description: >-
-            Lista categorias que possuam um número de produto maior que o
+            Lista departamentos que possuam um número de produtos maior que o
             informado
           required: false
           style: simple
@@ -1459,14 +1459,14 @@ paths:
                       pt-br: |+
                         &lt;p&gt;
 
-                         Exemplo de descrição na categoria &lt;/p&gt;
+                         Exemplo de descrição no departamento &lt;/p&gt;
 
                     meta_title:
                       en-gb: Desktops
                       pt-br: Desktops
                     meta_description:
                       en-gb: Example of category meta description
-                      pt-br: Exemplo de meta descrição na categoria
+                      pt-br: Exemplo de meta descrição no departamento
                     meta_keyword:
                       en-gb: ''
                       pt-br: ''
@@ -1961,7 +1961,7 @@ paths:
         - Pedidos
       summary: Atualizar histórico
       description: >-
-        Atualiza o histórico e a situação do pedido.
+        Atualiza o histórico e a situação de pedidos cadastrados.
       operationId: AtualizarHistoricoPedido
       security:
         - httpBearer: []
@@ -1985,7 +1985,7 @@ paths:
         required: true
       responses:
         '200':
-          description: Pedidos atualizados
+          description: OK
           content:
             application/json:
               example:
@@ -2025,7 +2025,7 @@ paths:
             example: 1307
       responses:
         '200':
-          description: Informações capturadas com sucesso
+          description: OK
           content:
             application/json:
               schema:
@@ -2239,192 +2239,101 @@ paths:
                             comment: ''
                             notify: false
                         description: ''
-                example:
-                  result: true
-                  data:
-                    order_id: 19
-                    invoice_no: '0'
-                    invoice_prefix: FAT
-                    store_name: Sua loja
-                    store_url: https://seudominio/
-                    customer_id: 1
-                    customer_group_id: 1
-                    firstname: Fulano
-                    lastname: de Tal
-                    email: fulano@email.com
-                    telephone: '96 3222-3266'
-                    fax: ''
-                    custom_fields:
-                      cpf: 123.456.789-00
-                    payment:
-                      firstname: Fulano
-                      lastname: de Tal
-                      company: ''
-                      address_1: Rua Principal
-                      address_2: Centro
-                      city: Macapá
-                      postcode: '68900000'
-                      country: Brasil
-                      zone: Amapá
-                      custom_field: []
-                      method: Cash On Delivery
-                    shipping:
-                      firstname: Fulano
-                      lastname: de Tal
-                      company: ''
-                      address_1: Rua Principal
-                      address_2: Centro
-                      city: Macapá
-                      postcode: '68900000'
-                      country: Brasil
-                      zone: Amapá
-                      custom_field: []
-                      method: Flat Shipping Rate
-                    comment: ''
-                    total: 106.00
-                    order_status_id: 3
-                    affiliate_id: 0
-                    commission: 0
-                    marketing_id: 0
-                    tracking: ''
-                    currency_code: BRL
-                    currency_value: 1.00
-                    ip: 192.168.0.1
-                    forwarded_ip: ''
-                    user_agent: Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/94.0.4606.71 Safari/537.36
-                    accept_language: en-US,en;q=0.9,pt;q=0.8
-                    date_added: 2021-10-10T17:03:45+00:00
-                    date_modified: 2021-10-13T18:51:39+00:00
-                    products:
-                    - product_id: 40
-                      name: iPhone
-                      model: Modelo
-                      quantity: 1
-                      price: 101.00
-                      total: 101.00
-                      tax: 0
-                      reward: '0'
-                      sku: ''
-                      ncm: ''
-                      cest: ''
-                      options: []
-                      recurring: []
-                    totals:
-                    - code: sub_total
-                      title: Sub-Total
-                      value: 101.00
-                      sort_order: 1
-                    - code: shipping
-                      title: Flat Shipping Rate
-                      value: 5.00
-                      sort_order: 3
-                    - code: total
-                      title: Total
-                      value: 106.00
-                      sort_order: 9
-                    statuses:
-                    - order_status_id: '3'
-                      date_added: 2021-10-13 18:51:39
-                      comment: ''
-                      notify: '0'
-                    - order_status_id: '3'
-                      date_added: 2021-10-11 20:30:55
-                      comment: ''
-                      notify: '0'
               example:
                 result: true
-                order_id: 19
-                invoice_no: '0'
-                invoice_prefix: FAT
-                store_name: Sua loja
-                store_url: https://seudominio/
-                customer_id: 1
-                customer_group_id: 1
-                firstname: Fulano
-                lastname: de Tal
-                email: fulano@email.com
-                telephone: '96 3222-3266'
-                fax: ''
-                custom_fields:
-                  cpf: 123.456.789-00
-                payment:
+                data:
+                  order_id: 19
+                  invoice_no: '0'
+                  invoice_prefix: FAT
+                  store_name: Sua loja
+                  store_url: https://seudominio/
+                  customer_id: 1
+                  customer_group_id: 1
                   firstname: Fulano
                   lastname: de Tal
-                  company: ''
-                  address_1: Rua Principal
-                  address_2: Centro
-                  city: Macapá
-                  postcode: '68900000'
-                  country: Brasil
-                  zone: Amapá
-                  custom_field: []
-                  method: Cash On Delivery
-                shipping:
-                  firstname: Fulano
-                  lastname: de Tal
-                  company: ''
-                  address_1: Rua Principal
-                  address_2: Centro
-                  city: Macapá
-                  postcode: '68900000'
-                  country: Brasil
-                  zone: Amapá
-                  custom_field: []
-                  method: Flat Shipping Rate
-                comment: ''
-                total: 106.00
-                order_status_id: 3
-                affiliate_id: 0
-                commission: 0
-                marketing_id: 0
-                tracking: ''
-                currency_code: BRL
-                currency_value: 1.00
-                ip: 192.168.0.2
-                forwarded_ip: ''
-                user_agent: Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/94.0.4606.71 Safari/537.36
-                accept_language: en-US,en;q=0.9,pt;q=0.8
-                date_added: 2021-10-10T17:03:45+00:00
-                date_modified: 2021-10-13T18:51:39+00:00
-                products:
-                - product_id: 40
-                  name: iPhone
-                  model: Modelo
-                  quantity: 1
-                  price: 101.00
-                  total: 101.00
-                  tax: 0
-                  reward: '0'
-                  sku: ''
-                  ncm: ''
-                  cest: ''
-                  options: []
-                  recurring: []
-                totals:
-                - code: sub_total
-                  title: Sub-Total
-                  value: 101.00
-                  sort_order: 1
-                - code: shipping
-                  title: Flat Shipping Rate
-                  value: 5.00
-                  sort_order: 3
-                - code: total
-                  title: Total
-                  value: 106.00
-                  sort_order: 9
-                statuses:
-                - order_status_id: '3'
-                  date_added: 2021-10-13 18:51:39
+                  email: fulano@email.com
+                  telephone: '96 3222-3266'
+                  fax: ''
+                  custom_fields:
+                    cpf: 123.456.789-00
+                  payment:
+                    firstname: Fulano
+                    lastname: de Tal
+                    company: ''
+                    address_1: Rua Principal
+                    address_2: Centro
+                    city: Macapá
+                    postcode: '68900000'
+                    country: Brasil
+                    zone: Amapá
+                    custom_field: []
+                    method: Cash On Delivery
+                  shipping:
+                    firstname: Fulano
+                    lastname: de Tal
+                    company: ''
+                    address_1: Rua Principal
+                    address_2: Centro
+                    city: Macapá
+                    postcode: '68900000'
+                    country: Brasil
+                    zone: Amapá
+                    custom_field: []
+                    method: Flat Shipping Rate
                   comment: ''
-                  notify: '0'
-                - order_status_id: '3'
-                  date_added: 2021-10-11 20:30:55
-                  comment: ''
-                  notify: '0'
+                  total: 106.00
+                  order_status_id: 3
+                  affiliate_id: 0
+                  commission: 0
+                  marketing_id: 0
+                  tracking: ''
+                  currency_code: BRL
+                  currency_value: 1.00
+                  ip: 192.168.0.2
+                  forwarded_ip: ''
+                  user_agent: Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/94.0.4606.71 Safari/537.36
+                  accept_language: en-US,en;q=0.9,pt;q=0.8
+                  date_added: 2021-10-10T17:03:45+00:00
+                  date_modified: 2021-10-13T18:51:39+00:00
+                  products:
+                  - product_id: 40
+                    name: iPhone
+                    model: Modelo
+                    quantity: 1
+                    price: 101.00
+                    total: 101.00
+                    tax: 0
+                    reward: '0'
+                    sku: ''
+                    ncm: ''
+                    cest: ''
+                    options: []
+                    recurring: []
+                  totals:
+                  - code: sub_total
+                    title: Sub-Total
+                    value: 101.00
+                    sort_order: 1
+                  - code: shipping
+                    title: Flat Shipping Rate
+                    value: 5.00
+                    sort_order: 3
+                  - code: total
+                    title: Total
+                    value: 106.00
+                    sort_order: 9
+                  statuses:
+                  - order_status_id: '3'
+                    date_added: 2021-10-13 18:51:39
+                    comment: ''
+                    notify: '0'
+                  - order_status_id: '3'
+                    date_added: 2021-10-11 20:30:55
+                    comment: ''
+                    notify: '0'
 
         '404':
-          description: Pedido não encontrado
+          description: Not Found
           content:
             application/json:
               examples:
@@ -2436,13 +2345,13 @@ paths:
         - Pedidos
       summary: Listar pedidos
       description: >-
-        Exibe os pedidos cadastrados.
+        Lista os pedidos cadastrados.
       operationId: ListarPedidos
       security:
         - httpBearer: []
       responses:
         '200':
-          description: Sucesso
+          description: OK
           content:
             application/json:
               schema:
@@ -4723,22 +4632,24 @@ x-tagGroups:
   - name: Credenciais
     tags:
       - Token
-  - name: Produtos
+  - name: Catálogo
     tags:
-      - Produtos
-      - Idiomas
-      - Impostos
-      - Situações de estoque
-      - Unidades de medida
-      - Unidades de peso
       - Departamentos
+      - Produtos
       - Filtros
-      - Grupos de atributos
       - Atributos
+      - Grupos de atributos
+      - Opções
       - Marcas
       - Downloads
-      - Opções
-  - name: Pedidos
+  - name: Vendas
     tags:
       - Pedidos
+  - name: Dados auxiliares
+    tags:
+      - Idiomas
+      - Situações de estoque
       - Situações de pedidos
+      - Impostos
+      - Unidades de medida
+      - Unidades de peso
