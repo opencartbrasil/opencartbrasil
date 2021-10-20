@@ -193,9 +193,9 @@ class ControllerToolUpdate extends Controller {
 
             $lines[] = "// DIR\n";
             $lines[] = "define('DIR_APPLICATION', '" . addslashes($dir_opencart) ."api/');\n";
-            $lines[] = "define('DIR_WEBHOOK', '" . addslashes($dir_opencart) ."webhook/');\n";
             $lines[] = "define('DIR_SYSTEM', '" . addslashes($dir_opencart) ."system/');\n";
             $lines[] = "define('DIR_IMAGE', '" . addslashes($dir_opencart) ."image/');\n";
+            $lines[] = "define('DIR_WEBHOOK', '" . addslashes($dir_opencart) ."webhook/');\n";
             $lines[] = "define('DIR_STORAGE', DIR_SYSTEM . 'storage/');\n";
             $lines[] = "define('DIR_CONFIG', DIR_SYSTEM . 'config/');\n";
             $lines[] = "define('DIR_LOGS', DIR_STORAGE . 'logs/');\n";
@@ -282,21 +282,9 @@ class ControllerToolUpdate extends Controller {
                     $path = DIR_IMAGE . substr($destination, 6);
                 }
 
-                if (substr($destination, 0, 6) == 'webhook') {
-                    $path = DIR_WEBHOOK . substr($destination, 8);
-                }
-
-                if (substr($destination, 0, 6) == 'system') {
-                    $path = DIR_SYSTEM . substr($destination, 7);
-                }
-
-                if (substr($destination, 0, 7) == 'storage') {
-                    $path = DIR_STORAGE . substr($destination, 8);
-                }
-
-                if (is_dir($file) && !is_dir($path)) {
-                    if (!mkdir($path, 0777)) {
-                        $json['error'] = sprintf($this->language->get('error_directory'), $destination);
+                if (defined('DIR_WEBHOOK')) {
+                    if (substr($destination, 0, 6) == 'webhook') {
+                        $path = DIR_WEBHOOK . substr($destination, 8);
                     }
                 }
 
