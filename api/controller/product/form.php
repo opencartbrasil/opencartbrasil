@@ -35,7 +35,22 @@ class ControllerProductForm extends Controller {
 		}
 
 		// Download main image and additional images
-		$this->downloadImages($data);
+		try {
+			$this->downloadImages($data);
+		} catch (InvalidArgumentException $e) {
+			return $this->response(
+				array(
+					'result' => false,
+					'details' => 'Error downloading image files',
+					'errors' => array(
+						$e->getMessage()
+					)
+				),
+				self::HTTP_STATUS_400
+			);
+		} catch (RuntimeException $e) {
+			return $this->response(array(), self::HTTP_STATUS_500);
+		}
 
 		if ($product_id === null) {
 			$result = $this->model_catalog_product->add($data);
@@ -62,25 +77,10 @@ class ControllerProductForm extends Controller {
 	protected function downloadImages(&$data) {
 		$this->load->model('tool/image');
 
-		try {
-			$data->image = $this->model_tool_image->download($data->image);
+		$data->image = $this->model_tool_image->download($data->image);
 
-			foreach ($data->additional_images as $key => $url) {
-				$data->additional_images[$key] = $this->model_tool_image->download($url);
-			}
-		} catch (InvalidArgumentException $e) {
-			return $this->response(
-				array(
-					'result' => false,
-					'details' => 'Error downloading image files',
-					'errors' => array(
-						$e->getMessage()
-					)
-				),
-				self::HTTP_STATUS_400
-			);
-		} catch (RuntimeException $e) {
-			return $this->response(array(), self::HTTP_STATUS_500);
+		foreach ($data->additional_images as $key => $url) {
+			$data->additional_images[$key] = $this->model_tool_image->download($url);
 		}
 	}
 
