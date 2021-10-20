@@ -5,7 +5,6 @@ $_['heading_title']       = 'Log de erros API REST';
 // Text
 $_['text_success']        = 'Seu log de erros API REST foi completamente apagado!';
 $_['text_list']           = 'Listando os erros';
-$_['text_file_not_found'] = 'Arquivo com log de erros não encontrado!';
 
 // Entry
 $_['entry_date']          = 'Data';

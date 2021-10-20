@@ -1,5 +1,5 @@
 <?php
-class ModelWebHookAdvancedWebHook extends Model {
+class ModelWebhookAdvancedWebhook extends Model {
 	public function getHooks($action) {
 		$query = $this->db->query("SELECT `webhook_client_id`, `url`, CONCAT(`auth_user`, ':', `auth_password`) AS `auth`, `headers` FROM `" . DB_PREFIX . "webhook_client` WHERE `actions` LIKE '%" . $this->db->escape($action) . "%' AND `status` = 1");
 

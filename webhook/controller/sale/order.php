@@ -1,7 +1,7 @@
 <?php
-class ControllerWebHookSaleOrder extends Controller {
+class ControllerWebhookSaleOrder extends Controller {
 	public function add($router, $args, $order_id) {
-		$this->load->modelWebHook('advanced/webhook');
+		$this->load->modelWebhook('advanced/webhook');
 
 		$hooks = $this->model_webhook_advanced_webhook->getHooks('order_add');
 
@@ -16,7 +16,7 @@ class ControllerWebHookSaleOrder extends Controller {
 	public function edit($router, $args) {
 		$order_id = $args[0];
 
-		$this->load->modelWebHook('advanced/webhook');
+		$this->load->modelWebhook('advanced/webhook');
 
 		$hooks = $this->model_webhook_advanced_webhook->getHooks('order_edit');
 
@@ -31,7 +31,7 @@ class ControllerWebHookSaleOrder extends Controller {
 	public function addOrderHistory($router, $args) {
 		$order_id = $args[0];
 
-		$this->load->modelWebHook('advanced/webhook');
+		$this->load->modelWebhook('advanced/webhook');
 
 		$hooks = $this->model_webhook_advanced_webhook->getHooks('order_edit');
 

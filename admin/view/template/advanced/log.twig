@@ -56,24 +56,23 @@
       </div>
     </div>
   </div>
+  <script type="text/javascript">
+    $('#button-filter').click(function() {
+      let url = '{{ filter_url }}'.replace('&amp;', '&');
+
+      const filter_date = $('#input-filter-date').val();
+
+      if (filter_date) {
+        url += '&filter_date=' + filter_date;
+      }
+
+      location.href = url;
+    });
+
+    $('.date').datetimepicker({
+      language: '{{ datepicker }}',
+      pickTime: false
+    });
+  </script>
 </div>
-<script type="text/javascript"><!--
-  $('#button-filter').click(function() {
-    let url = '{{ filter_url }}'.replace('&amp;', '&');
-
-    const filter_date = $('#input-filter-date').val();
-
-    if (filter_date) {
-      url += '&filter_date=' + filter_date;
-    }
-
-    location.href = url;
-  });
-//--></script>
-<script type="text/javascript"><!--
-  $('.date').datetimepicker({
-	  language: '{{ datepicker }}',
-	  pickTime: false
-  });
-//--></script>
 {{ footer }}

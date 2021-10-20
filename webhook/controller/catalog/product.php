@@ -1,7 +1,7 @@
 <?php
-class ControllerWebHookCatalogProduct extends Controller {
+class ControllerWebhookCatalogProduct extends Controller {
 	public function add($router, $args, $product_id) {
-		$this->load->modelWebHook('advanced/webhook');
+		$this->load->modelWebhook('advanced/webhook');
 
 		$hooks = $this->model_webhook_advanced_webhook->getHooks('product_add');
 
@@ -14,9 +14,7 @@ class ControllerWebHookCatalogProduct extends Controller {
 	}
 
 	public function copy($router, $args, $output) {
-		$product_id = $args[0];
-
-		$this->load->modelWebHook('advanced/webhook');
+		$this->load->modelWebhook('advanced/webhook');
 
 		$hooks = $this->model_webhook_advanced_webhook->getHooks('product_add');
 
@@ -31,7 +29,7 @@ class ControllerWebHookCatalogProduct extends Controller {
 	public function edit($router, $args) {
 		$product_id = $args[0];
 
-		$this->load->modelWebHook('advanced/webhook');
+		$this->load->modelWebhook('advanced/webhook');
 
 		$hooks = $this->model_webhook_advanced_webhook->getHooks('product_edit');
 
@@ -46,7 +44,7 @@ class ControllerWebHookCatalogProduct extends Controller {
 	public function delete($router, $args) {
 		$product_id = $args[0];
 
-		$this->load->modelWebHook('advanced/webhook');
+		$this->load->modelWebhook('advanced/webhook');
 
 		$hooks = $this->model_webhook_advanced_webhook->getHooks('product_delete');
 
@@ -76,7 +74,7 @@ class ControllerWebHookCatalogProduct extends Controller {
 			return false;
 		}
 
-		$this->load->modelWebHook('advanced/webhook');
+		$this->load->modelWebhook('advanced/webhook');
 
 		$hooks = $this->model_webhook_advanced_webhook->getHooks('product_edit');
 
