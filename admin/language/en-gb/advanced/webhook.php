@@ -7,7 +7,8 @@ $_['text_list']               = 'List';
 $_['text_form']               = 'Form';
 $_['text_data']               = 'Data';
 $_['text_history']            = 'History';
-$_['text_product']            = 'Product';
+$_['text_product']            = 'Products';
+$_['text_order']              = 'Orders';
 $_['text_request_id']         = 'Request #';
 $_['text_request']            = 'Request';
 $_['text_response']           = 'Response';
@@ -48,6 +49,6 @@ $_['entry_headers_example']   = 'E.g.: Content-Type: application/json';
 $_['entry_actions']           = 'Triggers';
 
 //Error
-$_['error_permission']        = 'Warning! You do not have permission to create or edit webhooks.';
-$_['error_url']               = 'Invalid URL';
-$_['error_description']       = 'Description must be between 2 and 256 characters.';
+$_['error_permission']        = 'Warning! You do not have permission to create or edit webhooks!';
+$_['error_url']               = 'Invalid URL!';
+$_['error_description']       = 'Description must be between 2 and 256 characters!';

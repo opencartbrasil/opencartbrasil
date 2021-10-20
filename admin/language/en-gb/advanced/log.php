@@ -5,7 +5,6 @@ $_['heading_title']       = 'Error Log API REST';
 // Text
 $_['text_success']        = 'Success: You have successfully cleared your error log API REST!';
 $_['text_list']           = 'Errors List';
-$_['text_file_not_found'] = 'File Error Log not found!';
 
 // Entry
 $_['entry_date']          = 'Date';

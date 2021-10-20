@@ -208,37 +208,37 @@
       </div>
     </div>
   </div>
-</div>
-<script>
-if (location.hash) {
-  $(`[href="${document.location.hash}"]`).tab('show')
-}
-
-function addHeader() {
-  $('#list-headers tbody').append(`<tr>
-    <td class="text-left"><input type="text" name="headers[]" class="form-control" value="" placeholder="{{ entry_headers_example }}" /></td>
-    <td class="text-right">
-      <button type="button" class="btn btn-danger" onclick="$(this).parents('tr').remove()"><i class="fa fa-trash"></i> {{ button_remove }}</button>
-    </td>
-  </tr>`);
-}
-
-function webHookRequestInfo(webhook_request_history_id, el) {
-  $(el).button('loading')
-
-  $.ajax({
-    url: `{{ webhook_request_history_info }}&webhook_request_history_id=${webhook_request_history_id}`.replace(/&amp;/g, '&'),
-    method: 'GET',
-    success: function(result) {
-      $('#modal-webhook-request-info .modal-header h4').text(`{{ text_request_id }}${webhook_request_history_id}`)
-      $('#modal-webhook-request-info #sec-request code').text(result.request)
-      $('#modal-webhook-request-info #sec-response code').text(result.response)
-      $('#modal-webhook-request-info').modal('show')
-    },
-    complete: function() {
-      $(el).button('reset')
+  <script type="text/javascript">
+    if (location.hash) {
+      $(`[href="${document.location.hash}"]`).tab('show');
     }
-  })
-}
-</script>
+
+    function addHeader() {
+      $('#list-headers tbody').append(`<tr>
+        <td class="text-left"><input type="text" name="headers[]" class="form-control" value="" placeholder="{{ entry_headers_example }}" /></td>
+        <td class="text-right">
+          <button type="button" class="btn btn-danger" onclick="$(this).parents('tr').remove()"><i class="fa fa-trash"></i> {{ button_remove }}</button>
+        </td>
+      </tr>`);
+    }
+
+    function webHookRequestInfo(webhook_request_history_id, el) {
+      $(el).button('loading');
+
+      $.ajax({
+        url: `{{ webhook_request_history_info }}&webhook_request_history_id=${webhook_request_history_id}`.replace(/&amp;/g, '&'),
+        method: 'GET',
+        success: function(result) {
+          $('#modal-webhook-request-info .modal-header h4').text(`{{ text_request_id }}${webhook_request_history_id}`);
+          $('#modal-webhook-request-info #sec-request code').text(result.request);
+          $('#modal-webhook-request-info #sec-response code').text(result.response);
+          $('#modal-webhook-request-info').modal('show');
+        },
+        complete: function() {
+          $(el).button('reset');
+        }
+      });
+    }
+  </script>
+</div>
 {{ footer }}

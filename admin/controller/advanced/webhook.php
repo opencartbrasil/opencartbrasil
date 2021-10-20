@@ -1,5 +1,4 @@
 <?php
-
 class ControllerAdvancedWebHook extends Controller {
 	private $error = array();
 

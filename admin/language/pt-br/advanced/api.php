@@ -8,10 +8,10 @@ $_['text_list']               = 'Listagem';
 $_['text_form']               = 'Formulário';
 $_['text_general']            = 'Geral';
 $_['text_access']             = 'Acessos';
-$_['text_add_keys']           = 'Adicionar chaves';
-$_['text_edit_keys']          = 'Editar chaves';
-$_['text_type_login']         = 'Gerou um token de acesso';
-$_['text_type_refresh_token'] = 'Atualizou o token de acesso';
+$_['text_add_keys']           = 'Adicionar';
+$_['text_edit_keys']          = 'Editar';
+$_['text_type_login']         = 'Gerou access_token';
+$_['text_type_refresh_token'] = 'Utilizou refresh_token';
 
 // Column
 $_['column_description']      = 'Descrição';
@@ -24,10 +24,10 @@ $_['column_type']             = 'Descrição';
 $_['column_action']           = 'Ação';
 
 // Button
-$_['button_add']              = 'Gerar novas chaves';
-$_['button_delete']           = 'Remover chaves selecionadas';
-$_['button_cancel']           = 'Voltar';
-$_['button_logs']             = 'Ver logs';
+$_['button_add']              = 'Cadastrar';
+$_['button_delete']           = 'Excluir';
+$_['button_cancel']           = 'Cancelar';
+$_['button_logs']             = 'Logs';
 $_['button_edit']             = 'Editar';
 $_['button_disable']          = 'Desabilitar';
 
@@ -39,8 +39,8 @@ $_['entry_permissions']       = 'Permissões';
 $_['entry_status']            = 'Situação';
 
 // Error
-$_['error_permission']        = 'Atenção: Você não tem permissão para modificar API REST!';
+$_['error_permission']        = 'Atenção: Você não tem permissão para modificar a API REST!';
 $_['error_description']       = 'A descrição deve ter entre 3 e 255 caracteres!';
-$_['error_consumer_key']      = 'A chave deve ter entre 7 e 67 caracteres e deve começar com "ck_"!';
-$_['error_consumer_secret']   = 'A chave secreta deve ter entre 7 e 67 caracteres e deve começar com "cs_"!';
-$_['error_consumer_exist']    = 'As chaves informadas já foram cadastrado!';
+$_['error_consumer_key']      = 'A Consumer Key deve ter entre 7 e 67 caracteres e deve começar com "ck_"!';
+$_['error_consumer_secret']   = 'A Consumer Secret deve ter entre 7 e 67 caracteres e deve começar com "cs_"!';
+$_['error_consumer_exist']    = 'As chaves informadas já foram cadastradas!';

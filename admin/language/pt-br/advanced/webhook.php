@@ -7,7 +7,8 @@ $_['text_list']               = 'Listagem';
 $_['text_form']               = 'Formulário';
 $_['text_data']               = 'Dados';
 $_['text_history']            = 'Histórico';
-$_['text_product']            = 'Produto';
+$_['text_product']            = 'Produtos';
+$_['text_order']              = 'Pedidos';
 $_['text_request_id']         = 'Requisição #';
 $_['text_request']            = 'Requisição';
 $_['text_response']           = 'Resposta';
@@ -48,6 +49,6 @@ $_['entry_headers_example']   = 'Ex.: Content-Type: application/json';
 $_['entry_actions']           = 'Gatilhos';
 
 //Error
-$_['error_permission']        = 'Atenção. Você não tem permissão para criar ou editar webhooks.';
-$_['error_url']               = 'URL inválida';
-$_['error_description']       = 'A descrição deve ter entre 2 e 256 caracteres';
+$_['error_permission']        = 'Atenção. Você não tem permissão para criar ou editar os webhooks!';
+$_['error_url']               = 'URL inválida!';
+$_['error_description']       = 'A descrição deve ter entre 2 e 256 caracteres!';

@@ -1,5 +1,4 @@
 <?php
-
 class ControllerAdvancedApi extends Controller {
 	private $error = array();
 
