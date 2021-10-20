@@ -288,6 +288,20 @@ class ControllerToolUpdate extends Controller {
                     }
                 }
 
+                if (substr($destination, 0, 6) == 'system') {
+                    $path = DIR_SYSTEM . substr($destination, 7);
+                }
+
+                if (substr($destination, 0, 7) == 'storage') {
+                    $path = DIR_STORAGE . substr($destination, 8);
+                }
+
+                if (is_dir($file) && !is_dir($path)) {
+                    if (!mkdir($path, 0777)) {
+                        $json['error'] = sprintf($this->language->get('error_directory'), $destination);
+                    }
+                }
+
                 if (is_file($file)) {
                     if (!rename($file, $path)) {
                         $json['error'] = sprintf($this->language->get('error_file'), $destination);
