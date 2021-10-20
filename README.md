@@ -23,6 +23,10 @@
 
 <img src="./.github/IMAGES/03.jpg">
 
+### Documentação da API REST:
+
+<img src="./.github/IMAGES/04.jpg">
+
 ## Apresentação
 
 O projeto OpenCart Brasil é um fork do OpenCart 3, que tem o objetivo de oferecer uma versão do OpenCart otimizada, atualizada e segura, com foco especial no mercado brasileiro, sempre compatível com a última versão estável do OpenCart, e mantendo a licença GPLv3 para garantir que **o projeto OpenCart Brasil é livre e sempre será**.
