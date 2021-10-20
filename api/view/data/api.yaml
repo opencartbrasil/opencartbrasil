@@ -1318,7 +1318,7 @@ paths:
       summary: Listar Unidades de peso
       description: >-
         Lista as unidades de peso cadastradas.
-      operationId: ListarUnidadePeso
+      operationId: ListarUnidadesPeso
       parameters: []
       responses:
         '200':
@@ -1326,7 +1326,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ListarUnidadePesoSucesso'
+                $ref: '#/components/schemas/ListarUnidadesPesoSucesso'
       deprecated: false
       security:
         - httpBearer: []
@@ -4241,8 +4241,8 @@ components:
           type: string
         pt-br:
           type: string
-    ListarUnidadePesoSucesso:
-      title: ListarUnidadePesoSucesso
+    ListarUnidadesPesoSucesso:
+      title: ListarUnidadesPesoSucesso
       required:
         - records
         - _metadata
