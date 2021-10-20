@@ -23,6 +23,10 @@
 
 <img src="./.github/IMAGES/03.jpg">
 
+### Documentação da API REST:
+
+<img src="./.github/IMAGES/04.jpg">
+
 ## Apresentação
 
 O projeto OpenCart Brasil é um fork do OpenCart 3, que tem o objetivo de oferecer uma versão do OpenCart otimizada, atualizada e segura, com foco especial no mercado brasileiro, sempre compatível com a última versão estável do OpenCart, e mantendo a licença GPLv3 para garantir que **o projeto OpenCart Brasil é livre e sempre será**.
@@ -108,14 +112,16 @@ Após executar os procedimentos, acesse a administração da loja e vá no menu 
 - [x] Melhorias na criptografia das senhas dos clientes.
 - [x] Melhorias na redefinição de senha do cliente na loja.
 - [x] Melhorias ao criar pastas e enviar imagens através do gerenciador de arquivos.
+- [x] API REST para gestão de produtos, atualização do histórico de pedidos e listagem de dados.
+- [x] Webhook para notificar aplicações externas por meio de HTTP sobre atualizações nos produtos e pedidos.
 
 ### Tarefas em andamento:
 
-- [ ] API REST para inclusão de produtos, clientes, pedidos, etc.
+- [ ] Marketplace Brasil de extensões.
 
 ### Próximas tarefas:
 
-- [ ] Webhook que enviará notificações para aplicações externas.
+- [ ] Suporte intermediário para LGPD.
 
 ## Requisitos
 

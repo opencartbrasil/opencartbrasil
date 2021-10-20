@@ -6,6 +6,34 @@ e utiliza [Semantic Versioning](https://semver.org/lang/pt-BR/spec/v2.0.0.html).
 
 ## [Não lançada]
 
+## [1.7.0] (Data de lançamento: 21.10.2021)
+### Corrigido
+
+- Correção na tradução do checkout
+- Correção na tradução dos relatórios
+- Correção no log de modificações OCMOD
+- Correção non-canonical URLs no sitemap
+- Correção no cálculo de impostos no frete
+- Correção na biblioteca de envio por SMTP
+- Correção no filtro por data dos relatórios
+- Correção na tradução en-gb do security.php
+- Correção na validação do pontos por produtos
+- Correção ao refazer compra de produto com anexo
+- Correção na tentativa de login com IPs diferentes
+- Correção no vinculo das assinaturas com o produto
+- Correção para retorno null nos módulos de produtos
+- Correção no common.js para exibir e ocultar o popover
+- Correção na exibição da entrega e fatura com múltiplos pedidos
+- Correção no campo com limite de tentativas de login na administração
+- Correção na extensão depagamento PayPal Express para ser compatível com PHP 7.4
+
+### Modificado
+- Suporte básico para RTL no admin
+
+### Adicionado
+- API REST com documentação
+- Webhook de produtos e pedidos
+
 ## [1.6.1] (Data de lançamento: 30.06.2021)
 ### Corrigido
 - Correção na tradução da página de atualização do OpenCart Brasil
@@ -680,7 +708,8 @@ e utiliza [Semantic Versioning](https://semver.org/lang/pt-BR/spec/v2.0.0.html).
 - Cupons de descontos para demonstração.
 - Moedas: Euro e Libra esterlina.
 
-[Não lançada]: https://github.com/opencartbrasil/opencartbrasil/compare/v1.6.1...HEAD
+[Não lançada]: https://github.com/opencartbrasil/opencartbrasil/compare/v1.7.0...HEAD
+[1.7.0]: https://github.com/opencartbrasil/opencartbrasil/compare/v1.6.1...v1.7.0
 [1.6.1]: https://github.com/opencartbrasil/opencartbrasil/compare/v1.6.0...v1.6.1
 [1.6.0]: https://github.com/opencartbrasil/opencartbrasil/compare/v1.5.1...v1.6.0
 [1.5.1]: https://github.com/opencartbrasil/opencartbrasil/compare/v1.5.0...v1.5.1
