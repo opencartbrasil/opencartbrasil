@@ -54,17 +54,17 @@ class ControllerProductForm extends Controller {
 
 		if ($product_id === null) {
 			$result = $this->model_catalog_product->add($data);
-			$product_info = $this->load->controller('product/info/index', $result->id);
+			$product_info = $this->load->controller('product/info/index', $result);
 
-			$this->load->controller('product/info/index', $result->id);
+			$this->load->controller('product/info/index', $result);
 			$this->response->addHeader('HTTP/1.1 ' . self::HTTP_STATUS_201);
 			return;
 		}
 
 		$result = $this->model_catalog_product->update($product_id, $data);
-		$product_info = $this->load->controller('product/info/index', $result->id);
+		$product_info = $this->load->controller('product/info/index', $result);
 
-		return $this->load->controller('product/info/index', $result->id);
+		return $this->load->controller('product/info/index', $result);
 	}
 
 	/**

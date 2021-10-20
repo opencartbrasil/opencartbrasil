@@ -88,6 +88,9 @@ $_['action_webhook']           = array(
 	'model/catalog/product/update/after' => array(
 		'catalog/product/edit'
 	),
+	'model/catalog/product/updateStock/after' => array(
+		'catalog/product/edit'
+	),
 	'model/catalog/product/deleteProduct/after' => array(
 		'catalog/product/delete'
 	),
