@@ -193,9 +193,9 @@ class ControllerToolUpdate extends Controller {
 
             $lines[] = "// DIR\n";
             $lines[] = "define('DIR_APPLICATION', '" . addslashes($dir_opencart) ."api/');\n";
-            $lines[] = "define('DIR_WEBHOOK', '" . addslashes($dir_opencart) ."webhook/');\n";
             $lines[] = "define('DIR_SYSTEM', '" . addslashes($dir_opencart) ."system/');\n";
             $lines[] = "define('DIR_IMAGE', '" . addslashes($dir_opencart) ."image/');\n";
+            $lines[] = "define('DIR_WEBHOOK', '" . addslashes($dir_opencart) ."webhook/');\n";
             $lines[] = "define('DIR_STORAGE', DIR_SYSTEM . 'storage/');\n";
             $lines[] = "define('DIR_CONFIG', DIR_SYSTEM . 'config/');\n";
             $lines[] = "define('DIR_LOGS', DIR_STORAGE . 'logs/');\n";
@@ -282,8 +282,10 @@ class ControllerToolUpdate extends Controller {
                     $path = DIR_IMAGE . substr($destination, 6);
                 }
 
-                if (substr($destination, 0, 6) == 'webhook') {
-                    $path = DIR_WEBHOOK . substr($destination, 8);
+                if (defined('DIR_WEBHOOK')) {
+                    if (substr($destination, 0, 6) == 'webhook') {
+                        $path = DIR_WEBHOOK . substr($destination, 8);
+                    }
                 }
 
                 if (substr($destination, 0, 6) == 'system') {

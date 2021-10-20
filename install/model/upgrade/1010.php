@@ -125,9 +125,9 @@ class ModelUpgrade1010 extends Model {
 
 			$lines[] = "// DIR\n";
 			$lines[] = "define('DIR_APPLICATION', '" . addslashes(DIR_OPENCART) ."api/');\n";
-			$lines[] = "define('DIR_WEBHOOK', '" . addslashes(DIR_OPENCART) ."webhook/');\n";
 			$lines[] = "define('DIR_SYSTEM', '" . addslashes(DIR_OPENCART) ."system/');\n";
 			$lines[] = "define('DIR_IMAGE', '" . addslashes(DIR_OPENCART) ."image/');\n";
+			$lines[] = "define('DIR_WEBHOOK', '" . addslashes(DIR_OPENCART) ."webhook/');\n";
 			$lines[] = "define('DIR_STORAGE', DIR_SYSTEM . 'storage/');\n";
 			$lines[] = "define('DIR_CONFIG', DIR_SYSTEM . 'config/');\n";
 			$lines[] = "define('DIR_LOGS', DIR_STORAGE . 'logs/');\n";
