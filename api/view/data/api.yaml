@@ -1317,7 +1317,7 @@ paths:
         - Unidades de peso
       summary: Listar Unidades de peso
       description: >-
-        Lista as Unidades de peso cadastradas.
+        Lista as unidades de peso cadastradas.
       operationId: ListarUnidadePeso
       parameters: []
       responses:
@@ -1342,16 +1342,16 @@ paths:
         - name: filter_parent_id
           in: query
           description: >-
-            Informe 0 para listar as categorias "pai" ou um valor maior que 0
-            para lsitar apenas as categorias "filhas" de uma determinada
-            categoria "pai"
+            Informe 0 para listar os departamentos "pai" ou um valor maior que 0
+            para listar apenas os departamentos "filhos" de um determinado
+            departamento "pai"
           required: false
           schema:
             type: integer
           style: simple
         - name: filter_total_products_eq
           in: query
-          description: Lista categorias que possuam um número exato de produto
+          description: Lista departamentos que possuam um número exato de produtos
           required: false
           style: simple
           schema:
@@ -1362,7 +1362,7 @@ paths:
         - name: filter_total_products_lt
           in: query
           description: >-
-            Lista categorias que possuam um número de produto menor que o
+            Lista departamentos que possuam um número de produtos menor que o
             informado
           required: false
           style: simple
@@ -1371,7 +1371,7 @@ paths:
         - name: filter_total_products_gt
           in: query
           description: >-
-            Lista categorias que possuam um número de produto maior que o
+            Lista departamentos que possuam um número de produtos maior que o
             informado
           required: false
           style: simple
@@ -1459,14 +1459,14 @@ paths:
                       pt-br: |+
                         &lt;p&gt;
 
-                         Exemplo de descrição na categoria &lt;/p&gt;
+                         Exemplo de descrição no departamento &lt;/p&gt;
 
                     meta_title:
                       en-gb: Desktops
                       pt-br: Desktops
                     meta_description:
                       en-gb: Example of category meta description
-                      pt-br: Exemplo de meta descrição na categoria
+                      pt-br: Exemplo de meta descrição no departamento
                     meta_keyword:
                       en-gb: ''
                       pt-br: ''
