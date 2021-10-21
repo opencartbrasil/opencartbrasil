@@ -41,6 +41,7 @@ Para acessar uma demonstração online do OpenCart Brasil e visualizar a loja em
 
 ## Diferenciais
 
+- **API REST e Webhook**.
 - Bootstrap 3.3.7 atualizado.
 - Suporte para tarefas agendadas.
 - Sistema de afiliados 100% funcional.
