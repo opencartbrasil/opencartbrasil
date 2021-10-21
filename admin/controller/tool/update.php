@@ -179,6 +179,10 @@ class ControllerToolUpdate extends Controller {
 
         $file_api_config = $dir_opencart . "api/config.php";
 
+        if (!defined('DIR_WEBHOOK')) {
+            define('DIR_WEBHOOK', addslashes($dir_opencart) . 'webhook/');
+        }
+
         if (!file_exists($file_api_config)) {
             $lines = array();
 
@@ -282,10 +286,8 @@ class ControllerToolUpdate extends Controller {
                     $path = DIR_IMAGE . substr($destination, 6);
                 }
 
-                if (defined('DIR_WEBHOOK')) {
-                    if (substr($destination, 0, 6) == 'webhook') {
-                        $path = DIR_WEBHOOK . substr($destination, 8);
-                    }
+                if (substr($destination, 0, 6) == 'webhook') {
+                    $path = DIR_WEBHOOK . substr($destination, 8);
                 }
 
                 if (substr($destination, 0, 6) == 'system') {
