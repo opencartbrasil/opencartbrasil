@@ -798,7 +798,7 @@ class ControllerToolUpdate extends Controller {
     }
 
     private function define_webhook() {
-        $dir_opencart = str_replace("admin/", "", DIR_APPLICATION);
+        $dir_opencart = $this->dir_opencart();
 
         $files = glob($dir_opencart . '{config.php,admin/config.php}', GLOB_BRACE);
 
@@ -822,7 +822,7 @@ class ControllerToolUpdate extends Controller {
     }
 
     private function create_api_config() {
-        $dir_opencart = str_replace("admin/", "", DIR_APPLICATION);
+        $dir_opencart = $this->dir_opencart();
 
         $file_api_config = $dir_opencart . "api/config.php";
 
@@ -865,5 +865,11 @@ class ControllerToolUpdate extends Controller {
             fwrite($handler, implode('', $lines));
             fclose($handler);
         }
+    }
+
+    private function dir_opencart() {
+        $dir = str_replace('\\', '/', realpath(dirname(__FILE__))) . '/';
+
+        return str_replace('\\', '/', realpath($dir . '../../')) . '/';
     }
 }
