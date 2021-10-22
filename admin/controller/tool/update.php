@@ -826,7 +826,6 @@ class ControllerToolUpdate extends Controller {
 
         $file_api_config = $dir_opencart . "api/config.php";
 
-        // Create API config.php
         if (!file_exists($file_api_config)) {
             $lines = array();
 
@@ -870,6 +869,6 @@ class ControllerToolUpdate extends Controller {
     private function dir_opencart() {
         $dir = str_replace('\\', '/', realpath(dirname(__FILE__))) . '/';
 
-        return str_replace('\\', '/', realpath($dir . '../../')) . '/';
+        return str_replace('\\', '/', realpath($dir . '../../../')) . '/';
     }
 }
