@@ -17,7 +17,7 @@ e utiliza [Semantic Versioning](https://semver.org/lang/pt-BR/spec/v2.0.0.html).
 - Correção na biblioteca de envio por SMTP
 - Correção no filtro por data dos relatórios
 - Correção na tradução en-gb do security.php
-- Correção na validação do pontos por produtos
+- Correção na validação dos pontos por produtos
 - Correção ao refazer compra de produto com anexo
 - Correção na tentativa de login com IPs diferentes
 - Correção no vinculo das assinaturas com o produto
