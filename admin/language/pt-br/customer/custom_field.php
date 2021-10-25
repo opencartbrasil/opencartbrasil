@@ -34,6 +34,7 @@ $_['column_action']        = 'Ação';
 
 // Entry
 $_['entry_name']           = 'Nome do campo';
+$_['entry_code']           = 'Código';
 $_['entry_location']       = 'Localização do campo';
 $_['entry_type']           = 'Tipo de campo';
 $_['entry_value']          = 'Valor padrão';
@@ -45,6 +46,7 @@ $_['entry_status']         = 'Situação';
 $_['entry_sort_order']     = 'Posição';
 
 // Help
+$_['help_code']            = 'Utilizado para identificação na API.';
 $_['help_regex']           = 'Exemplo de regex: /[a-zA-Z0-9_-]/';
 $_['help_sort_order']      = 'Posição do campo no cadastro. Use o sinal de menos para contar para trás a partir do último campo no conjunto';
 
