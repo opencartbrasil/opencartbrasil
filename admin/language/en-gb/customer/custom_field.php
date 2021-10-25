@@ -34,7 +34,7 @@ $_['column_action']        = 'Action';
 
 // Entry
 $_['entry_name']           = 'Custom Field Name';
-$_['entry_code']           = 'Code';
+$_['entry_code']           = 'Code in API';
 $_['entry_location']       = 'Location';
 $_['entry_type']           = 'Type';
 $_['entry_value']          = 'Value';
@@ -46,7 +46,7 @@ $_['entry_status']         = 'Status';
 $_['entry_sort_order']     = 'Sort Order';
 
 // Help
-$_['help_code']            = 'Used for identification in API.';
+$_['help_code']            = 'Use for identification in API.';
 $_['help_regex']           = 'Use regex. E.g: /[a-zA-Z0-9_-]/';
 $_['help_sort_order']      = 'Use minus to count backwards from the last field in the set.';
 
