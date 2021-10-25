@@ -301,12 +301,6 @@ class ControllerCustomerCustomField extends Controller {
 			$data['error_name'] = array();
 		}
 
-		if (isset($this->error['code'])) {
-			$data['error_code'] = $this->error['code'];
-		} else {
-			$data['error_code'] = false;
-		}
-
 		if (isset($this->error['custom_field_value'])) {
 			$data['error_custom_field_value'] = $this->error['custom_field_value'];
 		} else {
@@ -487,10 +481,6 @@ class ControllerCustomerCustomField extends Controller {
 			if ((utf8_strlen($value['name']) < 1) || (utf8_strlen($value['name']) > 128)) {
 				$this->error['name'][$language_id] = $this->language->get('error_name');
 			}
-		}
-
-		if (utf8_strlen(trim($this->request->post['code'])) === 0) {
-			$this->error['code'] = $this->language->get('error_code');
 		}
 
 		if (($this->request->post['type'] == 'select' || $this->request->post['type'] == 'radio' || $this->request->post['type'] == 'checkbox')) {
