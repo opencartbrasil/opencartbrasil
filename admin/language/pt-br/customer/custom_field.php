@@ -34,7 +34,7 @@ $_['column_action']        = 'Ação';
 
 // Entry
 $_['entry_name']           = 'Nome do campo';
-$_['entry_code']           = 'Código';
+$_['entry_code']           = 'Código na API';
 $_['entry_location']       = 'Localização do campo';
 $_['entry_type']           = 'Tipo de campo';
 $_['entry_value']          = 'Valor padrão';
