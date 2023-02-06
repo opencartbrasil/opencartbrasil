@@ -231,21 +231,21 @@
 </div>
 <script type="text/javascript"><!--
   // Sort the custom fields
-  var fields_length = $('.form-group').length;
-
   $('.form-group[data-sort]').detach().each(function() {
-    var data_sort = $(this).attr('data-sort')-1;
-
-    if (data_sort <= 0) {
-      $('.form-group:first').before(this);
+    if ($(this).attr('data-sort') >= 0 && $(this).attr('data-sort') <= $('.form-group').length+1) {
+      $('.form-group').eq(parseInt($(this).attr('data-sort'))-1).before(this);
     }
 
-    if (data_sort > 0 && data_sort <= fields_length) {
-      $('.form-group').eq(parseInt(data_sort)).before(this);
-    }
-
-    if (data_sort > fields_length) {
+    if ($(this).attr('data-sort') > $('.form-group').length) {
       $('.form-group:last').after(this);
+    }
+
+    if ($(this).attr('data-sort') == $('.form-group').length) {
+      $('.form-group:last').after(this);
+    }
+
+    if ($(this).attr('data-sort') < -$('.form-group').length) {
+      $('.form-group:first').before(this);
     }
   });
 //--></script>

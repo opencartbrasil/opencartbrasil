@@ -915,16 +915,20 @@
 
     // Sort the custom fields
     $('#tab-address' + address_row + ' .form-group[data-sort]').detach().each(function() {
-        if ($(this).attr('data-sort') <= 0) {
-            $('#tab-address' + address_row + ' .form-group:first').before(this);
+        if ($(this).attr('data-sort') >= 0 && $(this).attr('data-sort') <= $('#tab-address' + address_row + ' .form-group').length-2) {
+            $('#tab-address' + address_row + ' .form-group').eq(parseInt($(this).attr('data-sort'))+2).before(this);
         }
 
-        if ($(this).attr('data-sort') > 0 && $(this).attr('data-sort') <= $('#tab-address' + address_row + ' .form-group').length) {
-            $('#tab-address' + address_row + ' .form-group').eq(parseInt($(this).attr('data-sort'))-1).before(this);
-        }
-
-        if ($(this).attr('data-sort') > $('#tab-address' + address_row + ' .form-group').length) {
+        if ($(this).attr('data-sort') > $('#tab-address' + address_row + ' .form-group').length-2) {
             $('#tab-address' + address_row + ' .form-group:last').after(this);
+        }
+
+        if ($(this).attr('data-sort') == $('#tab-address' + address_row + ' .form-group').length-2) {
+            $('#tab-address' + address_row + ' .form-group:last').after(this);
+        }
+
+        if ($(this).attr('data-sort') < -$('#tab-address' + address_row + ' .form-group').length-2) {
+            $('#tab-address' + address_row + ' .form-group:first').before(this);
         }
     });
 
@@ -1191,35 +1195,41 @@
   {% set address_row = 1 %}
   {% for address in addresses %}
 
-  // Sort the custom fields
   $('#tab-address{{ address_row }} .form-group[data-sort]').detach().each(function() {
-    if ($(this).attr('data-sort') <= 0) {
-        $('#tab-address{{ address_row }} .form-group:first').before(this);
+    if ($(this).attr('data-sort') >= 0 && $(this).attr('data-sort') <= $('#tab-address{{ address_row }} .form-group').length-2) {
+      $('#tab-address{{ address_row }} .form-group').eq(parseInt($(this).attr('data-sort'))+2).before(this);
     }
 
-    if ($(this).attr('data-sort') > 0 && $(this).attr('data-sort') <= $('#tab-address{{ address_row }} .form-group').length) {
-      $('#tab-address{{ address_row }} .form-group').eq(parseInt($(this).attr('data-sort'))-1).before(this);
-    }
-
-    if ($(this).attr('data-sort') > $('#tab-address{{ address_row }} .form-group').length) {
+    if ($(this).attr('data-sort') > $('#tab-address{{ address_row }} .form-group').length-2) {
       $('#tab-address{{ address_row }} .form-group:last').after(this);
+    }
+
+    if ($(this).attr('data-sort') == $('#tab-address{{ address_row }} .form-group').length-2) {
+      $('#tab-address{{ address_row }} .form-group:last').after(this);
+    }
+
+    if ($(this).attr('data-sort') < -$('#tab-address{{ address_row }} .form-group').length-2) {
+      $('#tab-address{{ address_row }} .form-group:first').before(this);
     }
   });
   {% set address_row = address_row + 1 %}
   {% endfor %}
 
-  // Sort the custom fields
   $('#tab-customer .form-group[data-sort]').detach().each(function() {
-    if ($(this).attr('data-sort') <= 0) {
-        $('#tab-customer .form-group:first').before(this);
-    }
-
-    if ($(this).attr('data-sort') > 0 && $(this).attr('data-sort') <= $('#tab-customer .form-group').length) {
-      $('#tab-customer .form-group').eq(parseInt($(this).attr('data-sort'))-1).before(this);
+    if ($(this).attr('data-sort') >= 0 && $(this).attr('data-sort') <= $('#tab-customer .form-group').length) {
+      $('#tab-customer .form-group').eq($(this).attr('data-sort')).before(this);
     }
 
     if ($(this).attr('data-sort') > $('#tab-customer .form-group').length) {
       $('#tab-customer .form-group:last').after(this);
+    }
+
+    if ($(this).attr('data-sort') == $('#tab-customer .form-group').length) {
+      $('#tab-customer .form-group:last').after(this);
+    }
+
+    if ($(this).attr('data-sort') < -$('#tab-customer .form-group').length) {
+      $('#tab-customer .form-group:first').before(this);
     }
   });
 
