@@ -2265,60 +2265,60 @@ $('.time').datetimepicker({
 //--></script>
 <script type="text/javascript"><!--
 // Sort the custom fields
-var customer_fields_length = $('#tab-customer .form-group').length;
-
 $('#tab-customer .form-group[data-sort]').detach().each(function() {
-    var data_sort = $(this).attr('data-sort');
+  if ($(this).attr('data-sort') >= 0 && $(this).attr('data-sort') <= $('#tab-customer .form-group').length) {
+    $('#tab-customer .form-group').eq(parseInt($(this).attr('data-sort'))+3).before(this);
+  }
 
-    if (data_sort <= 0) {
-        $('#tab-customer .form-group').eq(3).before(this);
-    }
+  if ($(this).attr('data-sort') > $('#tab-customer .form-group').length-3) {
+    $('#tab-customer .form-group:last').after(this);
+  }
 
-    if (data_sort > 0 && data_sort <= customer_fields_length) {
-        $('#tab-customer .form-group').eq(parseInt(data_sort)+2).before(this);
-    }
+  if ($(this).attr('data-sort') == $('#tab-customer .form-group').length-3) {
+    $('#tab-customer .form-group:last').after(this);
+  }
 
-    if (data_sort > customer_fields_length) {
-        $('#tab-customer .form-group:last').after(this);
-    }
+  if ($(this).attr('data-sort') < -$('#tab-customer .form-group').length-3) {
+    $('#tab-customer .form-group:first').before(this);
+  }
 });
 
 // Sort the custom fields
-var payment_fields_length = $('#tab-payment .form-group').length;
-
 $('#tab-payment .form-group[data-sort]').detach().each(function() {
-    var data_sort = $(this).attr('data-sort');
+  if ($(this).attr('data-sort') >= 0 && $(this).attr('data-sort') <= $('#tab-payment .form-group').length) {
+    $('#tab-payment .form-group').eq(parseInt($(this).attr('data-sort'))+3).before(this);
+  }
 
-    if (data_sort <= 0) {
-        $('#tab-payment .form-group').eq(1).before(this);
-    }
+  if ($(this).attr('data-sort') > $('#tab-payment .form-group').length-3) {
+    $('#tab-payment .form-group:last').after(this);
+  }
 
-    if (data_sort > 0 && data_sort <= payment_fields_length) {
-        $('#tab-payment .form-group').eq(parseInt(data_sort)).before(this);
-    }
+  if ($(this).attr('data-sort') == $('#tab-payment .form-group').length-3) {
+    $('#tab-payment .form-group:last').after(this);
+  }
 
-    if (data_sort > payment_fields_length) {
-        $('#tab-payment .form-group:last').after(this);
-    }
+  if ($(this).attr('data-sort') < -$('#tab-payment .form-group').length-3) {
+    $('#tab-payment .form-group:first').before(this);
+  }
 });
 
 // Sort the custom fields
-var shipping_fields_length = $('#tab-shipping .form-group').length;
-
 $('#tab-shipping .form-group[data-sort]').detach().each(function() {
-    var data_sort = $(this).attr('data-sort');
+  if ($(this).attr('data-sort') >= 0 && $(this).attr('data-sort') <= $('#tab-shipping .form-group').length) {
+    $('#tab-shipping .form-group').eq(parseInt($(this).attr('data-sort'))+3).before(this);
+  }
 
-    if (data_sort <= 0) {
-        $('#tab-shipping .form-group').eq(1).before(this);
-    }
+  if ($(this).attr('data-sort') > $('#tab-shipping .form-group').length-3) {
+    $('#tab-shipping .form-group:last').after(this);
+  }
 
-    if (data_sort > 0 && data_sort <= shipping_fields_length) {
-        $('#tab-shipping .form-group').eq(parseInt(data_sort)).before(this);
-    }
+  if ($(this).attr('data-sort') == $('#tab-shipping .form-group').length-3) {
+    $('#tab-shipping .form-group:last').after(this);
+  }
 
-    if (data_sort > shipping_fields_length) {
-        $('#tab-shipping .form-group:last').after(this);
-    }
+  if ($(this).attr('data-sort') < -$('#tab-shipping .form-group').length-3) {
+    $('#tab-shipping .form-group:first').before(this);
+  }
 });
 
 // Add all products to the cart using the api

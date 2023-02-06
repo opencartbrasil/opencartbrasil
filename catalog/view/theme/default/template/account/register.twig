@@ -316,21 +316,21 @@
 </div>
 <script type="text/javascript"><!--
   // Sort the custom fields
-  var account_fields_length = $('#account .form-group').length;
-
   $('#account .form-group[data-sort]').detach().each(function() {
-    var data_sort = $(this).attr('data-sort');
-
-    if (data_sort <= 0) {
-      $('#account .form-group:first').before(this);
+    if ($(this).attr('data-sort') >= 0 && $(this).attr('data-sort') <= $('#account .form-group').length) {
+      $('#account .form-group').eq($(this).attr('data-sort')).before(this);
     }
 
-    if (data_sort > 0 && data_sort <= account_fields_length) {
-      $('#account .form-group').eq(parseInt(data_sort)-1).before(this);
-    }
-
-    if (data_sort > account_fields_length) {
+    if ($(this).attr('data-sort') > $('#account .form-group').length) {
       $('#account .form-group:last').after(this);
+    }
+
+    if ($(this).attr('data-sort') == $('#account .form-group').length) {
+      $('#account .form-group:last').after(this);
+    }
+
+    if ($(this).attr('data-sort') < -$('#account .form-group').length) {
+      $('#account .form-group:first').before(this);
     }
   });
 
