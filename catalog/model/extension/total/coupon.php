@@ -22,7 +22,7 @@ class ModelExtensionTotalCoupon extends Model {
 
 			if ($this->customer->getId()) {
 				$customer_total = $this->getTotalCouponHistoriesByCustomerId($code, $this->customer->getId());
-				
+
 				if ($coupon_query->row['uses_customer'] > 0 && ($customer_total >= $coupon_query->row['uses_customer'])) {
 					$status = false;
 				}
@@ -132,7 +132,7 @@ class ModelExtensionTotalCoupon extends Model {
 					if ($status) {
 						if ($coupon_info['type'] == 'F') {
 							$discount = $coupon_info['discount'] * ($product['total'] / $sub_total);
-						} elseif ($coupon_info['type'] == 'P' && $coupon_info['shipping'] == 0) {
+						} elseif ($coupon_info['type'] == 'P') {
 							$discount = $product['total'] / 100 * $coupon_info['discount'];
 						}
 
@@ -240,3 +240,4 @@ class ModelExtensionTotalCoupon extends Model {
 		return $query->row['total'];
 	}
 }
+
