@@ -21,6 +21,7 @@ jobs:
       - name: Running Composer
         run: |
           curl -o- https://getcomposer.org/installer | php
+          php composer.phar config allow-plugins true -n
           php composer.phar install --no-dev
 
       - name: Zip Files
