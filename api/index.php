@@ -1,7 +1,7 @@
 <?php
 // Version
 define('VERSION', '3.0.3.3');
-define('OPENCART_BRASIL', '1.7.0');
+define('OPENCART_BRASIL', '1.7.1');
 define('API', '1.0.0');
 
 // Configuration
