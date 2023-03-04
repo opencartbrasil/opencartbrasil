@@ -963,7 +963,8 @@ class ControllerSaleOrder extends Controller {
 
 			$data['shipping_address'] = str_replace(array("\r\n", "\r", "\n"), '<br />', preg_replace(array("/\s\s+/", "/\r\r+/", "/\n\n+/"), '<br />', trim(str_replace($find, $replace, $format))));
 
-			// Uploaded files
+            $this->load->model('catalog/product');
+
 			$this->load->model('tool/upload');
 
 			$data['products'] = array();
@@ -971,6 +972,8 @@ class ControllerSaleOrder extends Controller {
 			$products = $this->model_sale_order->getOrderProducts($this->request->get['order_id']);
 
 			foreach ($products as $product) {
+			    $product_info = $this->model_catalog_product->getProduct($product['product_id']);
+
 				$option_data = array();
 
 				$options = $this->model_sale_order->getOrderOptions($this->request->get['order_id'], $product['order_product_id']);
@@ -1000,6 +1003,7 @@ class ControllerSaleOrder extends Controller {
 					'order_product_id' => $product['order_product_id'],
 					'product_id'       => $product['product_id'],
 					'name'    	 	   => $product['name'],
+					'sku'    		   => $product_info['sku'],
 					'model'    		   => $product['model'],
 					'option'   		   => $option_data,
 					'quantity'		   => $product['quantity'],
@@ -1538,6 +1542,8 @@ class ControllerSaleOrder extends Controller {
 
 		$data['lang'] = $this->language->get('code');
 
+		$this->load->model('catalog/product');
+
 		$this->load->model('sale/order');
 
 		$this->load->model('setting/setting');
@@ -1655,6 +1661,8 @@ class ControllerSaleOrder extends Controller {
 				foreach ($products as $product) {
 					$option_data = array();
 
+					$product_info = $this->model_catalog_product->getProduct($product['product_id']);
+
 					$options = $this->model_sale_order->getOrderOptions($order_id, $product['order_product_id']);
 
 					foreach ($options as $option) {
@@ -1678,6 +1686,7 @@ class ControllerSaleOrder extends Controller {
 
 					$product_data[] = array(
 						'name'     => $product['name'],
+						'sku'      => $product_info['sku'],
 						'model'    => $product['model'],
 						'option'   => $option_data,
 						'quantity' => $product['quantity'],

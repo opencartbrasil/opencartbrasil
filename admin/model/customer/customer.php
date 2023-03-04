@@ -73,7 +73,7 @@ class ModelCustomerCustomer extends Model {
 	}
 
 	public function getCustomers($data = array()) {
-		$sql = "SELECT *, CONCAT(c.firstname, ' ', c.lastname) AS name, cgd.name AS customer_group FROM " . DB_PREFIX . "customer c LEFT JOIN " . DB_PREFIX . "customer_group_description cgd ON (c.customer_group_id = cgd.customer_group_id)";
+		$sql = "SELECT c.*, CONCAT(c.firstname, ' ', c.lastname) AS name, cgd.name AS customer_group FROM " . DB_PREFIX . "customer c LEFT JOIN " . DB_PREFIX . "customer_group_description cgd ON (c.customer_group_id = cgd.customer_group_id)";
 
 		if (!empty($data['filter_affiliate'])) {
 			$sql .= " LEFT JOIN " . DB_PREFIX . "customer_affiliate ca ON (ca.customer_id = c.customer_id)";

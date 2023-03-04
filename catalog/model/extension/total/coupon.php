@@ -22,7 +22,7 @@ class ModelExtensionTotalCoupon extends Model {
 
 			if ($this->customer->getId()) {
 				$customer_total = $this->getTotalCouponHistoriesByCustomerId($code, $this->customer->getId());
-				
+
 				if ($coupon_query->row['uses_customer'] > 0 && ($customer_total >= $coupon_query->row['uses_customer'])) {
 					$status = false;
 				}
@@ -240,3 +240,4 @@ class ModelExtensionTotalCoupon extends Model {
 		return $query->row['total'];
 	}
 }
+

@@ -20,8 +20,8 @@ class ControllerExtensionFeedGoogleSitemap extends Controller {
 				if ($product['image']) {
 					$output .= '  <image:image>';
 					$output .= '  <image:loc>' . $this->model_tool_image->resize($product['image'], $this->config->get('theme_' . $this->config->get('config_theme') . '_image_popup_width'), $this->config->get('theme_' . $this->config->get('config_theme') . '_image_popup_height')) . '</image:loc>';
-					$output .= '  <image:caption>' . $product['name'] . '</image:caption>';
-					$output .= '  <image:title>' . $product['name'] . '</image:title>';
+					$output .= '  <image:caption><![CDATA[' . strip_tags(html_entity_decode(utf8_substr($product['name'], 0, 5000), ENT_QUOTES, 'UTF-8')) . ']]></image:caption>';
+					$output .= '  <image:title><![CDATA[' . strip_tags(html_entity_decode(utf8_substr($product['name'], 0, 5000), ENT_QUOTES, 'UTF-8')) . ']]></image:title>';
 					$output .= '  </image:image>';
 				}
 
