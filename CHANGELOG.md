@@ -6,6 +6,23 @@ e utiliza [Semantic Versioning](https://semver.org/lang/pt-BR/spec/v2.0.0.html).
 
 ## [Não lançada]
 
+## [1.7.2] (Data de lançamento: 18.04.2023)
+### Corrigido
+
+- Correção ao carregar os detalhes da transação de pagamento no pedido.
+- Correção no tratamento de dados recebidos dos formulários da loja.
+- Correção na exibição do alerta de produtos sem estoque na edição do pedido.
+- Correção ao clicar nos botões de imprimir fatura e imprimir lista de entrega na listagem de pedidos do admin.
+
+## [1.7.1] (Data de lançamento: 04.03.2023)
+### Corrigido
+
+- Correção na exibição dos campos personalizados.
+- Correção na listagem de clientes na administração.
+- Correção no título das imagens no sitemap.
+- Cupom com suporte para desconto e frete grátis.
+- Exibir SKU do produto nos detalhes e fatura do pedido no admin.
+
 ## [1.7.0] (Data de lançamento: 21.10.2021)
 ### Corrigido
 
@@ -708,7 +725,9 @@ e utiliza [Semantic Versioning](https://semver.org/lang/pt-BR/spec/v2.0.0.html).
 - Cupons de descontos para demonstração.
 - Moedas: Euro e Libra esterlina.
 
-[Não lançada]: https://github.com/opencartbrasil/opencartbrasil/compare/v1.7.0...HEAD
+[Não lançada]: https://github.com/opencartbrasil/opencartbrasil/compare/v1.7.2...HEAD
+[1.7.2]: https://github.com/opencartbrasil/opencartbrasil/compare/v1.7.1...v1.7.2
+[1.7.1]: https://github.com/opencartbrasil/opencartbrasil/compare/v1.7.0...v1.7.1
 [1.7.0]: https://github.com/opencartbrasil/opencartbrasil/compare/v1.6.1...v1.7.0
 [1.6.1]: https://github.com/opencartbrasil/opencartbrasil/compare/v1.6.0...v1.6.1
 [1.6.0]: https://github.com/opencartbrasil/opencartbrasil/compare/v1.5.1...v1.6.0
