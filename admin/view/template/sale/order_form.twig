@@ -2362,7 +2362,7 @@ $('#button-refresh').on('click', function() {
 					product = json['products'][i];
 
 					html += '<tr>';
-					html += '  <td class="text-left">' + product['name'] + ' ' + (!product['stock'] ? '<span class="text-danger">***</span>' : '') + '<br />';
+					html += '  <td class="text-left">' + (product['stock'] == false ? '<span class="text-danger">' : '') + product['name'] + ' ' + (product['stock'] == false ? ' ***</span>' : '') + '<br />';
 					html += '  <input type="hidden" name="product[' + i + '][product_id]" value="' + product['product_id'] + '" />';
 
 					if (product['option']) {
@@ -2449,7 +2449,7 @@ $('#button-refresh').on('click', function() {
 					product = json['products'][i];
 
 					html += '<tr>';
-					html += '  <td class="text-left">' + product['name'] + ' ' + (!product['stock'] ? '<span class="text-danger">***</span>' : '') + '<br />';
+					html += '  <td class="text-left">' + (product['stock'] == false ? '<span class="text-danger">' : '') + product['name'] + ' ' + (product['stock'] == false ? ' ***</span>' : '') + '<br />';
 
 					if (product['option']) {
 						for (j = 0; j < product['option'].length; j++) {
