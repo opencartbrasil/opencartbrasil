@@ -457,6 +457,24 @@ class ControllerAccountReturn extends Controller {
 	}
 
 	protected function validate() {
+		$fields = array(
+			'order_id',
+			'firstname',
+			'lastname',
+			'email',
+			'telephone',
+			'product',
+			'model',
+			'return_reason_id',
+			'agree'
+		);
+
+		foreach ($fields as $field) {
+			if (!isset($this->request->post[$field])) {
+				$this->request->post[$field] = '';
+			}
+		}
+
 		if (!$this->request->post['order_id']) {
 			$this->error['order_id'] = $this->language->get('error_order_id');
 		}
