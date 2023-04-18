@@ -1003,7 +1003,7 @@ class ControllerSaleOrder extends Controller {
 					'order_product_id' => $product['order_product_id'],
 					'product_id'       => $product['product_id'],
 					'name'    	 	   => $product['name'],
-					'sku'    		   => $product_info['sku'],
+					'sku'    		   => isset($product_info['sku']) ? $product_info['sku'] : '',
 					'model'    		   => $product['model'],
 					'option'   		   => $option_data,
 					'quantity'		   => $product['quantity'],

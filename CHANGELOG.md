@@ -9,6 +9,7 @@ e utiliza [Semantic Versioning](https://semver.org/lang/pt-BR/spec/v2.0.0.html).
 ## [1.7.2] (Data de lançamento: 18.04.2023)
 ### Corrigido
 
+- Correção para erro ao exibir o SKU dos produtos nos detalhes do pedido no admin.
 - Correção ao carregar os detalhes da transação de pagamento no pedido.
 - Correção no tratamento de dados recebidos dos formulários da loja.
 - Correção na exibição do alerta de produtos sem estoque na edição do pedido.
